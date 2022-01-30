@@ -1,0 +1,82 @@
+steps:
+# SETUP SSH KEYS
+- name: 'gcr.io/cloud-builders/git'
+  secretEnv: ['SSH_KEY']
+  entrypoint: 'bash'
+  args:
+  - -c
+  - |
+    echo "$$SSH_KEY" >> /root/.ssh/id_rsa
+    chmod 400 /root/.ssh/id_rsa
+    cp known_hosts.github /root/.ssh/known_hosts
+    git config --global user.email "ops@limacharlie.io"
+    git config --global user.name "LimaCharlie Ops"
+  volumes:
+  - name: 'ssh'
+    path: /root/.ssh
+
+# CLONE NECESSARY REPOS
+- name: 'gcr.io/cloud-builders/git'
+  args:
+  - clone
+  - --recurse-submodules
+  - git@github.com:SigmaHQ/sigma.git
+  volumes:
+  - name: 'ssh'
+    path: /root/.ssh
+
+- name: 'gcr.io/cloud-builders/git'
+  args:
+  - clone
+  - --recurse-submodules
+  - git@github.com:refractionPOINT/sigma-limacharlie.git
+  - -b
+  - rules
+  volumes:
+  - name: 'ssh'
+    path: /root/.ssh
+
+# RESET EXISTING RULES
+- name: 'gcr.io/cloud-builders/git'
+  dir: sigma-limacharlie
+  entrypoint: 'bash'
+  args:
+  - -c
+  - |
+    git rm -r ./latest
+  volumes:
+  - name: 'ssh'
+    path: /root/.ssh
+
+# GENERATE NEW RULES
+- name: python:3
+  entrypoint: 'bash'
+  args:
+  - -c
+  - |
+    pip3 install ruamel.yaml pyyaml requests
+    python3 ./scripts/generate_all.py ./sigma/ ./sigma-limacharlie/latest/
+
+# PUSH CHANGES
+- name: 'gcr.io/cloud-builders/git'
+  dir: sigma-limacharlie
+  entrypoint: 'bash'
+  args:
+  - -c
+  - |
+    ls -lahR
+    git add ./*
+    git commit -m "Update to rules."
+    git push
+  volumes:
+  - name: 'ssh'
+    path: /root/.ssh
+
+availableSecrets:
+  secretManager:
+  - versionName: projects/968258204747/secrets/sigma-deploykey/versions/latest
+    env: 'SSH_KEY'
+
+timeout: 3600s
+options:
+  machineType: 'N1_HIGHCPU_8'
