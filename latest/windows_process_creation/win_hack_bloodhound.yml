@@ -1,0 +1,80 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: \Bloodhound.exe
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: \SharpHound.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -CollectionMethod All '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '.exe -c All -d '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Invoke-Bloodhound
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-BloodHoundData
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -JsonFolder '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -ZipFileName '
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' DCOnly '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' --NoSaveCache '
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects command line parameters used by Bloodhound and Sharphound
+      hack tools
+    falsepositives:
+    - Other programs that use these command line option and accepts an 'All' parameter
+    level: high
+    references:
+    - https://github.com/BloodHoundAD/BloodHound
+    - https://github.com/BloodHoundAD/SharpHound
+    tags:
+    - attack.discovery
+    - attack.t1087.001
+    - attack.t1087.002
+    - attack.t1482
+    - attack.t1069.001
+    - attack.t1069.002
+    - attack.execution
+    - attack.t1059.001
+  name: Bloodhound and Sharphound Hack Tool
+

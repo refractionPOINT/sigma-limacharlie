@@ -1,0 +1,60 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \nircmd.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \nircmdc.exe
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' execmd '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' exec2 '
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' copy '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' del '
+respond:
+- action: report
+  metadata:
+    author: Florian Roth, Nasreddine Bencherchali @nas_bench
+    description: Detects the use of NirCmd tool for command execution, which could
+      be the result of legitimate administrative activity
+    falsepositives:
+    - Legitimate use by administrators
+    level: medium
+    references:
+    - https://www.nirsoft.net/utils/nircmd.html
+    - https://www.winhelponline.com/blog/run-program-as-system-localsystem-account-windows/
+    - https://www.nirsoft.net/utils/nircmd2.html#using
+    tags:
+    - attack.execution
+    - attack.t1569.002
+    - attack.s0029
+  name: NirCmd Tool Execution
+

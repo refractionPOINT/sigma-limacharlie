@@ -1,0 +1,58 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: netstat
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'net '
+      - op: or
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/COMMAND_LINE
+            value: ' use'
+          - case sensitive: false
+            op: ends with
+            path: event/COMMAND_LINE
+            value: ' sessions'
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' use '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' sessions '
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Adversaries may attempt to get a listing of network connections to
+      or from the compromised system they are currently accessing or from remote systems
+      by querying for information over the network.
+    falsepositives:
+    - unknown
+    level: low
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1049/T1049.md#atomic-test-1---system-network-connections-discovery
+    tags:
+    - attack.discovery
+    - attack.t1049
+  name: Suspicious Listing of Network Connections
+

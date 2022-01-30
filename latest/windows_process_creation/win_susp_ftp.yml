@@ -1,0 +1,58 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-s:'
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: ftp.exe
+        - case sensitive: false
+          op: contains
+          path: event/ORIGINAL_FILE_NAME
+          value: ftp.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/ORIGINAL_FILE_NAME
+        value: ftp.exe
+      - case sensitive: false
+        not: true
+        op: ends with
+        path: event/FILE_PATH
+        value: ftp.exe
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: ftp.exe
+respond:
+- action: report
+  metadata:
+    author: Victor Sergeev, oscd.community
+    description: Detects renamed ftp.exe, ftp.exe script execution and child processes
+      ran by ftp.exe
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://github.com/LOLBAS-Project/LOLBAS/blob/master/yml/OSBinaries/Ftp.yml
+    tags:
+    - attack.execution
+    - attack.t1059
+    - attack.defense_evasion
+    - attack.t1202
+  name: Suspicious ftp.exe
+

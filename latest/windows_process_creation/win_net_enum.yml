@@ -1,0 +1,47 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \net.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \net1.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: view
+    - case sensitive: false
+      not: true
+      op: contains
+      path: event/COMMAND_LINE
+      value: \\\
+respond:
+- action: report
+  metadata:
+    author: Endgame, JHasenbusch (ported for oscd.community)
+    description: Identifies attempts to enumerate hosts in a network using the built-in
+      Windows net.exe tool.
+    falsepositives:
+    - Legitimate use of net.exe utility by legitimate user
+    level: low
+    references:
+    - https://eqllib.readthedocs.io/en/latest/analytics/b8a94d2f-dc75-4630-9d73-1edc6bd26fff.html
+    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1018/T1018.md
+    tags:
+    - attack.discovery
+    - attack.t1018
+  name: Windows Network Enumeration
+

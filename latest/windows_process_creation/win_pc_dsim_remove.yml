@@ -1,0 +1,69 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \DismHost.exe
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: /online
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: /Disable-Feature
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: '/FeatureName:'
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: /Remove
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \Dism.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /online
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /Disable-Feature
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '/FeatureName:'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /Remove
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Deployment Image Servicing and Management tool. DISM is used to enumerate,
+      install, uninstall, configure, and update features and packages in Windows images
+    falsepositives:
+    - Legitim script
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1562.001/T1562.001.md#atomic-test-26---disable-windows-defender-with-dism
+    tags:
+    - attack.defense_evasion
+    - attack.t1562.001
+  name: Dism Remove Online Package
+

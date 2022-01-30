@@ -1,0 +1,28 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - case sensitive: false
+    op: ends with
+    path: event/FILE_PATH
+    value: \dnx.exe
+respond:
+- action: report
+  metadata:
+    author: Beyu Denis, oscd.community
+    description: Execute C# code located in the consoleapp folder
+    falsepositives:
+    - Legitimate use of dnx.exe by legitimate user
+    level: medium
+    references:
+    - https://github.com/LOLBAS-Project/LOLBAS/blob/master/yml/OtherMSBinaries/Csi.yml
+    - https://enigma0x3.net/2016/11/17/bypassing-application-whitelisting-by-using-dnx-exe/
+    tags:
+    - attack.defense_evasion
+    - attack.t1218
+    - attack.t1027.004
+  name: Application Whitelisting Bypass via Dnx.exe
+

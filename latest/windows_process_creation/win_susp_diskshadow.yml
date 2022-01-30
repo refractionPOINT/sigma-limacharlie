@@ -1,0 +1,39 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \diskshadow.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /s
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -s
+respond:
+- action: report
+  metadata:
+    author: Ivan Dyachkov, oscd.community
+    description: Detects using Diskshadow.exe to execute arbitrary code in text file
+    falsepositives:
+    - False postitve can be if administrators use diskshadow tool in their infrastructure
+      as a main backup tool with scripts.
+    level: high
+    references:
+    - https://bohops.com/2018/03/26/diskshadow-the-return-of-vss-evasion-persistence-and-active-directory-database-extraction/
+    tags:
+    - attack.execution
+    - attack.t1218
+  name: Execution via Diskshadow.exe
+

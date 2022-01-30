@@ -1,0 +1,34 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \wsreset.exe
+    - case sensitive: false
+      not: true
+      op: ends with
+      path: event/FILE_PATH
+      value: \conhost.exe
+respond:
+- action: report
+  metadata:
+    author: E.M. Anhaus (originally from Atomic Blue Detections, Tony Lambert), oscd.community
+    description: Identifies use of WSReset.exe to bypass User Account Control. Adversaries
+      use this technique to execute privileged processes.
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://eqllib.readthedocs.io/en/latest/analytics/532b5ed4-7930-11e9-8f5c-d46d6d62a49e.html
+    tags:
+    - attack.privilege_escalation
+    - attack.t1548.002
+  name: Bypass UAC via WSReset.exe
+

@@ -1,0 +1,37 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \dxcap.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: -c
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: .exe
+respond:
+- action: report
+  metadata:
+    author: Beyu Denis, oscd.community
+    description: Detects execution of of Dxcap.exe
+    falsepositives:
+    - Legitimate execution of dxcap.exe by legitimate user
+    level: medium
+    references:
+    - https://github.com/LOLBAS-Project/LOLBAS/blob/master/yml/OtherMSBinaries/Dxcap.yml
+    - https://twitter.com/harr0ey/status/992008180904419328
+    tags:
+    - attack.defense_evasion
+    - attack.t1218
+  name: Application Whitelisting Bypass via Dxcap.exe
+

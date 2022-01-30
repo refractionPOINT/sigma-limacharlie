@@ -1,0 +1,80 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/FILE_PATH
+          value: \apache
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/FILE_PATH
+          value: \tomcat
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \w3wp.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \php-cgi.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \nginx.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \httpd.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cmd.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: perl --help
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: python --help
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: wget --help
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: perl -h
+respond:
+- action: report
+  metadata:
+    author: Cian Heasley
+    description: Looking for processes spawned by web server components that indicate
+      reconnaissance by popular public domain webshells for whether perl, python or
+      wget are installed.
+    falsepositives:
+    - unknown
+    level: high
+    references:
+    - https://ragged-lab.blogspot.com/2020/07/webshells-automating-reconnaissance.html
+    tags:
+    - attack.persistence
+    - attack.t1505.003
+  name: Webshell Recon Detection Via CommandLine & Processes
+

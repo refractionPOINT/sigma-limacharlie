@@ -1,0 +1,59 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \sc.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \net.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \net1.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: stop
+    - not: true
+      op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/COMMAND_LINE
+        value: sc  stop KSCWebConsoleMessageQueue
+      - op: or
+        rules:
+        - case sensitive: false
+          op: starts with
+          path: event/USER_NAME
+          value: NT AUTHORITY\SYSTEM
+        - case sensitive: false
+          op: starts with
+          path: event/USER_NAME
+          value: AUTORITE NT\Sys
+respond:
+- action: report
+  metadata:
+    author: Jakob Weinzettl, oscd.community
+    description: Detects a windows service to be stopped
+    falsepositives:
+    - Administrator shutting down the service due to upgrade or removal purposes
+    level: low
+    tags:
+    - attack.impact
+    - attack.t1489
+  name: Stop Windows Service
+

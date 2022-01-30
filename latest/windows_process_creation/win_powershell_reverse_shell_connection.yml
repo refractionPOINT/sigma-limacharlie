@@ -1,0 +1,33 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \powershell.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: new-object system.net.sockets.tcpclient
+respond:
+- action: report
+  metadata:
+    author: FPT.EagleEye, wagga
+    description: Detects the Nishang Invoke-PowerShellTcpOneLine reverse shell
+    falsepositives:
+    - Administrative might use this function for checking network connectivity
+    level: high
+    references:
+    - https://www.volexity.com/blog/2021/03/02/active-exploitation-of-microsoft-exchange-zero-day-vulnerabilities/
+    - https://www.microsoft.com/security/blog/2021/03/02/hafnium-targeting-exchange-servers/
+    tags:
+    - attack.execution
+    - attack.t1059.001
+  name: Powershell Reverse Shell Connection
+

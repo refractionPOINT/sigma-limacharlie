@@ -1,0 +1,137 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \powershell.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: hctac
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: kearb
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: dnammoc
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ekovn
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: eliFd
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: rahc
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: etirw
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: golon
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: tninon
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: eddih
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: tpircS
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ssecorp
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: llehsrewop
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: esnopser
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: daolnwod
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: tneilCbeW
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: tneilc
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ptth
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: elifotevas
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 46esab
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: htaPpmeTteG
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: tcejbO
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: maerts
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: hcaerof
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ekovni
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: retupmoc
+respond:
+- action: report
+  metadata:
+    author: Teymur Kheirkhabarov (idea), Vasiliy Burov (rule), oscd.community
+    description: Detects the PowerShell command lines with reversed strings
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://2019.offzone.moscow/ru/report/hunting-for-powershell-abuses/
+    - https://speakerdeck.com/heirhabarov/hunting-for-powershell-abuse?slide=66
+    tags:
+    - attack.defense_evasion
+    - attack.t1027
+    - attack.execution
+    - attack.t1059.001
+  name: Suspicious PowerShell Cmdline
+

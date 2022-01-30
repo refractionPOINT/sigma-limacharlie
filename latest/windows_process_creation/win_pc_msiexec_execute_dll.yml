@@ -1,0 +1,39 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \msiexec.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' /y'
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: 'Adversaries may abuse msiexec.exe to proxy execution of malicious
+      payloads.
+
+      Msiexec.exe is the command-line utility for the Windows Installer and is thus
+      commonly associated with executing installation packages (.msi)
+
+      '
+    falsepositives:
+    - Legitim script
+    level: medium
+    references:
+    - https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/msiexec
+    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1218.007/T1218.007.md
+    tags:
+    - attack.defense_evasion
+    - attack.t1218.007
+  name: Suspisious Msiexec Execute Arbitrary DLL
+

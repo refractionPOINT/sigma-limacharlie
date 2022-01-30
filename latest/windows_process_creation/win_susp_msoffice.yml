@@ -1,0 +1,44 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \powerpnt.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \winword.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \excel.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: http
+respond:
+- action: report
+  metadata:
+    author: Beyu Denis, oscd.community
+    description: Downloads payload from remote server
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://github.com/LOLBAS-Project/LOLBAS/blob/master/yml/OtherMSBinaries/Powerpnt.yml
+    - https://medium.com/@reegun/unsanitized-file-validation-leads-to-malicious-payload-download-via-office-binaries-202d02db7191
+    - Reegun J (OCBC Bank)
+    tags:
+    - attack.command_and_control
+    - attack.t1105
+  name: Malicious Payload Download via Office Binaries
+

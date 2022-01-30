@@ -1,0 +1,40 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' /INJECTRUNNING'
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: .dll
+    - case sensitive: false
+      op: contains
+      path: event/ORIGINAL_FILE_NAME
+      value: mavinject
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Injects arbitrary DLL into running process specified by process ID.
+      Requires Windows 10.
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1218/T1218.md
+    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1056.004/T1056.004.md
+    tags:
+    - attack.defense_evasion
+    - attack.collection
+    - attack.t1218
+    - attack.t1056.004
+  name: Mavinject Inject DLL Into Running Process
+

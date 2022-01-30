@@ -1,0 +1,67 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/PARENT/FILE_PATH
+      value: C:\Windows\hh.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cmd.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \powershell.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \wscript.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cscript.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \regsvr32.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \wmic.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \rundll32.exe
+respond:
+- action: report
+  metadata:
+    author: Maxim Pavlunin
+    description: Detects a suspicious child process of a Microsoft HTML Help system
+      when executing compiled HTML files (.chm)
+    falsepositives:
+    - unknown
+    level: high
+    references:
+    - https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/chm-badness-delivers-a-banking-trojan/
+    tags:
+    - attack.defense_evasion
+    - attack.t1218.001
+    - attack.t1218.010
+    - attack.t1218.011
+    - attack.execution
+    - attack.t1059.001
+    - attack.t1059.003
+    - attack.t1059.005
+    - attack.t1059.007
+    - attack.t1047
+  name: HTML Help Shell Spawn
+

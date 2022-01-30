@@ -1,0 +1,94 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \mshta.exe
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - op: or
+          rules:
+          - op: or
+            rules:
+            - case sensitive: false
+              op: ends with
+              path: event/PARENT/FILE_PATH
+              value: \cmd.exe
+            - case sensitive: false
+              op: ends with
+              path: event/PARENT/FILE_PATH
+              value: \powershell.exe
+          - op: or
+            rules:
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: \AppData\Local
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: C:\Windows\Temp
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: C:\Users\Public
+        - not: true
+          op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/FILE_PATH
+            value: C:\Windows\System32
+          - case sensitive: false
+            op: contains
+            path: event/FILE_PATH
+            value: C:\Windows\SysWOW64
+      - not: true
+        op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: .htm
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: .hta
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/COMMAND_LINE
+            value: mshta.exe
+          - case sensitive: false
+            op: ends with
+            path: event/COMMAND_LINE
+            value: mshta
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects suspicious mshta process patterns
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://en.wikipedia.org/wiki/HTML_Application
+    - https://www.echotrail.io/insights/search/mshta.exe
+    - https://app.any.run/tasks/34221348-072d-4b70-93f3-aa71f6ebecad/
+    tags:
+    - attack.execution
+    - attack.t1106
+  name: Suspicious MSHTA Process Patterns
+

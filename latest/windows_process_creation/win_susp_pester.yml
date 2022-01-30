@@ -1,0 +1,65 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \powershell.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Pester
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-Help
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cmd.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: pester
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ;
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: help
+        - case sensitive: false
+          op: matches
+          path: event/COMMAND_LINE
+          re: .*..*
+respond:
+- action: report
+  metadata:
+    author: Julia Fomina, oscd.community
+    description: Detects code execution via Pester.bat (Pester - Powershell Modulte
+      for testing)
+    falsepositives:
+    - Legitimate use of Pester for writing tests for Powershell scripts and modules
+    level: medium
+    references:
+    - https://twitter.com/Oddvarmoe/status/993383596244258816
+    tags:
+    - attack.execution
+    - attack.t1059.001
+    - attack.defense_evasion
+    - attack.t1216
+  name: Execute Code with Pester.bat
+

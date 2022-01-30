@@ -1,0 +1,30 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - case sensitive: false
+    op: ends with
+    path: event/PARENT/FILE_PATH
+    value: \WSreset.exe
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects a method that uses Wsreset.exe tool that can be used to reset
+      the Windows Store to bypass UAC
+    falsepositives:
+    - Unknown sub processes of Wsreset.exe
+    level: high
+    references:
+    - https://lolbas-project.github.io/lolbas/Binaries/Wsreset/
+    - https://www.activecyber.us/activelabs/windows-uac-bypass
+    - https://twitter.com/ReaQta/status/1222548288731217921
+    tags:
+    - attack.privilege_escalation
+    - attack.defense_evasion
+    - attack.t1548.002
+  name: Wsreset UAC Bypass
+

@@ -1,0 +1,33 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \SoundRecorder.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: /FILE
+respond:
+- action: report
+  metadata:
+    author: E.M. Anhaus (originally from Atomic Blue Detections, Endgame), oscd.community
+    description: Detect attacker collecting audio via SoundRecorder application.
+    falsepositives:
+    - Legitimate audio capture by legitimate user.
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1123/T1123.md
+    - https://eqllib.readthedocs.io/en/latest/analytics/f72a98cb-7b3d-4100-99c3-a138b6e9ff6e.html
+    tags:
+    - attack.collection
+    - attack.t1123
+  name: Audio Capture via SoundRecorder
+

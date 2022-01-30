@@ -1,0 +1,44 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \vsjitdebugger.exe
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: matches
+        path: event/FILE_PATH
+        re: .*\\vsimmersiveactivatehelper.*\.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \devenv.exe
+respond:
+- action: report
+  metadata:
+    author: "Agro (@agro_sev), Ensar \u015Eamil (@sblmsrsn), oscd.community"
+    description: There is an option for a MS VS Just-In-Time Debugger "vsjitdebugger.exe"
+      to launch specified executable and attach a debugger. This option may be used
+      adversaries to execute malicious code by signed verified binary. The debugger
+      is installed alongside with Microsoft Visual Studio package.
+    falsepositives:
+    - the process spawned by vsjitdebugger.exe is uncommon.
+    level: medium
+    references:
+    - https://twitter.com/pabraeken/status/990758590020452353
+    - https://github.com/LOLBAS-Project/LOLBAS/blob/master/yml/OtherMSBinaries/Vsjitdebugger.yml
+    - https://docs.microsoft.com/en-us/visualstudio/debugger/debug-using-the-just-in-time-debugger?view=vs-2019
+    tags:
+    - attack.t1218
+    - attack.defense_evasion
+  name: Malicious PE Execution by Microsoft Visual Studio Debugger
+

@@ -1,0 +1,202 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: cmd.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: CONHOST.EXE
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: powershell.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: powershell_ise.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: psexec.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: psexec.c
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: cscript.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: wscript.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: mshta.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: regsvr32.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: wmic.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: certutil.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: rundll32.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: cmstp.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: msiexec.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: 7z.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: winrar.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: wevtutil.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: net.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: net1.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: netsh.exe
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cmd.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \conhost.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \powershell.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \powershell_ise.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \psexec.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \psexec64.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cscript.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \wscript.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \mshta.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \regsvr32.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \wmic.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \certutil.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \rundll32.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cmstp.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \msiexec.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \7z.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \winrar.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \wevtutil.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \net.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \net1.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \netsh.exe
+respond:
+- action: report
+  metadata:
+    author: Matthew Green - @mgreen27, Ecco, James Pemberton / @4A616D6573, oscd.community
+      (improvements), Andreas Hunkeler (@Karneades)
+    description: Detects the execution of a renamed binary often used by attackers
+      or malware leveraging new Sysmon OriginalFileName datapoint.
+    falsepositives:
+    - Custom applications use renamed binaries adding slight change to binary name.
+      Typically this is easy to spot and add to whitelist
+    level: medium
+    references:
+    - https://attack.mitre.org/techniques/T1036/
+    - https://mgreen27.github.io/posts/2019/05/12/BinaryRename.html
+    - https://mgreen27.github.io/posts/2019/05/29/BinaryRename2.html
+    tags:
+    - attack.defense_evasion
+    - attack.t1036.003
+  name: Renamed Binary
+

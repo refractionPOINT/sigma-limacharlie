@@ -1,0 +1,49 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'Stop-Service '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'Remove-Service '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' McAfeeDLPAgentService'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' Trend Micro Deep Security Manager'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' TMBMServer'
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Adversaries may disable security tools to avoid possible detection
+      of their tools and activities by stopping antivirus service
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1562.001/T1562.001.md
+    tags:
+    - attack.defense_evasion
+    - attack.t1562.001
+  name: Stop Or Remove Antivirus Service
+

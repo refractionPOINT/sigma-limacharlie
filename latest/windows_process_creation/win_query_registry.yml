@@ -1,0 +1,84 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \reg.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: query
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: save
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: export
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: currentVersion\windows
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: currentVersion\runServicesOnce
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: currentVersion\runServices
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: winlogon\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: currentVersion\shellServiceObjectDelayLoad
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: currentVersion\runOnce
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: currentVersion\runOnceEx
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: currentVersion\run
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: currentVersion\policies\explorer\run
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: currentcontrolset\services
+respond:
+- action: report
+  metadata:
+    author: Timur Zinniatullin, oscd.community
+    description: Adversaries may interact with the Windows Registry to gather information
+      about the system, configuration, and installed software.
+    level: low
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1012/T1012.md
+    tags:
+    - attack.discovery
+    - attack.t1012
+    - attack.t1007
+  name: Query Registry
+

@@ -1,0 +1,43 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ConfigSecurityPolicy.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: https://
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: http://
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ftp://
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Upload file, credentials or data exfiltration with Binary part of
+      Windows Defender
+    falsepositives:
+    - unknown
+    level: medium
+    references:
+    - https://lolbas-project.github.io/lolbas/Binaries/ConfigSecurityPolicy/
+    tags:
+    - attack.exfiltration
+    - attack.t1567
+  name: Suspicious ConfigSecurityPolicy Execution
+

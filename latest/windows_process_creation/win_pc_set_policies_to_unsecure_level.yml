@@ -1,0 +1,45 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: '-executionpolicy '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Unrestricted
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bypass
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: RemoteSigned
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Detects use of executionpolicy option to set a unsecure policies
+    falsepositives:
+    - Administrator script
+    level: high
+    references:
+    - https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-7.1
+    - https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.1
+    - https://adsecurity.org/?p=2604
+    - https://thedfirreport.com/2021/11/01/from-zero-to-domain-admin/
+    tags:
+    - attack.execution
+    - attack.t1059.001
+  name: Change PowerShell Policies to a Unsecure Level
+

@@ -1,0 +1,50 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-WebRequest
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: 'iwr '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: 'wget '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: 'curl '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Net.WebClient
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Start-BitsTransfer
+respond:
+- action: report
+  metadata:
+    author: James Pemberton / @4A616D6573
+    description: Detects the use of various web request with commandline tools or
+      Windows PowerShell command,methods (including aliases)
+    falsepositives:
+    - Use of Get-Command and Get-Help modules to reference Invoke-WebRequest and Start-BitsTransfer.
+    level: medium
+    references:
+    - https://4sysops.com/archives/use-powershell-to-download-a-file-with-http-https-and-ftp/
+    - https://blog.jourdant.me/post/3-ways-to-download-files-with-powershell
+    tags:
+    - attack.execution
+    - attack.t1059.001
+  name: Windows Suspicious Use Of Web Request in CommandLine
+

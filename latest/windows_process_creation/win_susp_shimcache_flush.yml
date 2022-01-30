@@ -1,0 +1,63 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: rundll32
+    - op: or
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: apphelp.dll
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ShimFlushCache
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '#250'
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: kernel32.dll
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: BaseFlushAppcompatCache
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '#46'
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects actions that clear the local ShimCache and remove forensic
+      evidence
+    falsepositives:
+    - Unknown
+    level: critical
+    references:
+    - https://medium.com/@blueteamops/shimcache-flush-89daff28d15e
+    tags:
+    - attack.defense_evasion
+    - attack.t1112
+  name: ShimCache Flush
+

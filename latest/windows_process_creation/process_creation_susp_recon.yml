@@ -1,0 +1,47 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \tree.com
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \WMIC.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \doskey.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \sc.exe
+    - case sensitive: false
+      op: contains
+      path: event/PARENT/COMMAND_LINE
+      value: ' > %TEMP%\'
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Once established within a system or network, an adversary may use
+      automated techniques for collecting internal data.
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1119/T1119.md
+    tags:
+    - attack.collection
+    - attack.t1119
+  name: Recon Information for Export with Command Prompt
+

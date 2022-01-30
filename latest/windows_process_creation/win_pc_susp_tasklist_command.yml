@@ -1,0 +1,34 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: tasklist
+    - case sensitive: false
+      op: is
+      path: event/FILE_PATH
+      value: C:\Windows\System32\tasklist.exe
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Adversaries may attempt to get information about running processes
+      on a system. Information obtained could be used to gain an understanding of
+      common software/applications running on systems within the network
+    falsepositives:
+    - administrator, hotline ask to user
+    level: low
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1057/T1057.md#atomic-test-2---process-discovery---tasklist
+    tags:
+    - attack.discovery
+    - attack.t1057
+  name: Suspicious Tasklist Discovery Command
+

@@ -1,0 +1,55 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: /logon:none
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: /system:none
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: /sam:none
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: /privilege:none
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: /object:none
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: /process:none
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: /policy:none
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali @nas_bench
+    description: Threat actors can use an older version of the auditpol binary available
+      inside the NT resource kit to change audit policy configuration to impair detection
+      capability. This can be carried out by selectively disabling/removing certain
+      audit policies as well as restoring a custom policy owned by the threat actor.
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://github.com/3CORESec/MAL-CL/tree/master/Descriptors/Windows%202000%20Resource%20Kit%20Tools/AuditPol
+    tags:
+    - attack.defense_evasion
+    - attack.t1562.002
+  name: Suspicious NT Resource Kit Auditpol Usage
+

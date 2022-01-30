@@ -1,0 +1,35 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: curl
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' start '
+respond:
+- action: report
+  metadata:
+    author: Sreeman
+    description: Adversaries can use curl to download payloads remotely and execute
+      them. Curl is included by default in Windows 10 build 17063 and later.
+    falsepositives:
+    - Administrative scripts (installers)
+    level: medium
+    references:
+    - https://medium.com/@reegun/curl-exe-is-the-new-rundll32-exe-lolbin-3f79c5f35983
+    tags:
+    - attack.execution
+    - attack.t1218
+    - attack.command_and_control
+    - attack.t1105
+  name: Curl Start Combination
+

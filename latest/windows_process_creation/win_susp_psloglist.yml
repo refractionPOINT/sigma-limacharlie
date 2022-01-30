@@ -1,0 +1,82 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/ORIGINAL_FILE_NAME
+        value: psloglist
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \psloglist.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \psloglist64.exe
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: -d
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /d
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: -x
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /x
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: -s
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /s
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: security
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: accepteula
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali @nas_bench
+    description: Threat actors can use the PsLogList utility to dump event log in
+      order to extract admin accounts and perform account discovery.
+    falsepositives:
+    - Another tool that uses the command line switches of PsLogList
+    - Legitimate use of PsLogList by an administrator
+    level: medium
+    references:
+    - https://research.nccgroup.com/2021/01/12/abusing-cloud-services-to-fly-under-the-radar/
+    - https://www.cybereason.com/blog/deadringer-exposing-chinese-threat-actors-targeting-major-telcos
+    - https://github.com/3CORESec/MAL-CL/tree/master/Descriptors/Sysinternals/PsLogList
+    tags:
+    - attack.discovery
+    - attack.t1087
+    - attack.t1087.001
+    - attack.t1087.002
+  name: Suspicious Use of PsLogList
+

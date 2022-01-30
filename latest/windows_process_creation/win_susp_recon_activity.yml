@@ -1,0 +1,44 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/COMMAND_LINE
+      value: net group "domain admins" /dom
+    - case sensitive: false
+      op: is
+      path: event/COMMAND_LINE
+      value: net localgroup administrators
+    - case sensitive: false
+      op: is
+      path: event/COMMAND_LINE
+      value: net group "enterprise admins" /dom
+    - case sensitive: false
+      op: is
+      path: event/COMMAND_LINE
+      value: net accounts /dom
+respond:
+- action: report
+  metadata:
+    author: Florian Roth, omkar72
+    description: Detects suspicious command line activity on Windows systems
+    falsepositives:
+    - Inventory tool runs
+    - Penetration tests
+    - Administrative activity
+    level: medium
+    references:
+    - https://redcanary.com/blog/how-one-hospital-thwarted-a-ryuk-ransomware-outbreak/
+    - https://thedfirreport.com/2020/10/18/ryuk-in-5-hours/
+    tags:
+    - attack.discovery
+    - attack.t1087.001
+    - attack.t1087.002
+  name: Suspicious Reconnaissance Activity
+

@@ -1,0 +1,47 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \wmiprvse.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+      - case sensitive: false
+        not: true
+        op: is
+        path: event/COMMAND_LINE
+        value: 'null'
+    - not: false
+      op: exists
+      path: event/COMMAND_LINE
+respond:
+- action: report
+  metadata:
+    author: Markus Neis / @Karneades
+    description: Detects WMI spawning PowerShell
+    falsepositives:
+    - AppvClient
+    - CCM
+    level: high
+    references:
+    - https://github.com/Neo23x0/sigma/blob/master/rules/windows/process_creation/win_shell_spawn_susp_program.yml
+    - https://any.run/report/68bc255f9b0db6a0d30a8f2dadfbee3256acfe12497bf93943bc1eab0735e45e/a2385d6f-34f7-403c-90d3-b1f9d2a90a5e
+    tags:
+    - attack.execution
+    - attack.t1047
+    - attack.t1059.001
+  name: WMI Spawning Windows PowerShell
+

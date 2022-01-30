@@ -1,0 +1,55 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: objectcategory
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: trustdmp
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: dcmodes
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: dclist
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: computers_pwdnotreqd
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \adfind.exe
+respond:
+- action: report
+  metadata:
+    author: FPT.EagleEye Team, omkar72, oscd.community
+    description: Detects the execution of a AdFind for Active Directory enumeration
+    falsepositives:
+    - Administrative activity
+    level: medium
+    references:
+    - https://social.technet.microsoft.com/wiki/contents/articles/7535.adfind-command-examples.aspx
+    - https://github.com/center-for-threat-informed-defense/adversary_emulation_library/blob/master/fin6/Emulation_Plan/Phase1.md
+    - https://thedfirreport.com/2020/05/08/adfind-recon/
+    tags:
+    - attack.discovery
+    - attack.t1018
+    - attack.t1087.002
+    - attack.t1482
+    - attack.t1069.002
+  name: Suspicious AdFind Execution
+

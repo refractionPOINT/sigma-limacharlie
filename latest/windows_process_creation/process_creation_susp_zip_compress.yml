@@ -1,0 +1,41 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: 'Compress-Archive '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' -Path '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' -DestinationPath '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: $env:TEMP\
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Use living off the land tools to zip a file and stage it in the Windows
+      temporary folder for later exfiltration
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1074.001/T1074.001.md
+    tags:
+    - attack.collection
+    - attack.t1074.001
+  name: Zip A Folder With PowerShell For Staging In Temp
+

@@ -1,0 +1,44 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \cmd.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: /q
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: /c
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: chcp
+respond:
+- action: report
+  metadata:
+    author: wagga, Jonhnathan Ribeiro, oscd.community
+    description: Detects command line parameters used by Koadic hack tool
+    falsepositives:
+    - Pentest
+    level: high
+    references:
+    - https://unit42.paloaltonetworks.com/unit42-sofacy-groups-parallel-attacks/
+    - https://github.com/zerosum0x0/koadic/blob/master/data/stager/js/stdlib.js#L955
+    - https://blog.f-secure.com/hunting-for-koadic-a-com-based-rootkit/
+    tags:
+    - attack.execution
+    - attack.t1059.003
+    - attack.t1059.005
+    - attack.t1059.007
+  name: Koadic Execution
+

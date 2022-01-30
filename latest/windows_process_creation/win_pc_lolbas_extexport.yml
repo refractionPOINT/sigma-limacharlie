@@ -1,0 +1,27 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - case sensitive: false
+    op: contains
+    path: event/COMMAND_LINE
+    value: Extexport.exe
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Extexport.exe loads dll and is execute from other folder the original
+      path
+    falsepositives:
+    - unknown
+    level: medium
+    references:
+    - https://lolbas-project.github.io/lolbas/Binaries/Extexport/
+    tags:
+    - attack.defense_evasion
+    - attack.t1218
+  name: Suspicious Extexport Execution
+

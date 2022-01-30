@@ -1,0 +1,34 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: CL_Mutexverifiers.ps1
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: runAfterCancelProcess
+respond:
+- action: report
+  metadata:
+    author: oscd.community, Natalia Shornikova
+    description: Detects Execution via runAfterCancelProcess in CL_Mutexverifiers.ps1
+      module
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://github.com/LOLBAS-Project/LOLBAS/blob/master/yml/OSScripts/CL_mutexverifiers.yml
+    - https://twitter.com/pabraeken/status/995111125447577600
+    tags:
+    - attack.defense_evasion
+    - attack.t1216
+  name: Execution via CL_Mutexverifiers.ps1
+

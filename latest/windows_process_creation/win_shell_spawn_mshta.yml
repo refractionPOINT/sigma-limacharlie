@@ -1,0 +1,46 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \mshta.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \powershell.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cmd.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \WScript.exe
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects a suspicious child process of a mshta.exe process
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://app.any.run/tasks/f0fac90f-84ac-4faa-b5b2-f4353c388969/#
+    - https://app.any.run/tasks/9c0f37bc-867a-4314-b685-e101566766d7/
+    tags:
+    - attack.execution
+    - attack.defense_evasion
+    - attack.t1059.005
+    - attack.t1059.001
+    - attack.t1218
+  name: Mshta Spawning Windows Shell
+

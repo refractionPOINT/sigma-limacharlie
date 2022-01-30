@@ -1,0 +1,56 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      not: true
+      op: contains
+      path: event/FILE_PATH
+      value: \
+    - not: true
+      op: or
+      rules:
+      - not: true
+        op: exists
+        path: event/FILE_PATH
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/FILE_PATH
+          value: '-'
+        - case sensitive: false
+          op: is
+          path: event/FILE_PATH
+          value: ''
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/FILE_PATH
+          value: Registry
+        - case sensitive: false
+          op: is
+          path: event/COMMAND_LINE
+          value: Registry
+respond:
+- action: report
+  metadata:
+    author: Max Altgelt
+    description: Checks whether the image specified in a process creation event is
+      not a full, absolute path (caused by process ghosting or other unorthodox methods
+      to start a process)
+    falsepositives:
+    - unknown
+    level: high
+    references:
+    - https://pentestlaboratories.com/2021/12/08/process-ghosting/
+    tags:
+    - attack.defense_evasion
+  name: Execution Of Not Existing File
+

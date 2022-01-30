@@ -1,0 +1,38 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \protocolhandler.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: '"ms-word'
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: .docx"
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Emulates attack via documents through protocol handler in Microsoft
+      Office. On successful execution you should see Microsoft Word launch a blank
+      file.
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1218/T1218.md
+    tags:
+    - attack.defense_evasion
+    - attack.t1218
+  name: ProtocolHandler.exe Downloaded Suspicious File
+

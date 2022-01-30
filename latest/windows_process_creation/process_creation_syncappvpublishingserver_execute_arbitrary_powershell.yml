@@ -1,0 +1,33 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \SyncAppvPublishingServer.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: '"n; '
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Executes arbitrary PowerShell code using SyncAppvPublishingServer.exe.
+    falsepositives:
+    - App-V clients
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1218/T1218.md
+    - https://lolbas-project.github.io/lolbas/Binaries/Syncappvpublishingserver/
+    tags:
+    - attack.defense_evasion
+    - attack.t1218
+  name: SyncAppvPublishingServer Execute Arbitrary PowerShell Code
+

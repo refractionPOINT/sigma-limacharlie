@@ -1,0 +1,37 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: matches
+      path: event/COMMAND_LINE
+      re: .*xcopy.*\\System32\\.*
+    - case sensitive: false
+      op: matches
+      path: event/COMMAND_LINE
+      re: .*cmd\.exe.*/c.*copy.*\\System32\\.*
+respond:
+- action: report
+  metadata:
+    author: Florian Roth, Markus Neis, Tim Shelton (HAWK.IO)
+    description: Detects a suspicious copy command that copies a system program from
+      System32 to another directory on disk - sometimes used to use LOLBINs like certutil
+      or desktopimgdownldr to a different location with a different name
+    falsepositives:
+    - False positives depend on scripts and administrative tools used in the monitored
+      environment
+    - Admin scripts like https://www.itexperience.net/sccm-batch-files-and-32-bits-processes-on-64-bits-os/
+    - False positive when cmd.exe and xcopy.exe are called directly
+    level: medium
+    references:
+    - https://www.hybrid-analysis.com/sample/8da5b75b6380a41eee3a399c43dfe0d99eeefaa1fd21027a07b1ecaa4cd96fdd?environmentId=120
+    tags:
+    - attack.defense_evasion
+    - attack.t1036.003
+  name: Suspicious Copy From or To System32
+

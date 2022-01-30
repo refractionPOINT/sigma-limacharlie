@@ -1,0 +1,107 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: wmic
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: product where name=
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: call uninstall
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: /nointeractive
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Antivirus
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'AVG '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Crowdstrike Sensor
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: DLP Endpoint
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Endpoint Detection
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Endpoint Protection
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Endpoint Security
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Endpoint Sensor
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ESET File Security
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Malwarebytes
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: McAfee Agent
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Microsoft Security Client
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Threat Protection
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: VirusScan
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Webroot SecureAnywhere
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Windows Defender
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects deinstallation of security products using WMIC utility
+    falsepositives:
+    - Legitimate administration
+    level: medium
+    references:
+    - https://twitter.com/cglyer/status/1355171195654709249
+    - https://thedfirreport.com/2021/10/18/icedid-to-xinglocker-ransomware-in-24-hours/
+    tags:
+    - attack.defense_evasion
+    - attack.t1562.001
+  name: Wmic Uninstall Security Product
+

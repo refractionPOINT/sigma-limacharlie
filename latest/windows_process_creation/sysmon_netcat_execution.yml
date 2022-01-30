@@ -1,0 +1,48 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \ncat.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -lvp '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -l --proxy-type http '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' --exec cmd.exe '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -vnl --exec '
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Adversaries may use a non-application layer protocol for communication
+      between host and C2 server or among infected hosts within a network
+    falsepositives:
+    - Legitimate ncat use
+    level: high
+    references:
+    - https://nmap.org/ncat/
+    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1095/T1095.md
+    tags:
+    - attack.command_and_control
+    - attack.t1095
+  name: Ncat Execution
+

@@ -1,0 +1,93 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \mshta.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \wscript.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \cscript.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \Windows\Temp
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \Temporary Internet
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \AppData\Local\Temp
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \AppData\Roaming\Temp
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '%TEMP%'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '%TMP%'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '%LocalAppData%\Temp'
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' >'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Out-File
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ConvertTo-Json
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -WindowStyle hidden -Verb runAs
+respond:
+- action: report
+  metadata:
+    author: Florian Roth, Max Altgelt
+    description: Detects a suspicious script executions from temporary folder
+    falsepositives:
+    - Administrative scripts
+    level: high
+    references:
+    - https://www.microsoft.com/security/blog/2021/07/13/microsoft-discovers-threat-actor-targeting-solarwinds-serv-u-software-with-0-day-exploit/
+    tags:
+    - attack.execution
+    - attack.t1059
+  name: Suspicious Script Execution From Temp Folder
+

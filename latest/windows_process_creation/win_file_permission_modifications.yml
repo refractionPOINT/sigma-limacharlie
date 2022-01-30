@@ -1,0 +1,54 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \takeown.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \cacls.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \icacls.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /grant
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \attrib.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -r
+respond:
+- action: report
+  metadata:
+    author: Jakob Weinzettl, oscd.community
+    description: Detects a file or folder's permissions being modified.
+    falsepositives:
+    - Users interacting with the files on their own (unlikely unless privileged users).
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1222.001/T1222.001.md
+    tags:
+    - attack.defense_evasion
+    - attack.t1222.001
+  name: File or Folder Permissions Modifications
+

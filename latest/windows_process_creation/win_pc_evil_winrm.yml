@@ -1,0 +1,43 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \ruby.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: '-i '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: '-u '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: '-p '
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Adversaries may use Valid Accounts to log into a computer using the
+      Remote Desktop Protocol (RDP). The adversary may then perform actions as the
+      logged-on user.
+    falsepositives:
+    - Unknow
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1021.006/T1021.006.md#atomic-test-3---winrm-access-with-evil-winrm
+    - https://github.com/Hackplayers/evil-winrm
+    tags:
+    - attack.lateral_movement
+    - attack.t1021.006
+  name: WinRM Access with Evil-WinRM
+

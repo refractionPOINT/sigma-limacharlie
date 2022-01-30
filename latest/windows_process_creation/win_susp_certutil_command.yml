@@ -1,0 +1,98 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -decode '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -decodehex '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -urlcache '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -verifyctl '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -encode '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /decode '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /decodehex '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /urlcache '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /verifyctl '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /encode '
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \certutil.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: URL
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ping
+respond:
+- action: report
+  metadata:
+    author: Florian Roth, juju4, keepwatch
+    description: Detects a suspicious Microsoft certutil execution with sub commands
+      like 'decode' sub command, which is sometimes used to decode malicious code
+      with the built-in certutil utility
+    falsepositives:
+    - False positives depend on scripts and administrative tools used in the monitored
+      environment
+    level: high
+    references:
+    - https://twitter.com/JohnLaTwC/status/835149808817991680
+    - https://blogs.technet.microsoft.com/pki/2006/11/30/basic-crl-checking-with-certutil/
+    - https://www.trustedsec.com/2017/07/new-tool-release-nps_payload/
+    - https://twitter.com/egre55/status/1087685529016193025
+    - https://lolbas-project.github.io/lolbas/Binaries/Certutil/
+    tags:
+    - attack.defense_evasion
+    - attack.t1140
+    - attack.command_and_control
+    - attack.t1105
+    - attack.s0160
+    - attack.g0007
+    - attack.g0010
+    - attack.g0045
+    - attack.g0049
+    - attack.g0075
+    - attack.g0096
+  name: Suspicious Certutil Command
+

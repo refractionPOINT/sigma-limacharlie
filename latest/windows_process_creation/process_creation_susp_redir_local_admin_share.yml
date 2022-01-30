@@ -1,0 +1,30 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: '> \\127.0.0.1\admin$'
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: '> \\localhost\admin$'
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects a suspicious output redirection to the local admins share
+      as often found in malicious scripts or hacktool stagers
+    falsepositives:
+    - unknown
+    level: high
+    references:
+    - https://www.microsoft.com/security/blog/2022/01/15/destructive-malware-targeting-ukrainian-organizations/
+  name: Suspicious Redirection to Local Admin Share
+

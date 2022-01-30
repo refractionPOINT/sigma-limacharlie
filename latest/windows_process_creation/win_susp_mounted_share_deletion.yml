@@ -1,0 +1,42 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \net.exe
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \net1.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: share
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: /delete
+respond:
+- action: report
+  metadata:
+    author: oscd.community, @redcanary, Zach Stanford @svch0st
+    description: Detects when when a mounted share is removed. Adversaries may remove
+      share connections that are no longer useful in order to clean up traces of their
+      operation
+    falsepositives:
+    - Administrators or Power users may remove their shares via cmd line
+    level: low
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1070.005/T1070.005.md
+    tags:
+    - attack.defense_evasion
+    - attack.t1070.005
+  name: Mounted Share Deleted
+

@@ -1,0 +1,28 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - case sensitive: false
+    op: ends with
+    path: event/PARENT/FILE_PATH
+    value: \EdgeTransport.exe
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects a WMI backdoor in Exchange Transport Agents via WMI event
+      filters
+    falsepositives:
+    - Unknown
+    level: critical
+    references:
+    - https://twitter.com/cglyer/status/1182389676876980224
+    - https://twitter.com/cglyer/status/1182391019633029120
+    tags:
+    - attack.persistence
+    - attack.t1546.003
+  name: WMI Backdoor Exchange Transport Agent
+

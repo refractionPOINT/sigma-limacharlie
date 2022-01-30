@@ -1,0 +1,88 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: C:\Windows\cert.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Set-MpPreference -DisableRealtimeMonitoring $true -DisableIntrusionPreventionSystem
+          $true -DisableIOAVProtection $true -DisableScriptScanning $true -EnableControlledFolderAccess
+          Disabled -EnableNetworkProtection AuditMode -Force -MAPSReporting Disabled
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: del /q /f c:\kworking\agent.crt
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Kaseya VSA Agent Hot-fix
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \AppData\Local\Temp\MsMpEng.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: rmdir /s /q %SystemDrive%\inetpub\logs
+      - case sensitive: false
+        op: matches
+        path: event/COMMAND_LINE
+        re: .*del\ /s\ /q\ /f\ %SystemDrive%\\.*\.log.*
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: c:\kworking1\agent.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: c:\kworking1\agent.crt
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/FILE_PATH
+        value: C:\Windows\MsMpEng.exe
+      - case sensitive: false
+        op: is
+        path: event/FILE_PATH
+        value: C:\Windows\cert.exe
+      - case sensitive: false
+        op: is
+        path: event/FILE_PATH
+        value: C:\kworking\agent.exe
+      - case sensitive: false
+        op: is
+        path: event/FILE_PATH
+        value: C:\kworking1\agent.exe
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects process command line patterns and locations used by REvil
+      group in Kaseya incident (can also match on other malware)
+    falsepositives:
+    - Unknown
+    level: critical
+    references:
+    - https://community.sophos.com/b/security-blog/posts/active-ransomware-attack-on-kaseya-customers
+    - https://www.joesandbox.com/analysis/443736/0/html
+    - https://doublepulsar.com/kaseya-supply-chain-attack-delivers-mass-ransomware-event-to-us-companies-76e4ec6ec64b
+    - https://therecord.media/revil-ransomware-executes-supply-chain-attack-via-malicious-kaseya-update/
+    - https://blog.truesec.com/2021/07/04/kaseya-supply-chain-attack-targeting-msps-to-deliver-revil-ransomware/
+    tags:
+    - attack.execution
+    - attack.t1059
+    - attack.g0115
+  name: REvil Kaseya Incident Malware Patterns
+

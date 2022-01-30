@@ -1,0 +1,39 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: rundll32.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: .dll
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: StartW
+respond:
+- action: report
+  metadata:
+    author: Wojciech Lesicki
+    description: Rundll32 can be use by Cobalt Strike with StartW function to load
+      DLLs from the command line.
+    falsepositives:
+    - Unknown
+    level: critical
+    references:
+    - https://www.cobaltstrike.com/help-windows-executable
+    - https://redcanary.com/threat-detection-report/
+    - https://thedfirreport.com/2020/10/18/ryuk-in-5-hours/
+    tags:
+    - attack.defense_evasion
+    - attack.t1218.011
+  name: CobaltStrike Load by Rundll32
+

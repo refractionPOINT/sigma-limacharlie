@@ -1,0 +1,39 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/PARENT/COMMAND_LINE
+      value: cmd
+    - case sensitive: false
+      op: contains
+      path: event/PARENT/COMMAND_LINE
+      value: /c
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: /../../
+respond:
+- action: report
+  metadata:
+    author: xknow @xknow_infosec
+    description: detects the usage of path traversal in cmd.exe indicating possible
+      command/argument confusion/hijacking
+    falsepositives:
+    - (not much) some benign Java tools may product false-positive commandlines for
+      loading libraries
+    level: high
+    references:
+    - https://hackingiscool.pl/cmdhijack-command-argument-confusion-with-path-traversal-in-cmd-exe/
+    - https://twitter.com/Oddvarmoe/status/1270633613449723905
+    tags:
+    - attack.execution
+    - attack.t1059.003
+  name: Cmd.exe CommandLine Path Traversal
+

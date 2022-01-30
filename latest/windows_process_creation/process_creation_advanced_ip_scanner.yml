@@ -1,0 +1,45 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/FILE_PATH
+      value: \advanced_ip_scanner
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /portable
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /lng
+respond:
+- action: report
+  metadata:
+    author: '@ROxPinTeddy, Nasreddine Bencherchali @nas_bench'
+    description: Detects the use of Advanced IP Scanner. Seems to be a popular tool
+      for ransomware groups.
+    falsepositives:
+    - Legitimate administrative use
+    level: medium
+    references:
+    - https://news.sophos.com/en-us/2019/12/09/snatch-ransomware-reboots-pcs-into-safe-mode-to-bypass-protection/
+    - https://www.fireeye.com/blog/threat-research/2020/05/tactics-techniques-procedures-associated-with-maze-ransomware-incidents.html
+    - https://labs.f-secure.com/blog/prelude-to-ransomware-systembc
+    - https://assets.documentcloud.org/documents/20444693/fbi-pin-egregor-ransomware-bc-01062021.pdf
+    - https://thedfirreport.com/2021/01/18/all-that-for-a-coinminer
+    - https://github.com/3CORESec/MAL-CL/tree/master/Descriptors/Other/Advanced%20IP%20Scanner
+    tags:
+    - attack.discovery
+    - attack.t1046
+    - attack.t1135
+  name: Advanced IP Scanner
+

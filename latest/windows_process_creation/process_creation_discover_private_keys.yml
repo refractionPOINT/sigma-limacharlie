@@ -1,0 +1,77 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'dir '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'findstr '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .key
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .pgp
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .gpg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .ppk
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .p12
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .pem
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .pfx
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .cer
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .p7b
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .asc
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Adversaries may search for private key certificate files on compromised
+      systems for insecurely stored credential
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1552.004/T1552.004.md
+    tags:
+    - attack.credential_access
+    - attack.t1552.004
+  name: Discover Private Keys
+

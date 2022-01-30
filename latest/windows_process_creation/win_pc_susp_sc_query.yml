@@ -1,0 +1,26 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - case sensitive: false
+    op: contains
+    path: event/COMMAND_LINE
+    value: sc query
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Adversaries may try to get information about registered services
+    falsepositives:
+    - unknown
+    level: low
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1007/T1007.md#atomic-test-1---system-service-discovery
+    tags:
+    - attack.discovery
+    - attack.t1007
+  name: Suspicious Sc Query
+

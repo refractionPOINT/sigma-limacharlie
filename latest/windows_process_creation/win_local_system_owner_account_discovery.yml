@@ -1,0 +1,148 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \whoami.exe
+        - op: and
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \wmic.exe
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: useraccount
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: get
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \quser.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \qwinsta.exe
+        - op: and
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \cmdkey.exe
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: /list
+        - op: and
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \cmd.exe
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: /c
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: 'dir '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \Users\
+      - case sensitive: false
+        not: true
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' rmdir '
+    - op: and
+      rules:
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \net.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \net1.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: user
+      - not: true
+        op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /domain
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /add
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /delete
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /active
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /expires
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /passwordreq
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /scriptpath
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /times
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /workstations
+respond:
+- action: report
+  metadata:
+    author: Timur Zinniatullin, Daniil Yugoslavskiy, oscd.community
+    description: Local accounts, System Owner/User discovery using operating systems
+      utilities
+    falsepositives:
+    - Legitimate administrator or user enumerates local users for legitimate reason
+    level: low
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1033/T1033.md
+    tags:
+    - attack.discovery
+    - attack.t1033
+    - attack.t1087.001
+  name: Local Accounts Discovery
+

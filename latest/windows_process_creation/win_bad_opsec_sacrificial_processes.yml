@@ -1,0 +1,86 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \WerFault.exe
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: \WerFault.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \rundll32.exe
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: \rundll32.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \regsvcs.exe
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: \regsvcs.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \regasm.exe
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: \regasm.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \regsvr32.exe
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: \regsvr32.exe
+respond:
+- action: report
+  metadata:
+    author: Oleg Kolesnikov @securonix invrep_de, oscd.community, Florian Roth, Christian
+      Burkard
+    description: Detects attackers using tooling with bad opsec defaults e.g. spawning
+      a sacrificial process to inject a capability into the process without taking
+      into account how the process is normally run, one trivial example of this is
+      using rundll32.exe without arguments as a sacrificial process (default in CS,
+      now highlighted by c2lint), running WerFault without arguments (Kraken - credit
+      am0nsec), and other examples.
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://blog.malwarebytes.com/malwarebytes-news/2020/10/kraken-attack-abuses-wer-service/
+    - https://www.cobaltstrike.com/help-opsec
+    - https://twitter.com/CyberRaiju/status/1251492025678983169
+    - https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/regsvr32
+    - https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/rundll32
+    - https://docs.microsoft.com/en-us/dotnet/framework/tools/regasm-exe-assembly-registration-tool
+    - https://docs.microsoft.com/en-us/dotnet/framework/tools/regsvcs-exe-net-services-installation-tool#feedback
+    tags:
+    - attack.defense_evasion
+    - attack.t1218.011
+  name: Bad Opsec Defaults Sacrificial Processes With Improper Arguments
+

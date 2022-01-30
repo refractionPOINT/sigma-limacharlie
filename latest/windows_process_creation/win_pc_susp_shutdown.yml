@@ -1,0 +1,39 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \shutdown.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '/r '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '/s '
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Use of the commandline to shutdown or reboot windows
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1529/T1529.md
+    - https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/shutdown
+    tags:
+    - attack.impact
+    - attack.t1529
+  name: Suspicious Execution of Shutdown
+

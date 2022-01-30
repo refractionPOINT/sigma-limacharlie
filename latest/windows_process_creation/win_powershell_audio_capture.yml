@@ -1,0 +1,27 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - case sensitive: false
+    op: contains
+    path: event/COMMAND_LINE
+    value: WindowsAudioDevice-Powershell-Cmdlet
+respond:
+- action: report
+  metadata:
+    author: E.M. Anhaus (originally from Atomic Blue Detections, Endgame), oscd.community
+    description: Detects audio capture via PowerShell Cmdlet.
+    falsepositives:
+    - Legitimate audio capture by legitimate user.
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1123/T1123.md
+    - https://eqllib.readthedocs.io/en/latest/analytics/ab7a6ef4-0983-4275-a4f1-5c6bd3c31c23.html
+    tags:
+    - attack.collection
+    - attack.t1123
+  name: Audio Capture via PowerShell
+

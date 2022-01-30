@@ -1,0 +1,100 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: domainlist
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: trustdmp
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: dcmodes
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: adinfo
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' dclist '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: computer_pwdnotreqd
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: objectcategory=
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: -subnets -f
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: name="Domain Admins"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: '-sc u:'
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: domainncs
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: dompol
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' oudmp '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: subnetdmp
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: gpodmp
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: fspdmp
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: users_noexpire
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: computers_active
+respond:
+- action: report
+  metadata:
+    author: Janantha Marasinghe (https://github.com/blueteam0ps)
+    description: AdFind continues to be seen across majority of breaches. It is used
+      to domain trust discovery to plan out subsequent steps in the attack chain.
+    falsepositives:
+    - Admin activity
+    level: high
+    references:
+    - https://thedfirreport.com/2020/05/08/adfind-recon/
+    - https://thedfirreport.com/2021/01/11/trickbot-still-alive-and-well/
+    - https://www.microsoft.com/security/blog/2021/01/20/deep-dive-into-the-solorigate-second-stage-activation-from-sunburst-to-teardrop-and-raindrop/
+    tags:
+    - attack.discovery
+    - attack.t1482
+    - attack.t1018
+  name: AdFind Usage Detection
+

@@ -1,0 +1,77 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \vmtoolsd.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \cmd.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \rundll32.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \regsvr32.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \wscript.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \cscript.exe
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \VMware\VMware Tools\poweron-vm-default.bat
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \VMware\VMware Tools\poweroff-vm-default.bat
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \VMware\VMware Tools\resume-vm-default.bat
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \VMware\VMware Tools\suspend-vm-default.bat
+respond:
+- action: report
+  metadata:
+    author: behops, Bhabesh Raj
+    description: Detects suspicious child process creations of VMware Tools process
+      which may indicate persistence setup
+    falsepositives:
+    - Legitimate use by adminstrator
+    level: high
+    references:
+    - https://bohops.com/2021/10/08/analyzing-and-detecting-a-vmtools-persistence-technique/
+    tags:
+    - attack.execution
+    - attack.persistence
+    - attack.t1059
+  name: VMToolsd Suspicious Child Process
+

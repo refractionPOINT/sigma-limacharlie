@@ -1,0 +1,41 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \GfxDownloadWrapper.exe
+      - case sensitive: false
+        not: true
+        op: contains
+        path: event/COMMAND_LINE
+        value: gameplayapi.intel.com
+    - case sensitive: false
+      not: true
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \GfxDownloadWrapper.exe
+respond:
+- action: report
+  metadata:
+    author: Victor Sergeev, oscd.community
+    description: Detects when GfxDownloadWrapper.exe downloads file from non standard
+      URL
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://github.com/LOLBAS-Project/LOLBAS/blob/master/yml/OSBinaries/GfxDownloadWrapper.yml
+    tags:
+    - attack.command_and_control
+    - attack.t1105
+  name: GfxDownloadWrapper.exe Downloads File from Suspicious URL
+

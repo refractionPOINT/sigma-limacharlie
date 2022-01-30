@@ -1,0 +1,63 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \SepRemovalToolNative_x64.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \CATClean.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: --uninstall
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \NetInstaller.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -r
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \WFPUnins.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /uninstall
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /enterprise
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali @nas_bench
+    description: Detects the use of CleanWipe a tool usually used to delete Symantec
+      antivirus.
+    falsepositives:
+    - Legitimate administrative use
+    level: medium
+    references:
+    - https://github.com/3CORESec/MAL-CL/tree/master/Descriptors/Other/CleanWipe
+    tags:
+    - attack.defense_evasion
+    - attack.t1562.001
+  name: CleanWipe Usage
+

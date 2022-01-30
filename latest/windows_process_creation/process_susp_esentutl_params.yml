@@ -1,0 +1,37 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: esentutl
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' /p'
+respond:
+- action: report
+  metadata:
+    author: sam0x90
+    description: Conti recommendation to its affiliates to use esentult to access
+      NTDS dumped file. Trickbot also uses this utilities to get MSEdge info via its
+      module pwgrab.
+    falsepositives:
+    - To be determined
+    level: medium
+    references:
+    - https://twitter.com/vxunderground/status/1423336151860002816
+    - https://attack.mitre.org/software/S0404/
+    - https://thedfirreport.com/2021/08/01/bazarcall-to-conti-ransomware-via-trickbot-and-cobalt-strike/
+    tags:
+    - attack.credential_access
+    - attack.t1003
+    - attack.t1003.003
+  name: Esentutl Gather Credentials
+

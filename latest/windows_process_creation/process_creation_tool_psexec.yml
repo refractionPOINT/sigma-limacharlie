@@ -1,0 +1,35 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \PSEXESVC.exe
+    - case sensitive: false
+      op: starts with
+      path: event/USER_NAME
+      value: NT AUTHORITY\SYSTEM
+respond:
+- action: report
+  metadata:
+    author: Thomas Patzke
+    description: Detects PsExec service installation and execution events (service
+      and Sysmon)
+    falsepositives:
+    - unknown
+    level: low
+    references:
+    - https://www.jpcert.or.jp/english/pub/sr/ir_research.html
+    - https://jpcertcc.github.io/ToolAnalysisResultSheet
+    tags:
+    - attack.execution
+    - attack.t1569.002
+    - attack.s0029
+  name: PsExec Tool Execution
+

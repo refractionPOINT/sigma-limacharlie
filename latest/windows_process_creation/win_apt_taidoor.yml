@@ -1,0 +1,45 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: dll,MyStart
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: dll MyStart
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: ' MyStart'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: rundll32.exe
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects specific process characteristics of Chinese TAIDOOR RAT malware
+      load
+    falsepositives:
+    - Unknown
+    level: critical
+    references:
+    - https://us-cert.cisa.gov/ncas/analysis-reports/ar20-216a
+    tags:
+    - attack.execution
+    - attack.t1055.001
+  name: TAIDOOR RAT DLL Load
+

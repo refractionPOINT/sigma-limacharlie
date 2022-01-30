@@ -1,0 +1,27 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - case sensitive: false
+    op: contains
+    path: event/FILE_PATH
+    value: .zip\
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Payloads may be compressed, archived, or encrypted in order to avoid
+      detection
+    falsepositives:
+    - unknown
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1027/T1027.md#atomic-test-4---execution-from-compressed-file
+    tags:
+    - attack.impact
+    - attack.t1485
+  name: Run from a Zip File
+

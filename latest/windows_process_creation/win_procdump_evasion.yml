@@ -1,0 +1,71 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: copy procdump
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: move procdump
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'copy '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '.dmp '
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 2.dmp
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: lsass
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: out.dmp
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: copy lsass.exe_
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: move lsass.exe_
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects uses of the SysInternals Procdump utility in which procdump
+      or its output get renamed or a dump file is moved ot copied to a different name
+    falsepositives:
+    - Cases in which procdump just gets copied to a different directory without any
+      renaming
+    level: high
+    references:
+    - https://twitter.com/mrd0x/status/1480785527901204481
+    tags:
+    - attack.defense_evasion
+    - attack.t1036
+    - attack.t1003.001
+  name: Procdump Evasion
+
