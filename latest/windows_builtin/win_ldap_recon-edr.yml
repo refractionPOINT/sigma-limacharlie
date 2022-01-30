@@ -1,0 +1,231 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/EVENT/System/EventID
+          value: '30'
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/SearchFilter
+            value: (groupType:1.2.840.113556.1.4.803:=2147483648)
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/SearchFilter
+            value: (groupType:1.2.840.113556.1.4.803:=2147483656)
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/SearchFilter
+            value: (groupType:1.2.840.113556.1.4.803:=2147483652)
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/SearchFilter
+            value: (groupType:1.2.840.113556.1.4.803:=2147483650)
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/SearchFilter
+            value: (sAMAccountType=805306369)
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/SearchFilter
+            value: (sAMAccountType=805306368)
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/SearchFilter
+            value: (sAMAccountType=536870913)
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/SearchFilter
+            value: (sAMAccountType=536870912)
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/SearchFilter
+            value: (sAMAccountType=268435457)
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/SearchFilter
+            value: (sAMAccountType=268435456)
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/SearchFilter
+            value: (objectCategory=groupPolicyContainer)
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/SearchFilter
+            value: (objectCategory=organizationalUnit)
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/SearchFilter
+            value: (objectCategory=Computer)
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/SearchFilter
+            value: (objectCategory=nTDSDSA)
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/SearchFilter
+            value: (objectCategory=server)
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/SearchFilter
+            value: (objectCategory=domain)
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/SearchFilter
+            value: (objectCategory=person)
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/SearchFilter
+            value: (objectCategory=group)
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/SearchFilter
+            value: (objectCategory=user)
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/SearchFilter
+            value: (objectClass=trustedDomain)
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/SearchFilter
+            value: (objectClass=computer)
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/SearchFilter
+            value: (objectClass=server)
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/SearchFilter
+            value: (objectClass=group)
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/SearchFilter
+            value: (objectClass=user)
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/SearchFilter
+            value: (primaryGroupID=521)
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/SearchFilter
+            value: (primaryGroupID=516)
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/SearchFilter
+            value: (primaryGroupID=515)
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/SearchFilter
+            value: (primaryGroupID=512)
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/SearchFilter
+            value: Domain Admins
+      - not: true
+        op: and
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/EVENT/System/EventID
+          value: '30'
+        - op: or
+          rules:
+          - case sensitive: false
+            op: matches
+            path: event/EVENT/EventData/SearchFilter
+            re: .*\(domainSid=.*\).*
+          - case sensitive: false
+            op: matches
+            path: event/EVENT/EventData/SearchFilter
+            re: .*\(objectSid=.*\).*
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '30'
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/SearchFilter
+          value: (userAccountControl:1.2.840.113556.1.4.803:=4194304)
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/SearchFilter
+          value: (userAccountControl:1.2.840.113556.1.4.803:=2097152)
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/SearchFilter
+          value: '!(userAccountControl:1.2.840.113556.1.4.803:=1048574)'
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/SearchFilter
+          value: (userAccountControl:1.2.840.113556.1.4.803:=524288)
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/SearchFilter
+          value: (userAccountControl:1.2.840.113556.1.4.803:=65536)
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/SearchFilter
+          value: (userAccountControl:1.2.840.113556.1.4.803:=8192)
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/SearchFilter
+          value: (userAccountControl:1.2.840.113556.1.4.803:=544)
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/SearchFilter
+          value: '!(UserAccountControl:1.2.840.113556.1.4.803:=2)'
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/SearchFilter
+          value: msDS-AllowedToActOnBehalfOfOtherIdentity
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/SearchFilter
+          value: msDS-AllowedToDelegateTo
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/SearchFilter
+          value: (accountExpires=9223372036854775807)
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/SearchFilter
+          value: (accountExpires=0)
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/SearchFilter
+          value: (adminCount=1)
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/SearchFilter
+          value: ms-MCS-AdmPwd
+respond:
+- action: report
+  metadata:
+    author: Adeem Mawani
+    description: Detects possible Active Directory enumeration via LDAP
+    level: medium
+    references:
+    - https://techcommunity.microsoft.com/t5/microsoft-defender-for-endpoint/hunting-for-reconnaissance-activities-using-ldap-search-filters/ba-p/824726
+    - https://github.com/PowerShellMafia/PowerSploit/blob/master/Recon/PowerView.ps1
+    - https://github.com/BloodHoundAD/SharpHound3/blob/master/SharpHound3/LdapBuilder.cs
+    tags:
+    - attack.discovery
+    - attack.t1069.002
+    - attack.t1087.002
+    - attack.t1482
+  name: LDAP Reconnaissance / Active Directory Enumeration
+

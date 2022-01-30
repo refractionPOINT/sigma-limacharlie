@@ -1,0 +1,43 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/EventData/ServiceName
+    value: PSEXESVC
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: Event/System/EventID
+        value: '7045'
+      - case sensitive: false
+        op: ends with
+        path: Event/EventData/ServiceFileName
+        value: \PSEXESVC.exe
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '7036'
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Thomas Patzke
+    description: Detects PsExec service installation and execution events (service
+      and Sysmon)
+    falsepositives:
+    - unknown
+    level: low
+    references:
+    - https://www.jpcert.or.jp/english/pub/sr/ir_research.html
+    - https://jpcertcc.github.io/ToolAnalysisResultSheet
+    tags:
+    - attack.execution
+    - attack.t1569.002
+    - attack.s0029
+  name: PsExec Tool Execution
+

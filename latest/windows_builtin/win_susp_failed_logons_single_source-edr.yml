@@ -1,0 +1,41 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '529'
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '4625'
+    - case sensitive: false
+      op: exists
+      path: event/EVENT/EventData/TargetUserName
+    - case sensitive: false
+      op: exists
+      path: event/EVENT/EventData/WorkstationName
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects suspicious failed logins with different user accounts from
+      a single source system
+    falsepositives:
+    - Terminal servers
+    - Jump servers
+    - Other multiuser systems like Citrix server farms
+    - Workstations with frequently changing users
+    level: medium
+    tags:
+    - attack.persistence
+    - attack.privilege_escalation
+    - attack.t1078
+  name: Failed Logins with Different Accounts from Single Source System
+

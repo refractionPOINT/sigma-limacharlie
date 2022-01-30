@@ -1,0 +1,57 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '4661'
+  - op: or
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/EventData/ObjectType
+      value: SAM_USER
+    - case sensitive: false
+      op: is
+      path: Event/EventData/ObjectType
+      value: SAM_GROUP
+  - case sensitive: false
+    op: starts with
+    path: Event/EventData/ObjectName
+    value: S-1-5-21-
+  - case sensitive: false
+    op: is
+    path: Event/EventData/AccessMask
+    value: '0x2d'
+  - op: or
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/ObjectName
+      value: '-500'
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/ObjectName
+      value: '-512'
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (rule), Jack Croock (method), Jonhnathan Ribeiro (improvements),
+      oscd.community
+    description: Detects activity as "net user administrator /domain" and "net group
+      domain admins /domain"
+    falsepositives:
+    - Administrator activity
+    - Penetration tests
+    level: high
+    references:
+    - https://findingbad.blogspot.de/2017/01/hunting-what-does-it-look-like.html
+    tags:
+    - attack.discovery
+    - attack.t1087.002
+    - attack.t1069.002
+    - attack.s0039
+  name: Reconnaissance Activity
+

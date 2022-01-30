@@ -1,0 +1,48 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '5136'
+    - case sensitive: false
+      op: is
+      path: event/EVENT/EventData/AttributeLDAPDisplayName
+      value: ntSecurityDescriptor
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/AttributeValue
+        value: 1131f6ad-9c07-11d1-f79f-00c04fc2dcd2
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/AttributeValue
+        value: 1131f6aa-9c07-11d1-f79f-00c04fc2dcd2
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/AttributeValue
+        value: 89e95b76-444d-4c62-991a-0facbeda640c
+respond:
+- action: report
+  metadata:
+    author: Samir Bousseaden; Roberto Rodriguez @Cyb3rWard0g; oscd.community
+    description: backdooring domain object to grant the rights associated with DCSync
+      to a regular user or machine account using Powerview\Add-DomainObjectAcl DCSync
+      Extended Right cmdlet, will allow to re-obtain the pwd hashes of any user/computer
+    falsepositives:
+    - New Domain Controller computer account, check user SIDs within the value attribute
+      of event 5136 and verify if it's a regular user or DC computer account.
+    level: critical
+    references:
+    - https://twitter.com/menasec1/status/1111556090137903104
+    - https://www.specterops.io/assets/resources/an_ace_up_the_sleeve.pdf
+    tags:
+    - attack.persistence
+    - attack.t1098
+  name: Powerview Add-DomainObjectAcl DCSync AD Extend Right
+

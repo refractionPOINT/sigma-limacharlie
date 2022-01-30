@@ -1,0 +1,39 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/EventData/Provider_Name
+    value: Microsoft-Windows-Security-Auditing
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '4673'
+  - case sensitive: false
+    op: is
+    path: Event/EventData/Service
+    value: LsaRegisterLogonProcess()
+  - case sensitive: false
+    op: is
+    path: Event/EventData/Keywords
+    value: '0x8010000000000000'
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Roberto Rodriguez (source), Ilyas Ochkov (rule), oscd.community
+    description: The 'LsaRegisterLogonProcess' function verifies that the application
+      making the function call is a logon process by checking that it has the SeTcbPrivilege
+      privilege set. Possible Rubeus tries to get a handle to LSA.
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://posts.specterops.io/hunting-in-active-directory-unconstrained-delegation-forests-trusts-71f2b33688e1
+    tags:
+    - attack.lateral_movement
+    - attack.privilege_escalation
+    - attack.t1558.003
+  name: User Couldn't Call a Privileged Service 'LsaRegisterLogonProcess'
+

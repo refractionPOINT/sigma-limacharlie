@@ -1,0 +1,60 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ObjectName
+      value: WINEVT\Publishers\{5770385f-c22a-43e0-bf4c-06f5698ffbd9}
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ObjectName
+      value: WINEVT\Channels\Microsoft-Windows-Sysmon/Operational
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: Event/System/EventID
+        value: '4657'
+      - case sensitive: false
+        op: is
+        path: Event/EventData/ObjectValueName
+        value: Enabled
+      - case sensitive: false
+        op: is
+        path: Event/EventData/NewValue
+        value: '0'
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: Event/System/EventID
+        value: '4663'
+      - case sensitive: false
+        op: is
+        path: Event/EventData/AccessMask
+        value: '65536'
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)
+    description: Potential threat actor tampering with Sysmon manifest and eventually
+      disabling it
+    falsepositives:
+    - unknown
+    level: critical
+    references:
+    - https://twitter.com/Flangvik/status/1283054508084473861
+    - https://twitter.com/SecurityJosh/status/1283027365770276866
+    - https://securityjosh.github.io/2020/04/23/Mute-Sysmon.html
+    - https://gist.github.com/Cyb3rWard0g/cf08c38c61f7e46e8404b38201ca01c8
+    tags:
+    - attack.defense_evasion
+    - attack.t1112
+  name: Sysmon Channel Reference Deletion
+

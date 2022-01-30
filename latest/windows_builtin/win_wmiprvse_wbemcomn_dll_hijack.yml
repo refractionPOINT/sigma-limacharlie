@@ -1,0 +1,43 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/EventData/Provider_Name
+      value: Microsoft-Windows-Eventlog
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '5145'
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/RelativeTargetName
+      value: \wbem\wbemcomn.dll
+  - case sensitive: false
+    not: true
+    op: ends with
+    path: Event/EventData/SubjectUserName
+    value: $
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Roberto Rodriguez @Cyb3rWard0g, Open Threat Research (OTR)
+    description: Detects a threat actor creating a file named `wbemcomn.dll` in the
+      `C:\Windows\System32\wbem\` directory over the network for a WMI DLL Hijack
+      scenario.
+    falsepositives:
+    - Unknown
+    level: critical
+    references:
+    - https://threathunterplaybook.com/notebooks/windows/08_lateral_movement/WIN-201009173318.html
+    tags:
+    - attack.execution
+    - attack.t1047
+    - attack.lateral_movement
+    - attack.t1021.002
+  name: T1047 Wmiprvse Wbemcomn DLL Hijack
+

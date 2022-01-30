@@ -1,0 +1,44 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '4742'
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/SubjectUserName
+        value: ANONYMOUS LOGON
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/TargetUserName
+        value: '%DC-MACHINE-NAME%'
+    - case sensitive: false
+      not: true
+      op: is
+      path: event/EVENT/EventData/PasswordLastSet
+      value: '-'
+respond:
+- action: report
+  metadata:
+    author: Aleksandr Akhremchik, @aleqs4ndr, ocsd.community
+    description: Detects Netlogon Elevation of Privilege Vulnerability aka Zerologon
+      (CVE-2020-1472)
+    falsepositives:
+    - automatic DC computer account password change
+    - legitimate DC computer account password change
+    level: high
+    references:
+    - https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/CVE-2020-1472
+    - https://www.logpoint.com/en/blog/detecting-zerologon-vulnerability-in-logpoint/
+    tags:
+    - attack.t1068
+    - attack.privilege_escalation
+  name: Possible Zerologon (CVE-2020-1472) Exploitation
+

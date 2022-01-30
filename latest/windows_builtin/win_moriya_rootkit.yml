@@ -1,0 +1,34 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/EventData/Provider_Name
+    value: Service Control Manager
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '7045'
+  - case sensitive: false
+    op: is
+    path: Event/EventData/ServiceName
+    value: ZzNetSvc
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Bhabesh Raj
+    description: Detects the use of Moriya rootkit as described in the securelist's
+      Operation TunnelSnake report
+    falsepositives:
+    - None
+    level: critical
+    references:
+    - https://securelist.com/operation-tunnelsnake-and-moriya-rootkit/101831
+    tags:
+    - attack.persistence
+    - attack.privilege_escalation
+    - attack.t1543.003
+  name: Moriya Rootkit
+

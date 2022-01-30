@@ -1,0 +1,62 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '4662'
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/Properties
+          value: Replicating Directory Changes All
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/Properties
+          value: 1131f6ad-9c07-11d1-f79f-00c04fc2dcd2
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/SubjectDomainName
+        value: Window Manager
+      - op: or
+        rules:
+        - case sensitive: false
+          op: starts with
+          path: event/EVENT/EventData/SubjectUserName
+          value: NT AUTHORITY
+        - case sensitive: false
+          op: starts with
+          path: event/EVENT/EventData/SubjectUserName
+          value: MSOL_
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/SubjectUserName
+        value: $
+respond:
+- action: report
+  metadata:
+    author: Benjamin Delpy, Florian Roth, Scott Dermott
+    description: Detects Mimikatz DC sync security events
+    falsepositives:
+    - Valid DC Sync that is not covered by the filters; please report
+    - Local Domain Admin account used for Azure AD Connect
+    level: high
+    references:
+    - https://twitter.com/gentilkiwi/status/1003236624925413376
+    - https://gist.github.com/gentilkiwi/dcc132457408cf11ad2061340dcb53c2
+    tags:
+    - attack.credential_access
+    - attack.s0002
+    - attack.t1003.006
+  name: Mimikatz DC Sync
+

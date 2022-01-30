@@ -1,0 +1,45 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '7036'
+    - case sensitive: false
+      op: is
+      path: event/EVENT/EventData/Provider_Name
+      value: Service Control Manager
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/param1
+        value: Windows Defender Antivirus Service
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/param1
+        value: Service antivirus Microsoft Defender
+    - case sensitive: false
+      op: is
+      path: event/EVENT/EventData/param2
+      value: stopped
+respond:
+- action: report
+  metadata:
+    author: "J\xE1n Tren\u010Dansk\xFD, frack113"
+    description: Detects disabling Windows Defender threat protection
+    falsepositives:
+    - Administrator actions
+    level: high
+    references:
+    - https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-antivirus/troubleshoot-windows-defender-antivirus
+    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1562.001/T1562.001.md
+    tags:
+    - attack.defense_evasion
+    - attack.t1562.001
+  name: Windows Defender Threat Detection Disabled
+

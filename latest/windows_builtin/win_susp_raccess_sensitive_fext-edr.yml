@@ -1,0 +1,76 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '5145'
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/RelativeTargetName
+        value: .pst
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/RelativeTargetName
+        value: .ost
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/RelativeTargetName
+        value: .msg
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/RelativeTargetName
+        value: .nst
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/RelativeTargetName
+        value: .oab
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/RelativeTargetName
+        value: .edb
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/RelativeTargetName
+        value: .nsf
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/RelativeTargetName
+        value: .bak
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/RelativeTargetName
+        value: .dmp
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/RelativeTargetName
+        value: .kirbi
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/RelativeTargetName
+        value: \groups.xml
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/RelativeTargetName
+        value: .rdp
+respond:
+- action: report
+  metadata:
+    author: Samir Bousseaden
+    description: Detects known sensitive file extensions accessed on a network share
+    falsepositives:
+    - Help Desk operator doing backup or re-imaging end user machine or pentest or
+      backup software
+    - Users working with these data types or exchanging message files
+    level: medium
+    tags:
+    - attack.collection
+    - attack.t1039
+  name: Suspicious Access to Sensitive File Extensions
+

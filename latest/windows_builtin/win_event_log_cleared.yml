@@ -1,0 +1,28 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '1102'
+  - case sensitive: false
+    op: is
+    path: Event/EventData/Provider_Name
+    value: Microsoft-Windows-Eventlog
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Saw Winn Naung
+    description: Checks for event id 1102 which indicates the security event log was
+      cleared.
+    falsepositives:
+    - Legitimate administrative activity
+    level: medium
+    references:
+    - https://github.com/Azure/Azure-Sentinel/blob/master/Detections/SecurityEvent/SecurityEventLogCleared.yaml
+    tags:
+    - attack.t1070.001
+  name: Security Event Log Cleared
+

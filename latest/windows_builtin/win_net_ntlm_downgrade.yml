@@ -1,0 +1,51 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '4657'
+  - case sensitive: false
+    op: contains
+    path: Event/EventData/ObjectName
+    value: \REGISTRY\MACHINE\SYSTEM
+  - case sensitive: false
+    op: contains
+    path: Event/EventData/ObjectName
+    value: ControlSet
+  - case sensitive: false
+    op: contains
+    path: Event/EventData/ObjectName
+    value: \Control\Lsa
+  - op: or
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/EventData/ObjectValueName
+      value: LmCompatibilityLevel
+    - case sensitive: false
+      op: is
+      path: Event/EventData/ObjectValueName
+      value: NtlmMinClientSec
+    - case sensitive: false
+      op: is
+      path: Event/EventData/ObjectValueName
+      value: RestrictSendingNTLMTraffic
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Florian Roth, wagga
+    description: Detects NetNTLM downgrade attack
+    falsepositives:
+    - Unknown
+    level: critical
+    references:
+    - https://www.optiv.com/blog/post-exploitation-using-netntlm-downgrade-attacks
+    tags:
+    - attack.defense_evasion
+    - attack.t1562.001
+    - attack.t1112
+  name: NetNTLM Downgrade Attack
+

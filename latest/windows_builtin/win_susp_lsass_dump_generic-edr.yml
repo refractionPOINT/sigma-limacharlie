@@ -1,0 +1,203 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/ObjectName
+        value: \lsass.exe
+      - op: or
+        rules:
+        - op: and
+          rules:
+          - case sensitive: false
+            op: is
+            path: event/EVENT/System/EventID
+            value: '4656'
+          - op: or
+            rules:
+            - case sensitive: false
+              op: contains
+              path: event/EVENT/EventData/AccessMask
+              value: '0x40'
+            - case sensitive: false
+              op: contains
+              path: event/EVENT/EventData/AccessMask
+              value: '0x1400'
+            - case sensitive: false
+              op: contains
+              path: event/EVENT/EventData/AccessMask
+              value: '0x100000'
+            - case sensitive: false
+              op: contains
+              path: event/EVENT/EventData/AccessMask
+              value: '0x1410'
+            - case sensitive: false
+              op: contains
+              path: event/EVENT/EventData/AccessMask
+              value: '0x1010'
+            - case sensitive: false
+              op: contains
+              path: event/EVENT/EventData/AccessMask
+              value: '0x1438'
+            - case sensitive: false
+              op: contains
+              path: event/EVENT/EventData/AccessMask
+              value: '0x143a'
+            - case sensitive: false
+              op: contains
+              path: event/EVENT/EventData/AccessMask
+              value: '0x1418'
+            - case sensitive: false
+              op: contains
+              path: event/EVENT/EventData/AccessMask
+              value: '0x1f0fff'
+            - case sensitive: false
+              op: contains
+              path: event/EVENT/EventData/AccessMask
+              value: '0x1f1fff'
+            - case sensitive: false
+              op: contains
+              path: event/EVENT/EventData/AccessMask
+              value: '0x1f2fff'
+            - case sensitive: false
+              op: contains
+              path: event/EVENT/EventData/AccessMask
+              value: '0x1f3fff'
+        - op: and
+          rules:
+          - case sensitive: false
+            op: is
+            path: event/EVENT/System/EventID
+            value: '4663'
+          - op: or
+            rules:
+            - case sensitive: false
+              op: contains
+              path: event/EVENT/EventData/AccessList
+              value: '4484'
+            - case sensitive: false
+              op: contains
+              path: event/EVENT/EventData/AccessList
+              value: '4416'
+    - not: true
+      op: or
+      rules:
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/EVENT/EventData/ProcessName
+            value: \wmiprvse.exe
+          - case sensitive: false
+            op: ends with
+            path: event/EVENT/EventData/ProcessName
+            value: \taskmgr.exe
+          - case sensitive: false
+            op: ends with
+            path: event/EVENT/EventData/ProcessName
+            value: \procexp64.exe
+          - case sensitive: false
+            op: ends with
+            path: event/EVENT/EventData/ProcessName
+            value: \procexp.exe
+          - case sensitive: false
+            op: ends with
+            path: event/EVENT/EventData/ProcessName
+            value: \lsm.exe
+          - case sensitive: false
+            op: ends with
+            path: event/EVENT/EventData/ProcessName
+            value: \csrss.exe
+          - case sensitive: false
+            op: ends with
+            path: event/EVENT/EventData/ProcessName
+            value: \wininit.exe
+          - case sensitive: false
+            op: ends with
+            path: event/EVENT/EventData/ProcessName
+            value: \vmtoolsd.exe
+          - case sensitive: false
+            op: ends with
+            path: event/EVENT/EventData/ProcessName
+            value: \minionhost.exe
+          - case sensitive: false
+            op: ends with
+            path: event/EVENT/EventData/ProcessName
+            value: \VsTskMgr.exe
+          - case sensitive: false
+            op: ends with
+            path: event/EVENT/EventData/ProcessName
+            value: \thor64.exe
+          - case sensitive: false
+            op: ends with
+            path: event/EVENT/EventData/ProcessName
+            value: \MicrosoftEdgeUpdate.exe
+          - case sensitive: false
+            op: ends with
+            path: event/EVENT/EventData/ProcessName
+            value: \GamingServices.exe
+          - case sensitive: false
+            op: ends with
+            path: event/EVENT/EventData/ProcessName
+            value: \svchost.exe
+          - case sensitive: false
+            op: ends with
+            path: event/EVENT/EventData/ProcessName
+            value: \MsMpEng.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: starts with
+            path: event/EVENT/EventData/ProcessName
+            value: C:\Windows\System32\
+          - case sensitive: false
+            op: starts with
+            path: event/EVENT/EventData/ProcessName
+            value: C:\Windows\SysWow64\
+          - case sensitive: false
+            op: starts with
+            path: event/EVENT/EventData/ProcessName
+            value: C:\Windows\SysNative\
+          - case sensitive: false
+            op: starts with
+            path: event/EVENT/EventData/ProcessName
+            value: C:\Program Files\
+          - case sensitive: false
+            op: starts with
+            path: event/EVENT/EventData/ProcessName
+            value: C:\Windows\Temp\asgard2-agent\
+          - case sensitive: false
+            op: starts with
+            path: event/EVENT/EventData/ProcessName
+            value: C:\ProgramData\Microsoft\Windows Defender\Platform\
+      - case sensitive: false
+        op: starts with
+        path: event/EVENT/EventData/ProcessName
+        value: C:\Program Files
+respond:
+- action: report
+  metadata:
+    author: Roberto Rodriguez, Teymur Kheirkhabarov, Dimitrios Slamaris, Mark Russinovich,
+      Aleksey Potapov, oscd.community (update)
+    description: Detects process handle on LSASS process with certain access mask
+    falsepositives:
+    - Legitimate software accessing LSASS process for legitimate reason; update the
+      whitelist with it
+    level: high
+    references:
+    - https://cyberwardog.blogspot.com/2017/03/chronicles-of-threat-hunter-hunting-for_22.html
+    - https://www.slideshare.net/heirhabarov/hunting-for-credentials-dumping-in-windows-environment
+    tags:
+    - attack.credential_access
+    - car.2019-04-004
+    - attack.t1003.001
+  name: Generic Password Dumper Activity on LSASS
+

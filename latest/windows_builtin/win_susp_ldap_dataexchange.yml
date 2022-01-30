@@ -1,0 +1,45 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '5136'
+  - case sensitive: false
+    op: exists
+    path: Event/EventData/AttributeValue
+  - op: or
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/EventData/AttributeLDAPDisplayName
+      value: primaryInternationalISDNNumber
+    - case sensitive: false
+      op: is
+      path: Event/EventData/AttributeLDAPDisplayName
+      value: otherFacsimileTelephoneNumber
+    - case sensitive: false
+      op: is
+      path: Event/EventData/AttributeLDAPDisplayName
+      value: primaryTelexNumber
+  target: log
+respond:
+- action: report
+  metadata:
+    author: xknow @xknow_infosec
+    description: Detects the usage of particular AttributeLDAPDisplayNames, which
+      are known for data exchange via LDAP by the tool LDAPFragger and are additionally
+      not commonly used in companies.
+    falsepositives:
+    - Companies, who may use these default LDAP-Attributes for personal information
+    level: high
+    references:
+    - https://medium.com/@ivecodoe/detecting-ldapfragger-a-newly-released-cobalt-strike-beacon-using-ldap-for-c2-communication-c274a7f00961
+    - https://blog.fox-it.com/2020/03/19/ldapfragger-command-and-control-over-ldap-attributes/
+    - https://github.com/fox-it/LDAPFragger
+    tags:
+    - attack.t1001.003
+    - attack.command_and_control
+  name: Suspicious LDAP-Attributes Used
+

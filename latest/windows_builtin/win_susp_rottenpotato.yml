@@ -1,0 +1,42 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '4624'
+  - case sensitive: false
+    op: is
+    path: Event/EventData/LogonType
+    value: '3'
+  - case sensitive: false
+    op: is
+    path: Event/EventData/TargetUserName
+    value: ANONYMOUS_LOGON
+  - case sensitive: false
+    op: is
+    path: Event/EventData/WorkstationName
+    value: '-'
+  - case sensitive: false
+    op: is
+    path: Event/EventData/IpAddress
+    value: 127.0.0.1
+  target: log
+respond:
+- action: report
+  metadata:
+    author: '@SBousseaden, Florian Roth'
+    description: Detects logon events that have characteristics of events generated
+      during an attack with RottenPotato and the like
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://twitter.com/SBousseaden/status/1195284233729777665
+    tags:
+    - attack.privilege_escalation
+    - attack.credential_access
+    - attack.t1557.001
+  name: RottenPotato Like Attack Pattern
+

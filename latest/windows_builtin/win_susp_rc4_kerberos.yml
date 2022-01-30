@@ -1,0 +1,41 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '4769'
+    - case sensitive: false
+      op: is
+      path: Event/EventData/TicketOptions
+      value: '0x40810000'
+    - case sensitive: false
+      op: is
+      path: Event/EventData/TicketEncryptionType
+      value: '0x17'
+  - case sensitive: false
+    not: true
+    op: starts with
+    path: Event/EventData/ServiceName
+    value: $
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects service ticket requests using RC4 encryption type
+    falsepositives:
+    - Service accounts used on legacy systems (e.g. NetApp)
+    - Windows Domains with DFL 2003 and legacy systems
+    level: medium
+    references:
+    - https://adsecurity.org/?p=3458
+    - https://www.trimarcsecurity.com/single-post/TrimarcResearch/Detecting-Kerberoasting-Activity
+    tags:
+    - attack.credential_access
+    - attack.t1558.003
+  name: Suspicious Kerberos RC4 Ticket Encryption
+

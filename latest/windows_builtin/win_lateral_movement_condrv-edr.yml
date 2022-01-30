@@ -1,0 +1,46 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '4674'
+    - case sensitive: false
+      op: is
+      path: event/EVENT/EventData/ObjectServer
+      value: Security
+    - case sensitive: false
+      op: is
+      path: event/EVENT/EventData/ObjectType
+      value: File
+    - case sensitive: false
+      op: is
+      path: event/EVENT/EventData/ObjectName
+      value: \Device\ConDrv
+respond:
+- action: report
+  metadata:
+    author: Janantha Marasinghe
+    description: This event was observed on the target host during lateral movement.
+      The process name within the event contains the process spawned post compromise.
+      Account Name within the event contains the compromised user account name. This
+      event should to be correlated with 4624 and 4688 for further intrusion context.
+    falsepositives:
+    - legal admin action
+    - Penetration tests where lateral movement has occurred. This event will be created
+      on the target host.
+    level: low
+    references:
+    - https://jpcertcc.github.io/ToolAnalysisResultSheet/details/wmiexec-vbs.htm
+    - https://www.fireeye.com/blog/threat-research/2017/08/monitoring-windows-console-activity-part-one.html
+    tags:
+    - attack.lateral_movement
+    - attack.execution
+    - attack.t1021
+    - attack.t1059
+  name: Lateral Movement Indicator ConDrv
+
