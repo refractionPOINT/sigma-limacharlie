@@ -18,7 +18,7 @@ detect:
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
-      value: ' -FilePath \\127.0.0.1\C$'
+      value: ' -FilePath \\\\127.0.0.1\\C$'
 respond:
 - action: report
   metadata:

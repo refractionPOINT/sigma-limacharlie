@@ -10,11 +10,11 @@ detect:
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
-      value: '> \\127.0.0.1\admin$'
+      value: '> \\\\127.0.0.1\\admin$'
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
-      value: '> \\localhost\admin$'
+      value: '> \\\\localhost\\admin$'
 respond:
 - action: report
   metadata:

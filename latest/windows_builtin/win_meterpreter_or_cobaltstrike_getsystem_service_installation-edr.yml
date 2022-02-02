@@ -88,7 +88,7 @@ detect:
       - case sensitive: false
         op: starts with
         path: event/EVENT/EventData/ImagePath
-        value: \\127.0.0.1\ADMIN$\
+        value: \\\\127.0.0.1\\ADMIN$\
 respond:
 - action: report
   metadata:
