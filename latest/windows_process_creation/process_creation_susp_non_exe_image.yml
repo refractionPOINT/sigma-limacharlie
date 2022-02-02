@@ -66,14 +66,24 @@ detect:
           value: .dat
       - op: and
         rules:
-        - case sensitive: false
-          op: matches
-          path: event/FILE_PATH
-          re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Windows\\System32\\
+        - op: or
+          rules:
+          - case sensitive: false
+            op: matches
+            path: event/FILE_PATH
+            re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Windows\\System32\\
+          - case sensitive: false
+            op: matches
+            path: event/FILE_PATH
+            re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Windows\\SysWOW64\\
         - case sensitive: false
           op: ends with
           path: event/FILE_PATH
           value: .com
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \WinSCP.com
 respond:
 - action: report
   metadata:

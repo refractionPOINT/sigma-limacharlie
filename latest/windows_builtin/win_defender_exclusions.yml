@@ -8,7 +8,7 @@ detect:
     value: '5007'
   - case sensitive: false
     op: contains
-    path: Event/EventData/New_Value
+    path: Event/EventData/NewValue
     value: \Microsoft\Windows Defender\Exclusions
   target: log
 respond:

@@ -5,32 +5,39 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: or
+  - op: and
     rules:
-    - op: and
+    - op: or
       rules:
-      - case sensitive: false
-        op: contains
-        path: event/FILE_PATH
-        value: \Windows\
-      - op: or
+      - op: and
         rules:
         - case sensitive: false
           op: contains
-          path: event/COMMAND_LINE
-          value: \..\Windows\
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: \..\System32\
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: \..\..\
+          path: event/FILE_PATH
+          value: \Windows\
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \..\Windows\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \..\System32\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \..\..\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .exe\..\
     - case sensitive: false
+      not: true
       op: contains
       path: event/COMMAND_LINE
-      value: .exe\..\
+      value: \Google\Drive\googledrivesync.exe\..\
 respond:
 - action: report
   metadata:
@@ -38,7 +45,7 @@ respond:
     description: Detects the attempt to evade or obfuscate the executed command on
       the CommandLine using bogus path traversal
     falsepositives:
-    - Unknown
+    - Google Drive
     level: high
     references:
     - https://twitter.com/hexacorn/status/1448037865435320323
