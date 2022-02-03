@@ -1,0 +1,44 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '4697'
+    - case sensitive: false
+      op: contains
+      path: event/EVENT/EventData/ServiceFileName
+      value: mshta
+    - case sensitive: false
+      op: contains
+      path: event/EVENT/EventData/ServiceFileName
+      value: vbscript:createobject
+    - case sensitive: false
+      op: contains
+      path: event/EVENT/EventData/ServiceFileName
+      value: .run
+    - case sensitive: false
+      op: contains
+      path: event/EVENT/EventData/ServiceFileName
+      value: window.close
+respond:
+- action: report
+  metadata:
+    author: Nikita Nazarov, oscd.community
+    description: Detects Obfuscated Powershell via use MSHTA in Scripts
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://github.com/Neo23x0/sigma/issues/1009
+    tags:
+    - attack.defense_evasion
+    - attack.t1027
+    - attack.execution
+    - attack.t1059.001
+  name: Invoke-Obfuscation Via Use MSHTA
+

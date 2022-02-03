@@ -1,0 +1,54 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '4697'
+  - case sensitive: false
+    op: contains
+    path: Event/EventData/ServiceFileName
+    value: cmd
+  - case sensitive: false
+    op: contains
+    path: Event/EventData/ServiceFileName
+    value: powershell
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ServiceFileName
+      value: ${input}
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ServiceFileName
+      value: noexit
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ServiceFileName
+      value: ' /c '
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ServiceFileName
+      value: ' /r '
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Jonathan Cheong, oscd.community
+    description: Detects Obfuscated use of stdin to execute PowerShell
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://github.com/Neo23x0/sigma/issues/1009
+    tags:
+    - attack.defense_evasion
+    - attack.t1027
+    - attack.execution
+    - attack.t1059.001
+  name: Invoke-Obfuscation STDIN+ Launcher
+
