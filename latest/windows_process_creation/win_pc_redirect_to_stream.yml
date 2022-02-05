@@ -1,0 +1,33 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \cmd.exe
+    - case sensitive: false
+      op: matches
+      path: event/COMMAND_LINE
+      re: .*>.*:.*
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Detects the redirection of an output stream of / within a Windows
+      command line session
+    falsepositives:
+    - Unknown
+    level: low
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1564.004/T1564.004.md#atomic-test-3---create-ads-command-prompt
+    tags:
+    - attack.defense_evasion
+    - attack.t1564.004
+  name: Cmd Stream Redirection
+
