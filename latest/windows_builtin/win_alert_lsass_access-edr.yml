@@ -16,22 +16,50 @@ detect:
         path: event/EVENT/EventData/Path
         value: \lsass.exe
     - not: true
-      op: and
+      op: or
       rules:
-      - case sensitive: false
-        op: starts with
-        path: event/EVENT/EventData/ProcessName
-        value: C:\Windows\Temp\asgard2-agent\
-      - op: or
+      - op: and
         rules:
         - case sensitive: false
-          op: ends with
+          op: starts with
           path: event/EVENT/EventData/ProcessName
-          value: \thor64.exe
-        - case sensitive: false
-          op: ends with
-          path: event/EVENT/EventData/ProcessName
-          value: \thor.exe
+          value: C:\Windows\Temp\asgard2-agent\
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/EVENT/EventData/ProcessName
+            value: \thor64.exe
+          - case sensitive: false
+            op: ends with
+            path: event/EVENT/EventData/ProcessName
+            value: \thor.exe
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: starts with
+            path: event/EVENT/EventData/ProcessName
+            value: C:\Program Files (x86)\Google\Temp\
+          - case sensitive: false
+            op: starts with
+            path: event/EVENT/EventData/ProcessName
+            value: C:\Program Files (x86)\Microsoft\
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/EVENT/EventData/ProcessName
+            value: \GoogleUpdate.exe
+          - case sensitive: false
+            op: ends with
+            path: event/EVENT/EventData/ProcessName
+            value: \MicrosoftEdgeUpdate.exe
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/ProcessName
+        value: C:\Program Files\VMware\VMware Tools\vmtoolsd.exe
 respond:
 - action: report
   metadata:
