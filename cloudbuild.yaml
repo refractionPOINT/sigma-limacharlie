@@ -20,7 +20,8 @@ steps:
   args:
   - clone
   - --recurse-submodules
-  - git@github.com:SigmaHQ/sigma.git
+  - git@github.com:maximelb/sigma.git
+  - -b exists-case
   volumes:
   - name: 'ssh'
     path: /root/.ssh
