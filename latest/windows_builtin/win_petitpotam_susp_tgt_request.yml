@@ -12,8 +12,7 @@ detect:
       op: ends with
       path: Event/EventData/TargetUserName
       value: $
-    - case sensitive: false
-      op: exists
+    - op: exists
       path: Event/EventData/CertThumbprint
   - not: true
     op: or

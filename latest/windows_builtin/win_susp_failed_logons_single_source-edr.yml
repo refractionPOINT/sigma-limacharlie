@@ -15,11 +15,9 @@ detect:
         op: is
         path: event/EVENT/System/EventID
         value: '4625'
-    - case sensitive: false
-      op: exists
+    - op: exists
       path: event/EVENT/EventData/TargetUserName
-    - case sensitive: false
-      op: exists
+    - op: exists
       path: event/EVENT/EventData/WorkstationName
 respond:
 - action: report

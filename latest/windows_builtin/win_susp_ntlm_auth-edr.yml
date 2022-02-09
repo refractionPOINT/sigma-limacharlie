@@ -9,8 +9,7 @@ detect:
       op: is
       path: event/EVENT/System/EventID
       value: '8002'
-    - case sensitive: false
-      op: exists
+    - op: exists
       path: event/EVENT/EventData/ProcessName
 respond:
 - action: report

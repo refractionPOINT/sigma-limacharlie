@@ -12,11 +12,9 @@ detect:
       op: is
       path: Event/System/EventID
       value: '4625'
-  - case sensitive: false
-    op: exists
+  - op: exists
     path: Event/EventData/TargetUserName
-  - case sensitive: false
-    op: exists
+  - op: exists
     path: Event/EventData/WorkstationName
   target: log
 respond:

@@ -6,8 +6,7 @@ detect:
     op: is
     path: Event/System/EventID
     value: '5136'
-  - case sensitive: false
-    op: exists
+  - op: exists
     path: Event/EventData/AttributeValue
   - op: or
     rules:
