@@ -1,0 +1,182 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/FILE_PATH
+      value: \CVE-202
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \poc.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \artifact.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \artifact64.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \artifact_protected.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \artifact32.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \artifact32big.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: obfuscated.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: obfusc.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \meterpreter
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: inject.ps1
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Invoke-CVE
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: pupy.ps1
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: payload.ps1
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: beacon.ps1
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: PowerView.ps1
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bypass.ps1
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: obfuscated.ps1
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: obfusc.ps1
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: obfus.ps1
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: obfs.ps1
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: evil.ps1
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: MiniDogz.ps1
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: _enc.ps1
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \shell.ps1
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \rshell.ps1
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: revshell.ps1
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \av.ps1
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \av_test.ps1
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: adrecon.ps1
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: mimikatz.ps1
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \PowerUp_
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: powerup.ps1
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Temp\a.ps1
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Temp\p.ps1
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Temp\1.ps1
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Hound.ps1
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: encode.ps1
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: powercat.ps1
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects suspicious patterns in program names or folders that are
+      often found in malicious samples or hacktools
+    falsepositives:
+    - Legitimate tools that accidentally match on the searched patterns
+    level: high
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1560.001/T1560.001.md
+  name: Suspicious Program Names
+
