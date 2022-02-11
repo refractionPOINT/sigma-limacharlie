@@ -84,6 +84,32 @@ detect:
         op: ends with
         path: event/FILE_PATH
         value: \WinSCP.com
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \program\soffice.bin
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/FILE_PATH
+            value: C:\Windows\Temp\is-
+          - case sensitive: false
+            op: contains
+            path: event/FILE_PATH
+            value: \AppData\Local\Temp\is-
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: .tmp\target.tmp
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: .tmp\_isetup\_setup64.tmp
 respond:
 - action: report
   metadata:

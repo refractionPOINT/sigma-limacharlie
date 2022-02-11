@@ -7,24 +7,37 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: \AppData\Local\
-    - op: or
+    - op: and
       rules:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: \regsvr32
+        value: \AppData\Local\
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \regsvr32
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ',DllEntry'
+    - not: true
+      op: or
+      rules:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ',DllEntry'
+        value: AppData\Local\Microsoft\TeamsMeetingAddin\
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: \x86\Microsoft.Teams.AddinLoader.dll
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth, Tim Shelton
     description: Detects a suspicious DLL loading from AppData Local path as described
       in BlueMashroom report
     falsepositives:

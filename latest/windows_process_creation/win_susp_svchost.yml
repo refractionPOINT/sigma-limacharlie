@@ -7,14 +7,14 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - op: and
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \svchost.exe
+    - not: true
+      op: or
       rules:
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \svchost.exe
-      - not: true
-        op: or
+      - op: or
         rules:
         - case sensitive: false
           op: ends with
@@ -44,9 +44,17 @@ detect:
           op: ends with
           path: event/PARENT/FILE_PATH
           value: \TiWorker.exe
-    - not: false
-      op: exists
-      path: event/PARENT/FILE_PATH
+      - not: true
+        op: exists
+        path: event/PARENT/FILE_PATH
+      - case sensitive: false
+        op: is
+        path: event/PARENT/FILE_PATH
+        value: ''
+      - case sensitive: false
+        op: is
+        path: event/PARENT/FILE_PATH
+        value: '-'
 respond:
 - action: report
   metadata:

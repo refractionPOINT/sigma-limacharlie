@@ -7,18 +7,31 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - case sensitive: false
-      op: ends with
-      path: event/FILE_PATH
-      value: schtasks.exe
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: '/Create '
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: \AppData\Local\Temp
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: schtasks.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '/Create '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \AppData\Local\Temp
+    - not: true
+      op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '/Create /TN "klcp_update" /XML '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \klcp_update_task.xml
 respond:
 - action: report
   metadata:

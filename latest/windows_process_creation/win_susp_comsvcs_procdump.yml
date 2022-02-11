@@ -38,7 +38,7 @@ respond:
     description: Detects process memory dump via comsvcs.dll and rundll32
     falsepositives:
     - unknown
-    level: medium
+    level: high
     references:
     - https://modexp.wordpress.com/2019/08/30/minidumpwritedump-via-com-services-dll/
     - https://twitter.com/SBousseaden/status/1167417096374050817

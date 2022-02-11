@@ -7,28 +7,39 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - case sensitive: false
-      op: ends with
-      path: event/FILE_PATH
-      value: \powershell.exe
-    - op: or
+    - op: and
       rules:
       - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ' -e '
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ' -en '
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ' -enc '
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ' -enco'
+        op: ends with
+        path: event/FILE_PATH
+        value: \powershell.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -e '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -en '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -enc '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -enco'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -ec '
+    - case sensitive: false
+      not: true
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' -Encoding '
 respond:
 - action: report
   metadata:
