@@ -35,5 +35,5 @@ respond:
     tags:
     - attack.defense_evasion
     - attack.t1218.007
-  name: Suspisious Msiexec Execute Arbitrary DLL
+  name: Suspicious Msiexec Execute Arbitrary DLL
 

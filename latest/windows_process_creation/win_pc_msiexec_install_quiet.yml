@@ -39,5 +39,5 @@ respond:
     tags:
     - attack.defense_evasion
     - attack.t1218.007
-  name: Suspisious Msiexec Quiet Install
+  name: Suspicious Msiexec Quiet Install
 
