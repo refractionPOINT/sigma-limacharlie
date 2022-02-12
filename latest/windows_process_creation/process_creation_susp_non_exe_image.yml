@@ -84,6 +84,24 @@ detect:
         op: ends with
         path: event/FILE_PATH
         value: \WinSCP.com
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: C:\Users\
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: \AppData\
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: .tmp
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: CodeSetup
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
