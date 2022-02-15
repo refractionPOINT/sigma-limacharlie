@@ -29,14 +29,35 @@ detect:
         value: /grant
     - op: and
       rules:
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \attrib.exe
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: -r
+      - op: and
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \attrib.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: -r
+      - not: true
+        op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/COMMAND_LINE
+          value: ICACLS C:\ProgramData\dynatrace\gateway\config\connectivity.history
+            /reset
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: 'ICACLS C:\ProgramData\dynatrace\gateway\config\config.properties
+              /grant :r '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: S-1-5-19:F
 respond:
 - action: report
   metadata:
@@ -44,6 +65,7 @@ respond:
     description: Detects a file or folder's permissions being modified.
     falsepositives:
     - Users interacting with the files on their own (unlikely unless privileged users).
+    - Dynatrace app
     level: medium
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1222.001/T1222.001.md
