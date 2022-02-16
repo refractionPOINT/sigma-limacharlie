@@ -7,21 +7,33 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - case sensitive: false
-      not: true
-      op: ends with
-      path: event/FILE_PATH
-      value: .exe
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: .exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: .tmp
     - not: true
       op: or
       rules:
       - not: true
         op: exists
         path: event/FILE_PATH
-      - case sensitive: false
-        op: is
-        path: event/FILE_PATH
-        value: Registry
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/FILE_PATH
+          value: Registry
+        - case sensitive: false
+          op: is
+          path: event/FILE_PATH
+          value: MemCompression
       - op: or
         rules:
         - case sensitive: false
@@ -36,20 +48,16 @@ detect:
         op: matches
         path: event/FILE_PATH
         re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Windows\\Installer\\MSI
-      - case sensitive: false
-        op: starts with
-        path: event/PARENT/FILE_PATH
-        value: C:\ProgramData\Avira\
-      - op: and
+      - op: or
         rules:
         - case sensitive: false
-          op: matches
-          path: event/FILE_PATH
-          re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Windows\\Temp\\
+          op: starts with
+          path: event/PARENT/FILE_PATH
+          value: C:\ProgramData\Avira\
         - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \avira_speedup_setup_update.tmp
+          op: starts with
+          path: event/PARENT/FILE_PATH
+          value: C:\Windows\System32\DriverStore\FileRepository\
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
@@ -106,28 +114,76 @@ detect:
         op: ends with
         path: event/FILE_PATH
         value: \program\soffice.bin
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/FILE_PATH
+          value: C:\Program Files\EMC NetWorker\Management\GST\apache\cgi-bin\update_jnlp.cgi
+        - case sensitive: false
+          op: is
+          path: event/FILE_PATH
+          value: C:\Program Files (x86)\EMC NetWorker\Management\GST\apache\cgi-bin\update_jnlp.cgi
       - op: and
         rules:
         - op: or
           rules:
           - case sensitive: false
-            op: contains
+            op: matches
             path: event/FILE_PATH
-            value: C:\Windows\Temp\is-
+            re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Program\ Files\ \(x86\)\\WINPAKPRO\\
           - case sensitive: false
-            op: contains
+            op: matches
             path: event/FILE_PATH
-            value: \AppData\Local\Temp\is-
+            re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Program\ Files\\WINPAKPRO\\
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: .ngn
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/FILE_PATH
+          value: C:\Program Files (x86)\MyQ\Server\pcltool.dll
+        - case sensitive: false
+          op: is
+          path: event/FILE_PATH
+          value: C:\Program Files\MyQ\Server\pcltool.dll
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: matches
+            path: event/FILE_PATH
+            re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Program\ Files\\Microsoft\
+              Visual\ Studio\\
+          - case sensitive: false
+            op: matches
+            path: event/FILE_PATH
+            re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Program\ Files\ \(x86\)\\Microsoft\
+              Visual\ Studio
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: .com
+      - op: and
+        rules:
+        - case sensitive: false
+          op: matches
+          path: event/FILE_PATH
+          re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Config\.Msi\\
         - op: or
           rules:
           - case sensitive: false
             op: ends with
             path: event/FILE_PATH
-            value: .tmp\target.tmp
+            value: .rbf
           - case sensitive: false
             op: ends with
             path: event/FILE_PATH
-            value: .tmp\_isetup\_setup64.tmp
+            value: .rbs
 respond:
 - action: report
   metadata:
@@ -142,5 +198,5 @@ respond:
     - https://pentestlaboratories.com/2021/12/08/process-ghosting/
     tags:
     - attack.defense_evasion
-  name: Execution File Type Other Than .exe
+  name: Execution of Suspicious File Type Extension
 
