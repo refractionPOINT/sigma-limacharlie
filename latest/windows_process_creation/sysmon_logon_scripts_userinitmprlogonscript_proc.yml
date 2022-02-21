@@ -36,6 +36,10 @@ detect:
             op: contains
             path: event/COMMAND_LINE
             value: UsrLogon.cmd
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: C:\WINDOWS\Explorer.EXE
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
