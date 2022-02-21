@@ -7,34 +7,41 @@ detect:
   - op: is windows
   - op: and
     rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: wlrmdr.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-s '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-f '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-t '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-m '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-a '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-u '
     - case sensitive: false
-      op: ends with
-      path: event/FILE_PATH
-      value: wlrmdr.exe
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: '-s '
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: '-f '
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: '-t '
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: '-m '
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: '-a '
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: '-u '
+      not: true
+      op: is
+      path: event/PARENT/FILE_PATH
+      value: C:\Windows\System32\winlogon.exe
 respond:
 - action: report
   metadata:
