@@ -1,10 +1,23 @@
 detect:
-  case sensitive: false
   log type: wel
-  op: is
-  path: Event/System/EventID
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '2005'
+  - not: true
+    op: or
+    rules:
+    - case sensitive: false
+      op: starts with
+      path: Event/EventData/ModifyingApplication
+      value: C:\Program Files (x86)\
+    - case sensitive: false
+      op: starts with
+      path: Event/EventData/ModifyingApplication
+      value: C:\Program Files\
   target: log
-  value: '2005'
 respond:
 - action: report
   metadata:

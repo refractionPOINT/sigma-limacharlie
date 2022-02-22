@@ -7,122 +7,139 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - op: or
+    - op: and
       rules:
-      - case sensitive: false
-        op: ends with
-        path: event/PARENT/FILE_PATH
-        value: \WINWORD.EXE
-      - case sensitive: false
-        op: ends with
-        path: event/PARENT/FILE_PATH
-        value: \EXCEL.EXE
-      - case sensitive: false
-        op: ends with
-        path: event/PARENT/FILE_PATH
-        value: \POWERPNT.exe
-      - case sensitive: false
-        op: ends with
-        path: event/PARENT/FILE_PATH
-        value: \MSPUB.exe
-      - case sensitive: false
-        op: ends with
-        path: event/PARENT/FILE_PATH
-        value: \VISIO.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \WINWORD.EXE
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \EXCEL.EXE
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \POWERPNT.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \MSPUB.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \VISIO.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \OUTLOOK.EXE
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \MSACCESS.EXE
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \EQNEDT32.EXE
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \cmd.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \wscript.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \cscript.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \sh.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \bash.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \scrcons.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \schtasks.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \regsvr32.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \hh.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \wmic.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \mshta.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \rundll32.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \msiexec.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \forfiles.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \scriptrunner.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \mftrace.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \AppVLP.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \svchost.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \msbuild.exe
+    - not: true
+      op: and
+      rules:
       - case sensitive: false
         op: ends with
         path: event/PARENT/FILE_PATH
         value: \OUTLOOK.EXE
       - case sensitive: false
         op: ends with
-        path: event/PARENT/FILE_PATH
-        value: \MSACCESS.EXE
-      - case sensitive: false
-        op: ends with
-        path: event/PARENT/FILE_PATH
-        value: \EQNEDT32.EXE
-    - op: or
-      rules:
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \cmd.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \powershell.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \wscript.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \cscript.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \sh.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \bash.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \scrcons.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \schtasks.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \regsvr32.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \hh.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \wmic.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \mshta.exe
-      - case sensitive: false
-        op: ends with
         path: event/FILE_PATH
         value: \rundll32.exe
       - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \msiexec.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \forfiles.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \scriptrunner.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \mftrace.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \AppVLP.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \svchost.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \msbuild.exe
+        op: contains
+        path: event/COMMAND_LINE
+        value: \PhotoViewer.dll
 respond:
 - action: report
   metadata:

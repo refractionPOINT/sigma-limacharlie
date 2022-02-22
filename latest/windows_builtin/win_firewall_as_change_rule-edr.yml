@@ -3,10 +3,23 @@ detect:
   op: and
   rules:
   - op: is windows
-  - case sensitive: false
-    op: is
-    path: event/EVENT/System/EventID
-    value: '2005'
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '2005'
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: starts with
+        path: event/EVENT/EventData/ModifyingApplication
+        value: C:\Program Files (x86)\
+      - case sensitive: false
+        op: starts with
+        path: event/EVENT/EventData/ModifyingApplication
+        value: C:\Program Files\
 respond:
 - action: report
   metadata:

@@ -1,0 +1,38 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: schtasks
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: \Application Experience\Microsoft Compatibility Appraiser
+respond:
+- action: report
+  metadata:
+    author: Sreeman
+    description: Windows telemetry makes use of the binary CompatTelRunner.exe to
+      run a variety of commands and perform the actual telemetry collections. This
+      binary was created to be easily extensible, and to that end, it relies on the
+      registry to instruct on which commands to run. The problem is, it will run any
+      arbitrary command without restriction of location or type.
+    falsepositives:
+    - none
+    level: high
+    references:
+    - https://www.trustedsec.com/blog/abusing-windows-telemetry-for-persistence/
+    tags:
+    - attack.defense_evasion
+    - attack.persistence
+    - attack.t1112
+    - attack.t1053
+  name: Abusing Windows Telemetry For Persistence
+
