@@ -10,7 +10,7 @@ respond:
   metadata:
     author: frack113
     description: The Windows Firewall service failed to load Group Policy.
-    level: medium
+    level: low
     references:
     - https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-r2-and-2008/dd364427(v=ws.10)
   name: Failed to Load Policy in Windows Firewall with Advanced Security

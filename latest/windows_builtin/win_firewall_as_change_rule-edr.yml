@@ -12,7 +12,7 @@ respond:
   metadata:
     author: frack113
     description: A rule has been modified in the Windows Firewall exception list
-    level: medium
+    level: low
     references:
     - https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-r2-and-2008/dd364427(v=ws.10)
   name: Modified Rule in Windows Firewall with Advanced Security
