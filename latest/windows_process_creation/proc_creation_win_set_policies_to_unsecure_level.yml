@@ -7,10 +7,20 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: '-executionpolicy '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -executionpolicy '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -ep '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -exec '
     - op: or
       rules:
       - case sensitive: false
@@ -32,7 +42,7 @@ respond:
     description: Detects use of executionpolicy option to set a unsecure policies
     falsepositives:
     - Administrator script
-    level: high
+    level: medium
     references:
     - https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-7.1
     - https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.1
@@ -41,5 +51,5 @@ respond:
     tags:
     - attack.execution
     - attack.t1059.001
-  name: Change PowerShell Policies to a Unsecure Level
+  name: Change PowerShell Policies to an Unsecure Level
 
