@@ -19,7 +19,7 @@ respond:
 - action: report
   metadata:
     author: sam0x90
-    description: Conti recommendation to its affiliates to use esentult to access
+    description: Conti recommendation to its affiliates to use esentutl to access
       NTDS dumped file. Trickbot also uses this utilities to get MSEdge info via its
       module pwgrab.
     falsepositives:

@@ -15,7 +15,7 @@ detect:
     path: Event/EventData/AccessMask
     value: '0x2'
   - case sensitive: false
-    op: is
+    op: contains
     path: Event/EventData/ObjectName
     value: BCKUPKEY
   target: log
