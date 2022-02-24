@@ -1,0 +1,114 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: schtasks.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '/Create '
+    - op: or
+      rules:
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '/sc minute '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '/ru system '
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: 'cmd.exe /c '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: cmd /c
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' -w hidden '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' bypass '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' IEX'
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' -enc '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' -decode '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: .DownloadString
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: .DownloadFile
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: FromBase64String
+      - op: or
+        rules:
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: /xml C:\Users\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \AppData\Local\
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: wscript.exe
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \AppData\
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects suspicious scheduled task creations with commands that are
+      uncommon
+    falsepositives:
+    - Software installers that run from temporary folders and also install scheduled
+      tasks
+    level: high
+    references:
+    - https://app.any.run/tasks/512c1352-6380-4436-b27d-bb62f0c020d6/
+    tags:
+    - attack.execution
+    - attack.t1053.005
+  name: Suspicious Add Scheduled Command Pattern
+

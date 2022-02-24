@@ -45,5 +45,5 @@ respond:
     tags:
     - attack.execution
     - attack.t1053.005
-  name: Suspicius Add Task From User AppData Temp
+  name: Suspicious Add Scheduled Task From User AppData Temp
 
