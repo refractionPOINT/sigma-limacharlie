@@ -3,9 +3,9 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: and
+  - op: or
     rules:
-    - op: or
+    - op: and
       rules:
       - case sensitive: false
         op: is
@@ -13,12 +13,18 @@ detect:
         value: '517'
       - case sensitive: false
         op: is
+        path: event/EVENT/EventData/Provider_Name
+        value: Security
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
         path: event/EVENT/System/EventID
         value: '1102'
-    - case sensitive: false
-      op: is
-      path: event/EVENT/EventData/Provider_Name
-      value: Microsoft-Windows-Eventlog
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/Provider_Name
+        value: Microsoft-Windows-Eventlog
 respond:
 - action: report
   metadata:

@@ -8,7 +8,7 @@ detect:
     - case sensitive: false
       op: is
       path: event/EVENT/EventData/Provider_Name
-      value: Service Control Manager
+      value: Microsoft-Windows-Security-Auditing
     - case sensitive: false
       op: is
       path: event/EVENT/System/EventID

@@ -1,8 +1,8 @@
 detect:
   log type: wel
-  op: and
+  op: or
   rules:
-  - op: or
+  - op: and
     rules:
     - case sensitive: false
       op: is
@@ -10,12 +10,18 @@ detect:
       value: '517'
     - case sensitive: false
       op: is
+      path: Event/EventData/Provider_Name
+      value: Security
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
       path: Event/System/EventID
       value: '1102'
-  - case sensitive: false
-    op: is
-    path: Event/EventData/Provider_Name
-    value: Microsoft-Windows-Eventlog
+    - case sensitive: false
+      op: is
+      path: Event/EventData/Provider_Name
+      value: Microsoft-Windows-Eventlog
   target: log
 respond:
 - action: report

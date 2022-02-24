@@ -7,7 +7,7 @@ detect:
     - case sensitive: false
       op: is
       path: Event/EventData/Provider_Name
-      value: Microsoft-Windows-Eventlog
+      value: Microsoft-Windows-Security-Auditing
     - case sensitive: false
       op: is
       path: Event/System/EventID
