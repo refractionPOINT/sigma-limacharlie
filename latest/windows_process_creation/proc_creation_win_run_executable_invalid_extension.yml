@@ -37,6 +37,16 @@ detect:
           op: contains
           path: event/COMMAND_LINE
           value: .cpl
+      - op: and
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: :\Windows\SysWOW64\msiexec.exe
+        - case sensitive: false
+          op: starts with
+          path: event/COMMAND_LINE
+          value: C:\Windows\syswow64\MsiExec.exe -Embedding
 respond:
 - action: report
   metadata:

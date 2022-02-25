@@ -5,7 +5,7 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: or
+  - op: and
     rules:
     - op: or
       rules:
@@ -17,17 +17,15 @@ detect:
         op: ends with
         path: event/PARENT/FILE_PATH
         value: \sqlps.exe
-    - op: and
-      rules:
       - case sensitive: false
         op: is
         path: event/ORIGINAL_FILE_NAME
         value: \sqlps.exe
-      - case sensitive: false
-        not: true
-        op: ends with
-        path: event/PARENT/FILE_PATH
-        value: \sqlagent.exe
+    - case sensitive: false
+      not: true
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \sqlagent.exe
 respond:
 - action: report
   metadata:
