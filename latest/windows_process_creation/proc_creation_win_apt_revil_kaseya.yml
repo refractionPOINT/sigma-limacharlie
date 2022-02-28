@@ -5,7 +5,7 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: and
+  - op: or
     rules:
     - op: or
       rules:
@@ -65,6 +65,16 @@ detect:
         op: is
         path: event/FILE_PATH
         value: C:\kworking1\agent.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: del /s /q /f
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: WebPages\Errors\webErrorLog.txt
 respond:
 - action: report
   metadata:
