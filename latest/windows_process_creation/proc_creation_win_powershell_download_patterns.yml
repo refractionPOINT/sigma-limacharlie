@@ -1,0 +1,42 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: IEX ((New-Object Net.WebClient).DownloadString
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: IEX (New-Object Net.WebClient).DownloadString
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: IEX((New-Object Net.WebClient).DownloadString
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: IEX(New-Object Net.WebClient).DownloadString
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects suspicious PowerShell download patterns that are often used
+      in malicious scripts, stagers or downloaders (make sure that your backend applies
+      the strings case-insensitive)
+    falsepositives:
+    - Software installers that pull packages from remote systems and execute them
+    level: high
+    references:
+    - https://gist.github.com/jivoi/c354eaaf3019352ce32522f916c03d70
+    tags:
+    - attack.execution
+    - attack.t1059.001
+  name: Suspicious PowerShell Download and Execute Pattern
+

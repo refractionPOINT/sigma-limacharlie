@@ -7,36 +7,10 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - op: or
-      rules:
-      - case sensitive: false
-        op: ends with
-        path: event/PARENT/FILE_PATH
-        value: \WINWORD.EXE
-      - case sensitive: false
-        op: ends with
-        path: event/PARENT/FILE_PATH
-        value: \EXCEL.EXE
-      - case sensitive: false
-        op: ends with
-        path: event/PARENT/FILE_PATH
-        value: \POWERPNT.exe
-      - case sensitive: false
-        op: ends with
-        path: event/PARENT/FILE_PATH
-        value: \MSPUB.exe
-      - case sensitive: false
-        op: ends with
-        path: event/PARENT/FILE_PATH
-        value: \VISIO.exe
-      - case sensitive: false
-        op: ends with
-        path: event/PARENT/FILE_PATH
-        value: \MSACCESS.EXE
-      - case sensitive: false
-        op: ends with
-        path: event/PARENT/FILE_PATH
-        value: \EQNEDT32.EXE
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \OUTLOOK.EXE
     - op: or
       rules:
       - case sensitive: false
@@ -90,10 +64,6 @@ detect:
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
-        value: \rundll32.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
         value: \msiexec.exe
       - case sensitive: false
         op: ends with
@@ -134,5 +104,5 @@ respond:
     tags:
     - attack.execution
     - attack.t1204.002
-  name: Microsoft Office Product Spawning Windows Shell
+  name: Microsoft Outlook Product Spawning Windows Shell
 
