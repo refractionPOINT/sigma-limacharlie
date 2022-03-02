@@ -23,6 +23,14 @@ detect:
       op: contains
       path: event/COMMAND_LINE
       value: IEX(New-Object Net.WebClient).DownloadString
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' -command (New-Object System.Net.WebClient).DownloadFile('
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' -c (New-Object System.Net.WebClient).DownloadFile('
 respond:
 - action: report
   metadata:

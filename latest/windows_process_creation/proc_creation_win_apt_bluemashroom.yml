@@ -30,10 +30,24 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: AppData\Local\Microsoft\TeamsMeetingAddin\
-      - case sensitive: false
-        op: ends with
-        path: event/COMMAND_LINE
-        value: \x86\Microsoft.Teams.AddinLoader.dll
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/COMMAND_LINE
+          value: \x86\Microsoft.Teams.AddinLoader.dll
+        - case sensitive: false
+          op: ends with
+          path: event/COMMAND_LINE
+          value: \x86\Microsoft.Teams.AddinLoader.dll"
+        - case sensitive: false
+          op: ends with
+          path: event/COMMAND_LINE
+          value: \x64\Microsoft.Teams.AddinLoader.dll
+        - case sensitive: false
+          op: ends with
+          path: event/COMMAND_LINE
+          value: \x64\Microsoft.Teams.AddinLoader.dll"
 respond:
 - action: report
   metadata:

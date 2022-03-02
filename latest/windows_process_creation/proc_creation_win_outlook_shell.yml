@@ -94,7 +94,7 @@ respond:
   metadata:
     author: Michael Haag, Florian Roth, Markus Neis, Elastic, FPT.EagleEye Team
     description: Detects a Windows command and scripting interpreter executable started
-      from Microsoft Word, Excel, Powerpoint, Publisher and Visio
+      from Microsoft Outlook
     falsepositives:
     - unknown
     level: high

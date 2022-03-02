@@ -1,0 +1,38 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: VwBpAG4AMwAyAF8AUwBoAGEAZABvAHcAYwBvAHAAeQAgAHwAIABGAG8AcgBFAGEAYwBoAC0ATwBiAGoAZQBjAHQA
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: cAaQBuADMAMgBfAFMAaABhAGQAbwB3AGMAbwBwAHkAIAB8ACAARgBvAHIARQBhAGMAaAAtAE8AYgBqAGUAYwB0A
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: XAGkAbgAzADIAXwBTAGgAYQBkAG8AdwBjAG8AcAB5ACAAfAAgAEYAbwByAEUAYQBjAGgALQBPAGIAagBlAGMAdA
+respond:
+- action: report
+  metadata:
+    author: Christian Burkard
+    description: Detects base64 encoded listing Win32_Shadowcopy
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://github.com/Neo23x0/Raccine/blob/main/yara/mal_revil.yar
+    tags:
+    - attack.execution
+    - attack.t1059.001
+    - attack.defense_evasion
+    - attack.t1027
+  name: Base64 Encoded Listing of Shadowcopy
+
