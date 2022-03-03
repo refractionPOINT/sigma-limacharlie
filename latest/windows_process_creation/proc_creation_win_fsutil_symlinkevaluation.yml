@@ -1,0 +1,47 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: fsutil.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: 'behavior '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: 'set '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: SymlinkEvaluation
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: 'A symbolic link is a type of file that contains a reference to another
+      file.
+
+      This is probably done to make sure that the ransomware is able to follow shortcuts
+      on the machine in order to find the original file to encrypt
+
+      '
+    falsepositives:
+    - legitimate use
+    level: medium
+    references:
+    - https://www.cybereason.com/blog/cybereason-vs.-blackcat-ransomware
+    - https://docs.microsoft.com/fr-fr/windows-server/administration/windows-commands/fsutil-behavior
+    tags:
+    - attack.execution
+    - attack.t1059
+  name: Fsutil Behavior Set SymlinkEvaluation
+

@@ -1,0 +1,37 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '3'
+    - case sensitive: false
+      op: ends with
+      path: event/EVENT/EventData/processPath
+      value: \bitsadmin.exe
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: 'Adversaries may abuse BITS jobs to persistently execute or clean
+      up after malicious payloads.
+
+      Windows Background Intelligent Transfer Service (BITS) is a low-bandwidth, asynchronous
+      file transfer mechanism exposed through [Component Object Model](https://attack.mitre.org/techniques/T1559/001)
+
+      '
+    falsepositives:
+    - Administrator PowerShell scripts
+    level: low
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1197/T1197.md
+    tags:
+    - attack.defense_evasion
+    - attack.persistence
+    - attack.t1197
+  name: Suspicious Task Added by Bitsadmin
+
