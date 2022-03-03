@@ -1,0 +1,166 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'Add-MpPreference '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'Set-MpPreference '
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'DisableRealtimeMonitoring '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'DisableIOAVProtection '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'DisableBehaviorMonitoring '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'DisableBlockAtFirstSeen '
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: $true
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' 1 '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: RGlzYWJsZVJlYWx0aW1lTW9uaXRvcmluZy
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Rpc2FibGVSZWFsdGltZU1vbml0b3Jpbmcg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: EaXNhYmxlUmVhbHRpbWVNb25pdG9yaW5nI
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: RGlzYWJsZUlPQVZQcm90ZWN0aW9uI
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Rpc2FibGVJT0FWUHJvdGVjdGlvbi
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: EaXNhYmxlSU9BVlByb3RlY3Rpb24g
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: RGlzYWJsZUJlaGF2aW9yTW9uaXRvcmluZy
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Rpc2FibGVCZWhhdmlvck1vbml0b3Jpbmcg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: EaXNhYmxlQmVoYXZpb3JNb25pdG9yaW5nI
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: RGlzYWJsZUJsb2NrQXRGaXJzdFNlZW4g
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Rpc2FibGVCbG9ja0F0Rmlyc3RTZWVuI
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: EaXNhYmxlQmxvY2tBdEZpcnN0U2Vlbi
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ZGlzYWJsZXJlYWx0aW1lbW9uaXRvcmluZy
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Rpc2FibGVyZWFsdGltZW1vbml0b3Jpbmcg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: kaXNhYmxlcmVhbHRpbWVtb25pdG9yaW5nI
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ZGlzYWJsZWlvYXZwcm90ZWN0aW9uI
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Rpc2FibGVpb2F2cHJvdGVjdGlvbi
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: kaXNhYmxlaW9hdnByb3RlY3Rpb24g
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ZGlzYWJsZWJlaGF2aW9ybW9uaXRvcmluZy
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Rpc2FibGViZWhhdmlvcm1vbml0b3Jpbmcg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: kaXNhYmxlYmVoYXZpb3Jtb25pdG9yaW5nI
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ZGlzYWJsZWJsb2NrYXRmaXJzdHNlZW4g
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Rpc2FibGVibG9ja2F0Zmlyc3RzZWVuI
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: kaXNhYmxlYmxvY2thdGZpcnN0c2Vlbi
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects requests to disable Microsoft Defender features using PowerShell
+      commands
+    falsepositives:
+    - Possible Admin Activity
+    - Other Cmdlets that may use the same parameters
+    level: high
+    references:
+    - https://docs.microsoft.com/en-us/powershell/module/defender/set-mppreference?view=windowsserver2022-ps
+    - https://www.virustotal.com/gui/file/d609799091731d83d75ec5d1f030571af20c45efeeb94840b67ea09a3283ab65/behavior/C2AE
+    - https://www.virustotal.com/gui/search/content%253A%2522Set-MpPreference%2520-Disable%2522/files
+    tags:
+    - attack.defense_evasion
+    - attack.t1562.001
+  name: Powershell Defender Disable Scan Feature
+
