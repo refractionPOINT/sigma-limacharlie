@@ -27,11 +27,17 @@ detect:
           op: ends with
           path: event/PARENT/FILE_PATH
           value: \excel.exe
-    - case sensitive: false
-      not: true
-      op: ends with
-      path: event/COMMAND_LINE
-      value: \control.exe input.dll
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: \control.exe input.dll
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: \control.exe" input.dll
 respond:
 - action: report
   metadata:

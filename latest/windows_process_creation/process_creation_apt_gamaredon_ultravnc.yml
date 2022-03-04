@@ -1,0 +1,39 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: '-autoreconnect '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: '-connect '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: '-id:'
+respond:
+- action: report
+  metadata:
+    author: Bhabesh Raj
+    description: Gamaredon is known to use UltraVNC via command line for gaining remote
+      access.
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.ria.ee/sites/default/files/content-editors/kuberturve/tale_of_gamaredon_infection.pdf
+    - https://unit42.paloaltonetworks.com/unit-42-title-gamaredon-group-toolset-evolution
+    tags:
+    - attack.lateral_movement
+    - attack.g0047
+    - attack.t1021.005
+  name: Gamaredon UltraVNC Execution
+
