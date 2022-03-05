@@ -15,10 +15,16 @@ detect:
       op: contains
       path: event/COMMAND_LINE
       value: .dll
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: StartW
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: ' StartW'
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: ',StartW'
 respond:
 - action: report
   metadata:

@@ -5,84 +5,32 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: or
+  - op: and
     rules:
-    - op: and
-      rules:
-      - op: or
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: 'Add-MpPreference '
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: 'Set-MpPreference '
-      - op: or
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: ' -ExclusionPath '
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: ' -ExclusionExtension '
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: ' -ExclusionProcess '
     - op: or
       rules:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: QWRkLU1wUHJlZmVyZW5jZS
+        value: 'Add-MpPreference '
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: FkZC1NcFByZWZlcmVuY2Ug
+        value: 'Set-MpPreference '
+    - op: or
+      rules:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: BZGQtTXBQcmVmZXJlbmNlI
+        value: ' -ExclusionPath '
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: U2V0LU1wUHJlZmVyZW5jZS
+        value: ' -ExclusionExtension '
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: NldC1NcFByZWZlcmVuY2Ug
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: TZXQtTXBQcmVmZXJlbmNlI
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: YWRkLW1wcHJlZmVyZW5jZS
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: FkZC1tcHByZWZlcmVuY2Ug
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: hZGQtbXBwcmVmZXJlbmNlI
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: c2V0LW1wcHJlZmVyZW5jZS
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: NldC1tcHByZWZlcmVuY2Ug
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: zZXQtbXBwcmVmZXJlbmNlI
+        value: ' -ExclusionProcess '
 respond:
 - action: report
   metadata:
@@ -92,7 +40,7 @@ respond:
     falsepositives:
     - Possible Admin Activity
     - Other Cmdlets that may use the same parameters
-    level: high
+    level: medium
     references:
     - https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/configure-process-opened-file-exclusions-microsoft-defender-antivirus
     - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1562.001/T1562.001.md

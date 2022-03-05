@@ -1,0 +1,75 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: QWRkLU1wUHJlZmVyZW5jZS
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: FkZC1NcFByZWZlcmVuY2Ug
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: BZGQtTXBQcmVmZXJlbmNlI
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: U2V0LU1wUHJlZmVyZW5jZS
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: NldC1NcFByZWZlcmVuY2Ug
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: TZXQtTXBQcmVmZXJlbmNlI
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: YWRkLW1wcHJlZmVyZW5jZS
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: FkZC1tcHByZWZlcmVuY2Ug
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: hZGQtbXBwcmVmZXJlbmNlI
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: c2V0LW1wcHJlZmVyZW5jZS
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: NldC1tcHByZWZlcmVuY2Ug
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: zZXQtbXBwcmVmZXJlbmNlI
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects base64 encoded PowerShell code that modifies Windows Defender
+    falsepositives:
+    - Possible Admin Activity
+    - Other Cmdlets that may use the same parameters
+    level: high
+    references:
+    - https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/configure-process-opened-file-exclusions-microsoft-defender-antivirus
+    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1562.001/T1562.001.md
+    - https://twitter.com/AdamTheAnalyst/status/1483497517119590403
+    tags:
+    - attack.defense_evasion
+    - attack.t1562.001
+  name: Powershell Defender Base64 MpPreference
+
