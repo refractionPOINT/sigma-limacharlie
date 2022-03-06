@@ -36,7 +36,7 @@ detect:
         - case sensitive: false
           op: contains
           path: event/PARENT/COMMAND_LINE
-          value: ' > \\.\pipe'
+          value: ' > \\\\.\\pipe'
     - op: and
       rules:
       - op: or
@@ -48,7 +48,7 @@ detect:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: '> \\.\pipe'
+          value: '> \\\\.\\pipe'
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
