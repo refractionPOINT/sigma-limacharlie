@@ -5,16 +5,35 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: or
+  - op: and
     rules:
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: ' /am51'
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: ' /password'
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /am51'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /password'
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /PASSWORDCHG'
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/PARENT/FILE_PATH
+          value: C:\Program Files\CEETIS\CEETIS_IDE.exe
+        - case sensitive: false
+          op: is
+          path: event/PARENT/FILE_PATH
+          value: C:\Program Files (x86)\CEETIS\CEETIS_IDE.exe
 respond:
 - action: report
   metadata:
