@@ -7,32 +7,53 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - case sensitive: false
-      op: ends with
-      path: event/PARENT/FILE_PATH
-      value: \sqlservr.exe
-    - op: or
+    - op: and
       rules:
       - case sensitive: false
         op: ends with
-        path: event/FILE_PATH
-        value: \cmd.exe
+        path: event/PARENT/FILE_PATH
+        value: \sqlservr.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \cmd.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \sh.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \bash.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \bitsadmin.exe
+    - not: true
+      op: and
+      rules:
+      - case sensitive: false
+        op: starts with
+        path: event/PARENT/FILE_PATH
+        value: C:\Program Files\Microsoft SQL Server\
       - case sensitive: false
         op: ends with
-        path: event/FILE_PATH
-        value: \sh.exe
+        path: event/PARENT/FILE_PATH
+        value: DATEV_DBENGINE\MSSQL\Binn\sqlservr.exe
       - case sensitive: false
-        op: ends with
+        op: is
         path: event/FILE_PATH
-        value: \bash.exe
+        value: C:\Windows\System32\cmd.exe
       - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \powershell.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \bitsadmin.exe
+        op: starts with
+        path: event/COMMAND_LINE
+        value: '"C:\Windows\system32\cmd.exe" '
 respond:
 - action: report
   metadata:
