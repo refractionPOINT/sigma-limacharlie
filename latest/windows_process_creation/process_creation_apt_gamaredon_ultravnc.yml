@@ -23,8 +23,9 @@ respond:
 - action: report
   metadata:
     author: Bhabesh Raj
-    description: Gamaredon is known to use UltraVNC via command line for gaining remote
-      access.
+    description: Detects suspicious UltraVNC command line flag combination that indicate
+      a auto reconnect upon execution, e.g. startup (as seen being used by Gamaredon
+      threat group)
     falsepositives:
     - Unknown
     level: high
@@ -35,5 +36,5 @@ respond:
     - attack.lateral_movement
     - attack.g0047
     - attack.t1021.005
-  name: Gamaredon UltraVNC Execution
+  name: Suspicious UltraVNC Execution
 

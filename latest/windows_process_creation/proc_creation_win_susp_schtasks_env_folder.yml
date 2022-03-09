@@ -9,14 +9,22 @@ detect:
     rules:
     - op: and
       rules:
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: schtasks.exe
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ' /create '
+      - op: or
+        rules:
+        - op: and
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \schtasks.exe
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' /create '
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/COMMAND_LINE
+          value: \svchost.exe -k netsvcs -p -s Schedule
       - op: or
         rules:
         - case sensitive: false
@@ -65,7 +73,10 @@ respond:
     description: Detects Schtask creations that point to a folder references in environment
       variables or often used by malware
     falsepositives:
-    - Benign scheduled tasks creations that happen often during software installations
+    - Benign scheduled tasks creations or executions that happen often during software
+      installations
+    - Software that uses the AppData folder and scheduled tasks to update the software
+      in the AppData folders
     level: high
     references:
     - https://www.welivesecurity.com/2022/01/18/donot-go-do-not-respawn/
