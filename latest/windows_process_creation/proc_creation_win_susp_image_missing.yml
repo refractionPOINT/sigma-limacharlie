@@ -30,14 +30,26 @@ detect:
           value: ''
       - op: or
         rules:
-        - case sensitive: false
-          op: is
-          path: event/FILE_PATH
-          value: Registry
-        - case sensitive: false
-          op: is
-          path: event/COMMAND_LINE
-          value: Registry
+        - op: or
+          rules:
+          - case sensitive: false
+            op: is
+            path: event/FILE_PATH
+            value: Registry
+          - case sensitive: false
+            op: is
+            path: event/FILE_PATH
+            value: MemCompression
+        - op: or
+          rules:
+          - case sensitive: false
+            op: is
+            path: event/COMMAND_LINE
+            value: Registry
+          - case sensitive: false
+            op: is
+            path: event/COMMAND_LINE
+            value: MemCompression
 respond:
 - action: report
   metadata:
