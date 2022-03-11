@@ -7,54 +7,72 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - op: and
+    - op: or
       rules:
-      - op: or
+      - op: and
         rules:
-        - op: and
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \schtasks.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /create '
+        - op: or
           rules:
-          - case sensitive: false
-            op: ends with
-            path: event/FILE_PATH
-            value: \schtasks.exe
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
-            value: ' /create '
+            value: '%AppData%'
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \AppData\Local\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \AppData\Roaming\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '%Public%'
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \Users\Public
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: C:\Windows\Temp
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: C:\Perflogs
+      - op: and
+        rules:
         - case sensitive: false
           op: ends with
           path: event/PARENT/COMMAND_LINE
           value: \svchost.exe -k netsvcs -p -s Schedule
-      - op: or
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: '%AppData%'
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: \AppData\Local\
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: \AppData\Roaming\
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: '%Public%'
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: \Users\Public
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: C:\Windows\Temp
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: C:\Perflogs
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '%Public%'
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \Users\Public
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: C:\Windows\Temp
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: C:\Perflogs
     - not: true
       op: or
       rules:
