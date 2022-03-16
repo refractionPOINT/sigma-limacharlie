@@ -18,28 +18,38 @@ detect:
       - not: true
         op: exists
         path: Event/EventData/AllowedToDelegateTo
-  - op: and
+  - op: or
     rules:
-    - case sensitive: false
-      op: is
-      path: Event/System/EventID
-      value: '5136'
-    - op: or
+    - op: and
       rules:
+      - case sensitive: false
+        op: is
+        path: Event/System/EventID
+        value: '5136'
       - case sensitive: false
         op: is
         path: Event/EventData/AttributeLDAPDisplayName
         value: msDS-AllowedToDelegateTo
-      - op: and
-        rules:
-        - case sensitive: false
-          op: is
-          path: Event/EventData/ObjectClass
-          value: user
-        - case sensitive: false
-          op: is
-          path: Event/EventData/AttributeLDAPDisplayName
-          value: servicePrincipalName
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: Event/System/EventID
+        value: '5136'
+      - case sensitive: false
+        op: is
+        path: Event/EventData/ObjectClass
+        value: user
+      - case sensitive: false
+        op: is
+        path: Event/EventData/AttributeLDAPDisplayName
+        value: servicePrincipalName
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: Event/System/EventID
+        value: '5136'
       - case sensitive: false
         op: is
         path: Event/EventData/AttributeLDAPDisplayName

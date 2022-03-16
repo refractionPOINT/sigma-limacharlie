@@ -5,42 +5,44 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: and
+  - op: or
     rules:
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: netsh
-    - op: or
+    - op: and
       rules:
-      - op: and
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: firewall add portopening
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: tcp 3389
-      - op: and
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: advfirewall firewall add rule
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: action=allow
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: protocol=TCP
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: localport=3389
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: netsh
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: firewall add portopening
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: tcp 3389
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: netsh
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: advfirewall firewall add rule
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: action=allow
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: protocol=TCP
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: localport=3389
 respond:
 - action: report
   metadata:

@@ -5,46 +5,48 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: and
+  - op: or
     rules:
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: rundll32
-    - op: or
+    - op: and
       rules:
-      - op: and
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: rundll32
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: apphelp.dll
+      - op: or
         rules:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: apphelp.dll
-        - op: or
-          rules:
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: ShimFlushCache
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: '#250'
-      - op: and
+          value: ShimFlushCache
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '#250'
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: rundll32
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: kernel32.dll
+      - op: or
         rules:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: kernel32.dll
-        - op: or
-          rules:
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: BaseFlushAppcompatCache
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: '#46'
+          value: BaseFlushAppcompatCache
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '#46'
 respond:
 - action: report
   metadata:

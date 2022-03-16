@@ -5,19 +5,25 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: and
+  - op: or
     rules:
-    - case sensitive: false
-      op: ends with
-      path: event/FILE_PATH
-      value: \dump64.exe
-    - op: or
+    - op: and
       rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \dump64.exe
       - case sensitive: false
         not: true
         op: contains
         path: event/FILE_PATH
         value: \Installer\Feedback\dump64.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \dump64.exe
       - op: or
         rules:
         - case sensitive: false

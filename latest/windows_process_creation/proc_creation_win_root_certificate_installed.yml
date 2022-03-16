@@ -5,34 +5,36 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: and
+  - op: or
     rules:
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: root
-    - op: or
+    - op: and
       rules:
-      - op: and
-        rules:
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \certutil.exe
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: -addstore
-      - op: and
-        rules:
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \CertMgr.exe
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: /add
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \certutil.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -addstore
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: root
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \CertMgr.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /add
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: root
 respond:
 - action: report
   metadata:

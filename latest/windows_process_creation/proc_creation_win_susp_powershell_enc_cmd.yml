@@ -9,24 +9,36 @@ detect:
     rules:
     - op: or
       rules:
-      - op: and
+      - op: or
         rules:
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: ' -e'
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: ' JAB'
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: ' -w'
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: ' hidden '
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' -e'
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' JAB'
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' -e'
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' JAB'
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' -w'
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' hidden '
       - op: and
         rules:
         - case sensitive: false

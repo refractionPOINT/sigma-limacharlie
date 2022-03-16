@@ -5,46 +5,52 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: and
+  - op: or
     rules:
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: netsh
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: set
-    - op: or
+    - op: and
       rules:
-      - op: and
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: firewall
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: opmode
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: mode=disable
-      - op: and
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: advfirewall
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: state
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: 'off'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: netsh
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: firewall
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: set
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: opmode
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: mode=disable
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: netsh
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: advfirewall
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: set
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: state
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'off'
 respond:
 - action: report
   metadata:

@@ -1,27 +1,31 @@
 detect:
   log type: wel
-  op: and
+  op: or
   rules:
-  - case sensitive: false
-    op: is
-    path: Event/EventData/ServiceName
-    value: PSEXESVC
-  - op: or
+  - op: and
     rules:
-    - op: and
-      rules:
-      - case sensitive: false
-        op: is
-        path: Event/System/EventID
-        value: '7045'
-      - case sensitive: false
-        op: ends with
-        path: Event/EventData/ServiceFileName
-        value: \PSEXESVC.exe
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '7045'
+    - case sensitive: false
+      op: is
+      path: Event/EventData/ServiceName
+      value: PSEXESVC
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/ServiceFileName
+      value: \PSEXESVC.exe
+  - op: and
+    rules:
     - case sensitive: false
       op: is
       path: Event/System/EventID
       value: '7036'
+    - case sensitive: false
+      op: is
+      path: Event/EventData/ServiceName
+      value: PSEXESVC
   target: log
 respond:
 - action: report

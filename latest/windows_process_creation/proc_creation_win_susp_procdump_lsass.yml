@@ -5,18 +5,24 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: and
+  - op: or
     rules:
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: ' -ma '
-    - op: or
+    - op: and
       rules:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: ' -ma '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: ' lsass'
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -ma '
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE

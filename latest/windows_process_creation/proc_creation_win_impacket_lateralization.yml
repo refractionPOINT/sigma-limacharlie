@@ -5,70 +5,76 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: and
+  - op: or
     rules:
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: cmd.exe
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: '&1'
-    - op: or
+    - op: and
       rules:
-      - op: and
+      - op: or
         rules:
-        - op: or
-          rules:
-          - case sensitive: false
-            op: ends with
-            path: event/PARENT/FILE_PATH
-            value: \wmiprvse.exe
-          - case sensitive: false
-            op: ends with
-            path: event/PARENT/FILE_PATH
-            value: \mmc.exe
-          - case sensitive: false
-            op: ends with
-            path: event/PARENT/FILE_PATH
-            value: \explorer.exe
-          - case sensitive: false
-            op: ends with
-            path: event/PARENT/FILE_PATH
-            value: \services.exe
         - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: /Q
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \wmiprvse.exe
         - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: /c
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \mmc.exe
         - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: \\\\127.0.0.1\
-      - op: and
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \explorer.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \services.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: cmd.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /Q
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /c
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \\\\127.0.0.1\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '&1'
+    - op: and
+      rules:
+      - op: or
         rules:
-        - op: or
-          rules:
-          - case sensitive: false
-            op: contains
-            path: event/PARENT/COMMAND_LINE
-            value: svchost.exe -k netsvcs
-          - case sensitive: false
-            op: contains
-            path: event/PARENT/COMMAND_LINE
-            value: taskeng.exe
         - case sensitive: false
           op: contains
-          path: event/COMMAND_LINE
-          value: /C
+          path: event/PARENT/COMMAND_LINE
+          value: svchost.exe -k netsvcs
         - case sensitive: false
           op: contains
-          path: event/COMMAND_LINE
-          value: Windows\Temp\
+          path: event/PARENT/COMMAND_LINE
+          value: taskeng.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: cmd.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /C
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Windows\Temp\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '&1'
 respond:
 - action: report
   metadata:

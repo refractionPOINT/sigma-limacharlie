@@ -5,12 +5,8 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: and
+  - op: or
     rules:
-    - case sensitive: false
-      op: ends with
-      path: event/FILE_PATH
-      value: \powershell.exe
     - op: or
       rules:
       - op: or
@@ -19,6 +15,10 @@ detect:
           rules:
           - op: and
             rules:
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \powershell.exe
             - op: or
               rules:
               - case sensitive: false
@@ -62,6 +62,10 @@ detect:
           - op: and
             rules:
             - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \powershell.exe
+            - case sensitive: false
               op: contains
               path: event/COMMAND_LINE
               value: char
@@ -71,6 +75,10 @@ detect:
               value: join
         - op: and
           rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \powershell.exe
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
@@ -82,6 +90,10 @@ detect:
       - op: and
         rules:
         - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
           value: ForEach
@@ -89,6 +101,12 @@ detect:
           op: contains
           path: event/COMMAND_LINE
           value: Xor
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \powershell.exe
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE

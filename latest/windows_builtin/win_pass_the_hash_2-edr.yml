@@ -5,42 +5,44 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - op: and
+    - op: or
       rules:
-      - case sensitive: false
-        op: is
-        path: event/EVENT/System/EventID
-        value: '4624'
-      - op: or
+      - op: and
         rules:
-        - op: and
-          rules:
-          - case sensitive: false
-            op: is
-            path: event/EVENT/EventData/SubjectUserSid
-            value: S-1-0-0
-          - case sensitive: false
-            op: is
-            path: event/EVENT/EventData/LogonType
-            value: '3'
-          - case sensitive: false
-            op: is
-            path: event/EVENT/EventData/LogonProcessName
-            value: NtLmSsp
-          - case sensitive: false
-            op: is
-            path: event/EVENT/EventData/KeyLength
-            value: '0'
-        - op: and
-          rules:
-          - case sensitive: false
-            op: is
-            path: event/EVENT/EventData/LogonType
-            value: '9'
-          - case sensitive: false
-            op: is
-            path: event/EVENT/EventData/LogonProcessName
-            value: seclogo
+        - case sensitive: false
+          op: is
+          path: event/EVENT/System/EventID
+          value: '4624'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/SubjectUserSid
+          value: S-1-0-0
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/LogonType
+          value: '3'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/LogonProcessName
+          value: NtLmSsp
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/KeyLength
+          value: '0'
+      - op: and
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/EVENT/System/EventID
+          value: '4624'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/LogonType
+          value: '9'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/LogonProcessName
+          value: seclogo
     - case sensitive: false
       not: true
       op: is

@@ -5,38 +5,40 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: and
+  - op: or
     rules:
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: .zip
-    - op: or
+    - op: and
       rules:
-      - op: and
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: /generic:Microsoft_Windows_Shell_ZipFolder:filename=
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: '/pass:'
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: '/user:'
-      - op: and
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: /delete
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: Microsoft_Windows_Shell_ZipFolder:filename=
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /generic:Microsoft_Windows_Shell_ZipFolder:filename=
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .zip
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '/pass:'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '/user:'
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /delete
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Microsoft_Windows_Shell_ZipFolder:filename=
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .zip
 respond:
 - action: report
   metadata:

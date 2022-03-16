@@ -3,44 +3,52 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: and
+  - op: or
     rules:
-    - op: or
+    - op: and
       rules:
       - case sensitive: false
-        op: contains
-        path: event/EVENT/EventData/ObjectName
-        value: WINEVT\Publishers\{5770385f-c22a-43e0-bf4c-06f5698ffbd9}
+        op: is
+        path: event/EVENT/System/EventID
+        value: '4657'
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/ObjectName
+          value: WINEVT\Publishers\{5770385f-c22a-43e0-bf4c-06f5698ffbd9}
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/ObjectName
+          value: WINEVT\Channels\Microsoft-Windows-Sysmon/Operational
       - case sensitive: false
-        op: contains
-        path: event/EVENT/EventData/ObjectName
-        value: WINEVT\Channels\Microsoft-Windows-Sysmon/Operational
-    - op: or
+        op: is
+        path: event/EVENT/EventData/ObjectValueName
+        value: Enabled
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/NewValue
+        value: '0'
+    - op: and
       rules:
-      - op: and
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '4663'
+      - op: or
         rules:
         - case sensitive: false
-          op: is
-          path: event/EVENT/System/EventID
-          value: '4657'
+          op: contains
+          path: event/EVENT/EventData/ObjectName
+          value: WINEVT\Publishers\{5770385f-c22a-43e0-bf4c-06f5698ffbd9}
         - case sensitive: false
-          op: is
-          path: event/EVENT/EventData/ObjectValueName
-          value: Enabled
-        - case sensitive: false
-          op: is
-          path: event/EVENT/EventData/NewValue
-          value: '0'
-      - op: and
-        rules:
-        - case sensitive: false
-          op: is
-          path: event/EVENT/System/EventID
-          value: '4663'
-        - case sensitive: false
-          op: is
-          path: event/EVENT/EventData/AccessMask
-          value: '65536'
+          op: contains
+          path: event/EVENT/EventData/ObjectName
+          value: WINEVT\Channels\Microsoft-Windows-Sysmon/Operational
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/AccessMask
+        value: '65536'
 respond:
 - action: report
   metadata:

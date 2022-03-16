@@ -5,58 +5,60 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: and
+  - op: or
     rules:
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: bitsadmin
-    - op: or
+    - op: and
       rules:
-      - op: and
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bitsadmin
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /SetNotifyCmdLine
+      - op: or
         rules:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: /SetNotifyCmdLine
-        - op: or
-          rules:
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: '%COMSPEC%'
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: cmd.exe
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: regsvr32.exe
-      - op: and
+          value: '%COMSPEC%'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: cmd.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: regsvr32.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bitsadmin
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /Addfile
+      - op: or
         rules:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: /Addfile
-        - op: or
-          rules:
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: 'http:'
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: 'https:'
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: 'ftp:'
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: 'ftps:'
+          value: 'http:'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'https:'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'ftp:'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'ftps:'
 respond:
 - action: report
   metadata:

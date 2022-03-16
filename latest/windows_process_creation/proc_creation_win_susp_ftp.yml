@@ -7,13 +7,9 @@ detect:
   - op: is windows
   - op: or
     rules:
-    - op: and
+    - op: or
       rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: '-s:'
-      - op: or
+      - op: and
         rules:
         - case sensitive: false
           op: ends with
@@ -21,8 +17,18 @@ detect:
           value: ftp.exe
         - case sensitive: false
           op: contains
+          path: event/COMMAND_LINE
+          value: '-s:'
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
           path: event/ORIGINAL_FILE_NAME
           value: ftp.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '-s:'
     - op: and
       rules:
       - case sensitive: false
