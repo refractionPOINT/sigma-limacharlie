@@ -26,6 +26,10 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: ' -lvnp'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: ' -l -v -p '
       - case sensitive: false
         op: contains

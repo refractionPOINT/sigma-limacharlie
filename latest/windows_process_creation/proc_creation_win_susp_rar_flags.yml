@@ -31,7 +31,7 @@ respond:
     falsepositives:
     - Legitimate use of Winrar command line version
     - Other command line tools, that use these flags
-    level: medium
+    level: high
     references:
     - https://labs.sentinelone.com/the-anatomy-of-an-apt-attack-and-cobaltstrike-beacons-encoded-configuration/
     - https://ss64.com/bash/rar.html
@@ -39,5 +39,5 @@ respond:
     tags:
     - attack.collection
     - attack.t1560.001
-  name: Rar with Password or Compression Level
+  name: Rar Usage with Password and Compression Level
 
