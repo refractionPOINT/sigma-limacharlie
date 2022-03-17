@@ -26,7 +26,7 @@ respond:
     description: Detects suspicious a certutil command that used to encode files,
       which is sometimes used for data exfiltration
     falsepositives:
-    - unknown
+    - Unknown
     level: medium
     references:
     - https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/certutil

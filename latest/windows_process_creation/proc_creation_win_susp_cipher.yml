@@ -28,7 +28,7 @@ respond:
 
       '
     falsepositives:
-    - unknown
+    - Unknown
     level: medium
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1485/T1485.md#atomic-test-3---overwrite-deleted-data-on-c-drive

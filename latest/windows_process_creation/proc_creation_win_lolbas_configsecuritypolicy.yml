@@ -32,7 +32,7 @@ respond:
     description: Upload file, credentials or data exfiltration with Binary part of
       Windows Defender
     falsepositives:
-    - unknown
+    - Unknown
     level: medium
     references:
     - https://lolbas-project.github.io/lolbas/Binaries/ConfigSecurityPolicy/

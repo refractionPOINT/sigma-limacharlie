@@ -52,7 +52,7 @@ respond:
     description: Qbot used reg.exe to add Defender folder exceptions for folders within
       AppData and ProgramData.
     falsepositives:
-    - legitimate use
+    - Legitimate use
     level: medium
     references:
     - https://thedfirreport.com/2022/02/07/qbot-likes-to-move-it-move-it/

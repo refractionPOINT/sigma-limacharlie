@@ -35,7 +35,7 @@ respond:
 
       '
     falsepositives:
-    - legitimate use
+    - Legitimate use
     level: medium
     references:
     - https://www.cybereason.com/blog/cybereason-vs.-blackcat-ransomware

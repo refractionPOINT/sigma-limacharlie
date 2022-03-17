@@ -29,8 +29,6 @@ respond:
       event should to be correlated with 4624 and 4688 for further intrusion context.
     falsepositives:
     - legal admin action
-    - Penetration tests where lateral movement has occurred. This event will be created
-      on the target host.
     level: low
     references:
     - https://jpcertcc.github.io/ToolAnalysisResultSheet/details/wmiexec-vbs.htm

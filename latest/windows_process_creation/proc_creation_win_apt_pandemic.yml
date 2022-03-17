@@ -15,7 +15,7 @@ respond:
     author: Florian Roth
     description: Detects Pandemic Windows Implant
     falsepositives:
-    - unknown
+    - Unknown
     level: critical
     references:
     - https://wikileaks.org/vault7/#Pandemic

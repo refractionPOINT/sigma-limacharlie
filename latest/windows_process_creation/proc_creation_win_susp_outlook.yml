@@ -36,7 +36,7 @@ respond:
     description: Detects EnableUnsafeClientMailRules used for Script Execution from
       Outlook
     falsepositives:
-    - unknown
+    - Unknown
     level: high
     references:
     - https://github.com/sensepost/ruler

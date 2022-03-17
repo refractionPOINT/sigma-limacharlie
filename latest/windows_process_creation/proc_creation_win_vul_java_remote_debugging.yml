@@ -29,7 +29,7 @@ respond:
     description: Detects a JAVA process running with remote debugging allowing more
       than just localhost to connect
     falsepositives:
-    - unknown
+    - Unknown
     level: medium
     tags:
     - attack.t1203

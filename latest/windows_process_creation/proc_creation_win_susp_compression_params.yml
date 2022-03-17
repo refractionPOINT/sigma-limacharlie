@@ -61,7 +61,7 @@ respond:
     description: Detects suspicious command line arguments of common data compression
       tools
     falsepositives:
-    - unknown
+    - Unknown
     level: high
     references:
     - https://twitter.com/SBousseaden/status/1184067445612535811

@@ -18,7 +18,7 @@ respond:
     description: Detects known malicious service installs that only appear in cases
       of lateral movement, credential dumping, and other suspicious activities.
     falsepositives:
-    - Penetration testing
+    - Unknown
     level: critical
     references:
     - https://awakesecurity.com/blog/threat-hunting-for-paexec/

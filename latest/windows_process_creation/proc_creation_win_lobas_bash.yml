@@ -22,7 +22,7 @@ respond:
     description: Performs execution of specified file, can be used as a defensive
       evasion.
     falsepositives:
-    - unknown
+    - Unknown
     level: medium
     references:
     - https://lolbas-project.github.io/lolbas/Binaries/Bash/

@@ -30,7 +30,6 @@ respond:
     description: Detects file execution using the msdeploy.exe lolbin
     falsepositives:
     - System administrator Usage
-    - Penetration test
     level: medium
     references:
     - https://github.com/LOLBAS-Project/LOLBAS/blob/master/yml/OtherMSBinaries/Msdeploy.yml

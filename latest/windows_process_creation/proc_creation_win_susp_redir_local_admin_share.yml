@@ -22,7 +22,7 @@ respond:
     description: Detects a suspicious output redirection to the local admins share
       as often found in malicious scripts or hacktool stagers
     falsepositives:
-    - unknown
+    - Unknown
     level: high
     references:
     - https://www.microsoft.com/security/blog/2022/01/15/destructive-malware-targeting-ukrainian-organizations/

@@ -35,7 +35,7 @@ respond:
     description: Detects executables launched outside their default directories as
       used by Lazarus Group (Bluenoroff)
     falsepositives:
-    - unknown
+    - Unknown
     level: high
     references:
     - https://media.kasperskycontenthub.com/wp-content/uploads/sites/43/2018/03/07180244/Lazarus_Under_The_Hood_PDF_final.pdf

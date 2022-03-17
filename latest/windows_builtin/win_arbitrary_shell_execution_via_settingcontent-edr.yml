@@ -22,7 +22,7 @@ respond:
       allows a user to create "shortcuts" to various Windows 10 setting pages. These
       files are simply XML and contain paths to various Windows 10 settings binaries.
     falsepositives:
-    - unknown
+    - Unknown
     level: medium
     references:
     - https://posts.specterops.io/the-tale-of-settingcontent-ms-files-f1ea253e4d39

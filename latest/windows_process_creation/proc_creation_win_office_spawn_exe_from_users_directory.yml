@@ -51,7 +51,7 @@ respond:
     description: Detects an executable in the users directory started from Microsoft
       Word, Excel, Powerpoint, Publisher or Visio
     falsepositives:
-    - unknown
+    - Unknown
     level: high
     references:
     - sha256=23160972c6ae07f740800fa28e421a81d7c0ca5d5cab95bc082b4a986fbac57c

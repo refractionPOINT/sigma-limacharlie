@@ -30,7 +30,6 @@ respond:
       changes in your environment.
     - DataSvcUtil.exe being executed from unfamiliar users should be investigated.
       If known behavior is causing false positives, it can be exempted from the rule.
-    - Penetration Testing
     level: medium
     references:
     - https://gist.github.com/teixeira0xfffff/837e5bfed0d1b0a29a7cb1e5dbdd9ca6

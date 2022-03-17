@@ -69,7 +69,7 @@ respond:
       reconnaissance by popular public domain webshells for whether perl, python or
       wget are installed.
     falsepositives:
-    - unknown
+    - Unknown
     level: high
     references:
     - https://ragged-lab.blogspot.com/2020/07/webshells-automating-reconnaissance.html

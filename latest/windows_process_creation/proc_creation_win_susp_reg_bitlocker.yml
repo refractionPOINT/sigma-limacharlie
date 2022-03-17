@@ -67,7 +67,7 @@ respond:
     author: frack113
     description: Suspicious add key for BitLocker
     falsepositives:
-    - unknown
+    - Unknown
     level: medium
     references:
     - https://thedfirreport.com/2021/11/15/exchange-exploit-leads-to-domain-wide-ransomware/

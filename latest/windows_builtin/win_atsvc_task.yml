@@ -26,7 +26,7 @@ respond:
     description: Detects remote task creation via at.exe or API interacting with ATSVC
       namedpipe
     falsepositives:
-    - pentesting
+    - Unknown
     level: medium
     references:
     - https://blog.menasec.net/2019/03/threat-hunting-25-scheduled-tasks-for.html

@@ -30,7 +30,6 @@ respond:
     description: Detects suspicious command line activity on Windows systems
     falsepositives:
     - Inventory tool runs
-    - Penetration tests
     - Administrative activity
     level: medium
     references:

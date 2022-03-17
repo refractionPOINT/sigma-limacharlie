@@ -22,7 +22,7 @@ respond:
     description: Detects the use of Moriya rootkit as described in the securelist's
       Operation TunnelSnake report
     falsepositives:
-    - None
+    - Unknown
     level: critical
     references:
     - https://securelist.com/operation-tunnelsnake-and-moriya-rootkit/101831

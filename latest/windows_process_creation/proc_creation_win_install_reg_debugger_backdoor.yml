@@ -48,7 +48,7 @@ respond:
     description: Detects the registration of a debugger for a program that is available
       in the logon screen (sticky key backdoor).
     falsepositives:
-    - Penetration Tests
+    - Unknown
     level: high
     references:
     - https://blogs.technet.microsoft.com/jonathantrull/2016/10/03/detecting-sticky-key-backdoors/

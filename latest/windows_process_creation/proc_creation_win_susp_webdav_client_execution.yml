@@ -24,7 +24,7 @@ respond:
       indicator of exfiltration or use of WebDav to launch code (hosted on WebDav
       Server).
     falsepositives:
-    - unknown
+    - Unknown
     level: medium
     references:
     - https://github.com/OTRF/detection-hackathon-apt29/issues/17

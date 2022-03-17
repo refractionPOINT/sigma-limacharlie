@@ -70,7 +70,7 @@ respond:
     description: Detects different loaders as described in various threat reports
       on Lazarus group activity
     falsepositives:
-    - unknown
+    - Unknown
     level: critical
     references:
     - https://www.hvs-consulting.de/lazarus-report/

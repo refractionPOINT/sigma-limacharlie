@@ -30,7 +30,7 @@ respond:
     description: This method detects a suspicious PowerShell command line combination
       as used by APT29 in a campaign against U.S. think tanks.
     falsepositives:
-    - unknown
+    - Unknown
     level: critical
     references:
     - https://www.microsoft.com/security/blog/2018/12/03/analysis-of-cyberattack-on-u-s-think-tanks-non-profits-public-sector-by-unidentified-attackers/

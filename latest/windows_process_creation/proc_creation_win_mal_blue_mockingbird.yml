@@ -37,7 +37,7 @@ respond:
     author: Trent Liffick (@tliffick)
     description: Attempts to detect system changes made by Blue Mockingbird
     falsepositives:
-    - unknown
+    - Unknown
     level: high
     references:
     - https://redcanary.com/blog/blue-mockingbird-cryptominer/

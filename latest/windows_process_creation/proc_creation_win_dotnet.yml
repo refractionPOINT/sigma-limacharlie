@@ -28,7 +28,6 @@ respond:
     description: dotnet.exe will execute any DLL and execute unsigned code
     falsepositives:
     - System administrator Usage
-    - Penetration test
     level: medium
     references:
     - https://github.com/LOLBAS-Project/LOLBAS/blob/master/yml/OtherMSBinaries/Dotnet.yml

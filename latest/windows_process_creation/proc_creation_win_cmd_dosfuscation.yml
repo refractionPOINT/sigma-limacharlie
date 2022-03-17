@@ -37,7 +37,7 @@ respond:
     author: frack113
     description: Posssible Payload Obfuscation
     falsepositives:
-    - legitimate use
+    - Legitimate use
     level: medium
     references:
     - https://www.fireeye.com/content/dam/fireeye-www/blog/pdfs/dosfuscation-report.pdf

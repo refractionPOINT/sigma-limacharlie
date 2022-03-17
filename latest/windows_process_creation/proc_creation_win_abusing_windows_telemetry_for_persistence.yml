@@ -25,7 +25,7 @@ respond:
       registry to instruct on which commands to run. The problem is, it will run any
       arbitrary command without restriction of location or type.
     falsepositives:
-    - none
+    - Unknown
     level: high
     references:
     - https://www.trustedsec.com/blog/abusing-windows-telemetry-for-persistence/

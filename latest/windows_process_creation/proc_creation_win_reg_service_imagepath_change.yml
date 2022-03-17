@@ -47,7 +47,7 @@ respond:
 
       '
     falsepositives:
-    - unknown
+    - Unknown
     level: medium
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1574.011/T1574.011.md#atomic-test-2---service-imagepath-change-with-regexe

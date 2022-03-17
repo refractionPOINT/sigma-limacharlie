@@ -35,7 +35,7 @@ respond:
     author: Timur Zinniatullin, oscd.community
     description: Detects Obfuscated Powershell via COMPRESS OBFUSCATION
     falsepositives:
-    - unknown
+    - Unknown
     level: medium
     references:
     - https://github.com/Neo23x0/sigma/issues/1009

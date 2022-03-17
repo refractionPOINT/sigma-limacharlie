@@ -50,7 +50,7 @@ respond:
     description: Detects svchost hosting RDP termsvcs communicating with the loopback
       address
     falsepositives:
-    - unknown
+    - Unknown
     level: high
     references:
     - https://twitter.com/SBousseaden/status/1096148422984384514

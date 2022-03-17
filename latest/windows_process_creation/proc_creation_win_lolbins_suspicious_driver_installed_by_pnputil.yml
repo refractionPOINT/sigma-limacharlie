@@ -46,7 +46,6 @@ respond:
       changes in your environment.
     - Pnputil.exe being executed from unfamiliar users should be investigated. If
       known behavior is causing false positives, it can be exempted from the rule.
-    - Penetration Testing
     level: medium
     references:
     - https://docs.microsoft.com/en-us/windows-hardware/drivers/devtest/pnputil-command-syntax

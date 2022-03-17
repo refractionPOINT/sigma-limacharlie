@@ -35,7 +35,7 @@ respond:
     author: frack113
     description: Download or Copy file with Extrac32
     falsepositives:
-    - unknown
+    - Unknown
     level: medium
     references:
     - https://lolbas-project.github.io/lolbas/Binaries/Extrac32/

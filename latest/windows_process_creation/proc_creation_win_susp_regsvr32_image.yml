@@ -22,7 +22,7 @@ respond:
     description: utilizes REGSVR32.exe to execute this DLL masquerading as a Image
       file
     falsepositives:
-    - unknown
+    - Unknown
     level: high
     references:
     - https://thedfirreport.com/2021/11/29/continuing-the-bazar-ransomware-story/

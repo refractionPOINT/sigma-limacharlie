@@ -63,7 +63,7 @@ respond:
     author: Sittikorn S
     description: Detects a suspicious child process of Script Event Consumer (scrcons.exe).
     falsepositives:
-    - unknown
+    - Unknown
     level: high
     references:
     - https://redcanary.com/blog/child-processes/

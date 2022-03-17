@@ -61,7 +61,7 @@ respond:
     author: Florian Roth
     description: Detects command line parameters used by Rubeus hack tool
     falsepositives:
-    - unlikely
+    - Unlikely
     level: critical
     references:
     - https://www.harmj0y.net/blog/redteaming/from-kekeo-to-rubeus/

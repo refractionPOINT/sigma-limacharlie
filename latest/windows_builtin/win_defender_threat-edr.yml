@@ -27,7 +27,7 @@ respond:
     author: "J\xE1n Tren\u010Dansk\xFD"
     description: Detects all actions taken by Windows Defender malware detection engines
     falsepositives:
-    - unlikely
+    - Unlikely
     level: high
     references:
     - https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-antivirus/troubleshoot-windows-defender-antivirus

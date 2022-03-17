@@ -21,7 +21,7 @@ respond:
     author: Markus Neis, Jonhnathan Ribeiro, oscd.community
     description: Detects Access to Domain Group Policies stored in SYSVOL
     falsepositives:
-    - administrative activity
+    - Administrative activity
     level: medium
     references:
     - https://adsecurity.org/?p=2288

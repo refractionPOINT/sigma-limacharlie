@@ -33,7 +33,7 @@ respond:
     author: frack113
     description: lolbas Cmdl32 is use to download a payload to evade antivirus
     falsepositives:
-    - unknown
+    - Unknown
     level: medium
     references:
     - https://lolbas-project.github.io/lolbas/Binaries/Cmdl32/

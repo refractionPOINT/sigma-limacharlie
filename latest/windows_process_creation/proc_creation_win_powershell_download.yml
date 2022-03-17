@@ -40,7 +40,7 @@ respond:
     description: Detects a Powershell process that contains download commands in its
       command line string
     falsepositives:
-    - unknown
+    - Unknown
     level: medium
     tags:
     - attack.execution

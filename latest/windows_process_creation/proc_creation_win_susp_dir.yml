@@ -25,7 +25,7 @@ respond:
     author: frack113
     description: Use dir to collect information
     falsepositives:
-    - unknown
+    - Unknown
     level: low
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1217/T1217.md

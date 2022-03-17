@@ -52,7 +52,7 @@ respond:
     description: Detects Judgement Panda activity as described in Global Threat Report
       2019 by Crowdstrike
     falsepositives:
-    - unknown
+    - Unknown
     level: critical
     references:
     - https://www.crowdstrike.com/resources/reports/2019-crowdstrike-global-threat-report/

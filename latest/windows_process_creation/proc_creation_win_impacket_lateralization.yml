@@ -81,7 +81,7 @@ respond:
     author: Ecco, oscd.community, Jonhnathan Ribeiro
     description: Detects wmiexec/dcomexec/atexec/smbexec from Impacket framework
     falsepositives:
-    - pentesters
+    - Unknown
     level: critical
     references:
     - https://github.com/SecureAuthCorp/impacket/blob/master/examples/wmiexec.py

@@ -41,7 +41,7 @@ respond:
       for storage devices. This could be a precursor to a ransomware attack and has
       been an observed technique used by cypherpunk group.
     falsepositives:
-    - none observed
+    - Unknown
     level: medium
     tags:
     - attack.defense_evasion

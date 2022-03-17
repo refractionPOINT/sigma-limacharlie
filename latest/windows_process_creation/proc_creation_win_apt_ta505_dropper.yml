@@ -22,7 +22,7 @@ respond:
     description: Detects mshta loaded by wmiprvse as parent as used by TA505 malicious
       documents
     falsepositives:
-    - unknown
+    - Unknown
     level: critical
     references:
     - https://twitter.com/ForensicITGuy/status/1334734244120309760

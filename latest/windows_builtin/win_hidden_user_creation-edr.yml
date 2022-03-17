@@ -20,7 +20,7 @@ respond:
     description: Detects the creation of a local hidden user account which should
       not happen for event ID 4720.
     falsepositives:
-    - unknown
+    - Unknown
     level: high
     references:
     - https://twitter.com/SBousseaden/status/1387743867663958021

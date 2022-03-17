@@ -23,7 +23,7 @@ respond:
       controllers, domain trusts, parent domain and the current user permissions.
     falsepositives:
     - Red team activity
-    - rare legitimate use by an administrator
+    - Rare legitimate use by an administrator
     level: high
     references:
     - https://jpcertcc.github.io/ToolAnalysisResultSheet/details/nltest.htm

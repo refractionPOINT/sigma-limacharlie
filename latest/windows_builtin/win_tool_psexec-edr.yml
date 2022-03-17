@@ -36,7 +36,7 @@ respond:
     description: Detects PsExec service installation and execution events (service
       and Sysmon)
     falsepositives:
-    - unknown
+    - Unknown
     level: low
     references:
     - https://www.jpcert.or.jp/english/pub/sr/ir_research.html

@@ -47,7 +47,7 @@ respond:
       or from the compromised system they are currently accessing or from remote systems
       by querying for information over the network.
     falsepositives:
-    - unknown
+    - Unknown
     level: low
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1049/T1049.md#atomic-test-1---system-network-connections-discovery

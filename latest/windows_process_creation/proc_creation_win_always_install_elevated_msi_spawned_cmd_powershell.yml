@@ -36,7 +36,7 @@ respond:
     description: This rule looks for Windows Installer service (msiexec.exe) spawned
       command line and/or powershell
     falsepositives:
-    - Penetration test
+    - Unknown
     level: medium
     references:
     - https://image.slidesharecdn.com/kheirkhabarovoffzonefinal-181117201458/95/hunting-for-privilege-escalation-in-windows-environment-50-638.jpg

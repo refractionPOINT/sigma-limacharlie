@@ -15,7 +15,7 @@ respond:
     author: Markus Neis
     description: Detects CrackMapExecWin Activity as Described by NCSC
     falsepositives:
-    - None
+    - Unknown
     level: critical
     references:
     - https://www.ncsc.gov.uk/alerts/hostile-state-actors-compromising-uk-organisations-focus-engineering-and-industrial-control

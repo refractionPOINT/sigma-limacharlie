@@ -26,7 +26,7 @@ respond:
     description: Detects when a user installs certificates by using CertOC.exe to
       loads the target DLL file.
     falsepositives:
-    - None
+    - Unknown
     level: medium
     references:
     - https://twitter.com/sblmsrsn/status/1445758411803480072?s=20

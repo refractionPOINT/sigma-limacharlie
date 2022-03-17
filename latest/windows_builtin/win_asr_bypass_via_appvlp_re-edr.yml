@@ -95,7 +95,7 @@ respond:
 
       '
     falsepositives:
-    - unknown
+    - Unknown
     level: medium
     tags:
     - attack.t1218

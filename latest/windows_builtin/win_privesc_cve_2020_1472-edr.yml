@@ -32,7 +32,7 @@ respond:
       (CVE-2020-1472)
     falsepositives:
     - automatic DC computer account password change
-    - legitimate DC computer account password change
+    - Legitimate DC computer account password change
     level: high
     references:
     - https://portal.msrc.microsoft.com/en-US/security-guidance/advisory/CVE-2020-1472

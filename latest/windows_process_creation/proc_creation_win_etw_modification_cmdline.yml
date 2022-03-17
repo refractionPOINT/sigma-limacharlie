@@ -16,7 +16,7 @@ respond:
     description: Potential adversaries stopping ETW providers recording loaded .NET
       assemblies.
     falsepositives:
-    - unknown
+    - Unknown
     level: critical
     references:
     - https://twitter.com/_xpn_/status/1268712093928378368

@@ -15,7 +15,7 @@ respond:
     author: Tobias Michalski
     description: Detects the Installation of a Exchange Transport Agent
     falsepositives:
-    - legitimate installations of exchange TransportAgents. AssemblyPath is a good
+    - Legitimate installations of exchange TransportAgents. AssemblyPath is a good
       indicator for this.
     level: medium
     references:

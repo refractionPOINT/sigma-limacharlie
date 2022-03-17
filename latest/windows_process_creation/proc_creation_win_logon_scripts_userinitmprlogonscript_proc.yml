@@ -51,8 +51,7 @@ respond:
     description: Detects creation or execution of UserInitMprLogonScript persistence
       method
     falsepositives:
-    - exclude legitimate logon scripts
-    - penetration tests, red teaming
+    - Exclude legitimate logon scripts
     level: high
     references:
     - https://attack.mitre.org/techniques/T1037/

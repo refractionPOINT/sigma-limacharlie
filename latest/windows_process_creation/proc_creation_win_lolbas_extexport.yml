@@ -16,7 +16,7 @@ respond:
     description: Extexport.exe loads dll and is execute from other folder the original
       path
     falsepositives:
-    - unknown
+    - Unknown
     level: medium
     references:
     - https://lolbas-project.github.io/lolbas/Binaries/Extexport/

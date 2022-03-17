@@ -33,7 +33,7 @@ respond:
       Account Manager (SAM) database either through Windows Registry where the SAM
       database is stored
     falsepositives:
-    - Unknow
+    - Unknown
     level: high
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1003.002/T1003.002.md#atomic-test-1---registry-dump-of-sam-creds-and-secrets

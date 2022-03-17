@@ -15,7 +15,7 @@ respond:
     author: frack113
     description: Adversaries may try to get information about registered services
     falsepositives:
-    - unknown
+    - Unknown
     level: low
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1007/T1007.md#atomic-test-1---system-service-discovery

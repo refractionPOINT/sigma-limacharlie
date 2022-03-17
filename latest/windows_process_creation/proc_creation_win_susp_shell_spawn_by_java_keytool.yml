@@ -100,7 +100,7 @@ respond:
     description: Detects suspicious shell spawn from Java utility keytool process
       (e.g. adselfservice plus exploitation)
     falsepositives:
-    - unknown
+    - Unknown
     level: high
     references:
     - https://redcanary.com/blog/intelligence-insights-december-2021

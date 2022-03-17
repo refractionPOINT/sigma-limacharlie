@@ -52,7 +52,7 @@ respond:
     description: Detects Windows Pcap driver installation based on a list of associated
       .sys files.
     falsepositives:
-    - unknown
+    - Unknown
     level: medium
     references:
     - https://ragged-lab.blogspot.com/2020/06/capturing-pcap-driver-installations.html#more

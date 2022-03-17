@@ -46,7 +46,7 @@ respond:
     description: Detects artefacts associated with activity group GALLIUM - Microsoft
       Threat Intelligence Center indicators released in December 2019.
     falsepositives:
-    - unknown
+    - Unknown
     level: high
     references:
     - https://www.microsoft.com/security/blog/2019/12/12/gallium-targeting-global-telecom/

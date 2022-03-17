@@ -21,7 +21,7 @@ respond:
     author: frack113
     description: Replace.exe is used to replace file with another file
     falsepositives:
-    - unknown
+    - Unknown
     level: medium
     references:
     - https://lolbas-project.github.io/lolbas/Binaries/Replace/

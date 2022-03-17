@@ -43,7 +43,7 @@ respond:
       discover or analyze by encrypting, encoding, or otherwise obfuscating its contents
       on the system or in transit.
     falsepositives:
-    - unknown
+    - Unknown
     level: high
     references:
     - https://www.wietzebeukema.nl/blog/windows-command-line-obfuscation

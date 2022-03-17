@@ -48,7 +48,7 @@ respond:
       selection that could indicate a defense evasion activity in which format.com
       is used to load malicious DLL files or other programs
     falsepositives:
-    - unknown
+    - Unknown
     level: high
     references:
     - https://twitter.com/0gtweet/status/1477925112561209344

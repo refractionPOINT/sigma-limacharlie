@@ -21,7 +21,7 @@ respond:
     author: E.M. Anhaus (originally from Atomic Blue Detections, Dan Beavin), oscd.community
     description: Identifies usage of hh.exe executing recently modified .chm files.
     falsepositives:
-    - unlike
+    - Unlikely
     level: high
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1218.001/T1218.001.md

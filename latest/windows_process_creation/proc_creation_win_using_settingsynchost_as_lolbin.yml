@@ -38,7 +38,7 @@ respond:
     author: Anton Kutepov, oscd.community
     description: Detects using SettingSyncHost.exe to run hijacked binary
     falsepositives:
-    - unknown
+    - Unknown
     level: high
     references:
     - https://www.hexacorn.com/blog/2020/02/02/settingsynchost-exe-as-a-lolbin

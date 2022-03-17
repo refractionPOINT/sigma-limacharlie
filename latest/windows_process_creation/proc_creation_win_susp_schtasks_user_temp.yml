@@ -38,7 +38,7 @@ respond:
     author: frack113
     description: schtasks.exe create task from user AppData\Local\Temp
     falsepositives:
-    - unknown
+    - Unknown
     level: high
     references:
     - malware analyse https://www.joesandbox.com/analysis/514608/0/html#324415FF7D8324231381BAD48A052F85DF04

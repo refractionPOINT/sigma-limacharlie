@@ -23,7 +23,7 @@ respond:
       on a system. Information obtained could be used to gain an understanding of
       common software/applications running on systems within the network
     falsepositives:
-    - administrator, hotline ask to user
+    - Administrator, hotline ask to user
     level: low
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1057/T1057.md#atomic-test-2---process-discovery---tasklist

@@ -160,7 +160,7 @@ respond:
     description: Detects certain command line parameters often used during reconnaissance
       activity via web shells
     falsepositives:
-    - unknown
+    - Unknown
     level: high
     references:
     - https://www.fireeye.com/blog/threat-research/2013/08/breaking-down-the-china-chopper-web-shell-part-ii.html

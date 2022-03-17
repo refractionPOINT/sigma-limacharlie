@@ -54,7 +54,7 @@ respond:
     description: Potential threat actor tampering with Sysmon manifest and eventually
       disabling it
     falsepositives:
-    - unknown
+    - Unknown
     level: critical
     references:
     - https://twitter.com/Flangvik/status/1283054508084473861

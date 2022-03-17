@@ -19,7 +19,7 @@ respond:
     author: Bhabesh Raj
     description: Detects triggering of AMSI by Windows Defender.
     falsepositives:
-    - unlikely
+    - Unlikely
     level: high
     references:
     - https://docs.microsoft.com/en-us/windows/win32/amsi/how-amsi-helps

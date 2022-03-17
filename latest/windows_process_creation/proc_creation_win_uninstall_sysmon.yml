@@ -28,7 +28,7 @@ respond:
     description: Detects the uninstallation of Sysinternals Sysmon, which could be
       the result of legitimate administration or a manipulation for defense evasion
     falsepositives:
-    - unknown
+    - Unknown
     level: high
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1562.001/T1562.001.md#atomic-test-11---uninstall-sysmon

@@ -34,7 +34,7 @@ respond:
     description: Detects wceaux.dll access while WCE pass-the-hash remote command
       execution on source host
     falsepositives:
-    - Penetration testing
+    - Unknown
     level: critical
     references:
     - https://www.jpcert.or.jp/english/pub/sr/ir_research.html

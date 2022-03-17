@@ -216,7 +216,7 @@ respond:
     description: Detects base64 encoded strings used in hidden malicious PowerShell
       command lines
     falsepositives:
-    - Penetration tests
+    - Unknown
     level: high
     references:
     - http://www.leeholmes.com/blog/2017/09/21/searching-for-content-in-base-64-strings/

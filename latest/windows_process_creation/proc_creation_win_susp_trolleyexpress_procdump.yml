@@ -60,7 +60,7 @@ respond:
     description: Detects a possible process memory dump that uses the white-listed
       Citrix TrolleyExpress.exe filename as a way to dump the lsass process memory
     falsepositives:
-    - unknown
+    - Unknown
     level: high
     references:
     - https://twitter.com/_xpn_/status/1491557187168178176

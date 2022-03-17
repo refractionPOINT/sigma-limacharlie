@@ -26,7 +26,6 @@ respond:
     description: Detects the use of smbexec.py tool by detecting a specific service
       installation
     falsepositives:
-    - Penetration Test
     - Unknown
     level: critical
     references:

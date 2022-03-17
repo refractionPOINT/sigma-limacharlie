@@ -22,7 +22,7 @@ respond:
     author: Ecco
     description: Detects some Empire PowerShell UAC bypass methods
     falsepositives:
-    - unknown
+    - Unknown
     level: critical
     references:
     - https://github.com/EmpireProject/Empire/blob/e37fb2eef8ff8f5a0a689f1589f424906fe13055/data/module_source/privesc/Invoke-EventVwrBypass.ps1#L64

@@ -27,7 +27,7 @@ respond:
       data from Internet Explorer and Microsoft Edge by using the built-in utility
       esentutl.exe
     falsepositives:
-    - legitimate use
+    - Legitimate use
     level: medium
     references:
     - https://thedfirreport.com/2022/02/07/qbot-likes-to-move-it-move-it/

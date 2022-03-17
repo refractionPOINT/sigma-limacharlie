@@ -30,7 +30,7 @@ respond:
 
       '
     falsepositives:
-    - unknown
+    - Unknown
     level: low
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1069.001/T1069.001.md

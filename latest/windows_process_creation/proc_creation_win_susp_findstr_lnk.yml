@@ -22,7 +22,7 @@ respond:
     description: Detects usage of findstr to identify and execute a lnk file as seen
       within the HHS redirect attack
     falsepositives:
-    - unknown
+    - Unknown
     level: medium
     references:
     - https://www.bleepingcomputer.com/news/security/hhsgov-open-redirect-used-by-coronavirus-phishing-to-spread-malware/

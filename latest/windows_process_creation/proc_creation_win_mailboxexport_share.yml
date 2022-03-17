@@ -26,7 +26,7 @@ respond:
     description: Detects a PowerShell New-MailboxExportRequest that exports a mailbox
       to a local share, as used in ProxyShell exploitations
     falsepositives:
-    - unknown
+    - Unknown
     level: critical
     references:
     - https://youtu.be/5mqid-7zp8k?t=2481

@@ -37,7 +37,7 @@ respond:
     author: frack113
     description: suspicious command line to remove exe or dll
     falsepositives:
-    - unknown
+    - Unknown
     level: medium
     references:
     - https://www.joesandbox.com/analysis/509330/0/html#1044F3BDBE3BB6F734E357235F4D5898582D

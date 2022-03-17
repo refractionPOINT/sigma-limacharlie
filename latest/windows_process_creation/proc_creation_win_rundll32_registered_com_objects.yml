@@ -35,7 +35,7 @@ respond:
     author: frack113
     description: load malicious registered COM objects
     falsepositives:
-    - legitimate use
+    - Legitimate use
     level: high
     references:
     - https://nasbench.medium.com/a-deep-dive-into-rundll32-exe-642344b41e90

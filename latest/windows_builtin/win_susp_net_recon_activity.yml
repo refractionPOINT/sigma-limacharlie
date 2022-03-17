@@ -44,7 +44,6 @@ respond:
       domain admins /domain"
     falsepositives:
     - Administrator activity
-    - Penetration tests
     level: high
     references:
     - https://findingbad.blogspot.de/2017/01/hunting-what-does-it-look-like.html

@@ -29,7 +29,7 @@ respond:
     author: wagga, Jonhnathan Ribeiro, oscd.community
     description: Detects command line parameters used by Koadic hack tool
     falsepositives:
-    - Pentest
+    - Unknown
     level: high
     references:
     - https://unit42.paloaltonetworks.com/unit42-sofacy-groups-parallel-attacks/

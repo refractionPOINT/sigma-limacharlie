@@ -22,7 +22,7 @@ respond:
     author: Florian Roth
     description: Detects UAC bypass method using Windows event viewer
     falsepositives:
-    - unknown
+    - Unknown
     level: critical
     references:
     - https://enigma0x3.net/2016/08/15/fileless-uac-bypass-using-eventvwr-exe-and-registry-hijacking/

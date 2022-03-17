@@ -114,7 +114,7 @@ respond:
     description: Detects a base64 encoded IEX command string in a process command
       line
     falsepositives:
-    - unknown
+    - Unknown
     level: critical
     tags:
     - attack.execution

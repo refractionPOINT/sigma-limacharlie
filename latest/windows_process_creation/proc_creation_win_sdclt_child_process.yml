@@ -16,7 +16,7 @@ respond:
     description: A General detection for sdclt spawning new processes. This could
       be an indicator of sdclt being used for bypass UAC techniques.
     falsepositives:
-    - unknown
+    - Unknown
     level: medium
     references:
     - https://github.com/OTRF/detection-hackathon-apt29/issues/6

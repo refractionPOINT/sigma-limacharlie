@@ -37,7 +37,7 @@ respond:
     author: frack113
     description: Windows Update get some error Check if need a 0-days KB
     falsepositives:
-    - unknown
+    - Unknown
     level: low
     tags:
     - attack.impact

@@ -23,7 +23,7 @@ respond:
       privileges in an active directory network by coercing authenticate from machine
       accounts and relaying to the certificate service
     falsepositives:
-    - unlikely
+    - Unlikely
     level: critical
     references:
     - https://github.com/bats3c/ADCSPwn

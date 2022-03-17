@@ -48,7 +48,7 @@ respond:
     description: Detects a suspicious child process of a Microsoft HTML Help system
       when executing compiled HTML files (.chm)
     falsepositives:
-    - unknown
+    - Unknown
     level: high
     references:
     - https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/chm-badness-delivers-a-banking-trojan/

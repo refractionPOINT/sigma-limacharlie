@@ -43,7 +43,7 @@ respond:
 
       '
     falsepositives:
-    - unknown
+    - Unknown
     level: high
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1490/T1490.md#atomic-test-5---windows---delete-volume-shadow-copies-via-wmi-with-powershell

@@ -35,7 +35,7 @@ respond:
     author: Austin Songer @austinsonger
     description: Detects when the registration of a VSS/VDS Provider as a COM+ application.
     falsepositives:
-    - None
+    - Unknown
     level: medium
     references:
     - https://twitter.com/sblmsrsn/status/1456613494783160325?s=20

@@ -72,7 +72,7 @@ respond:
     description: Threat actors performed dumping of SAM, SECURITY and SYSTEM registry
       hives using DelegateExecute key
     falsepositives:
-    - unknown
+    - Unknown
     level: medium
     references:
     - https://thedfirreport.com/2021/12/13/diavol-ransomware/

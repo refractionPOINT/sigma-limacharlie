@@ -42,7 +42,7 @@ respond:
     description: Detects a base64 encoded FromBase64String keyword in a process command
       line
     falsepositives:
-    - unknown
+    - Unknown
     level: critical
     tags:
     - attack.defense_evasion

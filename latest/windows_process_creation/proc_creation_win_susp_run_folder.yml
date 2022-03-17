@@ -39,7 +39,7 @@ respond:
     description: Detects process start from rare or uncommon folders like temporary
       folder or folders that usually don't contain executable files
     falsepositives:
-    - unknown
+    - Unknown
     level: low
     references:
     - Malware sandbox results

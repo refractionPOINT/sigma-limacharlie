@@ -16,7 +16,7 @@ respond:
     description: Payloads may be compressed, archived, or encrypted in order to avoid
       detection
     falsepositives:
-    - unknown
+    - Unknown
     level: medium
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1027/T1027.md#atomic-test-4---execution-from-compressed-file

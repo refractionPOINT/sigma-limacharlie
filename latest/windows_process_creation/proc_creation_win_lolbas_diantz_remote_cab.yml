@@ -26,7 +26,7 @@ respond:
     description: Download and compress a remote file and store it in a cab file on
       local machine.
     falsepositives:
-    - unknown
+    - Unknown
     level: medium
     references:
     - https://lolbas-project.github.io/lolbas/Binaries/Diantz/

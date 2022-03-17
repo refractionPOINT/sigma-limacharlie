@@ -54,7 +54,6 @@ respond:
       laterally inside the network
     falsepositives:
     - Administrator activity
-    - Penetration tests
     level: medium
     references:
     - https://github.com/iadgov/Event-Forwarding-Guidance/tree/master/Events
