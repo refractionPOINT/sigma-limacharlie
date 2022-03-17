@@ -7,22 +7,29 @@ detect:
   - op: is windows
   - op: and
     rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: cmd
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: /c
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /../../
     - case sensitive: false
-      op: contains
-      path: event/PARENT/COMMAND_LINE
-      value: cmd
-    - case sensitive: false
-      op: contains
-      path: event/PARENT/COMMAND_LINE
-      value: /c
-    - case sensitive: false
+      not: true
       op: contains
       path: event/COMMAND_LINE
-      value: /../../
+      value: \Tasktop\keycloak\bin\/../../jre\bin\java
 respond:
 - action: report
   metadata:
-    author: xknow @xknow_infosec
+    author: xknow @xknow_infosec, Tim Shelton
     description: detects the usage of path traversal in cmd.exe indicating possible
       command/argument confusion/hijacking
     falsepositives:
