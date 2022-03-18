@@ -1,0 +1,103 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \reg.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' add '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \SYSTEM\CurrentControlSet\Control\Terminal Server
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: REG_DWORD
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /f'
+    - op: or
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: Licensing Core
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: EnableConcurrentSessions
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: WinStations\RDP-Tcp
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: MaxInstanceCount
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: fEnableWinStation
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: TSUserEnabled
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: TSEnabled
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: TSAppCompat
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: IdleWinStationPoolCount
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: TSAdvertise
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: AllowTSConnections
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: fSingleSessionPerUser
+respond:
+- action: report
+  metadata:
+    author: '@Kostastsale, @TheDFIRReport, slightly modified by pH-T'
+    description: Detects the execution of reg.exe and subsequent command line arguments
+      for enabling RDP service on the host
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://thedfirreport.com/2022/02/21/qbot-and-zerologon-lead-to-full-domain-compromise/
+    tags:
+    - attack.defense_evasion
+    - attack.lateral_movement
+    - attack.t1021.001
+    - attack.t1112
+  name: Enabling RDP Service via Reg.exe
+
