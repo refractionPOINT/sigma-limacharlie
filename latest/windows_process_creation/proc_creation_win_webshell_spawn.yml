@@ -9,34 +9,84 @@ detect:
     rules:
     - op: or
       rules:
-      - case sensitive: false
-        op: ends with
-        path: event/PARENT/FILE_PATH
-        value: \w3wp.exe
-      - case sensitive: false
-        op: ends with
-        path: event/PARENT/FILE_PATH
-        value: \httpd.exe
-      - case sensitive: false
-        op: ends with
-        path: event/PARENT/FILE_PATH
-        value: \nginx.exe
-      - case sensitive: false
-        op: ends with
-        path: event/PARENT/FILE_PATH
-        value: \php-cgi.exe
-      - case sensitive: false
-        op: ends with
-        path: event/PARENT/FILE_PATH
-        value: \tomcat.exe
-      - case sensitive: false
-        op: ends with
-        path: event/PARENT/FILE_PATH
-        value: \UMWorkerProcess.exe
-      - case sensitive: false
-        op: ends with
-        path: event/PARENT/FILE_PATH
-        value: \ws_TomcatService.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \w3wp.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \php-cgi.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \nginx.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \httpd.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \caddy.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \ws_TomcatService.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \tomcat.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \UMWorkerProcess.exe
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \java.exe
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \javaw.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/FILE_PATH
+            value: -tomcat-
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/FILE_PATH
+            value: \tomcat
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \java.exe
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \javaw.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: catalina.jar
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: CATALINA_HOME
     - op: or
       rules:
       - case sensitive: false
@@ -62,7 +112,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Thomas Patzke
+    author: Thomas Patzke, Florian Roth
     description: Web servers that spawn shell processes could be the result of a successfully
       placed web shell or an other attack
     falsepositives:

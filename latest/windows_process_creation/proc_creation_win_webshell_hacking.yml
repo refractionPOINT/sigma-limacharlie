@@ -83,94 +83,82 @@ detect:
       rules:
       - op: and
         rules:
-        - op: or
-          rules:
-          - case sensitive: false
-            op: ends with
-            path: event/FILE_PATH
-            value: \net.exe
-          - case sensitive: false
-            op: ends with
-            path: event/FILE_PATH
-            value: \net1.exe
-        - op: or
-          rules:
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: ' user '
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: ' use '
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: ' group '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: rundll32
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: comsvcs.dll
       - op: and
         rules:
         - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \ping.exe
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -hp'
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: ' -n '
-      - op: or
-        rules:
+          value: ' a '
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: '&cd&echo'
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: 'cd /d '
+          value: ' -m'
       - op: and
         rules:
         - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \wmic.exe
+          op: contains
+          path: event/COMMAND_LINE
+          value: net
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: ' /node:'
+          value: ' user '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /add'
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: net
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' localgroup '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' administrators '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /add
       - op: or
         rules:
         - case sensitive: false
           op: ends with
           path: event/FILE_PATH
-          value: \whoami.exe
+          value: \ntdsutil.exe
         - case sensitive: false
           op: ends with
           path: event/FILE_PATH
-          value: \systeminfo.exe
+          value: \ldifde.exe
         - case sensitive: false
           op: ends with
           path: event/FILE_PATH
-          value: \quser.exe
+          value: \adfind.exe
         - case sensitive: false
           op: ends with
           path: event/FILE_PATH
-          value: \ipconfig.exe
+          value: \procdump.exe
         - case sensitive: false
           op: ends with
           path: event/FILE_PATH
-          value: \pathping.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \tracert.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \netstat.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \schtasks.exe
+          value: \Nanodump.exe
         - case sensitive: false
           op: ends with
           path: event/FILE_PATH
@@ -178,38 +166,78 @@ detect:
         - case sensitive: false
           op: ends with
           path: event/FILE_PATH
-          value: \wevtutil.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \tasklist.exe
+          value: \fsutil.exe
       - op: or
         rules:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: ' Test-NetConnection '
+          value: ' -NoP '
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: dir \
+          value: ' -W Hidden '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -decode '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /decode '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'reg save '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .downloadstring(
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .downloadfile(
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: FromBase64String
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /ticket:'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' sekurlsa'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .dmp full
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: process call create
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: whoami /priv
 respond:
 - action: report
   metadata:
-    author: Florian Roth, Jonhnathan Ribeiro, Anton Kutepov, oscd.community
-    description: Detects certain command line parameters often used during reconnaissance
-      activity via web shells
+    author: Florian Roth
+    description: Detects certain parent child patterns found in cases in which a webshell
+      is used to perform certain credential dumping or exfiltration activities on
+      a compromised system
     falsepositives:
-    - Unknown
+    - Unlikely
     level: high
     references:
-    - https://www.fireeye.com/blog/threat-research/2013/08/breaking-down-the-china-chopper-web-shell-part-ii.html
-    - https://unit42.paloaltonetworks.com/bumblebee-webshell-xhunt-campaign/
+    - https://youtu.be/7aemGhaE9ds?t=641
     tags:
     - attack.persistence
     - attack.t1505.003
     - attack.t1018
     - attack.t1033
     - attack.t1087
-  name: Webshell Detection With Command Line Keywords
+  name: Webshell Hacking Activity Patterns
 
