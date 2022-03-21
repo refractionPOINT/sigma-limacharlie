@@ -9,6 +9,10 @@ detect:
       rules:
       - case sensitive: false
         op: is
+        path: event/EVENT/EventData/Provider_Name
+        value: Service Control Manager
+      - case sensitive: false
+        op: is
         path: event/EVENT/System/EventID
         value: '7045'
       - case sensitive: false
@@ -17,7 +21,7 @@ detect:
         value: PSEXESVC
       - case sensitive: false
         op: ends with
-        path: event/EVENT/EventData/ServiceFileName
+        path: event/EVENT/EventData/ImagePath
         value: \PSEXESVC.exe
     - op: and
       rules:

@@ -19,7 +19,7 @@ detect:
       value: BTOBTO
     - case sensitive: false
       op: ends with
-      path: event/EVENT/EventData/ServiceFileName
+      path: event/EVENT/EventData/ImagePath
       value: \execute.bat
 respond:
 - action: report
