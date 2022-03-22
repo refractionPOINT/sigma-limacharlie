@@ -19,7 +19,7 @@ detect:
       value: NtsSrv
     - case sensitive: false
       op: ends with
-      path: event/EVENT/EventData/ServiceFileName
+      path: event/EVENT/EventData/ImagePath
       value: ' LocalService'
 respond:
 - action: report

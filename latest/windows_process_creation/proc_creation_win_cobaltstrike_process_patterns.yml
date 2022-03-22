@@ -76,7 +76,8 @@ respond:
   metadata:
     author: Florian Roth
     description: Detects process patterns found in Cobalt Strike beacon activity (see
-      reference for more details)
+      reference for more details) and also cases in which a China Chopper like webshell
+      is used to run whoami
     falsepositives:
     - Other programs that cause these patterns (please report)
     level: high
