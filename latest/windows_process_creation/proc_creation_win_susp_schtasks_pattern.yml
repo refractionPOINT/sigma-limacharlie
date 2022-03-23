@@ -41,60 +41,68 @@ detect:
             op: contains
             path: event/COMMAND_LINE
             value: cmd /c
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: ' -w hidden '
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: ' bypass '
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: ' IEX'
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: ' -enc '
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: ' -decode '
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: .DownloadString
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: .DownloadFile
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: FromBase64String
       - op: or
         rules:
-        - op: and
-          rules:
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: /xml C:\Users\
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: \AppData\Local\
-        - op: and
-          rules:
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: wscript.exe
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: \AppData\
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' bypass '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .DownloadString
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .DownloadFile
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: FromBase64String
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -w hidden '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' IEX'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -enc '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -decode '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '/c start /min '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' curl '
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /xml C:\Users\
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \AppData\Local\
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: wscript.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \AppData\
 respond:
 - action: report
   metadata:
