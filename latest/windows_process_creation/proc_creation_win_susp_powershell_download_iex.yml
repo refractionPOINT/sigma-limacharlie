@@ -42,6 +42,14 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: ' | IEX'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '|IEX '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: Invoke-Execution
       - case sensitive: false
         op: contains
