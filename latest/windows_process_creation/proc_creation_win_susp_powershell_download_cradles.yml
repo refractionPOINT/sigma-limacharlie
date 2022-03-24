@@ -1,0 +1,29 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: .DownloadString(
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: .DownloadFile(
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects suspicious ways to download files or content using PowerShell
+    falsepositives:
+    - Scripts or tools that download files
+    level: medium
+    references:
+    - https://github.com/VirtualAlllocEx/Payload-Download-Cradles/blob/main/Download-Cradles.cmd
+  name: PowerShell Web Download
+

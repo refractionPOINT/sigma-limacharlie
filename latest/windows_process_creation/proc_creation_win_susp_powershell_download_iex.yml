@@ -1,0 +1,61 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .DownloadString(
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .DownloadFile(
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: IEX(
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: IEX (
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: I`EX
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: IE`X
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: I`E`X
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Invoke-Execution
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ;iex $
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects suspicious ways to download files or content using PowerShell
+    falsepositives:
+    - Scripts or tools that download files and execute them
+    level: high
+    references:
+    - https://github.com/VirtualAlllocEx/Payload-Download-Cradles/blob/main/Download-Cradles.cmd
+  name: PowerShell Web Download and Execution
+
