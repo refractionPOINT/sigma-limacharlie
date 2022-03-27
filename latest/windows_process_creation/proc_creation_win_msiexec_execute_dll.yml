@@ -36,6 +36,10 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: \MsiExec.exe" /Y "C:\Program Files (x86)\Apple Software Update\SoftwareUpdateAdmin.dll
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \MsiExec.exe" /Y "C:\Windows\CCM\
 respond:
 - action: report
   metadata:
