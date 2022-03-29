@@ -14,10 +14,6 @@ detect:
     op: is
     path: Event/System/EventID
     value: '2008'
-  - case sensitive: false
-    op: is
-    path: Event/System/EventID
-    value: '2010'
   target: log
 respond:
 - action: report

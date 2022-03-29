@@ -17,10 +17,6 @@ detect:
       op: is
       path: event/EVENT/System/EventID
       value: '2008'
-    - case sensitive: false
-      op: is
-      path: event/EVENT/System/EventID
-      value: '2010'
 respond:
 - action: report
   metadata:
