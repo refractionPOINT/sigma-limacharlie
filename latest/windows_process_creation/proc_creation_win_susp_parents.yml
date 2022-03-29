@@ -52,26 +52,31 @@ detect:
       - not: true
         op: or
         rules:
-        - case sensitive: false
-          op: ends with
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \WerFault.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \wermgr.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \conhost.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \mmc.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \win32calc.exe
+        - not: true
+          op: exists
           path: event/FILE_PATH
-          value: \WerFault.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \wermgr.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \conhost.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \mmc.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \win32calc.exe
 respond:
 - action: report
   metadata:
