@@ -11,23 +11,23 @@ detect:
       rules:
       - case sensitive: false
         op: contains
-        path: event/PARENT/COMMAND_LINE
+        path: event/COMMAND_LINE
         value: regsvr32
       - case sensitive: false
         op: contains
-        path: event/PARENT/COMMAND_LINE
+        path: event/COMMAND_LINE
         value: rundll32
       - case sensitive: false
         op: contains
-        path: event/PARENT/COMMAND_LINE
+        path: event/COMMAND_LINE
         value: msiexec
       - case sensitive: false
         op: contains
-        path: event/PARENT/COMMAND_LINE
+        path: event/COMMAND_LINE
         value: mshta
       - case sensitive: false
         op: contains
-        path: event/PARENT/COMMAND_LINE
+        path: event/COMMAND_LINE
         value: verclsid
     - op: or
       rules:
@@ -37,7 +37,7 @@ detect:
         value: \wbem\WMIC.exe
       - case sensitive: false
         op: contains
-        path: event/PARENT/COMMAND_LINE
+        path: event/COMMAND_LINE
         value: 'wmic '
     - op: or
       rules:
@@ -55,15 +55,15 @@ detect:
         value: powerpnt.exe
     - case sensitive: false
       op: contains
-      path: event/PARENT/COMMAND_LINE
+      path: event/COMMAND_LINE
       value: process
     - case sensitive: false
       op: contains
-      path: event/PARENT/COMMAND_LINE
+      path: event/COMMAND_LINE
       value: create
     - case sensitive: false
       op: contains
-      path: event/PARENT/COMMAND_LINE
+      path: event/COMMAND_LINE
       value: call
 respond:
 - action: report

@@ -37,7 +37,7 @@ respond:
     author: frack113
     description: Conti ransomware command line ioc
     falsepositives:
-    - Unknown should be low
+    - Unlikely
     level: critical
     references:
     - https://news.sophos.com/en-us/2021/09/03/conti-affiliates-use-proxyshell-exchange-exploit-in-ransomware-attacks/
