@@ -9,21 +9,38 @@ detect:
     rules:
     - op: and
       rules:
-      - case sensitive: false
-        op: ends with
-        path: event/COMMAND_LINE
-        value: .cpl
+      - op: and
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/COMMAND_LINE
+          value: .cpl
+        - not: true
+          op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \System32\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '%System%'
       - not: true
-        op: or
+        op: and
         rules:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: \System32\
+          value: 'regsvr32 '
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: '%System%'
+          value: ' /s '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: igfxCPL.cpl
     - op: and
       rules:
       - case sensitive: false
