@@ -65,5 +65,7 @@ respond:
     level: high
     references:
     - https://github.com/VirtualAlllocEx/Payload-Download-Cradles/blob/main/Download-Cradles.cmd
+    tags:
+    - attack.t1546.013
   name: PowerShell Web Download and Execution
 
