@@ -30,5 +30,5 @@ respond:
     tags:
     - attack.defense_evasion
     - attack.t1036
-  name: New or Renamed User Account with '$' in Attribute 'SamAccountName'.
+  name: New or Renamed User Account with '$' in Attribute 'SamAccountName'
 

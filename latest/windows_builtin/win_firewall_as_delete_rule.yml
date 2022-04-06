@@ -38,5 +38,5 @@ respond:
     level: medium
     references:
     - https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-r2-and-2008/dd364427(v=ws.10)
-  name: Deteled Rule in Windows Firewall with Advanced Security
+  name: Delete Rule in Windows Firewall with Advanced Security
 

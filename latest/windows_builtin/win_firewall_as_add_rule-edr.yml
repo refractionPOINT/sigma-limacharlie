@@ -29,6 +29,10 @@ detect:
             path: event/EVENT/EventData/ApplicationPath
             value: C:\Program Files (x86)\
         - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/ModifyingApplication
+          value: C:\Windows\System32\oobe\Setup.exe
+        - case sensitive: false
           op: starts with
           path: event/EVENT/EventData/ModifyingApplication
           value: C:\Windows\WinSxS\

@@ -19,6 +19,10 @@ detect:
         op: is
         path: Event/EventData/ProcessName
         value: C:\Windows\System32\VBoxService.exe
+      - case sensitive: false
+        op: is
+        path: Event/EventData/ProcessName
+        value: C:\Windows\System32\oobe\msoobe.exe
     - op: and
       rules:
       - case sensitive: false
