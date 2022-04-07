@@ -49,6 +49,10 @@ detect:
           - case sensitive: false
             op: is
             path: event/EVENT/EventData/ModifyingApplication
+            value: C:\Windows\System32\dllhost.exe
+          - case sensitive: false
+            op: is
+            path: event/EVENT/EventData/ModifyingApplication
             value: C:\Program Files\Windows Defender\MsMpEng.exe
 respond:
 - action: report
