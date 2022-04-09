@@ -1,0 +1,33 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \VaultCmd.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: '/listcreds:'
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: List credentials currently stored in Windows Credential Manager via
+      the native Windows utility vaultcmd.exe
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1555.004/T1555.004.md#atomic-test-1---access-saved-credentials-via-vaultcmd
+    tags:
+    - attack.credential_access
+    - attack.t1555.004
+  name: Windows Credential Manager Access via VaultCmd
+
