@@ -46,6 +46,6 @@ respond:
     tags:
     - attack.defense_evasion
     - attack.execution
-    - attack.t1218.011
+    - attack.t1218
   name: Monitoring Wuauclt.exe For Lolbas Execution Of DLL
 

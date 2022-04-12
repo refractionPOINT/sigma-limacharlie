@@ -40,7 +40,7 @@ respond:
     references:
     - https://lolbas-project.github.io/lolbas/Binaries/Extrac32/
     tags:
-    - attack.defense_evasion
-    - attack.t1564.004
+    - attack.command_and_control
+    - attack.t1105
   name: Suspicious Extrac32 Execution
 
