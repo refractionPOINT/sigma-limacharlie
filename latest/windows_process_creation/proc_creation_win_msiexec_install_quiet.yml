@@ -31,7 +31,7 @@ respond:
 
       '
     falsepositives:
-    - Legitim script
+    - Legitimate script
     level: low
     references:
     - https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/msiexec
