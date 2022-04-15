@@ -1,5 +1,7 @@
 detect:
-  event: WEL
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
   op: and
   rules:
   - op: is windows
@@ -7,12 +9,12 @@ detect:
     rules:
     - case sensitive: false
       op: contains
-      path: event/EVENT/EventData/CommandLine
+      path: event/COMMAND_LINE
       value: .SettingContent-ms
     - case sensitive: false
       not: true
       op: contains
-      path: event/EVENT/EventData/FilePath
+      path: event/COMMAND_LINE
       value: immersivecontrolpanel
 respond:
 - action: report

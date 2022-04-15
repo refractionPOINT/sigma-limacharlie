@@ -7,6 +7,10 @@ detect:
     path: Event/System/EventID
     value: '16'
   - case sensitive: false
+    op: is
+    path: Event/EventData/Provider_Name
+    value: Microsoft-Windows-Kernel-General
+  - case sensitive: false
     op: contains
     path: Event/EventData/HiveName
     value: \AppData\Local\Temp\SAM
