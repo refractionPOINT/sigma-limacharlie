@@ -26,5 +26,5 @@ respond:
     tags:
     - attack.t1546.008
     - attack.privilege_escalation
-  name: Using Sticky-keys To Obtain Unauthenticated, Privileged Console Access
+  name: Sticky-Key Backdoor Copy Cmd.exe
 
