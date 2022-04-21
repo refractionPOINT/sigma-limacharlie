@@ -7,14 +7,27 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - case sensitive: false
-      op: ends with
-      path: event/FILE_PATH
-      value: \explorer.exe
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: /NOUACCHECK
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \explorer.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /NOUACCHECK
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/PARENT/COMMAND_LINE
+        value: C:\Windows\system32\svchost.exe -k netsvcs -p -s Schedule
+      - case sensitive: false
+        op: is
+        path: event/PARENT/FILE_PATH
+        value: C:\Windows\System32\svchost.exe
 respond:
 - action: report
   metadata:
@@ -23,6 +36,7 @@ respond:
       flag that allows to run all sub processes of that newly started explorer.exe
       without any UAC checks
     falsepositives:
+    - Domain Controller User Logon
     - Unknown how many legitimate software products use that method
     level: high
     references:
