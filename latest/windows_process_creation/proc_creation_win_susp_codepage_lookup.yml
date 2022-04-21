@@ -19,10 +19,20 @@ detect:
       op: ends with
       path: event/FILE_PATH
       value: \chcp.com
-    - case sensitive: false
-      op: ends with
-      path: event/COMMAND_LINE
-      value: chcp
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: chcp
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: 'chcp '
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: 'chcp  '
 respond:
 - action: report
   metadata:
