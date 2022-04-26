@@ -23,7 +23,8 @@ respond:
 - action: report
   metadata:
     author: frack113
-    description: Loads a DLL into msiexec.exe and calls its DllUnregisterServer function.
+    description: Detects MsiExec loading a DLL and calling its DllUnregisterServer
+      function
     falsepositives:
     - Unknown
     level: medium

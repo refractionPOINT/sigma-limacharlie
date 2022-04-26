@@ -49,7 +49,7 @@ detect:
         - case sensitive: false
           op: starts with
           path: event/EVENT/EventData/SubjectUserName
-          value: NT AUTHORITY
+          value: NT AUT
         - case sensitive: false
           op: starts with
           path: event/EVENT/EventData/SubjectUserName

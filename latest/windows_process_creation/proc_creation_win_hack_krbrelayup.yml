@@ -1,0 +1,73 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \KrbRelayUp.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' relay '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -Domain '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -ComputerName '
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' krbscm '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -sc '
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' spawn '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -d '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -cn '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -cp '
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects KrbRelayUp used to perform a universal no-fix local privilege
+      escalation in windows domain environments where LDAP signing is not enforced
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://github.com/Dec0ne/KrbRelayUp
+    tags:
+    - attack.credential_access
+    - attack.t1558.003
+    - attack.lateral_movement
+    - attack.t1550.003
+  name: KrbRelayUp Hack Tool
+
