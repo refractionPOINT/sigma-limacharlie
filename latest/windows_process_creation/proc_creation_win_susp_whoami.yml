@@ -14,7 +14,7 @@ respond:
   metadata:
     author: Florian Roth
     description: Detects the execution of whoami, which is often used by attackers
-      after exloitation / privilege escalation but rarely used by administrators
+      after exploitation / privilege escalation but rarely used by administrators
     falsepositives:
     - Admin activity
     - Scripts and administrative tools used in the monitored environment
