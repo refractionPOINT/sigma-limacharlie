@@ -1,0 +1,32 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/EventData/Provider_Name
+      value: Application Popup
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '26'
+    - case sensitive: false
+      op: is
+      path: event/EVENT/EventData/Caption
+      value: sysmon64.exe - Application Error
+respond:
+- action: report
+  metadata:
+    author: Tim Shelton
+    description: Detectes application popup reporting a failure of the Sysmon service
+    falsepositives:
+    - none
+    level: high
+    tags:
+    - attack.t1562
+    - attack.impair_defenses
+  name: Sysmon Crash
+

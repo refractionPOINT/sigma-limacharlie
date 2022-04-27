@@ -1,0 +1,31 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/EventData/Provider_Name
+      value: LsaSrv
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '6038'
+respond:
+- action: report
+  metadata:
+    author: Tim Shelton
+    description: Detects the reporting of NTLMv1 being used between a client and server
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://attack.mitre.org/techniques/T1550/002/
+    tags:
+    - attack.execution
+    - attack.t1550.002
+    - attack.s0363
+  name: NTLMv1 Logon Between Client and Server
+

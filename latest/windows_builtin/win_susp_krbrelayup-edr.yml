@@ -1,0 +1,40 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '4624'
+    - case sensitive: false
+      op: is
+      path: event/EVENT/EventData/LogonType
+      value: '3'
+    - case sensitive: false
+      op: is
+      path: event/EVENT/EventData/AuthenticationPackageName
+      value: Kerberos
+    - case sensitive: false
+      op: is
+      path: event/EVENT/EventData/IpAddress
+      value: 127.0.0.1
+respond:
+- action: report
+  metadata:
+    author: '@SBousseaden, Florian Roth'
+    description: Detects logon events that have characteristics of events generated
+      during an attack with KrbRelayUp and the like
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://twitter.com/sbousseaden/status/1518976397364056071?s=12&t=qKO5eKHvWhAP19a50FTZ7g
+    - https://github.com/elastic/detection-rules/blob/fb6ee2c69864ffdfe347bf3b050cb931f53067a6/rules/windows/privilege_escalation_krbrelayup_suspicious_logon.toml
+    tags:
+    - attack.privilege_escalation
+    - attack.credential_access
+  name: KrbRelayUp Attack Pattern
+
