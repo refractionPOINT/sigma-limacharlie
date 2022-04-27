@@ -18,6 +18,14 @@ detect:
     op: is
     path: Event/EventData/IpAddress
     value: 127.0.0.1
+  - case sensitive: false
+    op: starts with
+    path: Event/EventData/TargetUserSid
+    value: S-1-5-21-
+  - case sensitive: false
+    op: ends with
+    path: Event/EventData/TargetUserSid
+    value: '-500'
   target: log
 respond:
 - action: report
