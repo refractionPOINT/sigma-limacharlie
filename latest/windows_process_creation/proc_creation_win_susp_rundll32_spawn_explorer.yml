@@ -19,7 +19,7 @@ respond:
 - action: report
   metadata:
     author: elhoim
-    description: Detects RunDLL32.exe spawmning explorer.exe as child, which is very
+    description: Detects RunDLL32.exe spawning explorer.exe as child, which is very
       uncommon, often observes Gamarue spawning the explorer.exe process in an unusual
       way
     falsepositives:
@@ -30,5 +30,5 @@ respond:
     tags:
     - attack.defense_evasion
     - attack.t1218.011
-  name: RunDLL32 Spawmning Explorer
+  name: RunDLL32 Spawning Explorer
 
