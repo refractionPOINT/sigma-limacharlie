@@ -1,0 +1,32 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '21'
+    - case sensitive: false
+      op: contains
+      path: event/EVENT/EventData/Address
+      value: '16777216'
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects cases in which ngrok, a reverse proxy tool, forwards events
+      to the local RDP port, which could be a sign of malicious behaviour
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://twitter.com/tekdefense/status/1519711183162556416?s=12&t=OTsHCBkQOTNs1k3USz65Zg
+    - https://ngrok.com/
+    tags:
+    - attack.command_and_control
+    - attack.t1090
+  name: Ngrok Usage with Remote Desktop Service
+
