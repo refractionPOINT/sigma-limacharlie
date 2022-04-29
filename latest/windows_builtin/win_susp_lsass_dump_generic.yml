@@ -134,6 +134,10 @@ detect:
         - case sensitive: false
           op: ends with
           path: Event/EventData/ProcessName
+          value: \thor.exe
+        - case sensitive: false
+          op: ends with
+          path: Event/EventData/ProcessName
           value: \thor64.exe
         - case sensitive: false
           op: ends with
@@ -151,6 +155,14 @@ detect:
           op: ends with
           path: Event/EventData/ProcessName
           value: \MsMpEng.exe
+        - case sensitive: false
+          op: ends with
+          path: Event/EventData/ProcessName
+          value: \MRT.exe
+        - case sensitive: false
+          op: ends with
+          path: Event/EventData/ProcessName
+          value: RtkAudUService64
       - op: or
         rules:
         - case sensitive: false
@@ -181,6 +193,10 @@ detect:
       op: starts with
       path: Event/EventData/ProcessName
       value: C:\Program Files
+    - case sensitive: false
+      op: is
+      path: Event/EventData/ProcessName
+      value: C:\Windows\CCM\CcmExec.exe
   target: log
 respond:
 - action: report

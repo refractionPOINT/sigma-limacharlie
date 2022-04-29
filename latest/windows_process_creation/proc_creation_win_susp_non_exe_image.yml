@@ -184,6 +184,16 @@ detect:
             op: ends with
             path: event/FILE_PATH
             value: .rbs
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: \AppData\Local\Packages\
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: \LocalState\rootfs\
 respond:
 - action: report
   metadata:
