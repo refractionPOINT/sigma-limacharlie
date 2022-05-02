@@ -17,8 +17,8 @@ respond:
     author: Tim Shelton
     description: Detects the reporting of NTLMv1 being used between a client and server
     falsepositives:
-    - Unknown
-    level: high
+    - Environments that use NTLMv1
+    level: low
     references:
     - https://attack.mitre.org/techniques/T1550/002/
     tags:

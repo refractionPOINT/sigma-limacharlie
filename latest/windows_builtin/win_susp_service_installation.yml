@@ -4,94 +4,101 @@ detect:
   rules:
   - op: and
     rules:
-    - case sensitive: false
-      op: is
-      path: Event/EventData/Provider_Name
-      value: Service Control Manager
-    - case sensitive: false
-      op: is
-      path: Event/System/EventID
-      value: '7045'
-  - op: or
-    rules:
-    - op: or
-      rules:
-      - case sensitive: false
-        op: contains
-        path: Event/EventData/ImagePath
-        value: ' -w hidden '
-      - case sensitive: false
-        op: contains
-        path: Event/EventData/ImagePath
-        value: ' -nop '
-      - case sensitive: false
-        op: contains
-        path: Event/EventData/ImagePath
-        value: ' -sta '
-      - case sensitive: false
-        op: contains
-        path: Event/EventData/ImagePath
-        value: \Users\Public\
-      - case sensitive: false
-        op: contains
-        path: Event/EventData/ImagePath
-        value: \Windows\Temp\
-      - case sensitive: false
-        op: contains
-        path: Event/EventData/ImagePath
-        value: \Perflogs\
-      - case sensitive: false
-        op: contains
-        path: Event/EventData/ImagePath
-        value: \\\\.\\pipe
-      - case sensitive: false
-        op: contains
-        path: Event/EventData/ImagePath
-        value: \ADMIN$\
-      - case sensitive: false
-        op: contains
-        path: Event/EventData/ImagePath
-        value: .downloadstring(
-      - case sensitive: false
-        op: contains
-        path: Event/EventData/ImagePath
-        value: .downloadfile(
     - op: and
       rules:
       - case sensitive: false
-        op: contains
-        path: Event/EventData/ImagePath
-        value: ' -e'
+        op: is
+        path: Event/EventData/Provider_Name
+        value: Service Control Manager
+      - case sensitive: false
+        op: is
+        path: Event/System/EventID
+        value: '7045'
+    - op: or
+      rules:
       - op: or
         rules:
         - case sensitive: false
           op: contains
           path: Event/EventData/ImagePath
-          value: ' JAB'
+          value: ' -w hidden '
         - case sensitive: false
           op: contains
           path: Event/EventData/ImagePath
-          value: ' SUVYI'
+          value: ' -nop '
         - case sensitive: false
           op: contains
           path: Event/EventData/ImagePath
-          value: ' SQBFAFgA'
+          value: ' -sta '
         - case sensitive: false
           op: contains
           path: Event/EventData/ImagePath
-          value: ' aWV4I'
+          value: \Users\Public\
         - case sensitive: false
           op: contains
           path: Event/EventData/ImagePath
-          value: ' IAB'
+          value: \Windows\Temp\
         - case sensitive: false
           op: contains
           path: Event/EventData/ImagePath
-          value: ' PAA'
+          value: \Perflogs\
         - case sensitive: false
           op: contains
           path: Event/EventData/ImagePath
-          value: ' aQBlAHgA'
+          value: \\\\.\\pipe
+        - case sensitive: false
+          op: contains
+          path: Event/EventData/ImagePath
+          value: \ADMIN$\
+        - case sensitive: false
+          op: contains
+          path: Event/EventData/ImagePath
+          value: .downloadstring(
+        - case sensitive: false
+          op: contains
+          path: Event/EventData/ImagePath
+          value: .downloadfile(
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: Event/EventData/ImagePath
+          value: ' -e'
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: Event/EventData/ImagePath
+            value: ' JAB'
+          - case sensitive: false
+            op: contains
+            path: Event/EventData/ImagePath
+            value: ' SUVYI'
+          - case sensitive: false
+            op: contains
+            path: Event/EventData/ImagePath
+            value: ' SQBFAFgA'
+          - case sensitive: false
+            op: contains
+            path: Event/EventData/ImagePath
+            value: ' aWV4I'
+          - case sensitive: false
+            op: contains
+            path: Event/EventData/ImagePath
+            value: ' IAB'
+          - case sensitive: false
+            op: contains
+            path: Event/EventData/ImagePath
+            value: ' PAA'
+          - case sensitive: false
+            op: contains
+            path: Event/EventData/ImagePath
+            value: ' aQBlAHgA'
+  - case sensitive: false
+    not: true
+    op: starts with
+    path: Event/EventData/ImagePath
+    value: C:\WINDOWS\TEMP\thor10-remote\thor64.exe
   target: log
 respond:
 - action: report

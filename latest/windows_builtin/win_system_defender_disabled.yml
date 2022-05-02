@@ -32,7 +32,8 @@ respond:
     description: Detects disabling Windows Defender threat protection
     falsepositives:
     - Administrator actions
-    level: high
+    - Auto updates of Windows Defender causes restarts
+    level: low
     references:
     - https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-antivirus/troubleshoot-windows-defender-antivirus
     - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1562.001/T1562.001.md
