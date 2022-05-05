@@ -5,32 +5,40 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - case sensitive: false
-      op: is
-      path: event/EVENT/System/EventID
-      value: '5136'
-    - case sensitive: false
-      op: is
-      path: event/EVENT/EventData/AttributeLDAPDisplayName
-      value: ntSecurityDescriptor
-    - op: or
+    - op: and
       rules:
       - case sensitive: false
-        op: contains
-        path: event/EVENT/EventData/AttributeValue
-        value: 1131f6ad-9c07-11d1-f79f-00c04fc2dcd2
+        op: is
+        path: event/EVENT/System/EventID
+        value: '5136'
       - case sensitive: false
-        op: contains
-        path: event/EVENT/EventData/AttributeValue
-        value: 1131f6aa-9c07-11d1-f79f-00c04fc2dcd2
-      - case sensitive: false
-        op: contains
-        path: event/EVENT/EventData/AttributeValue
-        value: 89e95b76-444d-4c62-991a-0facbeda640c
+        op: is
+        path: event/EVENT/EventData/AttributeLDAPDisplayName
+        value: ntSecurityDescriptor
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/AttributeValue
+          value: 1131f6ad-9c07-11d1-f79f-00c04fc2dcd2
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/AttributeValue
+          value: 1131f6aa-9c07-11d1-f79f-00c04fc2dcd2
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/AttributeValue
+          value: 89e95b76-444d-4c62-991a-0facbeda640c
+    - case sensitive: false
+      not: true
+      op: is
+      path: event/EVENT/EventData/ObjectType
+      value: dnsNode
 respond:
 - action: report
   metadata:
-    author: Samir Bousseaden; Roberto Rodriguez @Cyb3rWard0g; oscd.community
+    author: Samir Bousseaden; Roberto Rodriguez @Cyb3rWard0g; oscd.community; Tim
+      Shelton
     description: backdooring domain object to grant the rights associated with DCSync
       to a regular user or machine account using Powerview\Add-DomainObjectAcl DCSync
       Extended Right cmdlet, will allow to re-obtain the pwd hashes of any user/computer

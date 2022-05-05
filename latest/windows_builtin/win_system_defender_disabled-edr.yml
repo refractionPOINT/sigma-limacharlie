@@ -42,5 +42,5 @@ respond:
     tags:
     - attack.defense_evasion
     - attack.t1562.001
-  name: Windows Defender Threat Detection Disabled
+  name: Windows Defender Threat Detection Disabled - Service
 
