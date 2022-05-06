@@ -29,6 +29,14 @@ detect:
           op: contains
           path: event/COMMAND_LINE
           value: ' /RunAs 4 '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /RunAs 10 '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /RunAs 11 '
       - op: or
         rules:
         - case sensitive: false
@@ -39,12 +47,20 @@ detect:
           op: ends with
           path: event/COMMAND_LINE
           value: /RunAs 4
+        - case sensitive: false
+          op: ends with
+          path: event/COMMAND_LINE
+          value: /RunAs 10
+        - case sensitive: false
+          op: ends with
+          path: event/COMMAND_LINE
+          value: /RunAs 11
 respond:
 - action: report
   metadata:
     author: Florian Roth
     description: Detects the execution of AdvancedRun utitlity in the context of the
-      TrustedInstaller or SYSTEM account
+      TrustedInstaller, SYSTEM, Local Service or Network Service accounts
     falsepositives:
     - Unknown
     level: high

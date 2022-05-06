@@ -10,15 +10,9 @@ detect:
     - op: or
       rules:
       - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \nircmd.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \nircmdc.exe
-    - op: and
-      rules:
+        op: contains
+        path: event/ORIGINAL_FILE_NAME
+        value: NirCmd.exe
       - op: or
         rules:
         - case sensitive: false
@@ -28,17 +22,37 @@ detect:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
+          value: '.exe script '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '.exe shexec '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' runinteractive '
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' exec '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
           value: ' exec2 '
       - op: or
         rules:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: ' copy '
+          value: ' show '
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: ' del '
+          value: ' hide '
 respond:
 - action: report
   metadata:
