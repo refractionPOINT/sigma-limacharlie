@@ -8,25 +8,27 @@ detect:
   - op: and
     rules:
     - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: 'replace '
+      op: ends with
+      path: event/FILE_PATH
+      value: \replace.exe
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
-      value: /A
+      value: /a
 respond:
 - action: report
   metadata:
     author: frack113
-    description: Replace.exe is used to replace file with another file
+    description: Detects the use of Replace.exe which can be used to replace file
+      with another file
     falsepositives:
     - Unknown
     level: medium
     references:
     - https://lolbas-project.github.io/lolbas/Binaries/Replace/
+    - https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/replace
     tags:
     - attack.command_and_control
     - attack.t1105
-  name: Suspicious Replace.exe Execution
+  name: Replace.exe Usage
 
