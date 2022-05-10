@@ -187,6 +187,16 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: ShOpenVerbApplication
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: dfshim.dll
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ShOpenVerbShortcut
 respond:
 - action: report
   metadata:
@@ -200,6 +210,7 @@ respond:
     - http://www.hexacorn.com/blog/2017/05/01/running-programs-via-proxy-jumping-on-a-edr-bypass-trampoline/
     - https://twitter.com/Hexacorn/status/885258886428725250
     - https://gist.github.com/ryhanson/227229866af52e2d963cf941af135a52
+    - https://twitter.com/nas_bench/status/1433344116071583746
     tags:
     - attack.defense_evasion
     - attack.t1218.011
