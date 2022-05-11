@@ -58,7 +58,7 @@ respond:
     description: Deployment Image Servicing and Management tool. DISM is used to enumerate,
       install, uninstall, configure, and update features and packages in Windows images
     falsepositives:
-    - Legitim script
+    - Legitimate script
     level: medium
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1562.001/T1562.001.md#atomic-test-26---disable-windows-defender-with-dism

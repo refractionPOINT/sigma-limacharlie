@@ -31,7 +31,7 @@ respond:
       adversaries to execute malicious code by signed verified binary. The debugger
       is installed alongside with Microsoft Visual Studio package.
     falsepositives:
-    - the process spawned by vsjitdebugger.exe is uncommon.
+    - The process spawned by vsjitdebugger.exe is uncommon.
     level: medium
     references:
     - https://twitter.com/pabraeken/status/990758590020452353

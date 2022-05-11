@@ -55,8 +55,8 @@ respond:
     description: Detects a suspicious execution of csc.exe, which uses a source in
       a suspicious folder (e.g. AppData)
     falsepositives:
-    - https://twitter.com/gN3mes1s/status/1206874118282448897
-    - https://twitter.com/gabriele_pippi/status/1206907900268072962
+    - Legitimate software from program files - https://twitter.com/gN3mes1s/status/1206874118282448897
+    - Legitimate Microsoft software - https://twitter.com/gabriele_pippi/status/1206907900268072962
     level: medium
     references:
     - https://securityboulevard.com/2019/08/agent-tesla-evading-edr-by-removing-api-hooks/

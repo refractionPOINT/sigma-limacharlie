@@ -54,7 +54,7 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: CurrentVersion\\Control Panel\\CPLs
+        value: CurrentVersion\Control Panel\CPLs
 respond:
 - action: report
   metadata:

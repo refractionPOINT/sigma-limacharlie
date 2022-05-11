@@ -32,7 +32,7 @@ respond:
     description: Detect lateral movement using GPO scheduled task, usually used to
       deploy ransomware at scale
     falsepositives:
-    - if the source IP is not localhost then it's super suspicious, better to monitor
+    - If the source IP is not localhost then it's super suspicious, better to monitor
       both local and remote changes to GPO scheduledtasks
     level: high
     references:

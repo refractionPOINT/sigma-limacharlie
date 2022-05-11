@@ -21,7 +21,7 @@ respond:
       on servers where unprivileged users have access. For example terminal servers.
       You need configure applocker and log collect to receive these events.
     falsepositives:
-    - need tuning applocker or add exceptions in SIEM
+    - Need tuning applocker or add exceptions in SIEM
     level: medium
     references:
     - https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/applocker/what-is-applocker

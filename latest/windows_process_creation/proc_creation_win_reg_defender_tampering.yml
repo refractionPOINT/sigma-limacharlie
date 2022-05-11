@@ -29,6 +29,16 @@ detect:
       op: contains
       path: event/COMMAND_LINE
       value: ' /d 0'
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Real-Time Protection
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: TamperProtection
 respond:
 - action: report
   metadata:

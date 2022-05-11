@@ -13,6 +13,10 @@ detect:
         op: ends with
         path: event/FILE_PATH
         value: \update.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .exe
       - op: or
         rules:
         - case sensitive: false
@@ -27,10 +31,6 @@ detect:
           op: contains
           path: event/COMMAND_LINE
           value: --createShortcut
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: .exe
     - not: true
       op: and
       rules:
@@ -80,10 +80,10 @@ respond:
     - WebTorrent
     - WhatsApp
     - WordPress.com
-    - atom
-    - gitkraken
-    - slack
-    - teams
+    - Atom
+    - Gitkraken
+    - Slack
+    - Teams
     level: medium
     references:
     - http://www.hexacorn.com/blog/2019/03/30/sqirrel-packages-manager-as-a-lolbin-a-k-a-many-electron-apps-are-lolbins-by-default/

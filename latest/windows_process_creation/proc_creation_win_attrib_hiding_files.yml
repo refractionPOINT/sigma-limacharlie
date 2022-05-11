@@ -44,9 +44,9 @@ respond:
     author: Sami Ruohonen
     description: Detects usage of attrib.exe to hide files from users.
     falsepositives:
-    - igfxCUIService.exe hiding *.cui files via .bat script (attrib.exe a child of
+    - IgfxCUIService.exe hiding *.cui files via .bat script (attrib.exe a child of
       cmd.exe and igfxCUIService.exe is the parent of the cmd.exe)
-    - msiexec.exe hiding desktop.ini
+    - Msiexec.exe hiding desktop.ini
     level: low
     tags:
     - attack.defense_evasion

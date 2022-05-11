@@ -42,7 +42,7 @@ respond:
       \ intrusion, or as part of a post-intrusion process to minimize the adversary's\
       \ footprint. \n"
     falsepositives:
-    - Legitim script
+    - Legitimate script
     level: low
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1070.004/T1070.004.md

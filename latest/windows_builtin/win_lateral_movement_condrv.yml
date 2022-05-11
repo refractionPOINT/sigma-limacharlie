@@ -28,7 +28,7 @@ respond:
       Account Name within the event contains the compromised user account name. This
       event should to be correlated with 4624 and 4688 for further intrusion context.
     falsepositives:
-    - legal admin action
+    - Legal admin action
     level: low
     references:
     - https://jpcertcc.github.io/ToolAnalysisResultSheet/details/wmiexec-vbs.htm

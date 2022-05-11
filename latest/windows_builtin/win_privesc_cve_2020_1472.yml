@@ -29,7 +29,7 @@ respond:
     description: Detects Netlogon Elevation of Privilege Vulnerability aka Zerologon
       (CVE-2020-1472)
     falsepositives:
-    - automatic DC computer account password change
+    - Automatic DC computer account password change
     - Legitimate DC computer account password change
     level: high
     references:
