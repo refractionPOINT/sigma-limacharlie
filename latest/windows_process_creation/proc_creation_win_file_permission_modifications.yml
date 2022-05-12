@@ -58,6 +58,10 @@ detect:
             op: contains
             path: event/COMMAND_LINE
             value: S-1-5-19:F
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \AppData\Local\Programs\Microsoft VS Code
 respond:
 - action: report
   metadata:
