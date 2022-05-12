@@ -29,11 +29,17 @@ detect:
           op: contains
           path: event/EVENT/EventData/AttributeValue
           value: 89e95b76-444d-4c62-991a-0facbeda640c
-    - case sensitive: false
-      not: true
-      op: is
-      path: event/EVENT/EventData/ObjectType
-      value: dnsNode
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/ObjectType
+        value: dnsNode
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/ObjectType
+        value: dnsZoneScope
 respond:
 - action: report
   metadata:
