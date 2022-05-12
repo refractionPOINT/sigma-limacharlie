@@ -1,0 +1,33 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '5379'
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/TargetName
+      value: Microsoft_Windows_Shell_ZipFolder:filename
+  - case sensitive: false
+    not: true
+    op: contains
+    path: Event/EventData/TargetName
+    value: \Temporary Internet Files\Content.Outlook
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects the extraction of password protected ZIP archives. See the
+      filename variable for more details on which file has been opened.
+    falsepositives:
+    - Legitimate used of encrypted ZIP files
+    level: medium
+    references:
+    - https://twitter.com/sbousseaden/status/1523383197513379841
+  name: Password Protected ZIP File Opened
+
