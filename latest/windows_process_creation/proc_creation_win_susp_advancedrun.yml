@@ -8,7 +8,7 @@ detect:
   - op: or
     rules:
     - case sensitive: false
-      op: contains
+      op: is
       path: event/ORIGINAL_FILE_NAME
       value: AdvancedRun.exe
     - op: and

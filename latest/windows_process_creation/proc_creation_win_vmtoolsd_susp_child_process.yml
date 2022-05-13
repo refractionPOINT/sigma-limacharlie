@@ -15,30 +15,58 @@ detect:
         value: \vmtoolsd.exe
       - op: or
         rules:
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \cmd.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \powershell.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \rundll32.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \regsvr32.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \wscript.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \cscript.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \cmd.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \powershell.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \rundll32.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \regsvr32.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \wscript.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \cscript.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: Cmd.Exe
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: PowerShell.EXE
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: RUNDLL32.EXE
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: REGSVR32.EXE
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: wscript.exe
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: cscript.exe
     - not: true
       op: or
       rules:

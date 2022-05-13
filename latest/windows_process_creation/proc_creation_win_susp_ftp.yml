@@ -22,7 +22,7 @@ detect:
       - op: and
         rules:
         - case sensitive: false
-          op: contains
+          op: is
           path: event/ORIGINAL_FILE_NAME
           value: ftp.exe
         - case sensitive: false
@@ -32,7 +32,7 @@ detect:
     - op: and
       rules:
       - case sensitive: false
-        op: contains
+        op: is
         path: event/ORIGINAL_FILE_NAME
         value: ftp.exe
       - case sensitive: false

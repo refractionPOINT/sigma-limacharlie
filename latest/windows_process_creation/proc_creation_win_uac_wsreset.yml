@@ -11,11 +11,17 @@ detect:
       op: ends with
       path: event/PARENT/FILE_PATH
       value: \wsreset.exe
-    - case sensitive: false
-      not: true
-      op: ends with
-      path: event/FILE_PATH
-      value: \conhost.exe
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \conhost.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: CONHOST.EXE
 respond:
 - action: report
   metadata:

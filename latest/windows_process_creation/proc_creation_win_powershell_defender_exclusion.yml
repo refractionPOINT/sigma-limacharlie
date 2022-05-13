@@ -31,6 +31,10 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: ' -ExclusionProcess '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -ExclusionIpAddress '
 respond:
 - action: report
   metadata:

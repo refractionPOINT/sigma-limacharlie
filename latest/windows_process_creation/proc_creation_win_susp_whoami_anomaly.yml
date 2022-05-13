@@ -13,10 +13,16 @@ detect:
         rules:
         - op: and
           rules:
-          - case sensitive: false
-            op: ends with
-            path: event/FILE_PATH
-            value: \whoami.exe
+          - op: or
+            rules:
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \whoami.exe
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: whoami.exe
           - not: true
             op: or
             rules:
