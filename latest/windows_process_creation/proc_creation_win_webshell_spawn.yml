@@ -81,12 +81,16 @@ detect:
           rules:
           - case sensitive: false
             op: contains
-            path: event/COMMAND_LINE
+            path: event/PARENT/COMMAND_LINE
             value: catalina.jar
           - case sensitive: false
             op: contains
-            path: event/COMMAND_LINE
+            path: event/PARENT/COMMAND_LINE
             value: CATALINA_HOME
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/COMMAND_LINE
+            value: catalina.home
     - op: or
       rules:
       - case sensitive: false
@@ -112,7 +116,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Thomas Patzke, Florian Roth
+    author: Thomas Patzke, Florian Roth, Zach Stanford @svch0st
     description: Web servers that spawn shell processes could be the result of a successfully
       placed web shell or an other attack
     falsepositives:

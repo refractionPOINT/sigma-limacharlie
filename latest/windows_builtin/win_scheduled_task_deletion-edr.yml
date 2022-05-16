@@ -3,20 +3,27 @@ detect:
   op: and
   rules:
   - op: is windows
-  - case sensitive: false
-    op: is
-    path: event/EVENT/System/EventID
-    value: '4699'
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '4699'
+    - case sensitive: false
+      not: true
+      op: is
+      path: event/EVENT/EventData/TaskName
+      value: \Microsoft\Windows\RemovalTools\MRT_ERROR_HB
 respond:
 - action: report
   metadata:
-    author: David Strassegger
+    author: David Strassegger, Tim Shelton
     description: Detects scheduled task deletion events. Scheduled tasks are likely
       to be deleted if not used for persistence. Malicious Software often creates
       tasks directly under the root node e.g. \TASKNAME
     falsepositives:
     - Software installation
-    level: medium
+    level: low
     references:
     - https://twitter.com/matthewdunwoody/status/1352356685982146562
     - https://docs.microsoft.com/en-us/windows/security/threat-protection/auditing/event-4699
