@@ -12,34 +12,30 @@ detect:
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
-        value: \certoc.exe
+        value: \IEExec.exe
       - case sensitive: false
         op: is
         path: event/ORIGINAL_FILE_NAME
-        value: CertOC.exe
-    - op: and
+        value: IEExec.exe
+    - op: or
       rules:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: -LoadDLL
+        value: https://
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: .dll
+        value: http://
 respond:
 - action: report
   metadata:
-    author: Austin Songer @austinsonger
-    description: Detects when a user installs certificates by using CertOC.exe to
-      loads the target DLL file.
+    author: Nasreddine Bencherchali
+    description: Detects execution of the IEExec utility to download payloads
     falsepositives:
     - Unknown
-    level: medium
+    level: high
     references:
-    - https://twitter.com/sblmsrsn/status/1445758411803480072?s=20
-    tags:
-    - attack.defense_evasion
-    - attack.t1218
-  name: Suspicious Load DLL via CertOC.exe
+    - https://lolbas-project.github.io/lolbas/Binaries/Ieexec/
+  name: Abusing IEExec To Download Payloads
 

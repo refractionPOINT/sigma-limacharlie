@@ -7,6 +7,84 @@ detect:
   - op: is windows
   - op: or
     rules:
+    - op: or
+      rules:
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - op: or
+            rules:
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \powershell.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \wmic.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \vssadmin.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \diskshadow.exe
+          - op: or
+            rules:
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: PowerShell.EXE
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: wmic.exe
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: VSSADMIN.EXE
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: diskshadow.exe
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: shadow
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: delete
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \wbadmin.exe
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: WBADMIN.EXE
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: delete
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: catalog
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: quiet
     - op: and
       rules:
       - op: or
@@ -14,63 +92,25 @@ detect:
         - case sensitive: false
           op: ends with
           path: event/FILE_PATH
-          value: \powershell.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \wmic.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
           value: \vssadmin.exe
         - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \diskshadow.exe
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: shadow
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: delete
-    - op: and
-      rules:
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \wbadmin.exe
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: delete
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: catalog
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: quiet
-    - op: and
-      rules:
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \vssadmin.exe
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: resize
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: shadowstorage
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: unbounded
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: VSSADMIN.EXE
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: resize
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: shadowstorage
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: unbounded
 respond:
 - action: report
   metadata:

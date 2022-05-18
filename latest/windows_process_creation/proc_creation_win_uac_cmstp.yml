@@ -27,18 +27,23 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: /au
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /ni
 respond:
 - action: report
   metadata:
     author: E.M. Anhaus (originally from Atomic Blue Detections, Endgame), oscd.community
-    description: Detect child processes of automatically elevated instances of Microsoft
-      Connection Manager Profile Installer (cmstp.exe).
+    description: Detect commandline usage of Microsoft Connection Manager Profile
+      Installer (cmstp.exe) to install specially formatted local .INF files
     falsepositives:
     - Legitimate use of cmstp.exe utility by legitimate user
     level: high
     references:
     - https://eqllib.readthedocs.io/en/latest/analytics/e584f1a1-c303-4885-8a66-21360c90995b.html
     - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1191/T1191.md
+    - https://lolbas-project.github.io/lolbas/Binaries/Cmstp/
     tags:
     - attack.privilege_escalation
     - attack.defense_evasion

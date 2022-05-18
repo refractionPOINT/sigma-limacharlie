@@ -7,18 +7,30 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: '/in:'
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: '/out:'
-    - case sensitive: false
-      op: ends with
-      path: event/FILE_PATH
-      value: \DataSvcUtil.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '/in:'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '/out:'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '/uri:'
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \DataSvcUtil.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: DataSvcUtil.exe
 respond:
 - action: report
   metadata:
@@ -36,6 +48,7 @@ respond:
     - https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/wcf-data-service-client-utility-datasvcutil-exe
     - https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/generating-the-data-service-client-library-wcf-data-services
     - https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/how-to-add-a-data-service-reference-wcf-data-services
+    - https://lolbas-project.github.io/lolbas/Binaries/DataSvcUtil/
     tags:
     - attack.exfiltration
     - attack.t1567
