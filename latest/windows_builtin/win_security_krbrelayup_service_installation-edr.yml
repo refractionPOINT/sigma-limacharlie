@@ -1,0 +1,32 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '7045'
+    - case sensitive: false
+      op: is
+      path: event/EVENT/EventData/ServiceName
+      value: KrbSCM
+respond:
+- action: report
+  metadata:
+    author: Sittikorn S, Tim Shelton
+    description: Detects service creation from KrbRelayUp tool used for privilege
+      escalation in windows domain environments where LDAP signing is not enforced
+      (the default settings)
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://github.com/Dec0ne/KrbRelayUp
+    tags:
+    - attack.privilege_escalation
+    - attack.t1543
+  name: KrbRelayUp Service Installation
+

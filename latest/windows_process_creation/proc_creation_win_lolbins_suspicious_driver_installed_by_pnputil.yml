@@ -53,6 +53,5 @@ respond:
     tags:
     - attack.persistence
     - attack.t1547
-    - attack.t1547.006
   name: Suspicious Driver Install by pnputil.exe
 
