@@ -1,0 +1,33 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: grpconv.exe -o
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: grpconv -o
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects the suspicious execution of a utility to convert Windows
+      3.x .grp files or for persistence purposes by malicious software or actors
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://twitter.com/0gtweet/status/1526833181831200770
+    tags:
+    - attack.persistence
+    - attack.t1547
+  name: Suspicious GrpConv Execution
+
