@@ -16,12 +16,6 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: Set-MpPreference -DisableRealtimeMonitoring $true -DisableIntrusionPreventionSystem
-          $true -DisableIOAVProtection $true -DisableScriptScanning $true -EnableControlledFolderAccess
-          Disabled -EnableNetworkProtection AuditMode -Force -MAPSReporting Disabled
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
         value: del /q /f c:\kworking\agent.crt
       - case sensitive: false
         op: contains
