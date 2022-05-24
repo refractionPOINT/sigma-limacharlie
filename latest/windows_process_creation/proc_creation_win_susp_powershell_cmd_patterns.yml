@@ -1,0 +1,78 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \powershell.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -e '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -en '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -enc '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -enco'
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' JAB'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' SUVYI'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' SQBFAFgA'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' aWV4I'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' IAB'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' PAA'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' aQBlAHgA'
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects PowerShell command line patterns in combincation with encoded
+      commands that often appear in malware infection chains
+    falsepositives:
+    - Other tools that work with encoded scripts in the command line instead of script
+      files
+    level: high
+    references:
+    - https://app.any.run/tasks/b9040c63-c140-479b-ad59-f1bb56ce7a97/
+    tags:
+    - attack.execution
+    - attack.t1059.001
+  name: Suspicious PowerShell Encoded Command Patterns
+
