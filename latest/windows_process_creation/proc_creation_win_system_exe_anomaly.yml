@@ -109,19 +109,7 @@ detect:
         - case sensitive: false
           op: matches
           path: event/FILE_PATH
-          re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Windows\\system32\\
-        - case sensitive: false
-          op: matches
-          path: event/FILE_PATH
-          re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Windows\\SysWow64\\
-        - case sensitive: false
-          op: matches
-          path: event/FILE_PATH
           re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Windows\\SysWOW64\\
-        - case sensitive: false
-          op: matches
-          path: event/FILE_PATH
-          re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Windows\\winsxs\\
         - case sensitive: false
           op: matches
           path: event/FILE_PATH
