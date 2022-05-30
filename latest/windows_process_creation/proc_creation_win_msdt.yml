@@ -1,0 +1,51 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \WINWORD.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \msdt.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \msdt.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ms-msdt:/id
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: IT_BrowseForFile=
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: IT_RebrowseForFile=
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (rule)
+    description: Detects word documents leveraging the "ms-msdt" handler or the "msdt.exe"
+      binary to execute arbitrary commands
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://twitter.com/nao_sec/status/1530196847679401984
+    - https://app.any.run/tasks/713f05d2-fe78-4b9d-a744-f7c133e3fafb/
+  name: Execute Arbitrary Commands Using MSDT.EXE
+
