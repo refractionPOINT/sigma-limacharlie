@@ -11,10 +11,16 @@ detect:
       op: ends with
       path: event/FILE_PATH
       value: \PSEXESVC.exe
-    - case sensitive: false
-      op: starts with
-      path: event/USER_NAME
-      value: NT AUTHORITY\SYSTEM
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/USER_NAME
+        value: AUTHORI
+      - case sensitive: false
+        op: contains
+        path: event/USER_NAME
+        value: AUTORI
 respond:
 - action: report
   metadata:

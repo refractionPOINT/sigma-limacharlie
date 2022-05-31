@@ -26,11 +26,11 @@ detect:
         - case sensitive: false
           op: contains
           path: event/USER_NAME
-          value: NT AUTHO
+          value: AUTHORI
         - case sensitive: false
           op: contains
           path: event/USER_NAME
-          value: NT AUTO
+          value: AUTORI
     - op: and
       rules:
       - case sensitive: false

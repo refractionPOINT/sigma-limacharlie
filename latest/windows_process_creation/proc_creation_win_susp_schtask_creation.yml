@@ -21,13 +21,13 @@ detect:
       op: or
       rules:
       - case sensitive: false
-        op: starts with
+        op: contains
         path: event/USER_NAME
-        value: NT AUTHORITY\SYSTEM
+        value: AUTHORI
       - case sensitive: false
-        op: starts with
+        op: contains
         path: event/USER_NAME
-        value: AUTORITE NT\Sys
+        value: AUTORI
 respond:
 - action: report
   metadata:

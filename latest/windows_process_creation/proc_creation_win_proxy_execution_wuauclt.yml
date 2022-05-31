@@ -47,7 +47,8 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research), Florian Roth
+    author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research), Florian Roth,
+      Sreeman, FPT.EagleEye Team
     description: Detects the use of the Windows Update Client binary (wuauclt.exe)
       to proxy execute code.
     falsepositives:
@@ -59,5 +60,6 @@ respond:
     tags:
     - attack.defense_evasion
     - attack.t1218
+    - attack.execution
   name: Proxy Execution via Wuauclt
 
