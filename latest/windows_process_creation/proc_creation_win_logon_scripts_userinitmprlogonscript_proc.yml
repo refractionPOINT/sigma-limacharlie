@@ -40,6 +40,10 @@ detect:
             op: contains
             path: event/COMMAND_LINE
             value: C:\WINDOWS\Explorer.EXE
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \Citrix\System32\icast.exe
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
@@ -47,7 +51,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Tom Ueltschi (@c_APT_ure)
+    author: Tom Ueltschi (@c_APT_ure), Tim Shelton
     description: Detects creation or execution of UserInitMprLogonScript persistence
       method
     falsepositives:
