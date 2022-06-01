@@ -19,16 +19,53 @@ detect:
       op: contains
       path: event/COMMAND_LINE
       value: bAFIAZQBmAGwAZQBjAHQAaQBvAG4ALgBBAHMAcwBlAG0AYgBsAHkAXQA6ADoATABvAGEAZAAoA
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: AFsAcgBlAGYAbABlAGMAdABpAG8AbgAuAGEAcwBzAGUAbQBiAGwAeQBdADoAOgAoACIATABvAGEAZAAiAC
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: BbAHIAZQBmAGwAZQBjAHQAaQBvAG4ALgBhAHMAcwBlAG0AYgBsAHkAXQA6ADoAKAAiAEwAbwBhAGQAIgAp
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: AWwByAGUAZgBsAGUAYwB0AGkAbwBuAC4AYQBzAHMAZQBtAGIAbAB5AF0AOgA6ACgAIgBMAG8AYQBkACIAK
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: WwBSAGUAZgBsAGUAYwB0AGkAbwBuAC4AQQBzAHMAZQBtAGIAbAB5AF0AOgA6ACgAIgBMAG8AYQBkACIAKQ
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: sAUgBlAGYAbABlAGMAdABpAG8AbgAuAEEAcwBzAGUAbQBiAGwAeQBdADoAOgAoACIATABvAGEAZAAiACkA
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: bAFIAZQBmAGwAZQBjAHQAaQBvAG4ALgBBAHMAcwBlAG0AYgBsAHkAXQA6ADoAKAAiAEwAbwBhAGQAIgApA
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: WwByAGUAZgBsAGUAYwB0AGkAbwBuAC4AYQBzAHMAZQBtAGIAbAB5AF0AOgA6AEwAbwBhAGQAKA
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: sAcgBlAGYAbABlAGMAdABpAG8AbgAuAGEAcwBzAGUAbQBiAGwAeQBdADoAOgBMAG8AYQBkACgA
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: bAHIAZQBmAGwAZQBjAHQAaQBvAG4ALgBhAHMAcwBlAG0AYgBsAHkAXQA6ADoATABvAGEAZAAoA
 respond:
 - action: report
   metadata:
-    author: Christian Burkard
+    author: Christian Burkard, pH-T
     description: Detects base64 encoded .NET reflective loading of Assembly
     falsepositives:
     - Unlikely
     level: high
     references:
     - https://github.com/Neo23x0/Raccine/blob/main/yara/mal_revil.yar
+    - https://thedfirreport.com/2022/05/09/seo-poisoning-a-gootloader-story/
     tags:
     - attack.execution
     - attack.t1059.001
