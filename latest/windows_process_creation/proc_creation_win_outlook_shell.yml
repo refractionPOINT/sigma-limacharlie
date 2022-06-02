@@ -89,6 +89,10 @@ detect:
         op: ends with
         path: event/FILE_PATH
         value: \msbuild.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \msdt.exe
 respond:
 - action: report
   metadata:

@@ -32,7 +32,7 @@ respond:
   metadata:
     author: Nasreddine Bencherchali (rule)
     description: Detects word documents leveraging the "ms-msdt" handler or the "msdt.exe"
-      binary to execute arbitrary commands
+      binary to execute arbitrary commands as seen in CVE-2022-30190
     falsepositives:
     - Unknown
     level: high

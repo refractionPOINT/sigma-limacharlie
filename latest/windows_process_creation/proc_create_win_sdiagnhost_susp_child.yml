@@ -1,0 +1,56 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \sdiagnhost.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \powershell.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cmd.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \mshta.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cscript.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \wscript.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \taskkill.exe
+respond:
+- action: report
+  metadata:
+    author: Nextron Systems
+    description: Detects sdiagnhost.exe calling a suspicious child process
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://twitter.com/nao_sec/status/1530196847679401984
+    - https://app.any.run/tasks/713f05d2-fe78-4b9d-a744-f7c133e3fafb/
+    tags:
+    - attack.defense_evasion
+    - attack.t1036
+    - attack.t1218
+  name: Sdiagnhost Calling Suspicious Child Process
+
