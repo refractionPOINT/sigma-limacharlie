@@ -12,23 +12,23 @@ detect:
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
-        value: regsvr32
+        value: \regsvr32
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
-        value: rundll32
+        value: \rundll32
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
-        value: msiexec
+        value: \msiexec
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
-        value: mshta
+        value: \mshta
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
-        value: verclsid
+        value: \verclsid
     - case sensitive: false
       op: ends with
       path: event/PARENT/FILE_PATH

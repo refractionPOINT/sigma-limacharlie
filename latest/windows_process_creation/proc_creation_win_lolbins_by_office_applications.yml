@@ -12,41 +12,41 @@ detect:
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
-        value: regsvr32.exe
+        value: \regsvr32.exe
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
-        value: rundll32.exe
+        value: \rundll32.exe
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
-        value: msiexec.exe
+        value: \msiexec.exe
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
-        value: mshta.exe
+        value: \mshta.exe
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
-        value: verclsid.exe
+        value: \verclsid.exe
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
-        value: msdt.exe
+        value: \msdt.exe
     - op: or
       rules:
       - case sensitive: false
         op: ends with
         path: event/PARENT/FILE_PATH
-        value: winword.exe
+        value: \winword.exe
       - case sensitive: false
         op: ends with
         path: event/PARENT/FILE_PATH
-        value: excel.exe
+        value: \excel.exe
       - case sensitive: false
         op: ends with
         path: event/PARENT/FILE_PATH
-        value: powerpnt.exe
+        value: \powerpnt.exe
 respond:
 - action: report
   metadata:

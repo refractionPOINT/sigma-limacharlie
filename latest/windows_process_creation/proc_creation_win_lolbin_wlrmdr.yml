@@ -12,7 +12,7 @@ detect:
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
-        value: wlrmdr.exe
+        value: \wlrmdr.exe
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE

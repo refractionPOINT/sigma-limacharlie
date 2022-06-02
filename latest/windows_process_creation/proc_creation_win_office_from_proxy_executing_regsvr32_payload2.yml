@@ -44,15 +44,15 @@ detect:
       - case sensitive: false
         op: ends with
         path: event/PARENT/FILE_PATH
-        value: winword.exe
+        value: \winword.exe
       - case sensitive: false
         op: ends with
         path: event/PARENT/FILE_PATH
-        value: excel.exe
+        value: \excel.exe
       - case sensitive: false
         op: ends with
         path: event/PARENT/FILE_PATH
-        value: powerpnt.exe
+        value: \powerpnt.exe
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE

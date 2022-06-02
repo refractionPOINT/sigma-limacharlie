@@ -1,0 +1,34 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/ORIGINAL_FILE_NAME
+      value: BrowserCore.exe
+    - case sensitive: false
+      not: true
+      op: ends with
+      path: event/FILE_PATH
+      value: \BrowserCore.exe
+respond:
+- action: report
+  metadata:
+    author: Max Altgelt
+    description: Detects process creation with a renamed BrowserCore.exe (used to
+      extract Azure tokens)
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://twitter.com/mariuszbit/status/1531631015139102720
+    tags:
+    - attack.t1528
+    - attack.t1036.003
+  name: Process Creation with Renamed BrowserCore.exe
+
