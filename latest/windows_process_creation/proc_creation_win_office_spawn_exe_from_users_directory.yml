@@ -31,6 +31,14 @@ detect:
           op: ends with
           path: event/PARENT/FILE_PATH
           value: \VISIO.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \MSACCESS.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \EQNEDT32.exe
       - case sensitive: false
         op: matches
         path: event/FILE_PATH

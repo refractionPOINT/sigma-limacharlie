@@ -12,59 +12,68 @@ detect:
       - case sensitive: false
         op: ends with
         path: event/PARENT/FILE_PATH
-        value: \powershell.exe
+        value: \winword.exe
       - case sensitive: false
         op: ends with
         path: event/PARENT/FILE_PATH
-        value: \cmd.exe
+        value: \excel.exe
       - case sensitive: false
         op: ends with
         path: event/PARENT/FILE_PATH
-        value: \mshta.exe
+        value: \powerpnt.exe
       - case sensitive: false
         op: ends with
         path: event/PARENT/FILE_PATH
-        value: \cscript.exe
+        value: \msaccess.exe
       - case sensitive: false
         op: ends with
         path: event/PARENT/FILE_PATH
-        value: \wscript.exe
+        value: \mspub.exe
       - case sensitive: false
         op: ends with
         path: event/PARENT/FILE_PATH
-        value: \wsl.exe
+        value: \eqnedt32.exe
       - case sensitive: false
         op: ends with
         path: event/PARENT/FILE_PATH
-        value: \rundll32.exe
-      - case sensitive: false
-        op: ends with
-        path: event/PARENT/FILE_PATH
-        value: \regsvr32.exe
+        value: \visio.exe
     - op: or
       rules:
       - case sensitive: false
-        op: ends with
+        op: contains
         path: event/FILE_PATH
-        value: \msdt.exe
+        value: \Windows\System32\
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: \Windows\SysWOW64\
+    - op: or
+      rules:
       - case sensitive: false
         op: is
-        path: event/ORIGINAL_FILE_NAME
-        value: msdt.exe
+        path: event/COMMAND_LINE
+        value: ../../../..
+      - case sensitive: false
+        op: is
+        path: event/COMMAND_LINE
+        value: ..\..\..\..
+      - case sensitive: false
+        op: is
+        path: event/COMMAND_LINE
+        value: ..//..//..//..
 respond:
 - action: report
   metadata:
-    author: Nextron Systems
-    description: Detects msdt.exe executed by a suspicious parent as seen in CVE-2022-30190
+    author: '@SBousseaden (idea), Christian Burkard (rule)'
+    description: Detects Office Applications executing a Windows child process including
+      directory traversal patterns
     falsepositives:
     - Unknown
     level: high
     references:
-    - https://twitter.com/nao_sec/status/1530196847679401984
-    - https://app.any.run/tasks/713f05d2-fe78-4b9d-a744-f7c133e3fafb/
+    - https://twitter.com/sbousseaden/status/1531653369546301440
     tags:
+    - attack.execution
     - attack.defense_evasion
-    - attack.t1036
-    - attack.t1218
-  name: MSDT Executed with Suspicious Parent
+  name: Office Directory Traversal CommandLine
 

@@ -22,15 +22,31 @@ detect:
       - case sensitive: false
         op: is
         path: event/PARENT/FILE_PATH
-        value: winword.exe
+        value: \winword.exe
       - case sensitive: false
         op: is
         path: event/PARENT/FILE_PATH
-        value: excel.exe
+        value: \excel.exe
       - case sensitive: false
         op: is
         path: event/PARENT/FILE_PATH
-        value: powerpnt.exe
+        value: \powerpnt.exe
+      - case sensitive: false
+        op: is
+        path: event/PARENT/FILE_PATH
+        value: \msaccess.exe
+      - case sensitive: false
+        op: is
+        path: event/PARENT/FILE_PATH
+        value: \mspub.exe
+      - case sensitive: false
+        op: is
+        path: event/PARENT/FILE_PATH
+        value: \eqnedt32.exe
+      - case sensitive: false
+        op: is
+        path: event/PARENT/FILE_PATH
+        value: \visio.exe
 respond:
 - action: report
   metadata:

@@ -47,6 +47,18 @@ detect:
         op: ends with
         path: event/PARENT/FILE_PATH
         value: \powerpnt.exe
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \msaccess.exe
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \mspub.exe
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \eqnedt32.exe
 respond:
 - action: report
   metadata:
