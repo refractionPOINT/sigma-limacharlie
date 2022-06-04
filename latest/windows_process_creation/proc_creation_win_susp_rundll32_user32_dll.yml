@@ -1,0 +1,41 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \rundll32.exe
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \cmd.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: user32.dll,
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: LockWorkStation
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Detects a suspicious call to the user32.dll function that locks the
+      user workstation
+    falsepositives:
+    - Scritps or links on the user desktop used to lock the workstation instead of
+      Windows+L or the menu option
+    level: medium
+    references:
+    - https://app.any.run/tasks/2aef9c63-f944-4763-b3ef-81eee209d128/
+    tags:
+    - attack.defense_evasion
+  name: Suspicious Workstation Locking via Rundll32
+
