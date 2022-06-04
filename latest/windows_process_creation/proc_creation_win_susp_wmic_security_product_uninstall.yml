@@ -14,7 +14,7 @@ detect:
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
-      value: product where name=
+      value: 'product where '
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
@@ -23,6 +23,16 @@ detect:
       op: contains
       path: event/COMMAND_LINE
       value: /nointeractive
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' name='
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'caption like '
     - op: or
       rules:
       - case sensitive: false
@@ -89,10 +99,34 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: Windows Defender
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: CarbonBlack
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Carbon Black
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Cb Defense Sensor 64-bit
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Dell Threat Defense
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'Cylance '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: LogRhythm System Monitor Service
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth, Nasreddine Bencherchali
     description: Detects deinstallation of security products using WMIC utility
     falsepositives:
     - Legitimate administration
@@ -100,6 +134,7 @@ respond:
     references:
     - https://twitter.com/cglyer/status/1355171195654709249
     - https://thedfirreport.com/2021/10/18/icedid-to-xinglocker-ransomware-in-24-hours/
+    - https://www.mandiant.com/resources/unc2165-shifts-to-evade-sanctions
     tags:
     - attack.defense_evasion
     - attack.t1562.001
