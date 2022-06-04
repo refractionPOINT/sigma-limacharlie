@@ -24,14 +24,30 @@ detect:
     - not: true
       op: or
       rules:
+      - op: or
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: is
+            path: event/PARENT/FILE_PATH
+            value: C:\Windows\System32\cleanmgr.exe
+          - case sensitive: false
+            op: is
+            path: event/PARENT/FILE_PATH
+            value: C:\Program Files (x86)\Microsoft Visual Studio\Installer\resources\app\ServiceHub\Services\Microsoft.VisualStudio.Setup.Service\BackgroundDownload.exe
+          - case sensitive: false
+            op: is
+            path: event/PARENT/FILE_PATH
+            value: C:\Windows\System32\dxgiadaptercache.exe
+        - case sensitive: false
+          op: starts with
+          path: event/PARENT/FILE_PATH
+          value: C:\Program Files (x86)\NVIDIA Corporation\
       - case sensitive: false
-        op: is
-        path: event/PARENT/FILE_PATH
-        value: C:\Windows\System32\cleanmgr.exe
-      - case sensitive: false
-        op: is
-        path: event/PARENT/FILE_PATH
-        value: C:\Program Files (x86)\Microsoft Visual Studio\Installer\resources\app\ServiceHub\Services\Microsoft.VisualStudio.Setup.Service\BackgroundDownload.exe
+        op: ends with
+        path: event/FILE_PATH
+        value: setup.exe
 respond:
 - action: report
   metadata:
