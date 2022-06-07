@@ -1,0 +1,106 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \NSudo.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \NSudoLC.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \NSudoLG.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: NSudo.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: NSudoLC.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: NSudoLG.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-U:S '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-U:T '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-U:E '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-P:E '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-M:S '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-M:H '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-U=S '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-U=T '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-U=E '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-P=E '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-M=S '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-M=H '
+respond:
+- action: report
+  metadata:
+    author: Florian Roth, Nasreddine Bencherchali
+    description: Detects the use of NSudo tool for command execution
+    falsepositives:
+    - Legitimate use by administrators
+    level: high
+    references:
+    - https://nsudo.m2team.org/en-us/
+    - https://www.winhelponline.com/blog/run-program-as-system-localsystem-account-windows/
+    tags:
+    - attack.execution
+    - attack.t1569.002
+    - attack.s0029
+  name: NSudo Tool Execution
+
