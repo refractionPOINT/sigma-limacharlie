@@ -8,25 +8,25 @@ detect:
   - op: or
     rules:
     - case sensitive: false
-      op: is
+      op: contains
       path: event/COMMAND_LINE
-      value: net group "domain admins" /dom
+      value: net group "domain admins"
     - case sensitive: false
-      op: is
+      op: contains
       path: event/COMMAND_LINE
       value: net localgroup administrators
     - case sensitive: false
-      op: is
+      op: contains
       path: event/COMMAND_LINE
-      value: net group "enterprise admins" /dom
+      value: net group "enterprise admins"
     - case sensitive: false
-      op: is
+      op: contains
       path: event/COMMAND_LINE
-      value: net accounts /dom
+      value: net accounts /do
 respond:
 - action: report
   metadata:
-    author: Florian Roth, omkar72
+    author: Florian Roth, omkar72, @svch0st
     description: Detects suspicious command line activity on Windows systems
     falsepositives:
     - Inventory tool runs
