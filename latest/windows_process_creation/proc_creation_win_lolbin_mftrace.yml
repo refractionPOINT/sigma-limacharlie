@@ -1,0 +1,51 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \mftrace.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: mftrace.exe
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '.exe '
+        - case sensitive: false
+          op: ends with
+          path: event/COMMAND_LINE
+          value: .exe
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \mftrace.exe
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali
+    description: The "Trace log generation tool for Media Foundation Tools" (Mftrace.exe)
+      can be used to execute arbitrary binaries
+    falsepositives:
+    - Legitimate use for tracing purposes
+    level: medium
+    references:
+    - https://lolbas-project.github.io/lolbas/OtherMSBinaries/Mftrace/
+    tags:
+    - attack.defense_evasion
+    - attack.t1127
+  name: Use of Mftrace.exe
+
