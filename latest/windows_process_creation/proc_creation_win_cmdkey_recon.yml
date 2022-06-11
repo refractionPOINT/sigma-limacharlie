@@ -22,15 +22,15 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ' /list'
+        value: ' /l'
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ' -list'
+        value: ' -l'
 respond:
 - action: report
   metadata:
-    author: jmallette, Florian Roth
+    author: jmallette, Florian Roth, Nasreddine Bencherchali (update)
     description: Detects usage of cmdkey to look for cached credentials
     falsepositives:
     - Legitimate administrative tasks

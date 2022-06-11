@@ -12,6 +12,10 @@ detect:
       path: event/FILE_PATH
       value: \AccCheckConsole.exe
     - case sensitive: false
+      op: is
+      path: event/ORIGINAL_FILE_NAME
+      value: AccCheckConsole.exe
+    - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
       value: ' -window '
@@ -31,6 +35,7 @@ respond:
     references:
     - https://gist.github.com/bohops/2444129419c8acf837aedda5f0e7f340
     - https://twitter.com/bohops/status/1477717351017680899?s=12
+    - https://lolbas-project.github.io/lolbas/OtherMSBinaries/AccCheckConsole/
     tags:
     - attack.execution
   name: Suspicious LOLBIN AccCheckConsole
