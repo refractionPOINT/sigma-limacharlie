@@ -2,20 +2,41 @@ detect:
   log type: wel
   op: and
   rules:
-  - case sensitive: false
-    op: is
-    path: Event/System/EventID
-    value: '16403'
-  - op: or
+  - op: and
     rules:
     - case sensitive: false
-      op: ends with
-      path: Event/EventData/LocalName
-      value: .ps1
+      op: is
+      path: Event/System/EventID
+      value: '16403'
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: Event/EventData/LocalName
+        value: .ps1
+      - case sensitive: false
+        op: ends with
+        path: Event/EventData/LocalName
+        value: .exe
+      - case sensitive: false
+        op: ends with
+        path: Event/EventData/LocalName
+        value: .vbs
+      - case sensitive: false
+        op: ends with
+        path: Event/EventData/LocalName
+        value: .bat
+  - not: true
+    op: and
+    rules:
     - case sensitive: false
-      op: ends with
+      op: contains
       path: Event/EventData/LocalName
-      value: .exe
+      value: \AppData\
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
+      value: .com
   target: log
 respond:
 - action: report
@@ -30,12 +51,12 @@ respond:
       '
     falsepositives:
     - Administrator PowerShell scripts
-    level: low
+    level: medium
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1197/T1197.md
     tags:
     - attack.defense_evasion
     - attack.persistence
     - attack.t1197
-  name: Suspicious Download File Extension with Bits
+  name: Suspicious Download File Extension with BITS
 
