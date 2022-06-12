@@ -40,15 +40,15 @@ detect:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: '/generic:'
+          value: ' /g'
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: '/user:'
+          value: ' /u'
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: '/pass:'
+          value: ' /p'
 respond:
 - action: report
   metadata:

@@ -48,7 +48,7 @@ detect:
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
-            value: /list
+            value: ' /l'
         - op: and
           rules:
           - case sensitive: false
@@ -58,7 +58,7 @@ detect:
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
-            value: /c
+            value: ' /c'
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
