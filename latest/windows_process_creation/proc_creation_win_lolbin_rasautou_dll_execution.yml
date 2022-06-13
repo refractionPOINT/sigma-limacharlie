@@ -22,11 +22,11 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: -d
+        value: ' -d '
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: -p
+        value: ' -p '
 respond:
 - action: report
   metadata:

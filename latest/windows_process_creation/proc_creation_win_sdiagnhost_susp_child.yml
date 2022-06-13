@@ -41,7 +41,8 @@ respond:
 - action: report
   metadata:
     author: Nextron Systems
-    description: Detects sdiagnhost.exe calling a suspicious child process
+    description: Detects sdiagnhost.exe calling a suspicious child process (e.g. used
+      in exploits for Follina / CVE-2022-30190)
     falsepositives:
     - Unknown
     level: high

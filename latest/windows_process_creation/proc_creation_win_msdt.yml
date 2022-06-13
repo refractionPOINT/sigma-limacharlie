@@ -23,16 +23,29 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: IT_BrowseForFile=
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: '/af '
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' PCWDiagnostic'
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' /af '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' -af '
 respond:
 - action: report
   metadata:
     author: Nasreddine Bencherchali (rule)
-    description: Detects word documents leveraging the "ms-msdt" handler or the "msdt.exe"
-      binary to execute arbitrary commands as seen in CVE-2022-30190
+    description: Detects processes leveraging the "ms-msdt" handler or the "msdt.exe"
+      binary to execute arbitrary commands as seen in the follina (CVE-2022-30190)
+      vulnerability
     falsepositives:
     - Unknown
     level: high
