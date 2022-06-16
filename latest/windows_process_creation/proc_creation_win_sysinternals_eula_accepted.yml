@@ -13,8 +13,8 @@ respond:
 - action: report
   metadata:
     author: Markus Neis
-    description: Detects the usage of Sysinternals Tools due to accepteula key being
-      added to Registry
+    description: Detects the usage of Sysinternals Tools due to accepteula option
+      being seen in the command line.
     falsepositives:
     - Legitimate use of SysInternals tools
     - Programs that use the same Registry Key
