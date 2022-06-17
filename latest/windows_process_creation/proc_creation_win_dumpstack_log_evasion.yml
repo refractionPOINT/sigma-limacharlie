@@ -12,7 +12,7 @@ detect:
       path: event/FILE_PATH
       value: \DumpStack.log
     - case sensitive: false
-      op: is
+      op: contains
       path: event/COMMAND_LINE
       value: ' -o DumpStack.log'
 respond:

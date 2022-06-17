@@ -20,31 +20,31 @@ detect:
     - op: or
       rules:
       - case sensitive: false
-        op: is
+        op: ends with
         path: event/PARENT/FILE_PATH
         value: \winword.exe
       - case sensitive: false
-        op: is
+        op: ends with
         path: event/PARENT/FILE_PATH
         value: \excel.exe
       - case sensitive: false
-        op: is
+        op: ends with
         path: event/PARENT/FILE_PATH
         value: \powerpnt.exe
       - case sensitive: false
-        op: is
+        op: ends with
         path: event/PARENT/FILE_PATH
         value: \msaccess.exe
       - case sensitive: false
-        op: is
+        op: ends with
         path: event/PARENT/FILE_PATH
         value: \mspub.exe
       - case sensitive: false
-        op: is
+        op: ends with
         path: event/PARENT/FILE_PATH
         value: \eqnedt32.exe
       - case sensitive: false
-        op: is
+        op: ends with
         path: event/PARENT/FILE_PATH
         value: \visio.exe
 respond:

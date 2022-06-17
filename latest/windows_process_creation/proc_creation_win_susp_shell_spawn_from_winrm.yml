@@ -32,6 +32,10 @@ detect:
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
+        value: \wsl.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
         value: \schtasks.exe
       - case sensitive: false
         op: ends with
@@ -49,7 +53,8 @@ respond:
 - action: report
   metadata:
     author: Andreas Hunkeler (@Karneades), Markus Neis
-    description: Detects suspicious shell spawn from WinRM host process
+    description: Detects suspicious processes including shells spawnd from WinRM host
+      process
     falsepositives:
     - Legitimate WinRM usage
     level: high
@@ -58,5 +63,5 @@ respond:
     - attack.initial_access
     - attack.persistence
     - attack.privilege_escalation
-  name: Suspicious Shells Spawn by WinRM
+  name: Suspicious Processes Spawned by WinRM
 

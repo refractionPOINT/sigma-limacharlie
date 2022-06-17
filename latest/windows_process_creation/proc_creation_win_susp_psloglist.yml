@@ -12,7 +12,7 @@ detect:
       - case sensitive: false
         op: is
         path: event/ORIGINAL_FILE_NAME
-        value: psloglist
+        value: psloglist.exe
       - op: or
         rules:
         - case sensitive: false
@@ -25,32 +25,6 @@ detect:
           value: \psloglist64.exe
     - op: and
       rules:
-      - op: or
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: -d
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: /d
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: -x
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: /x
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: -s
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: /s
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -59,6 +33,32 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: accepteula
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -d'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /d'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -x'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /x'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -s'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /s'
 respond:
 - action: report
   metadata:
