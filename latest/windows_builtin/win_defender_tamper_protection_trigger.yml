@@ -25,7 +25,7 @@ respond:
       Defender by tamper protection
     falsepositives:
     - Administrator actions
-    level: critical
+    level: high
     references:
     - https://bhabeshraj.com/post/tampering-with-microsoft-defenders-tamper-protection
     tags:

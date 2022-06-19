@@ -62,7 +62,7 @@ respond:
     description: Detects the malicious use of a control panel item
     falsepositives:
     - Unknown
-    level: critical
+    level: high
     references:
     - https://attack.mitre.org/techniques/T1196/
     - https://ired.team/offensive-security/code-execution/code-execution-through-control-panel-add-ins

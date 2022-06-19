@@ -24,7 +24,7 @@ respond:
       accounts and relaying to the certificate service
     falsepositives:
     - Unlikely
-    level: critical
+    level: high
     references:
     - https://github.com/bats3c/ADCSPwn
     tags:

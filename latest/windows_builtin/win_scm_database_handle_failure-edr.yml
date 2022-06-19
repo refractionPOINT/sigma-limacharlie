@@ -31,7 +31,7 @@ respond:
     description: Detects non-system users failing to get a handle of the SCM database.
     falsepositives:
     - Unknown
-    level: critical
+    level: high
     references:
     - https://threathunterplaybook.com/notebooks/windows/07_discovery/WIN-190826010110.html
     tags:

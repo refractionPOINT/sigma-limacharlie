@@ -45,7 +45,7 @@ respond:
     description: Detects a suspicious process pattern found in CVE-2021-40444 exploitation
     falsepositives:
     - Unknown
-    level: critical
+    level: high
     references:
     - https://msrc.microsoft.com/update-guide/vulnerability/CVE-2021-40444
     - https://twitter.com/neonprimetime/status/1435584010202255375

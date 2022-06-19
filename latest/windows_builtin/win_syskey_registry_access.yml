@@ -43,7 +43,7 @@ respond:
       keys to calculate the SysKey
     falsepositives:
     - Unknown
-    level: critical
+    level: high
     references:
     - https://threathunterplaybook.com/notebooks/windows/07_discovery/WIN-190625024610.html
     tags:

@@ -146,7 +146,7 @@ respond:
       account
     falsepositives:
     - Unknown
-    level: critical
+    level: high
     references:
     - https://threathunterplaybook.com/notebooks/windows/06_credential_access/WIN-170105221010.html
     tags:

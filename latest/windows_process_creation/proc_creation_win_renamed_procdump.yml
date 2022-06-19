@@ -55,7 +55,7 @@ respond:
     falsepositives:
     - Procdump illegaly bundled with legitimate software
     - Weird admins who renamed binaries
-    level: critical
+    level: high
     references:
     - https://docs.microsoft.com/en-us/sysinternals/downloads/procdump
     tags:

@@ -65,7 +65,7 @@ respond:
       report in March 2018
     falsepositives:
     - Unknown
-    level: critical
+    level: high
     references:
     - https://nyotron.com/nyotron-discovers-next-generation-oilrig-attacks/
     tags:

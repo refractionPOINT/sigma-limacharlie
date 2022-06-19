@@ -31,7 +31,7 @@ respond:
       DLL (in registry) could not be loaded
     falsepositives:
     - Unknown
-    level: critical
+    level: high
     references:
     - https://blog.3or.de/mimilib-dhcp-server-callout-dll-injection.html
     - https://technet.microsoft.com/en-us/library/cc726884(v=ws.10).aspx

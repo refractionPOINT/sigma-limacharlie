@@ -61,7 +61,7 @@ respond:
       which a Cobalt Strike beacon elevates privileges or lateral movement
     falsepositives:
     - Unknown
-    level: critical
+    level: high
     references:
     - https://www.sans.org/webcasts/119395
     - https://www.crowdstrike.com/blog/getting-the-bacon-from-cobalt-strike-beacon/

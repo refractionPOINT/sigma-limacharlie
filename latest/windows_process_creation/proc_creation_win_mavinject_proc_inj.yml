@@ -16,7 +16,7 @@ respond:
     description: Detects process injection using the signed Windows tool Mavinject32.exe
     falsepositives:
     - Unknown
-    level: critical
+    level: high
     references:
     - https://twitter.com/gN3mes1s/status/941315826107510784
     - https://reaqta.com/2017/12/mavinject-microsoft-injector/

@@ -21,7 +21,7 @@ respond:
       DLL (in registry) could not be loaded
     falsepositives:
     - Unknown
-    level: critical
+    level: high
     references:
     - https://medium.com/@esnesenon/feature-not-bug-dnsadmin-to-dc-compromise-in-one-line-a0f779b8dc83
     - https://technet.microsoft.com/en-us/library/cc735829(v=ws.10).aspx

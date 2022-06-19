@@ -26,12 +26,12 @@ respond:
 - action: report
   metadata:
     author: Bhabesh Raj
-    description: "Detects possible successful exploitation for vulnerability described\
-      \ in CVE-2021-26857 by looking for | abnormal subprocesses spawning by Exchange\
-      \ Server\u2019s Unified Messaging service"
+    description: Detects possible successful exploitation for vulnerability described
+      in CVE-2021-26857 by looking for | abnormal subprocesses spawning by Exchange
+      Server's Unified Messaging service
     falsepositives:
     - Unknown
-    level: critical
+    level: high
     references:
     - https://www.microsoft.com/security/blog/2021/03/02/hafnium-targeting-exchange-servers/
     tags:

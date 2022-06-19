@@ -22,7 +22,7 @@ respond:
     description: The Devtoolslauncher.exe executes other binary
     falsepositives:
     - Legitimate use of devtoolslauncher.exe by legitimate user
-    level: critical
+    level: high
     references:
     - https://github.com/LOLBAS-Project/LOLBAS/blob/master/yml/OtherMSBinaries/Devtoolslauncher.yml
     - https://twitter.com/_felamos/status/1179811992841797632

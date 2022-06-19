@@ -21,7 +21,7 @@ respond:
       vulnerable to  CVE-2019-0708 RDP RCE aka BlueKeep
     falsepositives:
     - Unlikely
-    level: critical
+    level: high
     references:
     - https://twitter.com/AdamTheAnalyst/status/1134394070045003776
     - https://github.com/zerosum0x0/CVE-2019-0708

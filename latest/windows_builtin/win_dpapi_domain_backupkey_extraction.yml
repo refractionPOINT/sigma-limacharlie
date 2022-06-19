@@ -27,7 +27,7 @@ respond:
       Domain Controllers
     falsepositives:
     - Unknown
-    level: critical
+    level: high
     references:
     - https://threathunterplaybook.com/notebooks/windows/06_credential_access/WIN-190620024610.html
     tags:

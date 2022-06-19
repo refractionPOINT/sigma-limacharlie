@@ -60,7 +60,7 @@ respond:
     author: FPT.EagleEye Team, wagga
     description: Detects suspicious shell spawn from MSSQL process, this might be
       sight of RCE or SQL Injection
-    level: critical
+    level: high
     tags:
     - attack.t1505.003
     - attack.t1190

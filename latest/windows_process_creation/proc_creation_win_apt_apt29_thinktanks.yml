@@ -31,7 +31,7 @@ respond:
       as used by APT29 in a campaign against U.S. think tanks.
     falsepositives:
     - Unknown
-    level: critical
+    level: high
     references:
     - https://www.microsoft.com/security/blog/2018/12/03/analysis-of-cyberattack-on-u-s-think-tanks-non-profits-public-sector-by-unidentified-attackers/
     - https://www.fireeye.com/blog/threat-research/2018/11/not-so-cozy-an-uncomfortable-examination-of-a-suspected-apt29-phishing-campaign.html

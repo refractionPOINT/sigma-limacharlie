@@ -21,7 +21,7 @@ detect:
         value: '0x17'
     - case sensitive: false
       not: true
-      op: starts with
+      op: ends with
       path: event/EVENT/EventData/ServiceName
       value: $
 respond:

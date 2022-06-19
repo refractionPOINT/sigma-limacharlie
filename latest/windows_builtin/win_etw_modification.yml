@@ -27,7 +27,7 @@ respond:
       assemblies.
     falsepositives:
     - Unknown
-    level: critical
+    level: high
     references:
     - https://twitter.com/_xpn_/status/1268712093928378368
     - https://social.msdn.microsoft.com/Forums/vstudio/en-US/0878832e-39d7-4eaf-8e16-a729c4c40975/what-can-i-use-e13c0d23ccbc4e12931bd9cc2eee27e4-for?forum=clr

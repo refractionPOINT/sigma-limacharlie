@@ -42,7 +42,7 @@ respond:
     description: Detects NetNTLM downgrade attack
     falsepositives:
     - Unknown
-    level: critical
+    level: high
     references:
     - https://www.optiv.com/blog/post-exploitation-using-netntlm-downgrade-attacks
     tags:

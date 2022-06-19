@@ -33,7 +33,7 @@ respond:
       DLLs from the command line.
     falsepositives:
     - Unknown
-    level: critical
+    level: high
     references:
     - https://www.cobaltstrike.com/help-windows-executable
     - https://redcanary.com/threat-detection-report/

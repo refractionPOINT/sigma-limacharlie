@@ -121,7 +121,7 @@ respond:
     - Legitimate Administrator deletes Shadow Copies using operating systems utilities
       for legitimate reason
     - LANDesk LDClient Ivanti-PSModule (PS EncodedCommand)
-    level: critical
+    level: high
     references:
     - https://www.slideshare.net/heirhabarov/hunting-for-credentials-dumping-in-windows-environment
     - https://blog.talosintelligence.com/2017/05/wannacry.html

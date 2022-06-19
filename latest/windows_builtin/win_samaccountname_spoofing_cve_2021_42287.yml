@@ -26,7 +26,7 @@ respond:
       name that doesn't contain a $ symbol as seen in attacks against CVE-2021-42287
     falsepositives:
     - Unknown
-    level: critical
+    level: high
     references:
     - https://medium.com/@mvelazco/hunting-for-samaccountname-spoofing-cve-2021-42287-and-domain-controller-impersonation-f704513c8a45
   name: Suspicious Computer Account Name Change CVE-2021-42287

@@ -29,7 +29,7 @@ respond:
       InternetExplorer DLL Hijack scenario.
     falsepositives:
     - Unknown
-    level: critical
+    level: high
     references:
     - https://threathunterplaybook.com/notebooks/windows/08_lateral_movement/WIN-201009183000.html
     tags:

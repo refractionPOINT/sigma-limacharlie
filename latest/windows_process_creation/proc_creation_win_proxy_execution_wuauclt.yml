@@ -53,7 +53,7 @@ respond:
       to proxy execute code.
     falsepositives:
     - Unknown
-    level: critical
+    level: high
     references:
     - https://dtm.uk/wuauclt/
     - https://blog.malwarebytes.com/threat-intelligence/2022/01/north-koreas-lazarus-apt-leverages-windows-update-client-github-in-latest-campaign/

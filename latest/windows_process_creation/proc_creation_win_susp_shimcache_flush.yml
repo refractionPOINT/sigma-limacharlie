@@ -55,7 +55,7 @@ respond:
       evidence
     falsepositives:
     - Unknown
-    level: critical
+    level: high
     references:
     - https://medium.com/@blueteamops/shimcache-flush-89daff28d15e
     tags:

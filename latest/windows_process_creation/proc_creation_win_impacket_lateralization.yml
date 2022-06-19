@@ -82,7 +82,7 @@ respond:
     description: Detects wmiexec/dcomexec/atexec/smbexec from Impacket framework
     falsepositives:
     - Unknown
-    level: critical
+    level: high
     references:
     - https://github.com/SecureAuthCorp/impacket/blob/master/examples/wmiexec.py
     - https://github.com/SecureAuthCorp/impacket/blob/master/examples/atexec.py

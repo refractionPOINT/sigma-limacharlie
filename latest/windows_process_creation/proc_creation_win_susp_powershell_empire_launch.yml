@@ -38,7 +38,7 @@ respond:
     description: Detects suspicious powershell command line parameters used in Empire
     falsepositives:
     - Other tools that incidentally use the same command line parameters
-    level: critical
+    level: high
     references:
     - https://github.com/EmpireProject/Empire/blob/c2ba61ca8d2031dad0cfc1d5770ba723e8b710db/lib/common/helpers.py#L165
     - https://github.com/EmpireProject/Empire/blob/e37fb2eef8ff8f5a0a689f1589f424906fe13055/lib/modules/powershell/persistence/powerbreach/deaduser.py#L191

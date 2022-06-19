@@ -33,7 +33,7 @@ respond:
       and Password list to crack against
     falsepositives:
     - Tools that accidentally use the same command line flags and values
-    level: critical
+    level: high
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1110.002/T1110.002.md#atomic-test-1---password-cracking-with-hashcat
     - https://hashcat.net/wiki/doku.php?id=hashcat

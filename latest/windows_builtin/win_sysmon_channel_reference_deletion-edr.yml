@@ -57,7 +57,7 @@ respond:
       disabling it
     falsepositives:
     - Unknown
-    level: critical
+    level: high
     references:
     - https://twitter.com/Flangvik/status/1283054508084473861
     - https://twitter.com/SecurityJosh/status/1283027365770276866

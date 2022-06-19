@@ -35,7 +35,7 @@ respond:
       load
     falsepositives:
     - Unknown
-    level: critical
+    level: high
     references:
     - https://us-cert.cisa.gov/ncas/analysis-reports/ar20-216a
     tags:
