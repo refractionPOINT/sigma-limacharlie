@@ -194,6 +194,10 @@ detect:
           op: contains
           path: event/FILE_PATH
           value: \LocalState\rootfs\
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \LZMA_EXE
 respond:
 - action: report
   metadata:
