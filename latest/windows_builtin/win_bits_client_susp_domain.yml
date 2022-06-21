@@ -21,6 +21,10 @@ detect:
       op: contains
       path: Event/EventData/RemoteName
       value: .sfx.ms
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
+      value: download.mozilla.org
   target: log
 respond:
 - action: report
