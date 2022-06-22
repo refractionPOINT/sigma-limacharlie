@@ -1,0 +1,64 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: wmic.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \WMIC.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' service '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' get '
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: name
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: displayname
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: pathname
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: startmode
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali
+    description: Detects wmic known recon method to look for unquoted serivce paths,
+      often used by pentest and attackers enum scripts
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://github.com/nccgroup/redsnarf/blob/master/redsnarf.py
+    - https://github.com/S3cur3Th1sSh1t/Creds/blob/eac23d67f7f90c7fc8e3130587d86158c22aa398/PowershellScripts/jaws-enum.ps1
+    tags:
+    - attack.execution
+    - attack.t1047
+  name: WMIC Unquoted Services Path Lookup
+

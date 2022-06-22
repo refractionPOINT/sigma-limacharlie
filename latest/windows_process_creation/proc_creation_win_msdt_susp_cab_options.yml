@@ -17,29 +17,29 @@ detect:
         op: is
         path: event/ORIGINAL_FILE_NAME
         value: msdt.exe
-    - op: and
+    - op: or
       rules:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: /cab
+        value: ' /cab '
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: .diagcab
+        value: ' -cab '
 respond:
 - action: report
   metadata:
-    author: GossiTheDog (rule), frack113 (sigma version)
-    description: Detects diagcab leveraging the "ms-msdt" handler or the "msdt.exe"
-      binary to execute arbitrary commands as seen in CVE-2022-30190
+    author: Nasreddine Bencherchali
+    description: Detects execution of msdt.exe using the "cab" flag which could indicates
+      suspicious diagcab files with embedded answer files leveraging CVE-2022-30190
     falsepositives:
     - Legitimate usage of ".diagcab" files
-    level: high
+    level: medium
     references:
-    - https://github.com/GossiTheDog/ThreatHunting/blob/master/AdvancedHuntingQueries/DogWalk-DiagCab
+    - https://twitter.com/nas_bench/status/1537896324837781506
     tags:
     - attack.defense_evasion
     - attack.t1202
-  name: Execute MSDT.EXE Using Diagcab File
+  name: MSDT.EXE Execution With Suspicious Cab Option
 

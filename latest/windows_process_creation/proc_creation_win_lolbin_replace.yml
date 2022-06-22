@@ -11,10 +11,16 @@ detect:
       op: ends with
       path: event/FILE_PATH
       value: \replace.exe
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: /a
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /a
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -a
 respond:
 - action: report
   metadata:
