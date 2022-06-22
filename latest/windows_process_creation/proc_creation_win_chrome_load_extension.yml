@@ -1,0 +1,42 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \chrome.exe
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \powershell.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: --load-extension=
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: \AppData\Local\
+respond:
+- action: report
+  metadata:
+    author: Aedan Russell, frack113 (sigma)
+    description: Detects PowerShell spawning chrome.exe containing load-extension
+      and AppData\Local in the process command line
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://redcanary.com/blog/chromeloader/
+    - https://emkc.org/s/RJjuLa
+    tags:
+    - attack.persistence
+    - attack.t1176
+  name: Powershell ChromeLoader Browser Hijacker
+

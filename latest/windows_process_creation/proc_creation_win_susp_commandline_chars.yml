@@ -45,8 +45,8 @@ respond:
 - action: report
   metadata:
     author: Florian Roth
-    description: Detects suspicious characters in the command line, which could be
-      a sign of obfuscation
+    description: Detects suspicious Unicode characters in the command line, which
+      could be a sign of obfuscation or defense evasion
     falsepositives:
     - Unknown
     level: high
