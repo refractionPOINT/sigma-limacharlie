@@ -18,11 +18,13 @@ detect:
 respond:
 - action: report
   metadata:
-    author: omkar72 - https://www.fireeye.com/blog/threat-research/2020/10/kegtap-and-singlemalt-with-a-ransomware-chaser.html
-    description: Detect ed user accept agreement execution in psexec commandline
+    author: omkar72
+    description: Detects user accept agreement execution in psexec commandline
     falsepositives:
     - Administrative scripts.
     level: medium
+    references:
+    - https://www.fireeye.com/blog/threat-research/2020/10/kegtap-and-singlemalt-with-a-ransomware-chaser.html
     tags:
     - attack.execution
     - attack.t1569
