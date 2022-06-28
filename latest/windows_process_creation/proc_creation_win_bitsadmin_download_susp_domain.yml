@@ -1,0 +1,97 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \bitsadmin.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /transfer '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /create '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /addfile '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: raw.githubusercontent.com
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: gist.githubusercontent.com
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: pastebin.com
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: cdn.discordapp.com/attachments/
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: mediafire.com
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: mega.nz
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ddns.net
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .paste.ee
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .hastebin.com
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .ghostbin.co/
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ufile.io
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: storage.googleapis.com
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects usage of bitsadmin downloading a file from a suspicious domain
+    falsepositives:
+    - Some legitimate apps use this, but limited.
+    level: medium
+    references:
+    - https://blog.netspi.com/15-ways-to-download-a-file/#bitsadmin
+    - https://isc.sans.edu/diary/22264
+    - https://lolbas-project.github.io/lolbas/Binaries/Bitsadmin/
+    tags:
+    - attack.defense_evasion
+    - attack.persistence
+    - attack.t1197
+    - attack.s0190
+    - attack.t1036.003
+  name: Bitsadmin Download from Suspicious Domain
+

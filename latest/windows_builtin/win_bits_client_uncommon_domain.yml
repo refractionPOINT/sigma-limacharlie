@@ -6,56 +6,25 @@ detect:
     op: is
     path: Event/System/EventID
     value: '16403'
-  - op: or
+  - not: true
+    op: or
     rules:
     - case sensitive: false
       op: contains
       path: Event/EventData/RemoteName
-      value: raw.githubusercontent.com
+      value: .com
     - case sensitive: false
       op: contains
       path: Event/EventData/RemoteName
-      value: gist.githubusercontent.com
+      value: .azureedge.net
     - case sensitive: false
       op: contains
       path: Event/EventData/RemoteName
-      value: pastebin.com
+      value: .sfx.ms
     - case sensitive: false
       op: contains
       path: Event/EventData/RemoteName
-      value: cdn.discordapp.com/attachments/
-    - case sensitive: false
-      op: contains
-      path: Event/EventData/RemoteName
-      value: mediafire.com
-    - case sensitive: false
-      op: contains
-      path: Event/EventData/RemoteName
-      value: mega.nz
-    - case sensitive: false
-      op: contains
-      path: Event/EventData/RemoteName
-      value: ddns.net
-    - case sensitive: false
-      op: contains
-      path: Event/EventData/RemoteName
-      value: .paste.ee
-    - case sensitive: false
-      op: contains
-      path: Event/EventData/RemoteName
-      value: .hastebin.com
-    - case sensitive: false
-      op: contains
-      path: Event/EventData/RemoteName
-      value: .ghostbin.co/
-    - case sensitive: false
-      op: contains
-      path: Event/EventData/RemoteName
-      value: ufile.io
-    - case sensitive: false
-      op: contains
-      path: Event/EventData/RemoteName
-      value: storage.googleapis.com
+      value: download.mozilla.org
   target: log
 respond:
 - action: report
@@ -65,8 +34,8 @@ respond:
       is unusual. Adversaries may abuse BITS jobs to persistently execute or clean
       up after malicious payloads.
     falsepositives:
-    - Unknown
-    level: high
+    - Other legitimate domains used by software updaters
+    level: medium
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1197/T1197.md
     - https://twitter.com/malmoeb/status/1535142803075960832

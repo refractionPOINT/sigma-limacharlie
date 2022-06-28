@@ -9,34 +9,65 @@ detect:
       op: is
       path: event/EVENT/System/EventID
       value: '16403'
-    - not: true
-      op: or
+    - op: or
       rules:
       - case sensitive: false
         op: contains
         path: event/EVENT/EventData/RemoteName
-        value: .com
+        value: raw.githubusercontent.com
       - case sensitive: false
         op: contains
         path: event/EVENT/EventData/RemoteName
-        value: .azureedge.net
+        value: gist.githubusercontent.com
       - case sensitive: false
         op: contains
         path: event/EVENT/EventData/RemoteName
-        value: .sfx.ms
+        value: pastebin.com
       - case sensitive: false
         op: contains
         path: event/EVENT/EventData/RemoteName
-        value: download.mozilla.org
+        value: cdn.discordapp.com/attachments/
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/RemoteName
+        value: mediafire.com
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/RemoteName
+        value: mega.nz
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/RemoteName
+        value: ddns.net
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/RemoteName
+        value: .paste.ee
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/RemoteName
+        value: .hastebin.com
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/RemoteName
+        value: .ghostbin.co/
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/RemoteName
+        value: ufile.io
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/RemoteName
+        value: storage.googleapis.com
 respond:
 - action: report
   metadata:
     author: Florian Roth
-    description: Detects a suspicious download using the BITS client form a FQDN that
+    description: Detects a suspicious download using the BITS client from a FQDN that
       is unusual. Adversaries may abuse BITS jobs to persistently execute or clean
       up after malicious payloads.
     falsepositives:
-    - Other legitimate domains used by software updaters
+    - Unknown
     level: high
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1197/T1197.md
