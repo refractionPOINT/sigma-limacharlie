@@ -55,7 +55,7 @@ respond:
       restricted.
     falsepositives:
     - User using a disabled account
-    level: high
+    level: medium
     references:
     - https://docs.microsoft.com/en-us/windows/security/threat-protection/auditing/event-4625
     - https://twitter.com/SBousseaden/status/1101431884540710913

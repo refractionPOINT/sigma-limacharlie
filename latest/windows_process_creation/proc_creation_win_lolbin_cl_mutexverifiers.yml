@@ -5,7 +5,7 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: or
+  - op: and
     rules:
     - case sensitive: false
       op: contains
@@ -18,7 +18,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: frack113
+    author: oscd.community, Natalia Shornikova, frack113
     description: Detects the use of a Micorsoft signed script to execute commands
     falsepositives:
     - Unknown

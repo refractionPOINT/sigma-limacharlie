@@ -52,38 +52,6 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: Remove-EtwTraceProvider
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: EventLog-Microsoft-Windows-WMI-Activity-Trace
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: '{1418ef04-b0b4-4623-bf7e-d74ab47bbdaa}'
-    - op: and
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: Set-EtwTraceProvider
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: '{1418ef04-b0b4-4623-bf7e-d74ab47bbdaa}'
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: EventLog-Microsoft-Windows-WMI-Activity-Trace
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: '0x11'
-    - op: and
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
         value: logman
       - case sensitive: false
         op: contains
@@ -101,6 +69,20 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: -ets
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Remove-EtwTraceProvider
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Set-EtwTraceProvider
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '0x11'
 respond:
 - action: report
   metadata:

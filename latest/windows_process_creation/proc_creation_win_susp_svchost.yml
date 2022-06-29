@@ -35,10 +35,6 @@ detect:
         - case sensitive: false
           op: ends with
           path: event/PARENT/FILE_PATH
-          value: \svchost.exe
-        - case sensitive: false
-          op: ends with
-          path: event/PARENT/FILE_PATH
           value: \ngen.exe
         - case sensitive: false
           op: ends with

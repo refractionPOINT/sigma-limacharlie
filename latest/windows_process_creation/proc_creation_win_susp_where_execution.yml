@@ -22,15 +22,51 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: places.sqlite
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: cookies.sqlite
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: formhistory.sqlite
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: logins.json
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: key4.db
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: key3.db
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: sessionstore.jsonlz4
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: History
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: Bookmarks
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: places.sqlite
+        value: Cookies
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Login Data
 respond:
 - action: report
   metadata:
-    author: frack113
+    author: frack113, Nasreddine Bencherchali
     description: 'Adversaries may enumerate browser bookmarks to learn more about
       compromised hosts.
 
