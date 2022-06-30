@@ -57,6 +57,16 @@ detect:
           op: starts with
           path: event/COMMAND_LINE
           value: C:\Windows\system32\MsiExec.exe -Embedding
+      - op: and
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: :\Windows\System32\cmd.exe
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: ' C:\Program Files\SplunkUniversalForwarder\'
 respond:
 - action: report
   metadata:

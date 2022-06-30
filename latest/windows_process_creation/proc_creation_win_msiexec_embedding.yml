@@ -7,24 +7,37 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - op: or
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \cmd.exe
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: MsiExec.exe
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: '-Embedding '
+    - not: true
+      op: and
       rules:
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
-        value: \powershell.exe
+        value: :\Windows\System32\cmd.exe
       - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \cmd.exe
-    - case sensitive: false
-      op: contains
-      path: event/PARENT/COMMAND_LINE
-      value: MsiExec.exe
-    - case sensitive: false
-      op: contains
-      path: event/PARENT/COMMAND_LINE
-      value: '-Embedding '
+        op: contains
+        path: event/COMMAND_LINE
+        value: C:\Program Files\SplunkUniversalForwarder\bin\
 respond:
 - action: report
   metadata:
