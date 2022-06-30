@@ -20,16 +20,22 @@ detect:
       op: is
       path: Event/EventData/PrivilegeList
       value: SeTakeOwnershipPrivilege
-  - case sensitive: false
-    not: true
-    op: is
-    path: Event/EventData/SubjectLogonId
-    value: '0x3e4'
+  - not: true
+    op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/EventData/SubjectLogonId
+      value: '0x3e4'
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/ProcessName
+      value: :\Windows\System32\services.exe
   target: log
 respond:
 - action: report
   metadata:
-    author: Roberto Rodriguez @Cyb3rWard0g
+    author: Roberto Rodriguez @Cyb3rWard0g, Tim Shelton
     description: Detects non-system users performing privileged operation os the SCM
       database
     falsepositives:
