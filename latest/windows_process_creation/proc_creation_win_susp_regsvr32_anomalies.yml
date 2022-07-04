@@ -121,6 +121,46 @@ detect:
             op: contains
             path: event/COMMAND_LINE
             value: C:\Users\Public
+      - op: and
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \regsvr32.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/COMMAND_LINE
+            value: .jpg
+          - case sensitive: false
+            op: ends with
+            path: event/COMMAND_LINE
+            value: .jpeg
+          - case sensitive: false
+            op: ends with
+            path: event/COMMAND_LINE
+            value: .png
+          - case sensitive: false
+            op: ends with
+            path: event/COMMAND_LINE
+            value: .gif
+          - case sensitive: false
+            op: ends with
+            path: event/COMMAND_LINE
+            value: .bin
+          - case sensitive: false
+            op: ends with
+            path: event/COMMAND_LINE
+            value: .tmp
+          - case sensitive: false
+            op: ends with
+            path: event/COMMAND_LINE
+            value: .temp
+          - case sensitive: false
+            op: ends with
+            path: event/COMMAND_LINE
+            value: .txt
     - case sensitive: false
       not: true
       op: contains
