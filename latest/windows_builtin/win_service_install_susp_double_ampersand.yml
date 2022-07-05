@@ -13,26 +13,21 @@ detect:
   - case sensitive: false
     op: contains
     path: Event/EventData/ImagePath
-    value: mshta
-  - case sensitive: false
-    op: contains
-    path: Event/EventData/ImagePath
-    value: vbscript:createobject
+    value: '&&'
   target: log
 respond:
 - action: report
   metadata:
-    author: Nikita Nazarov, oscd.community
-    description: Detects Obfuscated Powershell via use MSHTA in Scripts
+    author: Florian Roth
+    description: Detects a service installation that uses a suspicious double ampersand
+      used in the image path value
     falsepositives:
     - Unknown
     level: high
     references:
-    - https://github.com/Neo23x0/sigma/issues/1009
+    - Internal Research
     tags:
     - attack.defense_evasion
     - attack.t1027
-    - attack.execution
-    - attack.t1059.001
-  name: Invoke-Obfuscation Via Use MSHTA
+  name: New Service Uses Double Ampersand in Path
 
