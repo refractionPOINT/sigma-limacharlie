@@ -28,6 +28,10 @@ detect:
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
+        value: \powershell_ise.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
         value: \regsvr32.exe
       - case sensitive: false
         op: ends with
@@ -97,6 +101,102 @@ detect:
         op: ends with
         path: event/FILE_PATH
         value: \wlanext.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \dashost.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \schtasks.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cscript.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \wscript.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \wsl.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \bitsadmin.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \atbroker.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \bcdedit.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \certutil.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \certreq.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cmstp.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \consent.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \defrag.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \dism.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \dllhst3g.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \eventvwr.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \msiexec.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \runonce.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \winver.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \logonui.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \userinit.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \dwm.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \LsaIso.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \ntoskrnl.exe
     - not: true
       op: or
       rules:
@@ -129,7 +229,8 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth, Patrick Bareiss, Anton Kutepov, oscd.community
+    author: Florian Roth, Patrick Bareiss, Anton Kutepov, oscd.community, Nasreddine
+      Bencherchali
     description: Detects a Windows program executable started in a suspicious folder
     falsepositives:
     - Exotic software
