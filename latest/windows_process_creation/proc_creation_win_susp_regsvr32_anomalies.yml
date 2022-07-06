@@ -161,11 +161,17 @@ detect:
             op: ends with
             path: event/COMMAND_LINE
             value: .txt
-    - case sensitive: false
-      not: true
-      op: contains
-      path: event/COMMAND_LINE
-      value: \AppData\Local\Microsoft\Teams
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \AppData\Local\Microsoft\Teams
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \AppData\Local\WebEx\WebEx64\Meetings\atucfobj.dll
 respond:
 - action: report
   metadata:

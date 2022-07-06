@@ -7,20 +7,32 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: bash.exe
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: '-c '
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bash.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-c '
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: C:\Program Files\Git\post-install.bat
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: C:\Program Files (x86)\Git\post-install.bat
 respond:
 - action: report
   metadata:
     author: frack113
-    description: Performs execution of specified file, can be used as a defensive
-      evasion.
+    description: Performs execution of specified file, can be used for defensive evasion.
     falsepositives:
     - Unknown
     level: medium
