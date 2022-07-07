@@ -28,16 +28,34 @@ detect:
         path: event/PARENT/COMMAND_LINE
         value: '-Embedding '
     - not: true
-      op: and
+      op: or
       rules:
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: :\Windows\System32\cmd.exe
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: C:\Program Files\SplunkUniversalForwarder\bin\
+      - op: and
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: :\Windows\System32\cmd.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: C:\Program Files\SplunkUniversalForwarder\bin\
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \DismFoDInstall.cmd
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/COMMAND_LINE
+            value: '\MsiExec.exe -Embedding '
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/COMMAND_LINE
+            value: Global\MSI0000
 respond:
 - action: report
   metadata:
