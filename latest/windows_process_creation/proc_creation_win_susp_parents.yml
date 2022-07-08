@@ -12,10 +12,6 @@ detect:
       - case sensitive: false
         op: ends with
         path: event/PARENT/FILE_PATH
-        value: \notepad.exe
-      - case sensitive: false
-        op: ends with
-        path: event/PARENT/FILE_PATH
         value: \minesweeper.exe
       - case sensitive: false
         op: ends with
@@ -49,6 +45,10 @@ detect:
           op: ends with
           path: event/PARENT/FILE_PATH
           value: \calc.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \notepad.exe
       - not: true
         op: or
         rules:
@@ -74,6 +74,10 @@ detect:
             op: ends with
             path: event/FILE_PATH
             value: \win32calc.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \notepad.exe
         - not: true
           op: exists
           path: event/FILE_PATH
