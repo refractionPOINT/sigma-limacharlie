@@ -53,18 +53,20 @@ detect:
         op: ends with
         path: event/PARENT/FILE_PATH
         value: \powerpnt.exe
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: process
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: create
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: call
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: process
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: create
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: call
 respond:
 - action: report
   metadata:

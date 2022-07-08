@@ -11,10 +11,16 @@ detect:
       op: ends with
       path: event/FILE_PATH
       value: \regedit.exe
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: ' /E '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /E '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -E '
     - op: or
       rules:
       - case sensitive: false
@@ -48,7 +54,7 @@ respond:
     - Dumping hives for legitimate purpouse i.e. backup or forensic investigation
     level: high
     references:
-    - https://github.com/LOLBAS-Project/LOLBAS/blob/master/yml/OSBinaries/Regedit.yml
+    - https://lolbas-project.github.io/lolbas/Binaries/Regedit/
     - https://gist.github.com/api0cradle/cdd2d0d0ec9abb686f0e89306e277b8f
     tags:
     - attack.exfiltration

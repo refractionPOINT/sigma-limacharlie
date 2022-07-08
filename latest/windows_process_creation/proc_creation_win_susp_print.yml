@@ -39,7 +39,7 @@ respond:
     - Unknown
     level: medium
     references:
-    - https://github.com/LOLBAS-Project/LOLBAS/blob/master/yml/OSBinaries/Print.yml
+    - https://lolbas-project.github.io/lolbas/Binaries/Print/
     - https://twitter.com/Oddvarmoe/status/985518877076541440
     tags:
     - attack.defense_evasion

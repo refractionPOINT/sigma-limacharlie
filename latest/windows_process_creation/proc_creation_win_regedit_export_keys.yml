@@ -13,10 +13,16 @@ detect:
         op: ends with
         path: event/FILE_PATH
         value: \regedit.exe
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ' /E '
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /E '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -E '
     - not: true
       op: and
       rules:
@@ -53,7 +59,7 @@ respond:
     - Legitimate export of keys
     level: low
     references:
-    - https://github.com/LOLBAS-Project/LOLBAS/blob/master/yml/OSBinaries/Regedit.yml
+    - https://lolbas-project.github.io/lolbas/Binaries/Regedit/
     - https://gist.github.com/api0cradle/cdd2d0d0ec9abb686f0e89306e277b8f
     tags:
     - attack.exfiltration

@@ -32,7 +32,7 @@ respond:
     - Unknown
     level: high
     references:
-    - https://github.com/p0shkatz/Get-ADS/blob/master/Get-ADS.ps1
+    - https://github.com/p0shkatz/Get-ADS/blob/1c3a3562e713c254edce1995a7d9879c687c7473/Get-ADS.ps1
     tags:
     - attack.defense_evasion
     - attack.t1564.004

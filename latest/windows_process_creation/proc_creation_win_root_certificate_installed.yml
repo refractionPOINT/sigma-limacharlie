@@ -46,7 +46,7 @@ respond:
       to test if GPO push doesn't trigger FP
     level: medium
     references:
-    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1553.004/T1553.004.md
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1553.004/T1553.004.md
     tags:
     - attack.defense_evasion
     - attack.t1553.004
