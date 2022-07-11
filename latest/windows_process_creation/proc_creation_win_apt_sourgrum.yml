@@ -13,20 +13,18 @@ detect:
         op: contains
         path: event/FILE_PATH
         value: windows\system32\Physmem.sys
-      - op: or
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/FILE_PATH
-          value: Windows\system32\ime\SHARED\WimBootConfigurations.ini
-        - case sensitive: false
-          op: contains
-          path: event/FILE_PATH
-          value: Windows\system32\ime\IMEJP\WimBootConfigurations.ini
-        - case sensitive: false
-          op: contains
-          path: event/FILE_PATH
-          value: Windows\system32\ime\IMETC\WimBootConfigurations.ini
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: Windows\system32\ime\SHARED\WimBootConfigurations.ini
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: Windows\system32\ime\IMEJP\WimBootConfigurations.ini
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: Windows\system32\ime\IMETC\WimBootConfigurations.ini
     - op: and
       rules:
       - op: or
@@ -64,7 +62,7 @@ respond:
     level: high
     references:
     - https://www.virustotal.com/gui/file/c299063e3eae8ddc15839767e83b9808fd43418dc5a1af7e4f44b97ba53fbd3d/detection
-    - https://github.com/Azure/Azure-Sentinel/blob/master/Detections/MultipleDataSources/SOURGUM_IOC.yaml
+    - https://github.com/Azure/Azure-Sentinel/blob/43e9be273dca321295190bfc4902858e009d4a35/Detections/MultipleDataSources/SOURGUM_IOC.yaml
     - https://www.microsoft.com/security/blog/2021/07/15/protecting-customers-from-a-private-sector-offensive-actor-using-0-day-exploits-and-devilstongue-malware/
     tags:
     - attack.t1546

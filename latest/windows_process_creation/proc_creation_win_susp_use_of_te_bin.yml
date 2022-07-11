@@ -31,7 +31,7 @@ respond:
     - It's not an uncommon to use te.exe directly to execute legal TAEF tests
     level: low
     references:
-    - https://github.com/LOLBAS-Project/LOLBAS/blob/master/yml/OtherMSBinaries/Te.yml
+    - https://lolbas-project.github.io/lolbas/OtherMSBinaries/Te/
     - https://twitter.com/pabraeken/status/993298228840992768
     - https://docs.microsoft.com/en-us/windows-hardware/drivers/taef/
     tags:

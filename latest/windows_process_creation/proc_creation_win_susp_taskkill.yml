@@ -38,7 +38,7 @@ respond:
     - Unknown
     level: low
     references:
-    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1489/T1489.md#atomic-test-3---windows---stop-service-by-killing-process
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1489/T1489.md#atomic-test-3---windows---stop-service-by-killing-process
     tags:
     - attack.impact
     - attack.t1489

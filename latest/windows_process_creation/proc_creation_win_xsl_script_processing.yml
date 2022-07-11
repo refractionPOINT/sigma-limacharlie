@@ -5,9 +5,9 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: and
+  - op: or
     rules:
-    - op: or
+    - op: and
       rules:
       - op: and
         rules:
@@ -19,49 +19,49 @@ detect:
           op: contains
           path: event/COMMAND_LINE
           value: /format
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \msxsl.exe
-    - not: true
-      op: or
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /Format:List
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /Format:htable
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /Format:hform
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /Format:table
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /Format:mof
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /Format:value
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /Format:rawxml
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /Format:xml
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /Format:csv
+      - not: true
+        op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /Format:List
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /Format:htable
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /Format:hform
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /Format:table
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /Format:mof
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /Format:value
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /Format:rawxml
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /Format:xml
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /Format:csv
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \msxsl.exe
 respond:
 - action: report
   metadata:
@@ -77,7 +77,7 @@ respond:
     - Static format arguments - https://petri.com/command-line-wmi-part-3
     level: medium
     references:
-    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1220/T1220.md
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1220/T1220.md
     tags:
     - attack.defense_evasion
     - attack.t1220

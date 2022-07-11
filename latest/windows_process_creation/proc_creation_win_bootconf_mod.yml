@@ -50,7 +50,7 @@ respond:
     - Unlikely
     level: high
     references:
-    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1490/T1490.md
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1490/T1490.md
     - https://eqllib.readthedocs.io/en/latest/analytics/c4732632-9c1d-4980-9fa8-1d98c93f918e.html
     tags:
     - attack.impact

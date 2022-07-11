@@ -7,18 +7,26 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - case sensitive: false
-      op: ends with
-      path: event/FILE_PATH
-      value: \verclsid.exe
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: /C
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: /S
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \verclsid.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: verclsid.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /S
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /C
 respond:
 - action: report
   metadata:
@@ -28,7 +36,7 @@ respond:
     - Unknown
     level: medium
     references:
-    - https://github.com/LOLBAS-Project/LOLBAS/blob/master/yml/OSBinaries/Verclsid.yml
+    - https://lolbas-project.github.io/lolbas/Binaries/Verclsid/
     - https://gist.github.com/NickTyrer/0598b60112eaafe6d07789f7964290d5
     - https://bohops.com/2018/08/18/abusing-the-com-registry-structure-part-2-loading-techniques-for-evasion-and-persistence/
     tags:

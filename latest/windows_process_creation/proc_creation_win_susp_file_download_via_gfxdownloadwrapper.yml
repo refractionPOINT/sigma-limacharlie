@@ -7,22 +7,21 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - op: and
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \GfxDownloadWrapper.exe
+    - not: true
+      op: and
       rules:
       - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \GfxDownloadWrapper.exe
-      - case sensitive: false
-        not: true
         op: contains
         path: event/COMMAND_LINE
         value: gameplayapi.intel.com
-    - case sensitive: false
-      not: true
-      op: ends with
-      path: event/PARENT/FILE_PATH
-      value: \GfxDownloadWrapper.exe
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \GfxDownloadWrapper.exe
 respond:
 - action: report
   metadata:
@@ -33,7 +32,7 @@ respond:
     - Unknown
     level: medium
     references:
-    - https://github.com/LOLBAS-Project/LOLBAS/blob/master/yml/OSBinaries/GfxDownloadWrapper.yml
+    - https://lolbas-project.github.io/lolbas/Binaries/GfxDownloadWrapper/
     tags:
     - attack.command_and_control
     - attack.t1105

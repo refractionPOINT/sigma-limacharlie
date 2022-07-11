@@ -24,7 +24,7 @@ respond:
     - Unknown
     level: medium
     references:
-    - https://github.com/LOLBAS-Project/LOLBAS/blob/master/yml/OSBinaries/Runscripthelper.yml
+    - https://lolbas-project.github.io/lolbas/Binaries/Runscripthelper/
     tags:
     - attack.execution
     - attack.t1059

@@ -84,10 +84,10 @@ respond:
     - Unknown
     level: high
     references:
-    - https://github.com/SecureAuthCorp/impacket/blob/master/examples/wmiexec.py
-    - https://github.com/SecureAuthCorp/impacket/blob/master/examples/atexec.py
-    - https://github.com/SecureAuthCorp/impacket/blob/master/examples/smbexec.py
-    - https://github.com/SecureAuthCorp/impacket/blob/master/examples/dcomexec.py
+    - https://github.com/SecureAuthCorp/impacket/blob/8b1a99f7c715702eafe3f24851817bb64721b156/examples/wmiexec.py
+    - https://github.com/SecureAuthCorp/impacket/blob/8b1a99f7c715702eafe3f24851817bb64721b156/examples/atexec.py
+    - https://github.com/SecureAuthCorp/impacket/blob/8b1a99f7c715702eafe3f24851817bb64721b156/examples/smbexec.py
+    - https://github.com/SecureAuthCorp/impacket/blob/8b1a99f7c715702eafe3f24851817bb64721b156/examples/dcomexec.py
     tags:
     - attack.execution
     - attack.t1047

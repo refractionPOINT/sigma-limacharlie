@@ -25,7 +25,7 @@ respond:
     level: high
     references:
     - https://eqllib.readthedocs.io/en/latest/analytics/ec5180c9-721a-460f-bddc-27539a284273.html
-    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1197/T1197.md
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1197/T1197.md
     tags:
     - attack.defense_evasion
     - attack.persistence

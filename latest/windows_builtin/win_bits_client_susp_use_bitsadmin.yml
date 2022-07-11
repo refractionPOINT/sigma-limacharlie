@@ -26,7 +26,7 @@ respond:
     - Administrator PowerShell scripts
     level: low
     references:
-    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1197/T1197.md
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1197/T1197.md
     tags:
     - attack.defense_evasion
     - attack.persistence

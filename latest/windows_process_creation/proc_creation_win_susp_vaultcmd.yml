@@ -31,7 +31,7 @@ respond:
     - Unknown
     level: medium
     references:
-    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1555.004/T1555.004.md#atomic-test-1---access-saved-credentials-via-vaultcmd
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1555.004/T1555.004.md#atomic-test-1---access-saved-credentials-via-vaultcmd
     tags:
     - attack.credential_access
     - attack.t1555.004

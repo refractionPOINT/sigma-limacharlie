@@ -38,7 +38,7 @@ respond:
     - Legitimate administration activities
     level: medium
     references:
-    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1518/T1518.md
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1518/T1518.md
     - https://github.com/harleyQu1nn/AggressorScripts
     tags:
     - attack.discovery

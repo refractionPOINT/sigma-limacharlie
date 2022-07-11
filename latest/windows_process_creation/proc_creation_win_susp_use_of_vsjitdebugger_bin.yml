@@ -35,7 +35,7 @@ respond:
     level: medium
     references:
     - https://twitter.com/pabraeken/status/990758590020452353
-    - https://github.com/LOLBAS-Project/LOLBAS/blob/master/yml/OtherMSBinaries/Vsjitdebugger.yml
+    - https://lolbas-project.github.io/lolbas/OtherMSBinaries/Vsjitdebugger/
     - https://docs.microsoft.com/en-us/visualstudio/debugger/debug-using-the-just-in-time-debugger?view=vs-2019
     tags:
     - attack.t1218

@@ -139,7 +139,7 @@ respond:
     - Legitimate administrator or user enumerates local users for legitimate reason
     level: low
     references:
-    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1033/T1033.md
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1033/T1033.md
     tags:
     - attack.discovery
     - attack.t1033

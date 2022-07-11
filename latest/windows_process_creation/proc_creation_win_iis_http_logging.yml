@@ -37,7 +37,7 @@ respond:
     - Unknown
     level: high
     references:
-    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1562.002/T1562.002.md#atomic-test-1---disable-windows-iis-http-logging
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1562.002/T1562.002.md#atomic-test-1---disable-windows-iis-http-logging
     tags:
     - attack.defense_evasion
     - attack.t1562.002

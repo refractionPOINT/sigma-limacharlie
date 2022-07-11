@@ -18,7 +18,7 @@ respond:
     - Unknown
     level: low
     references:
-    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1082/T1082.md#atomic-test-6---hostname-discovery-windows
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1082/T1082.md#atomic-test-6---hostname-discovery-windows
     - https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/hostname
     tags:
     - attack.discovery

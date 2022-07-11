@@ -12,23 +12,23 @@ detect:
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
-        value: \regsvr32
+        value: \regsvr32.exe
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
-        value: \rundll32
+        value: \rundll32.exe
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
-        value: \msiexec
+        value: \msiexec.exe
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
-        value: \mshta
+        value: \mshta.exe
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
-        value: \verclsid
+        value: \verclsid.exe
     - case sensitive: false
       op: ends with
       path: event/PARENT/FILE_PATH
@@ -44,7 +44,7 @@ respond:
     level: high
     references:
     - https://thedfirreport.com/2021/03/29/sodinokibi-aka-revil-ransomware/
-    - https://github.com/vadim-hunter/Detection-Ideas-Rules/blob/main/Threat%20Intelligence/The%20DFIR%20Report/20210329_Sodinokibi_(aka_REvil)_Ransomware.yaml
+    - https://github.com/vadim-hunter/Detection-Ideas-Rules/blob/02bcbfc2bfb8b4da601bb30de0344ae453aa1afe/Threat%20Intelligence/The%20DFIR%20Report/20210329_Sodinokibi_(aka_REvil)_Ransomware.yaml
     tags:
     - attack.t1204.002
     - attack.t1047

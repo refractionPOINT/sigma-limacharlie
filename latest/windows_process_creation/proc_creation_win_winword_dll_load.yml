@@ -24,7 +24,7 @@ respond:
     - Unknown
     level: medium
     references:
-    - https://github.com/LOLBAS-Project/LOLBAS/blob/master/yml/LOLUtilz/OtherMSBinaries/Winword.yml
+    - https://lolbas-project.github.io/lolbas/OtherMSBinaries/Winword/
     tags:
     - attack.defense_evasion
     - attack.t1202

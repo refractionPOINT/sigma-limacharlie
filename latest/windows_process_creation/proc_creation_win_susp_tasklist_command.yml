@@ -12,9 +12,13 @@ detect:
       path: event/COMMAND_LINE
       value: tasklist
     - case sensitive: false
-      op: is
+      op: ends with
       path: event/FILE_PATH
-      value: C:\Windows\System32\tasklist.exe
+      value: \tasklist.exe
+    - case sensitive: false
+      op: is
+      path: event/ORIGINAL_FILE_NAME
+      value: tasklist.exe
 respond:
 - action: report
   metadata:
@@ -26,7 +30,7 @@ respond:
     - Administrator, hotline ask to user
     level: low
     references:
-    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1057/T1057.md#atomic-test-2---process-discovery---tasklist
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1057/T1057.md#atomic-test-2---process-discovery---tasklist
     tags:
     - attack.discovery
     - attack.t1057

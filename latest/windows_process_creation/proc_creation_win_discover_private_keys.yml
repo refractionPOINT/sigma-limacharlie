@@ -69,7 +69,7 @@ respond:
     - Unknown
     level: medium
     references:
-    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1552.004/T1552.004.md
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1552.004/T1552.004.md
     tags:
     - attack.credential_access
     - attack.t1552.004

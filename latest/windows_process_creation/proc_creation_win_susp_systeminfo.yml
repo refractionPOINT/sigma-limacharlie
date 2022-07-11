@@ -13,12 +13,12 @@ respond:
 - action: report
   metadata:
     author: frack113
-    description: Use of systeminfo to get information
+    description: Detects usage of the "systeminfo" command to retrieve information
     falsepositives:
     - Unknown
     level: low
     references:
-    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1082/T1082.md#atomic-test-1---system-information-discovery
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1082/T1082.md#atomic-test-1---system-information-discovery
     - https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/systeminfo
     tags:
     - attack.discovery

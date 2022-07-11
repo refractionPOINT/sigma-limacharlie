@@ -7,24 +7,38 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: ' /INJECTRUNNING'
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: .dll
-    - op: or
+    - op: and
       rules:
       - case sensitive: false
-        op: is
-        path: event/ORIGINAL_FILE_NAME
-        value: mavinject32.exe
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /INJECTRUNNING'
       - case sensitive: false
-        op: is
-        path: event/ORIGINAL_FILE_NAME
-        value: mavinject64.exe
+        op: contains
+        path: event/COMMAND_LINE
+        value: .dll
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: mavinject32.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: mavinject64.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \mavinject32.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \mavinject64.exe
 respond:
 - action: report
   metadata:
@@ -35,8 +49,8 @@ respond:
     - Unknown
     level: medium
     references:
-    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1218/T1218.md
-    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1056.004/T1056.004.md
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1218/T1218.md
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1056.004/T1056.004.md
     - https://posts.specterops.io/mavinject-exe-functionality-deconstructed-c29ab2cf5c0e
     tags:
     - attack.defense_evasion

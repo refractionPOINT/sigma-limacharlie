@@ -18,7 +18,7 @@ respond:
     - Legitimate use of dnx.exe by legitimate user
     level: medium
     references:
-    - https://github.com/LOLBAS-Project/LOLBAS/blob/master/yml/OtherMSBinaries/Csi.yml
+    - https://lolbas-project.github.io/lolbas/OtherMSBinaries/Csi/
     - https://enigma0x3.net/2016/11/17/bypassing-application-whitelisting-by-using-dnx-exe/
     tags:
     - attack.defense_evasion

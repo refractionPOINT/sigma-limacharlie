@@ -69,7 +69,7 @@ respond:
     - Legitimate administrator sets up autorun keys for legitimate reasons.
     level: medium
     references:
-    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1547.001/T1547.001.md
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1547.001/T1547.001.md
     tags:
     - attack.persistence
     - attack.t1547.001

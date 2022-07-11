@@ -7,22 +7,38 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - case sensitive: false
-      op: ends with
-      path: event/PARENT/FILE_PATH
-      value: \net.exe
-    - case sensitive: false
-      op: ends with
-      path: event/FILE_PATH
-      value: \net1.exe
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: share
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: /delete
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \net.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \net1.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: net.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: net1.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: share
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /delete
 respond:
 - action: report
   metadata:
@@ -34,7 +50,7 @@ respond:
     - Administrators or Power users may remove their shares via cmd line
     level: low
     references:
-    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1070.005/T1070.005.md
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1070.005/T1070.005.md
     tags:
     - attack.defense_evasion
     - attack.t1070.005

@@ -5,10 +5,16 @@ detect:
   op: and
   rules:
   - op: is windows
-  - case sensitive: false
-    op: is
-    path: event/ORIGINAL_FILE_NAME
-    value: clip.exe
+  - op: or
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \clip.exe
+    - case sensitive: false
+      op: is
+      path: event/ORIGINAL_FILE_NAME
+      value: clip.exe
 respond:
 - action: report
   metadata:
@@ -20,7 +26,7 @@ respond:
     level: low
     references:
     - https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/clip
-    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1115/T1115.md
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1115/T1115.md
     tags:
     - attack.collection
     - attack.t1115

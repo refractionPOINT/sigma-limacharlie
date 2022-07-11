@@ -5,30 +5,30 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: or
+  - op: and
     rules:
-    - op: and
+    - op: or
       rules:
-      - op: or
+      - op: and
         rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \takeown.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \cacls.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \icacls.exe
         - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \takeown.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \cacls.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \icacls.exe
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /grant
-    - op: and
-      rules:
+          op: contains
+          path: event/COMMAND_LINE
+          value: /grant
       - op: and
         rules:
         - case sensitive: false
@@ -39,29 +39,29 @@ detect:
           op: contains
           path: event/COMMAND_LINE
           value: -r
-      - not: true
-        op: or
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: ICACLS C:\ProgramData\dynatrace\gateway\config\connectivity.history
+          /reset
+      - op: and
         rules:
-        - case sensitive: false
-          op: ends with
-          path: event/COMMAND_LINE
-          value: ICACLS C:\ProgramData\dynatrace\gateway\config\connectivity.history
-            /reset
-        - op: and
-          rules:
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: 'ICACLS C:\ProgramData\dynatrace\gateway\config\config.properties
-              /grant :r '
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: S-1-5-19:F
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: \AppData\Local\Programs\Microsoft VS Code
+          value: 'ICACLS C:\ProgramData\dynatrace\gateway\config\config.properties
+            /grant :r '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: S-1-5-19:F
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \AppData\Local\Programs\Microsoft VS Code
 respond:
 - action: report
   metadata:
@@ -72,7 +72,7 @@ respond:
     - Dynatrace app
     level: medium
     references:
-    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1222.001/T1222.001.md
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1222.001/T1222.001.md
     tags:
     - attack.defense_evasion
     - attack.t1222.001
