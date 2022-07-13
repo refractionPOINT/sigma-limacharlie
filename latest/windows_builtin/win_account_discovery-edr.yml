@@ -7,64 +7,71 @@ detect:
     rules:
     - op: and
       rules:
-      - case sensitive: false
-        op: is
-        path: event/EVENT/System/EventID
-        value: '4661'
-      - op: or
+      - op: and
         rules:
         - case sensitive: false
           op: is
-          path: event/EVENT/EventData/ObjectType
-          value: SAM_USER
-        - case sensitive: false
-          op: is
-          path: event/EVENT/EventData/ObjectType
-          value: SAM_GROUP
-    - op: or
-      rules:
+          path: event/EVENT/System/EventID
+          value: '4661'
+        - op: or
+          rules:
+          - case sensitive: false
+            op: is
+            path: event/EVENT/EventData/ObjectType
+            value: SAM_USER
+          - case sensitive: false
+            op: is
+            path: event/EVENT/EventData/ObjectType
+            value: SAM_GROUP
       - op: or
         rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/EVENT/EventData/ObjectName
+            value: '-512'
+          - case sensitive: false
+            op: ends with
+            path: event/EVENT/EventData/ObjectName
+            value: '-502'
+          - case sensitive: false
+            op: ends with
+            path: event/EVENT/EventData/ObjectName
+            value: '-500'
+          - case sensitive: false
+            op: ends with
+            path: event/EVENT/EventData/ObjectName
+            value: '-505'
+          - case sensitive: false
+            op: ends with
+            path: event/EVENT/EventData/ObjectName
+            value: '-519'
+          - case sensitive: false
+            op: ends with
+            path: event/EVENT/EventData/ObjectName
+            value: '-520'
+          - case sensitive: false
+            op: ends with
+            path: event/EVENT/EventData/ObjectName
+            value: '-544'
+          - case sensitive: false
+            op: ends with
+            path: event/EVENT/EventData/ObjectName
+            value: '-551'
+          - case sensitive: false
+            op: ends with
+            path: event/EVENT/EventData/ObjectName
+            value: '-555'
         - case sensitive: false
-          op: ends with
+          op: contains
           path: event/EVENT/EventData/ObjectName
-          value: '-512'
-        - case sensitive: false
-          op: ends with
-          path: event/EVENT/EventData/ObjectName
-          value: '-502'
-        - case sensitive: false
-          op: ends with
-          path: event/EVENT/EventData/ObjectName
-          value: '-500'
-        - case sensitive: false
-          op: ends with
-          path: event/EVENT/EventData/ObjectName
-          value: '-505'
-        - case sensitive: false
-          op: ends with
-          path: event/EVENT/EventData/ObjectName
-          value: '-519'
-        - case sensitive: false
-          op: ends with
-          path: event/EVENT/EventData/ObjectName
-          value: '-520'
-        - case sensitive: false
-          op: ends with
-          path: event/EVENT/EventData/ObjectName
-          value: '-544'
-        - case sensitive: false
-          op: ends with
-          path: event/EVENT/EventData/ObjectName
-          value: '-551'
-        - case sensitive: false
-          op: ends with
-          path: event/EVENT/EventData/ObjectName
-          value: '-555'
-      - case sensitive: false
-        op: contains
-        path: event/EVENT/EventData/ObjectName
-        value: admin
+          value: admin
+    - case sensitive: false
+      not: true
+      op: ends with
+      path: event/EVENT/EventData/SubjectUserName
+      value: $
 respond:
 - action: report
   metadata:
