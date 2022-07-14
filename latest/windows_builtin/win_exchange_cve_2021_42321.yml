@@ -1,0 +1,41 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - op: or
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '6'
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '8'
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/Data
+      value: 'Cmdlet failed. Cmdlet Get-App, '
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/Data
+      value: 'Task Get-App throwing unhandled exception: System.InvalidCastException:'
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Florian Roth, @testanull
+    description: Detects log entries that appear in exploitation attempts against
+      MS Exchange RCE CVE-2021-42321
+    falsepositives:
+    - Unknown, please report false positives via https://github.com/SigmaHQ/sigma/issues
+    level: high
+    references:
+    - https://msrc.microsoft.com/update-guide/vulnerability/CVE-2021-42321
+    tags:
+    - attack.lateral_movement
+    - attack.t1210
+  name: Possible Exploitation of Exchange RCE CVE-2021-42321
+
