@@ -33,10 +33,16 @@ detect:
           value: ' sl '
     - op: and
       rules:
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \powershell.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \pwsh.exe
       - op: or
         rules:
         - case sensitive: false

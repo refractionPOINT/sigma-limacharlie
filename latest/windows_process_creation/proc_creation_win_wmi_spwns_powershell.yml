@@ -17,14 +17,26 @@ detect:
           value: \wmiprvse.exe
         - op: or
           rules:
-          - case sensitive: false
-            op: ends with
-            path: event/FILE_PATH
-            value: \powershell.exe
-          - case sensitive: false
-            op: is
-            path: event/ORIGINAL_FILE_NAME
-            value: PowerShell.EXE
+          - op: or
+            rules:
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \powershell.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \pwsh.exe
+          - op: or
+            rules:
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: PowerShell.EXE
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: pwsh.dll
       - case sensitive: false
         not: true
         op: is

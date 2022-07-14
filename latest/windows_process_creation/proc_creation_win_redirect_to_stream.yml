@@ -7,23 +7,34 @@ detect:
   - op: is windows
   - op: and
     rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cmd.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '> '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ':'
     - case sensitive: false
-      op: ends with
-      path: event/FILE_PATH
-      value: \cmd.exe
-    - case sensitive: false
-      op: matches
+      not: true
+      op: contains
       path: event/COMMAND_LINE
-      re: .*>.*:.*
+      value: :\
 respond:
 - action: report
   metadata:
     author: frack113
-    description: Detects the redirection of an output stream of / within a Windows
-      command line session
+    description: Detects the redirection of an alternate data stream (ADS) of / within
+      a Windows command line session
     falsepositives:
     - Unknown
-    level: low
+    level: medium
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1564.004/T1564.004.md#atomic-test-3---create-ads-command-prompt
     tags:

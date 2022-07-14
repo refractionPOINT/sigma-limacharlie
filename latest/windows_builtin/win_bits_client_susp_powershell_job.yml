@@ -6,10 +6,16 @@ detect:
     op: is
     path: Event/System/EventID
     value: '3'
-  - case sensitive: false
-    op: ends with
-    path: Event/EventData/processPath
-    value: \powershell.exe
+  - op: or
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/processPath
+      value: \powershell.exe
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/processPath
+      value: \pwsh.exe
   target: log
 respond:
 - action: report

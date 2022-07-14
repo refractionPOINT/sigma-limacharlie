@@ -34,6 +34,14 @@ detect:
               op: ends with
               path: event/PARENT/FILE_PATH
               value: \powershell.exe
+            - case sensitive: false
+              op: ends with
+              path: event/PARENT/FILE_PATH
+              value: \pwsh.exe
+            - case sensitive: false
+              op: ends with
+              path: event/PARENT/FILE_PATH
+              value: \powershell_ise.exe
         - not: true
           op: or
           rules:

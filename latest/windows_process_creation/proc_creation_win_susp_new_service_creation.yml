@@ -7,28 +7,38 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - case sensitive: false
-      op: ends with
-      path: event/FILE_PATH
-      value: \sc.exe
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: config
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: binPath
+    - op: or
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \sc.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: create
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: binPath=
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: New-Service
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: -BinaryPathName
     - op: or
       rules:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
         value: powershell
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: cmd
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -41,6 +51,10 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: cscript
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: cmd.exe /c
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -72,9 +86,9 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Victor Sergeev, oscd.community, Nasreddine Bencherchali (update)
-    description: Detects service path modification via the "sc" binary to a suspicious
-      command or path
+    author: Nasreddine Bencherchali
+    description: Detects creation of a new service via "sc" command or the powershell
+      "new-service" cmdlet with suspicious binary paths
     falsepositives:
     - Unlikely
     level: high
@@ -84,5 +98,5 @@ respond:
     - attack.persistence
     - attack.privilege_escalation
     - attack.t1543.003
-  name: Suspicious Service Path Modification
+  name: Suspicious New Service Creation
 

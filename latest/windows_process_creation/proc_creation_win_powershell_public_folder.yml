@@ -7,10 +7,16 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - case sensitive: false
-      op: ends with
-      path: event/FILE_PATH
-      value: \powershell.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \powershell.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \pwsh.exe
     - op: or
       rules:
       - case sensitive: false
@@ -25,14 +31,50 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: -f %Public%
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -fi C:\Users\Public
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -fi "C:\Users\Public
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -fi %Public%
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -fil C:\Users\Public
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -fil "C:\Users\Public
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -fil %Public%
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -file C:\Users\Public
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -file "C:\Users\Public
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -file %Public%
 respond:
 - action: report
   metadata:
     author: Max Altgelt
     description: This rule detects execution of PowerShell scripts located in the
-      C:\Users\Public folder
+      "C:\Users\Public" folder
     falsepositives:
-    - Unknown
+    - Unlikely
     level: high
     references:
     - https://www.mandiant.com/resources/evolution-of-fin7

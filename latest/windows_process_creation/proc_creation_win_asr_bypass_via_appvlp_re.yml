@@ -21,6 +21,10 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: powershell.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: pwsh.exe
     - op: or
       rules:
       - case sensitive: false

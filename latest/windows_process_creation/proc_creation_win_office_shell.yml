@@ -50,6 +50,10 @@ detect:
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
+        value: \pwsh.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
         value: \wscript.exe
       - case sensitive: false
         op: ends with

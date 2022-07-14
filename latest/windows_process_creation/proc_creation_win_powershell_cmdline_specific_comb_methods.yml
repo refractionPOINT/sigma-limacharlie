@@ -5,84 +5,84 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: or
+  - op: and
     rules:
-    - op: and
+    - op: or
       rules:
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
         value: \powershell.exe
-      - op: or
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: ToInt
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: ToDecimal
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: ToByte
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: ToUint
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: ToSingle
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: ToSByte
-      - op: or
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: ToChar
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: ToString
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: String
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \pwsh.exe
     - op: or
       rules:
       - op: and
         rules:
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \powershell.exe
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: char
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: join
-      - op: and
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ToInt
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ToDecimal
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ToByte
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ToUint
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ToSingle
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ToSByte
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ToChar
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ToString
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: String
+      - op: or
         rules:
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \powershell.exe
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: split
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: join
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: char
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: join
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: split
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: join
 respond:
 - action: report
   metadata:

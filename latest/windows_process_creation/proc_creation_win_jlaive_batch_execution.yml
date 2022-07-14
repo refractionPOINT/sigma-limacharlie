@@ -38,6 +38,20 @@ detect:
         - case sensitive: false
           op: ends with
           path: event/FILE_PATH
+          value: \xcopy.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: pwsh.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .bat.exe
+      - op: and
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
           value: \attrib.exe
         - case sensitive: false
           op: contains

@@ -1,0 +1,36 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/EventData/Provider_Name
+    value: MSSQLSERVER
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '33205'
+  - case sensitive: false
+    op: contains
+    path: Event/EventData/Data
+    value: object_name:sysadmin
+  - case sensitive: false
+    op: contains
+    path: Event/EventData/Data
+    value: 'statement:alter server role [sysadmin] add member '
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali
+    description: Detects when an attacker tries to backdoor the MSSQL server by adding
+      a backdoor account to the sysadmin fixed server role
+    falsepositives:
+    - Rare legitimate administrative activity
+    level: high
+    references:
+    - https://www.netspi.com/blog/technical/network-penetration-testing/sql-server-persistence-part-1-startup-stored-procedures/
+    tags:
+    - attack.persistence
+  name: MSSQL Add Account To Sysadmin Role
+
