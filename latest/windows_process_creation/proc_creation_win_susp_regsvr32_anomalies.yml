@@ -174,18 +174,30 @@ detect:
     - not: true
       op: or
       rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: \AppData\Local\Microsoft\Teams
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: \AppData\Local\WebEx\WebEx64\Meetings\atucfobj.dll
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \AppData\Local\Microsoft\Teams
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \AppData\Local\WebEx\WebEx64\Meetings\atucfobj.dll
+      - op: and
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/PARENT/FILE_PATH
+          value: C:\Program Files\Box\Box\FS\streem.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \Program Files\Box\Box\Temp\
 respond:
 - action: report
   metadata:
-    author: Florian Roth, oscd.community
+    author: Florian Roth, oscd.community, Tim Shelton
     description: Detects various anomalies in relation to regsvr32.exe
     falsepositives:
     - Unknown
