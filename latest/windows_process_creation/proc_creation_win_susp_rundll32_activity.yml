@@ -5,198 +5,205 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: or
+  - op: and
     rules:
-    - op: and
+    - op: or
       rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: 'javascript:'
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: .RegisterXLL
-    - op: and
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: url.dll
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: OpenURL
-    - op: and
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: url.dll
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: OpenURLA
-    - op: and
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: url.dll
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: FileProtocolHandler
-    - op: and
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: zipfldr.dll
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: RouteTheCall
-    - op: and
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: shell32.dll
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: Control_RunDLL
-    - op: and
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: shell32.dll
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ShellExec_RunDLL
-    - op: and
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: mshtml.dll
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: PrintHTML
-    - op: and
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: advpack.dll
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: LaunchINFSection
-    - op: and
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: advpack.dll
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: RegisterOCX
-    - op: and
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ieadvpack.dll
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: LaunchINFSection
-    - op: and
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ieadvpack.dll
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: RegisterOCX
-    - op: and
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ieframe.dll
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: OpenURL
-    - op: and
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: shdocvw.dll
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: OpenURL
-    - op: and
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: syssetup.dll
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: SetupInfObjectInstallAction
-    - op: and
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: setupapi.dll
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: InstallHinfSection
-    - op: and
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: pcwutl.dll
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: LaunchApplication
-    - op: and
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: dfshim.dll
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ShOpenVerbApplication
-    - op: and
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: dfshim.dll
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ShOpenVerbShortcut
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'javascript:'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .RegisterXLL
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: url.dll
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: OpenURL
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: url.dll
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: OpenURLA
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: url.dll
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: FileProtocolHandler
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: zipfldr.dll
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: RouteTheCall
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: shell32.dll
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: Control_RunDLL
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: shell32.dll
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ShellExec_RunDLL
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: mshtml.dll
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: PrintHTML
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: advpack.dll
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: LaunchINFSection
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: advpack.dll
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: RegisterOCX
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ieadvpack.dll
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: LaunchINFSection
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ieadvpack.dll
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: RegisterOCX
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ieframe.dll
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: OpenURL
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: shdocvw.dll
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: OpenURL
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: syssetup.dll
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: SetupInfObjectInstallAction
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: setupapi.dll
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: InstallHinfSection
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: pcwutl.dll
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: LaunchApplication
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: dfshim.dll
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ShOpenVerbApplication
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: dfshim.dll
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ShOpenVerbShortcut
+    - case sensitive: false
+      not: true
+      op: contains
+      path: event/COMMAND_LINE
+      value: shell32.dll,Control_RunDLL desk.cpl,screensaver,@screensaver
 respond:
 - action: report
   metadata:

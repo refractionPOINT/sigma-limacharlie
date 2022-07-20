@@ -32,20 +32,32 @@ detect:
           path: event/COMMAND_LINE
           value: --createShortcut
     - not: true
-      op: and
+      op: or
       rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: C:\Users\
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: \AppData\Local\Discord\Update.exe
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ' --processStart Discord.exe'
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: C:\Users\
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \AppData\Local\Discord\Update.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' --processStart Discord.exe'
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: C:\Users\
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \AppData\Local\GitHubDesktop\Update.exe --createShortcut GitHubDesktop.exe
 respond:
 - action: report
   metadata:
