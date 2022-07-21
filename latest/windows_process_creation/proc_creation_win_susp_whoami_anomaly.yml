@@ -74,6 +74,14 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: whoami.exe /all
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: whoami.exe >
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: whoami >
 respond:
 - action: report
   metadata:
@@ -87,6 +95,7 @@ respond:
     references:
     - https://brica.de/alerts/alert/public/1247926/agent-tesla-keylogger-delivered-inside-a-power-iso-daa-archive/
     - https://app.any.run/tasks/7eaba74e-c1ea-400f-9c17-5e30eee89906/
+    - https://www.youtube.com/watch?v=DsJ9ByX84o4&t=6s
     tags:
     - attack.discovery
     - attack.t1033
