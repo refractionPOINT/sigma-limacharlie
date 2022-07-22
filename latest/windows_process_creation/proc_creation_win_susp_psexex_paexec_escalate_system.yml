@@ -7,6 +7,10 @@ detect:
   - op: is windows
   - op: and
     rules:
+    - case sensitive: false
+      op: ends with
+      path: event/COMMAND_LINE
+      value: ' -s cmd.exe'
     - op: or
       rules:
       - case sensitive: false
@@ -25,10 +29,6 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: 'cmd /c '
-    - case sensitive: false
-      op: ends with
-      path: event/COMMAND_LINE
-      value: ' -s cmd.exe'
 respond:
 - action: report
   metadata:
