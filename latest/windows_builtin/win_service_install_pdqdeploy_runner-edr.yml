@@ -1,0 +1,45 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/Provider_Name
+        value: Service Control Manager
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '7045'
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ImagePath
+        value: PDQDeployRunner-
+      - case sensitive: false
+        op: starts with
+        path: event/EVENT/EventData/ServiceName
+        value: PDQDeployRunner-
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali
+    description: Detects PDQDeploy service installation on the target system. When
+      a pakcage is deployed via PDQDeploy it installs a remote service on the target
+      machine with the name "PDQDeployRunner-X" where "X" is an integer starting from
+      1
+    falsepositives:
+    - Legitimate use of the tool
+    level: medium
+    references:
+    - https://documentation.pdq.com/PDQDeploy/13.0.3.0/index.html?windows-services.htm
+    tags:
+    - attack.privilege_escalation
+    - attack.t1543.003
+  name: New PDQDeploy Service - Client Side
+

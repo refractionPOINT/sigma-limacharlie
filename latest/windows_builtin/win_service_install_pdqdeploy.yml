@@ -1,0 +1,52 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/EventData/Provider_Name
+      value: Service Control Manager
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '7045'
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ImagePath
+      value: PDQDeployService.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: Event/EventData/ServiceName
+        value: PDQDeploy
+      - case sensitive: false
+        op: is
+        path: Event/EventData/ServiceName
+        value: PDQ Deploy
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali
+    description: 'Detects a PDQDeploy service installation which indicates that PDQDeploy
+      was installed on the machines.
+
+      PDQDeploy can be abused by attackers to remotely install packages or execute
+      commands on target machines
+
+      '
+    falsepositives:
+    - Legitimate use of the tool
+    level: medium
+    references:
+    - https://documentation.pdq.com/PDQDeploy/13.0.3.0/index.html?windows-services.htm
+    tags:
+    - attack.privilege_escalation
+    - attack.t1543.003
+  name: New PDQDeploy Service - Server Side
+
