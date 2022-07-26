@@ -7,120 +7,128 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - op: or
+    - op: and
       rules:
+      - op: or
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \w3wp.exe
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \php-cgi.exe
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \nginx.exe
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \httpd.exe
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \caddy.exe
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \ws_TomcatService.exe
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \tomcat.exe
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \UMWorkerProcess.exe
+        - op: and
+          rules:
+          - op: or
+            rules:
+            - case sensitive: false
+              op: ends with
+              path: event/PARENT/FILE_PATH
+              value: \java.exe
+            - case sensitive: false
+              op: ends with
+              path: event/PARENT/FILE_PATH
+              value: \javaw.exe
+          - op: or
+            rules:
+            - case sensitive: false
+              op: contains
+              path: event/PARENT/FILE_PATH
+              value: -tomcat-
+            - case sensitive: false
+              op: contains
+              path: event/PARENT/FILE_PATH
+              value: \tomcat
+        - op: and
+          rules:
+          - op: or
+            rules:
+            - case sensitive: false
+              op: ends with
+              path: event/PARENT/FILE_PATH
+              value: \java.exe
+            - case sensitive: false
+              op: ends with
+              path: event/PARENT/FILE_PATH
+              value: \javaw.exe
+          - op: or
+            rules:
+            - case sensitive: false
+              op: contains
+              path: event/PARENT/COMMAND_LINE
+              value: catalina.jar
+            - case sensitive: false
+              op: contains
+              path: event/PARENT/COMMAND_LINE
+              value: CATALINA_HOME
+            - case sensitive: false
+              op: contains
+              path: event/PARENT/COMMAND_LINE
+              value: catalina.home
       - op: or
         rules:
         - case sensitive: false
           op: ends with
-          path: event/PARENT/FILE_PATH
-          value: \w3wp.exe
+          path: event/FILE_PATH
+          value: \cmd.exe
         - case sensitive: false
           op: ends with
-          path: event/PARENT/FILE_PATH
-          value: \php-cgi.exe
+          path: event/FILE_PATH
+          value: \sh.exe
         - case sensitive: false
           op: ends with
-          path: event/PARENT/FILE_PATH
-          value: \nginx.exe
+          path: event/FILE_PATH
+          value: \bash.exe
         - case sensitive: false
           op: ends with
-          path: event/PARENT/FILE_PATH
-          value: \httpd.exe
+          path: event/FILE_PATH
+          value: \powershell.exe
         - case sensitive: false
           op: ends with
-          path: event/PARENT/FILE_PATH
-          value: \caddy.exe
+          path: event/FILE_PATH
+          value: \pwsh.exe
         - case sensitive: false
           op: ends with
-          path: event/PARENT/FILE_PATH
-          value: \ws_TomcatService.exe
-        - case sensitive: false
-          op: ends with
-          path: event/PARENT/FILE_PATH
-          value: \tomcat.exe
-        - case sensitive: false
-          op: ends with
-          path: event/PARENT/FILE_PATH
-          value: \UMWorkerProcess.exe
-      - op: and
-        rules:
-        - op: or
-          rules:
-          - case sensitive: false
-            op: ends with
-            path: event/PARENT/FILE_PATH
-            value: \java.exe
-          - case sensitive: false
-            op: ends with
-            path: event/PARENT/FILE_PATH
-            value: \javaw.exe
-        - op: or
-          rules:
-          - case sensitive: false
-            op: contains
-            path: event/PARENT/FILE_PATH
-            value: -tomcat-
-          - case sensitive: false
-            op: contains
-            path: event/PARENT/FILE_PATH
-            value: \tomcat
-      - op: and
-        rules:
-        - op: or
-          rules:
-          - case sensitive: false
-            op: ends with
-            path: event/PARENT/FILE_PATH
-            value: \java.exe
-          - case sensitive: false
-            op: ends with
-            path: event/PARENT/FILE_PATH
-            value: \javaw.exe
-        - op: or
-          rules:
-          - case sensitive: false
-            op: contains
-            path: event/PARENT/COMMAND_LINE
-            value: catalina.jar
-          - case sensitive: false
-            op: contains
-            path: event/PARENT/COMMAND_LINE
-            value: CATALINA_HOME
-          - case sensitive: false
-            op: contains
-            path: event/PARENT/COMMAND_LINE
-            value: catalina.home
-    - op: or
-      rules:
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \cmd.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \sh.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \bash.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \powershell.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \pwsh.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \bitsadmin.exe
+          path: event/FILE_PATH
+          value: \bitsadmin.exe
+    - case sensitive: false
+      not: true
+      op: ends with
+      path: event/COMMAND_LINE
+      value: Windows\system32\cmd.exe /c C:\ManageEngine\ADManager "Plus\ES\bin\elasticsearch.bat
+        -Enode.name=RMP-NODE1 -pelasticsearch-pid.txt
 respond:
 - action: report
   metadata:
-    author: Thomas Patzke, Florian Roth, Zach Stanford @svch0st
+    author: Thomas Patzke, Florian Roth, Zach Stanford @svch0st, Tim Shelton
     description: Web servers that spawn shell processes could be the result of a successfully
       placed web shell or an other attack
     falsepositives:
