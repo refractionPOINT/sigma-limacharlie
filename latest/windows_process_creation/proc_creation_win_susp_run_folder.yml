@@ -48,6 +48,16 @@ detect:
         op: ends with
         path: event/FILE_PATH
         value: setup.exe
+      - op: and
+        rules:
+        - case sensitive: false
+          op: matches
+          path: event/FILE_PATH
+          re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Program\ Files\ \(x86\)\\Microsoft\\Temp\\
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: .tmp\MicrosoftEdgeUpdate.exe
 respond:
 - action: report
   metadata:
