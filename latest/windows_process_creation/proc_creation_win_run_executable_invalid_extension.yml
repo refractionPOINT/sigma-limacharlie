@@ -45,7 +45,7 @@ detect:
           value: :\Windows\SysWOW64\msiexec.exe
         - case sensitive: false
           op: starts with
-          path: event/COMMAND_LINE
+          path: event/PARENT/COMMAND_LINE
           value: C:\Windows\syswow64\MsiExec.exe -Embedding
       - op: and
         rules:
@@ -55,7 +55,7 @@ detect:
           value: :\Windows\System32\msiexec.exe
         - case sensitive: false
           op: starts with
-          path: event/COMMAND_LINE
+          path: event/PARENT/COMMAND_LINE
           value: C:\Windows\system32\MsiExec.exe -Embedding
       - op: and
         rules:
@@ -67,10 +67,14 @@ detect:
           op: contains
           path: event/PARENT/COMMAND_LINE
           value: ' C:\Program Files\SplunkUniversalForwarder\'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -localserver '
 respond:
 - action: report
   metadata:
-    author: Tim Shelton, Florian Roth
+    author: Tim Shelton, Florian Roth, Yassine Oukessou (fix + fp)
     description: Detects the execution of rundll32 with a command line that doesn't
       contain a .dll file
     falsepositives:
