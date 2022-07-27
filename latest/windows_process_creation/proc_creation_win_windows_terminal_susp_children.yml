@@ -123,7 +123,7 @@ respond:
     description: Detects suspicious children spawned via the Windows Terminal application
       which could be a sign of persistence via WindowsTerminal (see referneces section)
     falsepositives:
-    - Legitimate "Windows Terminal" profiles
+    - Other legitimate "Windows Terminal" profiles
     level: medium
     references:
     - https://persistence-info.github.io/Data/windowsterminalprofile.html
