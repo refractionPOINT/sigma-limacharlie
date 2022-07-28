@@ -129,8 +129,8 @@ respond:
 - action: report
   metadata:
     author: Thomas Patzke, Florian Roth, Zach Stanford @svch0st, Tim Shelton
-    description: Web servers that spawn shell processes could be the result of a successfully
-      placed web shell or an other attack
+    description: Detects web servers that spawn shell processes which could be the
+      result of a successfully placed web shell or another attack
     falsepositives:
     - Particular web applications may spawn a shell process legitimately
     level: high

@@ -92,6 +92,18 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: python -h
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: python3 --help
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: python3 -h
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: wget --help
       - case sensitive: false
         op: contains
@@ -101,9 +113,9 @@ respond:
 - action: report
   metadata:
     author: Cian Heasley, Florian Roth
-    description: Looking for processes spawned by web server components that indicate
-      reconnaissance by popular public domain webshells for whether perl, python or
-      wget are installed.
+    description: Detects processes spawned from web servers (php, tomcat, iis...etc)
+      that perform reconnaissance looking for the existence of popular scripting tools
+      (perl, python, wget) on the system via the help commands
     falsepositives:
     - Unknown
     level: high

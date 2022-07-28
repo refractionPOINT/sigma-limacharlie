@@ -16,7 +16,7 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: HKLM\SOFTWARE\Microsoft\Windows Defender\Exclusions\Paths\
+        value: HKLM\SOFTWARE\Microsoft\Windows Defender\Exclusions\Paths
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE

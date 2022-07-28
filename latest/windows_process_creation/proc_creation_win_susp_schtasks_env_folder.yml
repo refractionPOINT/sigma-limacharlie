@@ -88,8 +88,8 @@ respond:
 - action: report
   metadata:
     author: Florian Roth
-    description: Detects Schtask creations that point to a folder references in environment
-      variables or often used by malware
+    description: Detects Schtask creations that point to a suspicious folder or an
+      environment variable often used by malware
     falsepositives:
     - Benign scheduled tasks creations or executions that happen often during software
       installations
@@ -102,5 +102,5 @@ respond:
     tags:
     - attack.execution
     - attack.t1053.005
-  name: Suspicius Schtasks From Env Var Folder
+  name: Suspicious Schtasks From Env Var Folder
 

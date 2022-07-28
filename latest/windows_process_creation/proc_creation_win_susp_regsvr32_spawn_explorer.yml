@@ -19,7 +19,7 @@ respond:
 - action: report
   metadata:
     author: elhoim
-    description: Suspicious explorer.exe child of regsvr32.exe
+    description: Detects "regsvr32.exe" spawning "explorer.exe", which is very uncommon.
     falsepositives:
     - Unknown
     level: high
@@ -29,5 +29,5 @@ respond:
     tags:
     - attack.defense_evasion
     - attack.t1218.010
-  name: Suspicious Explorer Child Of Regsvr32
+  name: Regsvr32 Spawning Explorer
 

@@ -235,7 +235,7 @@ respond:
   metadata:
     author: Florian Roth, Patrick Bareiss, Anton Kutepov, oscd.community, Nasreddine
       Bencherchali
-    description: Detects a Windows program executable started in a suspicious folder
+    description: Detects a Windows program executable started from a suspicious folder
     falsepositives:
     - Exotic software
     level: high
