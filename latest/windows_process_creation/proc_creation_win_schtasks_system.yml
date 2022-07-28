@@ -1,0 +1,78 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \schtasks.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /change '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /create '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '/ru '
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: NT AUT
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' SYSTEM '
+    - not: true
+      op: and
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/FILE_PATH
+          value: \AppData\Local\Temp\
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/FILE_PATH
+          value: TeamViewer_.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \schtasks.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /TN TVInstallRestore
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali
+    description: Detects the creation or update of a scheduled task to run with "NT
+      AUTHORITY\SYSTEM" privileges
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.elastic.co/security-labs/exploring-the-qbot-attack-pattern
+    - https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/schtasks
+    tags:
+    - attack.execution
+    - attack.persistence
+    - attack.t1053.005
+  name: Schtasks Creation Or Modification With SYSTEM Privileges
+
