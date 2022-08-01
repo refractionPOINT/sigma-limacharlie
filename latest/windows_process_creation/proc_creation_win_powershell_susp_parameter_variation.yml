@@ -12,7 +12,7 @@ detect:
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
-        value: \Powershell.exe
+        value: \powershell.exe
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
