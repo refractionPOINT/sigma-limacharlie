@@ -23,22 +23,38 @@ detect:
       op: contains
       path: event/COMMAND_LINE
       value: /disable
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: \Microsoft\Windows\SystemRestore\SR
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Microsoft\Windows\SystemRestore\SR
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Microsoft\Windows\Windows Defender\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Microsoft\Windows\BitLocker
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Windows\ExploitGuard
 respond:
 - action: report
   metadata:
     author: frack113
     description: Adversaries may stop services or processes in order to conduct Data
       Destruction or Data Encrypted for Impact on the data stores of services like
-      Exchange and SQL Server.
+      Exchange, SQL Server...etc.
     falsepositives:
     - Unknown
     level: high
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1490/T1490.md#atomic-test-8---windows---disable-the-sr-scheduled-task
+    - https://twitter.com/MichalKoczwara/status/1553634816016498688
+    - https://thedfirreport.com/2021/10/18/icedid-to-xinglocker-ransomware-in-24-hours/
     tags:
     - attack.impact
     - attack.t1489

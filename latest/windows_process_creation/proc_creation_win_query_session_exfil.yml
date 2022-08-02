@@ -1,0 +1,38 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \Windows\System32\query.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: session >
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: process >
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali
+    description: Detects usage of "query.exe" a system binary to exfil information
+      such as "sessions" and "processes" for later use
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://twitter.com/MichalKoczwara/status/1553634816016498688
+    tags:
+    - attack.execution
+  name: Query Usage To Exfil Data
+

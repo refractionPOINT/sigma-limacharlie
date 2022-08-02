@@ -31,7 +31,8 @@ respond:
 - action: report
   metadata:
     author: "J\xE1n Tren\u010Dansk\xFD, frack113"
-    description: Detects disabling Windows Defender threat protection
+    description: Detects the "Windows Defender Threat Protection" service has been
+      disabled
     falsepositives:
     - Administrator actions
     - Auto updates of Windows Defender causes restarts

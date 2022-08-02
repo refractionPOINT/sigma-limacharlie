@@ -25,6 +25,14 @@ detect:
             op: ends with
             path: event/FILE_PATH
             value: \icacls.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \net.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \net1.exe
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
@@ -65,7 +73,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Jakob Weinzettl, oscd.community
+    author: Jakob Weinzettl, oscd.community, Nasreddine Bencherchali
     description: Detects a file or folder's permissions being modified.
     falsepositives:
     - Users interacting with the files on their own (unlikely unless privileged users).
@@ -73,6 +81,7 @@ respond:
     level: medium
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1222.001/T1222.001.md
+    - https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/hh750728(v=ws.11)
     tags:
     - attack.defense_evasion
     - attack.t1222.001
