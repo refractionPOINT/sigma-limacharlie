@@ -1,0 +1,63 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \dnscmd.exe
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /enumrecords
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /enumzones
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /info
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /config
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /serverlevelplugindll
+respond:
+- action: report
+  metadata:
+    description: 'Detects an attempt to add a potentially crafted DLL as a plug in
+      of the DNS Service.
+
+      Detects an attempt to leverage dnscmd.exe to enumerate the DNS zones of a domain.
+
+      DNS zones used to host the DNS records for a particular domain
+
+      '
+    falsepositives:
+    - Legitimate administration use
+    level: medium
+    references:
+    - https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/dnscmd
+    - https://docs.microsoft.com/en-us/azure/dns/dns-zones-records
+    - https://lolbas-project.github.io/lolbas/Binaries/Dnscmd/
+    tags:
+    - attack.discovery
+    - attack.execution
+    - attack.t1543.003
+  name: Discovery/Execution via dnscmd.exe
+

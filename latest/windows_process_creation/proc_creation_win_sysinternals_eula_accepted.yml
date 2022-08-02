@@ -5,10 +5,16 @@ detect:
   op: and
   rules:
   - op: is windows
-  - case sensitive: false
-    op: contains
-    path: event/COMMAND_LINE
-    value: ' -accepteula'
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' -accepteula'
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' /accepteula'
 respond:
 - action: report
   metadata:
