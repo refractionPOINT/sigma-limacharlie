@@ -43,7 +43,7 @@ respond:
     falsepositives:
     - HyperV or other virtualization technologies with binary not listed in filter
       portion of detection
-    level: medium
+    level: low
     references:
     - Private Cuckoo Sandbox (from many years ago, no longer have hash, NDA as well)
     - Live environment caused by malware
