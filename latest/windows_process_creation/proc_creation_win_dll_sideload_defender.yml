@@ -1,0 +1,42 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \MpCmdRun.exe
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: matches
+        path: event/FILE_PATH
+        re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Program\ Files\\Windows\ Defender\\
+      - case sensitive: false
+        op: matches
+        path: event/FILE_PATH
+        re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\ProgramData\\Microsoft\\Windows\
+          Defender\\Platform\\
+respond:
+- action: report
+  metadata:
+    author: Bhabesh Raj
+    description: Detects execution of Microsoft Defender's CLI process (MpCmdRun.exe)
+      from the non-default directory which may be an attempt to sideload arbitary
+      DLL
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.sentinelone.com/blog/living-off-windows-defender-lockbit-ransomware-sideloads-cobalt-strike-through-microsoft-security-tool
+    tags:
+    - attack.defense_evasion
+    - attack.t1574.002
+  name: DLL Sideloading by Microsoft Defender
+
