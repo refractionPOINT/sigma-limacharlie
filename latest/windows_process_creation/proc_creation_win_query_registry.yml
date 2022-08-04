@@ -34,27 +34,11 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: currentVersion\runServicesOnce
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: currentVersion\runServices
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
         value: winlogon\
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
         value: currentVersion\shellServiceObjectDelayLoad
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: currentVersion\runOnce
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: currentVersion\runOnceEx
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE

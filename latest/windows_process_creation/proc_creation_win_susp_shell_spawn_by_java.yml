@@ -101,7 +101,7 @@ respond:
 - action: report
   metadata:
     author: Andreas Hunkeler (@Karneades), Florian Roth
-    description: Detects suspicious shell spawn from Java host process (e.g. log4j
+    description: Detects suspicious shell spawned from Java host process (e.g. log4j
       exploitation)
     falsepositives:
     - Legitimate calls to system binaries
@@ -111,5 +111,5 @@ respond:
     - attack.initial_access
     - attack.persistence
     - attack.privilege_escalation
-  name: Suspicious Shells Spawn by Java
+  name: Suspicious Shells Spawned by Java
 

@@ -24,6 +24,22 @@ detect:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
+          value: Invoke-WebRequest
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'iwr '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'curl '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'wget '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
           value: Start-BitsTransfer
         - case sensitive: false
           op: contains
@@ -46,7 +62,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth, Nasreddine Bencherchali
     description: Detects suspicious ways to download files from Microsoft domains
       that are used to store attachments in Emails or OneNote documents
     falsepositives:

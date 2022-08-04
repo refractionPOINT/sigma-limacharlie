@@ -24,22 +24,6 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: \software\Microsoft\Windows\CurrentVersion\RunOnce
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: \software\Microsoft\Windows\CurrentVersion\RunOnceEx
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: \software\Microsoft\Windows\CurrentVersion\RunServices
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: \software\Microsoft\Windows\CurrentVersion\RunServicesOnce
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
         value: \software\Microsoft\Windows NT\CurrentVersion\Winlogon\Userinit
       - case sensitive: false
         op: contains
