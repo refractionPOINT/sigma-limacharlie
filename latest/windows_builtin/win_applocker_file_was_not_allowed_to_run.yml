@@ -10,6 +10,14 @@ detect:
     op: is
     path: Event/System/EventID
     value: '8007'
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '8022'
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '8025'
   target: log
 respond:
 - action: report

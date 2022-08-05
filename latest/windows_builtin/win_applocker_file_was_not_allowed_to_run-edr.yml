@@ -13,6 +13,14 @@ detect:
       op: is
       path: event/EVENT/System/EventID
       value: '8007'
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '8022'
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '8025'
 respond:
 - action: report
   metadata:
