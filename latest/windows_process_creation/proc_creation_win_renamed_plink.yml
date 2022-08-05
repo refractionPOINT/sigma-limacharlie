@@ -7,10 +7,26 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - case sensitive: false
-      op: is
-      path: event/ORIGINAL_FILE_NAME
-      value: Plink
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: Plink
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -l forward'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -P '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -R '
     - case sensitive: false
       not: true
       op: ends with
@@ -23,7 +39,7 @@ respond:
     description: Execution of a renamed version of the Plink binary
     falsepositives:
     - Unknown
-    level: medium
+    level: high
     references:
     - https://thedfirreport.com/2022/06/06/will-the-real-msiexec-please-stand-up-exploit-leads-to-data-exfiltration/
     - https://the.earth.li/~sgtatham/putty/0.58/htmldoc/Chapter7.html
