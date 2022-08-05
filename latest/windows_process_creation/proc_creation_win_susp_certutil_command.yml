@@ -71,7 +71,6 @@ respond:
     author: Florian Roth, juju4, keepwatch
     description: Detects a suspicious Microsoft certutil execution with sub commands
       like 'decode' sub command, which is sometimes used to decode malicious code
-      with the built-in certutil utility
     falsepositives:
     - False positives depend on scripts and administrative tools used in the monitored
       environment
@@ -94,5 +93,5 @@ respond:
     - attack.g0049
     - attack.g0075
     - attack.g0096
-  name: Suspicious Certutil Command
+  name: Suspicious Certutil Command Usage
 

@@ -5,29 +5,40 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: or
+  - op: and
     rules:
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: '\calc.exe '
-    - op: and
+    - op: or
       rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '\calc.exe '
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
         value: \calc.exe
+    - not: true
+      op: or
+      rules:
       - case sensitive: false
-        not: true
-        op: contains
+        op: matches
         path: event/FILE_PATH
-        value: \Windows\Sys
+        re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Windows\\System32\\
+      - case sensitive: false
+        op: matches
+        path: event/FILE_PATH
+        re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Windows\\SysWOW64\\
+      - case sensitive: false
+        op: matches
+        path: event/FILE_PATH
+        re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Windows\\WinSxS\\
 respond:
 - action: report
   metadata:
     author: Florian Roth
-    description: Detects suspicious use of calc.exe with command line parameters or
-      in a suspicious directory, which is likely caused by some PoC or detection evasion
+    description: Detects suspicious use of 'calc.exe' with command line parameters
+      or in a suspicious directory, which is likely caused by some PoC or detection
+      evasion
     falsepositives:
     - Unknown
     level: high

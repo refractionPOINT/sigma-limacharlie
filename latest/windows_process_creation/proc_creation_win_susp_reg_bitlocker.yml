@@ -18,7 +18,7 @@ detect:
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
-      value: HKLM\SOFTWARE\Policies\Microsoft\FVE
+      value: \SOFTWARE\Policies\Microsoft\FVE
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE

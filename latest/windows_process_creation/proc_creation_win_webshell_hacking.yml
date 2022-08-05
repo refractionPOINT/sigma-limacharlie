@@ -90,7 +90,7 @@ detect:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: comsvcs.dll
+          value: comsvcs
       - op: and
         rules:
         - case sensitive: false

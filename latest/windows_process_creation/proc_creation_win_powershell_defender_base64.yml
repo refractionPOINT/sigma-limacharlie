@@ -111,7 +111,8 @@ respond:
 - action: report
   metadata:
     author: Florian Roth
-    description: Detects base64 encoded PowerShell code that modifies Windows Defender
+    description: Detects base64 encoded "MpPreference" PowerShell cmdlet code that
+      tries to modifies or tamper with Windows Defender AV
     falsepositives:
     - Possible Admin Activity
     - Other Cmdlets that may use the same parameters

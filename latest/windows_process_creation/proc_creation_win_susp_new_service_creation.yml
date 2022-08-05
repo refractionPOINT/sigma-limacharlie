@@ -54,6 +54,18 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: svchost
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: dllhost
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'cmd '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: cmd.exe /c
       - case sensitive: false
         op: contains
@@ -94,6 +106,7 @@ respond:
     level: high
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1543.003/T1543.003.md
+    - https://web.archive.org/web/20180331144337/https://www.fireeye.com/blog/threat-research/2018/03/sanny-malware-delivery-method-updated-in-recently-observed-attacks.html
     tags:
     - attack.persistence
     - attack.privilege_escalation

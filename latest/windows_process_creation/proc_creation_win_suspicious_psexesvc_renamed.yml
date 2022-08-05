@@ -20,8 +20,8 @@ respond:
 - action: report
   metadata:
     author: FLorian Roth
-    description: Detects suspicious launch of the PSEXESVC service with a different
-      service name, which is not often used by legitimate administrators
+    description: Detects suspicious launch of a renamed version of the PSEXESVC service
+      with, which is not often used by legitimate administrators
     falsepositives:
     - Legitimate administrative tasks
     level: high
@@ -30,5 +30,5 @@ respond:
     - https://www.youtube.com/watch?v=ro2QuZTIMBM
     tags:
     - attack.execution
-  name: PsExec Service Execution with Different Name
+  name: Renamed PsExec Service Execution
 
