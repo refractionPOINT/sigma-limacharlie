@@ -5,16 +5,23 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: or
+  - op: and
     rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ~1\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ~2\
     - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: ~1.
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: ~2.
+      not: true
+      op: is
+      path: event/PARENT/FILE_PATH
+      value: C:\Windows\System32\Dism.exe
 respond:
 - action: report
   metadata:
@@ -28,8 +35,9 @@ respond:
     references:
     - https://www.acunetix.com/blog/articles/windows-short-8-3-filenames-web-security-problem/
     - https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-2000-server/cc959352(v=technet.10)?redirectedfrom=MSDN
+    - https://twitter.com/frack113/status/1555830623633375232
     tags:
     - attack.defense_evasion
     - attack.t1564.004
-  name: Use NTFS Short Name in Command Line
+  name: Use Short Name Path in Command Line
 

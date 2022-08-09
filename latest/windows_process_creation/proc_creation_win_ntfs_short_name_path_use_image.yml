@@ -1,0 +1,43 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: ~1\
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: ~2\
+    - case sensitive: false
+      not: true
+      op: is
+      path: event/PARENT/FILE_PATH
+      value: C:\Windows\System32\Dism.exe
+respond:
+- action: report
+  metadata:
+    author: frack113, Nasreddine Bencherchali
+    description: Detect use of the Windows 8.3 short name. Which could be used as
+      a method to avoid Iamge detection
+    falsepositives:
+    - Applications could use this notation occasionally which might generate some
+      false positives. In that case Investigate the parent and child process.
+    level: high
+    references:
+    - https://www.acunetix.com/blog/articles/windows-short-8-3-filenames-web-security-problem/
+    - https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-2000-server/cc959352(v=technet.10)?redirectedfrom=MSDN
+    - https://twitter.com/frack113/status/1555830623633375232
+    tags:
+    - attack.defense_evasion
+    - attack.t1564.004
+  name: Use Short Name Path in Image
+
