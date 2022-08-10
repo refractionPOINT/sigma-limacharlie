@@ -31,11 +31,11 @@ detect:
     rules:
     - case sensitive: false
       op: is
-      path: Event/EventData/ObjectType
+      path: Event/EventData/ObjectClass
       value: dnsNode
     - case sensitive: false
       op: is
-      path: Event/EventData/ObjectType
+      path: Event/EventData/ObjectClass
       value: dnsZoneScope
   target: log
 respond:

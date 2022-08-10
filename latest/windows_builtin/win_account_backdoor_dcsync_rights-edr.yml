@@ -34,11 +34,11 @@ detect:
       rules:
       - case sensitive: false
         op: is
-        path: event/EVENT/EventData/ObjectType
+        path: event/EVENT/EventData/ObjectClass
         value: dnsNode
       - case sensitive: false
         op: is
-        path: event/EVENT/EventData/ObjectType
+        path: event/EVENT/EventData/ObjectClass
         value: dnsZoneScope
 respond:
 - action: report
