@@ -23,6 +23,15 @@ detect:
         path: event/FILE_PATH
         re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\ProgramData\\Microsoft\\Windows\
           Defender\\Platform\\
+      - case sensitive: false
+        op: matches
+        path: event/FILE_PATH
+        re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Windows\\winsxs\\x86_security\-malware\-windows\-defender_
+      - case sensitive: false
+        op: matches
+        path: event/FILE_PATH
+        re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Program\ Files\\Microsoft\
+          Security\ Client\\MpCmdRun\.exe
 respond:
 - action: report
   metadata:
