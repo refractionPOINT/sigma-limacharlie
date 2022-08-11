@@ -8,99 +8,105 @@ detect:
   - op: and
     rules:
     - case sensitive: false
-      op: ends with
-      path: event/FILE_PATH
-      value: \bitsadmin.exe
+      op: contains
+      path: event/COMMAND_LINE
+      value: 'process '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: 'call '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: 'create '
     - op: or
       rules:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ' /transfer '
+        value: rundll32
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ' /create '
+        value: bitsadmin
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ' /addfile '
-    - op: or
-      rules:
+        value: regsvr32
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: raw.githubusercontent.com
+        value: 'cmd.exe /c '
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: gist.githubusercontent.com
+        value: powershell
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: pastebin.com
+        value: pwsh
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: cdn.discordapp.com/attachments/
+        value: certutil
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: mediafire.com
+        value: cscript
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: mega.nz
+        value: wscript
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ddns.net
+        value: mshta
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: .paste.ee
+        value: \Users\Public\
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: .hastebin.com
+        value: \Windows\Temp\
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: .ghostbin.co/
+        value: \AppData\Local\
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ufile.io
+        value: '%temp%'
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: storage.googleapis.com
+        value: '%ProgramData%'
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: anonfiles.com
+        value: '%appdata%'
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: send.exploit.in
+        value: '%comspec%'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '%localappdata%'
 respond:
 - action: report
   metadata:
-    author: Florian Roth
-    description: Detects usage of bitsadmin downloading a file from a suspicious domain
+    author: Florian Roth, Nasreddine Bencherchali
+    description: Detects WMIC executing "process call create" with suspicious calls
+      to processes such as "rundll32", "regsrv32"...etc
     falsepositives:
-    - Some legitimate apps use this, but limited.
-    level: medium
+    - Unknown
+    level: high
     references:
-    - https://blog.netspi.com/15-ways-to-download-a-file/#bitsadmin
-    - https://isc.sans.edu/diary/22264
-    - https://lolbas-project.github.io/lolbas/Binaries/Bitsadmin/
+    - https://thedfirreport.com/2020/10/08/ryuks-return/
     - https://symantec-enterprise-blogs.security.com/blogs/threat-intelligence/ransomware-hive-conti-avoslocker
     tags:
-    - attack.defense_evasion
-    - attack.persistence
-    - attack.t1197
-    - attack.s0190
-    - attack.t1036.003
-  name: Bitsadmin Download from Suspicious Domain
+    - attack.execution
+    - attack.t1047
+  name: Suspicious WMIC Execution - ProcessCallCreate
 

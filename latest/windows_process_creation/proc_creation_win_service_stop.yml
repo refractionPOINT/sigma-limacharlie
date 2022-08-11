@@ -5,65 +5,77 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: and
+  - op: or
     rules:
     - op: and
       rules:
-      - op: or
+      - op: and
         rules:
         - op: or
           rules:
-          - case sensitive: false
-            op: is
-            path: event/ORIGINAL_FILE_NAME
-            value: sc.exe
-          - case sensitive: false
-            op: is
-            path: event/ORIGINAL_FILE_NAME
-            value: net.exe
-          - case sensitive: false
-            op: is
-            path: event/ORIGINAL_FILE_NAME
-            value: net1.exe
+          - op: or
+            rules:
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: sc.exe
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: net.exe
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: net1.exe
+          - op: or
+            rules:
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \sc.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \net.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \net1.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: stop
+      - not: true
+        op: and
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/COMMAND_LINE
+          value: sc  stop KSCWebConsoleMessageQueue
         - op: or
           rules:
           - case sensitive: false
-            op: ends with
-            path: event/FILE_PATH
-            value: \sc.exe
+            op: contains
+            path: event/USER_NAME
+            value: AUTHORI
           - case sensitive: false
-            op: ends with
-            path: event/FILE_PATH
-            value: \net.exe
-          - case sensitive: false
-            op: ends with
-            path: event/FILE_PATH
-            value: \net1.exe
+            op: contains
+            path: event/USER_NAME
+            value: AUTORI
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \powershell.exe
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: stop
-    - not: true
-      op: and
-      rules:
-      - case sensitive: false
-        op: is
-        path: event/COMMAND_LINE
-        value: sc  stop KSCWebConsoleMessageQueue
-      - op: or
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/USER_NAME
-          value: AUTHORI
-        - case sensitive: false
-          op: contains
-          path: event/USER_NAME
-          value: AUTORI
+        value: 'Stop-Service '
 respond:
 - action: report
   metadata:
-    author: Jakob Weinzettl, oscd.community
+    author: Jakob Weinzettl, oscd.community, Nasreddine Bencherchali
     description: Detects a windows service to be stopped
     falsepositives:
     - Administrator shutting down the service due to upgrade or removal purposes

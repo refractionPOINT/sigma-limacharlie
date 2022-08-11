@@ -34,7 +34,7 @@ respond:
     description: Detection of sc.exe utility adding a new service with special permission
       which hides that service.
     falsepositives:
-    - Intended use of hidden services
+    - Rare intended use of hidden services
     level: high
     references:
     - https://blog.talosintelligence.com/2021/10/threat-hunting-in-large-datasets-by.html

@@ -17,11 +17,23 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: ~2\
-    - case sensitive: false
-      not: true
-      op: is
-      path: event/PARENT/FILE_PATH
-      value: C:\Windows\System32\Dism.exe
+    - not: true
+      op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/PARENT/FILE_PATH
+          value: C:\Windows\System32\Dism.exe
+        - case sensitive: false
+          op: is
+          path: event/PARENT/FILE_PATH
+          value: C:\Windows\System32\cleanmgr.exe
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \WebEx\WebexHost.exe
 respond:
 - action: report
   metadata:

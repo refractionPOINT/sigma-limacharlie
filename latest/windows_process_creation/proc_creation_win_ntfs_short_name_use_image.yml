@@ -5,80 +5,87 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: or
+  - op: and
     rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: ~1.exe
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: ~1.bat
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: ~1.msi
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: ~1.vbe
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: ~1.vbs
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: ~1.dll
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: ~1.ps1
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: ~1.js
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: ~1.hta
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: ~2.exe
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: ~2.bat
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: ~2.msi
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: ~2.vbe
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: ~2.vbs
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: ~2.dll
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: ~2.ps1
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: ~2.js
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: ~2.hta
     - case sensitive: false
-      op: contains
-      path: event/FILE_PATH
-      value: ~1.exe
-    - case sensitive: false
-      op: contains
-      path: event/FILE_PATH
-      value: ~1.bat
-    - case sensitive: false
-      op: contains
-      path: event/FILE_PATH
-      value: ~1.msi
-    - case sensitive: false
-      op: contains
-      path: event/FILE_PATH
-      value: ~1.vbe
-    - case sensitive: false
-      op: contains
-      path: event/FILE_PATH
-      value: ~1.vbs
-    - case sensitive: false
-      op: contains
-      path: event/FILE_PATH
-      value: ~1.dll
-    - case sensitive: false
-      op: contains
-      path: event/FILE_PATH
-      value: ~1.ps1
-    - case sensitive: false
-      op: contains
-      path: event/FILE_PATH
-      value: ~1.js
-    - case sensitive: false
-      op: contains
-      path: event/FILE_PATH
-      value: ~1.hta
-    - case sensitive: false
-      op: contains
-      path: event/FILE_PATH
-      value: ~2.exe
-    - case sensitive: false
-      op: contains
-      path: event/FILE_PATH
-      value: ~2.bat
-    - case sensitive: false
-      op: contains
-      path: event/FILE_PATH
-      value: ~2.msi
-    - case sensitive: false
-      op: contains
-      path: event/FILE_PATH
-      value: ~2.vbe
-    - case sensitive: false
-      op: contains
-      path: event/FILE_PATH
-      value: ~2.vbs
-    - case sensitive: false
-      op: contains
-      path: event/FILE_PATH
-      value: ~2.dll
-    - case sensitive: false
-      op: contains
-      path: event/FILE_PATH
-      value: ~2.ps1
-    - case sensitive: false
-      op: contains
-      path: event/FILE_PATH
-      value: ~2.js
-    - case sensitive: false
-      op: contains
-      path: event/FILE_PATH
-      value: ~2.hta
+      not: true
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \WebEx\WebexHost.exe
 respond:
 - action: report
   metadata:

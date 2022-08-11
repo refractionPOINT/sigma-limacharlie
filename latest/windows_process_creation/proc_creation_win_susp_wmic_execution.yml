@@ -45,22 +45,22 @@ detect:
           op: is
           path: event/ORIGINAL_FILE_NAME
           value: wmic.exe
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ' path '
-      - op: or
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: AntiVirus
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: Firewall
       - op: and
         rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' path '
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: AntiVirus
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: Firewall
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
@@ -73,7 +73,7 @@ respond:
 - action: report
   metadata:
     author: Michael Haag, Florian Roth, juju4, oscd.community
-    description: Detects WMI executing suspicious commands
+    description: Detects WMIC executing suspicious or recon commands
     falsepositives:
     - If using Splunk, we recommend | stats count by Computer,CommandLine following
       for easy hunting by Computer/CommandLine
@@ -86,5 +86,5 @@ respond:
     - attack.execution
     - attack.t1047
     - car.2016-03-002
-  name: Suspicious WMI Execution
+  name: Suspicious WMIC Execution
 

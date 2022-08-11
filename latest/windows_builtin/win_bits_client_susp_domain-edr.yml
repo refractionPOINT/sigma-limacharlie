@@ -59,6 +59,14 @@ detect:
         op: contains
         path: event/EVENT/EventData/RemoteName
         value: storage.googleapis.com
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/RemoteName
+        value: anonfiles.com
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/RemoteName
+        value: send.exploit.in
 respond:
 - action: report
   metadata:
@@ -72,6 +80,7 @@ respond:
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1197/T1197.md
     - https://twitter.com/malmoeb/status/1535142803075960832
+    - https://symantec-enterprise-blogs.security.com/blogs/threat-intelligence/ransomware-hive-conti-avoslocker
     tags:
     - attack.defense_evasion
     - attack.persistence

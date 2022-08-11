@@ -56,7 +56,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth, Nasreddine Bencherchali @nas_bench
+    author: Florian Roth, Nasreddine Bencherchali
     description: Detects the use of NirCmd tool for command execution, which could
       be the result of legitimate administrative activity
     falsepositives:

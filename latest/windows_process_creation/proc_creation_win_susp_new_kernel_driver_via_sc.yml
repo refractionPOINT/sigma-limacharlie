@@ -24,11 +24,11 @@ detect:
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
-      value: binPath=
+      value: binPath
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
-      value: type=
+      value: type
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
@@ -39,7 +39,7 @@ respond:
     author: Nasreddine Bencherchali
     description: Detects creation of a new service (kernel driver) with the type "kernel"
     falsepositives:
-    - Legitimate installation of drivers via sc.exe
+    - Rare legitimate installation of kernel drivers via sc.exe
     level: medium
     references:
     - https://www.aon.com/cyber-solutions/aon_cyber_labs/yours-truly-signed-av-driver-weaponizing-an-antivirus-driver/

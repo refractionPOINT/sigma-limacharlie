@@ -41,6 +41,10 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: atbroker.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: HelpPane.exe
 respond:
 - action: report
   metadata:
@@ -52,6 +56,7 @@ respond:
     level: high
     references:
     - https://blogs.technet.microsoft.com/jonathantrull/2016/10/03/detecting-sticky-key-backdoors/
+    - https://bazaar.abuse.ch/sample/6f3aa9362d72e806490a8abce245331030d1ab5ac77e400dd475748236a6cc81/
     tags:
     - attack.persistence
     - attack.privilege_escalation

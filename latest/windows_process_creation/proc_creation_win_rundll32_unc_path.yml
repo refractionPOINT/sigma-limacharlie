@@ -1,0 +1,45 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \rundll32.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: RUNDLL32.EXE
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: rundll32
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' \\\\'
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali
+    description: Detects rundll32 execution where the DLL is located on a remote location
+      (share)
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://www.cybereason.com/blog/rundll32-the-infamous-proxy-for-executing-malicious-code
+    tags:
+    - attack.defense_evasion
+    - attack.execution
+    - attack.t1021.002
+    - attack.t1218.011
+  name: Rundll32 UNC Path Execution
+

@@ -88,7 +88,8 @@ respond:
   metadata:
     author: '@Kostastsale, @TheDFIRReport, slightly modified by pH-T'
     description: Detects the execution of reg.exe and subsequent command line arguments
-      for enabling RDP service on the host
+      for enabling RDP service on the host by tampering with the 'CurrentControlSet\Control\Terminal
+      Server' subkeys
     falsepositives:
     - Unknown
     level: high
