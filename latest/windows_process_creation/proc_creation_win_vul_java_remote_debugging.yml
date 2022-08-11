@@ -7,10 +7,22 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: transport=dt_socket,address=
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: transport=dt_socket,address=
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: jre1.
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: jdk1.
     - not: true
       op: or
       rules:
@@ -31,6 +43,8 @@ respond:
     falsepositives:
     - Unknown
     level: medium
+    references:
+    - https://dzone.com/articles/remote-debugging-java-applications-with-jdwp
     tags:
     - attack.t1203
     - attack.execution
