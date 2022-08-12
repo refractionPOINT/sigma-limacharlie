@@ -12,7 +12,7 @@ detect:
     - case sensitive: false
       op: matches
       path: event/EVENT/EventData/ShareName
-      re: \\\*\\SYSVOL
+      re: \\\\\*\\\\SYSVOL
     - case sensitive: false
       op: ends with
       path: event/EVENT/EventData/RelativeTargetName

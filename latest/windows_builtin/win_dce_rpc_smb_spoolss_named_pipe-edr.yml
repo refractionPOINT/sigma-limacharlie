@@ -12,7 +12,7 @@ detect:
     - case sensitive: false
       op: matches
       path: event/EVENT/EventData/ShareName
-      re: \\\*\\IPC\$
+      re: \\\\\*\\\\IPC\$
     - case sensitive: false
       op: is
       path: event/EVENT/EventData/RelativeTargetName
