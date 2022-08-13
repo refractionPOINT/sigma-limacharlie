@@ -1,0 +1,34 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/EventData/Provider_Name
+      value: Service Control Manager
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '7045'
+    - case sensitive: false
+      op: is
+      path: event/EVENT/EventData/ServiceName
+      value: AnyDesk Service
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali
+    description: Detects the installation of the anydesk software service. Which could
+      be an indication of anydesk abuse if you the software isn't already used.
+    falsepositives:
+    - Legitimate usage of the anydesk tool
+    level: medium
+    references:
+    - https://thedfirreport.com/2022/08/08/bumblebee-roasts-its-way-to-domain-admin/
+    tags:
+    - attack.persistence
+  name: Anydesk Remote Access Software Service Installation
+

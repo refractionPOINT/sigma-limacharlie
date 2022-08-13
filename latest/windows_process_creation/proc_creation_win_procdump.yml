@@ -7,31 +7,19 @@ detect:
   - op: is windows
   - op: or
     rules:
-    - op: or
-      rules:
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \procdump.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \procdump64.exe
-    - op: and
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ' -ma '
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: .exe
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \procdump.exe
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \procdump64.exe
 respond:
 - action: report
   metadata:
     author: Florian Roth
-    description: Detects uses of the SysInternals Procdump utility
+    description: Detects usage of the SysInternals Procdump utility
     falsepositives:
     - Legitimate use of procdump by a developer or administrator
     level: medium

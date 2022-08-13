@@ -7,6 +7,10 @@ detect:
   - op: is windows
   - op: and
     rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \cmd.exe
     - op: or
       rules:
       - case sensitive: false
@@ -47,10 +51,6 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: av_query
-    - case sensitive: false
-      op: ends with
-      path: event/FILE_PATH
-      value: \cmd.exe
 respond:
 - action: report
   metadata:

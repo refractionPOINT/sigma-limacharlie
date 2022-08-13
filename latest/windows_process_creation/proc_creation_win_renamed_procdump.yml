@@ -9,13 +9,13 @@ detect:
     rules:
     - op: or
       rules:
-      - op: or
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: procdump
+      - op: and
         rules:
-        - case sensitive: false
-          op: is
-          path: event/ORIGINAL_FILE_NAME
-          value: procdump
-        - op: and
+        - op: or
           rules:
           - case sensitive: false
             op: contains
@@ -24,17 +24,17 @@ detect:
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
+            value: ' /ma '
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
             value: ' -accepteula '
-      - op: and
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: ' -ma '
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: .dmp
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' /accepteula '
     - not: true
       op: or
       rules:
@@ -54,7 +54,7 @@ respond:
       by attackers or malware
     falsepositives:
     - Procdump illegaly bundled with legitimate software
-    - Weird admins who renamed binaries
+    - Weird admins who renamed binaries (and should be investigated)
     level: high
     references:
     - https://docs.microsoft.com/en-us/sysinternals/downloads/procdump

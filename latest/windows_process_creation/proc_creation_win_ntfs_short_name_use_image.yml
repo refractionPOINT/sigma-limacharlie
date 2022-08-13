@@ -81,11 +81,17 @@ detect:
         op: contains
         path: event/FILE_PATH
         value: ~2.hta
-    - case sensitive: false
-      not: true
-      op: ends with
-      path: event/PARENT/FILE_PATH
-      value: \WebEx\WebexHost.exe
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \WebEx\WebexHost.exe
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \thor\thor64.exe
 respond:
 - action: report
   metadata:

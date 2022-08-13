@@ -30,10 +30,16 @@ detect:
           op: is
           path: event/PARENT/FILE_PATH
           value: C:\Windows\System32\cleanmgr.exe
-      - case sensitive: false
-        op: ends with
-        path: event/PARENT/FILE_PATH
-        value: \WebEx\WebexHost.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \WebEx\WebexHost.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \thor\thor64.exe
 respond:
 - action: report
   metadata:

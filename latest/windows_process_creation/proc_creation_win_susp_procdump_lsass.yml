@@ -5,9 +5,9 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: or
+  - op: and
     rules:
-    - op: and
+    - op: or
       rules:
       - case sensitive: false
         op: contains
@@ -16,17 +16,11 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ' lsass'
-    - op: and
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ' -ma '
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ' ls'
+        value: ' /ma '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' ls'
 respond:
 - action: report
   metadata:
