@@ -10,7 +10,7 @@ detect:
     - case sensitive: false
       op: starts with
       path: event/COMMAND_LINE
-      value: 'net use \\%DomainController%\C$ "P@ssw0rd" '
+      value: 'net use \\\\%DomainController%\C$ "P@ssw0rd" '
     - case sensitive: false
       op: matches
       path: event/COMMAND_LINE

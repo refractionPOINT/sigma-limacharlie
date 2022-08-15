@@ -73,7 +73,7 @@ detect:
         - case sensitive: false
           op: starts with
           path: event/EVENT/EventData/ProcessName
-          value: C:\Windows\System32\\DriverStore\
+          value: C:\Windows\System32\DriverStore\
         - case sensitive: false
           op: starts with
           path: event/EVENT/EventData/ProcessName

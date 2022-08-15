@@ -20,7 +20,7 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ' 1> \\127.0.0.1\ADMIN$\__16'
+        value: ' 1> \\\\127.0.0.1\ADMIN$\__16'
     - op: and
       rules:
       - case sensitive: false

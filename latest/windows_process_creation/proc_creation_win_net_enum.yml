@@ -27,7 +27,7 @@ detect:
       not: true
       op: contains
       path: event/COMMAND_LINE
-      value: \\\
+      value: \\\\
 respond:
 - action: report
   metadata:

@@ -29,7 +29,7 @@ detect:
       - case sensitive: false
         op: matches
         path: event/COMMAND_LINE
-        re: .*\ /..*
+        re: .*\ /\?.*
 respond:
 - action: report
   metadata:

@@ -26,7 +26,7 @@ detect:
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
-      value: -p \\
+      value: -p \\\\
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE

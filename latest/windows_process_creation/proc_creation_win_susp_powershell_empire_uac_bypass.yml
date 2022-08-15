@@ -10,12 +10,11 @@ detect:
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
-      value: ' -NoP -NonI -w Hidden -c $x=$((gp HKCU:Software\\Microsoft\\Windows
-        Update).Update)'
+      value: ' -NoP -NonI -w Hidden -c $x=$((gp HKCU:Software\Microsoft\Windows Update).Update)'
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
-      value: ' -NoP -NonI -c $x=$((gp HKCU:Software\\Microsoft\\Windows Update).Update);'
+      value: ' -NoP -NonI -c $x=$((gp HKCU:Software\Microsoft\Windows Update).Update);'
 respond:
 - action: report
   metadata:
