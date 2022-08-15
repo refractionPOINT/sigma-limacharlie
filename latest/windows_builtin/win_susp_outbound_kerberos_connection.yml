@@ -10,26 +10,26 @@ detect:
       value: '5156'
     - case sensitive: false
       op: is
-      path: Event/EventData/DestinationPort
+      path: Event/EventData/DestPort
       value: '88'
   - not: true
     op: or
     rules:
     - case sensitive: false
       op: ends with
-      path: Event/EventData/Image
+      path: Event/EventData/Application
       value: \lsass.exe
     - case sensitive: false
       op: ends with
-      path: Event/EventData/Image
+      path: Event/EventData/Application
       value: \opera.exe
     - case sensitive: false
       op: ends with
-      path: Event/EventData/Image
+      path: Event/EventData/Application
       value: \chrome.exe
     - case sensitive: false
       op: ends with
-      path: Event/EventData/Image
+      path: Event/EventData/Application
       value: \firefox.exe
   target: log
 respond:
