@@ -26,7 +26,7 @@ detect:
       - case sensitive: false
         op: matches
         path: event/FILE_PATH
-        re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Windows\\winsxs\\x86_security\-malware\-windows\-defender_
+        re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Windows\\winsxs\\
       - case sensitive: false
         op: matches
         path: event/FILE_PATH
