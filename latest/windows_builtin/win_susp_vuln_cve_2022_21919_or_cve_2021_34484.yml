@@ -1,0 +1,30 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '1511'
+  - case sensitive: false
+    op: is
+    path: Event/EventData/ProviderName
+    value: Microsoft-Windows-User Profiles Service
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Cybex
+    description: During exploitation of this vuln, two logs (providername:Microsoft-Windows-User
+      Profiles Service) with eventid 1511 and 1515 (maybe lot of false positives with
+      this event) are created. Moreover, it appears the directory \Users\TEMP is created
+      may be created during the exploitation.Viewed on 2008 Server
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://packetstormsecurity.com/files/166692/Windows-User-Profile-Service-Privlege-Escalation.html
+    tags:
+    - attack.execution
+  name: Suspicious Usage of CVE_2021_34484 or CVE 2022_21919
+
