@@ -5,14 +5,20 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: or
+  - op: and
     rules:
-    - op: and
+    - op: or
       rules:
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
         value: \createdump.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: FX_VER_INTERNALNAME_STR
+    - op: or
+      rules:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -20,13 +26,15 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ' -f '
-    - op: and
-      rules:
+        value: ' --full '
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ' -u -f '
+        value: ' -f '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' --name '
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -34,7 +42,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth, Nasreddine Bencherchali
     description: Detects uses of the createdump.exe LOLOBIN utility to dump process
       memory
     falsepositives:
@@ -42,6 +50,7 @@ respond:
     level: high
     references:
     - https://www.crowdstrike.com/blog/overwatch-exposes-aquatic-panda-in-possession-of-log-4-shell-exploit-tools/
+    - https://twitter.com/bopin2020/status/1366400799199272960
     tags:
     - attack.defense_evasion
     - attack.t1036

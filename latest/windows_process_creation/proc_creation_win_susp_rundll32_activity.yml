@@ -199,6 +199,34 @@ detect:
           op: contains
           path: event/COMMAND_LINE
           value: ShOpenVerbShortcut
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: scrobj.dll
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: GenerateTypeLib
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: http
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: shimgvw.dll
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ImageView_Fullscreen
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: http
     - case sensitive: false
       not: true
       op: contains
@@ -207,7 +235,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: juju4, Jonhnathan Ribeiro, oscd.community
+    author: juju4, Jonhnathan Ribeiro, oscd.community, Nasreddine Bencherchali
     description: Detects suspicious process related to rundll32 based on arguments
     falsepositives:
     - False positives depend on scripts and administrative tools used in the monitored
@@ -218,6 +246,8 @@ respond:
     - https://twitter.com/Hexacorn/status/885258886428725250
     - https://gist.github.com/ryhanson/227229866af52e2d963cf941af135a52
     - https://twitter.com/nas_bench/status/1433344116071583746
+    - https://twitter.com/eral4m/status/1479106975967240209
+    - https://twitter.com/eral4m/status/1479080793003671557
     tags:
     - attack.defense_evasion
     - attack.t1218.011

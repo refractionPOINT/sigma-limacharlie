@@ -19,7 +19,8 @@ respond:
 - action: report
   metadata:
     author: frack113
-    description: Detects the use of a Microsoft signed script to execute commands.
+    description: Detects the use of the 'Pubprn.vbs' Microsoft signed script to execute
+      commands.
     falsepositives:
     - Unknown
     level: medium

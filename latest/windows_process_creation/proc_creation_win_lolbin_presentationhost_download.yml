@@ -12,35 +12,39 @@ detect:
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
-        value: \protocolhandler.exe
+        value: \presentationhost.exe
       - case sensitive: false
         op: is
         path: event/ORIGINAL_FILE_NAME
-        value: ProtocolHandler.exe
-    - op: and
+        value: PresentationHost.exe
+    - op: or
       rules:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: '"ms-word'
+        value: http://
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: .docx"
+        value: https://
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ftp://
 respond:
 - action: report
   metadata:
-    author: frack113
-    description: Emulates attack via documents through protocol handler in Microsoft
-      Office. On successful execution you should see Microsoft Word launch a blank
-      file.
+    author: Nasreddine Bencherchali
+    description: Detects usage of "PresentationHost" which is a utility that runs
+      ".xbap" (Browser Applications) files to download arbitrary files
     falsepositives:
     - Unknown
     level: medium
     references:
-    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1218/T1218.md
+    - https://github.com/LOLBAS-Project/LOLBAS/pull/239/files
     tags:
     - attack.defense_evasion
+    - attack.execution
     - attack.t1218
-  name: ProtocolHandler.exe Downloaded Suspicious File
+  name: Download Arbitrary Files Via PresentationHost.exe
 

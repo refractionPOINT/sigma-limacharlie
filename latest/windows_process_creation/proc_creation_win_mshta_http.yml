@@ -17,10 +17,20 @@ detect:
         op: is
         path: event/ORIGINAL_FILE_NAME
         value: MSHTA.EXE
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: http
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: http://
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: https://
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ftp://
 respond:
 - action: report
   metadata:
