@@ -267,12 +267,24 @@ detect:
           op: ends with
           path: event/FILE_PATH
           value: \wusa.exe
-    - case sensitive: false
-      not: true
-      op: ends with
-      path: event/COMMAND_LINE
-      value: Windows\system32\cmd.exe /c C:\ManageEngine\ADManager "Plus\ES\bin\elasticsearch.bat
-        -Enode.name=RMP-NODE1 -pelasticsearch-pid.txt
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: Windows\system32\cmd.exe /c C:\ManageEngine\ADManager "Plus\ES\bin\elasticsearch.bat
+          -Enode.name=RMP-NODE1 -pelasticsearch-pid.txt
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: sc query
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ADManager Plus
 respond:
 - action: report
   metadata:
