@@ -1,0 +1,64 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: Cmd.Exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cmd.exe
+    - op: or
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: 'cmd '
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: '/r '
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: <
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'cmd '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '/r '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: <
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Detect use of "/R <" to read and execute a file via cmd.exe
+    falsepositives:
+    - Legitimate use
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/40b77d63808dd4f4eafb83949805636735a1fd15/atomics/T1059.003/T1059.003.md
+    tags:
+    - attack.execution
+    - attack.t1059.003
+  name: Read and Execute a File Via Cmd.exe
+

@@ -12,7 +12,7 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: 'del '
+        value: ' del '
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
