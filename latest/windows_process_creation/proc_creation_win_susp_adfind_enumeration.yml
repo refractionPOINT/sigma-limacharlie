@@ -59,6 +59,7 @@ respond:
     - Administrative activity
     level: high
     references:
+    - https://www.joeware.net/freetools/tools/adfind/
     - https://social.technet.microsoft.com/wiki/contents/articles/7535.adfind-command-examples.aspx
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1087.002/T1087.002.md
     tags:

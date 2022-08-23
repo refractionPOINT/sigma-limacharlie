@@ -58,6 +58,16 @@ detect:
           op: contains
           path: event/COMMAND_LINE
           value: \AppData\Local\GitHubDesktop\Update.exe --createShortcut GitHubDesktop.exe
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: C:\Users\
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \AppData\Local\Microsoft\Teams\Update.exe" --processStart "Teams.exe"
 respond:
 - action: report
   metadata:
