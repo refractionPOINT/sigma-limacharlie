@@ -31,17 +31,31 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: ' TMBMServer'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Sophos
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Symantec
 respond:
 - action: report
   metadata:
     author: frack113
-    description: Adversaries may disable security tools to avoid possible detection
-      of their tools and activities by stopping antivirus service
+    description: 'Detects usage of ''Stop-Service'' or ''Remove-Service'' powershell
+      cmdlet to disable AV services.
+
+      Adversaries may disable security tools to avoid possible detection of their
+      tools and activities by stopping antivirus service
+
+      '
     falsepositives:
     - Unknown
-    level: medium
+    level: high
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1562.001/T1562.001.md
+    - https://research.nccgroup.com/2022/08/19/back-in-black-unlocking-a-lockbit-3-0-ransomware-attack/
     tags:
     - attack.defense_evasion
     - attack.t1562.001

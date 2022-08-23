@@ -7,10 +7,16 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - case sensitive: false
-      op: ends with
-      path: event/FILE_PATH
-      value: \nltest.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \nltest.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: nltestrk.exe
     - op: or
       rules:
       - op: and
@@ -59,6 +65,7 @@ respond:
     - https://attack.mitre.org/techniques/T1482/
     - https://attack.mitre.org/techniques/T1016/
     - https://book.hacktricks.xyz/windows/basic-cmd-for-pentesters
+    - https://research.nccgroup.com/2022/08/19/back-in-black-unlocking-a-lockbit-3-0-ransomware-attack/
     tags:
     - attack.discovery
     - attack.t1016

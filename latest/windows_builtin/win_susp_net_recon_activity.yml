@@ -6,6 +6,10 @@ detect:
     op: is
     path: Event/System/EventID
     value: '4661'
+  - case sensitive: false
+    op: is
+    path: Event/EventData/AccessMask
+    value: '0x2d'
   - op: or
     rules:
     - case sensitive: false
@@ -20,10 +24,6 @@ detect:
     op: starts with
     path: Event/EventData/ObjectName
     value: S-1-5-21-
-  - case sensitive: false
-    op: is
-    path: Event/EventData/AccessMask
-    value: '0x2d'
   - op: or
     rules:
     - case sensitive: false
