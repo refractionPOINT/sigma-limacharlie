@@ -1,0 +1,134 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: cmd.exe/c
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \cmd/c
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '"cmd/c'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: cmd.exe/k
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \cmd/k
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '"cmd/k'
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /cwhoami
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /cpowershell
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /cschtasks
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /cbitsadmin
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /ccertutil
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /kwhoami
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /kpowershell
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /kschtasks
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /kbitsadmin
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /kcertutil
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: cmd.exe /c
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: cmd /c
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: cmd.exe /k
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: cmd /k
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'cmd.exe /c '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'cmd /c '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'cmd.exe /k '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'cmd /k '
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects Windows command lines that miss a space before or after the
+      /c flag when running a command using the cmd.exe. This could be a sign of obfuscation
+      of a fat finger problem (typo by the developer).
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://twitter.com/cyb3rops/status/1562072617552678912
+    - https://ss64.com/nt/cmd.html
+    tags:
+    - attack.execution
+    - attack.t1059.001
+  name: Missing Space Characters in Command Lines
+
