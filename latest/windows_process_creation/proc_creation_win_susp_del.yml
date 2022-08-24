@@ -10,9 +10,13 @@ detect:
     - op: and
       rules:
       - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'del '
+      - case sensitive: false
         op: matches
         path: event/COMMAND_LINE
-        re: .*del\ .*\.exe.*
+        re: .*\*\.exe.*
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -24,9 +28,13 @@ detect:
     - op: and
       rules:
       - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'del '
+      - case sensitive: false
         op: matches
         path: event/COMMAND_LINE
-        re: .*del\ .*\.dll.*
+        re: .*\*\.dll.*
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -35,7 +43,7 @@ respond:
 - action: report
   metadata:
     author: frack113
-    description: suspicious command line to remove exe or dll
+    description: Detects suspicious command line to remove and 'exe' or 'dll'
     falsepositives:
     - Unknown
     level: medium

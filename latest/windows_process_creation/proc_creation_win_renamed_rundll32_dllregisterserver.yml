@@ -21,8 +21,8 @@ respond:
   metadata:
     author: Nasreddine Bencherchali
     description: Detects when 'DllRegisterServer' is called in the commandline and
-      the image is not rundll32. This could that the 'rundll32' utility has been renamed
-      in order to avoid detection
+      the image is not rundll32. This could mean that the 'rundll32' utility has been
+      renamed in order to avoid detection
     falsepositives:
     - Unlikely
     level: high

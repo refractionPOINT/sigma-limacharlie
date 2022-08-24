@@ -1,0 +1,51 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \System\CurrentControlSet\Services\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \NetworkProvider
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \System\CurrentControlSet\Services\WebClient\NetworkProvider
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \System\CurrentControlSet\Services\LanmanWorkstation\NetworkProvider
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \System\CurrentControlSet\Services\RDPNP\NetworkProvider
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali
+    description: Detects when an attacker tries to add a new network provider in order
+      to dump clear text credentials, similar to how the NPPSpy tool does it
+    falsepositives:
+    - Other legitimate network providers used and not filtred in this rule
+    level: high
+    references:
+    - https://docs.microsoft.com/en-us/troubleshoot/windows-client/deployment/network-provider-settings-removed-in-place-upgrade
+    - https://github.com/gtworek/PSBits/tree/master/PasswordStealing/NPPSpy
+    tags:
+    - attack.credential_access
+    - attack.t1003
+  name: New Network Provider - CommandLine
+

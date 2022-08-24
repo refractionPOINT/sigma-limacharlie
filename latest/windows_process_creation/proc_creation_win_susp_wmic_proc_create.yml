@@ -40,6 +40,10 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: 'cmd.exe /k '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: powershell
       - case sensitive: false
         op: contains

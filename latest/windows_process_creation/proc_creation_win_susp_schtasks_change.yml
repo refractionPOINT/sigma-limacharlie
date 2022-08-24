@@ -90,7 +90,15 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: 'cmd /k '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: 'cmd.exe /c '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'cmd.exe /k '
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
