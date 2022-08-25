@@ -64,6 +64,10 @@ detect:
       op: contains
       path: Event/EventData/RemoteName
       value: send.exploit.in
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
+      value: transfer.sh
   target: log
 respond:
 - action: report
