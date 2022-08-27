@@ -16,19 +16,11 @@ detect:
       - case sensitive: false
         op: contains
         path: event/PARENT/COMMAND_LINE
-        value: /online
+        value: /Online
       - case sensitive: false
         op: contains
         path: event/PARENT/COMMAND_LINE
         value: /Disable-Feature
-      - case sensitive: false
-        op: contains
-        path: event/PARENT/COMMAND_LINE
-        value: '/FeatureName:'
-      - case sensitive: false
-        op: contains
-        path: event/PARENT/COMMAND_LINE
-        value: /Remove
     - op: and
       rules:
       - case sensitive: false
@@ -38,19 +30,11 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: /online
+        value: /Online
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
         value: /Disable-Feature
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: '/FeatureName:'
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /Remove
 respond:
 - action: report
   metadata:
@@ -62,6 +46,7 @@ respond:
     level: medium
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1562.001/T1562.001.md#atomic-test-26---disable-windows-defender-with-dism
+    - https://www.trendmicro.com/en_us/research/22/h/ransomware-actor-abuses-genshin-impact-anti-cheat-driver-to-kill-antivirus.html
     tags:
     - attack.defense_evasion
     - attack.t1562.001
