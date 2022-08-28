@@ -98,22 +98,34 @@ detect:
     - not: true
       op: or
       rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: 'cmd.exe /c '
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: 'cmd /c '
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: 'cmd.exe /k '
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: 'cmd /k '
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'cmd.exe /c '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'cmd /c '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'cmd.exe /k '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'cmd /k '
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: AppData\Local\Programs\Microsoft VS Code\resources\app\node_modules
+        - case sensitive: false
+          op: ends with
+          path: event/COMMAND_LINE
+          value: cmd.exe/c .
 respond:
 - action: report
   metadata:
