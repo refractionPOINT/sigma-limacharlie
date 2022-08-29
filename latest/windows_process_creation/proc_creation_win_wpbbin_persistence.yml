@@ -14,7 +14,7 @@ respond:
   metadata:
     author: Nasreddine Bencherchali
     description: Detects execution of the binary "wpbbin" which is used as part of
-      the UEFI based persistence method described in the refernece section
+      the UEFI based persistence method described in the reference section
     falsepositives:
     - Legitimate usage of the file by hardware manufacturer such as lenovo (Thanks
       @0gtweet for the tip)

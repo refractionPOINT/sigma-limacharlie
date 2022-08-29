@@ -604,8 +604,8 @@ respond:
   metadata:
     author: Florian Roth
     description: Detects PowerShell command line contents that include a suspicious
-      anormal casing in the Net.Webclient (e.g. nEt.WEbCliEnT) string as used in obfuscation
-      techniques
+      abnormal casing in the Net.Webclient (e.g. nEt.WEbCliEnT) string as used in
+      obfuscation techniques
     falsepositives:
     - Unknown
     level: high

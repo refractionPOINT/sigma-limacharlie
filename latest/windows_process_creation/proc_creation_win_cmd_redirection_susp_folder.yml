@@ -36,7 +36,7 @@ respond:
   metadata:
     author: Nasreddine Bencherchali
     description: Detects inline windows shell commands redirecting output via the
-      ">" symbol to a suspicous location
+      ">" symbol to a suspicious location
     falsepositives:
     - Legitimate admin scripts
     level: medium

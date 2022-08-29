@@ -35,7 +35,7 @@ respond:
 - action: report
   metadata:
     author: frack113
-    description: Posssible Payload Obfuscation
+    description: Possible Payload Obfuscation
     falsepositives:
     - Legitimate use
     level: medium

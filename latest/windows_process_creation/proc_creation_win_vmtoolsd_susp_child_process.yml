@@ -101,7 +101,7 @@ respond:
     description: Detects suspicious child process creations of VMware Tools process
       which may indicate persistence setup
     falsepositives:
-    - Legitimate use by adminstrator
+    - Legitimate use by administrator
     level: high
     references:
     - https://bohops.com/2021/10/08/analyzing-and-detecting-a-vmtools-persistence-technique/
