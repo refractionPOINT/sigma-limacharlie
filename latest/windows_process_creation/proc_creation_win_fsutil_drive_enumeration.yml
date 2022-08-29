@@ -27,7 +27,7 @@ respond:
     author: Christopher Peacock '@securepeacock', SCYTHE '@scythe_io'
     description: Attackers may leverage fsutil to enumerated connected drives.
     falsepositives:
-    - Certain software or administrative tasks may trigger false positivies.
+    - Certain software or administrative tasks may trigger false positives.
     level: low
     references:
     - Turla has used fsutil fsinfo drives to list connected drives. https://attack.mitre.org/techniques/T1120/

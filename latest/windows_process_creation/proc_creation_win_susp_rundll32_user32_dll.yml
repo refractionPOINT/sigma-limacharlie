@@ -30,7 +30,7 @@ respond:
     description: Detects a suspicious call to the user32.dll function that locks the
       user workstation
     falsepositives:
-    - Scritps or links on the user desktop used to lock the workstation instead of
+    - Scripts or links on the user desktop used to lock the workstation instead of
       Windows+L or the menu option
     level: medium
     references:

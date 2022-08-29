@@ -41,7 +41,7 @@ respond:
     author: Nasreddine Bencherchali, Victor Sergeev, oscd.community
     description: 'Detects Winword process loading custmom dlls via the ''/l'' switch.
 
-      Winword can be abused as a LOLBIN to download arbitary file or load arbitary
+      Winword can be abused as a LOLBIN to download arbitrary file or load arbitrary
       DLLs.
 
       '

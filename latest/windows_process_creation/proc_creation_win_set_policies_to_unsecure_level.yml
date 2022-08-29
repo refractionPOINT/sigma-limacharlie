@@ -39,7 +39,7 @@ respond:
 - action: report
   metadata:
     author: frack113
-    description: Detects use of executionpolicy option to set a unsecure policies
+    description: Detects use of executionpolicy option to set insecure policies
     falsepositives:
     - Administrator script
     level: medium
@@ -51,5 +51,5 @@ respond:
     tags:
     - attack.execution
     - attack.t1059.001
-  name: Change PowerShell Policies to an Unsecure Level
+  name: Change PowerShell Policies to an Insecure Level
 

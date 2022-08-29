@@ -33,7 +33,7 @@ respond:
     author: Nasreddine Bencherchali
     description: Detects encoded base64 MZ header in the commandline
     falsepositives:
-    - Unlikley
+    - Unlikely
     level: high
     references:
     - https://thedfirreport.com/2022/07/11/select-xmrig-from-sqlserver/

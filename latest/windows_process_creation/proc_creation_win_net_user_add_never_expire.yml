@@ -36,7 +36,7 @@ respond:
     description: Detects creation of local users via the net.exe command with the
       option "never expire"
     falsepositives:
-    - Unlikley
+    - Unlikely
     level: high
     references:
     - https://thedfirreport.com/2022/07/11/select-xmrig-from-sqlserver/

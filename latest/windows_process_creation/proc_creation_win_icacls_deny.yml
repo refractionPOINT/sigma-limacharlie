@@ -35,8 +35,8 @@ respond:
 - action: report
   metadata:
     author: frack113
-    description: Detect use of icacls to deny acces for everyone in Users folder sometimes
-      used to hide malicious files
+    description: Detect use of icacls to deny access for everyone in Users folder
+      sometimes used to hide malicious files
     falsepositives:
     - Legitimate use
     level: medium

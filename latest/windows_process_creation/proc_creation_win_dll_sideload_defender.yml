@@ -37,7 +37,7 @@ respond:
   metadata:
     author: Bhabesh Raj
     description: Detects execution of Microsoft Defender's CLI process (MpCmdRun.exe)
-      from the non-default directory which may be an attempt to sideload arbitary
+      from the non-default directory which may be an attempt to sideload arbitrary
       DLL
     falsepositives:
     - Unknown

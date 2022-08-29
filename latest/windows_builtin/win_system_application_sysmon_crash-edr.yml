@@ -21,7 +21,7 @@ respond:
 - action: report
   metadata:
     author: Tim Shelton
-    description: Detectes application popup reporting a failure of the Sysmon service
+    description: Detects application popup reporting a failure of the Sysmon service
     falsepositives:
     - Unknown
     level: high

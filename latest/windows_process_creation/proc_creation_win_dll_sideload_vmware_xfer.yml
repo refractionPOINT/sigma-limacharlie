@@ -21,7 +21,7 @@ respond:
   metadata:
     author: Nasreddine Bencherchali
     description: Detects execution of VMware Xfer utility (VMwareXferlogs.exe) from
-      the non-default directory which may be an attempt to sideload arbitary DLL
+      the non-default directory which may be an attempt to sideload arbitrary DLL
     falsepositives:
     - Unlikely
     level: high

@@ -121,7 +121,7 @@ respond:
   metadata:
     author: Nasreddine Bencherchali
     description: Detects suspicious children spawned via the Windows Terminal application
-      which could be a sign of persistence via WindowsTerminal (see referneces section)
+      which could be a sign of persistence via WindowsTerminal (see references section)
     falsepositives:
     - Other legitimate "Windows Terminal" profiles
     level: medium

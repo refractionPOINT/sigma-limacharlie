@@ -39,7 +39,7 @@ respond:
 - action: report
   metadata:
     author: Florian Roth
-    description: Detects the execution of AdvancedRun utitlity
+    description: Detects the execution of AdvancedRun utility
     falsepositives:
     - Unknown
     level: medium

@@ -19,7 +19,7 @@ respond:
 - action: report
   metadata:
     author: oscd.community, Natalia Shornikova, frack113
-    description: Detects the use of a Micorsoft signed script to execute commands
+    description: Detects the use of a Microsoft signed script to execute commands
     falsepositives:
     - Unknown
     level: medium

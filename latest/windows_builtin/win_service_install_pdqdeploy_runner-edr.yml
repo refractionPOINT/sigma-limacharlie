@@ -30,7 +30,7 @@ respond:
   metadata:
     author: Nasreddine Bencherchali
     description: Detects PDQDeploy service installation on the target system. When
-      a pakcage is deployed via PDQDeploy it installs a remote service on the target
+      a package is deployed via PDQDeploy it installs a remote service on the target
       machine with the name "PDQDeployRunner-X" where "X" is an integer starting from
       1
     falsepositives:
