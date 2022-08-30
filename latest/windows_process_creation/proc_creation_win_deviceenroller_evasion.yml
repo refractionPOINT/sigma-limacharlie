@@ -1,0 +1,36 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \deviceenroller.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: /PhoneDeepLink
+respond:
+- action: report
+  metadata:
+    author: '@gott_cyber'
+    description: "Detects the use of the PhoneDeepLink parameter to potentially sideload\
+      \ a DLL file that doesnt exist. This non-existent DLL file is named \"ShellChromeAPI.dll\"\
+      . \nAdversaries can drop their own renamed DLL and execute it via DeviceEnroller.exe\
+      \ using this parameter\n"
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://mobile.twitter.com/0gtweet/status/1564131230941122561
+    - https://strontic.github.io/xcyclopedia/library/DeviceEnroller.exe-24BEF0D6B0ECED36BB41831759FDE18D.html
+    tags:
+    - attack.defense_evasion
+    - attack.t1574.002
+  name: DLL Sideloading via DeviceEnroller.exe
+

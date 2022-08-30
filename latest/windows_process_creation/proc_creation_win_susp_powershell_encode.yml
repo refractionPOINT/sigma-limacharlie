@@ -50,7 +50,7 @@ respond:
 - action: report
   metadata:
     author: frack113
-    description: Commandline to lauch powershell with a base64 payload
+    description: Commandline to launch powershell with a base64 payload
     falsepositives:
     - Unknown
     level: medium

@@ -16,7 +16,7 @@ respond:
     description: Adversaries may attempt to get a listing of services running on remote
       hosts, including those that may be vulnerable to remote software exploitation
     falsepositives:
-    - Network administator computer
+    - Network administrator computer
     level: high
     references:
     - https://nmap.org/
