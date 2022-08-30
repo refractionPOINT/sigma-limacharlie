@@ -69,6 +69,10 @@ detect:
           op: contains
           path: event/COMMAND_LINE
           value: ' get '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: wmic csproduct get name
 respond:
 - action: report
   metadata:
