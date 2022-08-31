@@ -36,6 +36,10 @@ def processRule( sigmaDir, thisFile, outFile ):
         if level in ( 'informational', ):
             print( "ignoring rule %s, level: %s" % ( thisFile, level ) )
             return
+        status = ruleContent.get( 'status', None )
+        if status in ( 'experimental', ):
+            print( "ignoring rule %s, status: %s" % ( thisFile, status ) )
+            return
     except Exception as e:
         print( "failed to parse rule %s: %s" % ( thisFile, e ) )
         return
