@@ -26,11 +26,23 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: -s
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: /au
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: -au
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: /ni
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -ni
 respond:
 - action: report
   metadata:
