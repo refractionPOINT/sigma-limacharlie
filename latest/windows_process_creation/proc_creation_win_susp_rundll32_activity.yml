@@ -227,11 +227,23 @@ detect:
           op: contains
           path: event/COMMAND_LINE
           value: http
-    - case sensitive: false
-      not: true
-      op: contains
-      path: event/COMMAND_LINE
-      value: shell32.dll,Control_RunDLL desk.cpl,screensaver,@screensaver
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: shell32.dll,Control_RunDLL desk.cpl,screensaver,@screensaver
+      - op: and
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/PARENT/FILE_PATH
+          value: C:\Windows\System32\control.exe
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: .cpl
 respond:
 - action: report
   metadata:
