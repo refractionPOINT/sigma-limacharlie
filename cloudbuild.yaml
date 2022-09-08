@@ -66,7 +66,7 @@ steps:
   - |
     ls -lahR
     git add ./*
-    git commit -m "Update to rules."
+    git commit -m "`git status --porcelain`"
     git push
   volumes:
   - name: 'ssh'
