@@ -1,0 +1,104 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \powershell.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \pwsh.exe
+    - op: or
+      rules:
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ToInt
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ToDecimal
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ToByte
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ToUint
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ToSingle
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ToSByte
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ToChar
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ToString
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: String
+      - op: or
+        rules:
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: char
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: join
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: split
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: join
+respond:
+- action: report
+  metadata:
+    author: Teymur Kheirkhabarov (idea), Vasiliy Burov (rule), oscd.community, Tim
+      Shelton
+    description: Detects specific combinations of encoding methods in the PowerShell
+      command lines
+    falsepositives:
+    - Unlikely
+    level: low
+    references:
+    - https://speakerdeck.com/heirhabarov/hunting-for-powershell-abuse?slide=65
+    tags:
+    - attack.defense_evasion
+    - attack.t1027
+    - attack.execution
+    - attack.t1059.001
+  name: Encoded PowerShell Command Line
+

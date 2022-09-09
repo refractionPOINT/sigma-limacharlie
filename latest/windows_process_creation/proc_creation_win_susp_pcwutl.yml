@@ -1,0 +1,38 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \rundll32.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: pcwutl
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: LaunchApplication
+respond:
+- action: report
+  metadata:
+    author: Julia Fomina, oscd.community
+    description: Detects launch of executable by calling the LaunchApplication function
+      from pcwutl.dll library.
+    falsepositives:
+    - Use of Program Compatibility Troubleshooter Helper
+    level: medium
+    references:
+    - https://lolbas-project.github.io/lolbas/Libraries/Pcwutl/
+    - https://twitter.com/harr0ey/status/989617817849876488
+    tags:
+    - attack.defense_evasion
+    - attack.t1218.011
+  name: Code Execution via Pcwutl.dll
+
