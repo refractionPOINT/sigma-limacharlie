@@ -43,7 +43,7 @@ steps:
   args:
   - -c
   - |
-    git rm -r ./latest
+    git rm -r ./latest || true
   volumes:
   - name: 'ssh'
     path: /root/.ssh
