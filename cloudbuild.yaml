@@ -54,7 +54,7 @@ steps:
   args:
   - -c
   - |
-    pip3 install ruamel.yaml pyyaml requests
+    pip3 install ruamel.yaml pyyaml requests colored
     python3 ./scripts/generate_all.py ./sigma/ ./sigma-limacharlie/latest/
 
 # PUSH CHANGES
