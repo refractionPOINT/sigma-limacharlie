@@ -1,0 +1,30 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '1116'
+    - case sensitive: false
+      op: is
+      path: event/EVENT/EventData/Source_Name
+      value: AMSI
+respond:
+- action: report
+  metadata:
+    author: Bhabesh Raj
+    description: Detects triggering of AMSI by Windows Defender.
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://docs.microsoft.com/en-us/windows/win32/amsi/how-amsi-helps
+    tags:
+    - attack.execution
+    - attack.t1059
+  name: Windows Defender AMSI Trigger Detected
+

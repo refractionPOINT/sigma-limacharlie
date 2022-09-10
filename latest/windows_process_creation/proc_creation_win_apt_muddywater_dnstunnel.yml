@@ -1,0 +1,43 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \powershell.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \pwsh.exe
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \excel.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: DataExchange.dll
+respond:
+- action: report
+  metadata:
+    author: '@caliskanfurkan_'
+    description: Detecting DNS tunnel activity for Muddywater actor
+    falsepositives:
+    - Unknown
+    level: critical
+    references:
+    - https://www.virustotal.com/gui/file/5ad401c3a568bd87dd13f8a9ddc4e450ece61cd9ce4d1b23f68ce0b1f3c190b7/
+    - https://www.vmray.com/analyses/5ad401c3a568/report/overview.html
+    tags:
+    - attack.command_and_control
+    - attack.t1071.004
+  name: DNS Tunnel Technique from MuddyWater
+

@@ -1,0 +1,65 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: \CurrentVersion\Image File Execution Options\
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: sethc.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: utilman.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: osk.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: magnify.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: narrator.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: displayswitch.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: atbroker.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: HelpPane.exe
+respond:
+- action: report
+  metadata:
+    author: Florian Roth, oscd.community, Jonhnathan Ribeiro
+    description: Detects the registration of a debugger for a program that is available
+      in the logon screen (sticky key backdoor).
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://blogs.technet.microsoft.com/jonathantrull/2016/10/03/detecting-sticky-key-backdoors/
+    - https://bazaar.abuse.ch/sample/6f3aa9362d72e806490a8abce245331030d1ab5ac77e400dd475748236a6cc81/
+    tags:
+    - attack.persistence
+    - attack.privilege_escalation
+    - attack.t1546.008
+  name: Suspicious Debugger Registration Cmdline
+

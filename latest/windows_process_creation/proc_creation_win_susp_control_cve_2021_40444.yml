@@ -1,0 +1,57 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \control.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \winword.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \powerpnt.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \excel.exe
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: \control.exe input.dll
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: \control.exe" input.dll
+respond:
+- action: report
+  metadata:
+    author: '@neonprimetime, Florian Roth'
+    description: Detects a suspicious process pattern found in CVE-2021-40444 exploitation
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://msrc.microsoft.com/update-guide/vulnerability/CVE-2021-40444
+    - https://twitter.com/neonprimetime/status/1435584010202255375
+    - https://www.joesandbox.com/analysis/476188/1/iochtml
+    tags:
+    - attack.execution
+    - attack.t1059
+  name: CVE-2021-40444 Process Pattern
+

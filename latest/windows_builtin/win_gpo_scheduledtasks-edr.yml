@@ -1,0 +1,48 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '5145'
+    - case sensitive: false
+      op: matches
+      path: event/EVENT/EventData/ShareName
+      re: \\\\\*\\\\SYSVOL
+    - case sensitive: false
+      op: ends with
+      path: event/EVENT/EventData/RelativeTargetName
+      value: ScheduledTasks.xml
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Accesses
+        value: WriteData
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Accesses
+        value: '%%4417'
+respond:
+- action: report
+  metadata:
+    author: Samir Bousseaden
+    description: Detect lateral movement using GPO scheduled task, usually used to
+      deploy ransomware at scale
+    falsepositives:
+    - If the source IP is not localhost then it's super suspicious, better to monitor
+      both local and remote changes to GPO scheduledtasks
+    level: high
+    references:
+    - https://twitter.com/menasec1/status/1106899890377052160
+    - https://www.secureworks.com/blog/ransomware-as-a-distraction
+    tags:
+    - attack.persistence
+    - attack.lateral_movement
+    - attack.t1053.005
+  name: Persistence and Execution at Scale via GPO Scheduled Task
+

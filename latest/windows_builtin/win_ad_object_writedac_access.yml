@@ -1,0 +1,42 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '4662'
+  - case sensitive: false
+    op: is
+    path: Event/EventData/ObjectServer
+    value: DS
+  - case sensitive: false
+    op: is
+    path: Event/EventData/AccessMask
+    value: '0x40000'
+  - op: or
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/EventData/ObjectType
+      value: 19195a5b-6da0-11d0-afd3-00c04fd930c9
+    - case sensitive: false
+      op: is
+      path: Event/EventData/ObjectType
+      value: domainDNS
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Roberto Rodriguez @Cyb3rWard0g
+    description: Detects WRITE_DAC access to a domain object
+    falsepositives:
+    - Unknown
+    level: critical
+    references:
+    - https://threathunterplaybook.com/notebooks/windows/05_defense_evasion/WIN-190101151110.html
+    tags:
+    - attack.defense_evasion
+    - attack.t1222.001
+  name: AD Object WriteDAC Access
+

@@ -1,0 +1,95 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \winlogon.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \services.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \lsass.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \csrss.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \smss.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \wininit.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \spoolsv.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \searchindexer.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \pwsh.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \cmd.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/USER_NAME
+          value: AUTHORI
+        - case sensitive: false
+          op: contains
+          path: event/USER_NAME
+          value: AUTORI
+    - not: true
+      op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' route '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' ADD '
+respond:
+- action: report
+  metadata:
+    author: Semanur Guneysu @semanurtg, oscd.community
+    description: Detection of unusual child processes by different system processes
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://image.slidesharecdn.com/kheirkhabarovoffzonefinal-181117201458/95/hunting-for-privilege-escalation-in-windows-environment-74-638.jpg
+    tags:
+    - attack.privilege_escalation
+    - attack.t1548
+  name: Abused Debug Privilege by Arbitrary Parent Processes
+

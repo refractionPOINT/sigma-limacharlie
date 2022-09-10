@@ -1,0 +1,105 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: cl
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /Trace
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: clear-log
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /Trace
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: sl
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /e:false
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: set-log
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /e:false
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: logman
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: update
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: trace
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: --p
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -ets
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Remove-EtwTraceProvider
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Set-EtwTraceProvider
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '0x11'
+respond:
+- action: report
+  metadata:
+    author: '@neu5ron, Florian Roth, Jonhnathan Ribeiro, oscd.community'
+    description: Detects a command that clears or disables any ETW trace log which
+      could indicate a logging evasion.
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/wevtutil
+    - https://abuse.io/lockergoga.txt
+    - https://medium.com/palantir/tampering-with-windows-event-tracing-background-offense-and-defense-4be7ac62ac63
+    tags:
+    - attack.defense_evasion
+    - attack.t1070
+    - attack.t1562.006
+    - car.2016-04-002
+  name: Disable of ETW Trace
+

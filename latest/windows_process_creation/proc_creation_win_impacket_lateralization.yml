@@ -1,0 +1,97 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \wmiprvse.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \mmc.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \explorer.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \services.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: cmd.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /Q
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /c
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \\\\127.0.0.1\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '&1'
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: svchost.exe -k netsvcs
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: taskeng.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: cmd.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /C
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Windows\Temp\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '&1'
+respond:
+- action: report
+  metadata:
+    author: Ecco, oscd.community, Jonhnathan Ribeiro
+    description: Detects wmiexec/dcomexec/atexec/smbexec from Impacket framework
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://github.com/SecureAuthCorp/impacket/blob/8b1a99f7c715702eafe3f24851817bb64721b156/examples/wmiexec.py
+    - https://github.com/SecureAuthCorp/impacket/blob/8b1a99f7c715702eafe3f24851817bb64721b156/examples/atexec.py
+    - https://github.com/SecureAuthCorp/impacket/blob/8b1a99f7c715702eafe3f24851817bb64721b156/examples/smbexec.py
+    - https://github.com/SecureAuthCorp/impacket/blob/8b1a99f7c715702eafe3f24851817bb64721b156/examples/dcomexec.py
+    tags:
+    - attack.execution
+    - attack.t1047
+    - attack.lateral_movement
+    - attack.t1021.003
+  name: Impacket Lateralization Detection
+

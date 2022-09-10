@@ -1,0 +1,42 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \rundll32.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: zxFunction
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: RemoteDiskXXXXX
+respond:
+- action: report
+  metadata:
+    author: Florian Roth, oscd.community, Jonhnathan Ribeiro
+    description: Detects a ZxShell start by the called and well-known function name
+    falsepositives:
+    - Unlikely
+    level: critical
+    references:
+    - https://www.hybrid-analysis.com/sample/5d2a4cde9fa7c2fdbf39b2e2ffd23378d0c50701a3095d1e91e3cf922d7b0b16?environmentId=100
+    tags:
+    - attack.execution
+    - attack.t1059.003
+    - attack.defense_evasion
+    - attack.t1218.011
+    - attack.s0412
+    - attack.g0001
+  name: ZxShell Malware
+

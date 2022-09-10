@@ -1,0 +1,44 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '5145'
+    - case sensitive: false
+      op: matches
+      path: event/EVENT/EventData/ShareName
+      re: \\\\\*\\\\IPC\$
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/RelativeTargetName
+        value: RemCom_stdint
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/RelativeTargetName
+        value: RemCom_stdoutt
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/RelativeTargetName
+        value: RemCom_stderrt
+respond:
+- action: report
+  metadata:
+    author: Bhabesh Raj
+    description: Detects execution of Impacket's psexec.py.
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://blog.menasec.net/2019/02/threat-hunting-3-detecting-psexec.html
+    tags:
+    - attack.lateral_movement
+    - attack.t1021.002
+  name: Impacket PsExec Execution
+

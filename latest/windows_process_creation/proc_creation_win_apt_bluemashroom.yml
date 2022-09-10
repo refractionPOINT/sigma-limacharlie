@@ -1,0 +1,78 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \regsvr32
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \AppData\Local\
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \AppData\Local\
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ',DllEntry'
+    - not: true
+      op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: AppData\Local\Microsoft\TeamsMeetingAddin\
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/COMMAND_LINE
+            value: \x86\Microsoft.Teams.AddinLoader.dll
+          - case sensitive: false
+            op: ends with
+            path: event/COMMAND_LINE
+            value: \x86\Microsoft.Teams.AddinLoader.dll"
+          - case sensitive: false
+            op: ends with
+            path: event/COMMAND_LINE
+            value: \x64\Microsoft.Teams.AddinLoader.dll
+          - case sensitive: false
+            op: ends with
+            path: event/COMMAND_LINE
+            value: \x64\Microsoft.Teams.AddinLoader.dll"
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: \AppData\Local\WebEx\WebEx64\Meetings\atucfobj.dll
+respond:
+- action: report
+  metadata:
+    author: Florian Roth, Tim Shelton
+    description: Detects a suspicious DLL loading from AppData Local path as described
+      in BlueMashroom report
+    falsepositives:
+    - Unlikely
+    level: critical
+    references:
+    - https://www.virusbulletin.com/conference/vb2019/abstracts/apt-cases-exploiting-vulnerabilities-region-specific-software
+    tags:
+    - attack.defense_evasion
+    - attack.t1218.010
+  name: BlueMashroom DLL Load
+

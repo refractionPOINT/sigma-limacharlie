@@ -1,0 +1,37 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '5013'
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Value
+        value: \Windows Defender\DisableAntiSpyware = 0x1()
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Value
+        value: \Real-Time Protection\DisableRealtimeMonitoring = (Current)
+respond:
+- action: report
+  metadata:
+    author: Bhabesh Raj
+    description: Detects block of attempt to disable real time protection of Microsoft
+      Defender by tamper protection
+    falsepositives:
+    - Administrator actions
+    level: high
+    references:
+    - https://bhabeshraj.com/post/tampering-with-microsoft-defenders-tamper-protection
+    tags:
+    - attack.defense_evasion
+    - attack.t1562.001
+  name: Microsoft Defender Tamper Protection Trigger
+

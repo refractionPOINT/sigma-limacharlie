@@ -1,0 +1,305 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \w3wp.exe
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \php-cgi.exe
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \nginx.exe
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \httpd.exe
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \caddy.exe
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \ws_TomcatService.exe
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \tomcat.exe
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \UMWorkerProcess.exe
+        - op: and
+          rules:
+          - op: or
+            rules:
+            - case sensitive: false
+              op: ends with
+              path: event/PARENT/FILE_PATH
+              value: \java.exe
+            - case sensitive: false
+              op: ends with
+              path: event/PARENT/FILE_PATH
+              value: \javaw.exe
+          - op: or
+            rules:
+            - case sensitive: false
+              op: contains
+              path: event/PARENT/FILE_PATH
+              value: -tomcat-
+            - case sensitive: false
+              op: contains
+              path: event/PARENT/FILE_PATH
+              value: \tomcat
+        - op: and
+          rules:
+          - op: or
+            rules:
+            - case sensitive: false
+              op: ends with
+              path: event/PARENT/FILE_PATH
+              value: \java.exe
+            - case sensitive: false
+              op: ends with
+              path: event/PARENT/FILE_PATH
+              value: \javaw.exe
+          - op: or
+            rules:
+            - case sensitive: false
+              op: contains
+              path: event/PARENT/COMMAND_LINE
+              value: catalina.jar
+            - case sensitive: false
+              op: contains
+              path: event/PARENT/COMMAND_LINE
+              value: CATALINA_HOME
+            - case sensitive: false
+              op: contains
+              path: event/PARENT/COMMAND_LINE
+              value: catalina.home
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \cmd.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \sh.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \bash.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \pwsh.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \bitsadmin.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \arp.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \at.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \certutil.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \dsget.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \dsquery.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \find.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \findstr.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \fsutil.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \hostname.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \ipconfig.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \nbtstat.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \net.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \net1.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \netdom.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \netsh.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \netstat.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \nltest.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \nslookup.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \ntdutil.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \pathping.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \ping.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \qprocess.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \query.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \qwinsta.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \reg.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \rundll32.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \sc.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \schtasks.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \systeminfo.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \tasklist.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \tracert.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \ver.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \vssadmin.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \wevtutil.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \whoami.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \wmic.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \wusa.exe
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: Windows\system32\cmd.exe /c C:\ManageEngine\ADManager "Plus\ES\bin\elasticsearch.bat
+          -Enode.name=RMP-NODE1 -pelasticsearch-pid.txt
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: sc query
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ADManager Plus
+respond:
+- action: report
+  metadata:
+    author: Thomas Patzke, Florian Roth, Zach Stanford @svch0st, Tim Shelton, Nasreddine
+      Bencherchali (update)
+    description: Detects web servers that spawn shell processes which could be the
+      result of a successfully placed web shell or another attack
+    falsepositives:
+    - Particular web applications may spawn a shell process legitimately
+    level: high
+    references:
+    - https://media.defense.gov/2020/Jun/09/2002313081/-1/-1/0/CSI-DETECT-AND-PREVENT-WEB-SHELL-MALWARE-20200422.PDF
+    tags:
+    - attack.persistence
+    - attack.t1505.003
+    - attack.t1190
+  name: Shells Spawned by Web Servers
+

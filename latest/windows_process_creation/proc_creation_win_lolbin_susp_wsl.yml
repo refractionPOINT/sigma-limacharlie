@@ -1,0 +1,56 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \wsl.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: wsl.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -e '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' --exec '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' --system '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /mnt/c'
+respond:
+- action: report
+  metadata:
+    author: oscd.community, Zach Stanford @svch0st, Nasreddine Bencherchali
+    description: Detects Possible usage of Windows Subsystem for Linux (WSL) binary
+      as a LOLBIN
+    falsepositives:
+    - Automation and orchestration scripts may use this method execute scripts etc
+    level: medium
+    references:
+    - https://lolbas-project.github.io/lolbas/OtherMSBinaries/Wsl/
+    - https://twitter.com/nas_bench/status/1535431474429808642
+    tags:
+    - attack.execution
+    - attack.defense_evasion
+    - attack.t1218
+    - attack.t1202
+  name: WSL Execution
+
