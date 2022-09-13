@@ -70,11 +70,11 @@ detect:
         rules:
         - case sensitive: false
           op: contains
-          path: event/FILE_PATH
+          path: event/COMMAND_LINE
           value: \AppData\Local\Programs\Microsoft VS Code
         - case sensitive: false
           op: ends with
-          path: event/FILE_PATH
+          path: event/PARENT/FILE_PATH
           value: \Microsoft VS Code\Code.exe
 respond:
 - action: report
