@@ -84,6 +84,10 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: '%tmp%'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: '%ProgramData%'
       - case sensitive: false
         op: contains

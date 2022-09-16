@@ -68,6 +68,10 @@ detect:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
+          value: '%TMP%'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
           value: :\RECYCLER\
         - case sensitive: false
           op: contains
