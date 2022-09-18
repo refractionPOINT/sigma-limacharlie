@@ -42,7 +42,7 @@ respond:
       database
     falsepositives:
     - Unknown
-    level: high
+    level: medium
     references:
     - https://threathunterplaybook.com/notebooks/windows/07_discovery/WIN-190826010110.html
     tags:
