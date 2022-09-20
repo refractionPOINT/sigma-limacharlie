@@ -5,14 +5,26 @@ detect:
   op: and
   rules:
   - op: is windows
-  - case sensitive: false
-    op: contains
-    path: event/COMMAND_LINE
-    value: /factory,{75dff2b7-6936-4c06-a8bb-676a7b00b24b}
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: /factory,{75dff2b7-6936-4c06-a8bb-676a7b00b24b}
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: explorer.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /root,'
 respond:
 - action: report
   metadata:
-    author: Florian Roth, Nasreddine Bencherchali
+    author: Florian Roth, Nasreddine Bencherchali, @gott_cyber
     description: Detects a command line process that uses explorer.exe to launch arbitrary
       commands or binaries, which is similar to cmd.exe /c, only it breaks the process
       tree and makes its parent a new instance of explorer spawning from "svchost"
