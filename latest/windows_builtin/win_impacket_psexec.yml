@@ -15,15 +15,15 @@ detect:
     - case sensitive: false
       op: contains
       path: Event/EventData/RelativeTargetName
-      value: RemCom_stdint
+      value: RemCom_stdin
     - case sensitive: false
       op: contains
       path: Event/EventData/RelativeTargetName
-      value: RemCom_stdoutt
+      value: RemCom_stdout
     - case sensitive: false
       op: contains
       path: Event/EventData/RelativeTargetName
-      value: RemCom_stderrt
+      value: RemCom_stderr
   target: log
 respond:
 - action: report
