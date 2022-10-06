@@ -85,6 +85,10 @@ detect:
           op: contains
           path: event/COMMAND_LINE
           value: Invoke-PetitPotam
+        - case sensitive: false
+          op: matches
+          path: event/COMMAND_LINE
+          re: .*\.exe\ \-t\ .*\ \-p\ .*
     - not: true
       op: or
       rules:
