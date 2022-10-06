@@ -89,6 +89,16 @@ detect:
           op: matches
           path: event/COMMAND_LINE
           re: .*\.exe\ \-t\ .*\ \-p\ .*
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .exe -c "{
+        - case sensitive: false
+          op: ends with
+          path: event/COMMAND_LINE
+          value: '}" -z'
     - not: true
       op: or
       rules:
