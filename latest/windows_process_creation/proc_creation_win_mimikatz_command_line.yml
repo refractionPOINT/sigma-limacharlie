@@ -121,11 +121,29 @@ detect:
           op: contains
           path: event/COMMAND_LINE
           value: '::'
-    - case sensitive: false
-      not: true
-      op: contains
-      path: event/COMMAND_LINE
-      value: function Convert-GuidToCompressedGuid
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: function Convert-GuidToCompressedGuid
+      - op: and
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \AppData\Local\Programs\Microsoft VS Code\Code.exe
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '/d /s /c '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: 'checkfilenameiocs --ioc-path '
 respond:
 - action: report
   metadata:
