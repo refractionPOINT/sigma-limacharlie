@@ -1,0 +1,172 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: attrib
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' +h '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' +s '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' +r '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .aspx
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: schtasks
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: VSPerfMon
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: vssadmin list shadows
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Temp\__output
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: '%TEMP%\execute.bat'
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: Users\Public\opera\Opera_browser.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: Opera_browser.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \services.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \svchost.exe
+    - case sensitive: false
+      op: contains
+      path: event/FILE_PATH
+      value: \ProgramData\VSPerfMon\
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -t7z '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: C:\Programdata\pst
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \it.zip
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \makecab.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: Microsoft\Exchange Server\
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: inetpub\wwwroot
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Temp\xx.bat
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Windows\WwanSvcdcs
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Windows\Temp\cw.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \comsvcs.dll
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Minidump
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \inetpub\wwwroot
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: dsquery
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -uco '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \inetpub\wwwroot
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects activity observed by different researchers to be HAFNIUM
+      group activity (or related) on Exchange servers
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://blog.truesec.com/2021/03/07/exchange-zero-day-proxylogon-and-hafnium/
+    - https://www.microsoft.com/security/blog/2021/03/02/hafnium-targeting-exchange-servers/
+    - https://discuss.elastic.co/t/detection-and-response-for-hafnium-activity/266289/3
+    - https://twitter.com/GadixCRK/status/1369313704869834753?s=20
+    - https://twitter.com/BleepinComputer/status/1372218235949617161
+    tags:
+    - attack.persistence
+    - attack.t1546
+    - attack.t1053
+  name: Exchange Exploitation Activity
+

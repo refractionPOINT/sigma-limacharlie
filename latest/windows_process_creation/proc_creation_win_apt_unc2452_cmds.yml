@@ -1,0 +1,104 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: 7z.exe a -v500m -mx9 -r0 -p
+          - op: and
+            rules:
+            - case sensitive: false
+              op: contains
+              path: event/PARENT/COMMAND_LINE
+              value: wscript.exe
+            - case sensitive: false
+              op: contains
+              path: event/PARENT/COMMAND_LINE
+              value: .vbs
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: rundll32.exe
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: C:\Windows
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: .dll,Tk_
+        - op: and
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \rundll32.exe
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/COMMAND_LINE
+            value: C:\Windows
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: 'cmd.exe /C '
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: rundll32 c:\windows\
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '.dll '
+    - op: and
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \rundll32.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \dllhost.exe
+      - not: true
+        op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/COMMAND_LINE
+          value: ' '
+        - case sensitive: false
+          op: is
+          path: event/COMMAND_LINE
+          value: ''
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects a specific process creation patterns as seen used by UNC2452
+      and provided by Microsoft as Microsoft Defender ATP queries
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.microsoft.com/security/blog/2021/01/20/deep-dive-into-the-solorigate-second-stage-activation-from-sunburst-to-teardrop-and-raindrop/
+    tags:
+    - attack.execution
+    - attack.t1059.001
+  name: UNC2452 Process Creation Patterns
+

@@ -1,0 +1,73 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \expand.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .cab
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '/F:'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '-F:'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: C:\ProgramData\
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: C:\Public\
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \AppData\Local\Temp\
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \AppData\Roaming\Temp\
+    - not: true
+      op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/PARENT/FILE_PATH
+        value: C:\Program Files (x86)\Dell\UpdateService\ServiceShell.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: C:\ProgramData\Dell\UpdateService\Temp\
+respond:
+- action: report
+  metadata:
+    author: Bhabesh Raj
+    description: Adversaries can use the inbuilt expand utility to decompress cab
+      files as seen in recent Iranian MeteorExpress attack
+    falsepositives:
+    - System administrator Usage
+    level: medium
+    references:
+    - https://labs.sentinelone.com/meteorexpress-mysterious-wiper-paralyzes-iranian-trains-with-epic-troll
+    - https://blog.malwarebytes.com/threat-intelligence/2021/08/new-variant-of-konni-malware-used-in-campaign-targetting-russia/
+    tags:
+    - attack.execution
+    - attack.t1218
+  name: Cabinet File Expansion
+

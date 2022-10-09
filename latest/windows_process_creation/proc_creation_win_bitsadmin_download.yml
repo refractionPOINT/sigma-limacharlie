@@ -1,0 +1,63 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \bitsadmin.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /create '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /addfile '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: http
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \bitsadmin.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /transfer '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: copy bitsadmin.exe
+respond:
+- action: report
+  metadata:
+    author: Michael Haag, FPT.EagleEye
+    description: Detects usage of bitsadmin downloading a file
+    falsepositives:
+    - Some legitimate apps use this, but limited.
+    level: medium
+    references:
+    - https://blog.netspi.com/15-ways-to-download-a-file/#bitsadmin
+    - https://isc.sans.edu/diary/22264
+    - https://lolbas-project.github.io/lolbas/Binaries/Bitsadmin/
+    tags:
+    - attack.defense_evasion
+    - attack.persistence
+    - attack.t1197
+    - attack.s0190
+    - attack.t1036.003
+  name: Bitsadmin Download
+

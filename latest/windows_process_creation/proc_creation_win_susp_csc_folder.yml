@@ -1,0 +1,70 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \csc.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \AppData\
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \Windows\Temp\
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: starts with
+        path: event/PARENT/FILE_PATH
+        value: C:\Program Files
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \sdiagnhost.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \w3wp.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \choco.exe
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: \ProgramData\Microsoft\Windows Defender Advanced Threat Protection
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects a suspicious execution of csc.exe, which uses a source in
+      a suspicious folder (e.g. AppData)
+    falsepositives:
+    - Legitimate software from program files - https://twitter.com/gN3mes1s/status/1206874118282448897
+    - Legitimate Microsoft software - https://twitter.com/gabriele_pippi/status/1206907900268072962
+    level: medium
+    references:
+    - https://securityboulevard.com/2019/08/agent-tesla-evading-edr-by-removing-api-hooks/
+    - https://www.clearskysec.com/wp-content/uploads/2018/11/MuddyWater-Operations-in-Lebanon-and-Oman.pdf
+    - https://app.any.run/tasks/c6993447-d1d8-414e-b856-675325e5aa09/
+    - https://twitter.com/gN3mes1s/status/1206874118282448897
+    tags:
+    - attack.defense_evasion
+    - attack.t1027.004
+  name: Suspicious Csc.exe Source File Folder
+

@@ -1,0 +1,89 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: 'txt:'
+    - op: or
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'type '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' > '
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'makecab '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .cab
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'reg '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' export '
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'regedit '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /E '
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'esentutl '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /y '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /d '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /o '
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Adversaries may use NTFS file attributes to hide their malicious
+      data in order to evade detection
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1564.004/T1564.004.md
+    tags:
+    - attack.defense_evasion
+    - attack.t1564.004
+  name: Execute From Alternate Data Streams
+
