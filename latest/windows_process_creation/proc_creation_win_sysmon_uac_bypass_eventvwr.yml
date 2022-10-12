@@ -11,11 +11,21 @@ detect:
       op: ends with
       path: event/PARENT/FILE_PATH
       value: \eventvwr.exe
-    - case sensitive: false
-      not: true
-      op: ends with
-      path: event/FILE_PATH
-      value: \mmc.exe
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \mmc.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: :\Windows\SysWOW64\WerFault.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: :\Windows\System32\WerFault.exe
 respond:
 - action: report
   metadata:

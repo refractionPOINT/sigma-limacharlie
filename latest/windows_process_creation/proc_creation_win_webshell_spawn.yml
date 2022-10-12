@@ -20,6 +20,10 @@ detect:
           - case sensitive: false
             op: ends with
             path: event/PARENT/FILE_PATH
+            value: \php.exe
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
             value: \php-cgi.exe
           - case sensitive: false
             op: ends with
@@ -102,6 +106,10 @@ detect:
         - case sensitive: false
           op: ends with
           path: event/FILE_PATH
+          value: \cscript.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
           value: \sh.exe
         - case sensitive: false
           op: ends with
@@ -111,6 +119,10 @@ detect:
           op: ends with
           path: event/FILE_PATH
           value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell_ise.exe
         - case sensitive: false
           op: ends with
           path: event/FILE_PATH
@@ -263,6 +275,10 @@ detect:
           op: ends with
           path: event/FILE_PATH
           value: \wmic.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \wscript.exe
         - case sensitive: false
           op: ends with
           path: event/FILE_PATH

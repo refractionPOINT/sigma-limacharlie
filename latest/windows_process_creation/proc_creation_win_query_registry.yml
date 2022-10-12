@@ -56,7 +56,7 @@ respond:
   metadata:
     author: Timur Zinniatullin, oscd.community
     description: Adversaries may interact with the Windows Registry to gather information
-      about the system, configuration, and installed software.
+      about credentials, the system, configuration, and installed software.
     level: low
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1012/T1012.md
