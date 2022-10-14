@@ -41,7 +41,7 @@ respond:
 - action: report
   metadata:
     author: Florian Roth
-    description: Execution of well known tools for data exfiltration and tunneling
+    description: Execution of plink to perform data exfiltration and tunneling
     falsepositives:
     - Administrative activity
     level: high

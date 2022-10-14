@@ -30,21 +30,21 @@ detect:
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
-            value: /v
+            value: ' /v '
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
-            value: -v
+            value: ' -v '
         - op: or
           rules:
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
-            value: /l
+            value: ' /l '
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
-            value: -l
+            value: ' -l '
       - op: and
         rules:
         - op: or
@@ -52,21 +52,21 @@ detect:
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
-            value: /s
+            value: ' /s '
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
-            value: -s
+            value: ' -s '
         - op: or
           rules:
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
-            value: /i
+            value: ' /i '
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
-            value: -i
+            value: ' -i '
 respond:
 - action: report
   metadata:
