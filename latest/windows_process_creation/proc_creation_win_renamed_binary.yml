@@ -97,6 +97,10 @@ detect:
         op: is
         path: event/ORIGINAL_FILE_NAME
         value: netsh.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: InstallUtil.exe
     - not: true
       op: or
       rules:
@@ -188,6 +192,10 @@ detect:
         op: ends with
         path: event/FILE_PATH
         value: \netsh.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \InstallUtil.exe
 respond:
 - action: report
   metadata:
