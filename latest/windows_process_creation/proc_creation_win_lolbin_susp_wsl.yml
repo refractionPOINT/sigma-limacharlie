@@ -43,6 +43,7 @@ respond:
       as a LOLBIN
     falsepositives:
     - Automation and orchestration scripts may use this method execute scripts etc
+    - Legitimate use by Windows
     level: medium
     references:
     - https://lolbas-project.github.io/lolbas/OtherMSBinaries/Wsl/
