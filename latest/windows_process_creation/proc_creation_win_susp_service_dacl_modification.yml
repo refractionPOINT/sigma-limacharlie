@@ -7,40 +7,48 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - case sensitive: false
-      op: ends with
-      path: event/FILE_PATH
-      value: \sc.exe
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: sdset
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: D;;
     - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \sc.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: sc.exe
+    - op: and
       rules:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ;;;IU
+        value: sdset
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ;;;SU
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ;;;BA
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ;;;SY
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ;;;WD
+        value: D;;
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ;;;IU
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ;;;SU
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ;;;BA
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ;;;SY
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ;;;WD
 respond:
 - action: report
   metadata:
