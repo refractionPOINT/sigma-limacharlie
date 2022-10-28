@@ -5,46 +5,112 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: and
+  - op: or
     rules:
-    - case sensitive: false
-      op: is
-      path: event/PARENT/FILE_PATH
-      value: C:\Windows\hh.exe
-    - op: or
+    - op: and
       rules:
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \cmd.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \powershell.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \pwsh.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \wscript.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \cscript.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \regsvr32.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \wmic.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \rundll32.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/PARENT/FILE_PATH
+          value: C:\Windows\hh.exe
+        - case sensitive: false
+          op: is
+          path: event/PARENT/FILE_PATH
+          value: C:\Windows\SysWOW64\hh.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \cmd.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \pwsh.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \wscript.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \cscript.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \regsvr32.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \wmic.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \rundll32.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \MSHTA.EXE
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \CertUtil.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \CertReq.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \MSbuild.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \installutil.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \schtasks.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \msiexec.exe
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \Windows\hh.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \Windows\SysWOW64\hh.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .application
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \Downloads\
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \Content.Outlook\
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \AppData\Local\Temp\
 respond:
 - action: report
   metadata:
@@ -56,6 +122,8 @@ respond:
     level: high
     references:
     - https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/chm-badness-delivers-a-banking-trojan/
+    - https://github.com/elastic/protections-artifacts/commit/746086721fd385d9f5c6647cada1788db4aea95f#diff-27939090904026cc396b0b629c8e4314acd6f5dac40a676edbc87f4567b47eb7
+    - https://www.ptsecurity.com/ww-en/analytics/pt-esc-threat-intelligence/higaisa-or-winnti-apt-41-backdoors-old-and-new/
     tags:
     - attack.defense_evasion
     - attack.t1218.001
@@ -67,5 +135,9 @@ respond:
     - attack.t1059.005
     - attack.t1059.007
     - attack.t1047
+    - attack.t1566
+    - attack.t1566.001
+    - attack.initial_access
+    - attack.t1218
   name: HTML Help Shell Spawn
 
