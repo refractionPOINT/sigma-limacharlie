@@ -23,10 +23,15 @@ respond:
 - action: report
   metadata:
     author: Konstantin Grishchenko, oscd.community
-    description: Detect VBoxDrvInst.exe run with parameters allowing processing INF
-      file. This allows to create values in the registry and install drivers. For
-      example one could use this technique to obtain persistence via modifying one
-      of Run or RunOnce registry keys
+    description: 'Detect VBoxDrvInst.exe run with parameters allowing processing INF
+      file.
+
+      This allows to create values in the registry and install drivers.
+
+      For example one could use this technique to obtain persistence via modifying
+      one of Run or RunOnce registry keys
+
+      '
     falsepositives:
     - Legitimate use of VBoxDrvInst.exe utility by VirtualBox Guest Additions installation
       process

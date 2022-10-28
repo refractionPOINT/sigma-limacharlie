@@ -23,10 +23,14 @@ respond:
 - action: report
   metadata:
     author: Agro (@agro_sev) oscd.community
-    description: Windows Test Authoring and Execution Framework (TAEF) framework allows
-      you to run automation by executing tests files written on different languages
-      (C, C#, Microsoft COM Scripting interfaces). Adversaries may execute malicious
-      code (such as WSC file with VBScript, dll and so on) directly by running te.exe
+    description: 'Windows Test Authoring and Execution Framework (TAEF) framework
+      allows you to run automation by executing tests files written on different languages
+      (C, C#, Microsoft COM Scripting interfaces
+
+      Adversaries may execute malicious code (such as WSC file with VBScript, dll
+      and so on) directly by running te.exe
+
+      '
     falsepositives:
     - It's not an uncommon to use te.exe directly to execute legal TAEF tests
     level: low

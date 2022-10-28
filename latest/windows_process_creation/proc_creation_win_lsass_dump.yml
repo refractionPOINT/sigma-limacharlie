@@ -42,9 +42,13 @@ respond:
 - action: report
   metadata:
     author: E.M. Anhaus (originally from Atomic Blue Detections, Tony Lambert), oscd.community
-    description: Detect creation of dump files containing the memory space of lsass.exe,
-      which contains sensitive credentials. Identifies usage of Sysinternals procdump.exe
-      to export the memory space of lsass.exe which contains sensitive credentials.
+    description: 'Detect creation of dump files containing the memory space of lsass.exe,
+      which contains sensitive credentials.
+
+      Identifies usage of Sysinternals procdump.exe to export the memory space of
+      lsass.exe which contains sensitive credentials.
+
+      '
     falsepositives:
     - Unlikely
     level: high

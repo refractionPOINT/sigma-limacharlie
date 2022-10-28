@@ -30,10 +30,14 @@ respond:
 - action: report
   metadata:
     author: Agro (@agro_sev) oscd.community
-    description: This rule detects execution of a PowerShell code through the sqlps.exe
+    description: 'This rule detects execution of a PowerShell code through the sqlps.exe
       utility, which is included in the standard set of utilities supplied with the
-      MSSQL Server. Script blocks are not logged in this case, so this utility helps
-      to bypass protection mechanisms based on the analysis of these logs.
+      MSSQL Server.
+
+      Script blocks are not logged in this case, so this utility helps to bypass protection
+      mechanisms based on the analysis of these logs.
+
+      '
     falsepositives:
     - Direct PS command execution through SQLPS.exe is uncommon, childprocess sqlps.exe
       spawned by sqlagent.exe is a legitimate action.

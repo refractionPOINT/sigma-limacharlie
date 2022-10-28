@@ -71,10 +71,13 @@ respond:
 - action: report
   metadata:
     author: Florian Roth
-    description: Detects the use of Ngrok, a utility used for port forwarding and
+    description: 'Detects the use of Ngrok, a utility used for port forwarding and
       tunneling, often used by threat actors to make local protected services publicly
-      available. Involved domains are bin.equinox.io for download and *.ngrok.io for
-      connections.
+      available.
+
+      Involved domains are bin.equinox.io for download and *.ngrok.io for connections.
+
+      '
     falsepositives:
     - Another tool that uses the command line switches of Ngrok
     - Ngrok http 3978 (https://docs.microsoft.com/en-us/azure/bot-service/bot-service-debug-channel-ngrok?view=azure-bot-service-4.0)
