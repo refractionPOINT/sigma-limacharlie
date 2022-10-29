@@ -30,7 +30,7 @@ respond:
 - action: report
   metadata:
     author: Florian Roth
-    description: Detects suspicious msiexec process starts in an uncommon directory
+    description: Detects execution of msiexec from an uncommon directory
     falsepositives:
     - Unknown
     level: high
