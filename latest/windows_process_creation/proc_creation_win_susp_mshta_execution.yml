@@ -45,10 +45,6 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: .dll
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: .exe
 respond:
 - action: report
   metadata:
