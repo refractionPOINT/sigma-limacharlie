@@ -14,14 +14,20 @@ detect:
     - not: true
       op: or
       rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \explorer.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \CompatTelRunner.exe
       - case sensitive: false
-        op: ends with
+        op: is
         path: event/PARENT/FILE_PATH
-        value: \explorer.exe
-      - case sensitive: false
-        op: ends with
-        path: event/PARENT/FILE_PATH
-        value: \CompatTelRunner.exe
+        value: C:\$WINDOWS.~BT\Sources\SetupHost.exe
 respond:
 - action: report
   metadata:
