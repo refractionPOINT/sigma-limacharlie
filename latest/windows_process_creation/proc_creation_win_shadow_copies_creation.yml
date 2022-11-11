@@ -9,30 +9,52 @@ detect:
     rules:
     - op: or
       rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \pwsh.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \wmic.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \vssadmin.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: PowerShell.EXE
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: pwsh.dll
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: wmic.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: VSSADMIN.EXE
+    - op: and
+      rules:
       - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \powershell.exe
+        op: contains
+        path: event/COMMAND_LINE
+        value: shadow
       - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \pwsh.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \wmic.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \vssadmin.exe
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: shadow
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: create
+        op: contains
+        path: event/COMMAND_LINE
+        value: create
 respond:
 - action: report
   metadata:
