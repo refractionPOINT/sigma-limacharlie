@@ -46,10 +46,16 @@ detect:
           value: '#141'
       - op: and
         rules:
-        - case sensitive: false
-          op: ends with
-          path: event/PARENT/FILE_PATH
-          value: \Msbuild\Current\Bin\Tracker.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/FILE_PATH
+            value: \Msbuild\Current\Bin\
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/FILE_PATH
+            value: \Tracker.exe
         - op: or
           rules:
           - case sensitive: false
