@@ -8,15 +8,15 @@ detect:
   - op: or
     rules:
     - case sensitive: false
-      op: is
+      op: contains
       path: event/COMMAND_LINE
       value: reg query "HKEY_CURRENT_USER\Software\Microsoft\Terminal Server Client\Default"
     - case sensitive: false
-      op: starts with
+      op: contains
       path: event/COMMAND_LINE
       value: powershell.exe mshta.exe http
     - case sensitive: false
-      op: is
+      op: contains
       path: event/COMMAND_LINE
       value: cmd.exe /c taskkill /im cmd.exe
 respond:

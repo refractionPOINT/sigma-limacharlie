@@ -9,52 +9,68 @@ detect:
     rules:
     - op: and
       rules:
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \xcopy.exe
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /S
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /E
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /C
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /Q
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /H
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: \\\\
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \xcopy.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: XCOPY.EXE
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /S
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /E
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /C
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /Q
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /H
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \\\\
     - op: and
       rules:
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \adexplorer.exe
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: -snapshot
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: '""'
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: c:\users\
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \adexplorer.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: AdExp
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: -snapshot
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '""'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: c:\users\
 respond:
 - action: report
   metadata:

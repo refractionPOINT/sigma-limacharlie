@@ -9,64 +9,82 @@ detect:
     rules:
     - op: and
       rules:
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \winlogon.exe
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \services.exe
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \lsass.exe
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \csrss.exe
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \smss.exe
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \wininit.exe
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \spoolsv.exe
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \searchindexer.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/USER_NAME
+            value: AUTHORI
+          - case sensitive: false
+            op: contains
+            path: event/USER_NAME
+            value: AUTORI
       - op: or
         rules:
-        - case sensitive: false
-          op: ends with
-          path: event/PARENT/FILE_PATH
-          value: \winlogon.exe
-        - case sensitive: false
-          op: ends with
-          path: event/PARENT/FILE_PATH
-          value: \services.exe
-        - case sensitive: false
-          op: ends with
-          path: event/PARENT/FILE_PATH
-          value: \lsass.exe
-        - case sensitive: false
-          op: ends with
-          path: event/PARENT/FILE_PATH
-          value: \csrss.exe
-        - case sensitive: false
-          op: ends with
-          path: event/PARENT/FILE_PATH
-          value: \smss.exe
-        - case sensitive: false
-          op: ends with
-          path: event/PARENT/FILE_PATH
-          value: \wininit.exe
-        - case sensitive: false
-          op: ends with
-          path: event/PARENT/FILE_PATH
-          value: \spoolsv.exe
-        - case sensitive: false
-          op: ends with
-          path: event/PARENT/FILE_PATH
-          value: \searchindexer.exe
-      - op: or
-        rules:
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \powershell.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \pwsh.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \cmd.exe
-      - op: or
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/USER_NAME
-          value: AUTHORI
-        - case sensitive: false
-          op: contains
-          path: event/USER_NAME
-          value: AUTORI
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \powershell.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \pwsh.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \cmd.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: PowerShell.EXE
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: pwsh.dll
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: Cmd.Exe
     - not: true
       op: and
       rules:

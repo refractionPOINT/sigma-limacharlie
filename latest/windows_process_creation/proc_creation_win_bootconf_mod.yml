@@ -7,16 +7,20 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - op: and
+    - op: or
       rules:
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
         value: \bcdedit.exe
       - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: set
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: bcdedit.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: set
     - op: or
       rules:
       - op: and

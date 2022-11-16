@@ -23,8 +23,8 @@ respond:
 - action: report
   metadata:
     author: "J\xE1n Tren\u010Dansk\xFD"
-    description: AnyDesk Remote Desktop silent installation can be used by attacker
-      to gain remote access.
+    description: Detects AnyDesk Remote Desktop silent installation. Which can be
+      used by attackers to gain remote access.
     falsepositives:
     - Legitimate deployment of AnyDesk
     level: high
