@@ -71,5 +71,6 @@ respond:
     - attack.t1059.001
     - attack.defense_evasion
     - attack.t1027
+    - attack.t1620
   name: Base64 Encoded Reflective Assembly Load
 
