@@ -1,0 +1,72 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: echo
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: clip
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: '&&'
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: clipboard
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: invoke
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: i`
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: n`
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: v`
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: o`
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: k`
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: e`
+respond:
+- action: report
+  metadata:
+    author: Nikita Nazarov, oscd.community
+    description: Detects Obfuscated Powershell via use Clip.exe in Scripts
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://github.com/Neo23x0/sigma/issues/1009
+    tags:
+    - attack.defense_evasion
+    - attack.t1027
+    - attack.execution
+    - attack.t1059.001
+  name: Invoke-Obfuscation Via Use Clip
+

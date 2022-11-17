@@ -1,0 +1,62 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: cmd
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: powershell
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /c
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /r
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: noexit
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: input
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: $
+respond:
+- action: report
+  metadata:
+    author: Jonathan Cheong, oscd.community
+    description: Detects Obfuscated use of stdin to execute PowerShell
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://github.com/Neo23x0/sigma/issues/1009
+    tags:
+    - attack.defense_evasion
+    - attack.t1027
+    - attack.execution
+    - attack.t1059.001
+  name: Invoke-Obfuscation STDIN+ Launcher
+
