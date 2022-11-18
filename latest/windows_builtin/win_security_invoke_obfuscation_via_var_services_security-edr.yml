@@ -1,0 +1,70 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '4697'
+    - case sensitive: false
+      op: contains
+      path: event/EVENT/EventData/ServiceFileName
+      value: '&&set'
+    - case sensitive: false
+      op: contains
+      path: event/EVENT/EventData/ServiceFileName
+      value: cmd
+    - case sensitive: false
+      op: contains
+      path: event/EVENT/EventData/ServiceFileName
+      value: /c
+    - case sensitive: false
+      op: contains
+      path: event/EVENT/EventData/ServiceFileName
+      value: -f
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ServiceFileName
+        value: '{0}'
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ServiceFileName
+        value: '{1}'
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ServiceFileName
+        value: '{2}'
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ServiceFileName
+        value: '{3}'
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ServiceFileName
+        value: '{4}'
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ServiceFileName
+        value: '{5}'
+respond:
+- action: report
+  metadata:
+    author: Timur Zinniatullin, oscd.community
+    description: Detects Obfuscated Powershell via VAR++ LAUNCHER
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://github.com/Neo23x0/sigma/issues/1009
+    tags:
+    - attack.defense_evasion
+    - attack.t1027
+    - attack.execution
+    - attack.t1059.001
+  name: Invoke-Obfuscation VAR++ LAUNCHER OBFUSCATION
+
