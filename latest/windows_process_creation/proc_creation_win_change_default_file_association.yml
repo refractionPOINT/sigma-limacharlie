@@ -14,11 +14,21 @@ detect:
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
-      value: /c
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
       value: assoc
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /c '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /k '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /r '
 respond:
 - action: report
   metadata:

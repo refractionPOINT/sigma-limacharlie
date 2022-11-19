@@ -9,18 +9,36 @@ detect:
     rules:
     - op: and
       rules:
-      - case sensitive: false
-        op: contains
-        path: event/PARENT/COMMAND_LINE
-        value: cmd
-      - case sensitive: false
-        op: contains
-        path: event/PARENT/COMMAND_LINE
-        value: /c
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /../../
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: cmd
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \cmd.exe
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/COMMAND_LINE
+            value: /c
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/COMMAND_LINE
+            value: /k
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/COMMAND_LINE
+            value: /r
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /../../
     - case sensitive: false
       not: true
       op: contains

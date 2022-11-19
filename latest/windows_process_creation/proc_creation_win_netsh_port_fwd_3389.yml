@@ -14,7 +14,7 @@ detect:
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
-      value: i
+      value: ' i'
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
