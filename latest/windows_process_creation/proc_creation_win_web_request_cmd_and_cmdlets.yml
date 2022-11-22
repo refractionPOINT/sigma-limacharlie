@@ -35,8 +35,8 @@ respond:
 - action: report
   metadata:
     author: James Pemberton / @4A616D6573
-    description: Detects the use of various web request with commandline tools or
-      Windows PowerShell command,methods (including aliases)
+    description: Detects the use of various web request commands with commandline
+      tools and Windows PowerShell cmdlets (including aliases)
     falsepositives:
     - Use of Get-Command and Get-Help modules to reference Invoke-WebRequest and Start-BitsTransfer.
     level: medium
@@ -46,5 +46,5 @@ respond:
     tags:
     - attack.execution
     - attack.t1059.001
-  name: Windows Suspicious Use Of Web Request in CommandLine
+  name: Usage Of Web Request Commands And Cmdlets
 
