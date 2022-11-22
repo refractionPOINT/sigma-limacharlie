@@ -1,21 +1,27 @@
 detect:
   log type: wel
-  op: and
+  op: or
   rules:
-  - op: or
+  - op: and
     rules:
     - case sensitive: false
       op: is
       path: Event/System/EventID
       value: '4720'
     - case sensitive: false
+      op: contains
+      path: Event/EventData/SamAccountName
+      value: $
+  - op: and
+    rules:
+    - case sensitive: false
       op: is
       path: Event/System/EventID
       value: '4781'
-  - case sensitive: false
-    op: contains
-    path: Event/EventData/SamAccountName
-    value: $
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/NewTargetUserName
+      value: $
   target: log
 respond:
 - action: report

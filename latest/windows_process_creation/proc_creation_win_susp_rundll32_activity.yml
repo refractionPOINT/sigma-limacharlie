@@ -244,6 +244,20 @@ detect:
           op: contains
           path: event/PARENT/COMMAND_LINE
           value: .cpl
+      - op: and
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/PARENT/FILE_PATH
+          value: C:\Windows\System32\control.exe
+        - case sensitive: false
+          op: starts with
+          path: event/COMMAND_LINE
+          value: '"C:\Windows\system32\rundll32.exe" Shell32.dll,Control_RunDLL "C:\Windows\System32\'
+        - case sensitive: false
+          op: ends with
+          path: event/COMMAND_LINE
+          value: .cpl",
 respond:
 - action: report
   metadata:
