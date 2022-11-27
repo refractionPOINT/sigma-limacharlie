@@ -49,5 +49,5 @@ respond:
     - attack.lateral_movement
     - attack.t1021.002
     - attack.t1021.003
-  name: T1021 DCOM InternetExplorer.Application Iertutil DLL Hijack
+  name: DCOM InternetExplorer.Application Iertutil DLL Hijack - Sysmon
 
