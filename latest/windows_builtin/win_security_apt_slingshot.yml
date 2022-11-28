@@ -26,5 +26,5 @@ respond:
     - attack.persistence
     - attack.t1053
     - attack.s0111
-  name: Defrag Deactivation
+  name: Defrag Deactivation - Security
 

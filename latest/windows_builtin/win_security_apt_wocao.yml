@@ -35,5 +35,5 @@ respond:
     - attack.execution
     - attack.t1053.005
     - attack.t1059.001
-  name: Operation Wocao Activity
+  name: Operation Wocao Activity - Security
 
