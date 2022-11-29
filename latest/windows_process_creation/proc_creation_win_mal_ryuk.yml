@@ -32,9 +32,9 @@ detect:
         path: event/COMMAND_LINE
         value: audioendpointbuilder
       - case sensitive: false
-        op: matches
+        op: contains
         path: event/COMMAND_LINE
-        re: .*unistoresvc_......*
+        value: unistoresvc_
 respond:
 - action: report
   metadata:
