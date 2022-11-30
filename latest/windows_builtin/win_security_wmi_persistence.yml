@@ -31,5 +31,5 @@ respond:
     - attack.persistence
     - attack.privilege_escalation
     - attack.t1546.003
-  name: WMI Persistence
+  name: WMI Persistence - Security
 

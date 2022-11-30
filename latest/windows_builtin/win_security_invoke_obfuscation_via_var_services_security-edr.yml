@@ -66,5 +66,5 @@ respond:
     - attack.t1027
     - attack.execution
     - attack.t1059.001
-  name: Invoke-Obfuscation VAR++ LAUNCHER OBFUSCATION
+  name: Invoke-Obfuscation VAR++ LAUNCHER OBFUSCATION - Security
 

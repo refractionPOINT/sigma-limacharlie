@@ -30,5 +30,5 @@ respond:
     tags:
     - attack.execution
     - attack.t1569.002
-  name: PowerShell Scripts Installed as Services
+  name: PowerShell Scripts Installed as Services - Security
 

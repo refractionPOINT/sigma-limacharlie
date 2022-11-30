@@ -58,5 +58,5 @@ respond:
     - attack.t1003.006
     - attack.t1569.002
     - attack.s0005
-  name: Credential Dumping Tools Service Execution
+  name: Credential Dumping Tools Service Execution - Security
 

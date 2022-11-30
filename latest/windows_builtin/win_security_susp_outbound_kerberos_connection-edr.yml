@@ -48,5 +48,5 @@ respond:
     tags:
     - attack.lateral_movement
     - attack.t1558.003
-  name: Suspicious Outbound Kerberos Connection
+  name: Suspicious Outbound Kerberos Connection - Security
 
