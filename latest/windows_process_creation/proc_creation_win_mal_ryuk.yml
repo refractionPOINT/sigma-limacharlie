@@ -48,5 +48,5 @@ respond:
     tags:
     - attack.execution
     - attack.t1204
-  name: Ryuk Ransomware
+  name: Ryuk Ransomware Command Line Activity
 

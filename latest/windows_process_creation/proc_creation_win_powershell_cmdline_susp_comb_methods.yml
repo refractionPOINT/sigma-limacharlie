@@ -42,5 +42,5 @@ respond:
     - attack.t1027
     - attack.execution
     - attack.t1059.001
-  name: Suspicious Encoded PowerShell Command Line
+  name: Suspicious Xor PowerShell Command Line
 
