@@ -67,6 +67,16 @@ detect:
           op: contains
           path: event/COMMAND_LINE
           value: ' authtoken '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '.exe authtoken '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .exe start --all
 respond:
 - action: report
   metadata:
@@ -87,7 +97,9 @@ respond:
     - https://www.fireeye.com/blog/threat-research/2021/05/shining-a-light-on-darkside-ransomware-operations.html
     - https://stackoverflow.com/questions/42442320/ssh-tunnel-to-ngrok-and-initiate-rdp
     - https://www.virustotal.com/gui/file/58d21840d915aaf4040ceb89522396124c82f325282f805d1085527e1e2ccfa1/detection
-    - https://cybleinc.com/2021/02/15/ngrok-platform-abused-by-hackers-to-deliver-a-new-wave-of-phishing-attacks/.
+    - https://cybleinc.com/2021/02/15/ngrok-platform-abused-by-hackers-to-deliver-a-new-wave-of-phishing-attacks/
+    - https://twitter.com/xorJosh/status/1598646907802451969
+    - https://www.softwaretestinghelp.com/how-to-use-ngrok/
     tags:
     - attack.command_and_control
     - attack.t1572

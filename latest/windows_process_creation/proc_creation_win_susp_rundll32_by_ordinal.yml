@@ -55,6 +55,10 @@ detect:
           - case sensitive: false
             op: contains
             path: event/PARENT/FILE_PATH
+            value: \VC\Tools\MSVC\
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/FILE_PATH
             value: \Tracker.exe
         - op: or
           rules:
