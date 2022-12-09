@@ -17,7 +17,8 @@ respond:
 - action: report
   metadata:
     author: Thomas Patzke
-    description: Code integrity failures may indicate tampered executables.
+    description: Detects code integrity failures such as missing page hashes or corrupted
+      drivers due unauthorized modification. This could be a sign of tampered binaries.
     falsepositives:
     - Disk device errors
     level: low

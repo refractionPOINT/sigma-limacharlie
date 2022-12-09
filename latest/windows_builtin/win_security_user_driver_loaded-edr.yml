@@ -26,54 +26,62 @@ detect:
     - not: true
       op: or
       rules:
-      - case sensitive: false
-        op: ends with
-        path: event/EVENT/EventData/ProcessName
-        value: \Windows\System32\Dism.exe
-      - case sensitive: false
-        op: ends with
-        path: event/EVENT/EventData/ProcessName
-        value: \Windows\System32\rundll32.exe
-      - case sensitive: false
-        op: ends with
-        path: event/EVENT/EventData/ProcessName
-        value: \Windows\System32\fltMC.exe
-      - case sensitive: false
-        op: ends with
-        path: event/EVENT/EventData/ProcessName
-        value: \Windows\HelpPane.exe
-      - case sensitive: false
-        op: ends with
-        path: event/EVENT/EventData/ProcessName
-        value: \Windows\System32\mmc.exe
-      - case sensitive: false
-        op: ends with
-        path: event/EVENT/EventData/ProcessName
-        value: \Windows\System32\svchost.exe
-      - case sensitive: false
-        op: ends with
-        path: event/EVENT/EventData/ProcessName
-        value: \Windows\System32\wimserv.exe
-      - case sensitive: false
-        op: ends with
-        path: event/EVENT/EventData/ProcessName
-        value: \procexp64.exe
-      - case sensitive: false
-        op: ends with
-        path: event/EVENT/EventData/ProcessName
-        value: \procexp.exe
-      - case sensitive: false
-        op: ends with
-        path: event/EVENT/EventData/ProcessName
-        value: \procmon64.exe
-      - case sensitive: false
-        op: ends with
-        path: event/EVENT/EventData/ProcessName
-        value: \procmon.exe
-      - case sensitive: false
-        op: ends with
-        path: event/EVENT/EventData/ProcessName
-        value: \Google\Chrome\Application\chrome.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/ProcessName
+          value: C:\Windows\System32\Dism.exe
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/ProcessName
+          value: C:\Windows\System32\rundll32.exe
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/ProcessName
+          value: C:\Windows\System32\fltMC.exe
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/ProcessName
+          value: C:\Windows\HelpPane.exe
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/ProcessName
+          value: C:\Windows\System32\mmc.exe
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/ProcessName
+          value: C:\Windows\System32\svchost.exe
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/ProcessName
+          value: C:\Windows\System32\wimserv.exe
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/ProcessName
+          value: C:\Windows\System32\RuntimeBroker.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/EVENT/EventData/ProcessName
+          value: \procexp64.exe
+        - case sensitive: false
+          op: ends with
+          path: event/EVENT/EventData/ProcessName
+          value: \procexp.exe
+        - case sensitive: false
+          op: ends with
+          path: event/EVENT/EventData/ProcessName
+          value: \procmon64.exe
+        - case sensitive: false
+          op: ends with
+          path: event/EVENT/EventData/ProcessName
+          value: \procmon.exe
+        - case sensitive: false
+          op: ends with
+          path: event/EVENT/EventData/ProcessName
+          value: \Google\Chrome\Application\chrome.exe
 respond:
 - action: report
   metadata:

@@ -11,7 +11,7 @@ detect:
       value: '1116'
     - case sensitive: false
       op: is
-      path: event/EVENT/EventData/Source_Name
+      path: event/EVENT/EventData/SourceName
       value: AMSI
 respond:
 - action: report

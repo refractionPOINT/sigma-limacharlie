@@ -8,7 +8,7 @@ detect:
     value: '1116'
   - case sensitive: false
     op: is
-    path: Event/EventData/Source_Name
+    path: Event/EventData/SourceName
     value: AMSI
   target: log
 respond:
