@@ -5,16 +5,23 @@ detect:
   op: and
   rules:
   - op: is windows
-  - case sensitive: false
-    op: contains
-    path: event/COMMAND_LINE
-    value: COMPlus_ETWEnabled=0
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: COMPlus_ETWEnabled
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: COMPlus_ETWFlags
 respond:
 - action: report
   metadata:
     author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)
-    description: Potential adversaries stopping ETW providers recording loaded .NET
-      assemblies.
+    description: Detects changes to environment variables related to ETW logging.
+      This could indicate potential adversaries stopping ETW providers recording loaded
+      .NET assemblies.
     falsepositives:
     - Unlikely
     level: high
@@ -28,8 +35,9 @@ respond:
     - https://bunnyinside.com/?term=f71e8cb9c76a
     - http://managed670.rssing.com/chan-5590147/all_p1.html
     - https://github.com/dotnet/runtime/blob/4f9ae42d861fcb4be2fcd5d3d55d5f227d30e723/docs/coding-guidelines/clr-jit-coding-conventions.md#1412-disabling-code
+    - https://i.blackhat.com/EU-21/Wednesday/EU-21-Teodorescu-Veni-No-Vidi-No-Vici-Attacks-On-ETW-Blind-EDRs.pdf
     tags:
     - attack.defense_evasion
     - attack.t1562
-  name: COMPlus_ETWEnabled Command Line Arguments
+  name: ETW Logging Tamper In .NET Processes
 

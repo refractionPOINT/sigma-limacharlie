@@ -54,12 +54,12 @@ respond:
       by attackers or malware
     falsepositives:
     - Procdump illegaly bundled with legitimate software
-    - Weird admins who renamed binaries (and should be investigated)
+    - Administrators who rename binaries (should be investigated)
     level: high
     references:
     - https://docs.microsoft.com/en-us/sysinternals/downloads/procdump
     tags:
     - attack.defense_evasion
     - attack.t1036.003
-  name: Renamed ProcDump
+  name: Renamed ProcDump Execution
 

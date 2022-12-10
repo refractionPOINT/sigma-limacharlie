@@ -42,7 +42,7 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: \\\\127.0.0.1\
+        value: \\\\127.0.0.1\\
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
