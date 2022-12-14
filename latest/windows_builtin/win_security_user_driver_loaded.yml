@@ -57,6 +57,10 @@ detect:
         op: is
         path: Event/EventData/ProcessName
         value: C:\Windows\System32\RuntimeBroker.exe
+      - case sensitive: false
+        op: is
+        path: Event/EventData/ProcessName
+        value: C:\Windows\System32\SystemSettingsBroker.exe
     - op: or
       rules:
       - case sensitive: false
