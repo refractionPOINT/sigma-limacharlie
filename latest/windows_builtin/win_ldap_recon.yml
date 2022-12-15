@@ -128,6 +128,14 @@ detect:
           op: contains
           path: Event/EventData/SearchFilter
           value: Domain Admins
+        - case sensitive: false
+          op: matches
+          path: Event/EventData/SearchFilter
+          re: .*objectGUID=\*
+        - case sensitive: false
+          op: matches
+          path: Event/EventData/SearchFilter
+          re: .*\(schemaIDGUID=\*\).*
     - not: true
       op: and
       rules:
@@ -214,16 +222,17 @@ respond:
 - action: report
   metadata:
     author: Adeem Mawani
-    description: Detects possible Active Directory enumeration via LDAP
+    description: Detects potential Active Directory enumeration via LDAP
     level: medium
     references:
     - https://techcommunity.microsoft.com/t5/microsoft-defender-for-endpoint/hunting-for-reconnaissance-activities-using-ldap-search-filters/ba-p/824726
     - https://github.com/PowerShellMafia/PowerSploit/blob/d943001a7defb5e0d1657085a77a0e78609be58f/Recon/PowerView.ps1
     - https://github.com/BloodHoundAD/SharpHound3/blob/7d96b991b1887ff50349ce59c80980bc0d95c86a/SharpHound3/LdapBuilder.cs
+    - https://medium.com/falconforce/falconfriday-detecting-active-directory-data-collection-0xff21-c22d1a57494c
     tags:
     - attack.discovery
     - attack.t1069.002
     - attack.t1087.002
     - attack.t1482
-  name: LDAP Reconnaissance / Active Directory Enumeration
+  name: Potential Active Directory Reconnaissance/Enumeration Via LDAP
 
