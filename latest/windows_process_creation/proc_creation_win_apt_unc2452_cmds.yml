@@ -9,50 +9,46 @@ detect:
     rules:
     - op: or
       rules:
-      - op: or
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 7z.exe a -v500m -mx9 -r0 -p
+      - op: and
         rules:
-        - op: or
-          rules:
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: 7z.exe a -v500m -mx9 -r0 -p
-          - op: and
-            rules:
-            - case sensitive: false
-              op: contains
-              path: event/PARENT/COMMAND_LINE
-              value: wscript.exe
-            - case sensitive: false
-              op: contains
-              path: event/PARENT/COMMAND_LINE
-              value: .vbs
-            - case sensitive: false
-              op: contains
-              path: event/COMMAND_LINE
-              value: rundll32.exe
-            - case sensitive: false
-              op: contains
-              path: event/COMMAND_LINE
-              value: C:\Windows
-            - case sensitive: false
-              op: contains
-              path: event/COMMAND_LINE
-              value: .dll,Tk_
-        - op: and
-          rules:
-          - case sensitive: false
-            op: ends with
-            path: event/PARENT/FILE_PATH
-            value: \rundll32.exe
-          - case sensitive: false
-            op: contains
-            path: event/PARENT/COMMAND_LINE
-            value: C:\Windows
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: 'cmd.exe /C '
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: wscript.exe
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: .vbs
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: rundll32.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: C:\Windows
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .dll,Tk_
+      - op: and
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \rundll32.exe
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: C:\Windows
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'cmd.exe /C '
       - op: and
         rules:
         - case sensitive: false
