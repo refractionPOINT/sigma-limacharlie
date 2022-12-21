@@ -27,9 +27,9 @@ detect:
       path: Event/System/EventID
       value: '4657'
     - case sensitive: false
-      op: ends with
+      op: contains
       path: Event/EventData/ObjectName
-      value: \Environment\
+      value: \Environment
     - op: or
       rules:
       - case sensitive: false
