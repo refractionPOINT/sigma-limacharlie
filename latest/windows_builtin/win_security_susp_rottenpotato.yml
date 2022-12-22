@@ -13,15 +13,21 @@ detect:
   - case sensitive: false
     op: is
     path: Event/EventData/TargetUserName
-    value: ANONYMOUS_LOGON
+    value: ANONYMOUS LOGON
   - case sensitive: false
     op: is
     path: Event/EventData/WorkstationName
     value: '-'
-  - case sensitive: false
-    op: is
-    path: Event/EventData/IpAddress
-    value: 127.0.0.1
+  - op: or
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/EventData/IpAddress
+      value: 127.0.0.1
+    - case sensitive: false
+      op: is
+      path: Event/EventData/IpAddress
+      value: ::1
   target: log
 respond:
 - action: report

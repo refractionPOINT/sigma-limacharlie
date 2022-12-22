@@ -21,7 +21,7 @@ respond:
 - action: report
   metadata:
     author: Florian Roth
-    description: Detects plugged USB devices
+    description: Detects plugged/unplugged USB devices
     falsepositives:
     - Legitimate administrative activity
     level: low
