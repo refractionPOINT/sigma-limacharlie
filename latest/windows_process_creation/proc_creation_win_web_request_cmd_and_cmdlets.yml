@@ -31,6 +31,18 @@ detect:
       op: contains
       path: event/COMMAND_LINE
       value: Start-BitsTransfer
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: '[System.Net.WebRequest]::create'
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-RestMethod
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: WinHttp.WinHttpRequest
 respond:
 - action: report
   metadata:
