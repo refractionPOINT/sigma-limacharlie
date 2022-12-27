@@ -1,0 +1,33 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '1033'
+    - case sensitive: false
+      op: is
+      path: event/EVENT/EventData/Provider_Name
+      value: Microsoft-Windows-DHCP-Server
+respond:
+- action: report
+  metadata:
+    author: Dimitrios Slamaris
+    description: This rule detects a DHCP server in which a specified Callout DLL
+      (in registry) was loaded
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://blog.3or.de/mimilib-dhcp-server-callout-dll-injection.html
+    - https://technet.microsoft.com/en-us/library/cc726884(v=ws.10).aspx
+    - https://msdn.microsoft.com/de-de/library/windows/desktop/aa363389(v=vs.85).aspx
+    tags:
+    - attack.defense_evasion
+    - attack.t1574.002
+  name: DHCP Server Loaded the CallOut DLL
+

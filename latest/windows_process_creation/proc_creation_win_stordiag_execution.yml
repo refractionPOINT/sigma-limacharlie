@@ -1,0 +1,57 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \stordiag.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \schtasks.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \systeminfo.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \fltmc.exe
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: starts with
+        path: event/PARENT/FILE_PATH
+        value: c:\windows\system32\
+      - case sensitive: false
+        op: starts with
+        path: event/PARENT/FILE_PATH
+        value: c:\windows\syswow64\
+respond:
+- action: report
+  metadata:
+    author: Austin Songer (@austinsonger)
+    description: Detects the use of stordiag.exe to execute schtasks.exe systeminfo.exe
+      and fltmc.exe
+    falsepositives:
+    - Legitimate usage of stordiag.exe.
+    level: high
+    references:
+    - https://strontic.github.io/xcyclopedia/library/stordiag.exe-1F08FC87C373673944F6A7E8B18CD845.html
+    - https://twitter.com/eral4m/status/1451112385041911809
+    tags:
+    - attack.defense_evasion
+    - attack.t1218
+  name: Execution via stordiag.exe
+
