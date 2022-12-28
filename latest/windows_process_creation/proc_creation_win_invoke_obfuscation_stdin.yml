@@ -52,7 +52,7 @@ respond:
     - Unknown
     level: high
     references:
-    - https://github.com/Neo23x0/sigma/issues/1009
+    - https://github.com/SigmaHQ/sigma/issues/1009
     tags:
     - attack.defense_evasion
     - attack.t1027
