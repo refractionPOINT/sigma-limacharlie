@@ -25,10 +25,10 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: system.io.streamreader
-    - case sensitive: false
-      op: ends with
-      path: event/COMMAND_LINE
-      value: readtoend
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: readtoend(
 respond:
 - action: report
   metadata:
