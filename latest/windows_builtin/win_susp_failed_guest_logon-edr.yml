@@ -10,10 +10,6 @@ detect:
       path: event/EVENT/System/EventID
       value: '31017'
     - case sensitive: false
-      op: contains
-      path: event/EVENT/EventData/Description
-      value: Rejected an insecure guest logon
-    - case sensitive: false
       op: is
       path: event/EVENT/EventData/UserName
       value: ''
