@@ -9,64 +9,24 @@ detect:
     rules:
     - op: and
       rules:
-      - op: or
+      - op: and
         rules:
         - case sensitive: false
           op: ends with
           path: event/FILE_PATH
-          value: \whoami.exe
-        - op: and
-          rules:
-          - case sensitive: false
-            op: ends with
-            path: event/FILE_PATH
-            value: \wmic.exe
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: useraccount
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: get
-        - op: or
-          rules:
-          - case sensitive: false
-            op: ends with
-            path: event/FILE_PATH
-            value: \quser.exe
-          - case sensitive: false
-            op: ends with
-            path: event/FILE_PATH
-            value: \qwinsta.exe
-        - op: and
-          rules:
-          - case sensitive: false
-            op: ends with
-            path: event/FILE_PATH
-            value: \cmdkey.exe
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: ' /l'
-        - op: and
-          rules:
-          - case sensitive: false
-            op: ends with
-            path: event/FILE_PATH
-            value: \cmd.exe
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: ' /c'
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: 'dir '
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: \Users\
+          value: \cmd.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /c'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'dir '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \Users\
       - case sensitive: false
         not: true
         op: contains
@@ -129,6 +89,44 @@ detect:
           op: contains
           path: event/COMMAND_LINE
           value: /workstations
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \whoami.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \quser.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \qwinsta.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \wmic.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: useraccount
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: get
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cmdkey.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /l'
 respond:
 - action: report
   metadata:

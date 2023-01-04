@@ -19,8 +19,8 @@ respond:
 - action: report
   metadata:
     author: oscd.community, Natalia Shornikova
-    description: Detects a usage of the manage-bde.wsf script that may indicate an
-      attempt of proxy execution from script
+    description: Detects usage of the manage-bde.wsf script that may indicate an attempt
+      of proxy execution from script
     falsepositives:
     - Unknown
     level: medium

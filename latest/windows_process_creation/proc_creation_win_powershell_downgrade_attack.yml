@@ -7,16 +7,10 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - op: or
-      rules:
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \powershell.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \pwsh.exe
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \powershell.exe
     - op: or
       rules:
       - case sensitive: false
@@ -43,6 +37,10 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: ' -ve 2 '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -v 2 '
 respond:
 - action: report
   metadata:
@@ -54,9 +52,10 @@ respond:
     level: medium
     references:
     - http://www.leeholmes.com/blog/2017/03/17/detecting-and-preventing-powershell-downgrade-attacks/
+    - https://github.com/r00t-3xp10it/hacking-material-books/blob/43cb1e1932c16ff1f58b755bc9ab6b096046853f/obfuscation/simple_obfuscation.md#bypass-or-avoid-amsi-by-version-downgrade-
     tags:
     - attack.defense_evasion
     - attack.execution
     - attack.t1059.001
-  name: PowerShell Downgrade Attack
+  name: Potential PowerShell Downgrade Attack
 
