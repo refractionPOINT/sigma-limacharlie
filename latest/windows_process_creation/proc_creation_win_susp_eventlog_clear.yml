@@ -5,76 +5,95 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: or
+  - op: and
     rules:
-    - op: and
+    - op: or
       rules:
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \wevtutil.exe
-      - op: or
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: 'clear-log '
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: ' cl '
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: 'set-log '
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: ' sl '
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: 'lfn:'
-    - op: and
-      rules:
-      - op: or
+      - op: and
         rules:
         - case sensitive: false
           op: ends with
           path: event/FILE_PATH
-          value: \powershell.exe
+          value: \wevtutil.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: 'clear-log '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' cl '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: 'set-log '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' sl '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: 'lfn:'
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \powershell.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \pwsh.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: 'Clear-EventLog '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: 'Remove-EventLog '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: 'Limit-EventLog '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: 'Clear-WinEvent '
+      - op: and
+        rules:
         - case sensitive: false
           op: ends with
           path: event/FILE_PATH
-          value: \pwsh.exe
+          value: \wmic.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' ClearEventLog '
+    - not: true
+      op: and
+      rules:
       - op: or
         rules:
         - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: 'Clear-EventLog '
+          op: is
+          path: event/PARENT/FILE_PATH
+          value: C:\Windows\SysWOW64\msiexec.exe
         - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: 'Remove-EventLog '
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: 'Limit-EventLog '
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: 'Clear-WinEvent '
-    - op: and
-      rules:
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \wmic.exe
+          op: is
+          path: event/PARENT/FILE_PATH
+          value: C:\Windows\System32\msiexec.exe
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ' ClearEventLog '
+        value: ' sl '
 respond:
 - action: report
   metadata:
@@ -85,11 +104,14 @@ respond:
     falsepositives:
     - Admin activity
     - Scripts and administrative tools used in the monitored environment
+    - Maintenance activity
     level: high
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1070.001/T1070.001.md
     - https://eqllib.readthedocs.io/en/latest/analytics/5b223758-07d6-4100-9e11-238cfdd0fe97.html
     - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/wevtutil
+    - https://gist.github.com/fovtran/ac0624983c7722e80a8f5a4babb170ee
+    - https://jdhnet.wordpress.com/2017/12/19/changing-the-location-of-the-windows-event-logs/
     tags:
     - attack.defense_evasion
     - attack.t1070.001

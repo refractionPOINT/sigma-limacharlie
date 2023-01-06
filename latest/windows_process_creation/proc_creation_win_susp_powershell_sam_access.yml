@@ -14,7 +14,7 @@ detect:
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
-      value: ystem32\config\sam
+      value: System32\config\sam
     - op: or
       rules:
       - case sensitive: false

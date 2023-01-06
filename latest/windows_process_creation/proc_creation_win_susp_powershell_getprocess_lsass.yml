@@ -5,16 +5,26 @@ detect:
   op: and
   rules:
   - op: is windows
-  - case sensitive: false
-    op: contains
-    path: event/COMMAND_LINE
-    value: Get-Process lsass
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-Process lsas
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ps lsas
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: gps lsas
 respond:
 - action: report
   metadata:
     author: Florian Roth
-    description: Detects a Get-Process command on lsass process, which is in almost
-      all cases a sign of malicious activity
+    description: Detects a "Get-Process" cmdlet and it's aliases on lsass process,
+      which is in almost all cases a sign of malicious activity
     falsepositives:
     - Unknown
     level: high
