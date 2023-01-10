@@ -71,7 +71,6 @@ respond:
     - Unknown
     level: high
     references:
-    - https://attack.mitre.org/techniques/T1196/
     - https://ired.team/offensive-security/code-execution/code-execution-through-control-panel-add-ins
     tags:
     - attack.execution

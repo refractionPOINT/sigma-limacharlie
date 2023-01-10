@@ -36,7 +36,6 @@ respond:
     level: high
     references:
     - https://github.com/vanhauser-thc/thc-hydra
-    - https://attack.mitre.org/techniques/T1110/001/
     tags:
     - attack.credential_access
     - attack.t1110
