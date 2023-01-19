@@ -61,6 +61,10 @@ detect:
         op: is
         path: Event/EventData/ProcessName
         value: C:\Windows\System32\SystemSettingsBroker.exe
+      - case sensitive: false
+        op: is
+        path: Event/EventData/ProcessName
+        value: C:\Windows\explorer.exe
     - op: or
       rules:
       - case sensitive: false
@@ -83,6 +87,10 @@ detect:
         op: ends with
         path: Event/EventData/ProcessName
         value: \Google\Chrome\Application\chrome.exe
+      - case sensitive: false
+        op: ends with
+        path: Event/EventData/ProcessName
+        value: \AppData\Local\Microsoft\Teams\current\Teams.exe
   target: log
 respond:
 - action: report

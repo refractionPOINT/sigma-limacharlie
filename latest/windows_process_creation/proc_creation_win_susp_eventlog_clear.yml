@@ -117,5 +117,5 @@ respond:
     - attack.t1070.001
     - attack.t1562.002
     - car.2016-04-002
-  name: Suspicious Eventlog Clear or Configuration Using Wevtutil
+  name: Suspicious Eventlog Clear or Configuration Change
 

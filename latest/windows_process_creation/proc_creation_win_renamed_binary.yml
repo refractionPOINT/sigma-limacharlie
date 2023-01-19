@@ -20,62 +20,6 @@ detect:
       - case sensitive: false
         op: is
         path: event/ORIGINAL_FILE_NAME
-        value: PowerShell.EXE
-      - case sensitive: false
-        op: is
-        path: event/ORIGINAL_FILE_NAME
-        value: pwsh.dll
-      - case sensitive: false
-        op: is
-        path: event/ORIGINAL_FILE_NAME
-        value: powershell_ise.EXE
-      - case sensitive: false
-        op: is
-        path: event/ORIGINAL_FILE_NAME
-        value: psexec.exe
-      - case sensitive: false
-        op: is
-        path: event/ORIGINAL_FILE_NAME
-        value: psexec.c
-      - case sensitive: false
-        op: is
-        path: event/ORIGINAL_FILE_NAME
-        value: cscript.exe
-      - case sensitive: false
-        op: is
-        path: event/ORIGINAL_FILE_NAME
-        value: wscript.exe
-      - case sensitive: false
-        op: is
-        path: event/ORIGINAL_FILE_NAME
-        value: MSHTA.EXE
-      - case sensitive: false
-        op: is
-        path: event/ORIGINAL_FILE_NAME
-        value: REGSVR32.EXE
-      - case sensitive: false
-        op: is
-        path: event/ORIGINAL_FILE_NAME
-        value: wmic.exe
-      - case sensitive: false
-        op: is
-        path: event/ORIGINAL_FILE_NAME
-        value: CertUtil.exe
-      - case sensitive: false
-        op: is
-        path: event/ORIGINAL_FILE_NAME
-        value: RUNDLL32.EXE
-      - case sensitive: false
-        op: is
-        path: event/ORIGINAL_FILE_NAME
-        value: CMSTP.EXE
-      - case sensitive: false
-        op: is
-        path: event/ORIGINAL_FILE_NAME
-        value: msiexec.exe
-      - case sensitive: false
-        op: is
-        path: event/ORIGINAL_FILE_NAME
         value: 7z.exe
       - case sensitive: false
         op: is
@@ -112,62 +56,6 @@ detect:
         op: ends with
         path: event/FILE_PATH
         value: \conhost.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \powershell.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \pwsh.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \powershell_ise.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \psexec.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \psexec64.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \cscript.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \wscript.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \mshta.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \regsvr32.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \WMIC.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \certutil.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \rundll32.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \cmstp.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \msiexec.exe
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
@@ -215,5 +103,5 @@ respond:
     tags:
     - attack.defense_evasion
     - attack.t1036.003
-  name: Renamed Binary
+  name: Potential Defense Evasion Via Binary Rename
 
