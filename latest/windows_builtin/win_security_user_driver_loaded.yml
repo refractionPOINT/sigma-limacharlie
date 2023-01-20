@@ -91,6 +91,10 @@ detect:
         op: ends with
         path: Event/EventData/ProcessName
         value: \AppData\Local\Microsoft\Teams\current\Teams.exe
+    - case sensitive: false
+      op: starts with
+      path: Event/EventData/ProcessName
+      value: C:\Program Files\WindowsApps\Microsoft
   target: log
 respond:
 - action: report
