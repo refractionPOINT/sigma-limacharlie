@@ -78,7 +78,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Ecco, oscd.community, Jonhnathan Ribeiro
+    author: Ecco, oscd.community, Jonhnathan Ribeiro, Tim Rauch
     description: Detects wmiexec/dcomexec/atexec/smbexec from Impacket framework
     falsepositives:
     - Unknown
@@ -88,10 +88,11 @@ respond:
     - https://github.com/SecureAuthCorp/impacket/blob/8b1a99f7c715702eafe3f24851817bb64721b156/examples/atexec.py
     - https://github.com/SecureAuthCorp/impacket/blob/8b1a99f7c715702eafe3f24851817bb64721b156/examples/smbexec.py
     - https://github.com/SecureAuthCorp/impacket/blob/8b1a99f7c715702eafe3f24851817bb64721b156/examples/dcomexec.py
+    - https://www.elastic.co/guide/en/security/current/suspicious-cmd-execution-via-wmi.html
     tags:
     - attack.execution
     - attack.t1047
     - attack.lateral_movement
     - attack.t1021.003
-  name: Impacket Lateralization Detection
+  name: Potential Impacket Lateral Movement Activity
 
