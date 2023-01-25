@@ -34,6 +34,10 @@ detect:
           op: ends with
           path: event/FILE_PATH
           value: :\Windows\System32\wininit.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: :\Windows\System32\winlogon.exe
       - not: true
         op: exists
         path: event/FILE_PATH
