@@ -1,0 +1,46 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \AccCheckConsole.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: AccCheckConsole.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -window '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .dll
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects suspicious LOLBIN AccCheckConsole execution with parameters
+      as used to load an arbitrary DLL
+    falsepositives:
+    - Legitimate use of the UI Accessibility Checker
+    level: high
+    references:
+    - https://gist.github.com/bohops/2444129419c8acf837aedda5f0e7f340
+    - https://twitter.com/bohops/status/1477717351017680899?s=12
+    - https://lolbas-project.github.io/lolbas/OtherMSBinaries/AccCheckConsole/
+    tags:
+    - attack.execution
+  name: Suspicious LOLBIN AccCheckConsole
+

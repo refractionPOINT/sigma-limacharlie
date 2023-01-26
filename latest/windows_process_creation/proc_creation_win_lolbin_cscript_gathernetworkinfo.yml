@@ -1,0 +1,35 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: cscript.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: gatherNetworkInfo.vbs
+respond:
+- action: report
+  metadata:
+    author: blueteamer8699
+    description: Adversaries can abuse of C:\Windows\System32\gatherNetworkInfo.vbs
+      script along with cscript.exe to gather information about the target
+    falsepositives:
+    - Administrative activity
+    level: medium
+    references:
+    - https://posts.slayerlabs.com/living-off-the-land/#gathernetworkinfovbs
+    tags:
+    - attack.discovery
+    - attack.execution
+    - attack.t1615
+    - attack.t1059.005
+  name: GatherNetworkInfo.vbs Script Usage
+

@@ -1,0 +1,22 @@
+detect:
+  case sensitive: false
+  log type: wel
+  op: is
+  path: Event/System/EventID
+  target: log
+  value: '16'
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Detects a Sysmon configuration change, which could be the result
+      of a legitimate reconfiguration or someone trying manipulate the configuration
+    falsepositives:
+    - Legitimate administrative action
+    level: medium
+    references:
+    - https://docs.microsoft.com/en-us/sysinternals/downloads/sysmon
+    tags:
+    - attack.defense_evasion
+  name: Sysmon Configuration Change
+

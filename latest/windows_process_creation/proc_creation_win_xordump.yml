@@ -1,0 +1,47 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \xordump.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -process lsass.exe '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -m comsvcs '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -m dbghelp '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -m dbgcore '
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects suspicious use of XORDump process memory dumping utility
+    falsepositives:
+    - Another tool that uses the command line switches of XORdump
+    level: high
+    references:
+    - https://github.com/audibleblink/xordump
+    tags:
+    - attack.defense_evasion
+    - attack.t1036
+    - attack.t1003.001
+  name: XORDump Use
+
