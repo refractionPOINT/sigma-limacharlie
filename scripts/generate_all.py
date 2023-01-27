@@ -7,12 +7,11 @@ from multiprocessing import Pool
 def main():
     sigmaDir = sys.argv[ 1 ]
     rootOutputDir = sys.argv[ 2 ]
+    dirsToProcess = sys.argv[ 3 : ]
 
     with Pool( 16 ) as pool:
-        os.system( 'mkdir ./lc-rules' )
-        for d in ( 'windows/builtin',
-                   'windows/process_creation',
-                   'windows/sysmon', ):
+        # Generate the core rules.
+        for d in dirsToProcess:
             outDir = d.replace( '/', '_' )
             print( "Creating dir: %s" % ( outDir, ) )
             os.system( 'mkdir -p %s%s' % ( rootOutputDir, outDir, ) )
