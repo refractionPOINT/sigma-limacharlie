@@ -19,7 +19,7 @@ respond:
       indicator for this.
     level: medium
     references:
-    - https://twitter.com/blueteamsec1/status/1401290874202382336?s=20
+    - https://speakerdeck.com/heirhabarov/hunting-for-persistence-via-microsoft-exchange-server-or-outlook?slide=7
     tags:
     - attack.persistence
     - attack.t1505.002

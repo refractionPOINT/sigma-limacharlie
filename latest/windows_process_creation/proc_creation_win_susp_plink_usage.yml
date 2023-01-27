@@ -50,5 +50,5 @@ respond:
     tags:
     - attack.command_and_control
     - attack.t1572
-  name: Suspicious Plink Usage RDP Tunneling
+  name: Potential RDP Tunneling Via SSH Plink
 

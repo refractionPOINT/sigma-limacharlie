@@ -13,7 +13,8 @@ respond:
 - action: report
   metadata:
     author: Florian Roth
-    description: Detects suspicious FromBase64String expressions in command line arguments
+    description: Detects usage of the "FromBase64String" function in the commandline
+      which is used to decode a base64 encoded string
     falsepositives:
     - Administrative script libraries
     level: high
@@ -24,5 +25,5 @@ respond:
     - attack.defense_evasion
     - attack.t1140
     - attack.t1059.001
-  name: FromBase64String Command Line
+  name: Base64 Encoded PowerShell Command Detected
 

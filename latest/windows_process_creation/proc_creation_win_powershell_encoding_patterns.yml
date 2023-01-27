@@ -9,14 +9,26 @@ detect:
     rules:
     - op: or
       rules:
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \powershell.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \pwsh.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \pwsh.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: PowerShell.EXE
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: pwsh.dll
     - op: or
       rules:
       - op: and
@@ -88,10 +100,10 @@ respond:
   metadata:
     author: Teymur Kheirkhabarov (idea), Vasiliy Burov (rule), oscd.community, Tim
       Shelton
-    description: Detects specific combinations of encoding methods in the PowerShell
-      command lines
+    description: Detects specific combinations of encoding methods in PowerShell via
+      the commandline
     falsepositives:
-    - Unlikely
+    - Unknown
     level: low
     references:
     - https://speakerdeck.com/heirhabarov/hunting-for-powershell-abuse?slide=65
@@ -100,5 +112,5 @@ respond:
     - attack.t1027
     - attack.execution
     - attack.t1059.001
-  name: Encoded PowerShell Command Line
+  name: Potential Encoded PowerShell Patterns In CommandLine
 

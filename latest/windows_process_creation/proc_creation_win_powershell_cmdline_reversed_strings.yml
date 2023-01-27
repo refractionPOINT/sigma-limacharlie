@@ -135,7 +135,8 @@ respond:
   metadata:
     author: Teymur Kheirkhabarov (idea), Vasiliy Burov (rule), oscd.community, Tim
       Shelton
-    description: Detects the PowerShell command lines with reversed strings
+    description: Detects the presenece of reversed PowerShell commands in the CommandLine.
+      This is often used as a method of obfuscation by attackers
     falsepositives:
     - Unlikely
     level: high
@@ -147,5 +148,5 @@ respond:
     - attack.t1027
     - attack.execution
     - attack.t1059.001
-  name: Suspicious PowerShell Cmdline
+  name: Potential PowerShell Obfuscation Via Reversed Commands
 

@@ -5,22 +5,16 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: and
+  - op: or
     rules:
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
-      value: AAAAYInlM
-    - op: or
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: OiCAAAAYInlM
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: OiJAAAAYInlM
+      value: OiCAAAAYInlM
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: OiJAAAAYInlM
 respond:
 - action: report
   metadata:

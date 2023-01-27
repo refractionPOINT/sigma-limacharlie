@@ -26,8 +26,8 @@ respond:
   metadata:
     author: Teymur Kheirkhabarov (idea), Vasiliy Burov (rule), oscd.community, Tim
       Shelton
-    description: Detects specific encoding method of cOnvErTTO-SECUreStRIng in the
-      PowerShell command lines
+    description: Detects usage of the "ConvertTo-SecureString" cmdlet via the commandline.
+      Which is fairly uncommon and could indicate potential suspicious activity
     falsepositives:
     - Unlikely
     level: high
@@ -38,5 +38,5 @@ respond:
     - attack.t1027
     - attack.execution
     - attack.t1059.001
-  name: Encoded PowerShell Command Line Usage of ConvertTo-SecureString
+  name: ConvertTo-SecureString Cmdlet Usage Via CommandLine
 
