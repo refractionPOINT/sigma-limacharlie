@@ -55,7 +55,16 @@ steps:
   - -c
   - |
     pip3 install ruamel.yaml pyyaml requests termcolor
-    python3 ./scripts/generate_all.py ./sigma/ ./sigma-limacharlie/latest/
+    python3 ./scripts/generate_all.py ./sigma/ ./sigma-limacharlie/latest/ windows/builtin windows/process_creation windows/sysmon
+
+# GENERATE NEW EXPERIMENTAL RULES
+- name: python:3
+  entrypoint: 'bash'
+  args:
+  - -c
+  - |
+    pip3 install ruamel.yaml pyyaml requests termcolor
+    python3 ./scripts/generate_all.py ./sigma/ ./sigma-limacharlie/experimental/ windows/builtin windows/process_creation windows/sysmon windows/dns_query macos/file_event macos/process_creation linux/process_creation
 
 # PUSH CHANGES
 - name: 'gcr.io/cloud-builders/git'
