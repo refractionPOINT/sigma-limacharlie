@@ -99,9 +99,6 @@ steps:
   - -c
   - |
     ls -lahR
-    git add ./*
-    git commit -m "`git status --porcelain`"
-    git push
   volumes:
   - name: 'ssh'
     path: /root/.ssh
