@@ -1,0 +1,40 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/Provider_Name
+        value: Service Control Manager
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '7045'
+    - op: or
+      rules:
+      - op: matches
+        path: event/EVENT/EventData/ImagePath
+        re: ^[Cc]:\\[Pp]rogram[Dd]ata\\.{1,9}\.exe
+      - op: matches
+        path: event/EVENT/EventData/ImagePath
+        re: ^[Cc]:\\.{1,9}\.exe
+respond:
+- action: report
+  metadata:
+    author: pH-T
+    description: Detects service installation with suspicious folder patterns
+    falsepositives:
+    - Unknown
+    level: high
+    tags:
+    - attack.persistence
+    - attack.privilege_escalation
+    - car.2013-09-005
+    - attack.t1543.003
+  name: Service Installation with Suspicious Folder Pattern
+
