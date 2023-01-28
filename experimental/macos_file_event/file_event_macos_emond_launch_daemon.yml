@@ -1,0 +1,43 @@
+detect:
+  events:
+  - FILE_CREATE
+  - FILE_DELETE
+  - FILE_MODIFIED
+  - NEW_DOCUMENT
+  op: and
+  rules:
+  - op: is mac
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: true
+        op: contains
+        path: event/FILE_PATH
+        value: /etc/emond.d/rules/
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: .plist
+    - case sensitive: true
+      op: contains
+      path: event/FILE_PATH
+      value: /private/var/db/emondClients/
+respond:
+- action: report
+  metadata:
+    author: Alejandro Ortuno, oscd.community
+    description: Detects additions to the Emond Launch Daemon that adversaries may
+      use to gain persistence and elevate privileges.
+    falsepositives:
+    - Legitimate administration activities
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1546.014/T1546.014.md
+    - https://posts.specterops.io/leveraging-emond-on-macos-for-persistence-a040a2785124
+    tags:
+    - attack.persistence
+    - attack.privilege_escalation
+    - attack.t1546.014
+  name: MacOS Emond Launch Daemon
+

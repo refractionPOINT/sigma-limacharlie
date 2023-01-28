@@ -1,0 +1,53 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - op: or
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '4656'
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '4663'
+  - case sensitive: false
+    op: is
+    path: Event/EventData/ObjectType
+    value: key
+  - op: or
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/ObjectName
+      value: lsa\JD
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/ObjectName
+      value: lsa\GBG
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/ObjectName
+      value: lsa\Skew1
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/ObjectName
+      value: lsa\Data
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Roberto Rodriguez @Cyb3rWard0g
+    description: Detects handle requests and access operations to specific registry
+      keys to calculate the SysKey
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://threathunterplaybook.com/notebooks/windows/07_discovery/WIN-190625024610.html
+    tags:
+    - attack.discovery
+    - attack.t1012
+  name: SysKey Registry Keys Access
+

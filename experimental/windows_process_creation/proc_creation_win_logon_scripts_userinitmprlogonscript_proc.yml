@@ -1,0 +1,66 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \userinit.exe
+      - not: true
+        op: or
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: explorer.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \proquota.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: matches
+            path: event/COMMAND_LINE
+            re: .*netlogon.*\.bat.*
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: UsrLogon.cmd
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: C:\WINDOWS\Explorer.EXE
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \Citrix\System32\icast.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: UserInitMprLogonScript
+respond:
+- action: report
+  metadata:
+    author: Tom Ueltschi (@c_APT_ure), Tim Shelton
+    description: Detects creation or execution of UserInitMprLogonScript persistence
+      method
+    falsepositives:
+    - Exclude legitimate logon scripts
+    level: high
+    references:
+    - https://cocomelonc.github.io/persistence/2022/12/09/malware-pers-20.html
+    tags:
+    - attack.t1037.001
+    - attack.persistence
+  name: Logon Scripts (UserInitMprLogonScript)
+

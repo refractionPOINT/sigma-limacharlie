@@ -1,0 +1,55 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: \HarddiskVolumeShadowCopy
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: System32\config\sam
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Copy-Item
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: cp $_.
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: cpi $_.
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: copy $_.
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .File]::Copy(
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects suspicious PowerShell scripts accessing SAM hives
+    falsepositives:
+    - Some rare backup scenarios
+    - PowerShell scripts fixing HiveNightmare / SeriousSAM ACLs
+    level: high
+    references:
+    - https://twitter.com/splinter_code/status/1420546784250769408
+    tags:
+    - attack.credential_access
+    - attack.t1003.002
+  name: PowerShell SAM Copy
+

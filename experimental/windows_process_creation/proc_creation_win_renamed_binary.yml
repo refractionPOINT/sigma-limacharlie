@@ -1,0 +1,107 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: Cmd.Exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: CONHOST.EXE
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: 7z.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: WinRAR.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: wevtutil.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: net.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: net1.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: netsh.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: InstallUtil.exe
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cmd.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \conhost.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \7z.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \WinRAR.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \wevtutil.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \net.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \net1.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \netsh.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \InstallUtil.exe
+respond:
+- action: report
+  metadata:
+    author: Matthew Green - @mgreen27, Ecco, James Pemberton / @4A616D6573, oscd.community
+      (improvements), Andreas Hunkeler (@Karneades)
+    description: Detects the execution of a renamed binary often used by attackers
+      or malware leveraging new Sysmon OriginalFileName datapoint.
+    falsepositives:
+    - Custom applications use renamed binaries adding slight change to binary name.
+      Typically this is easy to spot and add to whitelist
+    - PsExec installed via Windows Store doesn't contain original filename field (False
+      negative)
+    level: medium
+    references:
+    - https://mgreen27.github.io/posts/2019/05/12/BinaryRename.html
+    - https://mgreen27.github.io/posts/2019/05/29/BinaryRename2.html
+    tags:
+    - attack.defense_evasion
+    - attack.t1036.003
+  name: Potential Defense Evasion Via Binary Rename
+

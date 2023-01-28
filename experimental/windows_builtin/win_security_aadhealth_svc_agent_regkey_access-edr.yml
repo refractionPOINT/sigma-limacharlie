@@ -1,0 +1,78 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/EVENT/System/EventID
+          value: '4656'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/System/EventID
+          value: '4663'
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/ObjectType
+        value: Key
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/ObjectName
+        value: \REGISTRY\MACHINE\SOFTWARE\Microsoft\ADHealthAgent
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ProcessName
+        value: Microsoft.Identity.Health.Adfs.DiagnosticsAgent.exe
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ProcessName
+        value: Microsoft.Identity.Health.Adfs.InsightsService.exe
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ProcessName
+        value: Microsoft.Identity.Health.Adfs.MonitoringAgent.Startup.exe
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ProcessName
+        value: Microsoft.Identity.Health.Adfs.PshSurrogate.exe
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ProcessName
+        value: Microsoft.Identity.Health.Common.Clients.ResourceMonitor.exe
+respond:
+- action: report
+  metadata:
+    author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research), MSTIC
+    description: 'This detection uses Windows security events to detect suspicious
+      access attempts to the registry key values and sub-keys of Azure AD Health service
+      agents (e.g AD FS).
+
+      Information from AD Health service agents can be used to potentially abuse some
+      of the features provided by those services in the cloud (e.g. Federation).
+
+      This detection requires an access control entry (ACE) on the system access control
+      list (SACL) of the following securable object: HKLM:\SOFTWARE\Microsoft\ADHealthAgent.
+
+      Make sure you set the SACL to propagate to its sub-keys.
+
+      '
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://o365blog.com/post/hybridhealthagent/
+    - https://github.com/OTRF/Set-AuditRule/blob/c3dec5443414231714d850565d364ca73475ade5/rules/registry/aad_connect_health_service_agent.yml
+    tags:
+    - attack.discovery
+    - attack.t1012
+  name: Azure AD Health Service Agents Registry Keys Access
+

@@ -1,0 +1,44 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/EventData/Provider_Name
+    value: Service Control Manager
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '7045'
+  - op: or
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/EventData/ServiceName
+      value: srservice
+    - case sensitive: false
+      op: is
+      path: Event/EventData/ServiceName
+      value: ipvpn
+    - case sensitive: false
+      op: is
+      path: Event/EventData/ServiceName
+      value: hkmsvc
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: This method detects a service install of malicious services mentioned
+      in Carbon Paper - Turla report by ESET
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.welivesecurity.com/2017/03/30/carbon-paper-peering-turlas-second-stage-backdoor/
+    tags:
+    - attack.persistence
+    - attack.g0010
+    - attack.t1543.003
+  name: Turla Service Install
+

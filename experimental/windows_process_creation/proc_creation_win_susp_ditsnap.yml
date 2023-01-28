@@ -1,0 +1,34 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \ditsnap.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ditsnap.exe
+respond:
+- action: report
+  metadata:
+    author: Furkan Caliskan (@caliskanfurkan_)
+    description: Detects the use of Ditsnap tool. Seems to be a tool for ransomware
+      groups.
+    falsepositives:
+    - Legitimate admin usage
+    level: high
+    references:
+    - https://thedfirreport.com/2020/06/21/snatch-ransomware/
+    - https://github.com/yosqueoy/ditsnap
+    tags:
+    - attack.credential_access
+    - attack.t1003.003
+  name: DIT Snapshot Viewer Use
+

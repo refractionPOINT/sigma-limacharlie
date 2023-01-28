@@ -1,0 +1,38 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \python.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: adidnsdump
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: 'This tool enables enumeration and exporting of all DNS records in
+      the zone for recon purposes of internal networks Python 3 and python.exe must
+      be installed,
+
+      Usee to Query/modify DNS records for Active Directory integrated DNS via LDAP
+
+      '
+    falsepositives:
+    - Unknown
+    level: low
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1018/T1018.md#atomic-test-9---remote-system-discovery---adidnsdump
+    tags:
+    - attack.discovery
+    - attack.t1018
+  name: Suspicious Execution of Adidnsdump
+

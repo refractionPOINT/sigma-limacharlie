@@ -1,0 +1,142 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \\\\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: $
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - op: or
+          rules:
+          - op: or
+            rules:
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \robocopy.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \xcopy.exe
+          - op: or
+            rules:
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: robocopy.exe
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: XCOPY.EXE
+        - op: and
+          rules:
+          - op: or
+            rules:
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \cmd.exe
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: Cmd.Exe
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: copy
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - op: or
+            rules:
+            - case sensitive: false
+              op: contains
+              path: event/FILE_PATH
+              value: \powershell.exe
+            - case sensitive: false
+              op: contains
+              path: event/FILE_PATH
+              value: \pwsh.exe
+          - op: or
+            rules:
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: PowerShell.EXE
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: pwsh.dll
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: copy-item
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: copy
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: 'cpi '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' cp '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: move
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: move-item
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' mi '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' mv '
+respond:
+- action: report
+  metadata:
+    author: Florian Roth, oscd.community, Teymur Kheirkhabarov @HeirhabarovT, Zach
+      Stanford @svch0st, Nasreddine Bencherchali
+    description: Detects a suspicious copy command to or from an Admin share or remote
+    falsepositives:
+    - Administrative scripts
+    level: high
+    references:
+    - https://twitter.com/SBousseaden/status/1211636381086339073
+    - https://drive.google.com/file/d/1lKya3_mLnR3UQuCoiYruO3qgu052_iS_/view
+    - https://www.elastic.co/guide/en/security/current/remote-file-copy-to-a-hidden-share.html
+    - https://www.microsoft.com/en-us/security/blog/2022/10/18/defenders-beware-a-case-for-post-ransomware-investigations/
+    tags:
+    - attack.lateral_movement
+    - attack.collection
+    - attack.exfiltration
+    - attack.t1039
+    - attack.t1048
+    - attack.t1021.002
+  name: Copy from Admin Share
+

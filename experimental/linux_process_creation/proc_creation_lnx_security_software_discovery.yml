@@ -1,0 +1,69 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /grep
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /egrep
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: nessusd
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: td-agent
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: packetbeat
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: filebeat
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: auditbeat
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: osqueryd
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: cbagentd
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: falcond
+respond:
+- action: report
+  metadata:
+    author: Daniil Yugoslavskiy, oscd.community
+    description: Detects usage of system utilities (only grep and egrep for now) to
+      discover security software discovery
+    falsepositives:
+    - Legitimate activities
+    level: low
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1518.001/T1518.001.md
+    tags:
+    - attack.discovery
+    - attack.t1518.001
+  name: Security Software Discovery - Linux
+

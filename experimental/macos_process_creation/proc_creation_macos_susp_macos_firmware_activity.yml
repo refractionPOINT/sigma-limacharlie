@@ -1,0 +1,48 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is mac
+  - op: and
+    rules:
+    - case sensitive: true
+      op: is
+      path: event/FILE_PATH
+      value: /usr/sbin/firmwarepasswd
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: setpasswd
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: full
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: delete
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: check
+respond:
+- action: report
+  metadata:
+    author: Austin Songer @austinsonger
+    description: Detects when a user manipulates with Firmward Password on MacOS.
+      NOTE - this command has been disabled on silicon-based apple computers.
+    falsepositives:
+    - Legitimate administration activities
+    level: medium
+    references:
+    - https://github.com/usnistgov/macos_security/blob/932a51f3e819dd3e02ebfcf3ef433cfffafbe28b/rules/os/os_firmware_password_require.yaml
+    - https://www.manpagez.com/man/8/firmwarepasswd/
+    - https://support.apple.com/guide/security/firmware-password-protection-sec28382c9ca/web
+    tags:
+    - attack.impact
+  name: Suspicious MacOS Firmware Activity
+

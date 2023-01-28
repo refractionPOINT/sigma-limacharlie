@@ -1,0 +1,38 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: netsh
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: trace
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: start
+respond:
+- action: report
+  metadata:
+    author: Kutepov Anton, oscd.community
+    description: Detects capture a network trace via netsh.exe trace functionality
+    falsepositives:
+    - Legitimate administrator or user uses netsh.exe trace functionality for legitimate
+      reason
+    level: medium
+    references:
+    - https://blogs.msdn.microsoft.com/canberrapfe/2012/03/30/capture-a-network-trace-without-installing-anything-capture-a-network-trace-of-a-reboot/
+    tags:
+    - attack.discovery
+    - attack.credential_access
+    - attack.t1040
+  name: Capture a Network Trace with netsh.exe
+

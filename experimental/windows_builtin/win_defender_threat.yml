@@ -1,0 +1,36 @@
+detect:
+  log type: wel
+  op: or
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '1006'
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '1116'
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '1015'
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '1117'
+  target: log
+respond:
+- action: report
+  metadata:
+    author: "J\xE1n Tren\u010Dansk\xFD"
+    description: Detects all actions taken by Windows Defender malware detection engines
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-antivirus/troubleshoot-windows-defender-antivirus
+    tags:
+    - attack.execution
+    - attack.t1059
+  name: Windows Defender Threat Detected
+

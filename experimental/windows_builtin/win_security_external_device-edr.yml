@@ -1,0 +1,37 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '6416'
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/ClassName
+        value: DiskDrive
+    - case sensitive: false
+      op: is
+      path: event/EVENT/EventData/DeviceDescription
+      value: USB Mass Storage Device
+respond:
+- action: report
+  metadata:
+    author: Keith Wright
+    description: Detects external diskdrives or plugged in USB devices , EventID 6416
+      on windows 10 or later
+    falsepositives:
+    - Legitimate administrative activity
+    level: low
+    tags:
+    - attack.t1091
+    - attack.t1200
+    - attack.lateral_movement
+    - attack.initial_access
+  name: External Disk Drive Or USB Storage Device
+

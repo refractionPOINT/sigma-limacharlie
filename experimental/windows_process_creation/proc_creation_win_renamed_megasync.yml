@@ -1,0 +1,48 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \explorer.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: C:\Windows\Temp\meg.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: meg.exe
+      - case sensitive: false
+        not: true
+        op: ends with
+        path: event/FILE_PATH
+        value: \meg.exe
+respond:
+- action: report
+  metadata:
+    author: Sittikorn S
+    description: Detects the execution of a renamed meg.exe of MegaSync during incident
+      response engagements associated with ransomware families like Nefilim, Sodinokibi,
+      Pysa, and Conti.
+    falsepositives:
+    - Software that illegaly integrates MegaSync in a renamed form
+    - Administrators that have renamed MegaSync
+    level: high
+    references:
+    - https://redcanary.com/blog/rclone-mega-extortion/
+    tags:
+    - attack.defense_evasion
+    - attack.t1218
+  name: Renamed MegaSync
+

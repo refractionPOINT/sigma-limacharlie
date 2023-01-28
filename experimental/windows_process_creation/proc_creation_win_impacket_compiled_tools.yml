@@ -1,0 +1,170 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: \goldenPac
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: \karmaSMB
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: \kintercept
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: \ntlmrelayx
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: \rpcdump
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: \samrdump
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: \secretsdump
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: \smbexec
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: \smbrelayx
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: \wmiexec
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: \wmipersist
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \atexec_windows.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \dcomexec_windows.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \dpapi_windows.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \findDelegation_windows.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \GetADUsers_windows.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \GetNPUsers_windows.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \getPac_windows.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \getST_windows.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \getTGT_windows.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \GetUserSPNs_windows.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \ifmap_windows.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \mimikatz_windows.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \netview_windows.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \nmapAnswerMachine_windows.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \opdump_windows.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \psexec_windows.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \rdp_check_windows.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \sambaPipe_windows.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \smbclient_windows.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \smbserver_windows.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \sniffer_windows.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \sniff_windows.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \split_windows.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \ticketer_windows.exe
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects the execution of different compiled Windows binaries of the
+      impacket toolset (based on names or part of their names - could lead to false
+      positives)
+    falsepositives:
+    - Legitimate use of the impacket tools
+    level: high
+    references:
+    - https://github.com/ropnop/impacket_static_binaries/releases/tag/0.9.21-dev-binaries
+    tags:
+    - attack.execution
+    - attack.t1557.001
+  name: Impacket Tool Execution
+

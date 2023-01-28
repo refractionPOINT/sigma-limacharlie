@@ -1,0 +1,69 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \netsh.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: firewall
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: add
+    - not: true
+      op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \netsh.exe advfirewall firewall add rule name=Dropbox dir=in action=allow
+            "program=C:\Program Files (x86)\Dropbox\Client\Dropbox.exe" enable=yes
+            profile=Any
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \netsh.exe advfirewall firewall add rule name=Dropbox dir=in action=allow
+            "program=C:\Program Files\Dropbox\Client\Dropbox.exe" enable=yes profile=Any
+      - op: and
+        rules:
+        - case sensitive: false
+          op: starts with
+          path: event/PARENT/FILE_PATH
+          value: C:\Windows\Temp\asgard2-agent\
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \thor64.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: advfirewall firewall show rule name=all
+respond:
+- action: report
+  metadata:
+    author: Markus Neis, Sander Wiebing
+    description: Allow Incoming Connections by Port or Application on Windows Firewall
+    falsepositives:
+    - Legitimate administration
+    level: medium
+    references:
+    - https://attack.mitre.org/software/S0246/ (Lazarus HARDRAIN)
+    - https://www.operationblockbuster.com/wp-content/uploads/2016/02/Operation-Blockbuster-RAT-and-Staging-Report.pdf
+    tags:
+    - attack.defense_evasion
+    - attack.t1562.004
+  name: Netsh Port or Application Allowed
+

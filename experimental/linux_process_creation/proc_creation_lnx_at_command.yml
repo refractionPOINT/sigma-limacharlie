@@ -1,0 +1,38 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: or
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /at
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /atd
+respond:
+- action: report
+  metadata:
+    author: "\xD6mer G\xFCnal, oscd.community"
+    description: 'Detects the use of at/atd which are utilities that are used to schedule
+      tasks.
+
+      They are often abused by adversaries to maintain persistence or to perform task
+      scheduling for initial or recurring execution of malicious code
+
+      '
+    falsepositives:
+    - Legitimate administration activities
+    level: low
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1053.002/T1053.002.md
+    tags:
+    - attack.persistence
+    - attack.t1053.002
+  name: Scheduled Task/Job At
+

@@ -1,0 +1,32 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '4697'
+  - case sensitive: false
+    op: is
+    path: Event/EventData/ServiceName
+    value: HybridConnectionManager
+  - case sensitive: false
+    op: contains
+    path: Event/EventData/ServiceFileName
+    value: HybridConnectionManager
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)
+    description: Rule to detect the Hybrid Connection Manager service installation.
+    falsepositives:
+    - Legitimate use of Hybrid Connection Manager via Azure function apps.
+    level: high
+    references:
+    - https://twitter.com/Cyb3rWard0g/status/1381642789369286662
+    tags:
+    - attack.persistence
+    - attack.t1554
+  name: HybridConnectionManager Service Installation
+

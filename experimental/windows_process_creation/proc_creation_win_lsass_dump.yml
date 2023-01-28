@@ -1,0 +1,63 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: lsass
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .dmp
+      - case sensitive: false
+        not: true
+        op: ends with
+        path: event/FILE_PATH
+        value: \werfault.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: \procdump
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: .exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: lsass
+respond:
+- action: report
+  metadata:
+    author: E.M. Anhaus (originally from Atomic Blue Detections, Tony Lambert), oscd.community
+    description: 'Detect creation of dump files containing the memory space of lsass.exe,
+      which contains sensitive credentials.
+
+      Identifies usage of Sysinternals procdump.exe to export the memory space of
+      lsass.exe which contains sensitive credentials.
+
+      '
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://eqllib.readthedocs.io/en/latest/analytics/1e1ef6be-12fc-11e9-8d76-4d6bb837cda4.html
+    - https://eqllib.readthedocs.io/en/latest/analytics/210b4ea4-12fc-11e9-8d76-4d6bb837cda4.html
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1003/T1003.md
+    tags:
+    - attack.credential_access
+    - attack.t1003.001
+  name: LSASS Memory Dumping
+

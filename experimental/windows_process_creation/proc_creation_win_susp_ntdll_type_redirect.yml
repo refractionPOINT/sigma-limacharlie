@@ -1,0 +1,40 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: type %windir%\system32\ntdll.dll
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: type %systemroot%\system32\ntdll.dll
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: type c:\windows\system32\ntdll.dll
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: \\ntdll.dll > \\\\.\\pipe\\
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects command that type the content of ntdll.dll to a different
+      file or a pipe in order to evade AV / EDR detection
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.x86matthew.com/view_post?id=ntdll_pipe
+    tags:
+    - attack.defense_evasion
+  name: Suspicious Ntdll Pipe Redirection
+

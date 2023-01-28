@@ -1,0 +1,39 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/EventData/Provider_Name
+    value: Service Control Manager
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '7045'
+  - case sensitive: false
+    op: starts with
+    path: Event/EventData/ServiceName
+    value: ProcessHacker
+  - case sensitive: false
+    op: is
+    path: Event/EventData/AccountName
+    value: LocalSystem
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects a ProcessHacker tool that elevated privileges to a very high
+      level
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://twitter.com/1kwpeter/status/1397816101455765504
+    tags:
+    - attack.execution
+    - attack.privilege_escalation
+    - attack.t1543.003
+    - attack.t1569.002
+  name: ProcessHacker Privilege Elevation
+

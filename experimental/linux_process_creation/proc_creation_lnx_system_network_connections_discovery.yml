@@ -1,0 +1,57 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /who
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /w
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /last
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /lsof
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /netstat
+    - not: true
+      op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: /usr/bin/landscape-sysinfo
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /who
+respond:
+- action: report
+  metadata:
+    author: Daniil Yugoslavskiy, oscd.community
+    description: Detects usage of system utilities to discover system network connections
+    falsepositives:
+    - Legitimate activities
+    level: low
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1049/T1049.md
+    tags:
+    - attack.discovery
+    - attack.t1049
+  name: System Network Connections Discovery - Linux
+

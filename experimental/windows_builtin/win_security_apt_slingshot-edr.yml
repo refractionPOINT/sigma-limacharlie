@@ -1,0 +1,32 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '4701'
+    - case sensitive: false
+      op: is
+      path: event/EVENT/EventData/TaskName
+      value: \Microsoft\Windows\Defrag\ScheduledDefrag
+respond:
+- action: report
+  metadata:
+    author: Florian Roth, Bartlomiej Czyz (@bczyz1)
+    description: Detects the deactivation and disabling of the Scheduled defragmentation
+      task as seen by Slingshot APT group
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://securelist.com/apt-slingshot/84312/
+    tags:
+    - attack.persistence
+    - attack.t1053
+    - attack.s0111
+  name: Defrag Deactivation - Security
+

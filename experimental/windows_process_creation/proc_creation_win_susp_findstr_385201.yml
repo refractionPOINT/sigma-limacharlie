@@ -1,0 +1,33 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \findstr.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' 385201'
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Discovery of an installed Sysinternals Sysmon service using driver
+      altitude (even if the name is changed).
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1518.001/T1518.001.md#atomic-test-5---security-software-discovery---sysmon-service
+    tags:
+    - attack.discovery
+    - attack.t1518.001
+  name: Suspicious Findstr 385201 Execution
+

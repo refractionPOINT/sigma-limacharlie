@@ -1,0 +1,33 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is mac
+  - op: or
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/COMMAND_LINE
+      value: ' '
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: ' '
+respond:
+- action: report
+  metadata:
+    author: remotephone
+    description: Detects attempts to masquerade as legitimate files by adding a space
+      to the end of the filename.
+    falsepositives:
+    - Mistyped commands or legitimate binaries named to match the pattern
+    level: low
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1036.006/T1036.006.md
+    tags:
+    - attack.defense_evasion
+    - attack.t1036.006
+  name: Space After Filename - macOS
+

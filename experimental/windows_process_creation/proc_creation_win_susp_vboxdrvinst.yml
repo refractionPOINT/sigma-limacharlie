@@ -1,0 +1,46 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \VBoxDrvInst.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: driver
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: executeinf
+respond:
+- action: report
+  metadata:
+    author: Konstantin Grishchenko, oscd.community
+    description: 'Detect VBoxDrvInst.exe run with parameters allowing processing INF
+      file.
+
+      This allows to create values in the registry and install drivers.
+
+      For example one could use this technique to obtain persistence via modifying
+      one of Run or RunOnce registry keys
+
+      '
+    falsepositives:
+    - Legitimate use of VBoxDrvInst.exe utility by VirtualBox Guest Additions installation
+      process
+    level: medium
+    references:
+    - https://github.com/LOLBAS-Project/LOLBAS/blob/4db780e0f0b2e2bb8cb1fa13e09196da9b9f1834/yml/LOLUtilz/OtherBinaries/VBoxDrvInst.yml
+    - https://twitter.com/pabraeken/status/993497996179492864
+    tags:
+    - attack.defense_evasion
+    - attack.t1112
+  name: Suspicious VBoxDrvInst.exe Parameters
+

@@ -1,0 +1,51 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is mac
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: true
+        op: is
+        path: event/FILE_PATH
+        value: /usr/bin/security
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: find-certificate
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' export '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' dump-keychain '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' login-keychain '
+respond:
+- action: report
+  metadata:
+    author: Tim Ismilyaev, oscd.community, Florian Roth
+    description: Detects passwords dumps from Keychain
+    falsepositives:
+    - Legitimate administration activities
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1555.001/T1555.001.md
+    - https://gist.github.com/Capybara/6228955
+    tags:
+    - attack.credential_access
+    - attack.t1555.001
+  name: Credentials from Password Stores - Keychain
+

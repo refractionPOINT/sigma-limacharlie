@@ -1,0 +1,70 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is mac
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /dscl
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: create
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: UniqueID
+      - op: matches
+        path: event/COMMAND_LINE
+        re: ([0-9]|[1-9][0-9]|[1-4][0-9]{2})
+    - op: and
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /dscl
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: create
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: IsHidden
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'true'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'yes'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '1'
+respond:
+- action: report
+  metadata:
+    author: Daniil Yugoslavskiy, oscd.community
+    description: Detects creation of a hidden user account on macOS (UserID < 500)
+      or with IsHidden option
+    falsepositives:
+    - Legitimate administration activities
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1564.002/T1564.002.md
+    tags:
+    - attack.defense_evasion
+    - attack.t1564.002
+  name: Hidden User Creation
+

@@ -1,0 +1,52 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \w3wp.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: appcmd.exe add module
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' system.enterpriseservices.internal.publish'
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: gacutil
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /I'
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (rule), Microsoft (idea)
+    description: Detects a suspicious IIS module registration as described in Microsoft
+      threat report on IIS backdoors
+    falsepositives:
+    - Administrative activity
+    level: high
+    references:
+    - https://www.microsoft.com/security/blog/2022/07/26/malicious-iis-extensions-quietly-open-persistent-backdoors-into-servers/
+  name: Suspicious IIS Module Registration
+

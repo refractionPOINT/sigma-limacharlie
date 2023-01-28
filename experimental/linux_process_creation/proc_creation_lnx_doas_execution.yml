@@ -1,0 +1,28 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - case sensitive: true
+    op: ends with
+    path: event/FILE_PATH
+    value: /doas
+respond:
+- action: report
+  metadata:
+    author: Sittikorn S, Teoderick Contreras
+    description: Detects the doas tool execution in linux host platform. This utility
+      tool allow standard users to perform tasks as root, the same way sudo does.
+    falsepositives:
+    - Unlikely
+    level: low
+    references:
+    - https://research.splunk.com/endpoint/linux_doas_tool_execution/
+    - https://www.makeuseof.com/how-to-install-and-use-doas/
+    tags:
+    - attack.privilege_escalation
+    - attack.t1548
+  name: Linux Doas Tool Execution
+

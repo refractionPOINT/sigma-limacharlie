@@ -1,0 +1,47 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/EventData/Provider_Name
+      value: Microsoft-Windows-WindowsUpdateClient
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '16'
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '20'
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '24'
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '213'
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '217'
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Windows Update get some error Check if need a 0-days KB
+    falsepositives:
+    - Unknown
+    level: low
+    tags:
+    - attack.impact
+    - attack.resource_development
+    - attack.t1584
+  name: Windows Update Error
+

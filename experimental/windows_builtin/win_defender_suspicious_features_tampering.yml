@@ -1,0 +1,51 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '5007'
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/NewValue
+      value: '\Windows Defender\DisableAntiSpyware '
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/NewValue
+      value: '\Windows Defender\Scan\DisableRemovableDriveScanning '
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/NewValue
+      value: '\Windows Defender\Scan\DisableScanningMappedNetworkDrivesForFullScan '
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/NewValue
+      value: '\Windows Defender\SpyNet\DisableBlockAtFirstSeen '
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/NewValue
+      value: '\Real-Time Protection\SpyNetReporting '
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/NewValue
+      value: '\Real-Time Protection\SubmitSamplesConsent '
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali
+    description: Detects suspicious changes to the windows defender configuration
+    falsepositives:
+    - Administrator activity (must be investigated)
+    level: high
+    references:
+    - https://learn.microsoft.com/en-us/microsoft-365/security/defender-endpoint/troubleshoot-microsoft-defender-antivirus?view=o365-worldwide
+    - https://bidouillesecurity.com/disable-windows-defender-in-powershell/#DisableAntiSpyware
+    tags:
+    - attack.defense_evasion
+    - attack.t1562.001
+  name: Windows Defender Suspicious Configuration Changes
+

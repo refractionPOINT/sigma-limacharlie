@@ -1,0 +1,44 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' save '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: HKLM\sam
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: HKLM\system
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: HKLM\security
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Adversaries may attempt to extract credential material from the Security
+      Account Manager (SAM) database either through Windows Registry where the SAM
+      database is stored
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1003.002/T1003.002.md#atomic-test-1---registry-dump-of-sam-creds-and-secrets
+    tags:
+    - attack.credential_access
+    - attack.t1003.002
+  name: Registry Dump of SAM Creds and Secrets
+

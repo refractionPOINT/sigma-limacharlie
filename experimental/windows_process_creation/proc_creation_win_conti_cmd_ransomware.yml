@@ -1,0 +1,50 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: '-m '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: '-net '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: '-size '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: '-nomutex '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: -p \\\\
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: $
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Conti ransomware command line ioc
+    falsepositives:
+    - Unlikely
+    level: critical
+    references:
+    - https://news.sophos.com/en-us/2021/09/03/conti-affiliates-use-proxyshell-exchange-exploit-in-ransomware-attacks/
+    - https://twitter.com/VK_Intel/status/1447795359900704769?t=Xz7vaLTvaaCZ5kHoZa6gMw&s=19
+    tags:
+    - attack.impact
+    - attack.s0575
+    - attack.t1486
+  name: Conti Ransomware Execution
+

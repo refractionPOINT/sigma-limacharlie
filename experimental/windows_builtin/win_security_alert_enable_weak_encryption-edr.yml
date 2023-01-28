@@ -1,0 +1,245 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '4738'
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - op: and
+          rules:
+          - op: or
+            rules:
+            - case sensitive: false
+              op: matches
+              path: event/EVENT/EventData/NewUacValue
+              re: .*8...
+            - case sensitive: false
+              op: matches
+              path: event/EVENT/EventData/NewUacValue
+              re: .*9...
+            - case sensitive: false
+              op: matches
+              path: event/EVENT/EventData/NewUacValue
+              re: .*A...
+            - case sensitive: false
+              op: matches
+              path: event/EVENT/EventData/NewUacValue
+              re: .*B...
+            - case sensitive: false
+              op: matches
+              path: event/EVENT/EventData/NewUacValue
+              re: .*C...
+            - case sensitive: false
+              op: matches
+              path: event/EVENT/EventData/NewUacValue
+              re: .*D...
+            - case sensitive: false
+              op: matches
+              path: event/EVENT/EventData/NewUacValue
+              re: .*E...
+            - case sensitive: false
+              op: matches
+              path: event/EVENT/EventData/NewUacValue
+              re: .*F...
+          - not: true
+            op: or
+            rules:
+            - case sensitive: false
+              op: matches
+              path: event/EVENT/EventData/OldUacValue
+              re: .*8...
+            - case sensitive: false
+              op: matches
+              path: event/EVENT/EventData/OldUacValue
+              re: .*9...
+            - case sensitive: false
+              op: matches
+              path: event/EVENT/EventData/OldUacValue
+              re: .*A...
+            - case sensitive: false
+              op: matches
+              path: event/EVENT/EventData/OldUacValue
+              re: .*B...
+            - case sensitive: false
+              op: matches
+              path: event/EVENT/EventData/OldUacValue
+              re: .*C...
+            - case sensitive: false
+              op: matches
+              path: event/EVENT/EventData/OldUacValue
+              re: .*D...
+            - case sensitive: false
+              op: matches
+              path: event/EVENT/EventData/OldUacValue
+              re: .*E...
+            - case sensitive: false
+              op: matches
+              path: event/EVENT/EventData/OldUacValue
+              re: .*F...
+        - op: and
+          rules:
+          - op: or
+            rules:
+            - case sensitive: false
+              op: matches
+              path: event/EVENT/EventData/NewUacValue
+              re: .*1....
+            - case sensitive: false
+              op: matches
+              path: event/EVENT/EventData/NewUacValue
+              re: .*3....
+            - case sensitive: false
+              op: matches
+              path: event/EVENT/EventData/NewUacValue
+              re: .*5....
+            - case sensitive: false
+              op: matches
+              path: event/EVENT/EventData/NewUacValue
+              re: .*7....
+            - case sensitive: false
+              op: matches
+              path: event/EVENT/EventData/NewUacValue
+              re: .*9....
+            - case sensitive: false
+              op: matches
+              path: event/EVENT/EventData/NewUacValue
+              re: .*B....
+            - case sensitive: false
+              op: matches
+              path: event/EVENT/EventData/NewUacValue
+              re: .*D....
+            - case sensitive: false
+              op: matches
+              path: event/EVENT/EventData/NewUacValue
+              re: .*F....
+          - not: true
+            op: or
+            rules:
+            - case sensitive: false
+              op: matches
+              path: event/EVENT/EventData/OldUacValue
+              re: .*1....
+            - case sensitive: false
+              op: matches
+              path: event/EVENT/EventData/OldUacValue
+              re: .*3....
+            - case sensitive: false
+              op: matches
+              path: event/EVENT/EventData/OldUacValue
+              re: .*5....
+            - case sensitive: false
+              op: matches
+              path: event/EVENT/EventData/OldUacValue
+              re: .*7....
+            - case sensitive: false
+              op: matches
+              path: event/EVENT/EventData/OldUacValue
+              re: .*9....
+            - case sensitive: false
+              op: matches
+              path: event/EVENT/EventData/OldUacValue
+              re: .*B....
+            - case sensitive: false
+              op: matches
+              path: event/EVENT/EventData/OldUacValue
+              re: .*D....
+            - case sensitive: false
+              op: matches
+              path: event/EVENT/EventData/OldUacValue
+              re: .*F....
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: matches
+            path: event/EVENT/EventData/NewUacValue
+            re: .*8..
+          - case sensitive: false
+            op: matches
+            path: event/EVENT/EventData/NewUacValue
+            re: .*9..
+          - case sensitive: false
+            op: matches
+            path: event/EVENT/EventData/NewUacValue
+            re: .*A..
+          - case sensitive: false
+            op: matches
+            path: event/EVENT/EventData/NewUacValue
+            re: .*B..
+          - case sensitive: false
+            op: matches
+            path: event/EVENT/EventData/NewUacValue
+            re: .*C..
+          - case sensitive: false
+            op: matches
+            path: event/EVENT/EventData/NewUacValue
+            re: .*D..
+          - case sensitive: false
+            op: matches
+            path: event/EVENT/EventData/NewUacValue
+            re: .*E..
+          - case sensitive: false
+            op: matches
+            path: event/EVENT/EventData/NewUacValue
+            re: .*F..
+        - not: true
+          op: or
+          rules:
+          - case sensitive: false
+            op: matches
+            path: event/EVENT/EventData/OldUacValue
+            re: .*8..
+          - case sensitive: false
+            op: matches
+            path: event/EVENT/EventData/OldUacValue
+            re: .*9..
+          - case sensitive: false
+            op: matches
+            path: event/EVENT/EventData/OldUacValue
+            re: .*A..
+          - case sensitive: false
+            op: matches
+            path: event/EVENT/EventData/OldUacValue
+            re: .*B..
+          - case sensitive: false
+            op: matches
+            path: event/EVENT/EventData/OldUacValue
+            re: .*C..
+          - case sensitive: false
+            op: matches
+            path: event/EVENT/EventData/OldUacValue
+            re: .*D..
+          - case sensitive: false
+            op: matches
+            path: event/EVENT/EventData/OldUacValue
+            re: .*E..
+          - case sensitive: false
+            op: matches
+            path: event/EVENT/EventData/OldUacValue
+            re: .*F..
+respond:
+- action: report
+  metadata:
+    author: '@neu5ron'
+    description: Detects scenario where weak encryption is enabled for a user profile
+      which could be used for hash/password cracking.
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://adsecurity.org/?p=2053
+    - https://www.harmj0y.net/blog/activedirectory/roasting-as-reps/
+    tags:
+    - attack.defense_evasion
+    - attack.t1562.001
+  name: Weak Encryption Enabled and Kerberoast
+

@@ -1,0 +1,34 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: mklink
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: HarddiskVolumeShadowCopy
+respond:
+- action: report
+  metadata:
+    author: Teymur Kheirkhabarov, oscd.community
+    description: Shadow Copies storage symbolic link creation using operating systems
+      utilities
+    falsepositives:
+    - Legitimate administrator working with shadow copies, access for backup purposes
+    level: medium
+    references:
+    - https://www.slideshare.net/heirhabarov/hunting-for-credentials-dumping-in-windows-environment
+    tags:
+    - attack.credential_access
+    - attack.t1003.002
+    - attack.t1003.003
+  name: Shadow Copies Access via Symlink
+

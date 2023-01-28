@@ -1,0 +1,52 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: matches
+        path: event/COMMAND_LINE
+        re: .*cmd\.exe\ /Q\ /c\ .*\ 1>\ \\\\.*\\.*\\.*\ 2>\&1
+      - case sensitive: false
+        op: matches
+        path: event/COMMAND_LINE
+        re: .*cmd\.exe\ /C\ .*\ >\ \\\\.*\\.*\\.*\ 2>\&1
+      - case sensitive: false
+        op: matches
+        path: event/COMMAND_LINE
+        re: .*cmd\.exe\ /C\ .*\ >\ .*\\\\Temp\\.*\ 2>\&1
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: powershell.exe -exec bypass -noni -nop -w 1 -C "
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'powershell.exe -noni -nop -w 1 -enc '
+respond:
+- action: report
+  metadata:
+    author: Thomas Patzke
+    description: Detect various execution methods of the CrackMapExec pentesting framework
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://github.com/byt3bl33d3r/CrackMapExec
+    tags:
+    - attack.execution
+    - attack.t1047
+    - attack.t1053
+    - attack.t1059.003
+    - attack.t1059.001
+    - attack.s0106
+  name: CrackMapExec Command Execution
+

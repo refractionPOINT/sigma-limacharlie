@@ -1,0 +1,33 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \hh.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: .chm
+respond:
+- action: report
+  metadata:
+    author: E.M. Anhaus (originally from Atomic Blue Detections, Dan Beavin), oscd.community
+    description: Identifies usage of hh.exe executing recently modified .chm files.
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1218.001/T1218.001.md
+    - https://eqllib.readthedocs.io/en/latest/analytics/b25aa548-7937-11e9-8f5c-d46d6d62a49e.html
+    tags:
+    - attack.defense_evasion
+    - attack.t1218.001
+  name: HH.exe Execution
+

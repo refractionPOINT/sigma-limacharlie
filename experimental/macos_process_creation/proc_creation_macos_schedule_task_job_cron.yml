@@ -1,0 +1,36 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is mac
+  - op: and
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /crontab
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: /tmp/
+respond:
+- action: report
+  metadata:
+    author: Alejandro Ortuno, oscd.community
+    description: Detects abuse of the cron utility to perform task scheduling for
+      initial or recurring execution of malicious code. Detection will focus on crontab
+      jobs uploaded from the tmp folder.
+    falsepositives:
+    - Legitimate administration activities
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1053.003/T1053.003.md
+    tags:
+    - attack.execution
+    - attack.persistence
+    - attack.privilege_escalation
+    - attack.t1053.003
+  name: Scheduled Cron Task/Job - MacOs
+

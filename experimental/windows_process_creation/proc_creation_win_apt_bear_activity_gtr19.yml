@@ -1,0 +1,90 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \xcopy.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: XCOPY.EXE
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /S
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /E
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /C
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /Q
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /H
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \\\\
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \adexplorer.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: AdExp
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: -snapshot
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '""'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: c:\users\
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects Russian group activity as described in Global Threat Report
+      2019 by Crowdstrike
+    falsepositives:
+    - Unknown
+    level: critical
+    references:
+    - https://www.crowdstrike.com/resources/reports/2019-crowdstrike-global-threat-report/
+    tags:
+    - attack.credential_access
+    - attack.t1552.001
+    - attack.t1003.003
+  name: Judgement Panda Credential Access Activity
+

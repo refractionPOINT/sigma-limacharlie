@@ -1,0 +1,38 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: xyz123456.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: PurpleSharp
+    - case sensitive: false
+      op: is
+      path: event/ORIGINAL_FILE_NAME
+      value: PurpleSharp.exe
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects the execution of the PurpleSharp adversary simulation tool
+    falsepositives:
+    - Unlikely
+    level: critical
+    references:
+    - https://github.com/mvelazc0/PurpleSharp
+    tags:
+    - attack.t1587
+    - attack.resource_development
+  name: PurpleSharp Indicator
+

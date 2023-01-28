@@ -1,0 +1,70 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: reg.exe save hklm\sam %temp%\~reg_sam.save
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 1q2w3e4r@#$@#$@#$
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -hp1q2w3e4 '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '.dat data03 10000 -p '
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: process call create
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' > %temp%\~'
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'netstat -aon | find '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' > %temp%\~'
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: .255 10 C:\ProgramData\
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects different process creation events as described in various
+      threat reports on Lazarus group activity
+    falsepositives:
+    - Overlap with legitimate process activity in some cases (especially selection
+      3 and 4)
+    level: critical
+    references:
+    - https://securelist.com/lazarus-covets-covid-19-related-intelligence/99906/
+    - https://www.hvs-consulting.de/lazarus-report/
+    tags:
+    - attack.g0032
+    - attack.execution
+    - attack.t1059
+  name: Lazarus Activity Dec20
+

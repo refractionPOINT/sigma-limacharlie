@@ -1,0 +1,80 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \pwsh.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: PowerShell.EXE
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: pwsh.dll
+    - not: true
+      op: or
+      rules:
+      - op: or
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \explorer.exe
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \CompatTelRunner.exe
+        - case sensitive: false
+          op: is
+          path: event/PARENT/FILE_PATH
+          value: C:\$WINDOWS.~BT\Sources\SetupHost.exe
+      - op: and
+        rules:
+        - case sensitive: false
+          op: starts with
+          path: event/PARENT/FILE_PATH
+          value: C:\Users\
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \AppData\Local\Programs\Microsoft VS Code\Code.exe
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: ' --ms-enable-electron-run-as-node '
+respond:
+- action: report
+  metadata:
+    author: Roberto Rodriguez @Cyb3rWard0g (rule), oscd.community (improvements)
+    description: Detects non-interactive PowerShell activity by looking at powershell.exe
+      with a non user process such as "explorer.exe" as a parent.
+    falsepositives:
+    - Legitimate programs executing PowerShell scripts
+    level: low
+    references:
+    - https://threathunterplaybook.com/notebooks/windows/02_execution/WIN-190410151110.html
+    tags:
+    - attack.execution
+    - attack.t1059.001
+  name: Non Interactive PowerShell Process Spawned
+

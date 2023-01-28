@@ -1,0 +1,79 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \nltest.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: domain_trusts
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: all_trusts
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /trusted_domains
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /dclist
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \dsquery.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: trustedDomain
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \dsquery.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -filter
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: trustedDomain
+respond:
+- action: report
+  metadata:
+    author: E.M. Anhaus (originally from Atomic Blue Detections, Tony Lambert), oscd.community,
+      omkar72
+    description: Identifies execution of nltest.exe and dsquery.exe for domain trust
+      discovery. This technique is used by attackers to enumerate Active Directory
+      trusts.
+    falsepositives:
+    - Legitimate use of the utilities by legitimate user for legitimate reason
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1482/T1482.md
+    - https://eqllib.readthedocs.io/en/latest/analytics/03e231a6-74bc-467a-acb1-e5676b0fb55e.html
+    - https://thedfirreport.com/2020/10/18/ryuk-in-5-hours/
+    - https://redcanary.com/blog/how-one-hospital-thwarted-a-ryuk-ransomware-outbreak/
+    - https://www.harmj0y.net/blog/redteaming/a-guide-to-attacking-domain-trusts/
+    tags:
+    - attack.discovery
+    - attack.t1482
+  name: Domain Trust Discovery
+

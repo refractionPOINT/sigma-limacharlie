@@ -1,0 +1,89 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' --cpu-priority='
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: --donate-level=0
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' -o pool.'
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' --nicehash'
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' --algo=rx/0 '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: stratum+tcp://
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: stratum+udp://
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: sh -c /sbin/modprobe msr allow_writes=on
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: LS1kb25hdGUtbGV2ZWw9
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: 0tZG9uYXRlLWxldmVsP
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: tLWRvbmF0ZS1sZXZlbD
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: c3RyYXR1bSt0Y3A6Ly
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: N0cmF0dW0rdGNwOi8v
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: zdHJhdHVtK3RjcDovL
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: c3RyYXR1bSt1ZHA6Ly
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: N0cmF0dW0rdWRwOi8v
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: zdHJhdHVtK3VkcDovL
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects command line parameters or strings often used by crypto miners
+    falsepositives:
+    - Legitimate use of crypto miners
+    level: high
+    references:
+    - https://www.poolwatch.io/coin/monero
+  name: Linux Crypto Mining Indicators
+

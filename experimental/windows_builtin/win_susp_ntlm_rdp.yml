@@ -1,0 +1,31 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '8001'
+  - case sensitive: false
+    op: starts with
+    path: Event/EventData/TargetName
+    value: TERMSRV
+  target: log
+respond:
+- action: report
+  metadata:
+    author: James Pemberton
+    description: Detects logons using NTLM to hosts that are potentially not part
+      of the domain.
+    falsepositives:
+    - Host connections to valid domains, exclude these.
+    - Host connections not using host FQDN.
+    - Host connections to external legitimate domains.
+    level: medium
+    references:
+    - n/a
+    tags:
+    - attack.command_and_control
+    - attack.t1219
+  name: Potential Remote Desktop Connection to Non-Domain Host
+

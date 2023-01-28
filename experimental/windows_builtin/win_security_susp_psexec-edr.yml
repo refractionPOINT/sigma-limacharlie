@@ -1,0 +1,53 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '5145'
+      - case sensitive: false
+        op: matches
+        path: event/EVENT/EventData/ShareName
+        re: \\\\\*\\\\IPC\$
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/EVENT/EventData/RelativeTargetName
+          value: -stdin
+        - case sensitive: false
+          op: ends with
+          path: event/EVENT/EventData/RelativeTargetName
+          value: -stdout
+        - case sensitive: false
+          op: ends with
+          path: event/EVENT/EventData/RelativeTargetName
+          value: -stderr
+    - case sensitive: false
+      not: true
+      op: starts with
+      path: event/EVENT/EventData/RelativeTargetName
+      value: PSEXESVC
+respond:
+- action: report
+  metadata:
+    author: Samir Bousseaden
+    description: detects execution of psexec or paexec with renamed service name,
+      this rule helps to filter out the noise if psexec is used for legit purposes
+      or if attacker uses a different psexec client other than sysinternal one
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://blog.menasec.net/2019/02/threat-hunting-3-detecting-psexec.html
+    tags:
+    - attack.lateral_movement
+    - attack.t1021.002
+  name: Suspicious PsExec Execution
+

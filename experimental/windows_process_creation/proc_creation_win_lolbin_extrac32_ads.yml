@@ -1,0 +1,35 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: extrac32.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: .cab
+    - op: matches
+      path: event/COMMAND_LINE
+      re: :[^\\]
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Extract data from cab file and hide it in an alternate data stream
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://lolbas-project.github.io/lolbas/Binaries/Extrac32/
+    tags:
+    - attack.defense_evasion
+    - attack.t1564.004
+  name: Suspicious Extrac32 Alternate Data Stream Execution
+

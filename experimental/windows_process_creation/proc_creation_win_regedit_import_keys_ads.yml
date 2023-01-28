@@ -1,0 +1,72 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \regedit.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /i '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .reg
+      - op: matches
+        path: event/COMMAND_LINE
+        re: :[^ \\]
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /e '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /a '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /c '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -e '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -a '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -c '
+respond:
+- action: report
+  metadata:
+    author: Oddvar Moe, Sander Wiebing, oscd.community
+    description: Detects the import of a alternate datastream to the registry with
+      regedit.exe.
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://lolbas-project.github.io/lolbas/Binaries/Regedit/
+    - https://gist.github.com/api0cradle/cdd2d0d0ec9abb686f0e89306e277b8f
+    tags:
+    - attack.t1112
+    - attack.defense_evasion
+  name: Imports Registry Key From an ADS
+

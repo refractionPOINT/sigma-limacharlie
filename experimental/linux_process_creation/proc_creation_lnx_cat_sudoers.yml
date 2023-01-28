@@ -1,0 +1,51 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /cat
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: grep
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /head
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /tail
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /more
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' /etc/sudoers'
+respond:
+- action: report
+  metadata:
+    author: Florian Roth
+    description: Detects the execution of a cat /etc/sudoers to list all users that
+      have sudo rights
+    falsepositives:
+    - Legitimate administration activities
+    level: medium
+    references:
+    - https://github.com/sleventyeleven/linuxprivchecker/
+    tags:
+    - attack.reconnaissance
+    - attack.t1592.004
+  name: Cat Sudoers
+

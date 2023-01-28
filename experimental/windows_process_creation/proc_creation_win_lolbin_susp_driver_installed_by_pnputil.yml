@@ -1,0 +1,57 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -i
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /install
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -a
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /add-driver
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '.inf'
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \pnputil.exe
+respond:
+- action: report
+  metadata:
+    author: Hai Vaknin @LuxNoBulIshit, Avihay eldad  @aloneliassaf, Austin Songer
+      @austinsonger
+    description: Detects when a possible suspicious driver is being installed via
+      pnputil.exe lolbin
+    falsepositives:
+    - Pnputil.exe being used may be performed by a system administrator.
+    - Verify whether the user identity, user agent, and/or hostname should be making
+      changes in your environment.
+    - Pnputil.exe being executed from unfamiliar users should be investigated. If
+      known behavior is causing false positives, it can be exempted from the rule.
+    level: medium
+    references:
+    - https://docs.microsoft.com/en-us/windows-hardware/drivers/devtest/pnputil-command-syntax
+    - https://strontic.github.io/xcyclopedia/library/pnputil.exe-60EDC5E6BDBAEE441F2E3AEACD0340D2.html
+    tags:
+    - attack.persistence
+    - attack.t1547
+  name: Suspicious Driver Install by pnputil.exe
+
