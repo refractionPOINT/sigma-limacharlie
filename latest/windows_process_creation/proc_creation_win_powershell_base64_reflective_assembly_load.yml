@@ -72,5 +72,5 @@ respond:
     - attack.defense_evasion
     - attack.t1027
     - attack.t1620
-  name: Base64 Encoded Reflective Assembly Load
+  name: PowerShell Base64 Encoded Reflective Assembly Load
 

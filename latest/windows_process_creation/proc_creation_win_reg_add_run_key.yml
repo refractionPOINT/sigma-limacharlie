@@ -37,5 +37,5 @@ respond:
     tags:
     - attack.persistence
     - attack.t1547.001
-  name: Reg Add RUN Key
+  name: Potential Persistence Attempt Via Run Keys Using Reg.EXE
 

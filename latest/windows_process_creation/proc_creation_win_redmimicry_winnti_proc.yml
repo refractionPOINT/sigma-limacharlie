@@ -10,13 +10,13 @@ detect:
     - op: or
       rules:
       - case sensitive: false
-        op: contains
+        op: ends with
         path: event/FILE_PATH
-        value: rundll32.exe
+        value: \rundll32.exe
       - case sensitive: false
-        op: contains
+        op: ends with
         path: event/FILE_PATH
-        value: cmd.exe
+        value: \cmd.exe
     - op: or
       rules:
       - case sensitive: false
@@ -40,12 +40,12 @@ respond:
     - Unknown
     level: high
     references:
-    - https://redmimicry.com
+    - https://redmimicry.com/posts/redmimicry-winnti/
     tags:
     - attack.execution
     - attack.defense_evasion
     - attack.t1106
     - attack.t1059.003
     - attack.t1218.011
-  name: RedMimicry Winnti Playbook Execute
+  name: RedMimicry Winnti Playbook Execution
 
