@@ -7,6 +7,14 @@ detect:
   - op: is windows
   - op: or
     rules:
+    - case sensitive: false
+      op: contains
+      path: event/FILE_PATH
+      value: \purplesharp
+    - case sensitive: false
+      op: is
+      path: event/ORIGINAL_FILE_NAME
+      value: PurpleSharp.exe
     - op: or
       rules:
       - case sensitive: false
@@ -17,10 +25,6 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: PurpleSharp
-    - case sensitive: false
-      op: is
-      path: event/ORIGINAL_FILE_NAME
-      value: PurpleSharp.exe
 respond:
 - action: report
   metadata:
