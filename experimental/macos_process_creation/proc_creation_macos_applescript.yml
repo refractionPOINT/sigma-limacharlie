@@ -21,6 +21,10 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: .scpt
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .js
 respond:
 - action: report
   metadata:
