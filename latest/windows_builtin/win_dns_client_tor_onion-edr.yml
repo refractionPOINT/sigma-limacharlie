@@ -16,7 +16,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Nasreddine Bencherchali
+    author: Nasreddine Bencherchali (Nextron Systems)
     description: Detects DNS resolution of an .onion address related to Tor routing
       networks
     falsepositives:

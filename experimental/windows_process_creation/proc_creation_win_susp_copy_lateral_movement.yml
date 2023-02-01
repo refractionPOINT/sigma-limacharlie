@@ -120,8 +120,8 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth, oscd.community, Teymur Kheirkhabarov @HeirhabarovT, Zach
-      Stanford @svch0st, Nasreddine Bencherchali
+    author: Florian Roth (Nextron Systems), oscd.community, Teymur Kheirkhabarov @HeirhabarovT,
+      Zach Stanford @svch0st, Nasreddine Bencherchali
     description: Detects a suspicious copy command to or from an Admin share or remote
     falsepositives:
     - Administrative scripts

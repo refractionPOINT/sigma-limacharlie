@@ -12,7 +12,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Nasreddine Bencherchali
+    author: Nasreddine Bencherchali (Nextron Systems)
     description: Detects usage of the 'Get-Clipboard' cmdlet via CLI
     falsepositives:
     - Unknown

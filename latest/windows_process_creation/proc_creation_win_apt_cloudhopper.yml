@@ -42,7 +42,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects wmiexec vbs version execution by wscript or cscript
     falsepositives:
     - Unlikely

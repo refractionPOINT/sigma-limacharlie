@@ -37,7 +37,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects a JAVA process running with remote debugging allowing more
       than just localhost to connect
     falsepositives:

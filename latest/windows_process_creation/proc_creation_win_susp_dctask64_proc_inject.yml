@@ -19,7 +19,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects suspicious process injection using ZOHO's dctask64.exe
     falsepositives:
     - Unknown yet

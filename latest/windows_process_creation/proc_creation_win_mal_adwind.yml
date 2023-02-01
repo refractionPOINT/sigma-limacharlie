@@ -38,7 +38,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth, Tom Ueltschi, Jonhnathan Ribeiro, oscd.community
+    author: Florian Roth (Nextron Systems), Tom Ueltschi, Jonhnathan Ribeiro, oscd.community
     description: Detects javaw.exe in AppData folder as used by Adwind / JRAT
     level: high
     references:

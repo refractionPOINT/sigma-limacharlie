@@ -26,7 +26,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects command that type the content of ntdll.dll to a different
       file or a pipe in order to evade AV / EDR detection
     falsepositives:

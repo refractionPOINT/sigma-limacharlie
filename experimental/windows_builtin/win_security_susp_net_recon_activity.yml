@@ -38,8 +38,8 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth (rule), Jack Croock (method), Jonhnathan Ribeiro (improvements),
-      oscd.community
+    author: Florian Roth (Nextron Systems), Jack Croock (method), Jonhnathan Ribeiro
+      (improvements), oscd.community
     description: Detects activity as "net user administrator /domain" and "net group
       domain admins /domain"
     falsepositives:

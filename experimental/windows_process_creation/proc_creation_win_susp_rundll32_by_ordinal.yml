@@ -81,7 +81,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects suspicious calls of DLLs in rundll32.dll exports by ordinal
     falsepositives:
     - False positives depend on scripts and administrative tools used in the monitored

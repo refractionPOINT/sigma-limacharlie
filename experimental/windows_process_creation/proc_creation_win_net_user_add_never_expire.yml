@@ -32,7 +32,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Nasreddine Bencherchali
+    author: Nasreddine Bencherchali (Nextron Systems)
     description: Detects creation of local users via the net.exe command with the
       option "never expire"
     falsepositives:

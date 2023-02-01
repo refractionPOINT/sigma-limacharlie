@@ -14,7 +14,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Christian Burkard
+    author: Christian Burkard (Nextron Systems)
     description: Detects the Setting of Windows Defender Exclusions
     falsepositives:
     - Administrator actions

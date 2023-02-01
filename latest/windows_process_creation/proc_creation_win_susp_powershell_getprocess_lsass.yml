@@ -22,7 +22,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects a "Get-Process" cmdlet and it's aliases on lsass process,
       which is in almost all cases a sign of malicious activity
     falsepositives:

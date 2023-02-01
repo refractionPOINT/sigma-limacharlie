@@ -19,7 +19,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Christian Burkard
+    author: Christian Burkard (Nextron Systems)
     description: Detects the execution of Xwizard tool from the non-default directory
       which can be used to sideload a custom xwizards.dll
     falsepositives:

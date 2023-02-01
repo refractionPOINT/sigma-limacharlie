@@ -24,7 +24,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects suspicious process related to rundll32 based on command line
       that includes a *.sys file as seen being used by UNC2452
     falsepositives:

@@ -63,7 +63,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth, Tim Shelton
+    author: Florian Roth (Nextron Systems), Tim Shelton
     description: Detects a suspicious DLL loading from AppData Local path as described
       in BlueMashroom report
     falsepositives:

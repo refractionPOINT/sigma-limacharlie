@@ -74,7 +74,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects Russian group activity as described in Global Threat Report
       2019 by Crowdstrike
     falsepositives:

@@ -82,7 +82,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: pH-T
+    author: pH-T (Nextron Systems)
     description: Detects suspicious base64 encoded and obbfuscated LOAD string often
       used for reflection.assembly load
     falsepositives:

@@ -58,7 +58,8 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth, Modexp, Nasreddine Bencherchali (update)
+    author: Florian Roth (Nextron Systems), Modexp, Nasreddine Bencherchali (Nextron
+      Systems)
     description: Detects process memory dump via comsvcs.dll and rundll32 using different
       techniques (ordinal, minidump function...etc)
     falsepositives:

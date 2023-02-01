@@ -28,7 +28,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects suspicious command line patterns used when rundll32 is used
       to run JavaScript code
     falsepositives:

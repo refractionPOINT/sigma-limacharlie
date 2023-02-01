@@ -48,7 +48,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects Judgement Panda activity as described in Global Threat Report
       2019 by Crowdstrike
     falsepositives:

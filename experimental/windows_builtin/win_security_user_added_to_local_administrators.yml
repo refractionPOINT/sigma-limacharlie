@@ -33,7 +33,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: This rule triggers on user accounts that are added to the local Administrators
       group, which could be legitimate activity or a sign of privilege escalation
       activity

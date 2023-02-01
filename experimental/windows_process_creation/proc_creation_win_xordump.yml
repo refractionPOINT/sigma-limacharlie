@@ -32,7 +32,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects suspicious use of XORDump process memory dumping utility
     falsepositives:
     - Another tool that uses the command line switches of XORdump

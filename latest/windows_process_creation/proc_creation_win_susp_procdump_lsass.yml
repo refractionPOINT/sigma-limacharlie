@@ -24,7 +24,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects suspicious uses of the SysInternals Procdump utility by using
       a special command line parameter in combination with the lsass.exe process.
       This way we're also able to catch cases in which the attacker has renamed the

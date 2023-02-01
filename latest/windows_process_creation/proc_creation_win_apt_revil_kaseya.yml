@@ -72,7 +72,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects process command line patterns and locations used by REvil
       group in Kaseya incident (can also match on other malware)
     falsepositives:

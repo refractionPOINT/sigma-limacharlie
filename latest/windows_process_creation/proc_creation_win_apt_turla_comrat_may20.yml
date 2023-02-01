@@ -34,7 +34,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects commands used by Turla group as reported by ESET in May 2020
     falsepositives:
     - Unknown

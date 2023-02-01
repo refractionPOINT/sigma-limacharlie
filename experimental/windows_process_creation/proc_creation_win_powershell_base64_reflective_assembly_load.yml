@@ -58,7 +58,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Christian Burkard, pH-T
+    author: Christian Burkard (Nextron Systems), pH-T (Nextron Systems)
     description: Detects base64 encoded .NET reflective loading of Assembly
     falsepositives:
     - Unlikely

@@ -25,7 +25,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects suspicious Rundll32 execution from control.exe as used by
       Equation Group and Exploit Kits
     falsepositives:

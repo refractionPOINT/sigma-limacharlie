@@ -18,7 +18,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects suspicious sysprep process start with AppData folder as target
       (as used by Trojan Syndicasec in Thrip report by Symantec)
     falsepositives:

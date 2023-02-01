@@ -22,7 +22,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects a ProcessHacker tool that elevated privileges to a very high
       level
     falsepositives:

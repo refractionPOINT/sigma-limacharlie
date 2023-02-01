@@ -240,7 +240,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects the execution of an executable that is typically used by
       PlugX for DLL side loading started from an uncommon location
     falsepositives:

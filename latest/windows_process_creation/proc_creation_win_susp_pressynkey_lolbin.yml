@@ -31,7 +31,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects a certain command line flag combination used by Microsoft.NodejsTools.PressAnyKey.exe
       that can be used to execute any other binary
     falsepositives:

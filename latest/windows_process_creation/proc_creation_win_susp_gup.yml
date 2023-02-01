@@ -43,7 +43,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects execution of the Notepad++ updater in a suspicious directory,
       which is often used in DLL side-loading attacks
     falsepositives:

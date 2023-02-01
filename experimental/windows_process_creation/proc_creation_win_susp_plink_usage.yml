@@ -40,7 +40,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Execution of plink to perform data exfiltration and tunneling
     falsepositives:
     - Administrative activity

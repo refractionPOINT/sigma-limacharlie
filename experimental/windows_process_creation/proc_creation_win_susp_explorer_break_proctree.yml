@@ -24,7 +24,8 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth, Nasreddine Bencherchali, @gott_cyber
+    author: Florian Roth (Nextron Systems), Nasreddine Bencherchali (Nextron Systems),
+      @gott_cyber
     description: 'Detects a command line process that uses explorer.exe to launch
       arbitrary commands or binaries,
 

@@ -66,7 +66,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth, wagga
+    author: Florian Roth (Nextron Systems), wagga
     description: Detects different loaders as described in various threat reports
       on Lazarus group activity
     falsepositives:

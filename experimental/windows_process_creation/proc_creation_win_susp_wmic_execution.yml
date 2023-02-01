@@ -76,7 +76,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Michael Haag, Florian Roth, juju4, oscd.community
+    author: Michael Haag, Florian Roth (Nextron Systems), juju4, oscd.community
     description: Detects WMIC executing suspicious or recon commands
     falsepositives:
     - If using Splunk, we recommend | stats count by Computer,CommandLine following

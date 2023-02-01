@@ -52,7 +52,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects different process creation events as described in various
       threat reports on Lazarus group activity
     falsepositives:

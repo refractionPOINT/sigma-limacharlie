@@ -18,7 +18,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth, KevTheHermit, fuzzyf10w
+    author: Florian Roth (Nextron Systems), KevTheHermit, fuzzyf10w
     description: Detect Attempt PrintNightmare (CVE-2021-1675) Remote code execution
       in Windows Spooler Service
     falsepositives:

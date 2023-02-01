@@ -30,7 +30,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects Golden Chickens deployment method as used by Evilnum in report
       published in July 2020
     falsepositives:

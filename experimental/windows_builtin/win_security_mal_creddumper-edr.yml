@@ -42,7 +42,8 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth, Teymur Kheirkhabarov, Daniil Yugoslavskiy, oscd.community
+    author: Florian Roth (Nextron Systems), Teymur Kheirkhabarov, Daniil Yugoslavskiy,
+      oscd.community
     description: Detects well-known credential dumping tools execution via service
       execution events
     falsepositives:

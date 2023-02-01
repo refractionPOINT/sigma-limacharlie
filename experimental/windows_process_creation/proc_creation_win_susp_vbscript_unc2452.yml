@@ -37,7 +37,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects suspicious inline VBScript keywords as used by UNC2452
     falsepositives:
     - Unknown

@@ -21,7 +21,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects the renaming of an existing computer account to a account
       name that doesn't contain a $ symbol as seen in attacks against CVE-2021-42287
     falsepositives:

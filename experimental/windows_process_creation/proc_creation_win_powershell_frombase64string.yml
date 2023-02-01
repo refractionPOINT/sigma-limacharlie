@@ -12,7 +12,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects usage of the "FromBase64String" function in the commandline
       which is used to decode a base64 encoded string
     falsepositives:

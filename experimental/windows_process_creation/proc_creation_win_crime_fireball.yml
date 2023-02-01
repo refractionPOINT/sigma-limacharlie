@@ -18,7 +18,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects Archer malware invocation via rundll32
     falsepositives:
     - Unknown

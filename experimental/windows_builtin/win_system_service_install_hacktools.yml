@@ -58,7 +58,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects PsExec service installation and execution events (service
       and Sysmon)
     falsepositives:

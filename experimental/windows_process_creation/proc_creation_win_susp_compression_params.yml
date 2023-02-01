@@ -57,7 +57,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth, Samir Bousseaden
+    author: Florian Roth (Nextron Systems), Samir Bousseaden
     description: Detects suspicious command line arguments of common data compression
       tools
     falsepositives:

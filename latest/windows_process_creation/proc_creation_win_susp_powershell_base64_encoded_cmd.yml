@@ -101,8 +101,8 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth, Markus Neis, Jonhnathan Ribeiro, Daniil Yugoslavskiy, Anton
-      Kutepov, oscd.community
+    author: Florian Roth (Nextron Systems), Markus Neis, Jonhnathan Ribeiro, Daniil
+      Yugoslavskiy, Anton Kutepov, oscd.community
     description: Detects suspicious powershell process starts with base64 encoded
       commands (e.g. Emotet)
     level: high

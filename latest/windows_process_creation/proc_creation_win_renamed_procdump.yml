@@ -49,7 +49,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects the execution of a renamed ProcDump executable often used
       by attackers or malware
     falsepositives:

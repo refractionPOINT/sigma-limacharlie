@@ -26,7 +26,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth, Jonhnathan Ribeiro, oscd.community
+    author: Florian Roth (Nextron Systems), Jonhnathan Ribeiro, oscd.community
     description: Detects a suspicious command line execution that includes an URL
       and AppData string in the command line parameters as used by several droppers
       (js/vbs > powershell)

@@ -18,7 +18,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects WMIC executions in which a event consumer gets created in
       order to establish persistence
     falsepositives:

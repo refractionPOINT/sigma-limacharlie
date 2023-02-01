@@ -36,7 +36,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects the execution of a cat /etc/sudoers to list all users that
       have sudo rights
     falsepositives:

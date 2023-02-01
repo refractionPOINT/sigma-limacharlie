@@ -12,7 +12,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth, Nasreddine Bencherchali @nas_bench
+    author: Florian Roth (Nextron Systems), Nasreddine Bencherchali @nas_bench
     description: Detects the use of NirCmd tool for command execution as SYSTEM user
     falsepositives:
     - Legitimate use by administrators

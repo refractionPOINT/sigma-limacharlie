@@ -41,7 +41,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects a suspicious Microsoft desktopimgdownldr execution with parameters
       used to download files from the Internet
     falsepositives:

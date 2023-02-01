@@ -34,7 +34,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: pH-T, Harjot Singh, '@cyb3rjy0t'
+    author: pH-T (Nextron Systems), Harjot Singh, '@cyb3rjy0t'
     description: Detects UTF-8 and UTF-16 Base64 encoded powershell 'Invoke-' calls
     falsepositives:
     - Unlikely

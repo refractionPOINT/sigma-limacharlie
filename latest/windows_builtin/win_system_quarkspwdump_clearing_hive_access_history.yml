@@ -22,7 +22,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects QuarksPwDump clearing access history in hive
     falsepositives:
     - Unknown

@@ -24,7 +24,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects Elise backdoor acitivty as used by APT32
     falsepositives:
     - Unknown

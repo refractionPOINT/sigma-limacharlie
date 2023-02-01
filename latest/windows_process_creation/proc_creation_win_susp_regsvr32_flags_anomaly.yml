@@ -25,7 +25,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects a flag anomaly in which regsvr32.exe uses a /i flag without
       using a /n flag at the same time
     falsepositives:

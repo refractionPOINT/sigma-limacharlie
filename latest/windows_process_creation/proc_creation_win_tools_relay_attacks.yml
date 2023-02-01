@@ -121,7 +121,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects different hacktools used for relay attacks on Windows for
       privilege escalation
     falsepositives:

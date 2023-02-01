@@ -29,7 +29,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects execution of msiexec from an uncommon directory
     falsepositives:
     - Unknown

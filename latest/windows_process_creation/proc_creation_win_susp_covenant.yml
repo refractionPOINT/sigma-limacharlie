@@ -56,7 +56,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth, Jonhnathan Ribeiro, oscd.community
+    author: Florian Roth (Nextron Systems), Jonhnathan Ribeiro, oscd.community
     description: Detects suspicious command lines used in Covenant luanchers
     level: high
     references:

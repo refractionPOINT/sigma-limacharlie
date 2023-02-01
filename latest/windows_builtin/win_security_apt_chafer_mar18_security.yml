@@ -20,7 +20,8 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth, Markus Neis, Jonhnathan Ribeiro, Daniil Yugoslavskiy, oscd.community
+    author: Florian Roth (Nextron Systems), Markus Neis, Jonhnathan Ribeiro, Daniil
+      Yugoslavskiy, oscd.community
     description: Detects Chafer activity attributed to OilRig as reported in Nyotron
       report in March 2018
     falsepositives:

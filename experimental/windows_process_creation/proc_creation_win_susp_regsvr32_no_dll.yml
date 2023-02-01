@@ -53,7 +53,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects a regsvr.exe execution that doesn't contain a DLL in the
       command line
     falsepositives:

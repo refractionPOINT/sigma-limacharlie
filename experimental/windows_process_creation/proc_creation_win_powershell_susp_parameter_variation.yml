@@ -454,7 +454,8 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth (rule), Daniel Bohannon (idea), Roberto Rodriguez (Fix)
+    author: Florian Roth (Nextron Systems), Daniel Bohannon (idea), Roberto Rodriguez
+      (Fix)
     description: Detects suspicious PowerShell invocation with a parameter substring
     falsepositives:
     - Unknown

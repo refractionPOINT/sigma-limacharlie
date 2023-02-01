@@ -18,7 +18,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth, frack113
+    author: Florian Roth (Nextron Systems), frack113
     description: Detects activity mentioned in Operation Wocao report
     falsepositives:
     - Administrators that use checkadmin.exe tool to enumerate local administrators

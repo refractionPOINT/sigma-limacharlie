@@ -154,7 +154,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects the execution of different compiled Windows binaries of the
       impacket toolset (based on names or part of their names - could lead to false
       positives)

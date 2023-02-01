@@ -31,7 +31,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects the creation of scheduled tasks in user session
     falsepositives:
     - Administrative activity

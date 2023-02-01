@@ -28,7 +28,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Nasreddine Bencherchali
+    author: Nasreddine Bencherchali (Nextron Systems)
     description: Detects a program that invoked suspicious DNS queries known from
       Cobalt Strike beacons
     falsepositives:

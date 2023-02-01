@@ -20,7 +20,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects suspicious failed logins with different user accounts from
       a single source system
     falsepositives:

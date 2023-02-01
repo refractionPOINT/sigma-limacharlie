@@ -18,7 +18,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects command line parameters used by ADCSPwn, a tool to escalate
       privileges in an active directory network by coercing authenticate from machine
       accounts and relaying to the certificate service

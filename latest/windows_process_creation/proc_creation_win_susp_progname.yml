@@ -170,7 +170,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects suspicious patterns in program names or folders that are
       often found in malicious samples or hacktools
     falsepositives:

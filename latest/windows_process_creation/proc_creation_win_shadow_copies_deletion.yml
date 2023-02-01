@@ -128,8 +128,8 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth, Michael Haag, Teymur Kheirkhabarov, Daniil Yugoslavskiy,
-      oscd.community, Andreas Hunkeler (@Karneades)
+    author: Florian Roth (Nextron Systems), Michael Haag, Teymur Kheirkhabarov, Daniil
+      Yugoslavskiy, oscd.community, Andreas Hunkeler (@Karneades)
     description: Shadow Copies deletion using operating systems utilities
     falsepositives:
     - Legitimate Administrator deletes Shadow Copies using operating systems utilities

@@ -44,7 +44,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects specific process characteristics of Maze ransomware word
       document droppers
     falsepositives:

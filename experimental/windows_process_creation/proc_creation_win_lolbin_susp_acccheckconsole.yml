@@ -30,7 +30,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects suspicious LOLBIN AccCheckConsole execution with parameters
       as used to load an arbitrary DLL
     falsepositives:

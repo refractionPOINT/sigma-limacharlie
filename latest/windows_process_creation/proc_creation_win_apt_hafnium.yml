@@ -152,7 +152,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects activity observed by different researchers to be HAFNIUM
       group activity (or related) on Exchange servers
     falsepositives:

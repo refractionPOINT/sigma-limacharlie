@@ -19,7 +19,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects the execution of whoami that has been renamed to a different
       name to avoid detection
     falsepositives:

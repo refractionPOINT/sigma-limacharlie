@@ -214,7 +214,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth, Nasreddine Bencherchali
+    author: Florian Roth (Nextron Systems), Nasreddine Bencherchali
     description: Detects uninstallation or termination of security products using
       the WMIC utility
     falsepositives:

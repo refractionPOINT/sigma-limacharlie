@@ -304,8 +304,8 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Thomas Patzke, Florian Roth, Zach Stanford @svch0st, Tim Shelton, Nasreddine
-      Bencherchali (update)
+    author: Thomas Patzke, Florian Roth (Nextron Systems), Zach Stanford @svch0st,
+      Tim Shelton, Nasreddine Bencherchali (Nextron Systems)
     description: Detects web servers that spawn shell processes which could be the
       result of a successfully placed web shell or another attack
     falsepositives:

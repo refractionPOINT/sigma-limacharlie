@@ -56,7 +56,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth, oscd.community, Jonhnathan Ribeiro
+    author: Florian Roth (Nextron Systems), oscd.community, Jonhnathan Ribeiro
     description: Detects a Powershell process that contains download commands in its
       command line string
     falsepositives:

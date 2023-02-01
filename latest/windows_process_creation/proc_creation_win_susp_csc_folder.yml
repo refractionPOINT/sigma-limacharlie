@@ -51,7 +51,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects a suspicious execution of csc.exe, which uses a source in
       a suspicious folder (e.g. AppData)
     falsepositives:

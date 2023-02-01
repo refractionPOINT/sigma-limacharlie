@@ -120,7 +120,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth, Nasreddine Bencherchali
+    author: Florian Roth (Nextron Systems), Nasreddine Bencherchali
     description: Detects WMIC executing "process call create" with suspicious calls
       to processes such as "rundll32", "regsrv32"...etc
     falsepositives:

@@ -50,7 +50,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects actions that clear the local ShimCache and remove forensic
       evidence
     falsepositives:

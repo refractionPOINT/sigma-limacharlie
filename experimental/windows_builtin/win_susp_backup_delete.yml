@@ -14,7 +14,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth (rule), Tom U. @c_APT_ure (collection)
+    author: Florian Roth (Nextron Systems), Tom U. @c_APT_ure (collection)
     description: Detects backup catalog deletions
     falsepositives:
     - Unknown

@@ -24,7 +24,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth, Jonhnathan Ribeiro, oscd.community
+    author: Florian Roth (Nextron Systems), Jonhnathan Ribeiro, oscd.community
     description: Detects a code page switch in command line or batch scripts to a
       rare language
     falsepositives:

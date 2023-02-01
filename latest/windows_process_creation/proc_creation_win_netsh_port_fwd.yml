@@ -50,7 +50,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth, omkar72, oscd.community
+    author: Florian Roth (Nextron Systems), omkar72, oscd.community
     description: Detects netsh commands that configure a port forwarding (PortProxy)
     falsepositives:
     - Legitimate administration

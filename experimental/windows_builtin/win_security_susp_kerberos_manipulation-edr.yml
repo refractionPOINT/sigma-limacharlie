@@ -148,7 +148,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: This method triggers on rare Kerberos Failure Codes caused by manipulations
       of Kerberos messages
     falsepositives:

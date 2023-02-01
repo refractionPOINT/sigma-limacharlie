@@ -37,7 +37,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects the use of the Dinject PowerShell cradle based on the specific
       flags
     falsepositives:

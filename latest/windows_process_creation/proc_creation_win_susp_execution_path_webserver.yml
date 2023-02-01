@@ -45,7 +45,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects a suspicious program execution in a web service root folder
       (filter out false positives)
     falsepositives:

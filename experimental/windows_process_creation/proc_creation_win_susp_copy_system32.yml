@@ -72,8 +72,8 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth, Markus Neis, Tim Shelton (HAWK.IO), Nasreddine Bencherchali
-      (update)
+    author: Florian Roth (Nextron Systems), Markus Neis, Tim Shelton (HAWK.IO), Nasreddine
+      Bencherchali (Nextron Systems)
     description: 'Detects a suspicious copy operation that tries to copy a program
       from a system (System32 or SysWOW64) directory to another on disk.
 

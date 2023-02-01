@@ -16,7 +16,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Christian Burkard
+    author: Christian Burkard (Nextron Systems)
     description: Detects the creation of a local hidden user account which should
       not happen for event ID 4720.
     falsepositives:

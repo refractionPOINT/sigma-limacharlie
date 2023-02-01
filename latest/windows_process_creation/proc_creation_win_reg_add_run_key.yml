@@ -22,7 +22,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects suspicious command line reg.exe tool adding key to RUN key
       in Registry
     falsepositives:

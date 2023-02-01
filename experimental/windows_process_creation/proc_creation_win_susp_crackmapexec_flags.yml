@@ -136,7 +136,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: This rule detect common flag combinations used by CrackMapExec in
       order to detect its use even if the binary has been replaced.
     falsepositives:

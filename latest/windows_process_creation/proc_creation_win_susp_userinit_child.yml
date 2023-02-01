@@ -31,7 +31,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth (rule), Samir Bousseaden (idea)
+    author: Florian Roth (Nextron Systems), Samir Bousseaden (idea)
     description: Detects a suspicious child process of userinit
     falsepositives:
     - Administrative scripts

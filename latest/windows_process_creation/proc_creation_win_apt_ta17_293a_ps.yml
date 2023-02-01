@@ -12,7 +12,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects renamed SysInternals tool execution with a binary named ps.exe
       as used by Dragonfly APT group and documented in TA17-293A report
     falsepositives:

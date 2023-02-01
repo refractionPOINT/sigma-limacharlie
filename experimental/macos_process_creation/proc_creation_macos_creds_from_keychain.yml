@@ -36,7 +36,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Tim Ismilyaev, oscd.community, Florian Roth
+    author: Tim Ismilyaev, oscd.community, Florian Roth (Nextron Systems)
     description: Detects passwords dumps from Keychain
     falsepositives:
     - Legitimate administration activities

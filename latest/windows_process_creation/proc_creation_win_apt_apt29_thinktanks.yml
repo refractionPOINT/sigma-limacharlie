@@ -26,7 +26,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: This method detects a suspicious PowerShell command line combination
       as used by APT29 in a campaign against U.S. think tanks.
     falsepositives:

@@ -24,7 +24,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Beyu Denis, oscd.community, Nasreddine Bencherchali (update)
+    author: Beyu Denis, oscd.community, Nasreddine Bencherchali (Nextron Systems)
     description: Detects execution of of Dxcap.exe
     falsepositives:
     - Legitimate execution of dxcap.exe by legitimate user

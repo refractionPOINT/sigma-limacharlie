@@ -28,7 +28,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects a suspicious parent of csc.exe, which could by a sign of
       payload delivery
     falsepositives:

@@ -18,7 +18,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth, Samir Bousseaden
+    author: Florian Roth (Nextron Systems), Samir Bousseaden
     description: Detects a suspicious LSASS process process clone that could be a
       sign of process dumping activity
     falsepositives:

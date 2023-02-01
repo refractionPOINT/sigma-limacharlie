@@ -11,10 +11,16 @@ detect:
       op: ends with
       path: event/FILE_PATH
       value: /osascript
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: -e
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -e '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .scpt
 respond:
 - action: report
   metadata:
@@ -26,6 +32,7 @@ respond:
     level: medium
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1059.002/T1059.002.md
+    - https://redcanary.com/blog/applescript/
     tags:
     - attack.execution
     - attack.t1059.002

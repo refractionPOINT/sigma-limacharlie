@@ -12,7 +12,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects a suspicious RDP session redirect using tscon.exe
     falsepositives:
     - Unknown

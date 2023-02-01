@@ -40,7 +40,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth (rule), Microsoft (idea)
+    author: Florian Roth (Nextron Systems), Microsoft (idea)
     description: Detects a suspicious IIS module registration as described in Microsoft
       threat report on IIS backdoors
     falsepositives:

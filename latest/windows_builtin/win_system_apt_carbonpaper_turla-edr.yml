@@ -30,7 +30,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: This method detects a service install of malicious services mentioned
       in Carbon Paper - Turla report by ESET
     falsepositives:

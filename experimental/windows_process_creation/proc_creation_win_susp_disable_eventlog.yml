@@ -28,7 +28,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects command that is used to disable or delete Windows eventlog
       via logman Windows utility
     falsepositives:

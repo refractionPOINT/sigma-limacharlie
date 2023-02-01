@@ -18,7 +18,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects suspicious msiexec process starts with web addresses as parameter
     falsepositives:
     - False positives depend on scripts and administrative tools used in the monitored

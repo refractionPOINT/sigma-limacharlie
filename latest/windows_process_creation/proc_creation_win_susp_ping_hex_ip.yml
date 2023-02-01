@@ -18,7 +18,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects a ping command that uses a hex encoded IP address
     falsepositives:
     - Unlikely, because no sane admin pings IP addresses in a hexadecimal form

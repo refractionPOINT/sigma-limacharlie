@@ -48,7 +48,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: '@Kostastsale, @TheDFIRReport, slightly modified by pH-T'
+    author: '@Kostastsale, @TheDFIRReport, slightly modified by pH-T (Nextron Systems)'
     description: Detects the creation of a schtask that executes a base64 encoded
       payload stored in the Windows Registry using PowerShell.
     falsepositives:

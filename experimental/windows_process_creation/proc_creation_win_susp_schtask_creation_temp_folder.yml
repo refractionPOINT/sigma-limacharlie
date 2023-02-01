@@ -26,7 +26,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects the creation of scheduled tasks that involves a temporary
       folder and runs only once
     falsepositives:

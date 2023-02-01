@@ -40,7 +40,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth
+    author: Florian Roth (Nextron Systems)
     description: Detects command lines that indicate unwanted modifications to registry
       keys that disable important Internet Explorer security features
     falsepositives:

@@ -104,7 +104,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Victor Sergeev, oscd.community, Nasreddine Bencherchali (update)
+    author: Victor Sergeev, oscd.community, Nasreddine Bencherchali (Nextron Systems)
     description: Detects service path modification via the "sc" binary to a suspicious
       command or path
     falsepositives:

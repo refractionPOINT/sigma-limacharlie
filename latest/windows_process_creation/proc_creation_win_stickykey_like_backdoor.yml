@@ -44,7 +44,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth, @twjackomo, Jonhnathan Ribeiro, oscd.community
+    author: Florian Roth (Nextron Systems), @twjackomo, Jonhnathan Ribeiro, oscd.community
     description: Detects the usage and installation of a backdoor that uses an option
       to register a malicious debugger for built-in tools that are accessible in the
       login screen
