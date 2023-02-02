@@ -43,5 +43,5 @@ respond:
     tags:
     - attack.persistence
     - attack.t1136.001
-  name: Net.exe User Account Creation - Never Expire
+  name: New User Created Via Net.EXE With Never Expire Option
 

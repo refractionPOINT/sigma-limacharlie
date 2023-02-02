@@ -24,7 +24,7 @@ detect:
     - case sensitive: false
       op: matches
       path: event/COMMAND_LINE
-      re: .*\\\*\\.*\$.*
+      re: .*\ \\\\.*\\.*\$.*
 respond:
 - action: report
   metadata:
@@ -39,5 +39,5 @@ respond:
     tags:
     - attack.lateral_movement
     - attack.t1021.002
-  name: Mounted Windows Admin Shares with net.exe
+  name: Windows Admin Share Mounted Via Net.EXE
 

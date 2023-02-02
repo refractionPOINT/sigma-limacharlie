@@ -19,21 +19,25 @@ detect:
       op: or
       rules:
       - case sensitive: false
-        op: ends with
+        op: is
         path: event/EVENT/EventData/Application
-        value: \lsass.exe
+        value: C:\Windows\System32\lsass.exe
       - case sensitive: false
-        op: ends with
+        op: is
         path: event/EVENT/EventData/Application
-        value: \opera.exe
+        value: C:\Program Files\Google\Chrome\Application\chrome.exe
       - case sensitive: false
-        op: ends with
+        op: is
         path: event/EVENT/EventData/Application
-        value: \chrome.exe
+        value: C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
       - case sensitive: false
-        op: ends with
+        op: is
         path: event/EVENT/EventData/Application
-        value: \firefox.exe
+        value: C:\Program Files\Mozilla Firefox\firefox.exe
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/Application
+        value: C:\Program Files (x86)\Mozilla Firefox\firefox.exe
 respond:
 - action: report
   metadata:
@@ -41,7 +45,7 @@ respond:
     description: Detects suspicious outbound network activity via kerberos default
       port indicating possible lateral movement or first stage PrivEsc via delegation.
     falsepositives:
-    - Other browsers
+    - Web Browsers
     level: high
     references:
     - https://github.com/GhostPack/Rubeus

@@ -20,19 +20,24 @@ detect:
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
-      value: ' start '
+      value: ' use '
+    - case sensitive: false
+      op: matches
+      path: event/COMMAND_LINE
+      re: .*\ \\\\.*\\.*\$.*
 respond:
 - action: report
   metadata:
-    author: Timur Zinniatullin, Daniil Yugoslavskiy, oscd.community
-    description: Detects manual service execution (start) via system utilities.
+    author: oscd.community, Teymur Kheirkhabarov @HeirhabarovT, Zach Stanford @svch0st,
+      wagga
+    description: Detects when an admin share is mounted using net.exe
     falsepositives:
-    - Legitimate administrator or user executes a service for legitimate reasons.
-    level: low
+    - Administrators
+    level: medium
     references:
-    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1569.002/T1569.002.md
+    - https://drive.google.com/file/d/1lKya3_mLnR3UQuCoiYruO3qgu052_iS_/view
     tags:
-    - attack.execution
-    - attack.t1569.002
-  name: Service Execution
+    - attack.lateral_movement
+    - attack.t1021.002
+  name: Windows Admin Share Mounted Via Net.EXE
 

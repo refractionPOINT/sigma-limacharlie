@@ -32,8 +32,8 @@ respond:
 - action: report
   metadata:
     author: Endgame, JHasenbusch (ported for oscd.community)
-    description: Identifies attempts to enumerate hosts in a network using the built-in
-      Windows net.exe tool.
+    description: Detects attempts to enumerate file shares, printer shares and sessions
+      using "net.exe" with the "view" flag.
     falsepositives:
     - Legitimate use of net.exe utility by legitimate user
     level: low
@@ -43,5 +43,5 @@ respond:
     tags:
     - attack.discovery
     - attack.t1018
-  name: Windows Network Enumeration
+  name: Share And Session Enumeration Using Net.EXE
 

@@ -51,14 +51,26 @@ detect:
             value: ' cp '
       - op: or
         rules:
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \robocopy.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \xcopy.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \robocopy.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \xcopy.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: robocopy.exe
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: XCOPY.EXE
     - op: or
       rules:
       - case sensitive: false

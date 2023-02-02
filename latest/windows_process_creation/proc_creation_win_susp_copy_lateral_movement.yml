@@ -92,7 +92,7 @@ detect:
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
-            value: copy
+            value: 'copy '
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
@@ -104,7 +104,7 @@ detect:
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
-            value: move
+            value: 'move '
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE

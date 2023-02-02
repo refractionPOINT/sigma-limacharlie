@@ -29,7 +29,7 @@ respond:
 - action: report
   metadata:
     author: Endgame, JHasenbusch (adapted to Sigma for oscd.community)
-    description: Identifies creation of local users via the net.exe command.
+    description: Identifies the creation of local users via the net.exe command.
     falsepositives:
     - Legitimate user creation.
     - Better use event IDs for user creation rather than command line rules.
@@ -40,5 +40,5 @@ respond:
     tags:
     - attack.persistence
     - attack.t1136.001
-  name: Net.exe User Account Creation
+  name: New User Created Via Net.EXE
 
