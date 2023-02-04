@@ -37,6 +37,10 @@ detect:
         op: ends with
         path: event/PARENT/FILE_PATH
         value: \EQNEDT32.EXE
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \ONENOTE.EXE
     - op: or
       rules:
       - case sensitive: false
