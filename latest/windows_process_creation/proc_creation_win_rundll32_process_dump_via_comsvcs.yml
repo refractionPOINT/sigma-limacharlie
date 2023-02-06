@@ -1,0 +1,82 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \rundll32.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: RUNDLL32.EXE
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: rundll32
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: comsvcs
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: full
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '24 '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '#24'
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '#+24'
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: MiniDump
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: '#-4294967272'
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems), Modexp, Nasreddine Bencherchali (Nextron
+      Systems)
+    description: Detects a process memory dump via "comsvcs.dll" using rundll32, covering
+      multiple different techniques (ordinal, minidump function, etc.)
+    falsepositives:
+    - Unlikely, because no one should dump the process memory in that way
+    level: high
+    references:
+    - https://twitter.com/shantanukhande/status/1229348874298388484
+    - https://twitter.com/pythonresponder/status/1385064506049630211?s=21
+    - https://twitter.com/Hexacorn/status/1224848930795552769
+    - https://modexp.wordpress.com/2019/08/30/minidumpwritedump-via-com-services-dll/
+    - https://twitter.com/SBousseaden/status/1167417096374050817
+    - https://twitter.com/Wietze/status/1542107456507203586
+    tags:
+    - attack.defense_evasion
+    - attack.credential_access
+    - attack.t1036
+    - attack.t1003.001
+    - car.2013-05-009
+  name: Process Dumping Via Comsvcs.DLL
+

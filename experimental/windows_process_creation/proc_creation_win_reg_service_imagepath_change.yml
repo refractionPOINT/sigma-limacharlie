@@ -56,5 +56,5 @@ respond:
     tags:
     - attack.persistence
     - attack.t1574.011
-  name: Service ImagePath Change with Reg.exe
+  name: Changing Existing Service ImagePath Value Via Reg.EXE
 

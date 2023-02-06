@@ -73,7 +73,8 @@ respond:
     description: Detects Possible usage of Windows Subsystem for Linux (WSL) binary
       as a LOLBIN to execute arbitrary linux and windows commands
     falsepositives:
-    - Automation and orchestration scripts may use this method execute scripts etc
+    - Automation and orchestration scripts may use this method to execute scripts
+      etc.
     - Legitimate use by Windows to kill processes opened via WSL (example VsCode WSL
       server)
     level: medium

@@ -7,16 +7,22 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - op: and
+    - op: or
       rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \\\\
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: $
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: \\\\
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: $
+        value: \Sysvol\
     - op: or
       rules:
       - op: or

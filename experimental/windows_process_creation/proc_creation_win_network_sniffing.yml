@@ -59,7 +59,7 @@ respond:
 
       '
     falsepositives:
-    - Legitimate adminstration activity to troubleshoot network issues
+    - Legitimate administration activity to troubleshoot network issues
     level: medium
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1040/T1040.md

@@ -1,0 +1,44 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: '-u '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: '-p '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ^USER^
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ^PASS^
+respond:
+- action: report
+  metadata:
+    author: Vasiliy Burov
+    description: Detects command line parameters used by Hydra password guessing hack
+      tool
+    falsepositives:
+    - Software that uses the caret encased keywords PASS and USER in its command line
+    level: high
+    references:
+    - https://github.com/vanhauser-thc/thc-hydra
+    tags:
+    - attack.credential_access
+    - attack.t1110
+    - attack.t1110.001
+  name: HackTool - Hydra Password Bruteforce Execution
+

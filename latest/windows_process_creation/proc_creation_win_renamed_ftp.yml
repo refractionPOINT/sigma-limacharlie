@@ -32,5 +32,5 @@ respond:
     - attack.t1059
     - attack.defense_evasion
     - attack.t1202
-  name: Renamed FTP.EXE Binary Execution
+  name: Renamed FTP.EXE Execution
 
