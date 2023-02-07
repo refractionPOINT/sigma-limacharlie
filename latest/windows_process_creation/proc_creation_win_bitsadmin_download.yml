@@ -19,20 +19,10 @@ detect:
           op: is
           path: event/ORIGINAL_FILE_NAME
           value: bitsadmin.exe
-      - op: or
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: ' /create '
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: ' /addfile '
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: http
+        value: ' /transfer '
     - op: and
       rules:
       - op: or
@@ -45,10 +35,22 @@ detect:
           op: is
           path: event/ORIGINAL_FILE_NAME
           value: bitsadmin.exe
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ' /transfer '
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' /create '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' /addfile '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: http
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
