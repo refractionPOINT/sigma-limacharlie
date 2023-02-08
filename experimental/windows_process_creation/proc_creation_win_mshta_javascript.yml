@@ -7,10 +7,16 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - case sensitive: false
-      op: ends with
-      path: event/FILE_PATH
-      value: \mshta.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \mshta.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: MSHTA.EXE
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
@@ -19,7 +25,7 @@ respond:
 - action: report
   metadata:
     author: E.M. Anhaus (originally from Atomic Blue Detections, Endgame), oscd.community
-    description: Identifies suspicious mshta.exe commands.
+    description: Detects execution of javascript code using "mshta.exe".
     falsepositives:
     - Unknown
     level: high
@@ -29,5 +35,5 @@ respond:
     tags:
     - attack.defense_evasion
     - attack.t1218.005
-  name: Mshta JavaScript Execution
+  name: Suspicious JavaScript Execution Via Mshta.EXE
 

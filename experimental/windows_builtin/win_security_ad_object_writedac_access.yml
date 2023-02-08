@@ -34,7 +34,9 @@ respond:
     - Unknown
     level: critical
     references:
-    - https://threathunterplaybook.com/notebooks/windows/05_defense_evasion/WIN-190101151110.html
+    - https://threathunterplaybook.com/hunts/windows/180815-ADObjectAccessReplication/notebook.html
+    - https://threathunterplaybook.com/library/windows/active_directory_replication.html
+    - https://threathunterplaybook.com/hunts/windows/190101-ADModDirectoryReplication/notebook.html
     tags:
     - attack.defense_evasion
     - attack.t1222.001

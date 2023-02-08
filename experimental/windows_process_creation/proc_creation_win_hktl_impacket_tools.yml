@@ -166,5 +166,5 @@ respond:
     tags:
     - attack.execution
     - attack.t1557.001
-  name: Impacket Tool Execution
+  name: HackTool - Impacket Tools Execution
 

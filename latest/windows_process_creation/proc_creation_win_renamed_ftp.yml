@@ -20,8 +20,8 @@ respond:
 - action: report
   metadata:
     author: Victor Sergeev, oscd.community
-    description: Detects execution of renamed ftp.exe binary based on OriginalFileName
-      field
+    description: Detects the execution of a renamed "ftp.exe" binary based on the
+      PE metadata fields
     falsepositives:
     - Unknown
     level: medium

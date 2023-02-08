@@ -26,7 +26,7 @@ respond:
     - Legitimate usage of remote Powershell, e.g. for monitoring purposes.
     level: medium
     references:
-    - https://threathunterplaybook.com/notebooks/windows/02_execution/WIN-190511223310.html
+    - https://threathunterplaybook.com/hunts/windows/190511-RemotePwshExecution/notebook.html
     tags:
     - attack.execution
     - attack.t1059.001

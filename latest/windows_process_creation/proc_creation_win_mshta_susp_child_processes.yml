@@ -1,0 +1,115 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \mshta.exe
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \cmd.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \pwsh.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \wscript.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \cscript.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \sh.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \bash.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \reg.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \regsvr32.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \bitsadmin.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: Cmd.Exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: PowerShell.EXE
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: pwsh.dll
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: wscript.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: cscript.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: Bash.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: reg.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: REGSVR32.EXE
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: bitsadmin.exe
+respond:
+- action: report
+  metadata:
+    author: Michael Haag
+    description: Detects a suspicious process spawning from an "mshta.exe" process,
+      which could be indicative of a malicious HTA script execution
+    falsepositives:
+    - Printer software / driver installations
+    - HP software
+    level: high
+    references:
+    - https://www.trustedsec.com/july-2015/malicious-htas/
+    tags:
+    - attack.defense_evasion
+    - attack.t1218.005
+    - car.2013-02-003
+    - car.2013-03-001
+    - car.2014-04-003
+  name: Suspicious MSHTA Child Process
+

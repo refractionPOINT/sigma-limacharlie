@@ -58,7 +58,7 @@ respond:
 - action: report
   metadata:
     author: Bhabesh Raj
-    description: Adversaries can use the inbuilt expand utility to decompress cab
+    description: Adversaries can use the built-in expand utility to decompress cab
       files as seen in recent Iranian MeteorExpress attack
     falsepositives:
     - System administrator Usage
@@ -69,5 +69,5 @@ respond:
     tags:
     - attack.execution
     - attack.t1218
-  name: Cabinet File Expansion
+  name: Suspicious Cabinet File Expansion
 

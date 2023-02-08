@@ -19,8 +19,8 @@ respond:
 - action: report
   metadata:
     author: Markus Neis
-    description: Detects MSHTA.EXE spwaned by SVCHOST as seen in LethalHTA and described
-      in report
+    description: Detects potential LethalHTA technique where the "mshta.exe" is spwaned
+      by an "svchost.exe" process
     falsepositives:
     - Unknown
     level: high
@@ -29,5 +29,5 @@ respond:
     tags:
     - attack.defense_evasion
     - attack.t1218.005
-  name: MSHTA Spwaned by SVCHOST
+  name: Potential LethalHTA Technique Execution
 

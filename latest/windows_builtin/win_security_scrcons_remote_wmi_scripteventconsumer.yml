@@ -32,7 +32,7 @@ respond:
     - SCCM
     level: high
     references:
-    - https://threathunterplaybook.com/notebooks/windows/08_lateral_movement/WIN-200902020333.html
+    - https://threathunterplaybook.com/hunts/windows/200902-RemoteWMIActiveScriptEventConsumers/notebook.html
     tags:
     - attack.lateral_movement
     - attack.privilege_escalation

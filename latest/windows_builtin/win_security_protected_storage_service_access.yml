@@ -25,7 +25,7 @@ respond:
     - Unknown
     level: high
     references:
-    - https://threathunterplaybook.com/notebooks/windows/06_credential_access/WIN-190620024610.html
+    - https://threathunterplaybook.com/hunts/windows/190620-DomainDPAPIBackupKeyExtraction/notebook.html
     tags:
     - attack.lateral_movement
     - attack.t1021.002

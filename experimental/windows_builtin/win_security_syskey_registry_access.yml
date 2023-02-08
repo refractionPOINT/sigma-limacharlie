@@ -45,7 +45,7 @@ respond:
     - Unknown
     level: high
     references:
-    - https://threathunterplaybook.com/notebooks/windows/07_discovery/WIN-190625024610.html
+    - https://threathunterplaybook.com/hunts/windows/190625-RegKeyAccessSyskey/notebook.html
     tags:
     - attack.discovery
     - attack.t1012

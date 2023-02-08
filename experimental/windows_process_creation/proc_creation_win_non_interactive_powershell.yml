@@ -72,7 +72,7 @@ respond:
     - Legitimate programs executing PowerShell scripts
     level: low
     references:
-    - https://threathunterplaybook.com/notebooks/windows/02_execution/WIN-190410151110.html
+    - https://web.archive.org/web/20200925032237/https://threathunterplaybook.com/notebooks/windows/02_execution/WIN-190410151110.html
     tags:
     - attack.execution
     - attack.t1059.001
