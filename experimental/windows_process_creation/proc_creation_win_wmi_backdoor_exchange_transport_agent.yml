@@ -11,11 +11,24 @@ detect:
       op: ends with
       path: event/PARENT/FILE_PATH
       value: \EdgeTransport.exe
-    - case sensitive: false
-      not: true
-      op: is
-      path: event/FILE_PATH
-      value: C:\Windows\System32\conhost.exe
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/FILE_PATH
+        value: C:\Windows\System32\conhost.exe
+      - op: and
+        rules:
+        - case sensitive: false
+          op: matches
+          path: event/FILE_PATH
+          re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Program\ Files\\Microsoft\\Exchange\
+            Server\\
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \Bin\OleConverter.exe
 respond:
 - action: report
   metadata:
