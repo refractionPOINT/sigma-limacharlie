@@ -19,8 +19,9 @@ respond:
 - action: report
   metadata:
     author: frack113
-    description: Discovery of an installed Sysinternals Sysmon service using driver
-      altitude (even if the name is changed).
+    description: Detects usage of "findstr" with the argument "385201". Which could
+      indicate potential discovery of an installed Sysinternals Sysmon service using
+      the default driver altitude (even if the name is changed).
     falsepositives:
     - Unknown
     level: high
@@ -29,5 +30,5 @@ respond:
     tags:
     - attack.discovery
     - attack.t1518.001
-  name: Suspicious Findstr 385201 Execution
+  name: Sysmon Discovery Via Default Driver Altitude Using Findstr.EXE
 
