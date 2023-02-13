@@ -12,9 +12,9 @@ detect:
       - op: or
         rules:
         - case sensitive: false
-          op: contains
+          op: ends with
           path: event/FILE_PATH
-          value: wuauclt
+          value: \wuauclt.exe
         - case sensitive: false
           op: is
           path: event/ORIGINAL_FILE_NAME
