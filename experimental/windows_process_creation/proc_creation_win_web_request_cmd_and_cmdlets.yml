@@ -53,7 +53,7 @@ respond:
     author: James Pemberton / @4A616D6573, Endgame, JHasenbusch, oscd.community, Austin
       Songer @austinsonger
     description: Detects the use of various web request commands with commandline
-      tools and Windows PowerShell cmdlets (including aliases) viq CommandLine
+      tools and Windows PowerShell cmdlets (including aliases) via CommandLine
     falsepositives:
     - Use of Get-Command and Get-Help modules to reference Invoke-WebRequest and Start-BitsTransfer.
     level: medium

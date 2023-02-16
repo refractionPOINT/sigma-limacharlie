@@ -14,14 +14,25 @@ detect:
     - not: true
       op: or
       rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/FILE_PATH
+          value: C:\Program Files\Avast Software\SecureLine VPN\tapinstall.exe
+        - case sensitive: false
+          op: is
+          path: event/FILE_PATH
+          value: C:\Program Files (x86)\Avast Software\SecureLine VPN\tapinstall.exe
       - case sensitive: false
-        op: is
+        op: matches
         path: event/FILE_PATH
-        value: C:\Program Files\Avast Software\SecureLine VPN\tapinstall.exe
+        re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Program\ Files\\OpenVPN\ Connect\\drivers\\tap\\
       - case sensitive: false
-        op: is
+        op: matches
         path: event/FILE_PATH
-        value: C:\Program Files (x86)\Avast Software\SecureLine VPN\tapinstall.exe
+        re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Program\ Files\ \(x86\)\\Proton\
+          Technologies\\ProtonVPNTap\\installer\\
 respond:
 - action: report
   metadata:

@@ -37,5 +37,5 @@ respond:
     tags:
     - attack.collection
     - attack.t1005
-  name: VeeamBackup Database Credentials Dump
+  name: VeeamBackup Database Credentials Dump Via Sqlcmd.EXE
 

@@ -1,0 +1,54 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \certutil.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: CertUtil.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'urlcache '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'verifyctl '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: http
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems), Jonhnathan Ribeiro, oscd.community, Nasreddine
+      Bencherchali (Nextron Systems)
+    description: Detects the execution of certutil with certain flags that allow the
+      utility to download files.
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/certutil
+    - https://forensicitguy.github.io/agenttesla-vba-certutil-download/
+    - https://news.sophos.com/en-us/2021/04/13/compromised-exchange-server-hosting-cryptojacker-targeting-other-exchange-servers/
+    - https://twitter.com/egre55/status/1087685529016193025
+    - https://lolbas-project.github.io/lolbas/Binaries/Certutil/
+    tags:
+    - attack.defense_evasion
+    - attack.t1027
+  name: Suspicious Download Via Certutil.EXE
+

@@ -1,0 +1,55 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \netsh.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: netsh.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' i'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' p'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: =3389
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' c'
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems), oscd.community
+    description: Detects the execution of netsh to configure a port forwarding of
+      port 3389 (RDP) rule
+    falsepositives:
+    - Legitimate administration activity
+    level: high
+    references:
+    - https://www.fireeye.com/blog/threat-research/2019/01/bypassing-network-restrictions-through-rdp-tunneling.html
+    tags:
+    - attack.lateral_movement
+    - attack.defense_evasion
+    - attack.command_and_control
+    - attack.t1090
+  name: RDP Port Forwarding Rule Added Via Netsh.EXE
+

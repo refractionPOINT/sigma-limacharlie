@@ -102,5 +102,5 @@ respond:
     tags:
     - attack.impact
     - attack.t1496
-  name: Windows Crypto Mining Indicators
+  name: Potential Crypto Mining Activity
 

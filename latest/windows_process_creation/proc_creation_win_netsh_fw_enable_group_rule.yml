@@ -7,46 +7,54 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - case sensitive: false
-      op: ends with
-      path: event/FILE_PATH
-      value: \netsh.exe
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: advfirewall
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: firewall
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: set
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: rule
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: group=
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: new
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: enable=Yes
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \netsh.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: netsh.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: advfirewall
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: firewall
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: set
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: rule
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: group=
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: new
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: enable=Yes
 respond:
 - action: report
   metadata:
     author: frack113
-    description: Adversaries may  modify system firewalls in order to bypass controls
+    description: Adversaries may modify system firewalls in order to bypass controls
       limiting network usage
     falsepositives:
-    - Legitimate administration
+    - Legitimate administration activity
     level: medium
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1562.004/T1562.004.md#atomic-test-3---allow-smb-and-rdp-on-microsoft-defender-firewall

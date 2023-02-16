@@ -29,5 +29,5 @@ respond:
     tags:
     - attack.command_and_control
     - attack.t1090.003
-  name: Tor Client or Tor Browser Use
+  name: Tor Client/Browser Execution
 

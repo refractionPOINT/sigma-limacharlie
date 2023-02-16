@@ -5,36 +5,24 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: or
+  - op: and
     rules:
-    - op: and
+    - op: or
       rules:
-      - op: or
-        rules:
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \bitsadmin.exe
-        - case sensitive: false
-          op: is
-          path: event/ORIGINAL_FILE_NAME
-          value: bitsadmin.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \bitsadmin.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: bitsadmin.exe
+    - op: or
+      rules:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
         value: ' /transfer '
-    - op: and
-      rules:
-      - op: or
-        rules:
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \bitsadmin.exe
-        - case sensitive: false
-          op: is
-          path: event/ORIGINAL_FILE_NAME
-          value: bitsadmin.exe
       - op: and
         rules:
         - op: or
@@ -51,10 +39,6 @@ detect:
           op: contains
           path: event/COMMAND_LINE
           value: http
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: copy bitsadmin.exe
 respond:
 - action: report
   metadata:
@@ -73,5 +57,5 @@ respond:
     - attack.t1197
     - attack.s0190
     - attack.t1036.003
-  name: Bitsadmin Download
+  name: File Download Via Bitsadmin
 

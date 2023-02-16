@@ -1,0 +1,237 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: wmic
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'product where '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: call
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: uninstall
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /nointeractive
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: wmic
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'caption like '
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: call delete
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: call terminate
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'process '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'where '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: delete
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '%carbon%'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '%cylance%'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '%endpoint%'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '%eset%'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '%malware%'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '%Sophos%'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '%symantec%'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Antivirus
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'AVG '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Carbon Black
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: CarbonBlack
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Cb Defense Sensor 64-bit
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Crowdstrike Sensor
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'Cylance '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Dell Threat Defense
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: DLP Endpoint
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Endpoint Detection
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Endpoint Protection
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Endpoint Security
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Endpoint Sensor
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ESET File Security
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: LogRhythm System Monitor Service
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Malwarebytes
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: McAfee Agent
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Microsoft Security Client
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Sophos Anti-Virus
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Sophos AutoUpdate
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Sophos Credential Store
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Sophos Management Console
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Sophos Management Database
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Sophos Management Server
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Sophos Remote Management System
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Sophos Update Manager
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Threat Protection
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: VirusScan
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Webroot SecureAnywhere
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Windows Defender
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems), Nasreddine Bencherchali (Nextron Systems)
+    description: Detects uninstallation or termination of security products using
+      the WMIC utility
+    falsepositives:
+    - Legitimate administration
+    level: high
+    references:
+    - https://twitter.com/cglyer/status/1355171195654709249
+    - https://thedfirreport.com/2021/10/18/icedid-to-xinglocker-ransomware-in-24-hours/
+    - https://www.mandiant.com/resources/unc2165-shifts-to-evade-sanctions
+    - https://research.nccgroup.com/2022/08/19/back-in-black-unlocking-a-lockbit-3-0-ransomware-attack/
+    - https://www.trendmicro.com/en_us/research/23/a/vice-society-ransomware-group-targets-manufacturing-companies.html
+    tags:
+    - attack.defense_evasion
+    - attack.t1562.001
+  name: Potential Tampering With Security Products Via WMIC
+
