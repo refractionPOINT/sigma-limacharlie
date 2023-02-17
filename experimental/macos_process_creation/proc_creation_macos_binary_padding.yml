@@ -16,24 +16,27 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: -s
+        value: -s +
     - op: and
       rules:
-      - op: and
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /dd
+      - op: or
         rules:
-        - case sensitive: true
-          op: ends with
-          path: event/FILE_PATH
-          value: /dd
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: if=
-      - case sensitive: false
-        not: true
-        op: contains
-        path: event/COMMAND_LINE
-        value: of=
+          value: if=/dev/zero
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: if=/dev/random
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: if=/dev/urandom
 respond:
 - action: report
   metadata:
@@ -46,6 +49,8 @@ respond:
     level: high
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1027.001/T1027.001.md
+    - https://linux.die.net/man/1/truncate
+    - https://linux.die.net/man/1/dd
     tags:
     - attack.defense_evasion
     - attack.t1027.001
