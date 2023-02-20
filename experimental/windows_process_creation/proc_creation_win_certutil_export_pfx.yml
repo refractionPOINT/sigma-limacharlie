@@ -43,5 +43,5 @@ respond:
     tags:
     - attack.defense_evasion
     - attack.t1027
-  name: Certificat Exported Via Certutil.EXE
+  name: Certificate Exported Via Certutil.EXE
 

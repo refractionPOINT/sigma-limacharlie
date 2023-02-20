@@ -29,5 +29,5 @@ respond:
     tags:
     - attack.execution
     - attack.t1218.011
-  name: APT29 2018 Phishing Campaing CommandLine Indicators
+  name: APT29 2018 Phishing Campaign CommandLine Indicators
 
