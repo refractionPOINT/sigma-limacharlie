@@ -12,21 +12,22 @@ detect:
       path: event/COMMAND_LINE
       value: cyzfc.dat,
     - case sensitive: false
-      op: ends with
+      op: contains
       path: event/COMMAND_LINE
       value: PointFunctionCall
 respond:
 - action: report
   metadata:
-    author: '@41thexplorer, Microsoft Defender ATP'
-    description: A sigma rule detecting an unidetefied attacker who used phishing
-      emails to target high profile orgs on November 2018. The Actor shares some TTPs
-      with YYTRIUM/APT29 campaign in 2016.
-    level: high
+    author: '@41thexplorer'
+    description: Detects indicators of APT 29 (Cozy Bear) phishing-campaign as reported
+      by mandiant
+    falsepositives:
+    - Unlikely
+    level: critical
     references:
     - https://twitter.com/DrunkBinary/status/1063075530180886529
     tags:
     - attack.execution
     - attack.t1218.011
-  name: Unidentified Attacker November 2018
+  name: APT29 2018 Phishing Campaing CommandLine Indicators
 

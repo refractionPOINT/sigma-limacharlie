@@ -5,16 +5,28 @@ detect:
   op: and
   rules:
   - op: is mac
-  - op: and
+  - op: or
     rules:
-    - case sensitive: true
-      op: ends with
-      path: event/FILE_PATH
-      value: /dscl
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: create
+    - op: and
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /dscl
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: create
+    - op: and
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /sysadminctl
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: addUser
 respond:
 - action: report
   metadata:
@@ -27,6 +39,7 @@ respond:
     level: low
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1136.001/T1136.001.md
+    - https://ss64.com/osx/sysadminctl.html
     tags:
     - attack.t1136.001
     - attack.persistence
