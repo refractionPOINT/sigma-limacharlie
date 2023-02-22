@@ -1,0 +1,47 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \nmap.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \zennmap.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: nmap.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: zennmap.exe
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Detects usage of namp/zenmap. Adversaries may attempt to get a listing
+      of services running on remote hosts, including those that may be vulnerable
+      to remote software exploitation
+    falsepositives:
+    - Network administrator computer
+    level: high
+    references:
+    - https://nmap.org/
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1046/T1046.md#atomic-test-3---port-scan-nmap-for-windows
+    tags:
+    - attack.discovery
+    - attack.t1046
+  name: PUA - Nmap/Zenmap Execution
+

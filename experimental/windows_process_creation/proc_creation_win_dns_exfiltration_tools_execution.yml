@@ -21,7 +21,7 @@ respond:
     author: Daniil Yugoslavskiy, oscd.community
     description: Well-known DNS Exfiltration tools execution
     falsepositives:
-    - "Legitimate usage of iodine or dnscat2 \u2014 DNS Exfiltration tools (unlikely)"
+    - Unlikely
     level: high
     tags:
     - attack.exfiltration
