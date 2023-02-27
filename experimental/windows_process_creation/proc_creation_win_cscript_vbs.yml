@@ -7,10 +7,28 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - case sensitive: false
-      op: ends with
-      path: event/FILE_PATH
-      value: \cscript.exe
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: cscript.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: wscript.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \cscript.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \wscript.exe
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
@@ -28,5 +46,5 @@ respond:
     tags:
     - attack.execution
     - attack.t1059.005
-  name: Cscript Visual Basic Script Execution
+  name: Visual Basic Script Execution
 
