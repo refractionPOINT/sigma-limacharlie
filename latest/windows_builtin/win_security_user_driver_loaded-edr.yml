@@ -9,10 +9,6 @@ detect:
       rules:
       - case sensitive: false
         op: is
-        path: event/EVENT/EventData/Provider_Name
-        value: Microsoft-Windows-Security-Auditing
-      - case sensitive: false
-        op: is
         path: event/EVENT/System/EventID
         value: '4673'
       - case sensitive: false

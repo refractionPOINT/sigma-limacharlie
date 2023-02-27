@@ -3,16 +3,10 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: and
-    rules:
-    - case sensitive: false
-      op: is
-      path: event/EVENT/EventData/Provider_Name
-      value: Microsoft-Windows-Security-Auditing
-    - case sensitive: false
-      op: is
-      path: event/EVENT/System/EventID
-      value: '4720'
+  - case sensitive: false
+    op: is
+    path: event/EVENT/System/EventID
+    value: '4720'
 respond:
 - action: report
   metadata:

@@ -4,16 +4,10 @@ detect:
   rules:
   - op: and
     rules:
-    - op: and
-      rules:
-      - case sensitive: false
-        op: is
-        path: Event/EventData/Provider_Name
-        value: Microsoft-Windows-Security-Auditing
-      - case sensitive: false
-        op: is
-        path: Event/System/EventID
-        value: '4732'
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '4732'
     - op: or
       rules:
       - case sensitive: false
