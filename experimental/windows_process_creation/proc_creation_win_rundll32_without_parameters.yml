@@ -5,10 +5,16 @@ detect:
   op: and
   rules:
   - op: is windows
-  - case sensitive: false
-    op: is
-    path: event/COMMAND_LINE
-    value: rundll32.exe
+  - op: or
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/COMMAND_LINE
+      value: rundll32.exe
+    - case sensitive: false
+      op: is
+      path: event/COMMAND_LINE
+      value: rundll32
 respond:
 - action: report
   metadata:
@@ -26,5 +32,5 @@ respond:
     - attack.t1570
     - attack.execution
     - attack.t1569.002
-  name: Rundll32 Without Parameters
+  name: Rundll32 Execution Without Parameters
 

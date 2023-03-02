@@ -67,5 +67,5 @@ respond:
     - attack.defense_evasion
     - attack.t1036
     - attack.t1003.001
-  name: Procdump Evasion
+  name: Potential Procdump Evasion
 

@@ -34,12 +34,12 @@ respond:
     - Another tool that uses the command line switches of Procdump
     level: high
     references:
-    - Internal Research
+    - https://learn.microsoft.com/en-us/sysinternals/downloads/procdump
     tags:
     - attack.defense_evasion
     - attack.t1036
     - attack.credential_access
     - attack.t1003.001
     - car.2013-05-009
-  name: Suspicious Use of Procdump on LSASS
+  name: Potential LSASS Process Dump Via Procdump
 

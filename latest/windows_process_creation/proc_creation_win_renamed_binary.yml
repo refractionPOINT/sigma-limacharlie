@@ -94,8 +94,6 @@ respond:
     falsepositives:
     - Custom applications use renamed binaries adding slight change to binary name.
       Typically this is easy to spot and add to whitelist
-    - PsExec installed via Windows Store doesn't contain original filename field (False
-      negative)
     level: medium
     references:
     - https://mgreen27.github.io/posts/2019/05/12/BinaryRename.html
