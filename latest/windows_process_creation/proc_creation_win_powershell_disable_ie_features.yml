@@ -1,0 +1,55 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -name IEHarden '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -value 0 '
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -name DEPOff '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -value 1 '
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -name DisableFirstRunCustomize '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -value 2 '
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects command lines that indicate unwanted modifications to registry
+      keys that disable important Internet Explorer security features
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://unit42.paloaltonetworks.com/operation-ke3chang-resurfaces-with-new-tidepool-malware/
+    tags:
+    - attack.defense_evasion
+    - attack.t1562.001
+  name: Disabled IE Security Features
+

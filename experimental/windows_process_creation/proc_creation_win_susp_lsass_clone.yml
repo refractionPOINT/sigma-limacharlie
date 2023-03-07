@@ -20,7 +20,7 @@ respond:
   metadata:
     author: Florian Roth (Nextron Systems), Samir Bousseaden
     description: Detects a suspicious LSASS process process clone that could be a
-      sign of process dumping activity
+      sign of credential dumping activity
     falsepositives:
     - Unknown
     level: critical
@@ -32,5 +32,5 @@ respond:
     - attack.credential_access
     - attack.t1003
     - attack.t1003.001
-  name: Suspicious LSASS Process Clone
+  name: Potential Credential Dumping Via LSASS Process Clone
 

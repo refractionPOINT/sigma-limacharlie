@@ -7,10 +7,16 @@ detect:
   - op: is windows
   - op: or
     rules:
-    - case sensitive: false
-      op: contains
-      path: event/FILE_PATH
-      value: \CVE-202
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: \CVE-202
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: \CVE202
     - op: or
       rules:
       - case sensitive: false

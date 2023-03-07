@@ -47,5 +47,5 @@ respond:
     tags:
     - attack.execution
     - attack.t1569.002
-  name: Services Started Via Net.EXE
+  name: Start Windows Service Via Net.EXE
 
