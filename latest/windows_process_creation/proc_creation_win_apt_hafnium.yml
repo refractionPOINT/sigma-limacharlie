@@ -29,34 +29,22 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: .aspx
-    - op: and
+    - op: or
       rules:
       - case sensitive: false
         op: contains
-        path: event/COMMAND_LINE
-        value: schtasks
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: VSPerfMon
-    - op: and
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: vssadmin list shadows
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: Temp\__output
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: '%TEMP%\execute.bat'
-    - case sensitive: false
-      op: ends with
-      path: event/FILE_PATH
-      value: Users\Public\opera\Opera_browser.exe
+        path: event/FILE_PATH
+        value: \ProgramData\VSPerfMon\
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: schtasks
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: VSPerfMon
     - op: and
       rules:
       - case sensitive: false
@@ -74,9 +62,53 @@ detect:
           path: event/PARENT/FILE_PATH
           value: \svchost.exe
     - case sensitive: false
-      op: contains
+      op: ends with
       path: event/FILE_PATH
-      value: \ProgramData\VSPerfMon\
+      value: Users\Public\opera\Opera_browser.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: vssadmin list shadows
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Temp\__output
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \makecab.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: inetpub\wwwroot\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .dmp.zip
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \makecab.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: Microsoft\Exchange Server\
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: compressionmemory
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .gif
     - op: and
       rules:
       - case sensitive: false
@@ -94,36 +126,6 @@ detect:
     - op: and
       rules:
       - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \makecab.exe
-      - op: or
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: Microsoft\Exchange Server\
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: inetpub\wwwroot
-    - op: or
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: \Temp\xx.bat
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: Windows\WwanSvcdcs
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: Windows\Temp\cw.exe
-    - op: and
-      rules:
-      - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
         value: \comsvcs.dll
@@ -134,21 +136,25 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: 'full '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: \inetpub\wwwroot
-    - op: and
+    - op: or
       rules:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: dsquery
+        value: Windows\Temp\xx.bat
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ' -uco '
+        value: Windows\WwanSvcdcs
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: \inetpub\wwwroot
+        value: Windows\Temp\cw.exe
 respond:
 - action: report
   metadata:
@@ -156,8 +162,8 @@ respond:
     description: Detects activity observed by different researchers to be HAFNIUM
       group activity (or related) on Exchange servers
     falsepositives:
-    - Unknown
-    level: high
+    - Unlikely
+    level: critical
     references:
     - https://blog.truesec.com/2021/03/07/exchange-zero-day-proxylogon-and-hafnium/
     - https://www.microsoft.com/security/blog/2021/03/02/hafnium-targeting-exchange-servers/
@@ -168,5 +174,5 @@ respond:
     - attack.persistence
     - attack.t1546
     - attack.t1053
-  name: Exchange Exploitation Activity
+  name: HAFNIUM Exchange Exploitation Activity
 

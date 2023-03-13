@@ -1,0 +1,83 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: vbscript:Close(Execute("CreateObject(
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: powershell
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -w 1 -exec Bypass
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \ProgramData\
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Win32_OperatingSystem
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Win32_NetworkAdapterConfiguration
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: root\SecurityCenter2
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '[System.Net.DNS]'
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '[Convert]::ToBase64String'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '[System.Text.Encoding]::UTF8.GetString]'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: GetResponse().GetResponseStream()
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '[System.Net.HttpWebRequest]::Create('
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-bxor '
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects potential Muddywater APT activity
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://www.mandiant.com/resources/blog/iranian-threat-group-updates-ttps-in-spear-phishing-campaign
+    tags:
+    - attack.defense_evasion
+    - attack.execution
+    - attack.g0069
+  name: Potential MuddyWater APT Activity
+

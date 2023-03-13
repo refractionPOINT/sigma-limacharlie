@@ -9,68 +9,28 @@ detect:
     rules:
     - op: and
       rules:
-      - op: or
-        rules:
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \xcopy.exe
-        - case sensitive: false
-          op: is
-          path: event/ORIGINAL_FILE_NAME
-          value: XCOPY.EXE
-      - op: and
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: /S
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: /E
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: /C
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: /Q
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: /H
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: \\\\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: xcopy /S /E /C /Q /H \\\\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \sysvol\
     - op: and
       rules:
-      - op: or
-        rules:
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \adexplorer.exe
-        - case sensitive: false
-          op: is
-          path: event/ORIGINAL_FILE_NAME
-          value: AdExp
-      - op: and
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: -snapshot
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: '""'
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: c:\users\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: adexplorer -snapshot "" c:\users\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \downloads\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .snp
 respond:
 - action: report
   metadata:
@@ -78,13 +38,13 @@ respond:
     description: Detects Russian group activity as described in Global Threat Report
       2019 by Crowdstrike
     falsepositives:
-    - Unknown
+    - Unlikely
     level: critical
     references:
-    - https://www.crowdstrike.com/resources/reports/2019-crowdstrike-global-threat-report/
+    - https://www.documentcloud.org/documents/5743766-Global-Threat-Report-2019.html
     tags:
     - attack.credential_access
     - attack.t1552.001
     - attack.t1003.003
-  name: Judgement Panda Credential Access Activity
+  name: Potential Russian APT Credential Theft Activity
 

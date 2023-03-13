@@ -22,7 +22,7 @@ detect:
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
-      value: e:vbscript
+      value: ' /e:vbscript'
 respond:
 - action: report
   metadata:
@@ -38,5 +38,5 @@ respond:
     - attack.persistence
     - attack.t1053
     - attack.t1053.005
-  name: Scheduled Task WScript VBScript
+  name: Potential ACTINIUM Persistence Activiy
 

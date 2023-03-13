@@ -7,34 +7,54 @@ detect:
   - op: is windows
   - op: or
     rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: :\ProgramData\adobe\Adobe.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: :\ProgramData\oracle\local.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \revshell.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \infopagesbackup\ncat.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: :\ProgramData\comms\comms.exe
     - op: and
       rules:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: bitsadmin
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /transfer
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: CSIDL_APPDATA
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: CSIDL_SYSTEM_DRIVE
-    - op: or
-      rules:
+        value: -ExecutionPolicy Bypass -File
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
         value: \msf.ps1
+    - op: and
+      rules:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: 8989 -e cmd.exe
+        value: infopagesbackup
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \ncat
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -e cmd.exe
+    - op: or
+      rules:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -59,52 +79,18 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: -noninteractive -executionpolicy bypass netstat -a
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: L3NlcnZlcj1
-    - op: or
-      rules:
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \adobe\Adobe.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \oracle\local.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \revshell.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: infopagesbackup\ncat.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: CSIDL_SYSTEM\cmd.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \programdata\oracle\java.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: CSIDL_COMMON_APPDATA\comms\comms.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \Programdata\VMware\Vmware.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: L3NlcnZlcj1
 respond:
 - action: report
   metadata:
     author: Florian Roth (Nextron Systems)
-    description: Detects tools and process executions as observed in a Greenbug campaign
-      in May 2020
+    description: Detects tools and process executions used by Greenbug in their May
+      2020 campaign as reported by Symantec
     falsepositives:
-    - Unknown
+    - Unlikely
     level: critical
     references:
     - https://symantec-enterprise-blogs.security.com/blogs/threat-intelligence/greenbug-espionage-telco-south-asia
@@ -116,5 +102,5 @@ respond:
     - attack.t1105
     - attack.defense_evasion
     - attack.t1036.005
-  name: Greenbug Campaign Indicators
+  name: Greenbug Espionage Group Indicators
 

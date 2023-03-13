@@ -1,0 +1,43 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '4698'
+  - op: or
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/EventData/TaskName
+      value: SC Scheduled Scan
+    - case sensitive: false
+      op: is
+      path: Event/EventData/TaskName
+      value: UpdatMachine
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems), Markus Neis, Jonhnathan Ribeiro, Daniil
+      Yugoslavskiy, oscd.community
+    description: Detects OilRig schedule task persistence as reported by Nyotron in
+      their March 2018 report
+    falsepositives:
+    - Unlikely
+    level: critical
+    references:
+    - https://web.archive.org/web/20180402134442/https://nyotron.com/wp-content/uploads/2018/03/Nyotron-OilRig-Malware-Report-March-2018C.pdf
+    tags:
+    - attack.persistence
+    - attack.g0049
+    - attack.t1053.005
+    - attack.s0111
+    - attack.t1543.003
+    - attack.defense_evasion
+    - attack.t1112
+    - attack.command_and_control
+    - attack.t1071.004
+  name: OilRig APT Schedule Task Persistence - Security
+

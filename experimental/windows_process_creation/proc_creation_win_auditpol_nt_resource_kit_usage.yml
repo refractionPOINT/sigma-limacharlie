@@ -48,7 +48,9 @@ respond:
 
       '
     falsepositives:
-    - Unknown
+    - The old auditpol utility isn't available by default on recent versions of Windows
+      as it was replaced by a newer version. The FP rate should be very low except
+      for tools that use a similar flag structure
     level: high
     references:
     - https://github.com/3CORESec/MAL-CL/tree/master/Descriptors/Windows%202000%20Resource%20Kit%20Tools/AuditPol

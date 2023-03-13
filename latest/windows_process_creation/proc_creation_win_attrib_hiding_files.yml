@@ -54,6 +54,9 @@ respond:
       cmd.exe and igfxCUIService.exe is the parent of the cmd.exe)
     - Msiexec.exe hiding desktop.ini
     level: low
+    references:
+    - https://unit42.paloaltonetworks.com/unit42-sure-ill-take-new-combojack-malware-alters-clipboards-steal-cryptocurrency/
+    - https://www.uptycs.com/blog/lolbins-are-no-laughing-matter
     tags:
     - attack.defense_evasion
     - attack.t1564.001

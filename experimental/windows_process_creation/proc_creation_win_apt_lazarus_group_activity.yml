@@ -7,12 +7,54 @@ detect:
   - op: is windows
   - op: or
     rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: reg.exe save hklm\sam %temp%\~reg_sam.save
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 1q2w3e4r@#$@#$@#$
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -hp1q2w3e4 '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '.dat data03 10000 -p '
     - op: and
       rules:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: 'cmd.exe /c '
+        value: 'netstat -aon | find '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ESTA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' > %temp%\~'
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .255 10 C:\ProgramData\IBM\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .DAT
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /c '
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -32,7 +74,7 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: 'rundll32.exe '
+        value: 'rundll32 '
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -67,17 +109,17 @@ respond:
 - action: report
   metadata:
     author: Florian Roth (Nextron Systems), wagga
-    description: Detects different loaders as described in various threat reports
-      on Lazarus group activity
+    description: Detects different process execution behaviors as described in various
+      threat reports on Lazarus group activity
     falsepositives:
-    - Unknown
+    - Unlikely
     level: critical
     references:
-    - https://www.hvs-consulting.de/lazarus-report/
     - https://securelist.com/lazarus-covets-covid-19-related-intelligence/99906/
+    - https://www.hvs-consulting.de/lazarus-report/
     tags:
     - attack.g0032
     - attack.execution
     - attack.t1059
-  name: Lazarus Loaders
+  name: Lazarus Group Activity
 

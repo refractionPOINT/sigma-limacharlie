@@ -31,8 +31,8 @@ respond:
 - action: report
   metadata:
     author: Florian Roth (Nextron Systems)
-    description: Detects Golden Chickens deployment method as used by Evilnum in report
-      published in July 2020
+    description: Detects Golden Chickens deployment method as used by Evilnum and
+      described in ESET July 2020 report
     falsepositives:
     - Unknown
     level: critical
@@ -42,5 +42,5 @@ respond:
     tags:
     - attack.defense_evasion
     - attack.t1218.011
-  name: EvilNum Golden Chickens Deployment via OCX Files
+  name: EvilNum APT Golden Chickens Deployment Via OCX Files
 

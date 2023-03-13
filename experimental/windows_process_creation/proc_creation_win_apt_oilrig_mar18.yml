@@ -12,27 +12,11 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: \Service.exe
-      - op: or
-        rules:
-        - case sensitive: false
-          op: ends with
-          path: event/COMMAND_LINE
-          value: i
-        - case sensitive: false
-          op: ends with
-          path: event/COMMAND_LINE
-          value: u
-    - op: or
-      rules:
+        value: SC Scheduled Scan
       - case sensitive: false
-        op: ends with
+        op: contains
         path: event/COMMAND_LINE
         value: \microsoft\Taskbar\autoit3.exe
-      - case sensitive: false
-        op: starts with
-        path: event/COMMAND_LINE
-        value: C:\wsc.exe
     - op: and
       rules:
       - case sensitive: false
@@ -46,29 +30,45 @@ detect:
     - op: and
       rules:
       - case sensitive: false
+        op: is
+        path: event/FILE_PATH
+        value: C:\Windows\system32\Service.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: i
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: u
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \local\microsoft\Taskbar\autoit3.exe
+      - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: \nslookup.exe
+        value: nslookup.exe
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
         value: -q=TXT
-      - case sensitive: false
-        op: contains
-        path: event/PARENT/FILE_PATH
-        value: \Autoit
 respond:
 - action: report
   metadata:
     author: Florian Roth (Nextron Systems), Markus Neis, Jonhnathan Ribeiro, Daniil
       Yugoslavskiy, oscd.community
-    description: Detects Chafer activity attributed to OilRig as reported in Nyotron
-      report in March 2018
+    description: Detects OilRig activity as reported by Nyotron in their March 2018
+      report
     falsepositives:
-    - Unknown
-    level: high
+    - Unlikely
+    level: critical
     references:
-    - https://nyotron.com/nyotron-discovers-next-generation-oilrig-attacks/
+    - https://web.archive.org/web/20180402134442/https://nyotron.com/wp-content/uploads/2018/03/Nyotron-OilRig-Malware-Report-March-2018C.pdf
     tags:
     - attack.persistence
     - attack.g0049
@@ -79,5 +79,5 @@ respond:
     - attack.t1112
     - attack.command_and_control
     - attack.t1071.004
-  name: Chafer Activity
+  name: OilRig APT Activity
 
