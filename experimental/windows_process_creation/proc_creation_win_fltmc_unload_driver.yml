@@ -7,20 +7,27 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - op: or
+    - op: and
       rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \fltMC.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: fltMC.exe
       - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \fltMC.exe
-      - case sensitive: false
-        op: is
-        path: event/ORIGINAL_FILE_NAME
-        value: fltMC.exe
+        op: contains
+        path: event/COMMAND_LINE
+        value: unload
     - case sensitive: false
-      op: contains
+      not: true
+      op: ends with
       path: event/COMMAND_LINE
-      value: unload
+      value: unload rtp_filesystem_filter
 respond:
 - action: report
   metadata:

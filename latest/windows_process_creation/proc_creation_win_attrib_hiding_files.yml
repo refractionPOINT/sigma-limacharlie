@@ -53,7 +53,7 @@ respond:
     - IgfxCUIService.exe hiding *.cui files via .bat script (attrib.exe a child of
       cmd.exe and igfxCUIService.exe is the parent of the cmd.exe)
     - Msiexec.exe hiding desktop.ini
-    level: low
+    level: medium
     references:
     - https://unit42.paloaltonetworks.com/unit42-sure-ill-take-new-combojack-malware-alters-clipboards-steal-cryptocurrency/
     - https://www.uptycs.com/blog/lolbins-are-no-laughing-matter

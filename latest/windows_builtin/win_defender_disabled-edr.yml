@@ -28,6 +28,7 @@ respond:
     description: Detects disabling Windows Defender threat protection
     falsepositives:
     - Administrator actions (should be investigated)
+    - Seen being triggered occasionally during Windows 8 Defender Updates
     level: high
     references:
     - https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-antivirus/troubleshoot-windows-defender-antivirus

@@ -94,6 +94,10 @@ detect:
         op: is
         path: event/EVENT/EventData/RelativeTargetName
         value: sql\query
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/RelativeTargetName
+        value: eventlog
 respond:
 - action: report
   metadata:
