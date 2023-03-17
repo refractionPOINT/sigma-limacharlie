@@ -22,7 +22,7 @@ respond:
     description: Detects rundll32 execution without parameters as observed when running
       Metasploit windows/smb/psexec exploit module
     falsepositives:
-    - Unknown
+    - False positives may occur if a user called rundll32 from CLI with no options
     level: high
     references:
     - https://bczyz1.github.io/2021/01/30/psexec.html
