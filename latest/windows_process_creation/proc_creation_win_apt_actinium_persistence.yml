@@ -38,5 +38,5 @@ respond:
     - attack.persistence
     - attack.t1053
     - attack.t1053.005
-  name: Potential ACTINIUM Persistence Activiy
+  name: Potential ACTINIUM Persistence Activity
 
