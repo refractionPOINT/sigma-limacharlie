@@ -33,7 +33,7 @@ detect:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: accpeteula
+          value: accepteula
 respond:
 - action: report
   metadata:
