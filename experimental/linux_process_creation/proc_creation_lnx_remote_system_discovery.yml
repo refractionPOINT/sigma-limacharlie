@@ -1,0 +1,122 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /arp
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -a
+    - op: and
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /ping
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' 10.'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' 192.168.'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' 172.16.'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' 172.17.'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' 172.18.'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' 172.19.'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' 172.20.'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' 172.21.'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' 172.22.'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' 172.23.'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' 172.24.'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' 172.25.'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' 172.26.'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' 172.27.'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' 172.28.'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' 172.29.'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' 172.30.'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' 172.31.'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' 127.'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' 169.254.'
+respond:
+- action: report
+  metadata:
+    author: Alejandro Ortuno, oscd.community
+    description: Detects the enumeration of other remote systems.
+    falsepositives:
+    - Legitimate administration activities
+    level: low
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1018/T1018.md
+    tags:
+    - attack.discovery
+    - attack.t1018
+  name: Linux Remote System Discovery
+

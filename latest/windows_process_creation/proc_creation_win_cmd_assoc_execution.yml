@@ -1,0 +1,47 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cmd.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: Cmd.Exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: assoc
+respond:
+- action: report
+  metadata:
+    author: Timur Zinniatullin, oscd.community
+    description: 'Detects file association changes using the builtin "assoc" command.
+
+      When a file is opened, the default program used to open the file (also called
+      the file association or handler) is checked. File association selections are
+      stored in the Windows Registry and can be edited by users, administrators, or
+      programs that have Registry access or by administrators using the built-in assoc
+      utility. Applications can modify the file association for a given file extension
+      to call an arbitrary program when a file with the given extension is opened.
+
+      '
+    falsepositives:
+    - Admin activity
+    level: low
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1546.001/T1546.001.md
+    tags:
+    - attack.persistence
+    - attack.t1546.001
+  name: Change Default File Association Via Assoc
+

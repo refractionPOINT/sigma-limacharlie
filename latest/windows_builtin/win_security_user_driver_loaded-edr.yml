@@ -1,0 +1,130 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '4673'
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/PrivilegeList
+        value: SeLoadDriverPrivilege
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/Service
+        value: '-'
+    - not: true
+      op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/ProcessName
+          value: C:\Windows\System32\Dism.exe
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/ProcessName
+          value: C:\Windows\System32\rundll32.exe
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/ProcessName
+          value: C:\Windows\System32\fltMC.exe
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/ProcessName
+          value: C:\Windows\HelpPane.exe
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/ProcessName
+          value: C:\Windows\System32\mmc.exe
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/ProcessName
+          value: C:\Windows\System32\svchost.exe
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/ProcessName
+          value: C:\Windows\System32\wimserv.exe
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/ProcessName
+          value: C:\Windows\System32\RuntimeBroker.exe
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/ProcessName
+          value: C:\Windows\System32\SystemSettingsBroker.exe
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/ProcessName
+          value: C:\Windows\explorer.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/EVENT/EventData/ProcessName
+          value: \procexp64.exe
+        - case sensitive: false
+          op: ends with
+          path: event/EVENT/EventData/ProcessName
+          value: \procexp.exe
+        - case sensitive: false
+          op: ends with
+          path: event/EVENT/EventData/ProcessName
+          value: \procmon64.exe
+        - case sensitive: false
+          op: ends with
+          path: event/EVENT/EventData/ProcessName
+          value: \procmon.exe
+        - case sensitive: false
+          op: ends with
+          path: event/EVENT/EventData/ProcessName
+          value: \Google\Chrome\Application\chrome.exe
+        - case sensitive: false
+          op: ends with
+          path: event/EVENT/EventData/ProcessName
+          value: \AppData\Local\Microsoft\Teams\current\Teams.exe
+      - case sensitive: false
+        op: starts with
+        path: event/EVENT/EventData/ProcessName
+        value: C:\Program Files\WindowsApps\Microsoft
+respond:
+- action: report
+  metadata:
+    author: xknow (@xknow_infosec), xorxes (@xor_xes)
+    description: 'Detects the usage of the ''SeLoadDriverPrivilege'' privilege. This
+      privilege is required to load or unload a device driver.
+
+      With this privilege, the user can dynamically load and unload device drivers
+      or other code in to kernel mode.
+
+      This user right does not apply to Plug and Play device drivers.
+
+      If you exclude privileged users/admins and processes, which are allowed to do
+      so, you are maybe left with bad programs trying to load malicious kernel drivers.
+
+      This will detect Ghost-In-The-Logs (https://github.com/bats3c/Ghost-In-The-Logs)
+      and the usage of Sysinternals and various other tools. So you have to work with
+      a whitelist to find the bad stuff.
+
+      '
+    falsepositives:
+    - Other legimate tools loading drivers. Including but not limited to, Sysinternals,
+      CPU-Z, AVs etc. A baseline needs to be created according to the used products
+      and allowed tools. A good thing to do is to try and exclude users who are allowed
+      to load drivers.
+    level: medium
+    references:
+    - https://blog.dylan.codes/evading-sysmon-and-windows-event-logging/
+    - https://docs.microsoft.com/en-us/windows/security/threat-protection/auditing/event-4673
+    tags:
+    - attack.defense_evasion
+    - attack.t1562.001
+  name: Potential Privileged System Service Operation - SeLoadDriverPrivilege
+

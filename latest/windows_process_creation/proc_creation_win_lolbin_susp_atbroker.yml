@@ -1,0 +1,146 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: AtBroker.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: start
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: animations
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: audiodescription
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: caretbrowsing
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: caretwidth
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: colorfiltering
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: cursorscheme
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: filterkeys
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: focusborderheight
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: focusborderwidth
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: highcontrast
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: keyboardcues
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: keyboardpref
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: magnifierpane
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: messageduration
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: minimumhitradius
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: mousekeys
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Narrator
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: osk
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: overlappedcontent
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: showsounds
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: soundsentry
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: stickykeys
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: togglekeys
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: windowarranging
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: windowtracking
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: windowtrackingtimeout
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: windowtrackingzorder
+respond:
+- action: report
+  metadata:
+    author: Mateusz Wydra, oscd.community
+    description: Atbroker executing non-deafualt Assistive Technology applications
+    falsepositives:
+    - Legitimate, non-default assistive technology applications execution
+    level: high
+    references:
+    - http://www.hexacorn.com/blog/2016/07/22/beyond-good-ol-run-key-part-42/
+    - https://lolbas-project.github.io/lolbas/Binaries/Atbroker/
+    tags:
+    - attack.defense_evasion
+    - attack.t1218
+  name: Suspicious Atbroker Execution
+

@@ -1,0 +1,71 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: checkadmin.exe 127.0.0.1 -all
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: netsh advfirewall firewall add rule name=powershell dir=in
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: cmd /c powershell.exe -ep bypass -file c:\s.ps1
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: /tn win32times /f
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: create win32times binPath=
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: \c$\windows\system32\devmgr.dll
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' -exec bypass -enc JgAg'
+    - case sensitive: false
+      op: matches
+      path: event/COMMAND_LINE
+      re: .*type\ .*keepass\\KeePass\.config\.xml.*
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: iie.exe iie.txt
+    - case sensitive: false
+      op: matches
+      path: event/COMMAND_LINE
+      re: .*reg\ query\ HKEY_CURRENT_USER\\Software\\.*\\PuTTY\\Sessions\\.*
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems), frack113
+    description: Detects activity mentioned in Operation Wocao report
+    falsepositives:
+    - Administrators that use checkadmin.exe tool to enumerate local administrators
+    level: high
+    references:
+    - https://www.fox-it.com/en/news/whitepapers/operation-wocao-shining-a-light-on-one-of-chinas-hidden-hacking-groups/
+    - https://twitter.com/SBousseaden/status/1207671369963646976
+    tags:
+    - attack.discovery
+    - attack.t1012
+    - attack.defense_evasion
+    - attack.t1036.004
+    - attack.t1027
+    - attack.execution
+    - attack.t1053.005
+    - attack.t1059.001
+  name: Operation Wocao Activity
+

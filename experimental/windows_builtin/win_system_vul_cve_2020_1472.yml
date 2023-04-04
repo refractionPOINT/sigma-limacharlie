@@ -1,0 +1,29 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/EventData/Provider_Name
+    value: NetLogon
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '5829'
+  target: log
+respond:
+- action: report
+  metadata:
+    author: NVISO
+    description: Detects that a vulnerable Netlogon secure channel connection was
+      allowed, which could be an indicator of CVE-2020-1472.
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://support.microsoft.com/en-us/help/4557222/how-to-manage-the-changes-in-netlogon-secure-channel-connections-assoc
+    tags:
+    - attack.privilege_escalation
+    - attack.t1548
+  name: Vulnerable Netlogon Secure Channel Connection Allowed
+

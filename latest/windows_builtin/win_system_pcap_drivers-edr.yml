@@ -1,0 +1,66 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '4697'
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ServiceFileName
+        value: pcap
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ServiceFileName
+        value: npcap
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ServiceFileName
+        value: npf
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ServiceFileName
+        value: nm3
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ServiceFileName
+        value: ndiscap
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ServiceFileName
+        value: nmnt
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ServiceFileName
+        value: windivert
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ServiceFileName
+        value: USBPcap
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ServiceFileName
+        value: pktmon
+respond:
+- action: report
+  metadata:
+    author: Cian Heasley
+    description: Detects Windows Pcap driver installation based on a list of associated
+      .sys files.
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://ragged-lab.blogspot.com/2020/06/capturing-pcap-driver-installations.html#more
+    tags:
+    - attack.discovery
+    - attack.credential_access
+    - attack.t1040
+  name: Windows Pcap Drivers
+

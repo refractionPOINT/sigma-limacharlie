@@ -1,0 +1,42 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '4624'
+    - case sensitive: false
+      op: is
+      path: Event/EventData/LogonType
+      value: '3'
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/ProcessName
+      value: scrcons.exe
+  - case sensitive: false
+    not: true
+    op: is
+    path: Event/EventData/TargetLogonId
+    value: '0x3e7'
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)
+    description: Detect potential adversaries leveraging WMI ActiveScriptEventConsumers
+      remotely to move laterally in a network
+    falsepositives:
+    - SCCM
+    level: high
+    references:
+    - https://threathunterplaybook.com/hunts/windows/200902-RemoteWMIActiveScriptEventConsumers/notebook.html
+    tags:
+    - attack.lateral_movement
+    - attack.privilege_escalation
+    - attack.persistence
+    - attack.t1546.003
+  name: Remote WMI ActiveScriptEventConsumers
+

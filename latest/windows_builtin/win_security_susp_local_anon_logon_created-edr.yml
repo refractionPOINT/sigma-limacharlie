@@ -1,0 +1,37 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '4720'
+    - case sensitive: false
+      op: contains
+      path: event/EVENT/EventData/SamAccountName
+      value: ANONYMOUS
+    - case sensitive: false
+      op: contains
+      path: event/EVENT/EventData/SamAccountName
+      value: LOGON
+respond:
+- action: report
+  metadata:
+    author: James Pemberton / @4A616D6573
+    description: Detects the creation of suspicious accounts similar to ANONYMOUS
+      LOGON, such as using additional spaces. Created as an covering detection for
+      exclusion of Logon Type 3 from ANONYMOUS LOGON accounts.
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://twitter.com/SBousseaden/status/1189469425482829824
+    tags:
+    - attack.persistence
+    - attack.t1136.001
+    - attack.t1136.002
+  name: Suspicious Windows ANONYMOUS LOGON Local Account Created
+

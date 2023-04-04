@@ -1,0 +1,58 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /lockscreenurl:'
+      - not: true
+        op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .jpg
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .jpeg
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .png
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: reg delete
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \PersonalizationCSP
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects a suspicious Microsoft desktopimgdownldr execution with parameters
+      used to download files from the Internet
+    falsepositives:
+    - False positives depend on scripts and administrative tools used in the monitored
+      environment
+    level: high
+    references:
+    - https://labs.sentinelone.com/living-off-windows-land-a-new-native-file-downldr/
+    - https://twitter.com/SBousseaden/status/1278977301745741825
+    tags:
+    - attack.command_and_control
+    - attack.t1105
+  name: Suspicious Desktopimgdownldr Command
+

@@ -1,0 +1,48 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \EdgeTransport.exe
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/FILE_PATH
+        value: C:\Windows\System32\conhost.exe
+      - op: and
+        rules:
+        - case sensitive: false
+          op: matches
+          path: event/FILE_PATH
+          re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Program\ Files\\Microsoft\\Exchange\
+            Server\\
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \Bin\OleConverter.exe
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects a WMI backdoor in Exchange Transport Agents via WMI event
+      filters
+    falsepositives:
+    - Unknown
+    level: critical
+    references:
+    - https://twitter.com/cglyer/status/1182389676876980224
+    - https://twitter.com/cglyer/status/1182391019633029120
+    tags:
+    - attack.persistence
+    - attack.t1546.003
+  name: WMI Backdoor Exchange Transport Agent
+

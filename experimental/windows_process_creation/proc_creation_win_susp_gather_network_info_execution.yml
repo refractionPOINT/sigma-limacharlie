@@ -1,0 +1,43 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: gatherNetworkInfo.vbs
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cscript.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \wscript.exe
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects execution of the built-in script located in "C:\Windows\System32\gatherNetworkInfo.vbs".
+      Which can be used to gather information about the target machine
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://posts.slayerlabs.com/living-off-the-land/#gathernetworkinfovbs
+    - https://www.mandiant.com/resources/blog/trojanized-windows-installers-ukrainian-government
+    tags:
+    - attack.discovery
+    - attack.execution
+    - attack.t1615
+    - attack.t1059.005
+  name: Suspicious Reconnaissance Activity Via GatherNetworkInfo.VBS
+

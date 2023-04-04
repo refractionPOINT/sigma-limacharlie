@@ -1,0 +1,70 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ldifde
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -f -n
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: eprod.ldf
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: copy \\\\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: c$
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \aaaa\procdump64.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \aaaa\netsess.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \aaaa\7za.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \c$\aaaa\
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects APT31 Judgement Panda activity as described in the Crowdstrike
+      2019 Global Threat Report
+    falsepositives:
+    - Unlikely
+    level: critical
+    references:
+    - https://www.documentcloud.org/documents/5743766-Global-Threat-Report-2019.html
+    tags:
+    - attack.lateral_movement
+    - attack.credential_access
+    - attack.g0128
+    - attack.t1003.001
+    - attack.t1560.001
+  name: APT31 Judgement Panda Activity
+

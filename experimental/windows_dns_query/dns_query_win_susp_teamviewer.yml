@@ -1,0 +1,37 @@
+detect:
+  event: DNS_REQUEST
+  op: and
+  rules:
+  - op: or
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/DOMAIN_NAME
+      value: taf.teamviewer.com
+    - case sensitive: false
+      op: is
+      path: event/DOMAIN_NAME
+      value: udp.ping.teamviewer.com
+  - case sensitive: false
+    not: true
+    op: contains
+    path: event/FILE_PATH
+    value: TeamViewer
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects DNS queries to a TeamViewer domain only resolved by a TeamViewer
+      client by an image that isn't named TeamViewer (sometimes used by threat actors
+      for obfuscation)
+    falsepositives:
+    - Unknown binary names of TeamViewer
+    - Other programs that also lookup the observed domain
+    level: medium
+    references:
+    - https://www.teamviewer.com/en-us/
+    tags:
+    - attack.command_and_control
+    - attack.t1219
+  name: Suspicious TeamViewer Domain Access
+

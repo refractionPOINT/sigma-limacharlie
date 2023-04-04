@@ -1,0 +1,37 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '4662'
+  - case sensitive: false
+    op: is
+    path: Event/EventData/ObjectType
+    value: SecretObject
+  - case sensitive: false
+    op: is
+    path: Event/EventData/AccessMask
+    value: '0x2'
+  - case sensitive: false
+    op: contains
+    path: Event/EventData/ObjectName
+    value: BCKUPKEY
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Roberto Rodriguez @Cyb3rWard0g
+    description: Detects tools extracting LSA secret DPAPI domain backup key from
+      Domain Controllers
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://threathunterplaybook.com/hunts/windows/190620-DomainDPAPIBackupKeyExtraction/notebook.html
+    tags:
+    - attack.credential_access
+    - attack.t1003.004
+  name: DPAPI Domain Backup Key Extraction
+

@@ -1,0 +1,50 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cdb.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: CDB.Exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -c '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -cf '
+respond:
+- action: report
+  metadata:
+    author: Beyu Denis, oscd.community, Nasreddine Bencherchali
+    description: Detects usage of "cdb.exe" to launch 64-bit shellcode or arbitrary
+      processes or commands from a debugger script file
+    falsepositives:
+    - Legitimate use of debugging tools
+    level: medium
+    references:
+    - https://lolbas-project.github.io/lolbas/OtherMSBinaries/Cdb/
+    - https://web.archive.org/web/20170715043507/http://www.exploit-monday.com/2016/08/windbg-cdb-shellcode-runner.html
+    - https://twitter.com/nas_bench/status/1534957360032120833
+    tags:
+    - attack.execution
+    - attack.t1106
+    - attack.defense_evasion
+    - attack.t1218
+    - attack.t1127
+  name: WinDbg/CDB LOLBIN Usage
+

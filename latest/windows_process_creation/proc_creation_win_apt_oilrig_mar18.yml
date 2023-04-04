@@ -1,0 +1,83 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: SC Scheduled Scan
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \microsoft\Taskbar\autoit3.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: \Windows\Temp\DB\
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: .exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/FILE_PATH
+        value: C:\Windows\system32\Service.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: i
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: u
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \local\microsoft\Taskbar\autoit3.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: nslookup.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -q=TXT
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems), Markus Neis, Jonhnathan Ribeiro, Daniil
+      Yugoslavskiy, oscd.community
+    description: Detects OilRig activity as reported by Nyotron in their March 2018
+      report
+    falsepositives:
+    - Unlikely
+    level: critical
+    references:
+    - https://web.archive.org/web/20180402134442/https://nyotron.com/wp-content/uploads/2018/03/Nyotron-OilRig-Malware-Report-March-2018C.pdf
+    tags:
+    - attack.persistence
+    - attack.g0049
+    - attack.t1053.005
+    - attack.s0111
+    - attack.t1543.003
+    - attack.defense_evasion
+    - attack.t1112
+    - attack.command_and_control
+    - attack.t1071.004
+  name: OilRig APT Activity
+

@@ -1,0 +1,33 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \devtoolslauncher.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: LaunchForDeploy
+respond:
+- action: report
+  metadata:
+    author: Beyu Denis, oscd.community (rule), @_felamos (idea)
+    description: The Devtoolslauncher.exe executes other binary
+    falsepositives:
+    - Legitimate use of devtoolslauncher.exe by legitimate user
+    level: high
+    references:
+    - https://lolbas-project.github.io/lolbas/OtherMSBinaries/Devtoolslauncher/
+    - https://twitter.com/_felamos/status/1179811992841797632
+    tags:
+    - attack.defense_evasion
+    - attack.t1218
+  name: Devtoolslauncher.exe Executes Specified Binary
+

@@ -1,0 +1,32 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '1033'
+  - case sensitive: false
+    op: is
+    path: Event/EventData/Provider_Name
+    value: MsiInstaller
+  - case sensitive: false
+    op: contains
+    path: Event/EventData/Message
+    value: AteraAgent
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Bhabesh Raj
+    description: Detects successful installation of Atera Remote Monitoring & Management
+      (RMM) agent as recently found to be used by Conti operators
+    falsepositives:
+    - Legitimate Atera agent installation
+    level: high
+    references:
+    - https://www.advintel.io/post/secret-backdoor-behind-conti-ransomware-operation-introducing-atera-agent
+    tags:
+    - attack.t1219
+  name: Atera Agent Installation
+

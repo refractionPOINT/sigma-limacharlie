@@ -1,0 +1,58 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is mac
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /truncate
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -s +
+    - op: and
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /dd
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: if=/dev/zero
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: if=/dev/random
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: if=/dev/urandom
+respond:
+- action: report
+  metadata:
+    author: Igor Fits, Mikhail Larin, oscd.community
+    description: Adversaries may use binary padding to add junk data and change the
+      on-disk representation of malware. This rule detect using dd and truncate to
+      add a junk data to file.
+    falsepositives:
+    - Legitimate script work
+    level: high
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1027.001/T1027.001.md
+    - https://linux.die.net/man/1/truncate
+    - https://linux.die.net/man/1/dd
+    tags:
+    - attack.defense_evasion
+    - attack.t1027.001
+  name: Binary Padding - MacOS
+

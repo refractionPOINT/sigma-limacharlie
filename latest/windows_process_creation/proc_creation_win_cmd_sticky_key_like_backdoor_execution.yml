@@ -1,0 +1,97 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \winlogon.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cmd.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cscript.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \mshta.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \powershell.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \pwsh.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \regsvr32.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \rundll32.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \wscript.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \wt.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: sethc.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: utilman.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: osk.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Magnify.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Narrator.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: DisplaySwitch.exe
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems), @twjackomo, Jonhnathan Ribeiro, oscd.community
+    description: Detects the usage and installation of a backdoor that uses an option
+      to register a malicious debugger for built-in tools that are accessible in the
+      login screen
+    falsepositives:
+    - Unlikely
+    level: critical
+    references:
+    - https://learn.microsoft.com/en-us/archive/blogs/jonathantrull/detecting-sticky-key-backdoors
+    tags:
+    - attack.privilege_escalation
+    - attack.persistence
+    - attack.t1546.008
+    - car.2014-11-003
+    - car.2014-11-008
+  name: Sticky Key Like Backdoor Execution
+

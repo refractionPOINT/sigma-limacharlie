@@ -1,0 +1,30 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '4611'
+  - case sensitive: false
+    op: is
+    path: Event/EventData/LogonProcessName
+    value: User32LogonProcesss
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Roberto Rodriguez (source), Ilyas Ochkov (rule), oscd.community
+    description: Detects potential use of Rubeus via registered new trusted logon
+      process
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://posts.specterops.io/hunting-in-active-directory-unconstrained-delegation-forests-trusts-71f2b33688e1
+    tags:
+    - attack.lateral_movement
+    - attack.privilege_escalation
+    - attack.t1558.003
+  name: Register new Logon Process by Rubeus
+

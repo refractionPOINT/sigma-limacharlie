@@ -1,0 +1,33 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '5145'
+  - case sensitive: false
+    op: contains
+    path: Event/EventData/ShareName
+    value: IPC
+  - case sensitive: false
+    op: is
+    path: Event/EventData/RelativeTargetName
+    value: protected_storage
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Roberto Rodriguez @Cyb3rWard0g
+    description: Detects access to a protected_storage service over the network. Potential
+      abuse of DPAPI to extract domain backup keys from Domain Controllers
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://threathunterplaybook.com/hunts/windows/190620-DomainDPAPIBackupKeyExtraction/notebook.html
+    tags:
+    - attack.lateral_movement
+    - attack.t1021.002
+  name: Protected Storage Service Access
+

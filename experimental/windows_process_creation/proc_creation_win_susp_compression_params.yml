@@ -1,0 +1,72 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: matches
+          path: event/ORIGINAL_FILE_NAME
+          re: 7z.*\.exe
+        - case sensitive: false
+          op: ends with
+          path: event/ORIGINAL_FILE_NAME
+          value: rar.exe
+        - case sensitive: false
+          op: matches
+          path: event/ORIGINAL_FILE_NAME
+          re: .*Command.*Line.*RAR.*
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -p'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -ta'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -tb'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -sdel'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -dw'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -hp'
+    - case sensitive: false
+      not: true
+      op: starts with
+      path: event/PARENT/FILE_PATH
+      value: C:\Program
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems), Samir Bousseaden
+    description: Detects suspicious command line arguments of common data compression
+      tools
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://twitter.com/SBousseaden/status/1184067445612535811
+    tags:
+    - attack.collection
+    - attack.t1560.001
+  name: Suspicious Compression Tool Parameters
+

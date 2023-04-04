@@ -1,0 +1,33 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' /am51'
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' /password'
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects the use of the Dinject PowerShell cradle based on the specific
+      flags
+    falsepositives:
+    - Unlikely
+    level: critical
+    references:
+    - https://github.com/snovvcrash/DInjector
+    tags:
+    - attack.defense_evasion
+    - attack.t1055
+  name: HackTool - DInjector PowerShell Cradle Execution
+

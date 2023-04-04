@@ -1,0 +1,55 @@
+detect:
+  log type: wel
+  op: or
+  rules:
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: Event/System/EventID
+        value: '4625'
+      - case sensitive: false
+        op: is
+        path: Event/System/EventID
+        value: '4624'
+    - case sensitive: false
+      op: is
+      path: Event/EventData/LogonType
+      value: '3'
+    - case sensitive: false
+      op: is
+      path: Event/EventData/AuthenticationPackageName
+      value: NTLM
+    - op: matches
+      path: Event/EventData/WorkstationName
+      re: ^[A-Za-z0-9]{16}$
+  - op: and
+    rules:
+    - not: true
+      op: exists
+      path: Event/EventData/ProcessName
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '4776'
+    - op: matches
+      path: Event/EventData/Workstation
+      re: ^[A-Za-z0-9]{16}$
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Chakib Gzenayi (@Chak092), Hosni Mribah
+    description: Alerts on Metasploit host's authentications on the domain.
+    falsepositives:
+    - Linux hostnames composed of 16 characters.
+    level: high
+    references:
+    - https://github.com/rapid7/metasploit-framework/blob/1416b5776d963f21b7b5b45d19f3e961201e0aed/lib/rex/proto/smb/client.rb
+    tags:
+    - attack.lateral_movement
+    - attack.t1021.002
+  name: Metasploit SMB Authentication
+

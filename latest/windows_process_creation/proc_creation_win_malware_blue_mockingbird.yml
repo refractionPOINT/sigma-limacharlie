@@ -1,0 +1,49 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cmd.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: sc config
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: wercplsupporte.dll
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \wmic.exe
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: COR_PROFILER
+respond:
+- action: report
+  metadata:
+    author: Trent Liffick (@tliffick)
+    description: Attempts to detect system changes made by Blue Mockingbird
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://redcanary.com/blog/blue-mockingbird-cryptominer/
+    tags:
+    - attack.execution
+    - attack.t1112
+    - attack.t1047
+  name: Blue Mockingbird
+

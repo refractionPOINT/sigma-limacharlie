@@ -1,0 +1,40 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '4720'
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/SamAccountName
+        value: $
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '4781'
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/NewTargetUserName
+        value: $
+respond:
+- action: report
+  metadata:
+    author: Ilyas Ochkov, oscd.community
+    description: Detects possible bypass EDR and SIEM via abnormal user account name.
+    falsepositives:
+    - Unknown
+    level: high
+    tags:
+    - attack.defense_evasion
+    - attack.t1036
+  name: New or Renamed User Account with '$' in Attribute 'SamAccountName'
+

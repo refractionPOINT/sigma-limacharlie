@@ -1,0 +1,35 @@
+detect:
+  event: DNS_REQUEST
+  op: or
+  rules:
+  - op: or
+    rules:
+    - case sensitive: false
+      op: starts with
+      path: event/DOMAIN_NAME
+      value: aaa.stage.
+    - case sensitive: false
+      op: starts with
+      path: event/DOMAIN_NAME
+      value: post.1
+  - case sensitive: false
+    op: contains
+    path: event/DOMAIN_NAME
+    value: .stage.123456.
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects a program that invoked suspicious DNS queries known from
+      Cobalt Strike beacons
+    falsepositives:
+    - Unknown
+    level: critical
+    references:
+    - https://www.icebrg.io/blog/footprints-of-fin7-tracking-actor-patterns
+    - https://www.sekoia.io/en/hunting-and-detecting-cobalt-strike/
+    tags:
+    - attack.command_and_control
+    - attack.t1071.004
+  name: Suspicious Cobalt Strike DNS Beaconing - Sysmon
+

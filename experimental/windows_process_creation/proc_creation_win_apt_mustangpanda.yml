@@ -1,0 +1,66 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Temp\wtask.exe /create
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '%windir:~-3,1%%PUBLIC:~-9,1%'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '/tn "Security Script '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '%windir:~-1,1%'
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /E:vbscript
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: C:\Users\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .txt
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /F
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: Temp\winwsh.exe
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems), oscd.community
+    description: Detects specific process parameters as used by Mustang Panda droppers
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://app.any.run/tasks/7ca5661d-a67b-43ec-98c1-dd7a8103c256/
+    - https://app.any.run/tasks/b12cccf3-1c22-4e28-9d3e-c7a6062f3914/
+    - https://www.anomali.com/blog/china-based-apt-mustang-panda-targets-minority-groups-public-and-private-sector-organizations
+    tags:
+    - attack.t1587.001
+    - attack.resource_development
+  name: Mustang Panda Dropper
+

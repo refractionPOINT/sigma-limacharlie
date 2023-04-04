@@ -1,0 +1,38 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: \WindowsSensor.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' /uninstall'
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' /quiet'
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Adversaries may disable security tools to avoid possible detection
+      of their tools and activities by uninstalling Crowdstrike Falcon
+    falsepositives:
+    - Administrator might leverage the same command line for debugging or other purposes.
+      However this action must be always investigated
+    level: high
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1562.001/T1562.001.md
+    tags:
+    - attack.defense_evasion
+    - attack.t1562.001
+  name: Uninstall Crowdstrike Falcon Sensor
+

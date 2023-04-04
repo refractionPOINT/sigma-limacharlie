@@ -1,0 +1,63 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'taskkill '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: RaccineSettings.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: reg.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: delete
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Raccine Tray
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: schtasks
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /DELETE
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Raccine Rules Updater
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects commands that indicate a Raccine removal from an end system.
+      Raccine is a free ransomware protection tool.
+    falsepositives:
+    - Legitimate deinstallation by administrative staff
+    level: high
+    references:
+    - https://github.com/Neo23x0/Raccine
+    tags:
+    - attack.defense_evasion
+    - attack.t1562.001
+  name: Raccine Uninstall
+

@@ -1,0 +1,121 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \reg.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: reg.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: save
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: export
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u02E2ave"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "e\u02E3port"
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: hklm
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "hk\u02EAm"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: hkey_local_machine
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "hkey_\u02EAocal_machine"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "hkey_loca\u02EA_machine"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "hkey_\u02EAoca\u02EA_machine"
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \system
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \sam
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \security
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\\\u02E2ystem"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\\sy\u02E2tem"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\\\u02E2y\u02E2tem"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\\\u02E2am"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\\\u02E2ecurity"
+respond:
+- action: report
+  metadata:
+    author: Teymur Kheirkhabarov, Endgame, JHasenbusch, Daniil Yugoslavskiy, oscd.community,
+      frack113
+    description: Detects the usage of "reg.exe" in order to dump sensitive registry
+      hives, which includes SAM, SYSTEM and SECURITY
+    falsepositives:
+    - Dumping hives for legitimate purpouse i.e. backup or forensic investigation
+    level: high
+    references:
+    - https://www.slideshare.net/heirhabarov/hunting-for-credentials-dumping-in-windows-environment
+    - https://eqllib.readthedocs.io/en/latest/analytics/aed95fc6-5e3f-49dc-8b35-06508613f979.html
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1003/T1003.md
+    - https://www.wietzebeukema.nl/blog/windows-command-line-obfuscation
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1003.002/T1003.002.md#atomic-test-1---registry-dump-of-sam-creds-and-secrets
+    tags:
+    - attack.credential_access
+    - attack.t1003.002
+    - attack.t1003.004
+    - attack.t1003.005
+    - car.2013-07-001
+  name: Dumping of Sensitive Hives Via Reg.EXE
+

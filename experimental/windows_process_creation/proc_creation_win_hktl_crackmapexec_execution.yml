@@ -1,0 +1,155 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \crackmapexec.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -M pe_inject '
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' --local-auth'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -u '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -x '
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' --local-auth'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -u '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -p '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -H ''NTHASH'''
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' mssql '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -u '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -p '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -M '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -d '
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' smb '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -u '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -H '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -M '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -o '
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' smb '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -u '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -p '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' --local-auth'
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' --local-auth'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -u '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -p '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' 10.'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' 192.168.'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '/24 '
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: This rule detect common flag combinations used by CrackMapExec in
+      order to detect its use even if the binary has been replaced.
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://mpgn.gitbook.io/crackmapexec/smb-protocol/authentication/checking-credentials-local
+    - https://www.mandiant.com/resources/telegram-malware-iranian-espionage
+    - https://www.infosecmatter.com/crackmapexec-module-library/?cmem=mssql-mimikatz
+    - https://www.infosecmatter.com/crackmapexec-module-library/?cmem=smb-pe_inject
+  name: HackTool - CrackMapExec Execution
+

@@ -1,0 +1,27 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '4697'
+  - case sensitive: false
+    op: contains
+    path: Event/EventData/ServiceFileName
+    value: tap0901
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Daniil Yugoslavskiy, Ian Davis, oscd.community
+    description: Well-known TAP software installation. Possible preparation for data
+      exfiltration using tunnelling techniques
+    falsepositives:
+    - Legitimate OpenVPN TAP insntallation
+    level: medium
+    tags:
+    - attack.exfiltration
+    - attack.t1048
+  name: Tap Driver Installation - Security
+

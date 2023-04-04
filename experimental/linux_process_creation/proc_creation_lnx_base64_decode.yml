@@ -1,0 +1,33 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /base64
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: -d
+respond:
+- action: report
+  metadata:
+    author: Daniil Yugoslavskiy, oscd.community
+    description: Detects usage of base64 utility to decode arbitrary base64-encoded
+      text
+    falsepositives:
+    - Legitimate activities
+    level: low
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1027/T1027.md
+    tags:
+    - attack.defense_evasion
+    - attack.t1027
+  name: Decode Base64 Encoded Text
+

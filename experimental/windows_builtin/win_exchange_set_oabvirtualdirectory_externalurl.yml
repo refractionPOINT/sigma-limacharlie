@@ -1,0 +1,37 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/EventData/
+    value: Set-OabVirtualDirectory
+  - case sensitive: false
+    op: is
+    path: Event/EventData/
+    value: ExternalUrl
+  - case sensitive: false
+    op: is
+    path: Event/EventData/
+    value: Page_Load
+  - case sensitive: false
+    op: is
+    path: Event/EventData/
+    value: script
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Jose Rodriguez @Cyb3rPandaH
+    description: Rule to detect an adversary setting OabVirtualDirectory External
+      URL property to a script in Exchange Management log
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://twitter.com/OTR_Community/status/1371053369071132675
+    tags:
+    - attack.persistence
+    - attack.t1505.003
+  name: Exchange Set OabVirtualDirectory ExternalUrl Property
+

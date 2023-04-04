@@ -1,0 +1,54 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \plink.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: :127.0.0.1:3389
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \plink.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: :3389
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -P 443'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -P 22'
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Execution of plink to perform data exfiltration and tunneling
+    falsepositives:
+    - Administrative activity
+    level: high
+    references:
+    - https://www.microsoft.com/security/blog/2022/07/26/malicious-iis-extensions-quietly-open-persistent-backdoors-into-servers/
+    tags:
+    - attack.command_and_control
+    - attack.t1572
+  name: Potential RDP Tunneling Via SSH Plink
+

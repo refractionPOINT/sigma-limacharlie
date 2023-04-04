@@ -1,0 +1,76 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/Provider_Name
+        value: Service Control Manager
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/EVENT/System/EventID
+          value: '7045'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/System/EventID
+          value: '7036'
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/ServiceName
+          value: WCESERVICE
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/ServiceName
+          value: WCE SERVICE
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/ServiceName
+          value: winexesvc
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/ServiceName
+          value: DumpSvc
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/ServiceName
+          value: pwdump
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/ServiceName
+          value: gsecdump
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/ServiceName
+          value: cachedump
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ImagePath
+        value: bypass
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects PsExec service installation and execution events (service
+      and Sysmon)
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - Internal Research
+    tags:
+    - attack.execution
+    - attack.t1569.002
+    - attack.s0029
+  name: Hacktool Service Registration or Execution
+

@@ -1,0 +1,37 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: rundll32.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: .dll
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: StartNodeRelay
+respond:
+- action: report
+  metadata:
+    author: Alfie Champion (ajpc500)
+    description: F-Secure C3 produces DLLs with a default exported StartNodeRelay
+      function.
+    falsepositives:
+    - Unknown
+    level: critical
+    references:
+    - https://github.com/FSecureLABS/C3/blob/11a081fd3be2aaf2a879f6b6e9a96ecdd24966ef/Src/NodeRelayDll/NodeRelayDll.cpp#L12
+    tags:
+    - attack.defense_evasion
+    - attack.t1218.011
+  name: HackTool - F-Secure C3 Load by Rundll32
+

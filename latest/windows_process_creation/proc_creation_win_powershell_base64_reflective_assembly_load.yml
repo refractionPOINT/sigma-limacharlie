@@ -1,0 +1,76 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: WwBSAGUAZgBsAGUAYwB0AGkAbwBuAC4AQQBzAHMAZQBtAGIAbAB5AF0AOgA6AEwAbwBhAGQAKA
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: sAUgBlAGYAbABlAGMAdABpAG8AbgAuAEEAcwBzAGUAbQBiAGwAeQBdADoAOgBMAG8AYQBkACgA
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: bAFIAZQBmAGwAZQBjAHQAaQBvAG4ALgBBAHMAcwBlAG0AYgBsAHkAXQA6ADoATABvAGEAZAAoA
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: AFsAcgBlAGYAbABlAGMAdABpAG8AbgAuAGEAcwBzAGUAbQBiAGwAeQBdADoAOgAoACIATABvAGEAZAAiAC
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: BbAHIAZQBmAGwAZQBjAHQAaQBvAG4ALgBhAHMAcwBlAG0AYgBsAHkAXQA6ADoAKAAiAEwAbwBhAGQAIgAp
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: AWwByAGUAZgBsAGUAYwB0AGkAbwBuAC4AYQBzAHMAZQBtAGIAbAB5AF0AOgA6ACgAIgBMAG8AYQBkACIAK
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: WwBSAGUAZgBsAGUAYwB0AGkAbwBuAC4AQQBzAHMAZQBtAGIAbAB5AF0AOgA6ACgAIgBMAG8AYQBkACIAKQ
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: sAUgBlAGYAbABlAGMAdABpAG8AbgAuAEEAcwBzAGUAbQBiAGwAeQBdADoAOgAoACIATABvAGEAZAAiACkA
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: bAFIAZQBmAGwAZQBjAHQAaQBvAG4ALgBBAHMAcwBlAG0AYgBsAHkAXQA6ADoAKAAiAEwAbwBhAGQAIgApA
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: WwByAGUAZgBsAGUAYwB0AGkAbwBuAC4AYQBzAHMAZQBtAGIAbAB5AF0AOgA6AEwAbwBhAGQAKA
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: sAcgBlAGYAbABlAGMAdABpAG8AbgAuAGEAcwBzAGUAbQBiAGwAeQBdADoAOgBMAG8AYQBkACgA
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: bAHIAZQBmAGwAZQBjAHQAaQBvAG4ALgBhAHMAcwBlAG0AYgBsAHkAXQA6ADoATABvAGEAZAAoA
+respond:
+- action: report
+  metadata:
+    author: Christian Burkard (Nextron Systems), pH-T (Nextron Systems)
+    description: Detects base64 encoded .NET reflective loading of Assembly
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://github.com/Neo23x0/Raccine/blob/20a569fa21625086433dcce8bb2765d0ea08dcb6/yara/mal_revil.yar
+    - https://thedfirreport.com/2022/05/09/seo-poisoning-a-gootloader-story/
+    tags:
+    - attack.execution
+    - attack.t1059.001
+    - attack.defense_evasion
+    - attack.t1027
+    - attack.t1620
+  name: PowerShell Base64 Encoded Reflective Assembly Load
+

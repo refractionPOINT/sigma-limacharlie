@@ -1,0 +1,42 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: rundll32
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: javascript
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ..\..\mshtml,RunHTMLApplication
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ;document.write();GetObject("script
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects suspicious command line patterns used when rundll32 is used
+      to run JavaScript code
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - http://hyp3rlinx.altervista.org/advisories/MICROSOFT_WINDOWS_DEFENDER_DETECTION_BYPASS.txt
+    tags:
+    - attack.defense_evasion
+  name: Rundll32 JS RunHTMLApplication Pattern
+

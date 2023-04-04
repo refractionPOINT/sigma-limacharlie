@@ -1,0 +1,61 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \powershell.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -version 2 '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -versio 2 '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -versi 2 '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -vers 2 '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -ver 2 '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -ve 2 '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -v 2 '
+respond:
+- action: report
+  metadata:
+    author: Harish Segar (rule)
+    description: Detects PowerShell downgrade attack by comparing the host versions
+      with the actually used engine version 2.0
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - http://www.leeholmes.com/blog/2017/03/17/detecting-and-preventing-powershell-downgrade-attacks/
+    - https://github.com/r00t-3xp10it/hacking-material-books/blob/43cb1e1932c16ff1f58b755bc9ab6b096046853f/obfuscation/simple_obfuscation.md#bypass-or-avoid-amsi-by-version-downgrade-
+    tags:
+    - attack.defense_evasion
+    - attack.execution
+    - attack.t1059.001
+  name: Potential PowerShell Downgrade Attack
+

@@ -1,0 +1,40 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \wmiprvse.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \mshta.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: mshta.exe
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects mshta loaded by wmiprvse as parent as used by TA505 malicious
+      documents
+    falsepositives:
+    - Unknown
+    level: critical
+    references:
+    - https://twitter.com/ForensicITGuy/status/1334734244120309760
+    tags:
+    - attack.execution
+    - attack.g0092
+    - attack.t1106
+  name: TA505 Dropper Load Pattern
+

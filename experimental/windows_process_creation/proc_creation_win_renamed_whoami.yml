@@ -1,0 +1,36 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/ORIGINAL_FILE_NAME
+      value: whoami.exe
+    - case sensitive: false
+      not: true
+      op: ends with
+      path: event/FILE_PATH
+      value: \whoami.exe
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects the execution of whoami that has been renamed to a different
+      name to avoid detection
+    falsepositives:
+    - Unknown
+    level: critical
+    references:
+    - https://brica.de/alerts/alert/public/1247926/agent-tesla-keylogger-delivered-inside-a-power-iso-daa-archive/
+    - https://app.any.run/tasks/7eaba74e-c1ea-400f-9c17-5e30eee89906/
+    tags:
+    - attack.discovery
+    - attack.t1033
+    - car.2016-03-001
+  name: Renamed Whoami Execution
+

@@ -1,0 +1,47 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is mac
+  - op: and
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /touch
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -t
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -acmr
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -d
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -r
+respond:
+- action: report
+  metadata:
+    author: Igor Fits, Mikhail Larin, oscd.community
+    description: Detect file time attribute change to hide new or changes to existing
+      files
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1070.006/T1070.006.md
+    tags:
+    - attack.defense_evasion
+    - attack.t1070.006
+  name: File Time Attribute Change
+

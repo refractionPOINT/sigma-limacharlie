@@ -1,0 +1,118 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '5145'
+      - case sensitive: false
+        op: matches
+        path: event/EVENT/EventData/ShareName
+        re: \\\\\*\\\\IPC\$
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/RelativeTargetName
+        value: atsvc
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/RelativeTargetName
+        value: samr
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/RelativeTargetName
+        value: lsarpc
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/RelativeTargetName
+        value: lsass
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/RelativeTargetName
+        value: winreg
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/RelativeTargetName
+        value: netlogon
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/RelativeTargetName
+        value: srvsvc
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/RelativeTargetName
+        value: protected_storage
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/RelativeTargetName
+        value: wkssvc
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/RelativeTargetName
+        value: browser
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/RelativeTargetName
+        value: netdfs
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/RelativeTargetName
+        value: svcctl
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/RelativeTargetName
+        value: spoolss
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/RelativeTargetName
+        value: ntsvcs
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/RelativeTargetName
+        value: LSM_API_service
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/RelativeTargetName
+        value: HydraLsPipe
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/RelativeTargetName
+        value: TermSrv_API_service
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/RelativeTargetName
+        value: MsFteWds
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/RelativeTargetName
+        value: sql\query
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/RelativeTargetName
+        value: eventlog
+respond:
+- action: report
+  metadata:
+    author: Samir Bousseaden
+    description: This detection excludes known namped pipes accessible remotely and
+      notify on newly observed ones, may help to detect lateral movement and remote
+      exec using named pipes
+    falsepositives:
+    - Update the excluded named pipe to filter out any newly observed legit named
+      pipe
+    level: high
+    references:
+    - https://twitter.com/menasec1/status/1104489274387451904
+    tags:
+    - attack.lateral_movement
+    - attack.t1021.002
+  name: First Time Seen Remote Named Pipe
+

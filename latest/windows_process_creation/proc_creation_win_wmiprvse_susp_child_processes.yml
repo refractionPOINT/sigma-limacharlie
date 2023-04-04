@@ -1,0 +1,118 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \wbem\WmiPrvSE.exe
+      - op: or
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \certutil.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \cscript.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \mshta.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \msiexec.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \regsvr32.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \rundll32.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \verclsid.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \wscript.exe
+        - op: and
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \cmd.exe
+          - op: or
+            rules:
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: cscript
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: mshta
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: powershell
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: pwsh
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: regsvr32
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: rundll32
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: wscript
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \WerFault.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \WmiPrvSE.exe
+respond:
+- action: report
+  metadata:
+    author: Vadim Khrykov (ThreatIntel), Cyb3rEng
+    description: Detects suspicious and uncommon child processes of WmiPrvSE
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://thedfirreport.com/2021/03/29/sodinokibi-aka-revil-ransomware/
+    - https://github.com/vadim-hunter/Detection-Ideas-Rules/blob/02bcbfc2bfb8b4da601bb30de0344ae453aa1afe/Threat%20Intelligence/The%20DFIR%20Report/20210329_Sodinokibi_(aka_REvil)_Ransomware.yaml
+    - https://blog.osarmor.com/319/onenote-attachment-delivers-asyncrat-malware/
+    tags:
+    - attack.execution
+    - attack.defense_evasion
+    - attack.t1047
+    - attack.t1204.002
+    - attack.t1218.010
+  name: Suspicious WmiPrvSE Child Process
+

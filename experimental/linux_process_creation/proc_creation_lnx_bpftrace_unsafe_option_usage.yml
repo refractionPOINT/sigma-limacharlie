@@ -1,0 +1,33 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: bpftrace
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: --unsafe
+respond:
+- action: report
+  metadata:
+    author: Andreas Hunkeler (@Karneades)
+    description: Detects the usage of the unsafe bpftrace option
+    falsepositives:
+    - Legitimate usage of the unsafe option
+    level: medium
+    references:
+    - https://embracethered.com/blog/posts/2021/offensive-bpf-bpftrace/
+    - https://bpftrace.org/
+    tags:
+    - attack.execution
+    - attack.t1059.004
+  name: BPFtrace Unsafe Option Usage
+

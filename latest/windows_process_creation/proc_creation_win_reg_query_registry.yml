@@ -1,0 +1,67 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \reg.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: reg.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: query
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: currentVersion\windows
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: winlogon\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: currentVersion\shellServiceObjectDelayLoad
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: currentVersion\run
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: currentVersion\policies\explorer\run
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: currentcontrolset\services
+respond:
+- action: report
+  metadata:
+    author: Timur Zinniatullin, oscd.community
+    description: Detects the usage of "reg.exe" in order to query reconnaissance information
+      from the registry. Adversaries may interact with the Windows registry to gather
+      information about credentials, the system, configuration, and installed software.
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1012/T1012.md
+    tags:
+    - attack.discovery
+    - attack.t1012
+    - attack.t1007
+  name: Potential Configuration And Service Reconnaissance Via Reg.EXE
+

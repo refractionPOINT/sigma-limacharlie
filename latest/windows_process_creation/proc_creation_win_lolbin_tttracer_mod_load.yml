@@ -1,0 +1,31 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - case sensitive: false
+    op: ends with
+    path: event/PARENT/FILE_PATH
+    value: \tttracer.exe
+respond:
+- action: report
+  metadata:
+    author: "Ensar \u015Eamil, @sblmsrsn, @oscd_initiative"
+    description: Detects usage of Time Travel Debugging Utility. Adversaries can execute
+      malicious processes and dump processes, such as lsass.exe, via tttracer.exe.
+    falsepositives:
+    - Legitimate usage by software developers/testers
+    level: high
+    references:
+    - https://lolbas-project.github.io/lolbas/Binaries/Tttracer/
+    - https://twitter.com/mattifestation/status/1196390321783025666
+    - https://twitter.com/oulusoyum/status/1191329746069655553
+    tags:
+    - attack.defense_evasion
+    - attack.credential_access
+    - attack.t1218
+    - attack.t1003.001
+  name: Time Travel Debugging Utility Usage
+

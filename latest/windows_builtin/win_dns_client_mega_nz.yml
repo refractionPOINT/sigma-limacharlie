@@ -1,0 +1,28 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '3008'
+  - case sensitive: false
+    op: contains
+    path: Event/EventData/QueryName
+    value: userstorage.mega.co.nz
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects DNS queries for subdomains used for upload to MEGA.io
+    falsepositives:
+    - Legitimate DNS queries and usage of Mega
+    level: high
+    references:
+    - https://research.nccgroup.com/2021/05/27/detecting-rclone-an-effective-tool-for-exfiltration/
+    tags:
+    - attack.exfiltration
+    - attack.t1567.002
+  name: DNS Query for MEGA.io Upload Domain - DNS Client
+

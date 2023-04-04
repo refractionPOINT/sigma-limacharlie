@@ -1,0 +1,46 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \verclsid.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: verclsid.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /S
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /C
+respond:
+- action: report
+  metadata:
+    author: Victor Sergeev, oscd.community
+    description: Detects when verclsid.exe is used to run COM object via GUID
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://lolbas-project.github.io/lolbas/Binaries/Verclsid/
+    - https://gist.github.com/NickTyrer/0598b60112eaafe6d07789f7964290d5
+    - https://bohops.com/2018/08/18/abusing-the-com-registry-structure-part-2-loading-techniques-for-evasion-and-persistence/
+    tags:
+    - attack.defense_evasion
+    - attack.t1218
+  name: Verclsid.exe Runs COM Object
+

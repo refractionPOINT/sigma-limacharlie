@@ -1,0 +1,168 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \netsh.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: netsh.exe
+    - op: or
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: firewall
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: add
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: allowedprogram
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: advfirewall
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: firewall
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: add
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: rule
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: action=allow
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: program=
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '%Public%\'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '%TEMP%'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '%TMP%'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: :\$Recycle.bin\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: :\RECYCLER\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: :\SystemVolumeInformation\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: :\Temp\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: :\Users\Default\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: :\Users\Desktop\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: :\Users\Public\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: :\Windows\addins\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: :\Windows\cursors\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: :\Windows\debug\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: :\Windows\drivers\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: :\Windows\fonts\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: :\Windows\help\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: :\Windows\system32\tasks\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: :\Windows\Tasks\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: :\Windows\Temp\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Downloads\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Local Settings\Temporary Internet Files\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Temporary Internet Files\Content.Outlook\
+respond:
+- action: report
+  metadata:
+    author: Sander Wiebing, Jonhnathan Ribeiro, Daniil Yugoslavskiy, oscd.community
+    description: Detects Netsh command execution that whitelists a program located
+      in a suspicious location in the Windows Firewall
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.virusradar.com/en/Win32_Kasidet.AD/description
+    - https://www.hybrid-analysis.com/sample/07e789f4f2f3259e7559fdccb36e96814c2dbff872a21e1fa03de9ee377d581f?environmentId=100
+    tags:
+    - attack.defense_evasion
+    - attack.t1562.004
+  name: Suspicious Program Location Whitelisted In Firewall Via Netsh.EXE
+

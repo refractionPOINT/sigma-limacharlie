@@ -1,0 +1,82 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: or
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /lastlog
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: '''x:0:'''
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /cat
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /head
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /tail
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /more
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /etc/passwd
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /etc/shadow
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /etc/sudoers
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /id
+    - op: and
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /lsof
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -u
+respond:
+- action: report
+  metadata:
+    author: Alejandro Ortuno, oscd.community
+    description: Detects enumeration of local systeam accounts. This information can
+      help adversaries determine which local accounts exist on a system to aid in
+      follow-on behavior.
+    falsepositives:
+    - Legitimate administration activities
+    level: low
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1087.001/T1087.001.md
+    tags:
+    - attack.discovery
+    - attack.t1087.001
+  name: Local System Accounts Discovery - Linux
+

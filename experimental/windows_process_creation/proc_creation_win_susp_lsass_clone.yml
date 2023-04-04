@@ -1,0 +1,36 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \Windows\System32\lsass.exe
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \Windows\System32\lsass.exe
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems), Samir Bousseaden
+    description: Detects a suspicious LSASS process process clone that could be a
+      sign of credential dumping activity
+    falsepositives:
+    - Unknown
+    level: critical
+    references:
+    - https://www.matteomalvica.com/blog/2019/12/02/win-defender-atp-cred-bypass/
+    - https://twitter.com/Hexacorn/status/1420053502554951689
+    - https://twitter.com/SBousseaden/status/1464566846594691073?s=20
+    tags:
+    - attack.credential_access
+    - attack.t1003
+    - attack.t1003.001
+  name: Potential Credential Dumping Via LSASS Process Clone
+

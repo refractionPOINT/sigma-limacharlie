@@ -1,0 +1,50 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: matches
+        path: event/FILE_PATH
+        re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Windows\\System32\\
+      - case sensitive: false
+        op: matches
+        path: event/FILE_PATH
+        re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Windows\\SysWOW64\\
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: cmd.exe /c
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: RoamDiag.cmd
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: -outputpath
+respond:
+- action: report
+  metadata:
+    author: Anton Kutepov, oscd.community
+    description: Detects using SettingSyncHost.exe to run hijacked binary
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.hexacorn.com/blog/2020/02/02/settingsynchost-exe-as-a-lolbin
+    tags:
+    - attack.execution
+    - attack.defense_evasion
+    - attack.t1574.008
+  name: Using SettingSyncHost.exe as LOLBin
+

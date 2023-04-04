@@ -1,0 +1,39 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Event Viewer\RecentViews
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \EventV~1\RecentViews
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: '>'
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects the pattern of UAC Bypass using Event Viewer RecentViews
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://twitter.com/orange_8361/status/1518970259868626944
+    - https://lolbas-project.github.io/lolbas/Binaries/Eventvwr/#execute
+    tags:
+    - attack.defense_evasion
+    - attack.privilege_escalation
+  name: UAC Bypass Using Event Viewer RecentViews
+

@@ -1,0 +1,33 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '4781'
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/OldTargetUserName
+      value: $
+  - case sensitive: false
+    not: true
+    op: contains
+    path: Event/EventData/NewTargetUserName
+    value: $
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects the renaming of an existing computer account to a account
+      name that doesn't contain a $ symbol as seen in attacks against CVE-2021-42287
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://medium.com/@mvelazco/hunting-for-samaccountname-spoofing-cve-2021-42287-and-domain-controller-impersonation-f704513c8a45
+  name: Suspicious Computer Account Name Change CVE-2021-42287
+

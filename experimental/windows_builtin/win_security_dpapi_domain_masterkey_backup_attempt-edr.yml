@@ -1,0 +1,26 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - case sensitive: false
+    op: is
+    path: event/EVENT/System/EventID
+    value: '4692'
+respond:
+- action: report
+  metadata:
+    author: Roberto Rodriguez @Cyb3rWard0g
+    description: Detects anyone attempting a backup for the DPAPI Master Key. This
+      events gets generated at the source and not the Domain Controller.
+    falsepositives:
+    - If a computer is a member of a domain, DPAPI has a backup mechanism to allow
+      unprotection of the data. Which will trigger this event.
+    level: medium
+    references:
+    - https://threathunterplaybook.com/hunts/windows/190620-DomainDPAPIBackupKeyExtraction/notebook.html
+    tags:
+    - attack.credential_access
+    - attack.t1003.004
+  name: DPAPI Domain Master Key Backup Attempt
+

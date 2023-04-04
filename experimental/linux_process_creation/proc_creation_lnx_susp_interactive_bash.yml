@@ -1,0 +1,64 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/PARENT/COMMAND_LINE
+      value: bash -i
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '-c import '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: base64
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: pty.spawn
+      - op: or
+        rules:
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: whoami
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: iptables
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /ncat
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /nc
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /netcat
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects suspicious interactive bash as a parent to rather uncommon
+      child processes
+    falsepositives:
+    - Legitimate software that uses these patterns
+    level: medium
+    references:
+    - Internal Research
+  name: Interactive Bash Suspicious Children
+

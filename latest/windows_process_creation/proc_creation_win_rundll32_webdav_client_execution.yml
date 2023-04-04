@@ -1,0 +1,45 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \rundll32.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: RUNDLL32.EXE
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: C:\windows\system32\davclnt.dll,DavSetCookie
+respond:
+- action: report
+  metadata:
+    author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)
+    description: 'Detects "svchost.exe" spawning "rundll32.exe" with command arguments
+      like C:\windows\system32\davclnt.dll,DavSetCookie.
+
+      This could be an indicator of exfiltration or use of WebDav to launch code (hosted
+      on WebDav Server).
+
+      '
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://github.com/OTRF/detection-hackathon-apt29/issues/17
+    - https://github.com/OTRF/ThreatHunter-Playbook/blob/2d4257f630f4c9770f78d0c1df059f891ffc3fec/docs/evals/apt29/detections/7.B.4_C10730EA-6345-4934-AA0F-B0EFCA0C4BA6.md
+    tags:
+    - attack.exfiltration
+    - attack.t1048.003
+  name: WebDav Client Execution
+

@@ -1,0 +1,35 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \wsmprovhost.exe
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \wsmprovhost.exe
+respond:
+- action: report
+  metadata:
+    author: Roberto Rodriguez @Cyb3rWard0g
+    description: Detects remote PowerShell sections by monitoring for wsmprovhost
+      (WinRM host process) as a parent or child process (sign of an active PowerShell
+      remote session).
+    falsepositives:
+    - Legitimate usage of remote Powershell, e.g. for monitoring purposes.
+    level: medium
+    references:
+    - https://threathunterplaybook.com/hunts/windows/190511-RemotePwshExecution/notebook.html
+    tags:
+    - attack.execution
+    - attack.t1059.001
+    - attack.t1021.006
+  name: Remote PowerShell Session Host Process (WinRM)
+

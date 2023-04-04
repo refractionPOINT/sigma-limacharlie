@@ -1,0 +1,83 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: reg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: add
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: hkcu\software\classes\ms-settings\shell\open\command
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '/ve '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /d
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: reg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: add
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: hkcu\software\classes\ms-settings\shell\open\command
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /v
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: DelegateExecute
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: reg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: delete
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: hkcu\software\classes\ms-settings
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Threat actors performed dumping of SAM, SECURITY and SYSTEM registry
+      hives using DelegateExecute key
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://thedfirreport.com/2021/12/13/diavol-ransomware/
+    tags:
+    - attack.credential_access
+    - attack.t1003
+  name: Suspicious Reg Add Open Command
+

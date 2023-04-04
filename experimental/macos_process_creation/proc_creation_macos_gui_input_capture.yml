@@ -1,0 +1,79 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is mac
+  - op: and
+    rules:
+    - case sensitive: true
+      op: is
+      path: event/FILE_PATH
+      value: /usr/sbin/osascript
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: -e
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: display
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: dialog
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: answer
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: admin
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: administrator
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: authenticate
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: authentication
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: credentials
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: pass
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: password
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: unlock
+respond:
+- action: report
+  metadata:
+    author: remotephone, oscd.community
+    description: Detects attempts to use system dialog prompts to capture user credentials
+    falsepositives:
+    - Legitimate administration tools and activities
+    level: low
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1056.002/T1056.002.md
+    - https://scriptingosx.com/2018/08/user-interaction-from-bash-scripts/
+    tags:
+    - attack.credential_access
+    - attack.t1056.002
+  name: GUI Input Capture - macOS
+

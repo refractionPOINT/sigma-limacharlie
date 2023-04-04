@@ -1,0 +1,56 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '5156'
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/DestPort
+        value: '88'
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/Application
+        value: C:\Windows\System32\lsass.exe
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/Application
+        value: C:\Program Files\Google\Chrome\Application\chrome.exe
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/Application
+        value: C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/Application
+        value: C:\Program Files\Mozilla Firefox\firefox.exe
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/Application
+        value: C:\Program Files (x86)\Mozilla Firefox\firefox.exe
+respond:
+- action: report
+  metadata:
+    author: Ilyas Ochkov, oscd.community
+    description: Detects suspicious outbound network activity via kerberos default
+      port indicating possible lateral movement or first stage PrivEsc via delegation.
+    falsepositives:
+    - Web Browsers
+    level: high
+    references:
+    - https://github.com/GhostPack/Rubeus
+    tags:
+    - attack.lateral_movement
+    - attack.t1558.003
+  name: Suspicious Outbound Kerberos Connection - Security
+

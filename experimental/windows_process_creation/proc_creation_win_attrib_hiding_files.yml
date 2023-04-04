@@ -1,0 +1,64 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \attrib.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: ATTRIB.EXE
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' +h '
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '\desktop.ini '
+      - op: and
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \cmd.exe
+        - case sensitive: false
+          op: matches
+          path: event/COMMAND_LINE
+          re: \+R\ \+H\ \+S\ \+A\ \\\*\.cui
+        - case sensitive: false
+          op: matches
+          path: event/PARENT/COMMAND_LINE
+          re: C:\\\\WINDOWS\\\\system32\\\*\.bat
+respond:
+- action: report
+  metadata:
+    author: Sami Ruohonen
+    description: Detects usage of attrib.exe to hide files from users.
+    falsepositives:
+    - IgfxCUIService.exe hiding *.cui files via .bat script (attrib.exe a child of
+      cmd.exe and igfxCUIService.exe is the parent of the cmd.exe)
+    - Msiexec.exe hiding desktop.ini
+    level: medium
+    references:
+    - https://unit42.paloaltonetworks.com/unit42-sure-ill-take-new-combojack-malware-alters-clipboards-steal-cryptocurrency/
+    - https://www.uptycs.com/blog/lolbins-are-no-laughing-matter
+    tags:
+    - attack.defense_evasion
+    - attack.t1564.001
+  name: Hiding Files with Attrib.exe
+

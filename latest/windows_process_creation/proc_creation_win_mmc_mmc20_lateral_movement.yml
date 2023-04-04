@@ -1,0 +1,40 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \svchost.exe
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \mmc.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: -Embedding
+respond:
+- action: report
+  metadata:
+    author: '@2xxeformyshirt (Security Risk Advisors) - rule; Teymur Kheirkhabarov
+      (idea)'
+    description: Detects MMC20.Application Lateral Movement; specifically looks for
+      the spawning of the parent MMC.exe with a command line of "-Embedding" as a
+      child of svchost.exe
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://enigma0x3.net/2017/01/05/lateral-movement-using-the-mmc20-application-com-object/
+    - https://drive.google.com/file/d/1lKya3_mLnR3UQuCoiYruO3qgu052_iS_/view?usp=sharing
+    tags:
+    - attack.execution
+    - attack.t1021.003
+  name: MMC20 Lateral Movement
+

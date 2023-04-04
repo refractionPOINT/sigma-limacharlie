@@ -1,0 +1,58 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '5145'
+    - case sensitive: false
+      op: is
+      path: event/EVENT/EventData/ObjectType
+      value: File
+    - case sensitive: false
+      op: ends with
+      path: event/EVENT/EventData/RelativeTargetName
+      value: \desktop.ini
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/AccessList
+        value: WriteData
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/AccessList
+        value: DELETE
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/AccessList
+        value: WriteDAC
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/AccessList
+        value: AppendData
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/AccessList
+        value: AddSubdirectory
+respond:
+- action: report
+  metadata:
+    author: Tim Shelton (HAWK.IO)
+    description: Detects unusual processes accessing desktop.ini remotely over network
+      share, which can be leveraged to alter how Explorer displays a folder's content
+      (i.e. renaming files) without changing them on disk.
+    falsepositives:
+    - Read only access list authority
+    level: medium
+    references:
+    - https://isc.sans.edu/forums/diary/Desktopini+as+a+postexploitation+tool/25912/
+    tags:
+    - attack.persistence
+    - attack.t1547.009
+  name: Windows Network Access Suspicious desktop.ini Action
+

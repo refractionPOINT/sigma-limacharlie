@@ -1,0 +1,33 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \tor.exe
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \Tor Browser\Browser\firefox.exe
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Detects the use of Tor or Tor-Browser to connect to onion routing
+      networks
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.logpoint.com/en/blog/detecting-tor-use-with-logpoint/
+    tags:
+    - attack.command_and_control
+    - attack.t1090.003
+  name: Tor Client/Browser Execution
+

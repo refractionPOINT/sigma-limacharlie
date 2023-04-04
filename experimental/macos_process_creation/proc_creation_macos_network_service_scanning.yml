@@ -1,0 +1,51 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is mac
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /nc
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /netcat
+      - case sensitive: false
+        not: true
+        op: contains
+        path: event/COMMAND_LINE
+        value: l
+    - op: or
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /nmap
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /telnet
+respond:
+- action: report
+  metadata:
+    author: Alejandro Ortuno, oscd.community
+    description: Detects enumeration of local or remote network services.
+    falsepositives:
+    - Legitimate administration activities
+    level: low
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1046/T1046.md
+    tags:
+    - attack.discovery
+    - attack.t1046
+  name: MacOS Network Service Scanning
+

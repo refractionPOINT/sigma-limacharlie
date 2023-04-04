@@ -1,0 +1,21 @@
+detect:
+  case sensitive: false
+  event: DNS_REQUEST
+  op: contains
+  path: event/DOMAIN_NAME
+  value: userstorage.mega.co.nz
+respond:
+- action: report
+  metadata:
+    author: Aaron Greetham (@beardofbinary) - NCC Group
+    description: Detects DNS queries for subdomains used for upload to MEGA.io
+    falsepositives:
+    - Legitimate DNS queries and usage of Mega
+    level: high
+    references:
+    - https://research.nccgroup.com/2021/05/27/detecting-rclone-an-effective-tool-for-exfiltration/
+    tags:
+    - attack.exfiltration
+    - attack.t1567.002
+  name: DNS Query for MEGA.io Upload Domain - Sysmon
+

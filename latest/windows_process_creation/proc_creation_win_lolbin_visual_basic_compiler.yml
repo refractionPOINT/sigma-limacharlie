@@ -1,0 +1,33 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \vbc.exe
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \cvtres.exe
+respond:
+- action: report
+  metadata:
+    author: "Ensar \u015Eamil, @sblmsrsn, @oscd_initiative"
+    description: Detects successful code compilation via Visual Basic Command Line
+      Compiler that utilizes Windows Resource to Object Converter.
+    falsepositives:
+    - Utilization of this tool should not be seen in enterprise environment
+    level: high
+    references:
+    - https://lolbas-project.github.io/lolbas/Binaries/Vbc/
+    tags:
+    - attack.defense_evasion
+    - attack.t1027.004
+  name: Visual Basic Command Line Compiler Usage
+

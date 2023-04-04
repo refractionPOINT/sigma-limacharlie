@@ -1,0 +1,106 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: :\ProgramData\adobe\Adobe.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: :\ProgramData\oracle\local.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \revshell.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \infopagesbackup\ncat.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: :\ProgramData\comms\comms.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -ExecutionPolicy Bypass -File
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \msf.ps1
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: infopagesbackup
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \ncat
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -e cmd.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: system.Data.SqlClient.SqlDataAdapter($cmd); [void]$da.fill
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -nop -w hidden -c $k=new-object
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '[Net.CredentialCache]::DefaultCredentials;IEX '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -nop -w hidden -c $m=new-object net.webclient;$m'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -noninteractive -executionpolicy bypass whoami
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -noninteractive -executionpolicy bypass netstat -a
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: L3NlcnZlcj1
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects tools and process executions used by Greenbug in their May
+      2020 campaign as reported by Symantec
+    falsepositives:
+    - Unlikely
+    level: critical
+    references:
+    - https://symantec-enterprise-blogs.security.com/blogs/threat-intelligence/greenbug-espionage-telco-south-asia
+    tags:
+    - attack.g0049
+    - attack.execution
+    - attack.t1059.001
+    - attack.command_and_control
+    - attack.t1105
+    - attack.defense_evasion
+    - attack.t1036.005
+  name: Greenbug Espionage Group Indicators
+
