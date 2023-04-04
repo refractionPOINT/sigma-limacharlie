@@ -39,7 +39,6 @@ steps:
   - name: 'ssh'
     path: /root/.ssh
 
-
 - name: 'gcr.io/cloud-builders/git'
   id: clone-repo-sigma-limacharlie
   waitFor: ['set-ssh-keys']
