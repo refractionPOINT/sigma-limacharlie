@@ -29,6 +29,17 @@ steps:
     path: /root/.ssh
 
 - name: 'gcr.io/cloud-builders/git'
+  id: clone-repo-sigma-legacy
+  waitFor: ['set-ssh-keys']
+  args:
+  - clone
+  - --recurse-submodules
+  - git@github.com:SigmaHQ/legacy-sigmatools.git
+  volumes:
+  - name: 'ssh'
+    path: /root/.ssh
+
+- name: 'gcr.io/cloud-builders/git'
   id: clone-repo-sigma-limacharlie
   waitFor: ['set-ssh-keys']
   args:
@@ -44,7 +55,7 @@ steps:
 # RESET EXISTING RULES
 - name: 'gcr.io/cloud-builders/git'
   id: reset-latest
-  waitFor: ['clone-repo-sigma', 'clone-repo-sigma-limacharlie']
+  waitFor: ['clone-repo-sigma', 'clone-repo-sigma-legacy', 'clone-repo-sigma-limacharlie']
   dir: sigma-limacharlie
   entrypoint: 'bash'
   args:
@@ -56,7 +67,7 @@ steps:
     path: /root/.ssh
 - name: 'gcr.io/cloud-builders/git'
   id: reset-experimental
-  waitFor: ['clone-repo-sigma', 'clone-repo-sigma-limacharlie']
+  waitFor: ['clone-repo-sigma', 'clone-repo-sigma-legacy', 'clone-repo-sigma-limacharlie']
   dir: sigma-limacharlie
   entrypoint: 'bash'
   args:
@@ -76,7 +87,7 @@ steps:
   - -c
   - |
     pip3 install ruamel.yaml pyyaml requests termcolor
-    python3 ./scripts/generate_all.py ./sigma/ ./sigma-limacharlie/latest/ windows/builtin windows/process_creation windows/sysmon
+    python3 ./scripts/generate_all.py ./sigma/ ./legacy-sigmatools/ ./sigma-limacharlie/latest/ windows/builtin windows/process_creation windows/sysmon
 
 # GENERATE NEW EXPERIMENTAL RULES
 - name: python:3
@@ -87,7 +98,7 @@ steps:
   - -c
   - |
     pip3 install ruamel.yaml pyyaml requests termcolor
-    python3 ./scripts/generate_all.py ./sigma/ ./sigma-limacharlie/experimental/ windows/builtin windows/process_creation windows/sysmon windows/dns_query macos/file_event macos/process_creation linux/process_creation
+    python3 ./scripts/generate_all.py ./sigma/ ./legacy-sigmatools/ ./sigma-limacharlie/experimental/ windows/builtin windows/process_creation windows/sysmon windows/dns_query macos/file_event macos/process_creation linux/process_creation
 
 # PUSH CHANGES
 - name: 'gcr.io/cloud-builders/git'
