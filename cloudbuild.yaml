@@ -29,6 +29,17 @@ steps:
     path: /root/.ssh
 
 - name: 'gcr.io/cloud-builders/git'
+  id: clone-repo-sigma-legacy
+  waitFor: ['set-ssh-keys']
+  args:
+  - clone
+  - --recurse-submodules
+  - git@github.com:SigmaHQ/legacy-sigmatools.git
+  volumes:
+  - name: 'ssh'
+    path: /root/.ssh
+
+- name: 'gcr.io/cloud-builders/git'
   id: clone-repo-sigma-limacharlie
   waitFor: ['set-ssh-keys']
   args:
