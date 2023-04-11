@@ -11,102 +11,47 @@ detect:
       rules:
       - op: or
         rules:
-        - op: and
+        - op: or
           rules:
-          - op: or
-            rules:
-            - case sensitive: false
-              op: ends with
-              path: event/FILE_PATH
-              value: \powershell.exe
-            - case sensitive: false
-              op: ends with
-              path: event/FILE_PATH
-              value: \pwsh.exe
-          - op: matches
-            path: event/COMMAND_LINE
-            re: .*\+.*\+.*\+.*\+.*\+.*\+.*\+.*\+.*\+.*\+.*\+.*\+.*\+.*\+.*
-        - op: and
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \powershell.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \pwsh.exe
+        - op: or
           rules:
-          - op: or
-            rules:
-            - case sensitive: false
-              op: ends with
-              path: event/FILE_PATH
-              value: \powershell.exe
-            - case sensitive: false
-              op: ends with
-              path: event/FILE_PATH
-              value: \pwsh.exe
-          - op: matches
-            path: event/COMMAND_LINE
-            re: .*\{.*\{.*\{.*\{.*\{.*\{.*\{.*\{.*\{.*\{.*
-        - op: and
-          rules:
-          - op: or
-            rules:
-            - case sensitive: false
-              op: ends with
-              path: event/FILE_PATH
-              value: \powershell.exe
-            - case sensitive: false
-              op: ends with
-              path: event/FILE_PATH
-              value: \pwsh.exe
-          - op: matches
-            path: event/COMMAND_LINE
-            re: .*\{.*\{.*\{.*\{.*\{.*
-        - op: and
-          rules:
-          - op: or
-            rules:
-            - case sensitive: false
-              op: ends with
-              path: event/FILE_PATH
-              value: \powershell.exe
-            - case sensitive: false
-              op: ends with
-              path: event/FILE_PATH
-              value: \pwsh.exe
-          - op: matches
-            path: event/COMMAND_LINE
-            re: .*\^.*\^.*\^.*\^.*\^.*
-        - op: and
-          rules:
-          - op: or
-            rules:
-            - case sensitive: false
-              op: ends with
-              path: event/FILE_PATH
-              value: \powershell.exe
-            - case sensitive: false
-              op: ends with
-              path: event/FILE_PATH
-              value: \pwsh.exe
-          - op: matches
-            path: event/COMMAND_LINE
-            re: .*`.*`.*`.*`.*`.*
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: PowerShell.EXE
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: pwsh.dll
+      - op: or
+        rules:
+        - op: matches
+          path: event/COMMAND_LINE
+          re: .*\+.*\+.*\+.*\+.*\+.*\+.*\+.*\+.*\+.*\+.*\+.*\+.*\+.*\+.*
+        - op: matches
+          path: event/COMMAND_LINE
+          re: .*\{.*\{.*\{.*\{.*\{.*\{.*\{.*\{.*\{.*\{.*
+        - op: matches
+          path: event/COMMAND_LINE
+          re: .*\^.*\^.*\^.*\^.*\^.*
+        - op: matches
+          path: event/COMMAND_LINE
+          re: .*`.*`.*`.*`.*`.*
+    - not: true
+      op: or
+      rules:
       - case sensitive: false
-        not: true
         op: is
         path: event/PARENT/FILE_PATH
         value: C:\Program Files\Amazon\SSM\ssm-document-worker.exe
-    - not: true
-      op: and
-      rules:
-      - op: or
-        rules:
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \powershell.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \pwsh.exe
-      - op: matches
-        path: event/COMMAND_LINE
-        re: .*\{.*\{.*\{.*\{.*\{.*
       - op: or
         rules:
         - case sensitive: false
@@ -125,16 +70,15 @@ respond:
       Shelton (fp)
     description: Detects the PowerShell command lines with special characters
     falsepositives:
-    - Unlikely
     - Amazon SSM Document Worker
     - Windows Defender ATP
     level: high
     references:
     - https://speakerdeck.com/heirhabarov/hunting-for-powershell-abuse?slide=64
     tags:
+    - attack.execution
     - attack.defense_evasion
     - attack.t1027
-    - attack.execution
     - attack.t1059.001
-  name: Suspicious PowerShell Command Line
+  name: Potential PowerShell Command Line Obfuscation
 

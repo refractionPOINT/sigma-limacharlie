@@ -83,18 +83,19 @@ respond:
 - action: report
   metadata:
     author: pH-T (Nextron Systems)
-    description: Detects suspicious base64 encoded and obbfuscated LOAD string often
-      used for reflection.assembly load
+    description: Detects suspicious base64 encoded and obfuscated "LOAD" keyword used
+      in .NET "reflection.assembly"
     falsepositives:
     - Unlikely
     level: high
     references:
     - https://github.com/Neo23x0/Raccine/blob/20a569fa21625086433dcce8bb2765d0ea08dcb6/yara/mal_revil.yar
     - https://thedfirreport.com/2022/05/09/seo-poisoning-a-gootloader-story/
+    - https://learn.microsoft.com/en-us/dotnet/api/system.appdomain.load?view=net-7.0
     tags:
     - attack.execution
-    - attack.t1059.001
     - attack.defense_evasion
+    - attack.t1059.001
     - attack.t1027
-  name: Suspicious Encoded Obfuscated LOAD String
+  name: Suspicious Encoded And Obfuscated Reflection Assembly Load Function Call
 

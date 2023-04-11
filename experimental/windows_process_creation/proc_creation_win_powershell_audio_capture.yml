@@ -5,14 +5,33 @@ detect:
   op: and
   rules:
   - op: is windows
-  - case sensitive: false
-    op: contains
-    path: event/COMMAND_LINE
-    value: WindowsAudioDevice-Powershell-Cmdlet
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: WindowsAudioDevice-Powershell-Cmdlet
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Toggle-AudioDevice
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: 'Get-AudioDevice '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: 'Set-AudioDevice '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: 'Write-AudioDevice '
 respond:
 - action: report
   metadata:
-    author: E.M. Anhaus (originally from Atomic Blue Detections, Endgame), oscd.community
+    author: E.M. Anhaus (originally from Atomic Blue Detections, Endgame), oscd.community,
+      Nasreddine Bencherchali (Nextron Systems)
     description: Detects audio capture via PowerShell Cmdlet.
     falsepositives:
     - Legitimate audio capture by legitimate user.
@@ -20,6 +39,7 @@ respond:
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1123/T1123.md
     - https://eqllib.readthedocs.io/en/latest/analytics/ab7a6ef4-0983-4275-a4f1-5c6bd3c31c23.html
+    - https://github.com/frgnca/AudioDeviceCmdlets
     tags:
     - attack.collection
     - attack.t1123

@@ -7,8 +7,30 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - op: or
+    - op: and
       rules:
+      - op: or
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \powershell.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \pwsh.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: PowerShell.EXE
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: pwsh.dll
       - op: or
         rules:
         - op: and
@@ -17,87 +39,59 @@ detect:
             op: contains
             path: event/COMMAND_LINE
             value: ' -e'
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: ' JAB'
-        - op: and
-          rules:
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: ' -e'
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: ' JAB'
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: ' -w'
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: ' hidden '
-      - op: and
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: ' -e'
+          - op: or
+            rules:
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: ' JAB'
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: ' SUVYI'
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: ' SQBFAFgA'
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: ' aQBlAHgA'
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: ' aWV4I'
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: ' IAA'
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: ' IAB'
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: ' UwB'
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: ' cwB'
         - op: or
           rules:
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
-            value: ' BA^J'
+            value: '.exe -ENCOD '
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
-            value: ' SUVYI'
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: ' SQBFAFgA'
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: ' aQBlAHgA'
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: ' aWV4I'
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: ' IAA'
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: ' IAB'
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: ' UwB'
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: ' cwB'
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: '.exe -ENCOD '
-    - not: true
-      op: and
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ' -ExecutionPolicy'
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: 'remotesigned '
+            value: ' BA^J e-'
+    - case sensitive: false
+      not: true
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' -ExecutionPolicy remotesigned '
 respond:
 - action: report
   metadata:

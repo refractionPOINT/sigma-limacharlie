@@ -42,10 +42,12 @@ respond:
     falsepositives:
     - Unknown
     level: high
+    references:
+    - Internal Research
     tags:
     - attack.defense_evasion
     - attack.t1140
     - attack.execution
     - attack.t1059.001
-  name: PowerShell Base64 Encoded FromBase64String Keyword
+  name: PowerShell Base64 Encoded FromBase64String Cmdlet
 

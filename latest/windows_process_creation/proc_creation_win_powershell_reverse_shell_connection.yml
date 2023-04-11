@@ -34,24 +34,24 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ' System.Net.Sockets.TCPClient'
+        value: ' Net.Sockets.TCPClient'
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: .GetBytes
+        value: .GetStream(
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: .Write
+        value: .Write(
 respond:
 - action: report
   metadata:
-    author: FPT.EagleEye, wagga
+    author: FPT.EagleEye, wagga, Nasreddine Bencherchali (Nextron Systems)
     description: Detects usage of the "TcpClient" class. Which can be abused to establish
       remote connections and reverse-shells. As seen used by the Nishang "Invoke-PowerShellTcpOneLine"
-      reverse shell.
+      reverse shell and other.
     falsepositives:
-    - Administrative might use this function to check network connectivity
+    - In rare administrative cases, this function might be used to check network connectivity
     level: high
     references:
     - https://www.volexity.com/blog/2021/03/02/active-exploitation-of-microsoft-exchange-zero-day-vulnerabilities/

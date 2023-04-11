@@ -1,0 +1,101 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: OgA6ACgAIgBMACIAKwAiAG8AYQBkACIAKQ
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: oAOgAoACIATAAiACsAIgBvAGEAZAAiACkA
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: 6ADoAKAAiAEwAIgArACIAbwBhAGQAIgApA
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: OgA6ACgAIgBMAG8AIgArACIAYQBkACIAKQ
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: oAOgAoACIATABvACIAKwAiAGEAZAAiACkA
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: 6ADoAKAAiAEwAbwAiACsAIgBhAGQAIgApA
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: OgA6ACgAIgBMAG8AYQAiACsAIgBkACIAKQ
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: oAOgAoACIATABvAGEAIgArACIAZAAiACkA
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: 6ADoAKAAiAEwAbwBhACIAKwAiAGQAIgApA
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: OgA6ACgAJwBMACcAKwAnAG8AYQBkACcAKQ
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: oAOgAoACcATAAnACsAJwBvAGEAZAAnACkA
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: 6ADoAKAAnAEwAJwArACcAbwBhAGQAJwApA
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: OgA6ACgAJwBMAG8AJwArACcAYQBkACcAKQ
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: oAOgAoACcATABvACcAKwAnAGEAZAAnACkA
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: 6ADoAKAAnAEwAbwAnACsAJwBhAGQAJwApA
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: OgA6ACgAJwBMAG8AYQAnACsAJwBkACcAKQ
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: oAOgAoACcATABvAGEAJwArACcAZAAnACkA
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: 6ADoAKAAnAEwAbwBhACcAKwAnAGQAJwApA
+respond:
+- action: report
+  metadata:
+    author: pH-T (Nextron Systems)
+    description: Detects suspicious base64 encoded and obfuscated "LOAD" keyword used
+      in .NET "reflection.assembly"
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://github.com/Neo23x0/Raccine/blob/20a569fa21625086433dcce8bb2765d0ea08dcb6/yara/mal_revil.yar
+    - https://thedfirreport.com/2022/05/09/seo-poisoning-a-gootloader-story/
+    - https://learn.microsoft.com/en-us/dotnet/api/system.appdomain.load?view=net-7.0
+    tags:
+    - attack.execution
+    - attack.defense_evasion
+    - attack.t1059.001
+    - attack.t1027
+  name: Suspicious Encoded And Obfuscated Reflection Assembly Load Function Call
+
