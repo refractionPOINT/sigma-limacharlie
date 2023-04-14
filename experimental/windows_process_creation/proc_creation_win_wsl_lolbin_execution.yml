@@ -49,6 +49,10 @@ detect:
           op: contains
           path: event/COMMAND_LINE
           value: ' -u root'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: --debug-shell
     - not: true
       op: and
       rules:
@@ -69,8 +73,9 @@ detect:
 respond:
 - action: report
   metadata:
-    author: oscd.community, Zach Stanford @svch0st, Nasreddine Bencherchali
-    description: Detects Possible usage of Windows Subsystem for Linux (WSL) binary
+    author: oscd.community, Zach Stanford @svch0st, Nasreddine Bencherchali (Nextron
+      Systems)
+    description: Detects potential abuse of Windows Subsystem for Linux (WSL) binary
       as a LOLBIN to execute arbitrary linux and windows commands
     falsepositives:
     - Automation and orchestration scripts may use this method to execute scripts

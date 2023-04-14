@@ -32,7 +32,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Sreeman, Florian Roth
+    author: Sreeman, Florian Roth (Nextron Systems)
     description: This is an unusual method to download files. It starts a browser
       headless and downloads a file from a location. This can be used by threat actors
       to download files.

@@ -1,0 +1,36 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/ORIGINAL_FILE_NAME
+      value: Microsoft.NodejsTools.PressAnyKey.exe
+    - case sensitive: false
+      not: true
+      op: ends with
+      path: event/FILE_PATH
+      value: \Microsoft.NodejsTools.PressAnyKey.exe
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems), Florian Roth (Nextron Systems)
+    description: Detects renamed execution of "Microsoft.NodejsTools.PressAnyKey.exe",
+      which can be abused as a LOLBIN to execute arbitrary binaries
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://twitter.com/mrd0x/status/1463526834918854661
+    - https://gist.github.com/nasbench/a989ce64cefa8081bd50cf6ad8c491b5
+    tags:
+    - attack.execution
+    - attack.defense_evasion
+    - attack.t1218
+  name: Visual Studio NodejsTools PressAnyKey Renamed Execution
+

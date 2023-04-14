@@ -1,0 +1,75 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: HH.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \hh.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .application
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \AppData\Local\Temp\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Content.Outlook\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Downloads\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Users\Public\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Windows\Temp\
+respond:
+- action: report
+  metadata:
+    author: Maxim Pavlunin
+    description: Detects a suspicious execution of a Microsoft HTML Help (HH.exe)
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/chm-badness-delivers-a-banking-trojan/
+    - https://github.com/elastic/protections-artifacts/commit/746086721fd385d9f5c6647cada1788db4aea95f#diff-27939090904026cc396b0b629c8e4314acd6f5dac40a676edbc87f4567b47eb7
+    - https://www.ptsecurity.com/ww-en/analytics/pt-esc-threat-intelligence/higaisa-or-winnti-apt-41-backdoors-old-and-new/
+    - https://www.zscaler.com/blogs/security-research/unintentional-leak-glimpse-attack-vectors-apt37
+    tags:
+    - attack.defense_evasion
+    - attack.execution
+    - attack.initial_access
+    - attack.t1047
+    - attack.t1059.001
+    - attack.t1059.003
+    - attack.t1059.005
+    - attack.t1059.007
+    - attack.t1218
+    - attack.t1218.001
+    - attack.t1218.010
+    - attack.t1218.011
+    - attack.t1566
+    - attack.t1566.001
+  name: Suspicious HH.EXE Execution
+
