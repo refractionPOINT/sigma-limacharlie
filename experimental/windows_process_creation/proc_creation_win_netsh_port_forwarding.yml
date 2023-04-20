@@ -42,6 +42,24 @@ detect:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
+          value: 'i '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'p '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'a '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'v '
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
           value: connectp
         - case sensitive: false
           op: contains
@@ -54,7 +72,8 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth (Nextron Systems), omkar72, oscd.community
+    author: Florian Roth (Nextron Systems), omkar72, oscd.community, Swachchhanda
+      Shrawan Poudel
     description: Detects the execution of netsh commands that configure a new port
       forwarding (PortProxy) rule
     falsepositives:
