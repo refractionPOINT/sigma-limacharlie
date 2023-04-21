@@ -99,7 +99,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Vadim Khrykov (ThreatIntel), Cyb3rEng
+    author: Vadim Khrykov (ThreatIntel), Cyb3rEng, Florian Roth (Nextron Systems)
     description: Detects suspicious and uncommon child processes of WmiPrvSE
     falsepositives:
     - Unknown
@@ -108,6 +108,7 @@ respond:
     - https://thedfirreport.com/2021/03/29/sodinokibi-aka-revil-ransomware/
     - https://github.com/vadim-hunter/Detection-Ideas-Rules/blob/02bcbfc2bfb8b4da601bb30de0344ae453aa1afe/Threat%20Intelligence/The%20DFIR%20Report/20210329_Sodinokibi_(aka_REvil)_Ransomware.yaml
     - https://blog.osarmor.com/319/onenote-attachment-delivers-asyncrat-malware/
+    - https://twitter.com/ForensicITGuy/status/1334734244120309760
     tags:
     - attack.execution
     - attack.defense_evasion
