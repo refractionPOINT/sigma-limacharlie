@@ -21,6 +21,11 @@ detect:
       op: is
       path: event/EVENT/System/EventID
       value: '1117'
+  - not: true
+    op: is
+    case sensitive: false
+    path: event/EVENT/System/Provider/Name
+    value: 'Microsoft-Windows-GroupPolicy'
 respond:
 - action: report
   metadata:
