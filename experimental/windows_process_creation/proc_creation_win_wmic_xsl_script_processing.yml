@@ -15,49 +15,55 @@ detect:
           op: ends with
           path: event/FILE_PATH
           value: \wmic.exe
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: /format
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: /format
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: -format
       - not: true
         op: or
         rules:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: /Format:List
+          value: Format:List
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: /Format:htable
+          value: Format:htable
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: /Format:hform
+          value: Format:hform
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: /Format:table
+          value: Format:table
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: /Format:mof
+          value: Format:mof
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: /Format:value
+          value: Format:value
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: /Format:rawxml
+          value: Format:rawxml
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: /Format:xml
+          value: Format:xml
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: /Format:csv
+          value: Format:csv
     - case sensitive: false
       op: ends with
       path: event/FILE_PATH
@@ -65,7 +71,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Timur Zinniatullin, oscd.community
+    author: Timur Zinniatullin, oscd.community, Swachchhanda Shrawan Poudel
     description: Extensible Stylesheet Language (XSL) files are commonly used to describe
       the processing and rendering of data within XML files. Rule detects when adversaries
       abuse this functionality to execute arbitrary files while potentially bypassing
