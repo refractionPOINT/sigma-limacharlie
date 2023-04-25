@@ -327,12 +327,37 @@ detect:
           op: ends with
           path: event/FILE_PATH
           value: \wscript.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: \AppData\
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: \Users\Public\
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: \ProgramData\
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: \Windows\Tasks\
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: \Windows\Temp\
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: \Windows\System32\Tasks\
 respond:
 - action: report
   metadata:
-    author: Michael Haag, Florian Roth, Markus Neis, Elastic, FPT.EagleEye Team, Vadim
-      Khrykov, Cyb3rEng, Michael Haag, Christopher Peacock @securepeacock, SCYTHE
-      @scythe_io
+    author: Florian Roth (Nextron Systems), Markus Neis, FPT.EagleEye Team, Vadim
+      Khrykov, Cyb3rEng, Michael Haag, Christopher Peacock @securepeacock, @scythe_io
     description: Detects a suspicious process spawning from one of the Microsoft Office
       suite products (Word, Excel, PowerPoint, Publisher, Visio, etc.)
     falsepositives:
