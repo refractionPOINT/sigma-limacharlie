@@ -5,28 +5,87 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: and
+  - op: or
     rules:
-    - case sensitive: false
-      op: is
-      path: event/ORIGINAL_FILE_NAME
-      value: RdrLeakDiag.exe
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: fullmemdmp
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: fullmemdmp
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /memdmp
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: -memdmp
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -o '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /o '
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -p '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /p '
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \rdrleakdiag.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: RdrLeakDiag.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: fullmemdmp
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /memdmp
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: -memdmp
 respond:
 - action: report
   metadata:
-    author: Cedric MAURUGEON
-    description: Detects a process memory dump performed by RdrLeakDiag.exe
+    author: Cedric MAURUGEON, Florian Roth (Nextron Systems), Swachchhanda Shrawan
+      Poudel, Nasreddine Bencherchali (Nextron Systems)
+    description: Detects the use of the Microsoft Windows Resource Leak Diagnostic
+      tool "rdrleakdiag.exe" to dump process memory
     falsepositives:
     - Unknown
     level: high
     references:
     - https://www.pureid.io/dumping-abusing-windows-credentials-part-1/
+    - https://www.crowdstrike.com/blog/overwatch-exposes-aquatic-panda-in-possession-of-log-4-shell-exploit-tools/
+    - https://lolbas-project.github.io/lolbas/Binaries/Rdrleakdiag/
+    - https://twitter.com/0gtweet/status/1299071304805560321?s=21
     tags:
     - attack.credential_access
     - attack.t1003.001
-  name: Process Dump via RdrLeakDiag.exe
+  name: Process Memory Dump via RdrLeakDiag.EXE
 
