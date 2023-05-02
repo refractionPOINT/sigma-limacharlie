@@ -1,0 +1,31 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '4730'
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '634'
+respond:
+- action: report
+  metadata:
+    author: Alexandr Yampolskyi, SOC Prime
+    description: Detects activity when a security-enabled global group is deleted
+    falsepositives:
+    - Unknown
+    level: low
+    references:
+    - https://www.cisecurity.org/controls/cis-controls-list/
+    - https://www.pcisecuritystandards.org/documents/PCI_DSS_v3-2-1.pdf
+    - https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.04162018.pdf
+    - https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/event.aspx?eventID=4730
+    - https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/event.aspx?eventID=634
+  name: A Security-Enabled Global Group Was Deleted
+
