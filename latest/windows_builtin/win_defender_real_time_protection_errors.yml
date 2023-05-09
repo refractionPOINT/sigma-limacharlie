@@ -1,15 +1,34 @@
 detect:
   log type: wel
-  op: or
+  op: and
   rules:
-  - case sensitive: false
-    op: is
-    path: Event/System/EventID
-    value: '3002'
-  - case sensitive: false
-    op: is
-    path: Event/System/EventID
-    value: '3007'
+  - op: or
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '3002'
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '3007'
+  - not: true
+    op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/EventData/Feature_Name
+      value: '%%886'
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: Event/EventData/Reason
+        value: '%%892'
+      - case sensitive: false
+        op: is
+        path: Event/EventData/Reason
+        value: '%%858'
   target: log
 respond:
 - action: report
@@ -18,11 +37,13 @@ respond:
       (Update)
     description: Detects issues with Windows Defender Real-Time Protection features
     falsepositives:
-    - Unknown
-    level: high
+    - Some crashes can occur sometimes and the event doesn't provide enough information
+      to tune out these cases. Manual exception is required
+    level: medium
     references:
     - Internal Research
     - https://www.microsoft.com/en-us/security/blog/2023/04/11/guidance-for-investigating-attacks-using-cve-2022-21894-the-blacklotus-campaign/
+    - https://gist.github.com/nasbench/33732d6705cbdc712fae356f07666346
     tags:
     - attack.defense_evasion
     - attack.t1562.001

@@ -106,7 +106,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: frack113
+    author: frack113, Nasreddine Bencherchali (Nextron Systems)
     description: Adversaries may search for private key certificate files on compromised
       systems for insecurely stored credential
     falsepositives:
