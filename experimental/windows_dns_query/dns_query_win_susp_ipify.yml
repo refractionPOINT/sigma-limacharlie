@@ -47,6 +47,14 @@ detect:
     - case sensitive: false
       op: contains
       path: event/DOMAIN_NAME
+      value: geoipy.com
+    - case sensitive: false
+      op: contains
+      path: event/DOMAIN_NAME
+      value: getip.pro
+    - case sensitive: false
+      op: contains
+      path: event/DOMAIN_NAME
       value: icanhazip.com
     - case sensitive: false
       op: contains
@@ -226,7 +234,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Brandon George (blog post), Thomas Patzke (rule)
+    author: Brandon George (blog post), Thomas Patzke
     description: Detects DNS queries for IP lookup services such as "api.ipify.org"
       originating from a non browser process.
     falsepositives:
@@ -235,6 +243,7 @@ respond:
     references:
     - https://www.binarydefense.com/analysis-of-hancitor-when-boring-begets-beacon
     - https://twitter.com/neonprimetime/status/1436376497980428318
+    - https://www.trendmicro.com/en_us/research/23/e/managed-xdr-investigation-of-ducktail-in-trend-micro-vision-one.html
     tags:
     - attack.reconnaissance
     - attack.t1590

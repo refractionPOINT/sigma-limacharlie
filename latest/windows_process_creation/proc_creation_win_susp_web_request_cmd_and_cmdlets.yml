@@ -10,6 +10,18 @@ detect:
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
+      value: '[System.Net.WebRequest]::create'
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: 'curl '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-RestMethod
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
       value: Invoke-WebRequest
     - case sensitive: false
       op: contains
@@ -18,19 +30,7 @@ detect:
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
-      value: 'wget '
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: 'curl '
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
       value: Net.WebClient
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: Start-BitsTransfer
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
@@ -38,11 +38,11 @@ detect:
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
-      value: '[System.Net.WebRequest]::create'
+      value: Start-BitsTransfer
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
-      value: Invoke-RestMethod
+      value: 'wget '
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE

@@ -7,30 +7,7 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - op: or
-      rules:
-      - op: or
-        rules:
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \powershell.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \pwsh.exe
-      - op: or
-        rules:
-        - case sensitive: false
-          op: is
-          path: event/ORIGINAL_FILE_NAME
-          value: PowerShell.EXE
-        - case sensitive: false
-          op: is
-          path: event/ORIGINAL_FILE_NAME
-          value: pwsh.dll
-    - not: true
-      op: or
+    - op: and
       rules:
       - op: or
         rules:
@@ -38,38 +15,68 @@ detect:
           rules:
           - case sensitive: false
             op: ends with
-            path: event/PARENT/FILE_PATH
-            value: \explorer.exe
+            path: event/FILE_PATH
+            value: \powershell.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \pwsh.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: PowerShell.EXE
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: pwsh.dll
+      - not: true
+        op: or
+        rules:
+        - op: or
+          rules:
           - case sensitive: false
             op: ends with
             path: event/PARENT/FILE_PATH
-            value: \CompatTelRunner.exe
+            value: C:\Windows\explorer.exe
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: C:\Windows\System32\CompatTelRunner.exe
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: C:\Windows\SysWOW64\explorer.exe
         - case sensitive: false
           op: is
           path: event/PARENT/FILE_PATH
           value: C:\$WINDOWS.~BT\Sources\SetupHost.exe
-      - op: and
-        rules:
-        - case sensitive: false
-          op: starts with
-          path: event/PARENT/FILE_PATH
-          value: C:\Users\
-        - case sensitive: false
-          op: ends with
-          path: event/PARENT/FILE_PATH
-          value: \AppData\Local\Programs\Microsoft VS Code\Code.exe
-        - case sensitive: false
-          op: contains
-          path: event/PARENT/COMMAND_LINE
-          value: ' --ms-enable-electron-run-as-node '
+    - not: true
+      op: and
+      rules:
+      - case sensitive: false
+        op: starts with
+        path: event/PARENT/FILE_PATH
+        value: C:\Users\
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \AppData\Local\Programs\Microsoft VS Code\Code.exe
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: ' --ms-enable-electron-run-as-node '
 respond:
 - action: report
   metadata:
     author: Roberto Rodriguez @Cyb3rWard0g (rule), oscd.community (improvements)
-    description: Detects non-interactive PowerShell activity by looking at powershell.exe
-      with a non user process such as "explorer.exe" as a parent.
+    description: Detects non-interactive PowerShell activity by looking at the "powershell"
+      process with a non-user GUI process such as "explorer.exe" as a parent.
     falsepositives:
-    - Legitimate programs executing PowerShell scripts
+    - Likely. Many admin scripts and tools leverage PowerShell in their BAT or VB
+      scripts which may trigger this rule often. It is best to add additional filters
+      or use this to hunt for anomalies
     level: low
     references:
     - https://web.archive.org/web/20200925032237/https://threathunterplaybook.com/notebooks/windows/02_execution/WIN-190410151110.html

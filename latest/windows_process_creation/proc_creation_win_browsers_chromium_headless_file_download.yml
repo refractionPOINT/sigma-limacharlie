@@ -12,11 +12,23 @@ detect:
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
-        value: \msedge.exe
+        value: \brave.exe
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
         value: \chrome.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \msedge.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \opera.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \vivaldi.exe
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
@@ -33,14 +45,14 @@ respond:
 - action: report
   metadata:
     author: Sreeman, Florian Roth (Nextron Systems)
-    description: This is an unusual method to download files. It starts a browser
-      headless and downloads a file from a location. This can be used by threat actors
-      to download files.
+    description: Detects execution of chromium based browser in headless mode using
+      the "dump-dom" command line to download files
     falsepositives:
     - Unknown
     level: high
     references:
     - https://twitter.com/mrd0x/status/1478234484881436672?s=12
+    - https://www.trendmicro.com/en_us/research/23/e/managed-xdr-investigation-of-ducktail-in-trend-micro-vision-one.html
     tags:
     - attack.command_and_control
     - attack.t1105

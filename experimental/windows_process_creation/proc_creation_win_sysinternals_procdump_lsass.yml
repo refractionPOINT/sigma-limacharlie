@@ -25,13 +25,16 @@ respond:
 - action: report
   metadata:
     author: Florian Roth (Nextron Systems)
-    description: Detects suspicious uses of the SysInternals Procdump utility by using
-      a special command line parameter in combination with the lsass.exe process.
-      This way we're also able to catch cases in which the attacker has renamed the
+    description: 'Detects suspicious uses of the SysInternals Procdump utility by
+      using a special command line parameter in combination with the lsass.exe process.
+
+      This way we are also able to catch cases in which the attacker has renamed the
       procdump executable.
+
+      '
     falsepositives:
     - Unlikely, because no one should dump an lsass process memory
-    - Another tool that uses the command line switches of Procdump
+    - Another tool that uses command line flags similar to ProcDump
     level: high
     references:
     - https://learn.microsoft.com/en-us/sysinternals/downloads/procdump

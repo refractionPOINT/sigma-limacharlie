@@ -55,11 +55,12 @@ respond:
 - action: report
   metadata:
     author: Florian Roth (Nextron Systems)
-    description: Detects uses of the SysInternals Procdump utility in which procdump
-      or its output get renamed or a dump file is moved ot copied to a different name
+    description: Detects uses of the SysInternals ProcDump utility in which ProcDump
+      or its output get renamed, or a dump file is moved or copied to a different
+      name
     falsepositives:
-    - Cases in which procdump just gets copied to a different directory without any
-      renaming
+    - False positives are expected in cases in which ProcDump just gets copied to
+      a different directory without any renaming
     level: high
     references:
     - https://twitter.com/mrd0x/status/1480785527901204481
@@ -67,5 +68,5 @@ respond:
     - attack.defense_evasion
     - attack.t1036
     - attack.t1003.001
-  name: Potential Procdump Evasion
+  name: Potential SysInternals ProcDump Evasion
 
