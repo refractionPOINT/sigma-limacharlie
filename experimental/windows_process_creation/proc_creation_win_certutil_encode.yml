@@ -36,7 +36,8 @@ respond:
       a file to base64. This can be abused by threat actors and attackers for data
       exfiltration
     falsepositives:
-    - Unknown
+    - As this is a general purpose rule, legitimate usage of the encode functionality
+      will trigger some false positives. Apply additional filters accordingly
     level: medium
     references:
     - https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/certutil

@@ -227,6 +227,16 @@ detect:
           op: contains
           path: event/COMMAND_LINE
           value: http
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: comsvcs.dll
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: MiniDump
     - not: true
       op: or
       rules:
@@ -244,6 +254,20 @@ detect:
           op: contains
           path: event/PARENT/COMMAND_LINE
           value: .cpl
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: Shell32.dll
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: Control_RunDLL
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: .cpl
       - op: and
         rules:
         - case sensitive: false
@@ -261,8 +285,10 @@ detect:
 respond:
 - action: report
   metadata:
-    author: juju4, Jonhnathan Ribeiro, oscd.community, Nasreddine Bencherchali
-    description: Detects suspicious process related to rundll32 based on arguments
+    author: juju4, Jonhnathan Ribeiro, oscd.community, Nasreddine Bencherchali (Nextron
+      Systems)
+    description: Detects suspicious execution of rundll32, with specific calls to
+      some DLLs with known LOLBIN functionalities
     falsepositives:
     - False positives depend on scripts and administrative tools used in the monitored
       environment
@@ -277,5 +303,5 @@ respond:
     tags:
     - attack.defense_evasion
     - attack.t1218.011
-  name: Suspicious Rundll32 Activity
+  name: Potentially Suspicious Rundll32 Activity
 

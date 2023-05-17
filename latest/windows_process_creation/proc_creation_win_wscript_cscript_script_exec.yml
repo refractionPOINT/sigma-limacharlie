@@ -51,18 +51,23 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: .vbs
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .wsf
 respond:
 - action: report
   metadata:
     author: Michael Haag
-    description: Detects suspicious file execution by wscript and cscript
+    description: Detects script file execution (.js, .jse, .vba, .vbe, .vbs, .wsf)
+      by Wscript/Cscript
     falsepositives:
-    - Will need to be tuned. I recommend adding the user profile path in CommandLine
-      if it is getting too noisy.
+    - Some additional tunning is required. It is recommended to add the user profile
+      path in CommandLine if it is getting too noisy.
     level: medium
     tags:
     - attack.execution
     - attack.t1059.005
     - attack.t1059.007
-  name: WSF/JSE/JS/VBA/VBE File Execution
+  name: WSF/JSE/JS/VBA/VBE File Execution Via Cscript/Wscript
 

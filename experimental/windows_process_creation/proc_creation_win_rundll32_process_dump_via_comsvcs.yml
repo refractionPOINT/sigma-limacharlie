@@ -38,7 +38,11 @@ detect:
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
-            value: '24 '
+            value: '#-'
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '#+'
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
@@ -46,15 +50,39 @@ detect:
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
-            value: '#+24'
+            value: '24 '
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
             value: MiniDump
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: '#-4294967272'
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '24'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: comsvcs
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: full
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' #'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ',#'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ', #'
 respond:
 - action: report
   metadata:
@@ -63,7 +91,7 @@ respond:
     description: Detects a process memory dump via "comsvcs.dll" using rundll32, covering
       multiple different techniques (ordinal, minidump function, etc.)
     falsepositives:
-    - Unlikely, because no one should dump the process memory in that way
+    - Unlikely
     level: high
     references:
     - https://twitter.com/shantanukhande/status/1229348874298388484
@@ -72,11 +100,12 @@ respond:
     - https://modexp.wordpress.com/2019/08/30/minidumpwritedump-via-com-services-dll/
     - https://twitter.com/SBousseaden/status/1167417096374050817
     - https://twitter.com/Wietze/status/1542107456507203586
+    - https://github.com/Hackndo/lsassy/blob/14d8f8ae596ecf22b449bfe919829173b8a07635/lsassy/dumpmethod/comsvcs.py
     tags:
     - attack.defense_evasion
     - attack.credential_access
     - attack.t1036
     - attack.t1003.001
     - car.2013-05-009
-  name: Process Dumping Via Comsvcs.DLL
+  name: Process Memory Dump Via Comsvcs.DLL
 
