@@ -13,28 +13,40 @@ detect:
         op: ends with
         path: event/FILE_PATH
         value: \regsvr32.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /i:'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -i:'
+    - not: true
+      op: or
+      rules:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ' /i:'
-    - case sensitive: false
-      not: true
-      op: contains
-      path: event/COMMAND_LINE
-      value: ' /n '
+        value: ' /n '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -n '
 respond:
 - action: report
   metadata:
     author: Florian Roth (Nextron Systems)
-    description: Detects a flag anomaly in which regsvr32.exe uses a /i flag without
-      using a /n flag at the same time
+    description: Detects a potential command line flag anomaly related to "regsvr32"
+      in which the "/i" flag is used without the "/n" which should be uncommon.
     falsepositives:
-    - Unknown
-    level: high
+    - Administrator typo might cause some false positives
+    level: medium
     references:
     - https://twitter.com/sbousseaden/status/1282441816986484737?s=12
     tags:
     - attack.defense_evasion
     - attack.t1218.010
-  name: Regsvr32 Flags Anomaly
+  name: Potential Regsvr32 Commandline Flag Anomaly
 

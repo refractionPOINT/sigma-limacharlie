@@ -9,15 +9,29 @@ detect:
     rules:
     - op: and
       rules:
-      - op: and
+      - op: or
         rules:
         - case sensitive: false
           op: ends with
           path: event/FILE_PATH
           value: \regsvr32.exe
-        - not: true
-          op: or
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: REGSVR32.EXE
+      - not: true
+        op: or
+        rules:
+        - op: or
           rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: .ax
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: .cpl
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
@@ -26,44 +40,39 @@ detect:
             op: contains
             path: event/COMMAND_LINE
             value: .ocx
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: .cpl
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: .ax
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: .bav
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: .ppl
-      - not: false
-        op: exists
+        - not: true
+          op: exists
+          path: event/COMMAND_LINE
+        - case sensitive: false
+          op: is
+          path: event/COMMAND_LINE
+          value: ''
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: contains
         path: event/COMMAND_LINE
-    - case sensitive: false
-      not: true
-      op: is
-      path: event/COMMAND_LINE
-      value: ''
+        value: .ppl
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .bav
 respond:
 - action: report
   metadata:
     author: Florian Roth (Nextron Systems)
-    description: Detects a regsvr.exe execution that doesn't contain a DLL in the
-      command line
+    description: Detects a "regsvr32" execution where the DLL doesn't contain a common
+      file extension.
     falsepositives:
-    - Unknown
-    level: high
+    - Other legitimate extensions currently not in the list either from third party
+      or specific Windows components.
+    level: medium
     references:
     - https://app.any.run/tasks/34221348-072d-4b70-93f3-aa71f6ebecad/
     tags:
     - attack.defense_evasion
     - attack.t1574
     - attack.execution
-  name: Regsvr32 Command Line Without DLL
+  name: Regsvr32 DLL Execution With Uncommon Extension
 
