@@ -76,7 +76,7 @@ detect:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: ' ClearEventLog '
+          value: ClearEventLog
     - not: true
       op: and
       rules:

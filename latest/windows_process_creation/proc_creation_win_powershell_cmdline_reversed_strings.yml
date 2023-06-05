@@ -134,22 +134,16 @@ detect:
           path: event/COMMAND_LINE
           value: retupmoc
     - not: true
-      op: and
+      op: or
       rules:
       - case sensitive: false
-        op: is
-        path: event/PARENT/FILE_PATH
-        value: C:\Windows\System32\cmd.exe
-      - op: and
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: -EncodedCommand
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: rahc
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -EncodedCommand '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -enc '
 respond:
 - action: report
   metadata:
