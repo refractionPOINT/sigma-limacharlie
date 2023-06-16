@@ -42,6 +42,7 @@ respond:
     level: medium
     references:
     - https://www.sans.org/blog/wmic-for-incident-response/
+    - https://github.com/redcanaryco/atomic-red-team/blob/84215139ee5127f8e3a117e063b604812bd71928/atomics/T1047/T1047.md#atomic-test-5---wmi-execute-local-process
     tags:
     - attack.execution
     - attack.t1047
