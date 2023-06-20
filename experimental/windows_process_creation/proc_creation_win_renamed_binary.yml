@@ -98,6 +98,7 @@ respond:
     references:
     - https://mgreen27.github.io/posts/2019/05/12/BinaryRename.html
     - https://mgreen27.github.io/posts/2019/05/29/BinaryRename2.html
+    - https://github.com/redcanaryco/atomic-red-team/blob/0f229c0e42bfe7ca736a14023836d65baa941ed2/atomics/T1036.003/T1036.003.md#atomic-test-1---masquerading-as-windows-lsass-process
     tags:
     - attack.defense_evasion
     - attack.t1036.003
