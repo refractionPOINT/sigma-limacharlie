@@ -76,7 +76,7 @@ respond:
     author: oscd.community, Zach Stanford @svch0st, Nasreddine Bencherchali (Nextron
       Systems)
     description: Detects potential abuse of Windows Subsystem for Linux (WSL) binary
-      as a LOLBIN to execute arbitrary linux and windows commands
+      as a LOLBIN to execute arbitrary Linux or Windows commands
     falsepositives:
     - Automation and orchestration scripts may use this method to execute scripts
       etc.

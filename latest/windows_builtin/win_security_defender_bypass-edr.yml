@@ -31,9 +31,9 @@ respond:
 - action: report
   metadata:
     author: '@BarryShooshooga'
-    description: Detects scenarios where an windows defender exclusion was added in
-      registry where an entity would want to bypass antivirus scanning from windows
-      defender
+    description: Detects scenarios where an Windows Defender exclusion was added in
+      registry where an entity would want to bypass antivirus scanning from Windows
+      Defender
     falsepositives:
     - Intended inclusions by administrator
     level: high

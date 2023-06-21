@@ -23,8 +23,8 @@ respond:
 - action: report
   metadata:
     author: Keith Wright
-    description: Detects external diskdrives or plugged in USB devices , EventID 6416
-      on windows 10 or later
+    description: Detects external diskdrives or plugged in USB devices, EventID 6416
+      on Windows 10 or later
     falsepositives:
     - Legitimate administrative activity
     level: low

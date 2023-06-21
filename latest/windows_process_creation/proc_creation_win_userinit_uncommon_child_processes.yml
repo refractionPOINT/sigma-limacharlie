@@ -49,6 +49,9 @@ detect:
         op: ends with
         path: event/FILE_PATH
         value: \Citrix\System32\icast.exe
+      - not: true
+        op: exists
+        path: event/FILE_PATH
 respond:
 - action: report
   metadata:

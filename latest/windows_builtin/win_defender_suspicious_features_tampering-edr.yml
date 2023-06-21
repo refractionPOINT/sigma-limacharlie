@@ -39,7 +39,7 @@ respond:
 - action: report
   metadata:
     author: Nasreddine Bencherchali (Nextron Systems)
-    description: Detects suspicious changes to the windows defender configuration
+    description: Detects suspicious changes to the Windows Defender configuration
     falsepositives:
     - Administrator activity (must be investigated)
     level: high

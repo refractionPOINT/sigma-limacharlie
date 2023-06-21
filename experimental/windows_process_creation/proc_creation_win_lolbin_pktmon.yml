@@ -19,8 +19,8 @@ respond:
 - action: report
   metadata:
     author: frack113
-    description: Tools to Capture Network Packets on the windows 10 with October 2018
-      Update or later.
+    description: Tools to capture network packets on Windows 10 with October 2018
+      update or later.
     falsepositives:
     - Legitimate use
     level: medium
