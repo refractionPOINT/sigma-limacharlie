@@ -31,7 +31,7 @@ respond:
     - Runas command-line tool using /netonly parameter
     level: high
     references:
-    - https://cyberwardog.blogspot.de/2017/04/chronicles-of-threat-hunter-hunting-for.html
+    - https://web.archive.org/web/20220419045003/https://cyberwardog.blogspot.com/2017/04/chronicles-of-threat-hunter-hunting-for.html
     tags:
     - attack.lateral_movement
     - attack.s0002

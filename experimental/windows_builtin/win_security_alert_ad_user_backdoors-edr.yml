@@ -69,7 +69,7 @@ respond:
     references:
     - https://msdn.microsoft.com/en-us/library/cc220234.aspx
     - https://adsecurity.org/?p=3466
-    - https://www.harmj0y.net/blog/redteaming/another-word-on-delegation/
+    - https://blog.harmj0y.net/redteaming/another-word-on-delegation/
     tags:
     - attack.t1098
     - attack.persistence

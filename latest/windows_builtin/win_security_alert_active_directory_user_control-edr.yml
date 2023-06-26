@@ -23,7 +23,7 @@ respond:
     - Unknown
     level: high
     references:
-    - https://www.harmj0y.net/blog/activedirectory/the-most-dangerous-user-right-you-probably-have-never-heard-of/
+    - https://blog.harmj0y.net/activedirectory/the-most-dangerous-user-right-you-probably-have-never-heard-of/
     tags:
     - attack.persistence
     - attack.t1098

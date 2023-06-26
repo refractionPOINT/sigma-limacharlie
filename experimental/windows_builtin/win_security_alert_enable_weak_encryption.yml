@@ -235,7 +235,7 @@ respond:
     level: high
     references:
     - https://adsecurity.org/?p=2053
-    - https://www.harmj0y.net/blog/activedirectory/roasting-as-reps/
+    - https://blog.harmj0y.net/redteaming/another-word-on-delegation/
     tags:
     - attack.defense_evasion
     - attack.t1562.001
