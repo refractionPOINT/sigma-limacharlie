@@ -14,11 +14,7 @@ detect:
         - case sensitive: false
           op: ends with
           path: event/FILE_PATH
-          value: \powershell.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \pwsh.exe
+          value: \cscript.exe
         - case sensitive: false
           op: ends with
           path: event/FILE_PATH
@@ -27,20 +23,8 @@ detect:
           op: ends with
           path: event/FILE_PATH
           value: \wscript.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \cscript.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \cmd.exe
       - op: or
         rules:
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: ' -w hidden '
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
@@ -48,21 +32,29 @@ detect:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: '/e:vbscript '
+          value: ' -ExecutionPolicy bypass '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -w hidden '
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
           value: '/e:javascript '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '/e:Jscript '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '/e:vbscript '
       - op: or
         rules:
         - case sensitive: false
           op: is
           path: event/ORIGINAL_FILE_NAME
-          value: powershell.exe
-        - case sensitive: false
-          op: is
-          path: event/ORIGINAL_FILE_NAME
-          value: pwsh.dll
+          value: cscript.exe
         - case sensitive: false
           op: is
           path: event/ORIGINAL_FILE_NAME
@@ -71,51 +63,77 @@ detect:
           op: is
           path: event/ORIGINAL_FILE_NAME
           value: wscript.exe
-        - case sensitive: false
-          op: is
-          path: event/ORIGINAL_FILE_NAME
-          value: cscript.exe
-        - case sensitive: false
-          op: is
-          path: event/ORIGINAL_FILE_NAME
-          value: cmd.exe
     - op: or
       rules:
-      - case sensitive: false
-        op: contains
-        path: event/FILE_PATH
-        value: \Windows\Temp
-      - case sensitive: false
-        op: contains
-        path: event/FILE_PATH
-        value: \Temporary Internet
-      - case sensitive: false
-        op: contains
-        path: event/FILE_PATH
-        value: \AppData\Local\Temp
-      - case sensitive: false
-        op: contains
-        path: event/FILE_PATH
-        value: \AppData\Roaming\Temp
-      - case sensitive: false
-        op: contains
-        path: event/FILE_PATH
-        value: C:\Users\Public\
-      - case sensitive: false
-        op: contains
-        path: event/FILE_PATH
-        value: C:\Perflogs\
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: :\Perflogs\
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: :\Users\Public\
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \AppData\Local\Temp
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \AppData\Roaming\Temp
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \Temporary Internet
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \Windows\Temp
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: :\Users\
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \Favorites\
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: :\Users\
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \Favourites\
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: :\Users\
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \Contacts\
 respond:
 - action: report
   metadata:
-    author: Florian Roth (Nextron Systems)
-    description: Detects a suspicious script executions in temporary folders or folders
+    author: Florian Roth (Nextron Systems), Nasreddine Bencherchali (Nextron Systems)
+    description: Detects a suspicious script execution in temporary folders or folders
       accessible by environment variables
     falsepositives:
     - Unknown
     level: high
     references:
     - https://www.virustotal.com/gui/file/91ba814a86ddedc7a9d546e26f912c541205b47a853d227756ab1334ade92c3f
+    - https://symantec-enterprise-blogs.security.com/blogs/threat-intelligence/shuckworm-russia-ukraine-military
+    - https://learn.microsoft.com/en-us/windows/win32/shell/csidl
     tags:
     - attack.execution
     - attack.t1059

@@ -19,8 +19,7 @@ respond:
 - action: report
   metadata:
     author: frack113
-    description: Tools to capture network packets on Windows 10 with October 2018
-      update or later.
+    description: Detects execution of PktMon, a tool that captures network packets.
     falsepositives:
     - Legitimate use
     level: medium
@@ -29,5 +28,5 @@ respond:
     tags:
     - attack.credential_access
     - attack.t1040
-  name: Use of PktMon.exe
+  name: PktMon.EXE Execution
 

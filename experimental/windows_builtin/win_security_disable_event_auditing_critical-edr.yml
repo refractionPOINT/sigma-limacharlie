@@ -1,0 +1,112 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '4719'
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/SubcategoryGuid
+          value: '{0CCE9215-69AE-11D9-BED3-505054503030}'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/SubcategoryGuid
+          value: '{0CCE922B-69AE-11D9-BED3-505054503030}'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/SubcategoryGuid
+          value: '{0CCE9240-69AE-11D9-BED3-505054503030}'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/SubcategoryGuid
+          value: '{0CCE9210-69AE-11D9-BED3-505054503030}'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/SubcategoryGuid
+          value: '{0CCE9211-69AE-11D9-BED3-505054503030}'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/SubcategoryGuid
+          value: '{0CCE9212-69AE-11D9-BED3-505054503030}'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/SubcategoryGuid
+          value: '{0CCE921B-69AE-11D9-BED3-505054503030}'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/SubcategoryGuid
+          value: '{0CCE922F-69AE-11D9-BED3-505054503030}'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/SubcategoryGuid
+          value: '{0CCE9230-69AE-11D9-BED3-505054503030}'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/SubcategoryGuid
+          value: '{0CCE9235-69AE-11D9-BED3-505054503030}'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/SubcategoryGuid
+          value: '{0CCE9236-69AE-11D9-BED3-505054503030}'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/SubcategoryGuid
+          value: '{0CCE9237-69AE-11D9-BED3-505054503030}'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/SubcategoryGuid
+          value: '{0CCE923F-69AE-11D9-BED3-505054503030}'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/SubcategoryGuid
+          value: '{0CCE9242-69AE-11D9-BED3-505054503030}'
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/AuditPolicyChanges
+          value: '%%8448'
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/AuditPolicyChanges
+          value: '%%8450'
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '4719'
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/SubcategoryGuid
+        value: '{0CCE9217-69AE-11D9-BED3-505054503030}'
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/AuditPolicyChanges
+        value: '%%8448'
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects scenarios where system auditing for important events such
+      as "Process Creation" or "Logon" events is disabled.
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://docs.google.com/presentation/d/1dkrldTTlN3La-OjWtkWJBb4hVk6vfsSMBFBERs6R8zA/edit
+    - https://github.com/SigmaHQ/sigma/blob/master/documentation/logsource-guides/windows/service/security.md
+    tags:
+    - attack.defense_evasion
+    - attack.t1562.002
+  name: Important Windows Event Auditing Disabled
+
