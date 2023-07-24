@@ -1,0 +1,80 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \schtasks.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: schtasks.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: /Create
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: FromBase64String
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: encodedcommand
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-ItemProperty
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' gp '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'HKCU:'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'HKLM:'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'registry::'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: HKEY_
+respond:
+- action: report
+  metadata:
+    author: pH-T (Nextron Systems), @Kostastsale, @TheDFIRReport, X__Junior (Nextron
+      Systems), Nasreddine Bencherchali (Nextron Systems)
+    description: Detects the creation of a schtask that potentially executes a base64
+      encoded payload stored in the Windows Registry using PowerShell.
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://thedfirreport.com/2022/02/21/qbot-and-zerologon-lead-to-full-domain-compromise/
+    tags:
+    - attack.execution
+    - attack.persistence
+    - attack.t1053.005
+    - attack.t1059.001
+  name: Scheduled Task Executing Encoded Payload from Registry
+
