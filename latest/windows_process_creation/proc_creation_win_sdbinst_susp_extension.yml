@@ -1,0 +1,46 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \sdbinst.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: sdbinst.exe
+    - case sensitive: false
+      not: true
+      op: contains
+      path: event/COMMAND_LINE
+      value: .sdb
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: 'Detects installation of a potentially suspicious new shim with an
+      uncommon extension using sdbinst.exe.
+
+      Adversaries may establish persistence and/or elevate privileges by executing
+      malicious content triggered by application shims
+
+      '
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.fireeye.com/blog/threat-research/2017/05/fin7-shim-databases-persistence.html
+    tags:
+    - attack.persistence
+    - attack.privilege_escalation
+    - attack.t1546.011
+  name: Suspicious Shim Database Installation via Sdbinst.EXE
+

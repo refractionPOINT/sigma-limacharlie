@@ -9,33 +9,49 @@ detect:
     rules:
     - op: and
       rules:
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \sdbinst.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \sdbinst.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: sdbinst.exe
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
         value: .sdb
-    - case sensitive: false
-      not: true
-      op: contains
-      path: event/COMMAND_LINE
-      value: iisexpressshim.sdb
+    - not: true
+      op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \msiexec.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: iisexpressshim.sdb
 respond:
 - action: report
   metadata:
     author: Markus Neis
-    description: Detects installation of a new shim using sdbinst.exe. A shim can
-      be used to load malicious DLLs into applications.
+    description: 'Detects installation of a new shim using sdbinst.exe.
+
+      Adversaries may establish persistence and/or elevate privileges by executing
+      malicious content triggered by application shims
+
+      '
     falsepositives:
     - Unknown
-    level: high
+    level: medium
     references:
-    - https://www.fireeye.com/blog/threat-research/2017/05/fin7-shim-databases-persistence.html
+    - https://www.mandiant.com/resources/blog/fin7-shim-databases-persistence
     tags:
     - attack.persistence
     - attack.privilege_escalation
     - attack.t1546.011
-  name: Possible Shim Database Persistence via sdbinst.exe
+  name: Potential Shim Database Persistence via Sdbinst.EXE
 
