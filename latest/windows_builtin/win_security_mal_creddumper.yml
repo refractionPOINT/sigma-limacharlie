@@ -11,7 +11,7 @@ detect:
     - case sensitive: false
       op: contains
       path: Event/EventData/ServiceFileName
-      value: fgexec
+      value: cachedump
     - case sensitive: false
       op: contains
       path: Event/EventData/ServiceFileName
@@ -19,11 +19,7 @@ detect:
     - case sensitive: false
       op: contains
       path: Event/EventData/ServiceFileName
-      value: cachedump
-    - case sensitive: false
-      op: contains
-      path: Event/EventData/ServiceFileName
-      value: mimidrv
+      value: fgexec
     - case sensitive: false
       op: contains
       path: Event/EventData/ServiceFileName
@@ -31,11 +27,15 @@ detect:
     - case sensitive: false
       op: contains
       path: Event/EventData/ServiceFileName
-      value: servpw
+      value: mimidrv
     - case sensitive: false
       op: contains
       path: Event/EventData/ServiceFileName
       value: pwdump
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ServiceFileName
+      value: servpw
   target: log
 respond:
 - action: report

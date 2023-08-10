@@ -25,15 +25,7 @@ detect:
       - case sensitive: false
         op: contains
         path: Event/EventData/ServiceName
-        value: WCESERVICE
-      - case sensitive: false
-        op: contains
-        path: Event/EventData/ServiceName
-        value: WCE SERVICE
-      - case sensitive: false
-        op: contains
-        path: Event/EventData/ServiceName
-        value: winexesvc
+        value: cachedump
       - case sensitive: false
         op: contains
         path: Event/EventData/ServiceName
@@ -41,15 +33,27 @@ detect:
       - case sensitive: false
         op: contains
         path: Event/EventData/ServiceName
-        value: pwdump
-      - case sensitive: false
-        op: contains
-        path: Event/EventData/ServiceName
         value: gsecdump
       - case sensitive: false
         op: contains
         path: Event/EventData/ServiceName
-        value: cachedump
+        value: pwdump
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/ServiceName
+        value: UACBypassedService
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/ServiceName
+        value: WCE SERVICE
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/ServiceName
+        value: WCESERVICE
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/ServiceName
+        value: winexesvc
     - case sensitive: false
       op: contains
       path: Event/EventData/ImagePath
@@ -59,8 +63,7 @@ respond:
 - action: report
   metadata:
     author: Florian Roth (Nextron Systems)
-    description: Detects PsExec service installation and execution events (service
-      and Sysmon)
+    description: Detects installation or execution of services
     falsepositives:
     - Unknown
     level: high
@@ -70,5 +73,5 @@ respond:
     - attack.execution
     - attack.t1569.002
     - attack.s0029
-  name: Hacktool Service Registration or Execution
+  name: HackTool Service Registration or Execution
 

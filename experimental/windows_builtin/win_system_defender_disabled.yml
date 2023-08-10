@@ -20,10 +20,16 @@ detect:
       op: is
       path: Event/EventData/param1
       value: Service antivirus Microsoft Defender
-  - case sensitive: false
-    op: is
-    path: Event/EventData/param2
-    value: stopped
+  - op: or
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/EventData/param2
+      value: stopped
+    - case sensitive: false
+      op: is
+      path: Event/EventData/param2
+      value: "arr\xEAt\xE9"
   target: log
 respond:
 - action: report
@@ -34,7 +40,7 @@ respond:
     falsepositives:
     - Administrator actions
     - Auto updates of Windows Defender causes restarts
-    level: low
+    level: medium
     references:
     - https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-antivirus/troubleshoot-windows-defender-antivirus
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1562.001/T1562.001.md
