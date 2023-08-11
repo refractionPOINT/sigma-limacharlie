@@ -23,16 +23,22 @@ detect:
           op: is
           path: event/ORIGINAL_FILE_NAME
           value: ftp.exe
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: '-s:'
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '-s:'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '/s:'
 respond:
 - action: report
   metadata:
     author: Victor Sergeev, oscd.community
-    description: Detects execution of ftp.exe script execution with the "-s" flag
-      and any child processes ran by ftp.exe
+    description: Detects execution of ftp.exe script execution with the "-s" or "/s"
+      flag and any child processes ran by ftp.exe
     falsepositives:
     - Unknown
     level: medium
