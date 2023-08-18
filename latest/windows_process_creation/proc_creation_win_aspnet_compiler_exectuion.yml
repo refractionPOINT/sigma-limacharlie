@@ -1,0 +1,40 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: C:\Windows\Microsoft.NET\Framework\
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: C:\Windows\Microsoft.NET\Framework64\
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \aspnet_compiler.exe
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Detects execution of "aspnet_compiler.exe" which can be abused to
+      compile and execute C# code.
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://lolbas-project.github.io/lolbas/Binaries/Aspnet_Compiler/
+    - https://ijustwannared.team/2020/08/01/the-curious-case-of-aspnet_compiler-exe/
+    tags:
+    - attack.defense_evasion
+    - attack.t1127
+  name: AspNetCompiler Execution
+
