@@ -48,5 +48,8 @@ respond:
     level: high
     references:
     - https://www.microsoft.com/security/blog/2022/07/26/malicious-iis-extensions-quietly-open-persistent-backdoors-into-servers/
+    tags:
+    - attack.persistence
+    - attack.t1505.004
   name: Suspicious IIS Module Registration
 

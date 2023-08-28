@@ -39,5 +39,8 @@ respond:
     references:
     - https://twitter.com/0gtweet/status/1474899714290208777?s=12
     - https://docs.microsoft.com/en-us/windows-hardware/drivers/devtest/dtrace
+    tags:
+    - attack.discovery
+    - attack.t1082
   name: Suspicious Kernel Dump Using Dtrace
 

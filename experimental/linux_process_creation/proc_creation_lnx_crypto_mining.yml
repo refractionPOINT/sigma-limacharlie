@@ -85,5 +85,8 @@ respond:
     level: high
     references:
     - https://www.poolwatch.io/coin/monero
+    tags:
+    - attack.impact
+    - attack.t1496
   name: Linux Crypto Mining Indicators
 
