@@ -89,5 +89,5 @@ respond:
     - attack.defense_evasion
     - attack.command_and_control
     - attack.t1090
-  name: New Port Forwarding Rule Added Via Netsh.EXX
+  name: New Port Forwarding Rule Added Via Netsh.EXE
 
