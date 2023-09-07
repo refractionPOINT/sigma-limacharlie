@@ -1,0 +1,102 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: lsass.dmp
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: lsass.zip
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: lsass.rar
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Andrew.dmp
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Coredump.dmp
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: NotLSASS.zip
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: lsass_2
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: lsassdump
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: lsassdmp
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: lsass
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .dmp
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: SQLDmpr
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .mdmp
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: nanodump
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .dmp
+respond:
+- action: report
+  metadata:
+    author: E.M. Anhaus, Tony Lambert, oscd.community, Nasreddine Bencherchali (Nextron
+      Systems)
+    description: 'Detects the presence of the keywords "lsass" and ".dmp" in the commandline,
+      which could indicate a potential attempt to dump or create a dump of the lsass
+      process.
+
+      '
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://github.com/Hackndo/lsassy
+    - https://medium.com/@markmotig/some-ways-to-dump-lsass-exe-c4a75fdc49bf
+    - https://github.com/elastic/detection-rules/blob/c76a39796972ecde44cb1da6df47f1b6562c9770/rules/windows/credential_access_lsass_memdump_file_created.toml
+    - https://www.whiteoaksecurity.com/blog/attacks-defenses-dumping-lsass-no-mimikatz/
+    - https://github.com/helpsystems/nanodump
+    - https://github.com/CCob/MirrorDump
+    tags:
+    - attack.credential_access
+    - attack.t1003.001
+  name: LSASS Dump Keyword In CommandLine
+
