@@ -15,14 +15,14 @@ respond:
 - action: report
   metadata:
     author: Nasreddine Bencherchali (Nextron Systems)
-    description: Detects DNS queries for subdomains used for upload to MEGA.io
+    description: Detects DNS queries for subdomains related to MEGA sharing website
     falsepositives:
     - Legitimate DNS queries and usage of Mega
-    level: high
+    level: medium
     references:
     - https://research.nccgroup.com/2021/05/27/detecting-rclone-an-effective-tool-for-exfiltration/
     tags:
     - attack.exfiltration
     - attack.t1567.002
-  name: DNS Query for MEGA.io Upload Domain - DNS Client
+  name: DNS Query To MEGA Hosting Website - DNS Client
 

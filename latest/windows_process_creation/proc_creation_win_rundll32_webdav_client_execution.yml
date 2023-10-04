@@ -7,6 +7,10 @@ detect:
   - op: is windows
   - op: and
     rules:
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \svchost.exe
     - op: or
       rules:
       - case sensitive: false
@@ -26,10 +30,10 @@ respond:
   metadata:
     author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)
     description: 'Detects "svchost.exe" spawning "rundll32.exe" with command arguments
-      like C:\windows\system32\davclnt.dll,DavSetCookie.
+      like "C:\windows\system32\davclnt.dll,DavSetCookie".
 
       This could be an indicator of exfiltration or use of WebDav to launch code (hosted
-      on WebDav Server).
+      on a WebDav server).
 
       '
     falsepositives:
@@ -41,5 +45,5 @@ respond:
     tags:
     - attack.exfiltration
     - attack.t1048.003
-  name: WebDav Client Execution
+  name: WebDav Client Execution Via Rundll32.EXE
 

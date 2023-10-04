@@ -17,20 +17,21 @@ detect:
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
-        value: \mmc.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: :\Windows\SysWOW64\WerFault.exe
+        value: :\Windows\System32\mmc.exe
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
         value: :\Windows\System32\WerFault.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: :\Windows\SysWOW64\WerFault.exe
 respond:
 - action: report
   metadata:
     author: Florian Roth (Nextron Systems)
-    description: Detects UAC bypass method using Windows event viewer
+    description: Detects uncommon or suspicious child processes of "eventvwr.exe"
+      which might indicate a UAC bypass attempt
     falsepositives:
     - Unknown
     level: high
@@ -42,5 +43,5 @@ respond:
     - attack.privilege_escalation
     - attack.t1548.002
     - car.2019-04-001
-  name: UAC Bypass via Event Viewer
+  name: Potentially Suspicious Event Viewer Child Process
 

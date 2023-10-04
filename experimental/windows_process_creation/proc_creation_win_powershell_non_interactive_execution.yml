@@ -39,34 +39,42 @@ detect:
           - case sensitive: false
             op: ends with
             path: event/PARENT/FILE_PATH
-            value: C:\Windows\explorer.exe
+            value: :\Windows\explorer.exe
           - case sensitive: false
             op: ends with
             path: event/PARENT/FILE_PATH
-            value: C:\Windows\System32\CompatTelRunner.exe
+            value: :\Windows\System32\CompatTelRunner.exe
           - case sensitive: false
             op: ends with
             path: event/PARENT/FILE_PATH
-            value: C:\Windows\SysWOW64\explorer.exe
+            value: :\Windows\SysWOW64\explorer.exe
         - case sensitive: false
           op: is
           path: event/PARENT/FILE_PATH
-          value: C:\$WINDOWS.~BT\Sources\SetupHost.exe
+          value: :\$WINDOWS.~BT\Sources\SetupHost.exe
     - not: true
-      op: and
+      op: or
       rules:
-      - case sensitive: false
-        op: starts with
-        path: event/PARENT/FILE_PATH
-        value: C:\Users\
-      - case sensitive: false
-        op: ends with
-        path: event/PARENT/FILE_PATH
-        value: \AppData\Local\Programs\Microsoft VS Code\Code.exe
-      - case sensitive: false
-        op: contains
-        path: event/PARENT/COMMAND_LINE
-        value: ' --ms-enable-electron-run-as-node '
+      - op: and
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \AppData\Local\Programs\Microsoft VS Code\Code.exe
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: ' --ms-enable-electron-run-as-node '
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/FILE_PATH
+          value: :\Program Files\WindowsApps\Microsoft.WindowsTerminal_
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \WindowsTerminal.exe
 respond:
 - action: report
   metadata:

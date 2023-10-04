@@ -55,7 +55,7 @@ respond:
       from the registry. Adversaries may interact with the Windows registry to gather
       information about credentials, the system, configuration, and installed software.
     falsepositives:
-    - Unknown
+    - Discord
     level: medium
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1012/T1012.md

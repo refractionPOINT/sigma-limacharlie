@@ -8,10 +8,10 @@ respond:
 - action: report
   metadata:
     author: Dmitriy Lifanov, oscd.community
-    description: Detects network connections and DNS queries initiated by Regsvr32.exe
+    description: Detects DNS queries initiated by "Regsvr32.exe"
     falsepositives:
     - Unknown
-    level: high
+    level: medium
     references:
     - https://pentestlab.blog/2017/05/11/applocker-bypass-regsvr32/
     - https://oddvar.moe/2017/12/13/applocker-case-study-how-insecure-is-it-really-part-1/
@@ -20,5 +20,5 @@ respond:
     - attack.t1559.001
     - attack.defense_evasion
     - attack.t1218.010
-  name: Regsvr32 Network Activity - DNS
+  name: DNS Query Request By Regsvr32.EXE
 

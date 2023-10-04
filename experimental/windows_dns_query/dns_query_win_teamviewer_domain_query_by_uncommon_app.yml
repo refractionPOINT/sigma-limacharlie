@@ -26,12 +26,13 @@ respond:
       for obfuscation)
     falsepositives:
     - Unknown binary names of TeamViewer
-    - Other programs that also lookup the observed domain
+    - Depending on the environment the rule might require some initial tuning before
+      usage to avoid FP with third party applications
     level: medium
     references:
     - https://www.teamviewer.com/en-us/
     tags:
     - attack.command_and_control
     - attack.t1219
-  name: Suspicious TeamViewer Domain Access
+  name: TeamViewer Domain Query By Non-TeamViewer Application
 
