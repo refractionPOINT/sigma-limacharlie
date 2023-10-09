@@ -17,11 +17,27 @@ detect:
         op: is
         path: event/ORIGINAL_FILE_NAME
         value: sdbinst.exe
-    - case sensitive: false
-      not: true
-      op: contains
-      path: event/COMMAND_LINE
-      value: .sdb
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .sdb
+      - op: and
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: :\Windows\System32\svchost.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: :\Windows\System32\sdbinst.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -m -bg'
 respond:
 - action: report
   metadata:
