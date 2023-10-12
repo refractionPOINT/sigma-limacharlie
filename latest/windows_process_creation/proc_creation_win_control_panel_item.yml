@@ -48,6 +48,10 @@ detect:
             op: contains
             path: event/COMMAND_LINE
             value: '%System%'
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '|C:\Windows\system32|'
         - op: and
           rules:
           - case sensitive: false
