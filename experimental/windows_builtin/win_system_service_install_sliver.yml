@@ -1,0 +1,49 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/EventData/Provider_Name
+      value: Service Control Manager
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '7045'
+  - op: or
+    rules:
+    - op: matches
+      path: Event/EventData/ImagePath
+      re: ^[a-zA-Z]:\\windows\\temp\\[a-zA-Z0-9]{10}\.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: Event/EventData/ServiceName
+        value: Sliver
+      - case sensitive: false
+        op: is
+        path: Event/EventData/ServiceName
+        value: Sliver implant
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems), Nasreddine Bencherchali (Nextron Systems)
+    description: Detects known malicious service installation that appear in cases
+      in which a Sliver implants execute the PsExec commands
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://github.com/BishopFox/sliver/blob/79f2d48fcdfc2bee4713b78d431ea4b27f733f30/client/command/commands.go#L1231
+    - https://www.microsoft.com/security/blog/2022/08/24/looking-for-the-sliver-lining-hunting-for-emerging-command-and-control-frameworks/
+    tags:
+    - attack.execution
+    - attack.privilege_escalation
+    - attack.t1543.003
+    - attack.t1569.002
+  name: Sliver C2 Default Service Installation
+

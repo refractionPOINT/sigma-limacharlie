@@ -1,0 +1,35 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \Adobe Creative Cloud Experience\libs\node.exe
+    - case sensitive: false
+      not: true
+      op: contains
+      path: event/COMMAND_LINE
+      value: Adobe Creative Cloud Experience\js
+respond:
+- action: report
+  metadata:
+    author: Max Altgelt (Nextron Systems)
+    description: Detects the execution of other scripts using the Node executable
+      packaged with Adobe Creative Cloud
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://twitter.com/mttaggart/status/1511804863293784064
+    tags:
+    - attack.defense_evasion
+    - attack.t1127
+    - attack.t1059.007
+  name: Node Process Executions
+

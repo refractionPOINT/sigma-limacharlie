@@ -1,0 +1,52 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: taskkill
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' /F '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' /IM '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ccSvcHst.exe
+respond:
+- action: report
+  metadata:
+    author: Ilya Krestinichev, Florian Roth (Nextron Systems)
+    description: 'Detects one of the possible scenarios for disabling Symantec Endpoint
+      Protection.
+
+      Symantec Endpoint Protection antivirus software services incorrectly implement
+      the protected service mechanism.
+
+      As a result, the NT AUTHORITY/SYSTEM user can execute the taskkill /im command
+      several times ccSvcHst.exe /f, thereby killing the process belonging to the
+      service, and thus shutting down the service.
+
+      '
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.exploit-db.com/exploits/37525
+    - https://community.spiceworks.com/topic/2195015-batch-script-to-uninstall-symantec-endpoint-protection
+    - https://community.broadcom.com/symantecenterprise/communities/community-home/digestviewer/viewthread?MessageKey=6ce94b67-74e1-4333-b16f-000b7fd874f0&CommunityKey=1ecf5f55-9545-44d6-b0f4-4e4a7f5f5e68&tab=digestviewer
+    tags:
+    - attack.defense_evasion
+    - attack.t1562.001
+  name: Taskkill Symantec Endpoint Protection
+

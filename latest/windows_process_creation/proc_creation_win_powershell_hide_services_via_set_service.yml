@@ -1,0 +1,59 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \pwsh.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: pwsh.dll
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'Set-Service '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: DCLCWPDTSD
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-SecurityDescriptorSddl '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-sd '
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects usage of the "Set-Service" powershell cmdlet to configure
+      a new SecurityDescriptor that allows a service to be hidden from other utilities
+      such as "sc.exe", "Get-Service"...etc. (Works only in powershell 7)
+    falsepositives:
+    - Rare intended use of hidden services
+    level: high
+    references:
+    - https://twitter.com/Alh4zr3d/status/1580925761996828672
+    - https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/set-service?view=powershell-7.2
+    tags:
+    - attack.persistence
+    - attack.defense_evasion
+    - attack.privilege_escalation
+    - attack.t1574.011
+  name: Abuse of Service Permissions to Hide Services Via Set-Service
+

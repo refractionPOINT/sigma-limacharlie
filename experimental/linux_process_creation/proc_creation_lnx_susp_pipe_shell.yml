@@ -1,0 +1,73 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: starts with
+        path: event/COMMAND_LINE
+        value: 'sh -c '
+      - case sensitive: false
+        op: starts with
+        path: event/COMMAND_LINE
+        value: 'bash -c '
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '| bash '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '| sh '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '|bash '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '|sh '
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/COMMAND_LINE
+          value: '| bash'
+        - case sensitive: false
+          op: ends with
+          path: event/COMMAND_LINE
+          value: '| sh'
+        - case sensitive: false
+          op: ends with
+          path: event/COMMAND_LINE
+          value: '|bash'
+        - case sensitive: false
+          op: ends with
+          path: event/COMMAND_LINE
+          value: ' |sh'
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects suspicious process command line that starts with a shell
+      that executes something and finally gets piped into another shell
+    falsepositives:
+    - Legitimate software that uses these patterns
+    level: medium
+    references:
+    - Internal Research
+    tags:
+    - attack.defense_evasion
+    - attack.t1140
+  name: Linux Shell Pipe to Shell
+

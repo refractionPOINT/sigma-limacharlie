@@ -1,0 +1,34 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '42'
+    - case sensitive: false
+      op: is
+      path: event/EVENT/EventData/Provider_Name
+      value: Kerberos-Key-Distribution-Center
+    - case sensitive: false
+      op: is
+      path: event/EVENT/EventData/Level
+      value: '2'
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects the exploitation of a security bypass and elevation of privilege
+      vulnerability with Authentication Negotiation by using weak RC4-HMAC negotiation
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://support.microsoft.com/en-us/topic/kb5021131-how-to-manage-the-kerberos-protocol-changes-related-to-cve-2022-37966-fd837ac3-cdec-4e76-a6ec-86e67501407d
+    tags:
+    - attack.privilege_escalation
+  name: KDC RC4-HMAC Downgrade CVE-2022-37966
+

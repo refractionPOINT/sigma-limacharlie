@@ -1,0 +1,40 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \mmc.exe
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: WF.msc
+    - case sensitive: false
+      not: true
+      op: ends with
+      path: event/FILE_PATH
+      value: \WerFault.exe
+respond:
+- action: report
+  metadata:
+    author: Tim Rauch
+    description: Detects attempts to bypass User Account Control (UAC) by hijacking
+      the Microsoft Management Console (MMC) Windows Firewall snap-in
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://www.elastic.co/guide/en/security/current/uac-bypass-via-windows-firewall-snap-in-hijack.html#uac-bypass-via-windows-firewall-snap-in-hijack
+    tags:
+    - attack.privilege_escalation
+    - attack.t1548
+  name: UAC Bypass via Windows Firewall Snap-In Hijack
+

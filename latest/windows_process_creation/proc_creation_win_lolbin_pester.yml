@@ -1,0 +1,52 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \powershell.exe
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \pwsh.exe
+    - case sensitive: false
+      op: contains
+      path: event/PARENT/COMMAND_LINE
+      value: \WindowsPowerShell\Modules\Pester\
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: '{ Invoke-Pester -EnableExit ;'
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: '{ Get-Help "'
+respond:
+- action: report
+  metadata:
+    author: frack113, Nasreddine Bencherchali
+    description: Detects code execution via Pester.bat (Pester - Powershell Modulte
+      for testing)
+    falsepositives:
+    - Legitimate use of Pester for writing tests for Powershell scripts and modules
+    level: medium
+    references:
+    - https://twitter.com/Oddvarmoe/status/993383596244258816
+    - https://twitter.com/_st0pp3r_/status/1560072680887525378
+    tags:
+    - attack.execution
+    - attack.t1059.001
+    - attack.defense_evasion
+    - attack.t1216
+  name: Execute Code with Pester.bat as Parent
+

@@ -1,0 +1,42 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \schtasks.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' /delete '
+    - case sensitive: false
+      op: matches
+      path: event/COMMAND_LINE
+      re: .*/tn\ \*
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' /f'
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects the usage of schtasks with the delete flag and the asterisk
+      symbole to delete all tasks from the schedule of the local computer, including
+      tasks scheduled by other users.
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/schtasks-delete
+    tags:
+    - attack.impact
+    - attack.t1489
+  name: Delete All Scheduled Tasks
+

@@ -1,0 +1,243 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \w3wp.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \php-cgi.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \nginx.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \httpd.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \caddy.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \ws_tomcatservice.exe
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \java.exe
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \javaw.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/FILE_PATH
+            value: -tomcat-
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/FILE_PATH
+            value: \tomcat
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \java.exe
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \javaw.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: catalina.jar
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: CATALINA_HOME
+    - op: or
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: rundll32
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: comsvcs
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -hp'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' a '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -m'
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: net
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' user '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /add'
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: net
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' localgroup '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' administrators '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /add
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \ntdsutil.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \ldifde.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \adfind.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \procdump.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \Nanodump.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \vssadmin.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \fsutil.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -NoP '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -W Hidden '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -decode '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /decode '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'reg save '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .downloadstring(
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .downloadfile(
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: FromBase64String
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /ticket:'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' sekurlsa'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .dmp full
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: process call create
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: whoami /priv
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects certain parent child patterns found in cases in which a webshell
+      is used to perform certain credential dumping or exfiltration activities on
+      a compromised system
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://youtu.be/7aemGhaE9ds?t=641
+    tags:
+    - attack.persistence
+    - attack.t1505.003
+    - attack.t1018
+    - attack.t1033
+    - attack.t1087
+  name: Webshell Hacking Activity Patterns
+

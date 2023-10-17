@@ -1,0 +1,44 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '11'
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '12'
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/ProcessPath
+        value: \MpCmdRun.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/ProcessPath
+        value: \NisSrv.exe
+respond:
+- action: report
+  metadata:
+    author: Bhabesh Raj
+    description: Detects Code Integrity (CI) engine blocking Microsoft Defender's
+      processes (MpCmdRun and NisSrv) from loading unsigned DLLs which may be an attempt
+      to sideload arbitrary DLL
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.sentinelone.com/blog/living-off-windows-defender-lockbit-ransomware-sideloads-cobalt-strike-through-microsoft-security-tool
+    tags:
+    - attack.defense_evasion
+    - attack.t1574.002
+  name: Microsoft Defender Blocked from Loading Unsigned DLL
+

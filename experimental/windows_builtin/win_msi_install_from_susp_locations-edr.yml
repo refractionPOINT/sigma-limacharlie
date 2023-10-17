@@ -1,0 +1,71 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/Provider_Name
+        value: MsiInstaller
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/EVENT/System/EventID
+          value: '1040'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/System/EventID
+          value: '1042'
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/Data
+          value: \Users\Public\
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/Data
+          value: \PerfLogs\
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/Data
+          value: \Desktop\
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/Data
+          value: C:\Windows\TEMP\
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/Data
+          value: \\\\
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Data
+        value: \AppData\Local\Temp\WinGet\
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Data
+        value: C:\Windows\TEMP\UpdHealthTools.msi
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects MSI package installation from suspicious locations
+    falsepositives:
+    - False positives may occur if you allow installation from folders such as the
+      desktop, the public folder or remote shares
+    level: medium
+    references:
+    - https://www.trendmicro.com/en_us/research/22/h/ransomware-actor-abuses-genshin-impact-anti-cheat-driver-to-kill-antivirus.html
+    tags:
+    - attack.execution
+  name: MSI Installation From Suspicious Locations
+

@@ -1,0 +1,40 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \vsls-agent.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: --agentExtensionPath
+    - case sensitive: false
+      not: true
+      op: contains
+      path: event/COMMAND_LINE
+      value: Microsoft.VisualStudio.LiveShare.Agent.
+respond:
+- action: report
+  metadata:
+    author: bohops
+    description: Detects Microsoft Visual Studio vsls-agent.exe lolbin execution with
+      a suspicious library load using the --agentExtensionPath parameter
+    falsepositives:
+    - False positives depend on custom use of vsls-agent.exe
+    level: medium
+    references:
+    - https://twitter.com/bohops/status/1583916360404729857
+    tags:
+    - attack.defense_evasion
+    - attack.t1218
+  name: Suspicious Vsls-Agent Command With AgentExtensionPath Load
+

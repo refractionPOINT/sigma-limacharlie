@@ -1,0 +1,40 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /curl
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -A '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' --user-agent '
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects a suspicious curl process start on linux with set useragent
+      options
+    falsepositives:
+    - Scripts created by developers and admins
+    - Administrative activity
+    level: medium
+    references:
+    - https://curl.se/docs/manpage.html
+    tags:
+    - attack.command_and_control
+    - attack.t1071.001
+  name: Suspicious Curl Change User Agents - Linux
+

@@ -1,0 +1,79 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '4662'
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/Properties
+        value: Replicating Directory Changes All
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/Properties
+        value: 1131f6ad-9c07-11d1-f79f-00c04fc2dcd2
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/Properties
+        value: 1131f6aa-9c07-11d1-f79f-00c04fc2dcd2
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/Properties
+        value: 9923a32a-3607-11d2-b9be-0000f87a36b2
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/Properties
+        value: 89e95b76-444d-4c62-991a-0facbeda640c
+    - case sensitive: false
+      op: is
+      path: Event/EventData/AccessMask
+      value: '0x100'
+  - not: true
+    op: or
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/EventData/SubjectDomainName
+      value: Window Manager
+    - op: or
+      rules:
+      - case sensitive: false
+        op: starts with
+        path: Event/EventData/SubjectUserName
+        value: NT AUT
+      - case sensitive: false
+        op: starts with
+        path: Event/EventData/SubjectUserName
+        value: MSOL_
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/SubjectUserName
+      value: $
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Benjamin Delpy, Florian Roth (Nextron Systems), Scott Dermott, Sorina
+      Ionescu
+    description: Detects Mimikatz DC sync security events
+    falsepositives:
+    - Valid DC Sync that is not covered by the filters; please report
+    - Local Domain Admin account used for Azure AD Connect
+    level: high
+    references:
+    - https://twitter.com/gentilkiwi/status/1003236624925413376
+    - https://gist.github.com/gentilkiwi/dcc132457408cf11ad2061340dcb53c2
+    - https://blog.blacklanternsecurity.com/p/detecting-dcsync?s=r
+    - https://docs.microsoft.com/en-us/windows/security/threat-protection/auditing/event-4662
+    tags:
+    - attack.credential_access
+    - attack.s0002
+    - attack.t1003.006
+  name: Mimikatz DC Sync
+

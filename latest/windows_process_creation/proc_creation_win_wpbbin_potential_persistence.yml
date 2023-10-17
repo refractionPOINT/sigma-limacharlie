@@ -1,0 +1,30 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - case sensitive: false
+    op: is
+    path: event/FILE_PATH
+    value: C:\Windows\System32\wpbbin.exe
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects execution of the binary "wpbbin" which is used as part of
+      the UEFI based persistence method described in the reference section
+    falsepositives:
+    - Legitimate usage of the file by hardware manufacturer such as lenovo (Thanks
+      @0gtweet for the tip)
+    level: high
+    references:
+    - https://grzegorztworek.medium.com/using-uefi-to-inject-executable-files-into-bitlocker-protected-drives-8ff4ca59c94c
+    - https://persistence-info.github.io/Data/wpbbin.html
+    tags:
+    - attack.persistence
+    - attack.defense_evasion
+    - attack.t1542.001
+  name: UEFI Persistence Via Wpbbin - ProcessCreation
+

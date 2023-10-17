@@ -1,0 +1,69 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \schtasks.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: schtasks.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' ONLOGON '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' ONSTART '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' ONCE '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' ONIDLE '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: NT AUT
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' SYSTEM'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: HIGHEST
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects scheduled task creations or modification to be run with high
+      privileges on a suspicious schedule type
+    falsepositives:
+    - Some installers were seen using this method of creation unfortunately. Filter
+      them in your environment
+    level: medium
+    references:
+    - https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/schtasks-change
+    - https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/schtasks-create
+    tags:
+    - attack.execution
+    - attack.t1053.005
+  name: Suspicious Schtasks Schedule Type With High Privileges
+

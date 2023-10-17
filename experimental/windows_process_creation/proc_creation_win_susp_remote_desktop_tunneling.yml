@@ -1,0 +1,52 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: :3389
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -L '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -P '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -R '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -pw '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -ssh '
+respond:
+- action: report
+  metadata:
+    author: Tim Rauch
+    description: Detects potential use of an SSH utility to establish RDP over a reverse
+      SSH Tunnel. This can be used by attackers to enable routing of network packets
+      that would otherwise not reach their intended destination.
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://www.elastic.co/guide/en/security/current/potential-remote-desktop-tunneling-detected.html
+    tags:
+    - attack.lateral_movement
+    - attack.t1021
+  name: Potential Remote Desktop Tunneling
+

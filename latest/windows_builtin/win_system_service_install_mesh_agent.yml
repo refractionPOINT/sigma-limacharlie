@@ -1,0 +1,41 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/EventData/Provider_Name
+      value: Service Control Manager
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '7045'
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ImagePath
+      value: MeshAgent.exe
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ServiceName
+      value: Mesh Agent
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects a Mesh Agent service installation. Mesh Agent is used to
+      remotely manage computers
+    falsepositives:
+    - Legitimate use of the tool
+    level: medium
+    references:
+    - https://thedfirreport.com/2022/11/28/emotet-strikes-again-lnk-file-leads-to-domain-wide-ransomware/
+    tags:
+    - attack.command_and_control
+    - attack.t1219
+  name: Mesh Agent Service Installation
+

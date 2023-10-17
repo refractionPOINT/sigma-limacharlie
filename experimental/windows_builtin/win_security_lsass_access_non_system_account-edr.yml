@@ -1,0 +1,170 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/EVENT/System/EventID
+          value: '4663'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/System/EventID
+          value: '4656'
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/AccessMask
+          value: '0x40'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/AccessMask
+          value: '0x1400'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/AccessMask
+          value: '0x100000'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/AccessMask
+          value: '0x1410'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/AccessMask
+          value: '0x1010'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/AccessMask
+          value: '0x1438'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/AccessMask
+          value: '0x143a'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/AccessMask
+          value: '0x1418'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/AccessMask
+          value: '0x1f0fff'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/AccessMask
+          value: '0x1f1fff'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/AccessMask
+          value: '0x1f2fff'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/AccessMask
+          value: '0x1f3fff'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/AccessMask
+          value: '40'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/AccessMask
+          value: '1400'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/AccessMask
+          value: '1000'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/AccessMask
+          value: '100000'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/AccessMask
+          value: '1410'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/AccessMask
+          value: '1010'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/AccessMask
+          value: '1438'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/AccessMask
+          value: 143a
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/AccessMask
+          value: '1418'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/AccessMask
+          value: 1f0fff
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/AccessMask
+          value: 1f1fff
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/AccessMask
+          value: 1f2fff
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/AccessMask
+          value: 1f3fff
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/ObjectType
+        value: Process
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/ObjectName
+        value: \lsass.exe
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/SubjectUserName
+        value: $
+      - case sensitive: false
+        op: starts with
+        path: event/EVENT/EventData/ProcessName
+        value: C:\Program Files
+      - op: and
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/ProcessName
+          value: C:\Windows\System32\wbem\WmiPrvSE.exe
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/AccessMask
+          value: '0x1410'
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ProcessName
+        value: \SteamLibrary\steamapps\
+respond:
+- action: report
+  metadata:
+    author: Roberto Rodriguez @Cyb3rWard0g
+    description: Detects potential mimikatz-like tools accessing LSASS from non system
+      account
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://threathunterplaybook.com/hunts/windows/170105-LSASSMemoryReadAccess/notebook.html
+    tags:
+    - attack.credential_access
+    - attack.t1003.001
+  name: LSASS Access from Non System Account
+

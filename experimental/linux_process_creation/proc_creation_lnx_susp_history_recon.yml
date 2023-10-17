@@ -1,0 +1,70 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /cat
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /head
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /tail
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /more
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /.bash_history
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /.zsh_history
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/COMMAND_LINE
+          value: _history
+        - case sensitive: false
+          op: ends with
+          path: event/COMMAND_LINE
+          value: .history
+        - case sensitive: false
+          op: ends with
+          path: event/COMMAND_LINE
+          value: zhistory
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects events in which someone prints the contents of history files
+      to the commandline or redirects it to a file for reconnaissance
+    falsepositives:
+    - Legitimate administration activities
+    level: medium
+    references:
+    - https://github.com/sleventyeleven/linuxprivchecker/
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1552.003/T1552.003.md
+    tags:
+    - attack.reconnaissance
+    - attack.t1592.004
+  name: Print History File Contents
+

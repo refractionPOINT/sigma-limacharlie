@@ -1,0 +1,42 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \bash
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: id -Gn `
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: id -Gn '
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects attempts to exploit an apache spark server via CVE-2014-6287
+      from a commandline perspective
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://github.com/W01fh4cker/cve-2022-33891/blob/fd973b56e78bca8822caa3a2e3cf1b5aff5d0950/cve_2022_33891_poc.py
+    - https://sumsec.me/2022/CVE-2022-33891%20Apache%20Spark%20shell%20command%20injection.html
+    - https://github.com/apache/spark/pull/36315/files
+    tags:
+    - attack.initial_access
+    - attack.t1190
+    - cve.2022.33891
+  name: Apache Spark Shell Command Injection - ProcessCreation
+

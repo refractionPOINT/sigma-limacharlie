@@ -1,0 +1,85 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: PowerShell.EXE
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: pwsh.dll
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \pwsh.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'Set-Acl '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-AclObject '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -Path "C:\Windows
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -Path 'C:\Windows
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -Path %windir%
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -Path $env:windir
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: FullControl
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Allow
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects PowerShell scripts to set the ACL to a file in the Windows
+      folder
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-acl?view=powershell-5.1
+    - https://github.com/redcanaryco/atomic-red-team/blob/74438b0237d141ee9c99747976447dc884cb1a39/atomics/T1505.005/T1505.005.md
+    tags:
+    - attack.defense_evasion
+  name: PowerShell Set-Acl On Windows Folder
+

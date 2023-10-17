@@ -1,0 +1,30 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - case sensitive: false
+    op: contains
+    path: event/COMMAND_LINE
+    value: ' -u#'
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects users trying to exploit sudo vulnerability reported in CVE-2019-14287
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://www.openwall.com/lists/oss-security/2019/10/14/1
+    - https://access.redhat.com/security/cve/cve-2019-14287
+    - https://twitter.com/matthieugarin/status/1183970598210412546
+    tags:
+    - attack.privilege_escalation
+    - attack.t1068
+    - attack.t1548.003
+    - cve.2019.14287
+  name: Sudo Privilege Escalation CVE-2019-14287
+

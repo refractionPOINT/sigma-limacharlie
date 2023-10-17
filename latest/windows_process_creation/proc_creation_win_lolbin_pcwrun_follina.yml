@@ -1,0 +1,34 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \pcwrun.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ../
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects indirect command execution via Program Compatibility Assistant
+      "pcwrun.exe" leveraging the follina (CVE-2022-30190) vulnerability
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://twitter.com/nas_bench/status/1535663791362519040
+    tags:
+    - attack.defense_evasion
+    - attack.t1218
+    - attack.execution
+  name: Execute Pcwrun.EXE To Leverage Follina
+

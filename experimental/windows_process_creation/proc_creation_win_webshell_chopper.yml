@@ -1,0 +1,72 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \w3wp.exe
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \w3wp.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '&ipconfig&echo'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '&quser&echo'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '&whoami&echo'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '&c:&echo'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '&cd&echo'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '&dir&echo'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '&echo [E]'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '&echo [S]'
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems), MSTI (query)
+    description: Detects patterns found in process executions cause by China Chopper
+      like tiny (ASPX) webshells
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.microsoft.com/security/blog/2022/09/30/analyzing-attacks-using-the-exchange-vulnerabilities-cve-2022-41040-and-cve-2022-41082/
+    tags:
+    - attack.persistence
+    - attack.t1505.003
+    - attack.t1018
+    - attack.t1033
+    - attack.t1087
+  name: Chopper Webshell Process Pattern
+

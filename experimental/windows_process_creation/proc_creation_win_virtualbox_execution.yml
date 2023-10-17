@@ -1,0 +1,53 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: VBoxRT.dll,RTR3Init
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: VBoxC.dll
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: VBoxDrv.sys
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: startvm
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: controlvm
+respond:
+- action: report
+  metadata:
+    author: Janantha Marasinghe
+    description: Adversaries can carry out malicious operations using a virtual instance
+      to avoid detection. This rule is built to detect the registration of the Virtualbox
+      driver or start of a Virtualbox VM.
+    falsepositives:
+    - This may have false positives on hosts where Virtualbox is legitimately being
+      used for operations
+    level: low
+    references:
+    - https://news.sophos.com/en-us/2020/05/21/ragnar-locker-ransomware-deploys-virtual-machine-to-dodge-security/
+    - https://threatpost.com/maze-ransomware-ragnar-locker-virtual-machine/159350/
+    tags:
+    - attack.defense_evasion
+    - attack.t1564.006
+    - attack.t1564
+  name: Detect Virtualbox Driver Installation OR Starting Of VMs
+

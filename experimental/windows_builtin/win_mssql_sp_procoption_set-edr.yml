@@ -1,0 +1,40 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/EventData/Provider_Name
+      value: MSSQLSERVER
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '33205'
+    - case sensitive: false
+      op: contains
+      path: event/EVENT/EventData/Data
+      value: object_name:sp_procoption
+    - case sensitive: false
+      op: contains
+      path: event/EVENT/EventData/Data
+      value: statement:EXEC
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects when the a stored procedure is set or cleared for automatic
+      execution in MSSQL. A stored procedure that is set to automatic execution runs
+      every time an instance of SQL Server is started
+    falsepositives:
+    - Legitimate use of the feature by administrators (rare)
+    level: high
+    references:
+    - https://www.netspi.com/blog/technical/network-penetration-testing/sql-server-persistence-part-1-startup-stored-procedures/
+    - https://docs.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sp-procoption-transact-sql?view=sql-server-ver16
+    tags:
+    - attack.persistence
+  name: MSSQL SPProcoption Set
+

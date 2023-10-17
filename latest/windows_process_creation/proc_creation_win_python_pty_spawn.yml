@@ -1,0 +1,54 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: python.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: python3.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: python2.exe
+    - op: or
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: import pty
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .spawn(
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: from pty import spawn
+respond:
+- action: report
+  metadata:
+    author: Nextron Systems
+    description: Detects python spawning a pretty tty
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.volexity.com/blog/2022/06/02/zero-day-exploitation-of-atlassian-confluence/
+    tags:
+    - attack.execution
+    - attack.t1059
+  name: Python Spawning Pretty TTY on Windows
+

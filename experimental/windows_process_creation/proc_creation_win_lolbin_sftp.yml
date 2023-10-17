@@ -1,0 +1,40 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \sftp.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -D ..'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -D C:\'
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects the usage of the "sftp.exe" binary as a LOLBIN by abusing
+      the "-D" flag
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://github.com/LOLBAS-Project/LOLBAS/pull/264
+    tags:
+    - attack.defense_evasion
+    - attack.execution
+    - attack.t1218
+  name: Use Of The SFTP.EXE Binary As A LOLBIN
+

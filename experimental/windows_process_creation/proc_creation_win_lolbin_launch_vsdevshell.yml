@@ -1,0 +1,39 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Launch-VsDevShell.ps1
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'VsWherePath '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'VsInstallationPath '
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects the use of the 'Launch-VsDevShell.ps1' Microsoft signed script
+      to execute commands.
+    falsepositives:
+    - Legitimate usage of the script by a developer
+    level: medium
+    references:
+    - https://twitter.com/nas_bench/status/1535981653239255040
+    tags:
+    - attack.defense_evasion
+    - attack.t1216.001
+  name: Launch-VsDevShell.PS1 Proxy Execution
+

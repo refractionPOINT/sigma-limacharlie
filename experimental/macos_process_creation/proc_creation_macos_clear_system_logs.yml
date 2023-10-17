@@ -1,0 +1,54 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is mac
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /rm
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /unlink
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /shred
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /var/log
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /Users/
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /Library/Logs/
+respond:
+- action: report
+  metadata:
+    author: remotephone, oscd.community
+    description: Detects deletion of local audit logs
+    falsepositives:
+    - Legitimate administration activities
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1070.002/T1070.002.md
+    tags:
+    - attack.defense_evasion
+    - attack.t1070.002
+  name: Indicator Removal on Host - Clear Mac System Logs
+

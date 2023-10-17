@@ -1,0 +1,39 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/EventData/Provider_Name
+    value: MsiInstaller
+  - op: or
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '1040'
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '1042'
+  - case sensitive: false
+    op: contains
+    path: Event/EventData/Data
+    value: ://
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Stamatis Chatzimangou
+    description: Detects installation of a remote msi file from web.
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://twitter.com/_st0pp3r_/status/1583922009842802689
+    tags:
+    - attack.execution
+    - attack.t1218
+    - attack.t1218.007
+  name: MSI Installation From Web
+

@@ -1,0 +1,50 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: reg.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: reg.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: \SYSTEM\CurrentControlSet\Control\SafeBoot
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' copy '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' add '
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects execution of "reg.exe" commands with the "add" or "copy"
+      flags on safe boot registry keys. Often used by attacker to allow the ransomware
+      to work in safe mode as some security products do not
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://redacted.com/blog/bianlian-ransomware-gang-gives-it-a-go/
+    tags:
+    - attack.defense_evasion
+    - attack.t1562.001
+  name: Add SafeBoot Keys Via Reg Utility
+

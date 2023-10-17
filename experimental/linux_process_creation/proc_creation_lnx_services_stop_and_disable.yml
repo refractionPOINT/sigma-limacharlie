@@ -1,0 +1,48 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /service
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /systemctl
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /chkconfig
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: stop
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: disable
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects the usage of utilities such as 'systemctl', 'service'...etc
+      to stop or disable tools and services
+    falsepositives:
+    - Legitimate administration activities
+    level: medium
+    references:
+    - https://www.trendmicro.com/pl_pl/research/20/i/the-evolution-of-malicious-shell-scripts.html
+    tags:
+    - attack.defense_evasion
+  name: Disable Or Stop Services
+

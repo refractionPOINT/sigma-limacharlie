@@ -1,0 +1,161 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '4698'
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TaskContent
+        value: \AppData\Local\Temp\
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TaskContent
+        value: \AppData\Roaming\
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TaskContent
+        value: \Users\Public\
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TaskContent
+        value: \WINDOWS\Temp\
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TaskContent
+        value: C:\Temp\
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TaskContent
+        value: \Desktop\
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TaskContent
+        value: \Downloads\
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TaskContent
+        value: \Temporary Internet
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TaskContent
+        value: C:\ProgramData\
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TaskContent
+        value: C:\Perflogs\
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TaskContent
+        value: regsvr32
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TaskContent
+        value: rundll32
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TaskContent
+        value: cmd.exe</Command>
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TaskContent
+        value: cmd</Command>
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TaskContent
+        value: '<Arguments>/c '
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TaskContent
+        value: '<Arguments>/k '
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TaskContent
+        value: '<Arguments>/r '
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TaskContent
+        value: powershell
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TaskContent
+        value: pwsh
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TaskContent
+        value: mshta
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TaskContent
+        value: wscript
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TaskContent
+        value: cscript
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TaskContent
+        value: certutil
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TaskContent
+        value: bitsadmin
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TaskContent
+        value: bash.exe
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TaskContent
+        value: 'bash '
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TaskContent
+        value: scrcons
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TaskContent
+        value: 'wmic '
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TaskContent
+        value: wmic.exe
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TaskContent
+        value: forfiles
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TaskContent
+        value: scriptrunner
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TaskContent
+        value: hh.exe
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects suspicious scheduled task creation events. Based on attributes
+      such as paths, commands line flags, etc.
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://learn.microsoft.com/en-us/windows/security/threat-protection/auditing/event-4698
+    tags:
+    - attack.execution
+    - attack.privilege_escalation
+    - attack.persistence
+    - attack.t1053.005
+  name: Suspicious Scheduled Task Creation
+

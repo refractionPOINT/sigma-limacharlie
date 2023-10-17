@@ -1,0 +1,46 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: IyEvYmluL2Jhc2
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: IyEvYmluL2Rhc2
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: IyEvYmluL3pza
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: IyEvYmluL2Zpc2
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: IyEvYmluL3No
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects the presence of a base64 version of the shebang in the commandline,
+      which could indicate a malicious payload about to be decoded
+    falsepositives:
+    - Legitimate administration activities
+    level: medium
+    references:
+    - https://www.trendmicro.com/pl_pl/research/20/i/the-evolution-of-malicious-shell-scripts.html
+    - https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS
+    tags:
+    - attack.defense_evasion
+    - attack.t1140
+  name: Linux Base64 Encoded Shebang In CLI
+

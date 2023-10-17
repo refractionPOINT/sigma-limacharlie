@@ -1,0 +1,39 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \java.exe
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \javaw.exe
+    - case sensitive: false
+      op: contains
+      path: event/PARENT/COMMAND_LINE
+      value: SysAidServer
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects suspicious child processes of SysAidServer (as seen in MERCURY
+      threat actor intrusions)
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://www.microsoft.com/security/blog/2022/08/25/mercury-leveraging-log4j-2-vulnerabilities-in-unpatched-systems-to-target-israeli-organizations/
+    tags:
+    - attack.lateral_movement
+    - attack.t1210
+  name: Suspicious SysAidServer Child
+

@@ -1,0 +1,42 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: eyJ0eXAiOi
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' eyJ0eX'
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' "eyJ0eX"'
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' ''eyJ0eX'''
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects possible search for office tokens via CLI by looking for
+      the string "eyJ0eX". This string is used as an anchor to look for the start
+      of the JWT token used by office and similar apps.
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://mrd0x.com/stealing-tokens-from-office-applications/
+    tags:
+    - attack.credential_access
+    - attack.t1528
+  name: Suspicious Office Token Search Via CLI
+

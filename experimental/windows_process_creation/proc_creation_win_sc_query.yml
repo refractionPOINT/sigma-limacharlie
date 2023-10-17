@@ -1,0 +1,40 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \sc.exe
+    - case sensitive: false
+      op: ends with
+      path: event/ORIGINAL_FILE_NAME
+      value: sc.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' query'
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Detects execution of "sc.exe" to query information about registered
+      services on the system
+    falsepositives:
+    - Legitimate query of a service by an administrator to get more information such
+      as the state or PID
+    - Keybase process "kbfsdokan.exe" query the dokan1 service with the following
+      commandline "sc query dokan1"
+    level: low
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1007/T1007.md#atomic-test-1---system-service-discovery
+    tags:
+    - attack.discovery
+    - attack.t1007
+  name: SC.EXE Query Execution
+

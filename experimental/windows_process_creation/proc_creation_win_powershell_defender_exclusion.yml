@@ -1,0 +1,56 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'Add-MpPreference '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'Set-MpPreference '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -ExclusionPath '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -ExclusionExtension '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -ExclusionProcess '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -ExclusionIpAddress '
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects requests to exclude files, folders or processes from Antivirus
+      scanning using PowerShell cmdlets
+    falsepositives:
+    - Possible Admin Activity
+    - Other Cmdlets that may use the same parameters
+    level: medium
+    references:
+    - https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/configure-process-opened-file-exclusions-microsoft-defender-antivirus
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1562.001/T1562.001.md
+    - https://twitter.com/AdamTheAnalyst/status/1483497517119590403
+    tags:
+    - attack.defense_evasion
+    - attack.t1562.001
+  name: Powershell Defender Exclusion
+

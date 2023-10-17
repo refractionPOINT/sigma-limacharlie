@@ -1,0 +1,58 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \powershell.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \pwsh.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Add-PSSnapin
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-Recipient
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: -ExpandProperty
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: EmailAddresses
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: SmtpAddress
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: -hidetableheaders
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems),  Azure-Sentinel (idea)
+    description: Detects email exfiltration via powershell cmdlets
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.microsoft.com/security/blog/2022/09/07/profiling-dev-0270-phosphorus-ransomware-operations/
+    - https://github.com/Azure/Azure-Sentinel/blob/7e6aa438e254d468feec061618a7877aa528ee9f/Hunting%20Queries/Microsoft%20365%20Defender/Ransomware/DEV-0270/Email%20data%20exfiltration%20via%20PowerShell.yaml
+    tags:
+    - attack.exfiltration
+  name: Email Exifiltration Via Powershell
+

@@ -1,0 +1,37 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: crontab
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' -r'
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: 'Detects usage of the ''crontab'' utility to remove the current crontab.
+
+      This is a common occurrence where cryptocurrency miners compete against each
+      other by removing traces of other miners to hijack the maximum amount of resources
+      possible
+
+      '
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://www.trendmicro.com/en_us/research/22/i/how-malicious-actors-abuse-native-linux-tools-in-their-attacks.html
+    tags:
+    - attack.defense_evasion
+  name: Remove Scheduled Cron Task/Job
+

@@ -1,0 +1,74 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \TrolleyExpress 7
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \TrolleyExpress 8
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \TrolleyExpress 9
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \TrolleyExpress.exe 7
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \TrolleyExpress.exe 8
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \TrolleyExpress.exe 9
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '\TrolleyExpress.exe -ma '
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \TrolleyExpress.exe
+      - not: true
+        op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/ORIGINAL_FILE_NAME
+          value: CtxInstall
+        - not: true
+          op: exists
+          path: event/ORIGINAL_FILE_NAME
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects a possible process memory dump that uses the white-listed
+      Citrix TrolleyExpress.exe filename as a way to dump the lsass process memory
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://twitter.com/_xpn_/status/1491557187168178176
+    - https://www.youtube.com/watch?v=Ie831jF0bb0
+    tags:
+    - attack.defense_evasion
+    - attack.t1218.011
+    - attack.credential_access
+    - attack.t1003.001
+  name: Process Access via TrolleyExpress Exclusion
+

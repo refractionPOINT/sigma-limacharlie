@@ -1,0 +1,64 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'localgroup '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /add'
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'Add-LocalGroupMember '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -Group '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Remote Desktop Users
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "Utilisateurs du Bureau \xE0 distance"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Usuarios de escritorio remoto
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects suspicious command line in which a user gets added to the
+      local Remote Desktop Users group
+    falsepositives:
+    - Administrative activity
+    level: high
+    references:
+    - https://www.microsoft.com/security/blog/2021/11/16/evolving-trends-in-iranian-threat-actor-activity-mstic-presentation-at-cyberwarcon-2021/
+    tags:
+    - attack.persistence
+    - attack.lateral_movement
+    - attack.t1133
+    - attack.t1136.001
+    - attack.t1021.001
+  name: Suspicious Add User to Remote Desktop Users Group
+

@@ -1,0 +1,51 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \sc.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: create
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: config
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: binPath
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: type
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: kernel
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects creation of a new service (kernel driver) with the type "kernel"
+    falsepositives:
+    - Rare legitimate installation of kernel drivers via sc.exe
+    level: medium
+    references:
+    - https://www.aon.com/cyber-solutions/aon_cyber_labs/yours-truly-signed-av-driver-weaponizing-an-antivirus-driver/
+    tags:
+    - attack.persistence
+    - attack.privilege_escalation
+    - attack.t1543.003
+  name: New Kernel Driver Via SC.EXE
+

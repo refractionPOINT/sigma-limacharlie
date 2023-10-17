@@ -1,0 +1,35 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/ORIGINAL_FILE_NAME
+      value: finger.exe
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \finger.exe
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems), omkar72, oscd.community
+    description: Detects suspicious aged finger.exe tool execution often used in malware
+      attacks nowadays
+    falsepositives:
+    - Admin activity (unclear what they do nowadays with finger.exe)
+    level: high
+    references:
+    - https://twitter.com/bigmacjpg/status/1349727699863011328?s=12
+    - https://app.any.run/tasks/40115012-a919-4208-bfed-41e82cb3dadf/
+    - http://hyp3rlinx.altervista.org/advisories/Windows_TCPIP_Finger_Command_C2_Channel_and_Bypassing_Security_Software.txt
+    tags:
+    - attack.command_and_control
+    - attack.t1105
+  name: Finger.exe Suspicious Invocation
+

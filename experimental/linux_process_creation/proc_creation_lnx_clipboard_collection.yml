@@ -1,0 +1,47 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - case sensitive: true
+      op: contains
+      path: event/FILE_PATH
+      value: xclip
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: -sel
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: clip
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: -o
+respond:
+- action: report
+  metadata:
+    author: Pawel Mazur, Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research),
+      MSTIC
+    description: 'Detects attempts to collect data stored in the clipboard from users
+      with the usage of xclip tool. Xclip has to be installed.
+
+      Highly recommended using rule on servers, due to high usage of clipboard utilities
+      on user workstations.
+
+      '
+    falsepositives:
+    - Legitimate usage of xclip tools.
+    level: low
+    references:
+    - https://www.packetlabs.net/posts/clipboard-data-security/
+    tags:
+    - attack.collection
+    - attack.t1115
+  name: Clipboard Collection with Xclip Tool
+

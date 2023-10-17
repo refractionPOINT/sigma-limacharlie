@@ -1,0 +1,33 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: UtilityFunctions.ps1
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: 'RegSnapin '
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Detects the use of a Microsoft signed script executing a managed
+      DLL with PowerShell.
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://lolbas-project.github.io/lolbas/Scripts/UtilityFunctions/
+    tags:
+    - attack.defense_evasion
+    - attack.t1216
+  name: UtilityFunctions.ps1 Proxy Dll
+

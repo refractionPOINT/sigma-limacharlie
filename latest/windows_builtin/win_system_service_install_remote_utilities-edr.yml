@@ -1,0 +1,48 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/Provider_Name
+        value: Service Control Manager
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '7045'
+    - op: or
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/ImagePath
+          value: \rutserv.exe
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/ImagePath
+          value: -service
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/ServiceName
+        value: Remote Utilities - Host
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects Remote Utilities Host service installation on the target
+      system.
+    falsepositives:
+    - Legitimate use of the tool
+    level: medium
+    references:
+    - https://www.remoteutilities.com/support/kb/host-service-won-t-start/
+    tags:
+    - attack.persistence
+  name: Remote Utilities Host Service Install
+

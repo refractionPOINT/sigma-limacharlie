@@ -1,0 +1,52 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \msdt.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \WINDOWS\diagnostics\index\PCWDiagnostic.xml
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -af '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /af '
+    - case sensitive: false
+      not: true
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \pcwrun.exe
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects execution of "msdt.exe" using an answer file which is simulating
+      the legitimate way of calling msdt via "pcwrun.exe" (For example from the compatibility
+      tab)
+    falsepositives:
+    - Possible undocumented parents of "msdt" other than "pcwrun"
+    level: high
+    references:
+    - https://lolbas-project.github.io/lolbas/Binaries/Msdt/
+    tags:
+    - attack.defense_evasion
+    - attack.t1218
+    - attack.execution
+  name: Execute MSDT Via Answer File
+

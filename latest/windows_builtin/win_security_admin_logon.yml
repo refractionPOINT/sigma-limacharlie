@@ -1,0 +1,42 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - op: or
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '4672'
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '4964'
+  - case sensitive: false
+    not: true
+    op: is
+    path: Event/EventData/SubjectUserSid
+    value: S-1-5-18
+  target: log
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Detects logon with "Special groups" and "Special Privileges" can
+      be thought of as Administrator groups or privileges.
+    falsepositives:
+    - Unknown
+    level: low
+    references:
+    - https://github.com/Yamato-Security/EnableWindowsLogSettings/blob/7f6d755d45ac7cc9fc35b0cbf498e6aa4ef19def/ConfiguringSecurityLogAuditPolicies.md
+    - https://learn.microsoft.com/en-us/windows/security/threat-protection/auditing/event-4672
+    - https://learn.microsoft.com/en-us/windows/security/threat-protection/auditing/event-4964
+    tags:
+    - attack.defense_evasion
+    - attack.lateral_movement
+    - attack.credential_access
+    - attack.t1558
+    - attack.t1649
+    - attack.t1550
+  name: User with Privileges Logon
+

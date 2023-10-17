@@ -1,0 +1,43 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' /INJECTRUNNING '
+    - case sensitive: false
+      not: true
+      op: is
+      path: event/PARENT/FILE_PATH
+      value: C:\Windows\System32\AppVClient.exe
+respond:
+- action: report
+  metadata:
+    author: frack113, Florian Roth
+    description: Detects process injection using the signed Windows tool "Mavinject"
+      via the "INJECTRUNNING" flag
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1218/T1218.md
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1056.004/T1056.004.md
+    - https://posts.specterops.io/mavinject-exe-functionality-deconstructed-c29ab2cf5c0e
+    - https://twitter.com/gN3mes1s/status/941315826107510784
+    - https://reaqta.com/2017/12/mavinject-microsoft-injector/
+    - https://twitter.com/Hexacorn/status/776122138063409152
+    - https://github.com/SigmaHQ/sigma/issues/3742
+    - https://github.com/keyboardcrunch/SentinelOne-ATTACK-Queries/blob/6a228d23eefe963ca81f2d52f94b815f61ef5ee0/Tactics/DefenseEvasion.md#t1055-process-injection
+    tags:
+    - attack.defense_evasion
+    - attack.privilege_escalation
+    - attack.t1055.001
+    - attack.t1218.013
+  name: Mavinject Inject DLL Into Running Process
+

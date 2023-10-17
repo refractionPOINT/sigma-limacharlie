@@ -1,0 +1,58 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \w32tm.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: w32time.dll
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /stripchart
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '/computer:'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '/period:'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /dataonly
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '/samples:'
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: When configured with suitable command line arguments, w32tm can act
+      as a delay mechanism
+    falsepositives:
+    - Legitimate use
+    level: high
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/d0dad62dbcae9c60c519368e82c196a3db577055/atomics/T1124/T1124.md
+    - https://blogs.blackberry.com/en/2022/05/dirty-deeds-done-dirt-cheap-russian-rat-offers-backdoor-bargains
+    tags:
+    - attack.discovery
+    - attack.t1124
+  name: Use of W32tm as Timer
+

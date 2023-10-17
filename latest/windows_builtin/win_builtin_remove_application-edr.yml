@@ -1,0 +1,34 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/EventData/Provider_Name
+      value: MsiInstaller
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '11724'
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '1034'
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: An application has been removed. Check if it is critical.
+    falsepositives:
+    - Unknown
+    level: low
+    tags:
+    - attack.impact
+    - attack.t1489
+  name: Application Uninstalled
+

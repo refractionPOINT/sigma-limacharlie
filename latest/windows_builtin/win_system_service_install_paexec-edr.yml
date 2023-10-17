@@ -1,0 +1,42 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/Provider_Name
+        value: Service Control Manager
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '7045'
+    - op: or
+      rules:
+      - case sensitive: false
+        op: starts with
+        path: event/EVENT/EventData/ServiceName
+        value: PAExec-
+      - case sensitive: false
+        op: starts with
+        path: event/EVENT/EventData/ImagePath
+        value: C:\WINDOWS\PAExec-
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects PAExec service installation
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://www.poweradmin.com/paexec/
+    tags:
+    - attack.execution
+    - attack.t1569.002
+  name: PAExec Service Installation
+

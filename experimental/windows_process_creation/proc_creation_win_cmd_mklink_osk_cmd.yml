@@ -1,0 +1,53 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cmd.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: Cmd.Exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: mklink
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \osk.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \cmd.exe
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Detects the creation of a symbolic link between "cmd.exe" and the
+      accessibility on-screen keyboard binary (osk.exe) using "mklink". This technique
+      provides an elevated command prompt to the user from the login screen without
+      the need to log in.
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/5c1e6f1b4fafd01c8d1ece85f510160fc1275fbf/atomics/T1546.008/T1546.008.md
+    - https://ss64.com/nt/mklink.html
+    tags:
+    - attack.privilege_escalation
+    - attack.persistence
+    - attack.t1546.008
+  name: Potential Privilege Escalation Using Symlink Between Osk and Cmd
+

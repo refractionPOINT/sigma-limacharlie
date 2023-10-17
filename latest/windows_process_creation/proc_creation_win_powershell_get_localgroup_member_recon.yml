@@ -1,0 +1,63 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: 'Get-LocalGroupMember '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: domain admins
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' administrator'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' administrateur'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: enterprise admins
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Exchange Trusted Subsystem
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Remote Desktop Users
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "Utilisateurs du Bureau \xE0 distance"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Usuarios de escritorio remoto
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects suspicious reconnaissance command line activity on Windows
+      systems using the PowerShell Get-LocalGroupMember Cmdlet
+    falsepositives:
+    - Administrative activity
+    level: medium
+    references:
+    - https://www.absolomb.com/2018-01-26-Windows-Privilege-Escalation-Guide/
+    tags:
+    - attack.discovery
+    - attack.t1087.001
+  name: Suspicious Reconnaissance Activity Using Get-LocalGroupMember Cmdlet
+

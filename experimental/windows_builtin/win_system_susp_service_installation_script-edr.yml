@@ -1,0 +1,74 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/EventData/Provider_Name
+      value: Service Control Manager
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '7045'
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ImagePath
+        value: ' /c '
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ImagePath
+        value: ' /r '
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ImagePath
+        value: ' /k '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ImagePath
+        value: powershell
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ImagePath
+        value: pwsh
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ImagePath
+        value: wscript
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ImagePath
+        value: cscript
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ImagePath
+        value: mshta
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ImagePath
+        value: rundll32
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ImagePath
+        value: regsvr32
+respond:
+- action: report
+  metadata:
+    author: pH-T (Nextron Systems)
+    description: Detects suspicious service installation scripts
+    falsepositives:
+    - Unknown
+    level: high
+    tags:
+    - attack.persistence
+    - attack.privilege_escalation
+    - car.2013-09-005
+    - attack.t1543.003
+  name: Suspicious Service Installation Script
+

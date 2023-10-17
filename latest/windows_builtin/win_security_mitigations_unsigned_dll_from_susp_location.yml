@@ -1,0 +1,57 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - op: or
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '11'
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '12'
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ImageName
+      value: \Users\Public\
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ImageName
+      value: \PerfLogs\
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ImageName
+      value: \Desktop\
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ImageName
+      value: \Downloads\
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ImageName
+      value: \AppData\Local\Temp\
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ImageName
+      value: C:\Windows\TEMP\
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects Code Integrity (CI) engine blocking processes from loading
+      unsigned DLLs residing in suspicious locations
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://github.com/nasbench/EVTX-ETW-Resources/blob/45fd5be71a51aa518b1b36d4e1f36af498084e27/ETWEventsList/CSV/Windows11/21H2/W11_21H2_Pro_20220719_22000.795/Providers/Microsoft-Windows-Security-Mitigations.csv
+    tags:
+    - attack.defense_evasion
+    - attack.t1574.002
+  name: Unsigned Binary Loaded From Suspicious Location
+

@@ -1,0 +1,82 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \pwsh.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: PowerShell.EXE
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: pwsh.dll
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'Get-ADComputer '
+      - case sensitive: false
+        op: matches
+        path: event/COMMAND_LINE
+        re: .*\ \-Filter\ \*
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' > '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' | Select '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: Out-File
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: Set-Content
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: Add-Content
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects usage of the Get-ADComputer cmdlet to collect computer information
+      and output it to a file
+    falsepositives:
+    - Legitimate admin scripts may use the same technique, it's better to exclude
+      specific computers or users who execute these commands or scripts often
+    level: medium
+    references:
+    - http://blog.talosintelligence.com/2022/09/lazarus-three-rats.html
+    - https://www.microsoft.com/en-us/security/blog/2022/10/18/defenders-beware-a-case-for-post-ransomware-investigations/
+    - https://www.cisa.gov/uscert/sites/default/files/publications/aa22-320a_joint_csa_iranian_government-sponsored_apt_actors_compromise_federal%20network_deploy_crypto%20miner_credential_harvester.pdf
+    tags:
+    - attack.discovery
+    - attack.t1033
+  name: Computer Discovery And Export Via Get-ADComputer Cmdlet
+

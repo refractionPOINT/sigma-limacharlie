@@ -1,0 +1,38 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \desktopimgdownldr.exe
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \desktopimgdownldr.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: /lockscreenurl:http
+respond:
+- action: report
+  metadata:
+    author: Tim Rauch
+    description: Detects the desktopimgdownldr utility being used to download a remote
+      file. An adversary may use desktopimgdownldr to download arbitrary files as
+      an alternative to certutil.
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://www.elastic.co/guide/en/security/current/remote-file-download-via-desktopimgdownldr-utility.html
+    tags:
+    - attack.command_and_control
+    - attack.t1105
+  name: Remote File Download via Desktopimgdownldr Utility
+

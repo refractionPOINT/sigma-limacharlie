@@ -1,0 +1,63 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \ntdsutil.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: ntdsutil.exe
+    - op: or
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: snapshot
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'mount '
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ac
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' i'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' ntds'
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects execution of ntdsutil.exe to perform different actions such
+      as restoring snapshots...etc.
+    falsepositives:
+    - Legitimate usage to restore snapshots
+    - Legitimate admin activity
+    level: medium
+    references:
+    - https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/cc731620(v=ws.11)
+    - https://symantec-enterprise-blogs.security.com/blogs/threat-intelligence/espionage-asia-governments
+    tags:
+    - attack.credential_access
+    - attack.t1003.003
+  name: Suspicious Usage Of Active Directory Diagnostic Tool (ntdsutil.exe)
+

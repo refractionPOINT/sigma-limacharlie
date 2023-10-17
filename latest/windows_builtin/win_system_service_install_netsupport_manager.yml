@@ -1,0 +1,39 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/EventData/Provider_Name
+      value: Service Control Manager
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '7045'
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ImagePath
+      value: \NetSupport Manager\client32.exe
+    - case sensitive: false
+      op: is
+      path: Event/EventData/ServiceName
+      value: Client32
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects NetSupport Manager service installation on the target system.
+    falsepositives:
+    - Legitimate use of the tool
+    level: medium
+    references:
+    - http://resources.netsupportsoftware.com/resources/manualpdfs/nsm_manual_uk.pdf
+    tags:
+    - attack.persistence
+  name: NetSupport Manager Service Install
+

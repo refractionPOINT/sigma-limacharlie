@@ -1,0 +1,77 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Invoke-WebRequest
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'iwr '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'wget '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'curl '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: DownloadFile
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: DownloadString
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: //0x
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .0x
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .00x
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: http://%
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '%2e'
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects use of an encoded/obfuscated version of an IP address (hex,
+      octal...) in an URL combined with a download command
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://h.43z.one/ipconverter/
+    - https://twitter.com/Yasser_Elsnbary/status/1553804135354564608
+    tags:
+    - attack.discovery
+  name: Obfuscated IP Download
+

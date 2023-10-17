@@ -1,0 +1,39 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: New-MailboxExportRequest
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' -Mailbox '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' -FilePath \\\\'
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects usage of the powerShell New-MailboxExportRequest Cmdlet to
+      exports a mailbox to a remote or local share, as used in ProxyShell exploitations
+    falsepositives:
+    - Unknown
+    level: critical
+    references:
+    - https://youtu.be/5mqid-7zp8k?t=2481
+    - https://blog.orange.tw/2021/08/proxylogon-a-new-attack-surface-on-ms-exchange-part-1.html
+    - https://peterjson.medium.com/reproducing-the-proxyshell-pwn2own-exploit-49743a4ea9a1
+    - https://m365internals.com/2022/10/07/hunting-in-on-premises-exchange-server-logs/
+    tags:
+    - attack.exfiltration
+  name: Suspicious PowerShell Mailbox Export to Share
+

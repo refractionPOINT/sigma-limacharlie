@@ -1,0 +1,34 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: \register_app.vbs
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: -register
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects the use of a Microsoft signed script 'REGISTER_APP.VBS' to
+      register a VSS/VDS Provider as a COM+ application.
+    falsepositives:
+    - Legitimate usage of the script. Always investigate what's being registered to
+      confirm if it's benign
+    level: medium
+    references:
+    - https://twitter.com/sblmsrsn/status/1456613494783160325?s=20
+    tags:
+    - attack.defense_evasion
+    - attack.t1218
+  name: REGISTER_APP.VBS Proxy Execution
+

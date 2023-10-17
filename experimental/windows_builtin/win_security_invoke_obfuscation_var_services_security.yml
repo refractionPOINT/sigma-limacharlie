@@ -1,0 +1,48 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '4697'
+  - case sensitive: false
+    op: contains
+    path: Event/EventData/ServiceFileName
+    value: cmd
+  - case sensitive: false
+    op: contains
+    path: Event/EventData/ServiceFileName
+    value: '"set'
+  - case sensitive: false
+    op: contains
+    path: Event/EventData/ServiceFileName
+    value: -f
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ServiceFileName
+      value: /c
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ServiceFileName
+      value: /r
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Jonathan Cheong, oscd.community
+    description: Detects Obfuscated use of Environment Variables to execute PowerShell
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://github.com/SigmaHQ/sigma/issues/1009
+    tags:
+    - attack.defense_evasion
+    - attack.t1027
+    - attack.execution
+    - attack.t1059.001
+  name: Invoke-Obfuscation VAR+ Launcher - Security
+

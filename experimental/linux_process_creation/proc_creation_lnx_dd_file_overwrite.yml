@@ -1,0 +1,48 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: true
+        op: is
+        path: event/FILE_PATH
+        value: /bin/dd
+      - case sensitive: true
+        op: is
+        path: event/FILE_PATH
+        value: /usr/bin/dd
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: of=
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: if=/dev/zero
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: if=/dev/null
+respond:
+- action: report
+  metadata:
+    author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research), MSTIC
+    description: Detects potential overwriting and deletion of a file using DD.
+    falsepositives:
+    - Any user deleting files that way.
+    level: low
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1485/T1485.md#atomic-test-2---macoslinux---overwrite-file-with-dd
+    tags:
+    - attack.impact
+    - attack.t1485
+  name: DD File Overwrite
+

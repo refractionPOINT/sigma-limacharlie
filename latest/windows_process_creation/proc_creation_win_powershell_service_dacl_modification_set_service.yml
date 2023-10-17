@@ -1,0 +1,79 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \pwsh.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: pwsh.dll
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-SecurityDescriptorSddl '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-sd '
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'Set-Service '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: D;;
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ;;;IU
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ;;;SU
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ;;;BA
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ;;;SY
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ;;;WD
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects suspicious DACL modifications via the "Set-Service" cmdlet
+      using the "SecurityDescriptorSddl" flag (Only available with PowerShell 7) that
+      can be used to hide services or make them unstopable
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.sans.org/blog/red-team-tactics-hiding-windows-services/
+    - https://docs.microsoft.com/pt-br/windows/win32/secauthz/sid-strings
+    tags:
+    - attack.persistence
+    - attack.t1543.003
+  name: Suspicious Service DACL Modification Via Set-Service Cmdlet
+

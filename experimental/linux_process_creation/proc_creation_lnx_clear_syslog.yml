@@ -1,0 +1,70 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: rm /var/log/syslog
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: rm -r /var/log/syslog
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: rm -f /var/log/syslog
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: rm -rf /var/log/syslog
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: unlink /var/log/syslog
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: unlink -r /var/log/syslog
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: unlink -f /var/log/syslog
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: unlink -rf /var/log/syslog
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: mv /var/log/syslog
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' >/var/log/syslog'
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' > /var/log/syslog'
+respond:
+- action: report
+  metadata:
+    author: Max Altgelt (Nextron Systems), Roberto Rodriguez (Cyb3rWard0g), OTR (Open
+      Threat Research), MSTIC
+    description: Detects specific commands commonly used to remove or empty the syslog.
+      Which is often used by attacker as a method to hide their tracks
+    falsepositives:
+    - Log rotation.
+    level: high
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1070.002/T1070.002.md
+    tags:
+    - attack.defense_evasion
+    - attack.t1070.002
+  name: Commands to Clear or Remove the Syslog
+

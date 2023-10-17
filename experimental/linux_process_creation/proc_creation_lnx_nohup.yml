@@ -1,0 +1,29 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - case sensitive: true
+    op: ends with
+    path: event/FILE_PATH
+    value: /nohup
+respond:
+- action: report
+  metadata:
+    author: Christopher Peacock @SecurePeacock, SCYTHE @scythe_io
+    description: Detects usage of nohup which could be leveraged by an attacker to
+      keep a process running or break out from restricted environments
+    falsepositives:
+    - Administrators or installed processes that leverage nohup
+    level: medium
+    references:
+    - https://gtfobins.github.io/gtfobins/nohup/
+    - https://en.wikipedia.org/wiki/Nohup
+    - https://www.computerhope.com/unix/unohup.htm
+    tags:
+    - attack.execution
+    - attack.t1059.004
+  name: Nohup Execution
+

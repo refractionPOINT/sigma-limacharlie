@@ -1,0 +1,94 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \pwsh.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' | iex;'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' | iex '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' | iex}'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' | IEX ;'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' | IEX -Error'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' | IEX (new'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ');IEX '
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ::FromBase64String
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '.GetString([System.Convert]::'
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: )|iex;$
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: );iex($
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: );iex $
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' | IEX | '
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects suspicious ways to run Invoke-Execution using IEX alias
+    falsepositives:
+    - Legitimate scripts that use IEX
+    level: high
+    references:
+    - https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/invoke-expression?view=powershell-7.2
+    tags:
+    - attack.execution
+    - attack.t1059.001
+  name: Suspicious PowerShell IEX Execution Patterns
+

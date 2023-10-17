@@ -1,0 +1,263 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \w3wp.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \php-cgi.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \nginx.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \httpd.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \caddy.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \ws_tomcatservice.exe
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \java.exe
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \javaw.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/FILE_PATH
+            value: -tomcat-
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/FILE_PATH
+            value: \tomcat
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \java.exe
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \javaw.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: catalina.jar
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: CATALINA_HOME
+    - op: or
+      rules:
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: net.exe
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: net1.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' user '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' use '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' group '
+      - op: and
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: ping.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -n '
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '&cd&echo'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'cd /d '
+      - op: and
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: wmic.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /node:'
+      - op: or
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \whoami.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \systeminfo.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \quser.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \ipconfig.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \pathping.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \tracert.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \netstat.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \schtasks.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \vssadmin.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \wevtutil.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \tasklist.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: whoami.exe
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: sysinfo.exe
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: quser.exe
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: ipconfig.exe
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: pathping.exe
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: tracert.exe
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: netstat.exe
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: schtasks.exe
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: VSSADMIN.EXE
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: wevtutil.exe
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: tasklist.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' Test-NetConnection '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: dir \
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems), Jonhnathan Ribeiro, Anton Kutepov, oscd.community
+    description: Detects certain command line parameters often used during reconnaissance
+      activity via web shells
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.fireeye.com/blog/threat-research/2013/08/breaking-down-the-china-chopper-web-shell-part-ii.html
+    - https://unit42.paloaltonetworks.com/bumblebee-webshell-xhunt-campaign/
+    tags:
+    - attack.persistence
+    - attack.t1505.003
+    - attack.t1018
+    - attack.t1033
+    - attack.t1087
+  name: Webshell Detection With Command Line Keywords
+

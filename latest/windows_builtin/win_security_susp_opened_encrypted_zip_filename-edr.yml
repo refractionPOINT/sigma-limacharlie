@@ -1,0 +1,69 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '5379'
+    - case sensitive: false
+      op: contains
+      path: event/EVENT/EventData/TargetName
+      value: Microsoft_Windows_Shell_ZipFolder:filename
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TargetName
+        value: invoice
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TargetName
+        value: new order
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TargetName
+        value: rechnung
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TargetName
+        value: factura
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TargetName
+        value: delivery
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TargetName
+        value: purchase
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TargetName
+        value: order
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TargetName
+        value: payment
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects the extraction of password protected ZIP archives with suspicious
+      file names. See the filename variable for more details on which file has been
+      opened.
+    falsepositives:
+    - Legitimate used of encrypted ZIP files
+    level: high
+    references:
+    - https://twitter.com/sbousseaden/status/1523383197513379841
+    tags:
+    - attack.command_and_control
+    - attack.defense_evasion
+    - attack.t1027
+    - attack.t1105
+    - attack.t1036
+  name: Password Protected ZIP File Opened (Suspicious Filenames)
+

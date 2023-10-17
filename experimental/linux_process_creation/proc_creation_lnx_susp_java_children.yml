@@ -1,0 +1,70 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: /java
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /bin/sh
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bash
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: dash
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ksh
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: zsh
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: csh
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: fish
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: curl
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: wget
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: python
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects java process spawning suspicious children
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.tecmint.com/different-types-of-linux-shells/
+    tags:
+    - attack.execution
+    - attack.t1059
+  name: Suspicious Java Children Processes
+

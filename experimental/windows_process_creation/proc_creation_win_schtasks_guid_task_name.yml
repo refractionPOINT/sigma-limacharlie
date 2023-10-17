@@ -1,0 +1,61 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \schtasks.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: '/Create '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /TN "{
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /TN '{
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /TN {
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '}"'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '}'''
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '} '
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects creation of a scheduled task with a GUID like name
+    falsepositives:
+    - Legitimate software naming their tasks as GUIDs
+    level: medium
+    references:
+    - https://thedfirreport.com/2022/10/31/follina-exploit-leads-to-domain-compromise/
+    - https://thedfirreport.com/2022/02/21/qbot-and-zerologon-lead-to-full-domain-compromise/
+    tags:
+    - attack.execution
+    - attack.t1053.005
+  name: Suspicious Scheduled Task Name As GUID
+

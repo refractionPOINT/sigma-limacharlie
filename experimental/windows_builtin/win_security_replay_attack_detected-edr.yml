@@ -1,0 +1,26 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - case sensitive: false
+    op: is
+    path: event/EVENT/System/EventID
+    value: '4649'
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Detects possible Kerberos Replay Attack on the domain controllers
+      when "KRB_AP_ERR_REPEAT" Kerberos response is sent to the client
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://github.com/Yamato-Security/EnableWindowsLogSettings/blob/7f6d755d45ac7cc9fc35b0cbf498e6aa4ef19def/ConfiguringSecurityLogAuditPolicies.md
+    - https://learn.microsoft.com/en-us/windows/security/threat-protection/auditing/event-4649
+    tags:
+    - attack.credential_access
+    - attack.t1558
+  name: Replay Attack Detected
+

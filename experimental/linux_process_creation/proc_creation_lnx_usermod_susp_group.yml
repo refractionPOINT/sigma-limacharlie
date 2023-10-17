@@ -1,0 +1,40 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /usermod
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -aG root
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -aG sudoers
+respond:
+- action: report
+  metadata:
+    author: TuanLe (GTSC)
+    description: Detects usage of the "usermod" binary to add users add users to the
+      root or suoders groups
+    falsepositives:
+    - Legitimate administrator activities
+    level: medium
+    references:
+    - https://pberba.github.io/security/2021/11/23/linux-threat-hunting-for-persistence-account-creation-manipulation/
+    - https://www.configserverfirewall.com/ubuntu-linux/ubuntu-add-user-to-root-group/
+    tags:
+    - attack.privilege_escalation
+    - attack.persistence
+  name: User Added To Root/Sudoers Group Using Usermod
+

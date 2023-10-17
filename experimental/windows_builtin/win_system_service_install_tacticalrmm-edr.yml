@@ -1,0 +1,43 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/Provider_Name
+        value: Service Control Manager
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '7045'
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ImagePath
+        value: tacticalrmm.exe
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ServiceName
+        value: TacticalRMM Agent Service
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects a TacticalRMM service installation. Tactical RMM is a remote
+      monitoring & management tool.
+    falsepositives:
+    - Legitimate use of the tool
+    level: medium
+    references:
+    - https://thedfirreport.com/2022/11/28/emotet-strikes-again-lnk-file-leads-to-domain-wide-ransomware/
+    tags:
+    - attack.command_and_control
+    - attack.t1219
+  name: TacticalRMM Service Installation
+

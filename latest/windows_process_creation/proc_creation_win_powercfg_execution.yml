@@ -1,0 +1,65 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \powercfg.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: PowerCfg.exe
+    - op: or
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '/setacvalueindex '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: SCHEME_CURRENT
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: SUB_VIDEO
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: VIDEOCONLOCK
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '-change '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: -standby-timeout-
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Detects suspicious execution of 'Powercfg.exe' to change lock screen
+      timeout
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://blogs.vmware.com/security/2022/11/batloader-the-evasive-downloader-malware.html
+    - https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options
+    tags:
+    - attack.defense_evasion
+  name: Suspicious Powercfg Execution To Change Lock Screen Timeout
+

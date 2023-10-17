@@ -1,0 +1,33 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /sudo
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: execve_hijack
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects execution of a the file "execve_hijack" which is used by
+      the Triple Cross rootkit as a way to elevate privileges
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://github.com/h3xduck/TripleCross/blob/1f1c3e0958af8ad9f6ebe10ab442e75de33e91de/src/helpers/execve_hijack.c#L275
+    tags:
+    - attack.defense_evasion
+    - attack.privilege_escalation
+  name: Triple Cross eBPF Rootkit Execve Hijack
+

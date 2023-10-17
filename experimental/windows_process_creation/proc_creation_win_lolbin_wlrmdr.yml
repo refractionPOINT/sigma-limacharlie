@@ -1,0 +1,80 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \wlrmdr.exe
+    - op: and
+      rules:
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \wlrmdr.exe
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: WLRMNDR.EXE
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '-s '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '-f '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '-t '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '-m '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '-a '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '-u '
+      - not: true
+        op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/PARENT/FILE_PATH
+          value: C:\Windows\System32\winlogon.exe
+        - case sensitive: false
+          op: is
+          path: event/PARENT/FILE_PATH
+          value: '-'
+respond:
+- action: report
+  metadata:
+    author: frack113, manasmbellani
+    description: Detects use of Wlrmdr.exe in which the -u parameter is passed to
+      ShellExecute
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://twitter.com/0gtweet/status/1493963591745220608?s=20&t=xUg9DsZhJy1q9bPTUWgeIQ
+    tags:
+    - attack.defense_evasion
+    - attack.t1218
+  name: Wlrmdr Lolbin Use as Launcher
+

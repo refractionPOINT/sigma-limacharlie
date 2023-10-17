@@ -1,0 +1,63 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/EventData/Provider_Name
+    value: ESENT
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '325'
+  - case sensitive: false
+    op: contains
+    path: Event/EventData/Data
+    value: ntds.dit
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/Data
+      value: \Users\Public\
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/Data
+      value: \Perflogs\
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/Data
+      value: \Temp\
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/Data
+      value: \Appdata\
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/Data
+      value: \Desktop\
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/Data
+      value: \Downloads\
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/Data
+      value: C:\ntds.dit
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects potential abuse of ntdsutil to dump ntds.dit database to
+      a suspicious location
+    falsepositives:
+    - Legitimate backup operation/creating shadow copies
+    level: medium
+    references:
+    - https://twitter.com/mgreen27/status/1558223256704122882
+    - https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj574207(v=ws.11)
+    tags:
+    - attack.execution
+  name: Dump Ntds.dit To Suspicious Location
+

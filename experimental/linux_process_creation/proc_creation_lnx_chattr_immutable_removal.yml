@@ -1,0 +1,32 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /chattr
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' -i '
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects usage of the 'chattr' utility to remove immutable file attribute.
+    falsepositives:
+    - Administrator interacting with immutable files (e.g. for instance backups).
+    level: medium
+    references:
+    - https://www.trendmicro.com/en_us/research/22/i/how-malicious-actors-abuse-native-linux-tools-in-their-attacks.html
+    tags:
+    - attack.defense_evasion
+    - attack.t1222.002
+  name: Remove Immutable File Attribute
+

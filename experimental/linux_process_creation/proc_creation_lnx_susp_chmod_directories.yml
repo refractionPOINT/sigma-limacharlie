@@ -1,0 +1,47 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /chmod
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /tmp/
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /.Library/
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /etc/
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /opt/
+respond:
+- action: report
+  metadata:
+    author: Christopher Peacock @SecurePeacock, SCYTHE @scythe_io
+    description: Detects chmod targeting files in abnormal directory paths.
+    falsepositives:
+    - Admin changing file permissions.
+    level: medium
+    references:
+    - https://www.intezer.com/blog/malware-analysis/new-backdoor-sysjoker/
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1222.002/T1222.002.md
+    tags:
+    - attack.defense_evasion
+    - attack.t1222.002
+  name: Chmod Suspicious Directory
+
