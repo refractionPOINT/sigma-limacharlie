@@ -38,6 +38,20 @@ detect:
           op: contains
           path: event/COMMAND_LINE
           value: ' -m -bg'
+      - op: and
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: :\Windows\System32\svchost.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: :\Windows\System32\sdbinst.exe
+        - case sensitive: false
+          op: ends with
+          path: event/COMMAND_LINE
+          value: ' -mm'
 respond:
 - action: report
   metadata:
