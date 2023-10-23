@@ -34,5 +34,5 @@ respond:
     tags:
     - attack.command_and_control
     - attack.t1105
-  name: Remote File Download via Desktopimgdownldr Utility
+  name: Remote File Download Via Desktopimgdownldr Utility
 
