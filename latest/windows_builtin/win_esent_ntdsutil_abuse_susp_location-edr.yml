@@ -22,15 +22,7 @@ detect:
       - case sensitive: false
         op: contains
         path: event/EVENT/EventData/Data
-        value: \Users\Public\
-      - case sensitive: false
-        op: contains
-        path: event/EVENT/EventData/Data
-        value: \Perflogs\
-      - case sensitive: false
-        op: contains
-        path: event/EVENT/EventData/Data
-        value: \Temp\
+        value: :\ntds.dit
       - case sensitive: false
         op: contains
         path: event/EVENT/EventData/Data
@@ -46,7 +38,15 @@ detect:
       - case sensitive: false
         op: contains
         path: event/EVENT/EventData/Data
-        value: C:\ntds.dit
+        value: \Perflogs\
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Data
+        value: \Temp\
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Data
+        value: \Users\Public\
 respond:
 - action: report
   metadata:

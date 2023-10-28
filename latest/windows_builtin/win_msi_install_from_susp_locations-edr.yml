@@ -26,11 +26,11 @@ detect:
         - case sensitive: false
           op: contains
           path: event/EVENT/EventData/Data
-          value: \Users\Public\
+          value: :\Windows\TEMP\
         - case sensitive: false
           op: contains
           path: event/EVENT/EventData/Data
-          value: \PerfLogs\
+          value: \\\\
         - case sensitive: false
           op: contains
           path: event/EVENT/EventData/Data
@@ -38,11 +38,11 @@ detect:
         - case sensitive: false
           op: contains
           path: event/EVENT/EventData/Data
-          value: C:\Windows\TEMP\
+          value: \PerfLogs\
         - case sensitive: false
           op: contains
           path: event/EVENT/EventData/Data
-          value: \\\\
+          value: \Users\Public\
     - not: true
       op: or
       rules:
@@ -61,7 +61,8 @@ respond:
     description: Detects MSI package installation from suspicious locations
     falsepositives:
     - False positives may occur if you allow installation from folders such as the
-      desktop, the public folder or remote shares
+      desktop, the public folder or remote shares. A baseline is required before production
+      use.
     level: medium
     references:
     - https://www.trendmicro.com/en_us/research/22/h/ransomware-actor-abuses-genshin-impact-anti-cheat-driver-to-kill-antivirus.html

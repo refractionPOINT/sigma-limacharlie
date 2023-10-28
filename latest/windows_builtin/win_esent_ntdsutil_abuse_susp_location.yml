@@ -19,15 +19,7 @@ detect:
     - case sensitive: false
       op: contains
       path: Event/EventData/Data
-      value: \Users\Public\
-    - case sensitive: false
-      op: contains
-      path: Event/EventData/Data
-      value: \Perflogs\
-    - case sensitive: false
-      op: contains
-      path: Event/EventData/Data
-      value: \Temp\
+      value: :\ntds.dit
     - case sensitive: false
       op: contains
       path: Event/EventData/Data
@@ -43,7 +35,15 @@ detect:
     - case sensitive: false
       op: contains
       path: Event/EventData/Data
-      value: C:\ntds.dit
+      value: \Perflogs\
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/Data
+      value: \Temp\
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/Data
+      value: \Users\Public\
   target: log
 respond:
 - action: report

@@ -19,7 +19,7 @@ respond:
 - action: report
   metadata:
     author: Markus Neis
-    description: Detects potential LethalHTA technique where the "mshta.exe" is spwaned
+    description: Detects potential LethalHTA technique where the "mshta.exe" is spawned
       by an "svchost.exe" process
     falsepositives:
     - Unknown

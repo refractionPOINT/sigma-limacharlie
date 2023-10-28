@@ -28,7 +28,7 @@ respond:
   metadata:
     author: Nasreddine Bencherchali (Nextron Systems)
     description: Detects the usage of schtasks with the delete flag and the asterisk
-      symbole to delete all tasks from the schedule of the local computer, including
+      symbol to delete all tasks from the schedule of the local computer, including
       tasks scheduled by other users.
     falsepositives:
     - Unlikely

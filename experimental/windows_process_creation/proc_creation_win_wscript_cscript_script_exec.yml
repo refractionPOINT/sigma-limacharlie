@@ -62,7 +62,7 @@ respond:
     description: Detects script file execution (.js, .jse, .vba, .vbe, .vbs, .wsf)
       by Wscript/Cscript
     falsepositives:
-    - Some additional tunning is required. It is recommended to add the user profile
+    - Some additional tuning is required. It is recommended to add the user profile
       path in CommandLine if it is getting too noisy.
     level: medium
     tags:
