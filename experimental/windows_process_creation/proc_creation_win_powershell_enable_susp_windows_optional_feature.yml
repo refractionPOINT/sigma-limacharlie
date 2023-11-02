@@ -1,0 +1,69 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Enable-WindowsOptionalFeature
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: -Online
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: -FeatureName
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: TelnetServer
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Internet-Explorer-Optional-amd64
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: TFTP
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: SMB1Protocol
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Client-ProjFS
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Microsoft-Windows-Subsystem-Linux
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: 'Detects usage of the built-in PowerShell cmdlet "Enable-WindowsOptionalFeature"
+      used as a Deployment Image Servicing and Management tool.
+
+      Similar to DISM.exe, this cmdlet is used to enumerate, install, uninstall, configure,
+      and update features and packages in Windows images
+
+      '
+    falsepositives:
+    - Legitimate usage of the features listed in the rule.
+    level: medium
+    references:
+    - https://docs.microsoft.com/en-us/powershell/module/dism/enable-windowsoptionalfeature?view=windowsserver2022-ps
+    - https://learn.microsoft.com/en-us/windows/win32/projfs/enabling-windows-projected-file-system
+    - https://learn.microsoft.com/en-us/windows/wsl/install-on-server
+    tags:
+    - attack.defense_evasion
+  name: Potential Suspicious Windows Feature Enabled - ProcCreation
+

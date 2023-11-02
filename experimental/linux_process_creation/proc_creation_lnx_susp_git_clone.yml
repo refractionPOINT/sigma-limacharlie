@@ -1,0 +1,91 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /git
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' clone '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: exploit
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Vulns
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: vulnerability
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: RCE
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: RemoteCodeExecution
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Invoke-
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: CVE-
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: poc-
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ProofOfConcept
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: proxyshell
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: log4shell
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: eternalblue
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: eternal-blue
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: MS17-
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects execution of "git" in order to clone a remote repository
+      that contain suspicious keywords which might be suspicious
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://gist.githubusercontent.com/MichaelKoczwara/12faba9c061c12b5814b711166de8c2f/raw/e2068486692897b620c25fde1ea258c8218fe3d3/history.txt
+    tags:
+    - attack.reconnaissance
+    - attack.t1593.003
+  name: Suspicious Git Clone - Linux
+

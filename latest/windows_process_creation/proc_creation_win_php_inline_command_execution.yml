@@ -1,0 +1,41 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \php.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: php.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' -r'
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects execution of php using the "-r" flag. This is could be used
+      as a way to launch a reverse shell or execute live php code.
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://www.php.net/manual/en/features.commandline.php
+    - https://www.revshells.com/
+    - https://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet
+    tags:
+    - attack.execution
+    - attack.t1059
+  name: Php Inline Command Execution
+

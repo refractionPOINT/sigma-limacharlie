@@ -1,0 +1,61 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \cmd.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: Cmd.Exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: PowerShell.EXE
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: echo
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '>'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \\\\.\\pipe\\
+respond:
+- action: report
+  metadata:
+    author: Tim Rauch
+    description: Detects a remote file copy attempt to a hidden network share. This
+      may indicate lateral movement or data staging activity.
+    falsepositives:
+    - Other programs that cause these patterns (please report)
+    level: high
+    references:
+    - https://www.elastic.co/guide/en/security/current/privilege-escalation-via-named-pipe-impersonation.html
+    tags:
+    - attack.lateral_movement
+    - attack.t1021
+  name: Privilege Escalation via Named Pipe Impersonation
+

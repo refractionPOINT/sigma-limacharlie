@@ -1,0 +1,77 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \pwsh.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -e '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -en '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -enc '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -enco'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -ec '
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -Encoding '
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/FILE_PATH
+          value: C:\Packages\Plugins\Microsoft.GuestConfiguration.ConfigurationforWindows\
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/FILE_PATH
+          value: \gc_worker.exe
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Commandline to launch powershell with a base64 payload
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1059.001/T1059.001.md#atomic-test-20---powershell-invoke-known-malicious-cmdlets
+    - https://unit42.paloaltonetworks.com/unit42-pulling-back-the-curtains-on-encodedcommand-powershell-attacks/
+    - https://mikefrobbins.com/2017/06/15/simple-obfuscation-with-powershell-using-base64-encoding/
+    tags:
+    - attack.execution
+    - attack.t1059.001
+  name: Suspicious Execution of Powershell with Base64
+

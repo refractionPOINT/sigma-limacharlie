@@ -1,0 +1,52 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \protocolhandler.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: ProtocolHandler.exe
+    - op: or
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '"ms-word'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .docx"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' http'
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Detects usage of "ProtocolHandler" to download files. Downloaded
+      files will be located in the cache folder (for example - %LOCALAPPDATA%\Microsoft\Windows\INetCache\IE)
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1218/T1218.md
+    - https://lolbas-project.github.io/lolbas/OtherMSBinaries/ProtocolHandler/
+    tags:
+    - attack.defense_evasion
+    - attack.t1218
+  name: File Download Using ProtocolHandler.exe
+

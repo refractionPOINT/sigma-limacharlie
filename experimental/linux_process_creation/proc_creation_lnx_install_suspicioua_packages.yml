@@ -1,0 +1,115 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /apt
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /apt-get
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: install
+      - op: and
+        rules:
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /yum
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: localinstall
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: install
+      - op: and
+        rules:
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /rpm
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: -i
+      - op: and
+        rules:
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /dpkg
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: --install
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: -i
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: nmap
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' nc'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: netcat
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: wireshark
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: tshark
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: openconnect
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: proxychains
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects installation of suspicious packages using system installation
+      utilities
+    falsepositives:
+    - Legitimate administration activities
+    level: medium
+    references:
+    - https://gist.githubusercontent.com/MichaelKoczwara/12faba9c061c12b5814b711166de8c2f/raw/e2068486692897b620c25fde1ea258c8218fe3d3/history.txt
+    tags:
+    - attack.defense_evasion
+    - attack.t1553.004
+  name: Suspicious Package Installed - Linux
+

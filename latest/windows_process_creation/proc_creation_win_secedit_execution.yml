@@ -1,0 +1,75 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \secedit.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: SeCEdit
+    - op: or
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /export
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /cfg
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /configure
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /db
+respond:
+- action: report
+  metadata:
+    author: Janantha Marasinghe
+    description: Detects potential suspicious behaviour using secedit.exe. Such as
+      exporting or modifying the security policy
+    falsepositives:
+    - Legitimate administrative use
+    level: medium
+    references:
+    - https://blueteamops.medium.com/secedit-and-i-know-it-595056dee53d
+    - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/secedit
+    tags:
+    - attack.discovery
+    - attack.persistence
+    - attack.defense_evasion
+    - attack.credential_access
+    - attack.privilege_escalation
+    - attack.t1562.002
+    - attack.t1547.001
+    - attack.t1505.005
+    - attack.t1556.002
+    - attack.t1562
+    - attack.t1574.007
+    - attack.t1564.002
+    - attack.t1546.008
+    - attack.t1546.007
+    - attack.t1547.014
+    - attack.t1547.010
+    - attack.t1547.002
+    - attack.t1557
+    - attack.t1082
+  name: Potential Suspicious Activity Using SeCEdit
+

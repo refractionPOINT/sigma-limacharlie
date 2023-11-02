@@ -1,0 +1,42 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' --remote-debugging-'
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \firefox.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -start-debugger-server'
+respond:
+- action: report
+  metadata:
+    author: pH-T (Nextron Systems), Nasreddine Bencherchali (Nextron Systems)
+    description: Detects browsers starting with the remote debugging flags. Which
+      is a technique often used to perform browser injection attacks
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://yoroi.company/wp-content/uploads/2022/05/EternityGroup_report_compressed.pdf
+    - https://www.mdsec.co.uk/2022/10/analysing-lastpass-part-1/
+    - https://github.com/defaultnamehere/cookie_crimes/
+    - https://github.com/wunderwuzzi23/firefox-cookiemonster
+    tags:
+    - attack.credential_access
+    - attack.t1185
+  name: Browser Started with Remote Debugging
+

@@ -1,0 +1,174 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: -nop
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -w '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: hidden
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -c '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '[Convert]::FromBase64String'
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -w '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: hidden
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: -noni
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: -nop
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -c '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: iex
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: New-Object
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -w '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: hidden
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: -ep
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: bypass
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: -Enc
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: powershell
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: reg
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: add
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \software\
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: bypass
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: -noprofile
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: -windowstyle
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: hidden
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: new-object
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: system.net.webclient
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .download
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: iex
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: New-Object
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: Net.WebClient
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .Download
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: (New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Write-ChocolateyWarning
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects suspicious PowerShell invocation command parameters
+    falsepositives:
+    - Unknown
+    level: medium
+    tags:
+    - attack.defense_evasion
+  name: Suspicious PowerShell Invocations - Specific - ProcessCreation
+

@@ -1,0 +1,36 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \pcalua.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' -a'
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems), E.M. Anhaus (originally from
+      Atomic Blue Detections, Endgame), oscd.community
+    description: Detects execition of commands and binaries from the context of The
+      program compatibility assistant (Pcalua.exe). This can be used as a LOLBIN in
+      order to bypass application whitelisting.
+    falsepositives:
+    - Legitimate use by a via a batch script or by an administrator.
+    level: medium
+    references:
+    - https://lolbas-project.github.io/lolbas/Binaries/Pcalua/
+    - https://pentestlab.blog/2020/07/06/indirect-command-execution/
+    tags:
+    - attack.execution
+    - attack.t1059
+  name: Use of Pcalua For Execution
+

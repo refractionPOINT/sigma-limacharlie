@@ -1,0 +1,630 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \pwsh.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: PowerShell.EXE
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: pwsh.dll
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: TgBlAFQALgB3AEUAQg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 4AZQBUAC4AdwBFAEIA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OAGUAVAAuAHcARQBCA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bgBFAHQALgB3AGUAYg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 4ARQB0AC4AdwBlAGIA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: uAEUAdAAuAHcAZQBiA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: TgBFAHQALgB3AGUAYg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OAEUAdAAuAHcAZQBiA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bgBlAFQALgB3AGUAYg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 4AZQBUAC4AdwBlAGIA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: uAGUAVAAuAHcAZQBiA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: TgBlAFQALgB3AGUAYg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OAGUAVAAuAHcAZQBiA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bgBFAFQALgB3AGUAYg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 4ARQBUAC4AdwBlAGIA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: uAEUAVAAuAHcAZQBiA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bgBlAHQALgBXAGUAYg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 4AZQB0AC4AVwBlAGIA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: uAGUAdAAuAFcAZQBiA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bgBFAHQALgBXAGUAYg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 4ARQB0AC4AVwBlAGIA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: uAEUAdAAuAFcAZQBiA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: TgBFAHQALgBXAGUAYg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OAEUAdAAuAFcAZQBiA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bgBlAFQALgBXAGUAYg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 4AZQBUAC4AVwBlAGIA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: uAGUAVAAuAFcAZQBiA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: TgBlAFQALgBXAGUAYg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OAGUAVAAuAFcAZQBiA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bgBFAFQALgBXAGUAYg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 4ARQBUAC4AVwBlAGIA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: uAEUAVAAuAFcAZQBiA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bgBlAHQALgB3AEUAYg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 4AZQB0AC4AdwBFAGIA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: uAGUAdAAuAHcARQBiA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: TgBlAHQALgB3AEUAYg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OAGUAdAAuAHcARQBiA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bgBFAHQALgB3AEUAYg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 4ARQB0AC4AdwBFAGIA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: uAEUAdAAuAHcARQBiA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: TgBFAHQALgB3AEUAYg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OAEUAdAAuAHcARQBiA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bgBlAFQALgB3AEUAYg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 4AZQBUAC4AdwBFAGIA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: uAGUAVAAuAHcARQBiA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: TgBlAFQALgB3AEUAYg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OAGUAVAAuAHcARQBiA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bgBFAFQALgB3AEUAYg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 4ARQBUAC4AdwBFAGIA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: uAEUAVAAuAHcARQBiA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: TgBFAFQALgB3AEUAYg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OAEUAVAAuAHcARQBiA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bgBlAHQALgBXAEUAYg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 4AZQB0AC4AVwBFAGIA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: uAGUAdAAuAFcARQBiA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: TgBlAHQALgBXAEUAYg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OAGUAdAAuAFcARQBiA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bgBFAHQALgBXAEUAYg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 4ARQB0AC4AVwBFAGIA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: uAEUAdAAuAFcARQBiA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: TgBFAHQALgBXAEUAYg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OAEUAdAAuAFcARQBiA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bgBlAFQALgBXAEUAYg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 4AZQBUAC4AVwBFAGIA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: uAGUAVAAuAFcARQBiA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: TgBlAFQALgBXAEUAYg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OAGUAVAAuAFcARQBiA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bgBFAFQALgBXAEUAYg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 4ARQBUAC4AVwBFAGIA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: uAEUAVAAuAFcARQBiA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: TgBFAFQALgBXAEUAYg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OAEUAVAAuAFcARQBiA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bgBlAHQALgB3AGUAQg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 4AZQB0AC4AdwBlAEIA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: uAGUAdAAuAHcAZQBCA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: TgBlAHQALgB3AGUAQg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OAGUAdAAuAHcAZQBCA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bgBFAHQALgB3AGUAQg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 4ARQB0AC4AdwBlAEIA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: uAEUAdAAuAHcAZQBCA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: TgBFAHQALgB3AGUAQg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OAEUAdAAuAHcAZQBCA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bgBlAFQALgB3AGUAQg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 4AZQBUAC4AdwBlAEIA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: uAGUAVAAuAHcAZQBCA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: TgBlAFQALgB3AGUAQg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OAGUAVAAuAHcAZQBCA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bgBFAFQALgB3AGUAQg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 4ARQBUAC4AdwBlAEIA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: uAEUAVAAuAHcAZQBCA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: TgBFAFQALgB3AGUAQg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OAEUAVAAuAHcAZQBCA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bgBlAHQALgBXAGUAQg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 4AZQB0AC4AVwBlAEIA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: uAGUAdAAuAFcAZQBCA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: TgBlAHQALgBXAGUAQg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OAGUAdAAuAFcAZQBCA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bgBFAHQALgBXAGUAQg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 4ARQB0AC4AVwBlAEIA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: uAEUAdAAuAFcAZQBCA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: TgBFAHQALgBXAGUAQg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OAEUAdAAuAFcAZQBCA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bgBlAFQALgBXAGUAQg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 4AZQBUAC4AVwBlAEIA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: uAGUAVAAuAFcAZQBCA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: TgBlAFQALgBXAGUAQg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OAGUAVAAuAFcAZQBCA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bgBFAFQALgBXAGUAQg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 4ARQBUAC4AVwBlAEIA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: uAEUAVAAuAFcAZQBCA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: TgBFAFQALgBXAGUAQg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OAEUAVAAuAFcAZQBCA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bgBlAHQALgB3AEUAQg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 4AZQB0AC4AdwBFAEIA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: uAGUAdAAuAHcARQBCA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: TgBlAHQALgB3AEUAQg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OAGUAdAAuAHcARQBCA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bgBFAHQALgB3AEUAQg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 4ARQB0AC4AdwBFAEIA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: uAEUAdAAuAHcARQBCA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: TgBFAHQALgB3AEUAQg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OAEUAdAAuAHcARQBCA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bgBlAFQALgB3AEUAQg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: uAGUAVAAuAHcARQBCA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bgBFAFQALgB3AEUAQg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 4ARQBUAC4AdwBFAEIA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: uAEUAVAAuAHcARQBCA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: TgBFAFQALgB3AEUAQg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OAEUAVAAuAHcARQBCA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: TgBlAHQALgBXAEUAQg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 4AZQB0AC4AVwBFAEIA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OAGUAdAAuAFcARQBCA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bgBFAHQALgBXAEUAQg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 4ARQB0AC4AVwBFAEIA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: uAEUAdAAuAFcARQBCA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: TgBFAHQALgBXAEUAQg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OAEUAdAAuAFcARQBCA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bgBlAFQALgBXAEUAQg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 4AZQBUAC4AVwBFAEIA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: uAGUAVAAuAFcARQBCA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: TgBlAFQALgBXAEUAQg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OAGUAVAAuAFcARQBCA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bgBFAFQALgBXAEUAQg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 4ARQBUAC4AVwBFAEIA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: uAEUAVAAuAFcARQBCA
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects PowerShell command line contents that include a suspicious
+      abnormal casing in the Net.Webclient (e.g. nEt.WEbCliEnT) string as used in
+      obfuscation techniques
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://app.any.run/tasks/b9040c63-c140-479b-ad59-f1bb56ce7a97/
+    tags:
+    - attack.execution
+    - attack.t1059.001
+  name: Net WebClient Casing Anomalies
+

@@ -1,0 +1,34 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: X509Enrollment.CBinaryConverter
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: 884e2002-217d-11da-b2a4-000e7bbb2b09
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Detect use of X509Enrollment
+    falsepositives:
+    - Legitimate administrative script
+    level: medium
+    references:
+    - https://speakerdeck.com/heirhabarov/hunting-for-powershell-abuse?slide=42
+    - https://speakerdeck.com/heirhabarov/hunting-for-powershell-abuse?slide=41
+    - https://learn.microsoft.com/en-us/dotnet/api/microsoft.hpc.scheduler.store.cx509enrollmentwebclassfactoryclass?view=hpc-sdk-5.1.6115
+    tags:
+    - attack.defense_evasion
+    - attack.t1553.004
+  name: Suspicious X509Enrollment - Process Creation
+

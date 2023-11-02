@@ -1,0 +1,40 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \perl.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: perl.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' -e'
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects execution of perl using the "-e"/"-E" flags. This is could
+      be used as a way to launch a reverse shell or execute live perl code.
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet
+    - https://www.revshells.com/
+    tags:
+    - attack.execution
+    - attack.t1059
+  name: Perl Inline Command Execution
+

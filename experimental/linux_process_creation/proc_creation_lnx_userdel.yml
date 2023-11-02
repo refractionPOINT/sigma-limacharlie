@@ -1,0 +1,31 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - case sensitive: true
+    op: ends with
+    path: event/FILE_PATH
+    value: /userdel
+respond:
+- action: report
+  metadata:
+    author: Tuan Le (NCSGroup)
+    description: Detects execution of the "userdel" binary. Which is used to delete
+      a user account and related files. This is sometimes abused by threat actors
+      in order to cover their tracks
+    falsepositives:
+    - Legitimate administrator activities
+    level: medium
+    references:
+    - https://linuxize.com/post/how-to-delete-group-in-linux/
+    - https://www.cyberciti.biz/faq/linux-remove-user-command/
+    - https://www.cybrary.it/blog/0p3n/linux-commands-used-attackers/
+    - https://linux.die.net/man/8/userdel
+    tags:
+    - attack.impact
+    - attack.t1531
+  name: User Has Been Deleted Via Userdel
+

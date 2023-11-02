@@ -1,0 +1,71 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-WmiObject
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: gwmi
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-CimInstance
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: gcim
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Win32_Shadowcopy
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .Delete()
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Remove-WmiObject
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: rwmi
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Remove-CimInstance
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: rcim
+respond:
+- action: report
+  metadata:
+    author: Tim Rauch
+    description: Detects deletion of Windows Volume Shadow Copies with PowerShell
+      code and Get-WMIObject. This technique is used by numerous ransomware families
+      such as Sodinokibi/REvil
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1490/T1490.md#atomic-test-5---windows---delete-volume-shadow-copies-via-wmi-with-powershell
+    - https://www.elastic.co/guide/en/security/current/volume-shadow-copy-deletion-via-powershell.html
+    tags:
+    - attack.impact
+    - attack.t1490
+  name: Deletion of Volume Shadow Copies via WMI with PowerShell
+

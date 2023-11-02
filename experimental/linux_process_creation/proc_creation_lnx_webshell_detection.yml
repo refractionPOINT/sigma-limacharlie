@@ -1,0 +1,119 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: /httpd
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: /lighttpd
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: /nginx
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: /apache2
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: /node
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: /caddy
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: /bin/java
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: tomcat
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: /bin/java
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: websphere
+    - op: or
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /whoami
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /ifconfig
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /ip
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /bin/uname
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /bin/cat
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /bin/crontab
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /hostname
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /iptables
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /netstat
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /pwd
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /route
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems), Nasreddine Bencherchali (Nextron Systems)
+    description: Detects suspicious sub processes of web server processes
+    falsepositives:
+    - Web applications that invoke Linux command line tools
+    level: high
+    references:
+    - https://www.acunetix.com/blog/articles/web-shells-101-using-php-introduction-web-shells-part-2/
+    - https://media.defense.gov/2020/Jun/09/2002313081/-1/-1/0/CSI-DETECT-AND-PREVENT-WEB-SHELL-MALWARE-20200422.PDF
+    tags:
+    - attack.persistence
+    - attack.t1505.003
+  name: Linux Webshell Indicators
+

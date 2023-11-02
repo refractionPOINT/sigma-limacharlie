@@ -1,0 +1,38 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: FromBase64String
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: MemoryStream
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: H4sI
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Detects attempts of decoding a base64 Gzip archive via PowerShell.
+      This technique is often used as a method to load malicious content into memory
+      afterward.
+    falsepositives:
+    - Legitimate administrative script
+    level: medium
+    references:
+    - https://speakerdeck.com/heirhabarov/hunting-for-powershell-abuse?slide=43
+    tags:
+    - attack.command_and_control
+    - attack.t1132.001
+  name: Suspicious FromBase64String Usage On Gzip Archive - Process Creation
+

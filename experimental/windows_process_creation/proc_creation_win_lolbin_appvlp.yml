@@ -1,0 +1,48 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \appvlp.exe
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \msoasb.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \rundll32.exe
+respond:
+- action: report
+  metadata:
+    author: Sreeman
+    description: 'Application Virtualization Utility is included with Microsoft Office.
+      We are able to abuse "AppVLP" to execute shell commands.
+
+      Normally, this binary is used for Application Virtualization, but we can use
+      it as an abuse binary to circumvent the ASR file path rule folder
+
+      or to mark a file as a system file.
+
+      '
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://lolbas-project.github.io/lolbas/OtherMSBinaries/Appvlp/
+    tags:
+    - attack.t1218
+    - attack.defense_evasion
+    - attack.execution
+  name: Using AppVLP To Circumvent ASR File Path Rule
+

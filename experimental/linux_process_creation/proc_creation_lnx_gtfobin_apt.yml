@@ -1,0 +1,40 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /apt
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /apt-get
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: APT::Update::Pre-Invoke::=
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects usage of "apt" and "apt-get" as a GTFOBin to execute and
+      proxy command and binary execution
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://gtfobins.github.io/gtfobins/apt/
+    - https://gtfobins.github.io/gtfobins/apt-get/
+    tags:
+    - attack.discovery
+    - attack.t1083
+  name: Apt GTFOBin Abuse - Linux
+

@@ -1,0 +1,36 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '4697'
+  - op: or
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/EventData/ClientProcessId
+      value: '0'
+    - case sensitive: false
+      op: is
+      path: Event/EventData/ParentProcessId
+      value: '0'
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Tim Rauch
+    description: Detects a service installed by a client which has PID 0 or whose
+      parent has PID 0
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.elastic.co/guide/en/security/current/windows-service-installed-via-an-unusual-client.html
+    - https://twitter.com/SBousseaden/status/1490608838701166596
+    tags:
+    - attack.privilege_escalation
+    - attack.t1543
+  name: Service Installed By Unusual Client - Security
+

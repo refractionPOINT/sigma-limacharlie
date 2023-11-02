@@ -1,0 +1,60 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'iex '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'Invoke-Expression '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'Invoke-Command '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'icm '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'cat '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'get-content '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'type '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' -raw'
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Detects inline execution of PowerShell code from a file
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://speakerdeck.com/heirhabarov/hunting-for-powershell-abuse?slide=50
+    tags:
+    - attack.execution
+    - attack.t1059.001
+  name: Powershell Inline Execution From A File
+

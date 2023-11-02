@@ -1,0 +1,49 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \WmiPrvSE.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \svchost.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \dllhost.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \ImagingDevices.exe
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \ImagingDevices.exe
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects unusual parent or children of the ImagingDevices.exe (Windows
+      Contacts) process as seen being used with Bumblebee activity
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://thedfirreport.com/2022/09/26/bumblebee-round-two/
+    tags:
+    - attack.defense_evasion
+    - attack.execution
+  name: ImagingDevices Unusual Parent/Child Processes
+

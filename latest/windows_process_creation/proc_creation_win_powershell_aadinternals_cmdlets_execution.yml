@@ -1,0 +1,138 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \pwsh.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: PowerShell.Exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: pwsh.dll
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Add-AADInt
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ConvertTo-AADInt
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Disable-AADInt
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Enable-AADInt
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Export-AADInt
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-AADInt
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Grant-AADInt
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Install-AADInt
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Invoke-AADInt
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Join-AADInt
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: New-AADInt
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Open-AADInt
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Read-AADInt
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Register-AADInt
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Remove-AADInt
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Restore-AADInt
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Search-AADInt
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Send-AADInt
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Set-AADInt
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Start-AADInt
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Update-AADInt
+respond:
+- action: report
+  metadata:
+    author: Austin Songer (@austinsonger), Nasreddine Bencherchali (Nextron Systems)
+    description: Detects ADDInternals Cmdlet execution. A tool for administering Azure
+      AD and Office 365. Which can be abused by threat actors to attack Azure AD or
+      Office 365.
+    falsepositives:
+    - Legitimate use of the library for administrative activity
+    level: high
+    references:
+    - https://o365blog.com/aadinternals/
+    - https://github.com/Gerenios/AADInternals
+    tags:
+    - attack.execution
+    - attack.reconnaissance
+    - attack.discovery
+    - attack.credential_access
+    - attack.impact
+  name: AADInternals PowerShell Cmdlets Execution - ProccessCreation
+

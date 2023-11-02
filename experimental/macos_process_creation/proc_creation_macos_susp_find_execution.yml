@@ -1,0 +1,63 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is mac
+  - op: and
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /find
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -perm -4000
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -perm -2000
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -perm 0777
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -perm -222
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -perm -o w
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -perm -o x
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -perm -u=s
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -perm -g=s
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects usage of "find" binary in a suspicious manner to perform
+      discovery
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://github.com/SaiSathvik1/Linux-Privilege-Escalation-Notes
+    tags:
+    - attack.discovery
+    - attack.t1083
+  name: Potential Discovery Activity Using Find - MacOS
+

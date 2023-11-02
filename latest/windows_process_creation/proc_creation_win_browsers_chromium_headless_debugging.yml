@@ -1,0 +1,41 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: --remote-debugging-
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: --user-data-dir
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: --headless
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects chromium based browsers starting in headless and debugging
+      mode and pointing to a user profile. This could be a sign of data stealing or
+      remote control
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://github.com/defaultnamehere/cookie_crimes/
+    - https://mango.pdf.zone/stealing-chrome-cookies-without-a-password
+    - https://embracethered.com/blog/posts/2020/cookie-crimes-on-mirosoft-edge/
+    - https://embracethered.com/blog/posts/2020/chrome-spy-remote-control/
+    tags:
+    - attack.credential_access
+    - attack.t1185
+  name: Potential Data Stealing Via Chromium Headless Debugging
+

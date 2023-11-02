@@ -1,0 +1,51 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/FILE_PATH
+        value: \AgentExecutor.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: AgentExecutor.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -powershell'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -remediationScript'
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems), memory-shards
+    description: Detects execution of the AgentExecutor.exe binary. Which can be abused
+      as a LOLBIN to execute powershell scripts with the ExecutionPolicy "Bypass"
+      or any binary named "powershell.exe" located in the path provided by 6th positional
+      argument
+    falsepositives:
+    - Legitimate use via Intune management. You exclude script paths and names to
+      reduce FP rate
+    level: medium
+    references:
+    - https://twitter.com/lefterispan/status/1286259016436514816
+    - https://lolbas-project.github.io/lolbas/OtherMSBinaries/Agentexecutor/
+    - https://docs.microsoft.com/en-us/mem/intune/apps/intune-management-extension
+    - https://twitter.com/jseerden/status/1247985304667066373/photo/1
+    tags:
+    - attack.defense_evasion
+    - attack.t1218
+  name: AgentExecutor PowerShell Execution
+
