@@ -17,14 +17,71 @@ detect:
           value: \csc.exe
         - op: or
           rules:
-          - case sensitive: false
-            op: contains
+          - op: or
+            rules:
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: :\Perflogs\
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: :\Users\Public\
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: \AppData\Local\Temp\
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: \Temporary Internet
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: \Windows\Temp\
+          - op: and
+            rules:
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: :\Users\
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: \Favorites\
+          - op: and
+            rules:
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: :\Users\
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: \Favourites\
+          - op: and
+            rules:
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: :\Users\
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: \Contacts\
+          - op: and
+            rules:
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: :\Users\
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: \Pictures\
+          - op: matches
             path: event/COMMAND_LINE
-            value: \AppData\Local\Temp\
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: \Windows\Temp\
+            re: ([Pp]rogram[Dd]ata|%([Ll]ocal)?[Aa]pp[Dd]ata%|\\[Aa]pp[Dd]ata\\([Ll]ocal(Ll]ow)?|[Rr]oaming))\\[^\\]{1,256}$
       - not: true
         op: or
         rules:
@@ -74,7 +131,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth (Nextron Systems)
+    author: Florian Roth (Nextron Systems), X__Junior (Nextron Systems)
     description: Detects execution of "csc.exe" to compile .NET code. Attackers often
       leverage this to compile code on the fly and use it in other stages.
     falsepositives:

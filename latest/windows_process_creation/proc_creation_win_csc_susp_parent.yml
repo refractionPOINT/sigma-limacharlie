@@ -9,136 +9,190 @@ detect:
     rules:
     - op: and
       rules:
-      - op: or
+      - op: and
         rules:
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \csc.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \csc.exe
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: csc.exe
+        - op: or
+          rules:
+          - op: or
+            rules:
+            - case sensitive: false
+              op: ends with
+              path: event/PARENT/FILE_PATH
+              value: \cscript.exe
+            - case sensitive: false
+              op: ends with
+              path: event/PARENT/FILE_PATH
+              value: \excel.exe
+            - case sensitive: false
+              op: ends with
+              path: event/PARENT/FILE_PATH
+              value: \mshta.exe
+            - case sensitive: false
+              op: ends with
+              path: event/PARENT/FILE_PATH
+              value: \onenote.exe
+            - case sensitive: false
+              op: ends with
+              path: event/PARENT/FILE_PATH
+              value: \outlook.exe
+            - case sensitive: false
+              op: ends with
+              path: event/PARENT/FILE_PATH
+              value: \powerpnt.exe
+            - case sensitive: false
+              op: ends with
+              path: event/PARENT/FILE_PATH
+              value: \winword.exe
+            - case sensitive: false
+              op: ends with
+              path: event/PARENT/FILE_PATH
+              value: \wscript.exe
+          - op: and
+            rules:
+            - op: or
+              rules:
+              - case sensitive: false
+                op: ends with
+                path: event/PARENT/FILE_PATH
+                value: \powershell.exe
+              - case sensitive: false
+                op: ends with
+                path: event/PARENT/FILE_PATH
+                value: \pwsh.exe
+            - op: or
+              rules:
+              - case sensitive: false
+                op: contains
+                path: event/PARENT/COMMAND_LINE
+                value: '-Encoded '
+              - case sensitive: false
+                op: contains
+                path: event/PARENT/COMMAND_LINE
+                value: FromBase64String
+          - op: or
+            rules:
+            - op: matches
+              path: event/PARENT/COMMAND_LINE
+              re: ([Pp]rogram[Dd]ata|%([Ll]ocal)?[Aa]pp[Dd]ata%|\\[Aa]pp[Dd]ata\\([Ll]ocal(Ll]ow)?|[Rr]oaming))\\[^\\]{1,256}$
+            - op: or
+              rules:
+              - case sensitive: false
+                op: contains
+                path: event/PARENT/COMMAND_LINE
+                value: :\PerfLogs\
+              - case sensitive: false
+                op: contains
+                path: event/PARENT/COMMAND_LINE
+                value: :\Users\Public\
+              - case sensitive: false
+                op: contains
+                path: event/PARENT/COMMAND_LINE
+                value: :\Windows\Temp\
+              - case sensitive: false
+                op: contains
+                path: event/PARENT/COMMAND_LINE
+                value: \Temporary Internet
+            - op: and
+              rules:
+              - case sensitive: false
+                op: contains
+                path: event/PARENT/COMMAND_LINE
+                value: :\Users\
+              - case sensitive: false
+                op: contains
+                path: event/PARENT/COMMAND_LINE
+                value: \Favorites\
+            - op: and
+              rules:
+              - case sensitive: false
+                op: contains
+                path: event/PARENT/COMMAND_LINE
+                value: :\Users\
+              - case sensitive: false
+                op: contains
+                path: event/PARENT/COMMAND_LINE
+                value: \Favourites\
+            - op: and
+              rules:
+              - case sensitive: false
+                op: contains
+                path: event/PARENT/COMMAND_LINE
+                value: :\Users\
+              - case sensitive: false
+                op: contains
+                path: event/PARENT/COMMAND_LINE
+                value: \Contacts\
+            - op: and
+              rules:
+              - case sensitive: false
+                op: contains
+                path: event/PARENT/COMMAND_LINE
+                value: :\Users\
+              - case sensitive: false
+                op: contains
+                path: event/PARENT/COMMAND_LINE
+                value: \Pictures\
+      - not: true
+        op: or
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: starts with
+            path: event/PARENT/FILE_PATH
+            value: C:\Program Files (x86)\
+          - case sensitive: false
+            op: starts with
+            path: event/PARENT/FILE_PATH
+            value: C:\Program Files\
         - case sensitive: false
           op: is
-          path: event/ORIGINAL_FILE_NAME
-          value: csc.exe
-      - op: or
-        rules:
-        - op: or
-          rules:
-          - case sensitive: false
-            op: ends with
-            path: event/PARENT/FILE_PATH
-            value: \cscript.exe
-          - case sensitive: false
-            op: ends with
-            path: event/PARENT/FILE_PATH
-            value: \mshta.exe
-          - case sensitive: false
-            op: ends with
-            path: event/PARENT/FILE_PATH
-            value: \winword.exe
-          - case sensitive: false
-            op: ends with
-            path: event/PARENT/FILE_PATH
-            value: \wscript.exe
-        - op: and
-          rules:
-          - op: or
-            rules:
-            - case sensitive: false
-              op: ends with
-              path: event/PARENT/FILE_PATH
-              value: \powershell.exe
-            - case sensitive: false
-              op: ends with
-              path: event/PARENT/FILE_PATH
-              value: \pwsh.exe
-          - op: or
-            rules:
-            - case sensitive: false
-              op: contains
-              path: event/PARENT/COMMAND_LINE
-              value: '-Encoded '
-            - case sensitive: false
-              op: contains
-              path: event/PARENT/COMMAND_LINE
-              value: FromBase64String
-        - op: or
-          rules:
-          - op: matches
-            path: event/PARENT/COMMAND_LINE
-            re: ([Pp]rogram[Dd]ata|%([Ll]ocal)?[Aa]pp[Dd]ata%|\\[Aa]pp[Dd]ata\\([Ll]ocal(Ll]ow)?|[Rr]oaming))\\[^\\]{1,256}$
-          - op: or
-            rules:
-            - case sensitive: false
-              op: contains
-              path: event/PARENT/COMMAND_LINE
-              value: :\Users\Public\
-            - case sensitive: false
-              op: contains
-              path: event/PARENT/COMMAND_LINE
-              value: :\PerfLogs\
-            - case sensitive: false
-              op: contains
-              path: event/PARENT/COMMAND_LINE
-              value: \Temporary Internet
-          - op: and
-            rules:
-            - case sensitive: false
-              op: contains
-              path: event/PARENT/COMMAND_LINE
-              value: :\Users\
-            - case sensitive: false
-              op: contains
-              path: event/PARENT/COMMAND_LINE
-              value: \Favorites\
-          - op: and
-            rules:
-            - case sensitive: false
-              op: contains
-              path: event/PARENT/COMMAND_LINE
-              value: :\Users\
-            - case sensitive: false
-              op: contains
-              path: event/PARENT/COMMAND_LINE
-              value: \Favourites\
-          - op: and
-            rules:
-            - case sensitive: false
-              op: contains
-              path: event/PARENT/COMMAND_LINE
-              value: :\Users\
-            - case sensitive: false
-              op: contains
-              path: event/PARENT/COMMAND_LINE
-              value: \Contacts\
-          - op: and
-            rules:
-            - case sensitive: false
-              op: contains
-              path: event/PARENT/COMMAND_LINE
-              value: :\Users\
-            - case sensitive: false
-              op: contains
-              path: event/PARENT/COMMAND_LINE
-              value: \Pictures\
+          path: event/PARENT/FILE_PATH
+          value: C:\Windows\System32\sdiagnhost.exe
+        - case sensitive: false
+          op: is
+          path: event/PARENT/FILE_PATH
+          value: C:\Windows\System32\inetsrv\w3wp.exe
     - not: true
       op: or
       rules:
       - case sensitive: false
-        op: contains
-        path: event/PARENT/COMMAND_LINE
-        value: JwB7ACIAZgBhAGkAbABlAGQAIgA6AHQAcgB1AGUALAAiAG0AcwBnACIAOgAiAEEAbgBzAGkAYgBsAGUAIAByAGUAcQB1AGkAcgBlAHMAIABQAG8AdwBlAHIAUwBoAGUAbABsACAAdgAzAC4AMAAgAG8AcgAgAG4AZQB3AGUAcgAiAH0AJw
+        op: is
+        path: event/PARENT/FILE_PATH
+        value: C:\ProgramData\chocolatey\choco.exe
       - case sensitive: false
         op: contains
         path: event/PARENT/COMMAND_LINE
-        value: cAewAiAGYAYQBpAGwAZQBkACIAOgB0AHIAdQBlACwAIgBtAHMAZwAiADoAIgBBAG4AcwBpAGIAbABlACAAcgBlAHEAdQBpAHIAZQBzACAAUABvAHcAZQByAFMAaABlAGwAbAAgAHYAMwAuADAAIABvAHIAIABuAGUAdwBlAHIAIgB9ACcA
-      - case sensitive: false
-        op: contains
-        path: event/PARENT/COMMAND_LINE
-        value: nAHsAIgBmAGEAaQBsAGUAZAAiADoAdAByAHUAZQAsACIAbQBzAGcAIgA6ACIAQQBuAHMAaQBiAGwAZQAgAHIAZQBxAHUAaQByAGUAcwAgAFAAbwB3AGUAcgBTAGgAZQBsAGwAIAB2ADMALgAwACAAbwByACAAbgBlAHcAZQByACIAfQAnA
+        value: \ProgramData\Microsoft\Windows Defender Advanced Threat Protection
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: JwB7ACIAZgBhAGkAbABlAGQAIgA6AHQAcgB1AGUALAAiAG0AcwBnACIAOgAiAEEAbgBzAGkAYgBsAGUAIAByAGUAcQB1AGkAcgBlAHMAIABQAG8AdwBlAHIAUwBoAGUAbABsACAAdgAzAC4AMAAgAG8AcgAgAG4AZQB3AGUAcgAiAH0AJw
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: cAewAiAGYAYQBpAGwAZQBkACIAOgB0AHIAdQBlACwAIgBtAHMAZwAiADoAIgBBAG4AcwBpAGIAbABlACAAcgBlAHEAdQBpAHIAZQBzACAAUABvAHcAZQByAFMAaABlAGwAbAAgAHYAMwAuADAAIABvAHIAIABuAGUAdwBlAHIAIgB9ACcA
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: nAHsAIgBmAGEAaQBsAGUAZAAiADoAdAByAHUAZQAsACIAbQBzAGcAIgA6ACIAQQBuAHMAaQBiAGwAZQAgAHIAZQBxAHUAaQByAGUAcwAgAFAAbwB3AGUAcgBTAGgAZQBsAGwAIAB2ADMALgAwACAAbwByACAAbgBlAHcAZQByACIAfQAnA
 respond:
 - action: report
   metadata:
-    author: Florian Roth (Nextron Systems), Nasreddine Bencherchali (Nextron Systems)
+    author: Florian Roth (Nextron Systems), Nasreddine Bencherchali (Nextron Systems),
+      X__Junior (Nextron Systems)
     description: Detects a potentially suspicious parent of "csc.exe", which could
       be a sign of payload delivery.
     falsepositives:
@@ -147,6 +201,7 @@ respond:
     references:
     - https://www.uptycs.com/blog/warzonerat-can-now-evade-with-process-hollowing
     - https://reaqta.com/2017/11/short-journey-darkvnc/
+    - https://www.pwc.com/gx/en/issues/cybersecurity/cyber-threat-intelligence/yellow-liderc-ships-its-scripts-delivers-imaploader-malware.html
     tags:
     - attack.execution
     - attack.t1059.005
