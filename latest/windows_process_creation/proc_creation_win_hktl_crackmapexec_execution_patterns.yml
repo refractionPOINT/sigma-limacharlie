@@ -5,32 +5,28 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: and
+  - op: or
     rules:
-    - op: or
-      rules:
-      - case sensitive: false
-        op: matches
-        path: event/COMMAND_LINE
-        re: .*cmd\.exe\ /Q\ /c\ .*\ 1>\ \\\\.*\\.*\\.*\ 2>\&1
-      - case sensitive: false
-        op: matches
-        path: event/COMMAND_LINE
-        re: .*cmd\.exe\ /C\ .*\ >\ \\\\.*\\.*\\.*\ 2>\&1
-      - case sensitive: false
-        op: matches
-        path: event/COMMAND_LINE
-        re: .*cmd\.exe\ /C\ .*\ >\ .*\\\\Temp\\.*\ 2>\&1
-    - op: or
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: powershell.exe -exec bypass -noni -nop -w 1 -C "
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: 'powershell.exe -noni -nop -w 1 -enc '
+    - case sensitive: false
+      op: matches
+      path: event/COMMAND_LINE
+      re: .*cmd\.exe\ /Q\ /c\ .*\ 1>\ \\\\.*\\.*\\.*\ 2>\&1.*
+    - case sensitive: false
+      op: matches
+      path: event/COMMAND_LINE
+      re: .*cmd\.exe\ /C\ .*\ >\ \\\\.*\\.*\\.*\ 2>\&1.*
+    - case sensitive: false
+      op: matches
+      path: event/COMMAND_LINE
+      re: .*cmd\.exe\ /C\ .*\ >\ .*\\\\Temp\\.*\ 2>\&1.*
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: powershell.exe -exec bypass -noni -nop -w 1 -C "
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: 'powershell.exe -noni -nop -w 1 -enc '
 respond:
 - action: report
   metadata:

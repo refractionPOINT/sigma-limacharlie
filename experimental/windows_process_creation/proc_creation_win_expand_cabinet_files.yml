@@ -9,40 +9,84 @@ detect:
     rules:
     - op: and
       rules:
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \expand.exe
-      - op: or
+      - op: and
         rules:
         - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: .cab
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: '/F:'
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: '-F:'
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: C:\ProgramData\
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: C:\Public\
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: \AppData\Local\Temp\
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: \AppData\Roaming\Temp\
+          op: ends with
+          path: event/FILE_PATH
+          value: \expand.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '/F:'
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '-F:'
+      - op: or
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: :\Perflogs\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: :\Users\Public\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \Temporary Internet
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: :\ProgramData
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \AppData\Local\Temp
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \AppData\Roaming\Temp
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: :\Windows\Temp
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: :\Users\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \Favorites\
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: :\Users\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \Favourites\
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: :\Users\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \Contacts\
     - not: true
       op: and
       rules:
@@ -57,9 +101,10 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Bhabesh Raj
-    description: Adversaries can use the built-in expand utility to decompress cab
-      files as seen in recent Iranian MeteorExpress attack
+    author: Bhabesh Raj, X__Junior (Nextron Systems)
+    description: Detects the expansion or decompression of cabinet files from potentially
+      suspicious or uncommon locations, e.g. seen in Iranian MeteorExpress related
+      attacks
     falsepositives:
     - System administrator Usage
     level: medium
@@ -69,5 +114,5 @@ respond:
     tags:
     - attack.execution
     - attack.t1218
-  name: Suspicious Cabinet File Expansion
+  name: Potentially Suspicious Cabinet File Expansion
 
