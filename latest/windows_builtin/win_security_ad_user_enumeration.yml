@@ -12,6 +12,40 @@ detect:
       op: contains
       path: Event/EventData/ObjectType
       value: bf967aba-0de6-11d0-a285-00aa003049e2
+    - op: or
+      rules:
+      - case sensitive: false
+        op: matches
+        path: Event/EventData/AccessMask
+        re: .*1.
+      - case sensitive: false
+        op: matches
+        path: Event/EventData/AccessMask
+        re: .*3.
+      - case sensitive: false
+        op: matches
+        path: Event/EventData/AccessMask
+        re: .*4.
+      - case sensitive: false
+        op: matches
+        path: Event/EventData/AccessMask
+        re: .*7.
+      - case sensitive: false
+        op: matches
+        path: Event/EventData/AccessMask
+        re: .*9.
+      - case sensitive: false
+        op: matches
+        path: Event/EventData/AccessMask
+        re: .*B.
+      - case sensitive: false
+        op: matches
+        path: Event/EventData/AccessMask
+        re: .*D.
+      - case sensitive: false
+        op: matches
+        path: Event/EventData/AccessMask
+        re: .*F.
   - not: true
     op: or
     rules:
@@ -28,7 +62,7 @@ respond:
 - action: report
   metadata:
     author: Maxime Thiebaut (@0xThiebaut)
-    description: Detects access to a domain user from a non-machine account
+    description: Detects read access to a domain user from a non-machine account
     falsepositives:
     - Administrators configuring new users.
     level: medium
@@ -36,8 +70,9 @@ respond:
     - https://www.specterops.io/assets/resources/an_ace_up_the_sleeve.pdf
     - http://www.stuffithoughtiknew.com/2019/02/detecting-bloodhound.html
     - https://docs.microsoft.com/en-us/windows/win32/adschema/attributes-all
+    - https://learn.microsoft.com/en-us/windows/security/threat-protection/auditing/event-4662
     tags:
     - attack.discovery
     - attack.t1087.002
-  name: AD User Enumeration
+  name: Potential AD User Enumeration From Non-Machine Account
 
