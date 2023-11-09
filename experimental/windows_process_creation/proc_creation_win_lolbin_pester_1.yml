@@ -50,7 +50,7 @@ detect:
         - case sensitive: false
           op: matches
           path: event/COMMAND_LINE
-          re: .*..*
+          re: .*\?.*
 respond:
 - action: report
   metadata:
@@ -62,6 +62,7 @@ respond:
     level: medium
     references:
     - https://twitter.com/Oddvarmoe/status/993383596244258816
+    - https://github.com/api0cradle/LOLBAS/blob/d148d278f5f205ce67cfaf49afdfb68071c7252a/OSScripts/pester.md
     tags:
     - attack.execution
     - attack.t1059.001
