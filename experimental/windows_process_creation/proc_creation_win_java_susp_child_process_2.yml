@@ -52,5 +52,5 @@ respond:
     - attack.initial_access
     - attack.persistence
     - attack.privilege_escalation
-  name: Shells Spawned by Java
+  name: Shell Process Spawned by Java.EXE
 

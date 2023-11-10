@@ -14,15 +14,7 @@ detect:
         - case sensitive: false
           op: ends with
           path: event/PARENT/FILE_PATH
-          value: \w3wp.exe
-        - case sensitive: false
-          op: ends with
-          path: event/PARENT/FILE_PATH
-          value: \php-cgi.exe
-        - case sensitive: false
-          op: ends with
-          path: event/PARENT/FILE_PATH
-          value: \nginx.exe
+          value: \caddy.exe
         - case sensitive: false
           op: ends with
           path: event/PARENT/FILE_PATH
@@ -30,7 +22,15 @@ detect:
         - case sensitive: false
           op: ends with
           path: event/PARENT/FILE_PATH
-          value: \caddy.exe
+          value: \nginx.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \php-cgi.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \w3wp.exe
         - case sensitive: false
           op: ends with
           path: event/PARENT/FILE_PATH
@@ -172,6 +172,10 @@ detect:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
+          value: ' -decode '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
           value: ' -NoP '
         - case sensitive: false
           op: contains
@@ -180,27 +184,7 @@ detect:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: ' -decode '
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
           value: ' /decode '
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: 'reg save '
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: .downloadstring(
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: .downloadfile(
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: FromBase64String
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
@@ -216,7 +200,23 @@ detect:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
+          value: .downloadfile(
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .downloadstring(
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: FromBase64String
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
           value: process call create
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'reg save '
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
@@ -225,9 +225,11 @@ respond:
 - action: report
   metadata:
     author: Florian Roth (Nextron Systems)
-    description: Detects certain parent child patterns found in cases in which a webshell
-      is used to perform certain credential dumping or exfiltration activities on
-      a compromised system
+    description: 'Detects certain parent child patterns found in cases in which a
+      web shell is used to perform certain credential dumping or exfiltration activities
+      on a compromised system
+
+      '
     falsepositives:
     - Unlikely
     level: high

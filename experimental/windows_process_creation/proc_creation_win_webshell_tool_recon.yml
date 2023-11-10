@@ -14,15 +14,7 @@ detect:
         - case sensitive: false
           op: ends with
           path: event/PARENT/FILE_PATH
-          value: \w3wp.exe
-        - case sensitive: false
-          op: ends with
-          path: event/PARENT/FILE_PATH
-          value: \php-cgi.exe
-        - case sensitive: false
-          op: ends with
-          path: event/PARENT/FILE_PATH
-          value: \nginx.exe
+          value: \caddy.exe
         - case sensitive: false
           op: ends with
           path: event/PARENT/FILE_PATH
@@ -30,7 +22,15 @@ detect:
         - case sensitive: false
           op: ends with
           path: event/PARENT/FILE_PATH
-          value: \caddy.exe
+          value: \nginx.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \php-cgi.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \w3wp.exe
         - case sensitive: false
           op: ends with
           path: event/PARENT/FILE_PATH
@@ -74,17 +74,21 @@ detect:
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
-            value: catalina.jar
+            value: CATALINA_HOME
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
-            value: CATALINA_HOME
+            value: catalina.jar
     - op: or
       rules:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
         value: perl --help
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: perl -h
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -105,17 +109,15 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: wget --help
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: perl -h
 respond:
 - action: report
   metadata:
-    author: Cian Heasley, Florian Roth
-    description: Detects processes spawned from web servers (php, tomcat, iis...etc)
+    author: Cian Heasley, Florian Roth (Nextron Systems)
+    description: 'Detects processes spawned from web servers (PHP, Tomcat, IIS, etc.)
       that perform reconnaissance looking for the existence of popular scripting tools
       (perl, python, wget) on the system via the help commands
+
+      '
     falsepositives:
     - Unknown
     level: high
@@ -124,5 +126,5 @@ respond:
     tags:
     - attack.persistence
     - attack.t1505.003
-  name: Webshell Recon Detection Via CommandLine & Processes
+  name: Webshell Tool Reconnaissance Activity
 

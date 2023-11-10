@@ -1,0 +1,130 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \caddy.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \httpd.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \nginx.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \php-cgi.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \w3wp.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \ws_tomcatservice.exe
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \java.exe
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \javaw.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/FILE_PATH
+            value: -tomcat-
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/FILE_PATH
+            value: \tomcat
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \java.exe
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \javaw.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: CATALINA_HOME
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: catalina.jar
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: perl --help
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: perl -h
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: python --help
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: python -h
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: python3 --help
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: python3 -h
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: wget --help
+respond:
+- action: report
+  metadata:
+    author: Cian Heasley, Florian Roth (Nextron Systems)
+    description: 'Detects processes spawned from web servers (PHP, Tomcat, IIS, etc.)
+      that perform reconnaissance looking for the existence of popular scripting tools
+      (perl, python, wget) on the system via the help commands
+
+      '
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://ragged-lab.blogspot.com/2020/07/webshells-automating-reconnaissance.html
+    tags:
+    - attack.persistence
+    - attack.t1505.003
+  name: Webshell Tool Reconnaissance Activity
+

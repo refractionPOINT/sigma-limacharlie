@@ -144,15 +144,15 @@ detect:
           - case sensitive: false
             op: ends with
             path: event/FILE_PATH
-            value: \whoami.exe
+            value: \dsquery.exe
           - case sensitive: false
             op: ends with
             path: event/FILE_PATH
-            value: \systeminfo.exe
+            value: \find.exe
           - case sensitive: false
             op: ends with
             path: event/FILE_PATH
-            value: \quser.exe
+            value: \findstr.exe
           - case sensitive: false
             op: ends with
             path: event/FILE_PATH
@@ -160,15 +160,19 @@ detect:
           - case sensitive: false
             op: ends with
             path: event/FILE_PATH
+            value: \netstat.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \nslookup.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
             value: \pathping.exe
           - case sensitive: false
             op: ends with
             path: event/FILE_PATH
-            value: \tracert.exe
-          - case sensitive: false
-            op: ends with
-            path: event/FILE_PATH
-            value: \netstat.exe
+            value: \quser.exe
           - case sensitive: false
             op: ends with
             path: event/FILE_PATH
@@ -176,7 +180,19 @@ detect:
           - case sensitive: false
             op: ends with
             path: event/FILE_PATH
-            value: \vssadmin.exe
+            value: \systeminfo.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \tasklist.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \tracert.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \ver.exe
           - case sensitive: false
             op: ends with
             path: event/FILE_PATH
@@ -184,21 +200,21 @@ detect:
           - case sensitive: false
             op: ends with
             path: event/FILE_PATH
-            value: \tasklist.exe
+            value: \whoami.exe
         - op: or
           rules:
           - case sensitive: false
             op: is
             path: event/ORIGINAL_FILE_NAME
-            value: whoami.exe
+            value: dsquery.exe
           - case sensitive: false
             op: is
             path: event/ORIGINAL_FILE_NAME
-            value: sysinfo.exe
+            value: find.exe
           - case sensitive: false
             op: is
             path: event/ORIGINAL_FILE_NAME
-            value: quser.exe
+            value: findstr.exe
           - case sensitive: false
             op: is
             path: event/ORIGINAL_FILE_NAME
@@ -206,7 +222,31 @@ detect:
           - case sensitive: false
             op: is
             path: event/ORIGINAL_FILE_NAME
+            value: netstat.exe
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: nslookup.exe
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
             value: pathping.exe
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: quser.exe
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: schtasks.exe
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: sysinfo.exe
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: tasklist.exe
           - case sensitive: false
             op: is
             path: event/ORIGINAL_FILE_NAME
@@ -214,11 +254,7 @@ detect:
           - case sensitive: false
             op: is
             path: event/ORIGINAL_FILE_NAME
-            value: netstat.exe
-          - case sensitive: false
-            op: is
-            path: event/ORIGINAL_FILE_NAME
-            value: schtasks.exe
+            value: ver.exe
           - case sensitive: false
             op: is
             path: event/ORIGINAL_FILE_NAME
@@ -230,7 +266,7 @@ detect:
           - case sensitive: false
             op: is
             path: event/ORIGINAL_FILE_NAME
-            value: tasklist.exe
+            value: whoami.exe
       - op: or
         rules:
         - case sensitive: false
