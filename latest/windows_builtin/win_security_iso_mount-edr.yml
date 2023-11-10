@@ -23,16 +23,26 @@ detect:
         op: starts with
         path: event/EVENT/EventData/ObjectName
         value: \Device\CdRom
-    - case sensitive: false
-      not: true
-      op: is
-      path: event/EVENT/EventData/ObjectName
-      value: \Device\CdRom0\setup.exe
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/ObjectName
+        value: \Device\CdRom0\autorun.ico
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/ObjectName
+        value: \Device\CdRom0\setup.exe
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/ObjectName
+        value: \Device\CdRom0\setup64.exe
 respond:
 - action: report
   metadata:
     author: Syed Hasan (@syedhasan009)
-    description: Detects the mount of ISO images on an endpoint
+    description: Detects the mount of an ISO image on an endpoint
     falsepositives:
     - Software installation ISO files
     level: medium
@@ -44,5 +54,5 @@ respond:
     tags:
     - attack.initial_access
     - attack.t1566.001
-  name: ISO Image Mount
+  name: ISO Image Mounted
 

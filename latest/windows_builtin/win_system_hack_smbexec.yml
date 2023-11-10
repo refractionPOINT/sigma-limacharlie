@@ -2,22 +2,32 @@ detect:
   log type: wel
   op: and
   rules:
-  - case sensitive: false
-    op: is
-    path: Event/EventData/Provider_Name
-    value: Service Control Manager
-  - case sensitive: false
-    op: is
-    path: Event/System/EventID
-    value: '7045'
-  - case sensitive: false
-    op: is
-    path: Event/EventData/ServiceName
-    value: BTOBTO
-  - case sensitive: false
-    op: ends with
-    path: Event/EventData/ImagePath
-    value: \execute.bat
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/EventData/Provider_Name
+      value: Service Control Manager
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '7045'
+  - op: or
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/EventData/ServiceName
+      value: BTOBTO
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/ImagePath
+        value: '.bat & del '
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/ImagePath
+        value: __output 2^>^&1 >
   target: log
 respond:
 - action: report
@@ -27,9 +37,11 @@ respond:
       installation
     falsepositives:
     - Unknown
-    level: critical
+    level: high
     references:
     - https://blog.ropnop.com/using-credentials-to-own-windows-boxes-part-2-psexec-and-services/
+    - https://github.com/fortra/impacket/blob/33058eb2fde6976ea62e04bc7d6b629d64d44712/examples/smbexec.py#L286-L296
+    - https://github.com/fortra/impacket/blob/edef71f17bc1240f9f8c957bbda98662951ac3ec/examples/smbexec.py#L60
     tags:
     - attack.lateral_movement
     - attack.execution
