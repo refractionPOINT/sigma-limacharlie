@@ -19,26 +19,26 @@ detect:
         value: ProtocolHandler.exe
     - op: or
       rules:
-      - op: and
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: '"ms-word'
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: .docx"
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ' http'
+        value: ftp://
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: http://
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: https://
 respond:
 - action: report
   metadata:
     author: frack113
-    description: Detects usage of "ProtocolHandler" to download files. Downloaded
+    description: 'Detects usage of "ProtocolHandler" to download files. Downloaded
       files will be located in the cache folder (for example - %LOCALAPPDATA%\Microsoft\Windows\INetCache\IE)
+
+      '
     falsepositives:
     - Unknown
     level: medium

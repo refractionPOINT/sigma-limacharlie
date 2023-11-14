@@ -22,16 +22,16 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: https://
+        value: http://
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: http://
+        value: https://
 respond:
 - action: report
   metadata:
     author: Nasreddine Bencherchali (Nextron Systems)
-    description: Detects execution of the IEExec utility to download payloads
+    description: Detects execution of the IEExec utility to download and execute files
     falsepositives:
     - Unknown
     level: high
@@ -40,5 +40,5 @@ respond:
     tags:
     - attack.command_and_control
     - attack.t1105
-  name: Abusing IEExec To Download Payloads
+  name: File Download And Execution Via IEExec.EXE
 

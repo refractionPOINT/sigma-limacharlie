@@ -1,0 +1,32 @@
+detect:
+  event: DNS_REQUEST
+  op: and
+  rules:
+  - case sensitive: false
+    op: starts with
+    path: event/FILE_PATH
+    value: C:\Program Files\WindowsApps\Microsoft.DesktopAppInstaller_
+  - case sensitive: false
+    op: ends with
+    path: event/FILE_PATH
+    value: \AppInstaller.exe
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: 'Detects DNS queries made by "AppInstaller.EXE". The AppInstaller
+      is the default handler for the "ms-appinstaller" URI. It attempts to load/install
+      a package from the referenced URL
+
+      '
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://twitter.com/notwhickey/status/1333900137232523264
+    - https://lolbas-project.github.io/lolbas/Binaries/AppInstaller/
+    tags:
+    - attack.command_and_control
+    - attack.t1105
+  name: AppX Package Installation Attempts Via AppInstaller.EXE
+

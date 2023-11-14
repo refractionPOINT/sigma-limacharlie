@@ -12,11 +12,11 @@ detect:
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
-        value: \MSOHTMED.exe
+        value: \IEExec.exe
       - case sensitive: false
         op: is
         path: event/ORIGINAL_FILE_NAME
-        value: MsoHtmEd.exe
+        value: IEExec.exe
     - op: or
       rules:
       - case sensitive: false
@@ -27,23 +27,18 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: https://
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ftp://
 respond:
 - action: report
   metadata:
     author: Nasreddine Bencherchali (Nextron Systems)
-    description: Detects usage of "MSOHTMED" to download arbitrary files
+    description: Detects execution of the IEExec utility to download and execute files
     falsepositives:
     - Unknown
-    level: medium
+    level: high
     references:
-    - https://github.com/LOLBAS-Project/LOLBAS/pull/238/files
+    - https://lolbas-project.github.io/lolbas/Binaries/Ieexec/
     tags:
-    - attack.defense_evasion
-    - attack.execution
-    - attack.t1218
-  name: Download Arbitrary Files Via MSOHTMED.EXE
+    - attack.command_and_control
+    - attack.t1105
+  name: File Download And Execution Via IEExec.EXE
 

@@ -12,11 +12,11 @@ detect:
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
-        value: \InstallUtil.exe
+        value: \presentationhost.exe
       - case sensitive: false
         op: is
         path: event/ORIGINAL_FILE_NAME
-        value: InstallUtil.exe
+        value: PresentationHost.exe
     - op: or
       rules:
       - case sensitive: false
@@ -35,15 +35,16 @@ respond:
 - action: report
   metadata:
     author: Nasreddine Bencherchali (Nextron Systems)
-    description: Detects the use the .NET InstallUtil.exe application in order to
-      download arbitrary files. The files will be written to %LOCALAPPDATA%\Microsoft\Windows\INetCache\IE\
+    description: Detects usage of "PresentationHost" which is a utility that runs
+      ".xbap" (Browser Applications) files to download arbitrary files
     falsepositives:
     - Unknown
     level: medium
     references:
-    - https://github.com/LOLBAS-Project/LOLBAS/pull/239
+    - https://github.com/LOLBAS-Project/LOLBAS/pull/239/files
     tags:
     - attack.defense_evasion
+    - attack.execution
     - attack.t1218
-  name: Suspicious Execution of InstallUtil To Download
+  name: Arbitrary File Download Via PresentationHost.EXE
 

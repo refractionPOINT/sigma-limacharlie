@@ -5,81 +5,80 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: or
+  - op: and
     rules:
     - op: and
       rules:
-      - op: and
-        rules:
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \wmic.exe
-        - op: or
-          rules:
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: /format
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: -format
-      - not: true
-        op: or
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \wmic.exe
+      - op: or
         rules:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: Format:List
+          value: /format
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: Format:htable
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: Format:hform
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: Format:table
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: Format:mof
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: Format:value
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: Format:rawxml
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: Format:xml
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: Format:csv
-    - case sensitive: false
-      op: ends with
-      path: event/FILE_PATH
-      value: \msxsl.exe
+          value: -format
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Format:List
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Format:htable
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Format:hform
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Format:table
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Format:mof
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Format:value
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Format:rawxml
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Format:xml
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Format:csv
 respond:
 - action: report
   metadata:
     author: Timur Zinniatullin, oscd.community, Swachchhanda Shrawan Poudel
-    description: Extensible Stylesheet Language (XSL) files are commonly used to describe
-      the processing and rendering of data within XML files. Rule detects when adversaries
-      abuse this functionality to execute arbitrary files while potentially bypassing
-      application whitelisting defenses.
+    description: 'Detects the execution of WMIC with the "format" flag to potentially
+      load XSL files.
+
+      Adversaries abuse this functionality to execute arbitrary files while potentially
+      bypassing application whitelisting defenses.
+
+      Extensible Stylesheet Language (XSL) files are commonly used to describe the
+      processing and rendering of data within XML files.
+
+      '
     falsepositives:
     - WMIC.exe FP depend on scripts and administrative methods used in the monitored
       environment.
-    - Msxsl.exe is not installed by default, so unlikely.
     - Static format arguments - https://petri.com/command-line-wmi-part-3
     level: medium
     references:
@@ -87,5 +86,5 @@ respond:
     tags:
     - attack.defense_evasion
     - attack.t1220
-  name: XSL Script Processing
+  name: XSL Script Execution Via WMIC.EXE
 

@@ -46,5 +46,5 @@ respond:
     - attack.defense_evasion
     - attack.execution
     - attack.t1218
-  name: Download Arbitrary Files Via PresentationHost.exe
+  name: Arbitrary File Download Via PresentationHost.EXE
 

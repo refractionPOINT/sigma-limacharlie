@@ -29,18 +29,20 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: C:\Windows\
+        value: ' C:\Windows\'
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: C:\Program Files
+        value: ' C:\Program Files'
 respond:
 - action: report
   metadata:
     author: Nasreddine Bencherchali (Nextron Systems)
-    description: Detects usage of "PresentationHost" which is a utility that runs
-      ".xbap" (Browser Applications) files. It can be abused to run malicious ".xbap"
-      files any bypass AWL
+    description: 'Detects the execution of ".xbap" (Browser Applications) files via
+      PresentationHost.EXE from an uncommon location. These files can be abused to
+      run malicious ".xbap" files any bypass AWL
+
+      '
     falsepositives:
     - Legitimate ".xbap" being executed via "PresentationHost"
     level: medium
@@ -50,5 +52,5 @@ respond:
     - attack.defense_evasion
     - attack.execution
     - attack.t1218
-  name: Application Whitelisting Bypass via PresentationHost.exe
+  name: XBAP Execution From Uncommon Locations Via PresentationHost.EXE
 
