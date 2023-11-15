@@ -28,10 +28,6 @@ detect:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: .dll
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
           value: RunHandlerComServer
     - not: true
       op: or
@@ -44,13 +40,33 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: ' wuaueng.dll '
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: :\Windows\UUS\Packages\Preview\amd64\updatedeploy.dll /ClassId
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: :\Windows\UUS\amd64\UpdateDeploy.dll /ClassId
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: :\Windows\WinSxS\
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '\UpdateDeploy.dll /ClassId '
 respond:
 - action: report
   metadata:
     author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research), Florian Roth
       (Nextron Systems), Sreeman, FPT.EagleEye Team
     description: Detects the use of the Windows Update Client binary (wuauclt.exe)
-      to proxy execute code.
+      for proxy execution.
     falsepositives:
     - Unknown
     level: high
@@ -61,5 +77,5 @@ respond:
     - attack.defense_evasion
     - attack.t1218
     - attack.execution
-  name: Proxy Execution via Wuauclt
+  name: Proxy Execution Via Wuauclt.EXE
 

@@ -17,16 +17,24 @@ detect:
         op: is
         path: event/ORIGINAL_FILE_NAME
         value: Wuauclt.exe
-    - case sensitive: false
-      op: ends with
-      path: event/COMMAND_LINE
-      value: \Wuauclt.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: Wuauclt
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: Wuauclt.exe
 respond:
 - action: report
   metadata:
     author: Florian Roth (Nextron Systems)
-    description: Detects suspicious Windows Update Agent activity in which a wuauclt.exe
-      process command line doesn't contain any command line flags
+    description: 'Detects suspicious Windows Update Agent activity in which a wuauclt.exe
+      process command line doesn''t contain any command line flags
+
+      '
     falsepositives:
     - Unknown
     level: high

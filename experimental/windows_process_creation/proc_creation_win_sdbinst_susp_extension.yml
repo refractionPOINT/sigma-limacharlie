@@ -52,6 +52,13 @@ detect:
           op: ends with
           path: event/COMMAND_LINE
           value: ' -mm'
+      - not: true
+        op: exists
+        path: event/COMMAND_LINE
+      - case sensitive: false
+        op: is
+        path: event/COMMAND_LINE
+        value: ''
 respond:
 - action: report
   metadata:

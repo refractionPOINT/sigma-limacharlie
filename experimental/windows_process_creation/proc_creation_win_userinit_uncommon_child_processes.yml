@@ -15,9 +15,9 @@ detect:
         value: \userinit.exe
       - case sensitive: false
         not: true
-        op: is
+        op: ends with
         path: event/FILE_PATH
-        value: C:\WINDOWS\explorer.exe
+        value: :\WINDOWS\explorer.exe
     - not: true
       op: or
       rules:
@@ -38,17 +38,39 @@ detect:
       - op: or
         rules:
         - case sensitive: false
-          op: is
+          op: ends with
           path: event/FILE_PATH
-          value: C:\Windows\System32\proquota.exe
+          value: :\Windows\System32\proquota.exe
         - case sensitive: false
-          op: is
+          op: ends with
           path: event/FILE_PATH
-          value: C:\Windows\SysWOW64\proquota.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \Citrix\System32\icast.exe
+          value: :\Windows\SysWOW64\proquota.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: :\Program Files (x86)\Citrix\HDX\bin\cmstart.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: :\Program Files (x86)\Citrix\HDX\bin\icast.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: :\Program Files (x86)\Citrix\System32\icast.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: :\Program Files\Citrix\HDX\bin\cmstart.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: :\Program Files\Citrix\HDX\bin\icast.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: :\Program Files\Citrix\System32\icast.exe
       - not: true
         op: exists
         path: event/FILE_PATH

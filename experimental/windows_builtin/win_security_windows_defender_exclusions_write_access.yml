@@ -5,17 +5,19 @@ detect:
   - op: or
     rules:
     - case sensitive: false
-      op: is
-      path: Event/System/EventID
-      value: '4657'
+      op: contains
+      path: Event/EventData/AccessList
+      value: '%%4417'
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/AccessList
+      value: '%%4418'
+  - op: or
+    rules:
     - case sensitive: false
       op: is
       path: Event/System/EventID
       value: '4656'
-    - case sensitive: false
-      op: is
-      path: Event/System/EventID
-      value: '4660'
     - case sensitive: false
       op: is
       path: Event/System/EventID
@@ -28,17 +30,19 @@ detect:
 respond:
 - action: report
   metadata:
-    author: '@BarryShooshooga'
-    description: Detects scenarios where an Windows Defender exclusion was added in
-      registry where an entity would want to bypass antivirus scanning from Windows
-      Defender
+    author: '@BarryShooshooga, Nasreddine Bencherchali (Nextron Systems)'
+    description: 'Detects write access requests to the Windows Defender exclusions
+      registry keys. This could be an indication of an attacker trying to request
+      a handle or access the object to write new exclusions in order to bypass security.
+
+      '
     falsepositives:
-    - Intended inclusions by administrator
-    level: high
+    - Unknown
+    level: medium
     references:
     - https://www.bleepingcomputer.com/news/security/gootkit-malware-bypasses-windows-defender-by-setting-path-exclusions/
     tags:
     - attack.defense_evasion
     - attack.t1562.001
-  name: Windows Defender Exclusion Set
+  name: Windows Defender Exclusion Reigstry Key - Write Access Requested
 

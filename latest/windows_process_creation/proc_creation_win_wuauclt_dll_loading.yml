@@ -1,0 +1,81 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \wuauclt.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: wuauclt.exe
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: UpdateDeploymentProvider
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: RunHandlerComServer
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /UpdateDeploymentProvider UpdateDeploymentProvider.dll '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' wuaueng.dll '
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: :\Windows\UUS\Packages\Preview\amd64\updatedeploy.dll /ClassId
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: :\Windows\UUS\amd64\UpdateDeploy.dll /ClassId
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: :\Windows\WinSxS\
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '\UpdateDeploy.dll /ClassId '
+respond:
+- action: report
+  metadata:
+    author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research), Florian Roth
+      (Nextron Systems), Sreeman, FPT.EagleEye Team
+    description: Detects the use of the Windows Update Client binary (wuauclt.exe)
+      for proxy execution.
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://dtm.uk/wuauclt/
+    - https://blog.malwarebytes.com/threat-intelligence/2022/01/north-koreas-lazarus-apt-leverages-windows-update-client-github-in-latest-campaign/
+    tags:
+    - attack.defense_evasion
+    - attack.t1218
+    - attack.execution
+  name: Proxy Execution Via Wuauclt.EXE
+
