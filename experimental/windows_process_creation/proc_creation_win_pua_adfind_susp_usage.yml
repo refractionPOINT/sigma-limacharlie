@@ -106,5 +106,6 @@ respond:
     - attack.t1087.002
     - attack.t1482
     - attack.t1069.002
+    - stp.1u
   name: PUA - AdFind Suspicious Execution
 

@@ -44,5 +44,6 @@ respond:
     - attack.t1053.005
     - attack.s0111
     - car.2013-08-001
+    - stp.1u
   name: Scheduled Task Creation
 
