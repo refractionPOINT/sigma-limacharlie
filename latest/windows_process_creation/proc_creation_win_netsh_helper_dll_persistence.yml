@@ -7,32 +7,43 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - case sensitive: false
-      op: ends with
-      path: event/FILE_PATH
-      value: \netsh.exe
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: add
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: helper
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: netsh.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \netsh.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: add
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: helper
 respond:
 - action: report
   metadata:
     author: Victor Sergeev, oscd.community
-    description: Detects the execution of netsh with "add helper" flag in order to
+    description: 'Detects the execution of netsh with "add helper" flag in order to
       add a custom helper DLL. This technique can be abused to add a malicious helper
       DLL that can be used as a persistence proxy that gets called when netsh.exe
       is executed.
+
+      '
     falsepositives:
     - Unknown
-    level: high
+    level: medium
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1546.007/T1546.007.md
-    - https://attack.mitre.org/software/S0108/
+    - https://github.com/outflanknl/NetshHelperBeacon
+    - https://web.archive.org/web/20160928212230/https://www.adaptforward.com/2016/09/using-netshell-to-execute-evil-dlls-and-persist-on-a-host/
     tags:
     - attack.privilege_escalation
     - attack.persistence
