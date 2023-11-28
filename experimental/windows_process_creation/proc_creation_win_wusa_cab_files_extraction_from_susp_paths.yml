@@ -20,27 +20,19 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: C:\Users\Public\
+        value: :\PerfLogs\
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: \Desktop\
+        value: :\Users\Public\
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: \Downloads\
+        value: :\Windows\Temp\
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
         value: \Appdata\Local\Temp\
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: \Windows\Temp\
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: \PerfLogs\
 respond:
 - action: report
   metadata:
@@ -55,5 +47,5 @@ respond:
     - https://www.echotrail.io/insights/search/wusa.exe/
     tags:
     - attack.execution
-  name: Wusa Extracting Cab Files From Suspicious Paths
+  name: Wusa.EXE Extracting Cab Files From Suspicious Paths
 
