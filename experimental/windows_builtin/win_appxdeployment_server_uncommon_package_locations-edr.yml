@@ -1,0 +1,72 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '854'
+    - not: true
+      op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/Path
+          value: C:\Program Files\WindowsApps\
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/Path
+          value: C:\Program Files (x86)\
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/Path
+          value: C:\Windows\SystemApps\
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/Path
+          value: C:\Windows\PrintDialog\
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/Path
+          value: C:\Windows\ImmersiveControlPanel\
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/Path
+          value: x-windowsupdate://
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/Path
+          value: file:///C:/Program%20Files
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/Path
+          value: https://statics.teams.cdn.office.net/
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/Path
+          value: microsoft.com
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects an appx package added the pipeline of the "to be processed"
+      packages which is located in uncommon locations
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - Internal Research
+    - https://www.sentinelone.com/labs/inside-malicious-windows-apps-for-malware-deployment/
+    - https://learn.microsoft.com/en-us/windows/win32/appxpkg/troubleshooting
+    - https://news.sophos.com/en-us/2021/11/11/bazarloader-call-me-back-attack-abuses-windows-10-apps-mechanism/
+    tags:
+    - attack.defense_evasion
+  name: Uncommon AppX Package Locations
+

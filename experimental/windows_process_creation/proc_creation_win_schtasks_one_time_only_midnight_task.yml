@@ -1,0 +1,81 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: \schtasks.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: schtasks.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: wscript
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: vbscript
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: cscript
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'wmic '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: wmic.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: regsvr32.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: powershell
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \AppData\
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: once
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 00:00
+respond:
+- action: report
+  metadata:
+    author: pH-T (Nextron Systems)
+    description: Detects scheduled task creation events that include suspicious actions,
+      and is run once at 00:00
+    falsepositives:
+    - Software installation
+    level: high
+    references:
+    - https://www.trendmicro.com/vinfo/us/security/news/ransomware-spotlight/ransomware-spotlight-blackbyte
+    tags:
+    - attack.execution
+    - attack.persistence
+    - attack.privilege_escalation
+    - attack.t1053.005
+  name: Uncommon One Time Only Scheduled Task At 00:00
+

@@ -1,0 +1,80 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Import-Module "$Env:Temp\
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Import-Module '$Env:Temp\
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Import-Module $Env:Temp\
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Import-Module "$Env:Appdata\
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Import-Module '$Env:Appdata\
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Import-Module $Env:Appdata\
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Import-Module C:\Users\Public\
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ipmo "$Env:Temp\
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ipmo '$Env:Temp\
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ipmo $Env:Temp\
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ipmo "$Env:Appdata\
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ipmo '$Env:Appdata\
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ipmo $Env:Appdata\
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ipmo C:\Users\Public\
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects powershell scripts that import modules from suspicious directories
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1003.002/T1003.002.md
+    tags:
+    - attack.execution
+    - attack.t1059.001
+  name: Import PowerShell Modules From Suspicious Directories - ProcCreation
+

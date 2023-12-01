@@ -1,0 +1,94 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is mac
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/FILE_PATH
+        value: Microsoft Word
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/FILE_PATH
+        value: Microsoft Excel
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/FILE_PATH
+        value: Microsoft PowerPoint
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/FILE_PATH
+        value: Microsoft OneNote
+    - op: or
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /bash
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /curl
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /dash
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /fish
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /osacompile
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /osascript
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /sh
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /zsh
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /python
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /python3
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /wget
+respond:
+- action: report
+  metadata:
+    author: Sohan G (D4rkCiph3r)
+    description: Detects suspicious child processes spawning from microsoft office
+      suite applications such as word or excel. This could indicates malicious macro
+      execution
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://redcanary.com/blog/applescript/
+    - https://objective-see.org/blog/blog_0x4B.html
+    tags:
+    - attack.execution
+    - attack.persistence
+    - attack.t1059.002
+    - attack.t1137.002
+    - attack.t1204.002
+  name: Suspicious Microsoft Office Child Process - MacOS
+

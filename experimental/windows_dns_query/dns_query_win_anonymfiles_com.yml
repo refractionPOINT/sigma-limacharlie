@@ -1,0 +1,22 @@
+detect:
+  case sensitive: false
+  event: DNS_REQUEST
+  op: contains
+  path: event/DOMAIN_NAME
+  value: .anonfiles.com
+respond:
+- action: report
+  metadata:
+    author: pH-T (Nextron Systems)
+    description: Detects DNS queries for "anonfiles.com", which is an anonymous file
+      upload platform often used for malicious purposes
+    falsepositives:
+    - Rare legitimate access to anonfiles.com
+    level: high
+    references:
+    - https://www.trendmicro.com/vinfo/us/security/news/ransomware-spotlight/ransomware-spotlight-blackbyte
+    tags:
+    - attack.exfiltration
+    - attack.t1567.002
+  name: DNS Query for Anonfiles.com Domain - Sysmon
+

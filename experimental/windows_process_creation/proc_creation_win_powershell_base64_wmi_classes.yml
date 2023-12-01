@@ -1,0 +1,182 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \pwsh.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: PowerShell.EXE
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: pwsh.dll
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: VwBpAG4AMwAyAF8AUwBoAGEAZABvAHcAYwBvAHAAeQ
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: cAaQBuADMAMgBfAFMAaABhAGQAbwB3AGMAbwBwAHkA
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: XAGkAbgAzADIAXwBTAGgAYQBkAG8AdwBjAG8AcAB5A
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: V2luMzJfU2hhZG93Y29we
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: dpbjMyX1NoYWRvd2NvcH
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: XaW4zMl9TaGFkb3djb3B5
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: VwBpAG4AMwAyAF8AUwBjAGgAZQBkAHUAbABlAGQASgBvAGIA
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: cAaQBuADMAMgBfAFMAYwBoAGUAZAB1AGwAZQBkAEoAbwBiA
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: XAGkAbgAzADIAXwBTAGMAaABlAGQAdQBsAGUAZABKAG8AYg
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: V2luMzJfU2NoZWR1bGVkSm9i
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: dpbjMyX1NjaGVkdWxlZEpvY
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: XaW4zMl9TY2hlZHVsZWRKb2
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: VwBpAG4AMwAyAF8AUAByAG8AYwBlAHMAcw
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: cAaQBuADMAMgBfAFAAcgBvAGMAZQBzAHMA
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: XAGkAbgAzADIAXwBQAHIAbwBjAGUAcwBzA
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: V2luMzJfUHJvY2Vzc
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: dpbjMyX1Byb2Nlc3
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: XaW4zMl9Qcm9jZXNz
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: VwBpAG4AMwAyAF8AVQBzAGUAcgBBAGMAYwBvAHUAbgB0A
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: cAaQBuADMAMgBfAFUAcwBlAHIAQQBjAGMAbwB1AG4AdA
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: XAGkAbgAzADIAXwBVAHMAZQByAEEAYwBjAG8AdQBuAHQA
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: V2luMzJfVXNlckFjY291bn
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: dpbjMyX1VzZXJBY2NvdW50
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: XaW4zMl9Vc2VyQWNjb3Vud
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: VwBpAG4AMwAyAF8ATABvAGcAZwBlAGQATwBuAFUAcwBlAHIA
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: cAaQBuADMAMgBfAEwAbwBnAGcAZQBkAE8AbgBVAHMAZQByA
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: XAGkAbgAzADIAXwBMAG8AZwBnAGUAZABPAG4AVQBzAGUAcg
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: V2luMzJfTG9nZ2VkT25Vc2Vy
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: dpbjMyX0xvZ2dlZE9uVXNlc
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: XaW4zMl9Mb2dnZWRPblVzZX
+respond:
+- action: report
+  metadata:
+    author: Christian Burkard (Nextron Systems), Nasreddine Bencherchali (Nextron
+      Systems)
+    description: Detects calls to base64 encoded WMI class such as "Win32_Shadowcopy",
+      "Win32_ScheduledJob", etc.
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://github.com/Neo23x0/Raccine/blob/20a569fa21625086433dcce8bb2765d0ea08dcb6/yara/mal_revil.yar
+    tags:
+    - attack.execution
+    - attack.t1059.001
+    - attack.defense_evasion
+    - attack.t1027
+  name: PowerShell Base64 Encoded WMI Classes
+

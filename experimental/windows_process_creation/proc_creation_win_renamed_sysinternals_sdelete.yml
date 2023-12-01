@@ -1,0 +1,41 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/ORIGINAL_FILE_NAME
+      value: sdelete.exe
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \sdelete.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \sdelete64.exe
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects the use of a renamed SysInternals Sdelete, which is something
+      an administrator shouldn't do (the renaming)
+    falsepositives:
+    - System administrator usage
+    level: high
+    references:
+    - https://docs.microsoft.com/en-us/sysinternals/downloads/sdelete
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1485/T1485.md
+    tags:
+    - attack.impact
+    - attack.t1485
+  name: Renamed Sysinternals Sdelete Execution
+

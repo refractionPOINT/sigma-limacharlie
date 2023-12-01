@@ -1,0 +1,50 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: rundll32
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: mshtml,RunHTMLApplication
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: mshtml,#135
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'javascript:'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'vbscript:'
+respond:
+- action: report
+  metadata:
+    author: frack113, Zaw Min Htun (ZETA)
+    description: Detects suspicious process related to rundll32 based on arguments
+    falsepositives:
+    - False positives depend on scripts and administrative tools used in the monitored
+      environment
+    level: medium
+    references:
+    - https://gist.github.com/ryhanson/227229866af52e2d963cf941af135a52
+    - https://github.com/redcanaryco/atomic-red-team/blob/cd3690b100a495885c407282d0c94c85f48a8a2e/atomics/T1218.011/T1218.011.md
+    tags:
+    - attack.defense_evasion
+    - attack.t1218.011
+  name: Suspicious Rundll32 Script in CommandLine
+

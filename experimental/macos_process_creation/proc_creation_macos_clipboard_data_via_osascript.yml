@@ -1,0 +1,39 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is mac
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: osascript
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' -e '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: clipboard
+respond:
+- action: report
+  metadata:
+    author: Sohan G (D4rkCiph3r)
+    description: Detects possible collection of data from the clipboard via execution
+      of the osascript binary
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://www.sentinelone.com/blog/how-offensive-actors-use-applescript-for-attacking-macos/
+    tags:
+    - attack.collection
+    - attack.execution
+    - attack.t1115
+    - attack.t1059.002
+  name: Clipboard Data Collection Via OSAScript
+

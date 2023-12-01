@@ -1,0 +1,34 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '157'
+    - case sensitive: false
+      op: is
+      path: event/EVENT/EventData/subjectName
+      value: CN=Foresee Consulting Inc., O=Foresee Consulting Inc., L=North York,
+        S=Ontario, C=CA, SERIALNUMBER=1004913-1, OID.1.3.6.1.4.1.311.60.2.1.3=CA,
+        OID.2.5.4.15=Private Organization
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects execution of AppX packages with known suspicious or malicious
+      signature
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - Internal Research
+    - https://www.sentinelone.com/labs/inside-malicious-windows-apps-for-malware-deployment/
+    tags:
+    - attack.defense_evasion
+    - attack.execution
+  name: Suspicious Digital Signature Of AppX Package
+

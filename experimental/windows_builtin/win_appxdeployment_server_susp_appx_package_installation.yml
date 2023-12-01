@@ -1,0 +1,32 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '401'
+  - case sensitive: false
+    op: is
+    path: Event/EventData/ErrorCode
+    value: '0x80073cff'
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects an appx package installation with the error code "0x80073cff"
+      which indicates that the package didn't meet the signing requirements and could
+      be suspicious
+    falsepositives:
+    - Legitimate AppX packages not signed by MS used part of an enterprise
+    level: medium
+    references:
+    - Internal Research
+    - https://www.sentinelone.com/labs/inside-malicious-windows-apps-for-malware-deployment/
+    - https://learn.microsoft.com/en-us/windows/win32/appxpkg/troubleshooting
+    - https://news.sophos.com/en-us/2021/11/11/bazarloader-call-me-back-attack-abuses-windows-10-apps-mechanism/
+    tags:
+    - attack.defense_evasion
+  name: Suspicious AppX Package Installation Attempt
+

@@ -1,0 +1,81 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /iptables
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /xtables-legacy-multi
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /iptables-legacy-multi
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /ip6tables
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /ip6tables-legacy-multi
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -F
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -Z
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -X
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ufw-logging-deny
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ufw-logging-allow
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ufw6-logging-deny
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ufw6-logging-allow
+respond:
+- action: report
+  metadata:
+    author: Joseliyo Sanchez, @Joseliyo_Jstnk
+    description: Detect use of iptables to flush all firewall rules, tables and chains
+      and allow all network traffic
+    falsepositives:
+    - Network administrators
+    level: medium
+    references:
+    - https://blogs.blackberry.com/
+    - https://www.cyberciti.biz/tips/linux-iptables-how-to-flush-all-rules.html
+    - https://twitter.com/Joseliyo_Jstnk/status/1620131033474822144
+    tags:
+    - attack.defense_evasion
+    - attack.t1562.004
+  name: Flush Iptables Ufw Chain
+

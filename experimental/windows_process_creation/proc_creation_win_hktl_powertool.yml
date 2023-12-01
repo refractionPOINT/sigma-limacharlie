@@ -1,0 +1,43 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \PowerTool.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \PowerTool64.exe
+    - case sensitive: false
+      op: is
+      path: event/ORIGINAL_FILE_NAME
+      value: PowerTool.exe
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects the execution of the tool PowerTool which has the ability
+      to kill a process, delete its process file, unload drivers, and delete the driver
+      files
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://thedfirreport.com/2022/11/28/emotet-strikes-again-lnk-file-leads-to-domain-wide-ransomware/
+    - https://www.trendmicro.com/en_us/research/22/i/play-ransomware-s-attack-playbook-unmasks-it-as-another-hive-aff.html
+    - https://twitter.com/gbti_sa/status/1249653895900602375?lang=en
+    - https://www.softpedia.com/get/Antivirus/Removal-Tools/ithurricane-PowerTool.shtml
+    tags:
+    - attack.defense_evasion
+    - attack.t1562.001
+  name: HackTool - PowerTool Execution
+

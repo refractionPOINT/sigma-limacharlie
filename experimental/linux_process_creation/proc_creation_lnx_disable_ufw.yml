@@ -1,0 +1,45 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -ufw-init
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: force-stop
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ufw
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: disable
+respond:
+- action: report
+  metadata:
+    author: Joseliyo Sanchez, @Joseliyo_Jstnk
+    description: Detects attempts to force stop the ufw using ufw-init
+    falsepositives:
+    - Network administrators
+    level: medium
+    references:
+    - https://blogs.blackberry.com/
+    - https://twitter.com/Joseliyo_Jstnk/status/1620131033474822144
+    tags:
+    - attack.defense_evasion
+    - attack.t1562.004
+  name: Ufw Force Stop Using Ufw-Init
+

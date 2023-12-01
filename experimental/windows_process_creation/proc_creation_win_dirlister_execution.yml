@@ -1,0 +1,35 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/ORIGINAL_FILE_NAME
+      value: DirLister.exe
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \dirlister.exe
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Detect the usage of "DirLister.exe" a utility for quickly listing
+      folder or drive contents. It was seen used by BlackCat ransomware to create
+      a list of accessible directories and files.
+    falsepositives:
+    - Legitimate use by users
+    level: low
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/40b77d63808dd4f4eafb83949805636735a1fd15/atomics/T1083/T1083.md
+    - https://news.sophos.com/en-us/2022/07/14/blackcat-ransomware-attacks-not-merely-a-byproduct-of-bad-luck/
+    tags:
+    - attack.discovery
+    - attack.t1083
+  name: DirLister Execution
+

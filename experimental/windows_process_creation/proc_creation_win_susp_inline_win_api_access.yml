@@ -1,0 +1,218 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: AddSecurityPackage
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: AdjustTokenPrivileges
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Advapi32
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: CloseHandle
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: CreateProcessWithToken
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: CreatePseudoConsole
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: CreateRemoteThread
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: CreateThread
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: CreateUserThread
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: DangerousGetHandle
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: DuplicateTokenEx
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: EnumerateSecurityPackages
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: FreeHGlobal
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: FreeLibrary
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: GetDelegateForFunctionPointer
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: GetLogonSessionData
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: GetModuleHandle
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: GetProcAddress
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: GetProcessHandle
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: GetTokenInformation
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ImpersonateLoggedOnUser
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: kernel32
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: LoadLibrary
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: memcpy
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: MiniDumpWriteDump
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ntdll
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OpenDesktop
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OpenProcess
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OpenProcessToken
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OpenThreadToken
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OpenWindowStation
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: PtrToString
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: QueueUserApc
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ReadProcessMemory
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: RevertToSelf
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: RtlCreateUserThread
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: secur32
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: SetThreadToken
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: VirtualAlloc
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: VirtualFree
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: VirtualProtect
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: WaitForSingleObject
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: WriteInt32
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: WriteProcessMemory
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ZeroFreeGlobalAllocUnicode
+    - not: true
+      op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \MpCmdRun.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: GetLoadLibraryWAddress32
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects the use of WinAPI Functions via the commandline. As seen
+      used by threat actors via the tool winapiexec
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://twitter.com/m417z/status/1566674631788007425
+    tags:
+    - attack.execution
+    - attack.t1106
+  name: Potential WinAPI Calls Via CommandLine
+

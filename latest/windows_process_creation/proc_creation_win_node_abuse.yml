@@ -1,0 +1,59 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \node.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -e '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' --eval '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: .exec(
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: net.socket
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: .connect
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: child_process
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects the execution node.exe which is shipped with multiple software
+      such as VMware, Adobe...etc. In order to execute arbitrary code. For example
+      to establish reverse shell as seen in Log4j attacks...etc
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - http://blog.talosintelligence.com/2022/09/lazarus-three-rats.html
+    - https://www.sprocketsecurity.com/resources/crossing-the-log4j-horizon-a-vulnerability-with-no-return
+    - https://www.rapid7.com/blog/post/2022/01/18/active-exploitation-of-vmware-horizon-servers/
+    - https://nodejs.org/api/cli.html
+    tags:
+    - attack.defense_evasion
+    - attack.t1127
+  name: Potential Arbitrary Code Execution Via Node.EXE
+

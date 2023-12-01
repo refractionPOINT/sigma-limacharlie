@@ -1,0 +1,62 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \pwsh.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: PowerShell.EXE
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: pwsh.dll
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'Add-AppPackage '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'Add-AppxPackage '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' -AllowUnsigned'
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects usage of the "Add-AppxPackage" or it's alias "Add-AppPackage"
+      to install unsigned AppX packages
+    falsepositives:
+    - Installation of unsigned packages for testing purposes
+    level: medium
+    references:
+    - https://learn.microsoft.com/en-us/windows/msix/package/unsigned-package
+    - https://twitter.com/WindowsDocs/status/1620078135080325122
+    tags:
+    - attack.persistence
+    - attack.defense_evasion
+  name: Unsigned AppX Installation Attempt Using Add-AppxPackage
+

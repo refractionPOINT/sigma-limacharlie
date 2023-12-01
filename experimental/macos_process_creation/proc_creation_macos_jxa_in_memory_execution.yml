@@ -1,0 +1,59 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is mac
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: osascript
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -e '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: eval
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: NSData.dataWithContentsOfURL
+    - op: or
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -l '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: JavaScript
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .js
+respond:
+- action: report
+  metadata:
+    author: Sohan G (D4rkCiph3r)
+    description: Detects possible malicious execution of JXA in-memory via OSAScript
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://redcanary.com/blog/applescript/
+    tags:
+    - attack.t1059.002
+    - attack.t1059.007
+    - attack.execution
+  name: JXA In-memory Execution Via OSAScript
+

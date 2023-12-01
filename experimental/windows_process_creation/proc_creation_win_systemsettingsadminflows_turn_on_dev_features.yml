@@ -1,0 +1,50 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \SystemSettingsAdminFlows.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: SystemSettingsAdminFlows.EXE
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: TurnOnDeveloperFeatures
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: DeveloperUnlock
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: EnableSideloading
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects when a user enable developer features such as "Developer
+      Mode" or "Application Sideloading". Which allows the user to install untrusted
+      packages.
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - Internal Research
+    - https://www.sentinelone.com/labs/inside-malicious-windows-apps-for-malware-deployment/
+    tags:
+    - attack.defense_evasion
+  name: Potential Signing Bypass Via Windows Developer Features
+

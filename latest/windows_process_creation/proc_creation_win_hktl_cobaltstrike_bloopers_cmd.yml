@@ -1,0 +1,92 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: Cmd.Exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cmd.exe
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: starts with
+          path: event/COMMAND_LINE
+          value: 'cmd '
+        - case sensitive: false
+          op: starts with
+          path: event/COMMAND_LINE
+          value: cmd.exe
+        - case sensitive: false
+          op: starts with
+          path: event/COMMAND_LINE
+          value: c:\windows\system32\cmd.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: psinject
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: spawnas
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: make_token
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: remote-exec
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: rev2self
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: dcsync
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: logonpasswords
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: execute-assembly
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: getsystem
+respond:
+- action: report
+  metadata:
+    author: _pete_0, TheDFIRReport
+    description: Detects use of Cobalt Strike commands accidentally entered in the
+      CMD shell
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://hstechdocs.helpsystems.com/manuals/cobaltstrike/current/userguide/content/cobalt-4-5-user-guide.pdf
+    - https://thedfirreport.com/2021/10/04/bazarloader-and-the-conti-leaks/
+    - https://thedfirreport.com/2022/06/16/sans-ransomware-summit-2022-can-you-detect-this/
+    tags:
+    - attack.execution
+    - attack.t1059.003
+    - stp.1u
+  name: Operator Bloopers Cobalt Strike Commands
+

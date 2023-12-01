@@ -1,0 +1,64 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \pwsh.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: PowerShell.EXE
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: pwsh.dll
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'Import-Module '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'ipmo '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Microsoft.ActiveDirectory.Management.dll
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Detects usage of the "Import-Module" cmdlet to load the "Microsoft.ActiveDirectory.Management.dl"
+      DLL. Which is often used by attackers to perform AD enumeration.
+    falsepositives:
+    - Legitimate use of the library for administrative activity
+    level: medium
+    references:
+    - https://github.com/samratashok/ADModule
+    - https://twitter.com/cyb3rops/status/1617108657166061568?s=20
+    - https://www.ired.team/offensive-security-experiments/active-directory-kerberos-abuse/active-directory-enumeration-with-ad-module-without-rsat-or-admin-privileges
+    tags:
+    - attack.reconnaissance
+    - attack.discovery
+    - attack.impact
+  name: Potential Active Directory Enumeration Using AD Module - ProcCreation
+

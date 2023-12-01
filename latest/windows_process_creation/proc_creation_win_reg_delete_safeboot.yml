@@ -1,0 +1,46 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: reg.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: reg.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' delete '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \SYSTEM\CurrentControlSet\Control\SafeBoot
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems), Tim Shelton
+    description: Detects execution of "reg.exe" commands with the "delete" flag on
+      safe boot registry keys. Often used by attacker to prevent safeboot execution
+      of security products
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://www.trendmicro.com/en_us/research/22/e/avoslocker-ransomware-variant-abuses-driver-file-to-disable-anti-Virus-scans-log4shell.html
+    tags:
+    - attack.defense_evasion
+    - attack.t1562.001
+  name: SafeBoot Registry Key Deleted Via Reg.EXE
+

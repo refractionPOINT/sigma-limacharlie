@@ -1,0 +1,44 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: echo 1 >
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: /sys/kernel/debug/tracing/events/kprobes/
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /myprobe/enable
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /myretprobe/enable
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects common command used to enable bpf kprobes tracing
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://embracethered.com/blog/posts/2021/offensive-bpf-bpftrace/
+    - https://bpftrace.org/
+    - https://www.kernel.org/doc/html/v5.0/trace/kprobetrace.html
+    tags:
+    - attack.execution
+    - attack.defense_evasion
+  name: Enable BPF Kprobes Tracing
+

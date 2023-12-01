@@ -1,0 +1,129 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \keytool.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cmd.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \sh.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \bash.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \powershell.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \pwsh.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \schtasks.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \certutil.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \whoami.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \bitsadmin.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \wscript.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cscript.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \scrcons.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \regsvr32.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \hh.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \wmic.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \mshta.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \rundll32.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \forfiles.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \scriptrunner.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \mftrace.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \AppVLP.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \systeminfo.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \reg.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \query.exe
+respond:
+- action: report
+  metadata:
+    author: Andreas Hunkeler (@Karneades)
+    description: Detects suspicious shell spawn from Java utility keytool process
+      (e.g. adselfservice plus exploitation)
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://redcanary.com/blog/intelligence-insights-december-2021
+    - https://www.synacktiv.com/en/publications/how-to-exploit-cve-2021-40539-on-manageengine-adselfservice-plus.html
+    tags:
+    - attack.initial_access
+    - attack.persistence
+    - attack.privilege_escalation
+  name: Suspicious Shells Spawn by Java Utility Keytool
+

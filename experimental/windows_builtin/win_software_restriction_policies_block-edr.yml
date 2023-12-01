@@ -1,0 +1,50 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/EventData/Provider_Name
+      value: Microsoft-Windows-SoftwareRestrictionPolicies
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '865'
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '866'
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '867'
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '868'
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '882'
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Detects restricted access to applications by the Software Restriction
+      Policies (SRP) policy
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://learn.microsoft.com/en-us/windows-server/identity/software-restriction-policies/software-restriction-policies
+    - https://github.com/nasbench/EVTX-ETW-Resources/blob/7a806a148b3d9d381193d4a80356016e6e8b1ee8/ETWEventsList/CSV/Windows11/22H2/W11_22H2_Pro_20220920_22621.382/Providers/Microsoft-Windows-AppXDeployment-Server.csv
+    tags:
+    - attack.defense_evasion
+    - attack.t1072
+  name: Restricted Software Access By SRP
+

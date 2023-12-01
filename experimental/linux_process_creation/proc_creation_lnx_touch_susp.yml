@@ -1,0 +1,37 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /touch
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' -t '
+    - case sensitive: false
+      op: ends with
+      path: event/COMMAND_LINE
+      value: .service
+respond:
+- action: report
+  metadata:
+    author: Joseliyo Sanchez, @Joseliyo_Jstnk
+    description: Detects usage of the "touch" process in service file.
+    falsepositives:
+    - Admin changing date of files.
+    level: medium
+    references:
+    - https://blogs.blackberry.com/
+    - https://twitter.com/Joseliyo_Jstnk/status/1620131033474822144
+    tags:
+    - attack.defense_evasion
+    - attack.t1070.006
+  name: Touch Suspicious Service File
+

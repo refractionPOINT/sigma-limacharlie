@@ -1,0 +1,35 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: DllRegisterServer
+    - case sensitive: false
+      not: true
+      op: ends with
+      path: event/FILE_PATH
+      value: \rundll32.exe
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects when 'DllRegisterServer' is called in the commandline and
+      the image is not rundll32. This could mean that the 'rundll32' utility has been
+      renamed in order to avoid detection
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://twitter.com/swisscom_csirt/status/1331634525722521602?s=20
+    - https://app.any.run/tasks/f74c5157-8508-4ac6-9805-d63fe7b0d399/
+    tags:
+    - attack.execution
+  name: Potential Renamed Rundll32 Execution
+
