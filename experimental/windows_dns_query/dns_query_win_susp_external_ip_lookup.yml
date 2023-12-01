@@ -11,6 +11,10 @@ detect:
     - case sensitive: false
       op: contains
       path: event/DOMAIN_NAME
+      value: api.bigdatacloud.net
+    - case sensitive: false
+      op: contains
+      path: event/DOMAIN_NAME
       value: api.ipify.org
     - case sensitive: false
       op: contains
@@ -32,6 +36,10 @@ detect:
       op: contains
       path: event/DOMAIN_NAME
       value: curlmyip.com
+    - case sensitive: false
+      op: contains
+      path: event/DOMAIN_NAME
+      value: db-ip.com
     - case sensitive: false
       op: contains
       path: event/DOMAIN_NAME
@@ -68,6 +76,10 @@ detect:
       op: contains
       path: event/DOMAIN_NAME
       value: ifconfig.me
+    - case sensitive: false
+      op: contains
+      path: event/DOMAIN_NAME
+      value: ipapi.co
     - case sensitive: false
       op: contains
       path: event/DOMAIN_NAME
