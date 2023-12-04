@@ -138,11 +138,11 @@ detect:
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
-        value: \sniffer_windows.exe
+        value: \sniff_windows.exe
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
-        value: \sniff_windows.exe
+        value: \sniffer_windows.exe
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
