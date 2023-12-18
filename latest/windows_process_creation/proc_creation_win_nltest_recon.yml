@@ -24,37 +24,45 @@ detect:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: /server
+          value: server
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: /query
+          value: query
       - op: or
         rules:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: '/dclist:'
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: /parentdomain
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: /domain_trusts
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: /all_trusts
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: /trusted_domains
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
           value: /user
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: all_trusts
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'dclist:'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'dnsgetdc:'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: domain_trusts
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'dsgetdc:'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: parentdomain
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: trusted_domains
 respond:
 - action: report
   metadata:
@@ -62,7 +70,7 @@ respond:
     description: Detects nltest commands that can be used for information discovery
     falsepositives:
     - Legitimate administration use but user and host must be investigated
-    level: high
+    level: medium
     references:
     - https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/cc731935(v=ws.11)
     - https://thedfirreport.com/2021/08/16/trickbot-leads-up-to-fake-1password-installation/

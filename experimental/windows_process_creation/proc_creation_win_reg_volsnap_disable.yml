@@ -10,14 +10,6 @@ detect:
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
-      value: reg
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: ' add '
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
       value: \Services\VSS\Diag
     - case sensitive: false
       op: contains

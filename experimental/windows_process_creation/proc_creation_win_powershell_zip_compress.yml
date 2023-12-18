@@ -5,37 +5,41 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: and
+  - op: or
     rules:
     - case sensitive: false
-      op: contains
+      op: matches
       path: event/COMMAND_LINE
-      value: 'Compress-Archive '
+      re: .*Compress\-Archive\ \-Path.*\-DestinationPath\ \$env:TEMP.*
     - case sensitive: false
-      op: contains
+      op: matches
       path: event/COMMAND_LINE
-      value: ' -Path '
+      re: .*Compress\-Archive\ \-Path.*\-DestinationPath.*\\AppData\\Local\\Temp\\.*
     - case sensitive: false
-      op: contains
+      op: matches
       path: event/COMMAND_LINE
-      value: ' -DestinationPath '
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: $env:TEMP\
+      re: .*Compress\-Archive\ \-Path.*\-DestinationPath.*:\\Windows\\Temp\\.*
 respond:
 - action: report
   metadata:
-    author: frack113
-    description: Use living off the land tools to zip a file and stage it in the Windows
-      temporary folder for later exfiltration
+    author: Nasreddine Bencherchali (Nextron Systems), frack113
+    description: 'Detects PowerShell scripts that make use of the "Compress-Archive"
+      Cmdlet in order to compress folders and files where the output is stored in
+      a potentially suspicious location that is used often by malware for exfiltration.
+
+      An adversary might compress data (e.g., sensitive documents) that is collected
+      prior to exfiltration in order to make it portable and minimize the amount of
+      data sent over the network.
+
+      '
     falsepositives:
     - Unknown
     level: medium
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1074.001/T1074.001.md
+    - https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-347a
     tags:
     - attack.collection
     - attack.t1074.001
-  name: Zip A Folder With PowerShell For Staging In Temp
+  name: Folder Compress To Potentially Suspicious Output Via Compress-Archive Cmdlet
 

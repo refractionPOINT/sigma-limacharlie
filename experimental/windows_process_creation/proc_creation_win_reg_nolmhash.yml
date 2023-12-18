@@ -1,0 +1,44 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: \System\CurrentControlSet\Control\Lsa\
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: NoLMHash
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' 0'
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: 'Detects changes to the "NoLMHash" registry value in order to allow
+      Windows to store LM Hashes.
+
+      By setting this registry value to "0" (DWORD), Windows will be allowed to store
+      a LAN manager hash of your password in Active Directory and local SAM databases.
+
+      '
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-347a
+    - https://learn.microsoft.com/en-us/troubleshoot/windows-server/windows-security/prevent-windows-store-lm-hash-password
+    - https://www.sans.org/blog/protecting-privileged-domain-accounts-lm-hashes-the-good-the-bad-and-the-ugly/
+    tags:
+    - attack.defense_evasion
+    - attack.t1112
+  name: Enable LM Hash Storage - ProcCreation
+

@@ -46,7 +46,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: frack113, Nasreddine Bencherchali
+    author: frack113, Nasreddine Bencherchali (Nextron Systems)
     description: Detects when an adversary uses the reg.exe utility to add or modify
       new keys or subkeys
     falsepositives:

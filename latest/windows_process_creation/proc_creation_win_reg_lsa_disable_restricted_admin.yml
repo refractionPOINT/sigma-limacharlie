@@ -15,16 +15,12 @@ detect:
       op: contains
       path: event/COMMAND_LINE
       value: DisableRestrictedAdmin
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: ' 1'
 respond:
 - action: report
   metadata:
     author: frack113
-    description: 'Detect activation of DisableRestrictedAdmin to disable RestrictedAdmin
-      mode.
+    description: 'Detects changes to the "DisableRestrictedAdmin" registry value in
+      order to disable or enable RestrictedAdmin mode.
 
       RestrictedAdmin mode prevents the transmission of reusable credentials to the
       remote system to which you connect using Remote Desktop.
@@ -42,5 +38,5 @@ respond:
     tags:
     - attack.defense_evasion
     - attack.t1112
-  name: Disabled RestrictedAdminMode For RDS - ProcCreation
+  name: RestrictedAdminMode Registry Value Tampering - ProcCreation
 
