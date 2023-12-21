@@ -1,0 +1,66 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/EventData/Provider_Name
+    value: Service Control Manager
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '7045'
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ImagePath
+      value: ' -nop '
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ImagePath
+      value: ' -sta '
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ImagePath
+      value: ' -w hidden '
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ImagePath
+      value: :\Temp\
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ImagePath
+      value: .downloadfile(
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ImagePath
+      value: .downloadstring(
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ImagePath
+      value: \ADMIN$\
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ImagePath
+      value: \Perflogs\
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ImagePath
+      value: '&&'
+  target: log
+respond:
+- action: report
+  metadata:
+    author: pH-T (Nextron Systems), Florian Roth (Nextron Systems)
+    description: Detects suspicious service installation commands
+    falsepositives:
+    - Unknown
+    level: high
+    tags:
+    - attack.persistence
+    - attack.privilege_escalation
+    - car.2013-09-005
+    - attack.t1543.003
+  name: Suspicious Service Installation
+

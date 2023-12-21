@@ -24,34 +24,16 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: .sdb
-      - op: and
+      - op: or
         rules:
-        - case sensitive: false
-          op: ends with
-          path: event/PARENT/FILE_PATH
-          value: :\Windows\System32\svchost.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: :\Windows\System32\sdbinst.exe
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: ' -m -bg'
-      - op: and
-        rules:
-        - case sensitive: false
-          op: ends with
-          path: event/PARENT/FILE_PATH
-          value: :\Windows\System32\svchost.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: :\Windows\System32\sdbinst.exe
         - case sensitive: false
           op: ends with
           path: event/COMMAND_LINE
           value: ' -mm'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -m -bg'
       - not: true
         op: exists
         path: event/COMMAND_LINE
@@ -72,12 +54,12 @@ respond:
       '
     falsepositives:
     - Unknown
-    level: high
+    level: medium
     references:
     - https://www.fireeye.com/blog/threat-research/2017/05/fin7-shim-databases-persistence.html
     tags:
     - attack.persistence
     - attack.privilege_escalation
     - attack.t1546.011
-  name: Suspicious Shim Database Installation via Sdbinst.EXE
+  name: Uncommon Extension Shim Database Installation Via Sdbinst.EXE
 

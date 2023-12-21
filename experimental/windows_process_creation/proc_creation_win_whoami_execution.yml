@@ -25,7 +25,7 @@ respond:
     - Admin activity
     - Scripts and administrative tools used in the monitored environment
     - Monitoring activity
-    level: medium
+    level: low
     references:
     - https://brica.de/alerts/alert/public/1247926/agent-tesla-keylogger-delivered-inside-a-power-iso-daa-archive/
     - https://app.any.run/tasks/7eaba74e-c1ea-400f-9c17-5e30eee89906/

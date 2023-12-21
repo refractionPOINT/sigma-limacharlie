@@ -22,19 +22,19 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: save
+        value: ' save '
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: export
+        value: ' export '
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: "\u02E2ave"
+        value: " \u02E2ave "
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: "e\u02E3port"
+        value: " e\u02E3port "
     - op: or
       rules:
       - case sensitive: false
@@ -101,7 +101,7 @@ respond:
     author: Teymur Kheirkhabarov, Endgame, JHasenbusch, Daniil Yugoslavskiy, oscd.community,
       frack113
     description: Detects the usage of "reg.exe" in order to dump sensitive registry
-      hives, which includes SAM, SYSTEM and SECURITY
+      hives. This includes SAM, SYSTEM and SECURITY hives.
     falsepositives:
     - Dumping hives for legitimate purpouse i.e. backup or forensic investigation
     level: high

@@ -7,58 +7,60 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - op: and
+    - op: or
       rules:
       - op: or
         rules:
         - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: ' -executionpolicy '
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: PowerShell.EXE
         - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: ' -ep '
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: ' -exec '
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: pwsh.dll
       - op: or
         rules:
         - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: Unrestricted
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
         - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: bypass
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: RemoteSigned
-    - not: true
-      op: or
+          op: ends with
+          path: event/FILE_PATH
+          value: \pwsh.exe
+    - op: or
       rules:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: C:\Program Files
+        value: '-executionpolicy '
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: C:\ProgramData
+        value: ' -ep '
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: \AppData\Roaming\Code\
+        value: ' -exec '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Bypass
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Unrestricted
 respond:
 - action: report
   metadata:
     author: frack113
-    description: Detects use of executionpolicy option to set insecure policies
+    description: Detects changing the PowerShell script execution policy to a potentially
+      insecure level using the "-ExecutionPolicy" flag.
     falsepositives:
-    - Administrator script
+    - Administrator scripts
     level: medium
     references:
     - https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-7.1

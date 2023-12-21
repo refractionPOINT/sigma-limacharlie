@@ -13,10 +13,6 @@ detect:
       - case sensitive: false
         op: contains
         path: Event/EventData/ServiceFileName
-        value: cmd
-      - case sensitive: false
-        op: contains
-        path: Event/EventData/ServiceFileName
         value: /c
       - case sensitive: false
         op: contains
@@ -26,42 +22,16 @@ detect:
         op: contains
         path: Event/EventData/ServiceFileName
         value: \pipe\
-    - op: and
-      rules:
-      - case sensitive: false
-        op: contains
-        path: Event/EventData/ServiceFileName
-        value: '%COMSPEC%'
-      - case sensitive: false
-        op: contains
-        path: Event/EventData/ServiceFileName
-        value: /c
-      - case sensitive: false
-        op: contains
-        path: Event/EventData/ServiceFileName
-        value: echo
-      - case sensitive: false
-        op: contains
-        path: Event/EventData/ServiceFileName
-        value: \pipe\
-    - op: and
-      rules:
-      - case sensitive: false
-        op: contains
-        path: Event/EventData/ServiceFileName
-        value: cmd.exe
-      - case sensitive: false
-        op: contains
-        path: Event/EventData/ServiceFileName
-        value: /c
-      - case sensitive: false
-        op: contains
-        path: Event/EventData/ServiceFileName
-        value: echo
-      - case sensitive: false
-        op: contains
-        path: Event/EventData/ServiceFileName
-        value: \pipe\
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: Event/EventData/ServiceFileName
+          value: cmd
+        - case sensitive: false
+          op: contains
+          path: Event/EventData/ServiceFileName
+          value: '%COMSPEC%'
     - op: and
       rules:
       - case sensitive: false
@@ -76,16 +46,20 @@ detect:
         op: contains
         path: Event/EventData/ServiceFileName
         value: '/p:'
+    - case sensitive: false
+      op: starts with
+      path: Event/EventData/ServiceFileName
+      value: \\\\127.0.0.1\\ADMIN$\
   target: log
 respond:
 - action: report
   metadata:
-    author: Teymur Kheirkhabarov, Ecco, Florian Roth
+    author: Teymur Kheirkhabarov, Ecco, Florian Roth (Nextron Systems)
     description: Detects the use of getsystem Meterpreter/Cobalt Strike command by
       detecting a specific service installation
     falsepositives:
-    - Highly unlikely
-    level: critical
+    - Unlikely
+    level: high
     references:
     - https://speakerdeck.com/heirhabarov/hunting-for-privilege-escalation-in-windows-environment
     - https://blog.cobaltstrike.com/2014/04/02/what-happens-when-i-type-getsystem/

@@ -35,8 +35,8 @@ respond:
       of services running on remote hosts, including those that may be vulnerable
       to remote software exploitation
     falsepositives:
-    - Network administrator computer
-    level: high
+    - Legitimate administrator activity
+    level: medium
     references:
     - https://nmap.org/
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1046/T1046.md#atomic-test-3---port-scan-nmap-for-windows

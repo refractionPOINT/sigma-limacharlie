@@ -30,10 +30,16 @@ detect:
         op: ends with
         path: event/PARENT/FILE_PATH
         value: \msiexec.exe
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: iisexpressshim.sdb
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: :\Program Files (x86)\IIS Express\iisexpressshim.sdb
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: :\Program Files\IIS Express\iisexpressshim.sdb
 respond:
 - action: report
   metadata:

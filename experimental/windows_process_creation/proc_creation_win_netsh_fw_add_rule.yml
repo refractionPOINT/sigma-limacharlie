@@ -32,33 +32,18 @@ detect:
     - not: true
       op: or
       rules:
-      - op: or
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: \netsh.exe advfirewall firewall add rule name=Dropbox dir=in action=allow
-            "program=C:\Program Files (x86)\Dropbox\Client\Dropbox.exe" enable=yes
-            profile=Any
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: \netsh.exe advfirewall firewall add rule name=Dropbox dir=in action=allow
-            "program=C:\Program Files\Dropbox\Client\Dropbox.exe" enable=yes profile=Any
-      - op: and
-        rules:
-        - case sensitive: false
-          op: starts with
-          path: event/PARENT/FILE_PATH
-          value: C:\Windows\Temp\asgard2-agent\
-        - case sensitive: false
-          op: ends with
-          path: event/PARENT/FILE_PATH
-          value: \thor64.exe
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: advfirewall firewall show rule name=all
+      - case sensitive: false
+        op: matches
+        path: event/COMMAND_LINE
+        re: .*advfirewall\ firewall\ add\ rule\ name=Dropbox\ dir=in\ action=allow\
+          "program=.:\\Program\ Files\ \(x86\)\\Dropbox\\Client\\Dropbox\.exe"\ enable=yes\
+          profile=Any.*
+      - case sensitive: false
+        op: matches
+        path: event/COMMAND_LINE
+        re: .*advfirewall\ firewall\ add\ rule\ name=Dropbox\ dir=in\ action=allow\
+          "program=.:\\Program\ Files\\Dropbox\\Client\\Dropbox\.exe"\ enable=yes\
+          profile=Any.*
 respond:
 - action: report
   metadata:

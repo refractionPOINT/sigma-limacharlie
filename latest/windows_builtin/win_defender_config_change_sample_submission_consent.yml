@@ -1,0 +1,30 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '5007'
+  - case sensitive: false
+    op: contains
+    path: Event/EventData/NewValue
+    value: \Real-Time Protection\SubmitSamplesConsent = 0x0
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects disabling of the "Automatic Sample Submission" feature of
+      Windows Defender.
+    falsepositives:
+    - Administrator activity (must be investigated)
+    level: low
+    references:
+    - https://learn.microsoft.com/en-us/microsoft-365/security/defender-endpoint/troubleshoot-microsoft-defender-antivirus?view=o365-worldwide
+    - https://bidouillesecurity.com/disable-windows-defender-in-powershell/#DisableAntiSpyware
+    tags:
+    - attack.defense_evasion
+    - attack.t1562.001
+  name: Windows Defender Submit Sample Feature Disabled
+

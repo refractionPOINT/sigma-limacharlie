@@ -22,7 +22,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Tim Rauch
+    author: Tim Rauch (Nextron Systems), Elastic
     description: Detects a service installed by a client which has PID 0 or whose
       parent has PID 0
     falsepositives:
@@ -30,6 +30,7 @@ respond:
     level: high
     references:
     - https://www.elastic.co/guide/en/security/current/windows-service-installed-via-an-unusual-client.html
+    - https://www.x86matthew.com/view_post?id=create_svc_rpc
     - https://twitter.com/SBousseaden/status/1490608838701166596
     tags:
     - attack.privilege_escalation

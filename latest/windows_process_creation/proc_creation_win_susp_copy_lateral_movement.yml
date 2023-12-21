@@ -9,16 +9,10 @@ detect:
     rules:
     - op: or
       rules:
-      - op: and
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: \\\\
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: $
+      - case sensitive: false
+        op: matches
+        path: event/COMMAND_LINE
+        re: .*\\\\.*\$.*
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -128,10 +122,11 @@ respond:
   metadata:
     author: Florian Roth (Nextron Systems), oscd.community, Teymur Kheirkhabarov @HeirhabarovT,
       Zach Stanford @svch0st, Nasreddine Bencherchali
-    description: Detects a suspicious copy command to or from an Admin share or remote
+    description: Detects a copy command or a copy utility execution to or from an
+      Admin share or remote
     falsepositives:
     - Administrative scripts
-    level: high
+    level: medium
     references:
     - https://twitter.com/SBousseaden/status/1211636381086339073
     - https://drive.google.com/file/d/1lKya3_mLnR3UQuCoiYruO3qgu052_iS_/view
@@ -144,5 +139,5 @@ respond:
     - attack.t1039
     - attack.t1048
     - attack.t1021.002
-  name: Copy from Admin Share
+  name: Copy From Or To Admin Share Or Sysvol Folder
 

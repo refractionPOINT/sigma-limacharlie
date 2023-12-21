@@ -28,10 +28,6 @@ detect:
       op: contains
       path: Event/EventData/NewValue
       value: '\Real-Time Protection\SpyNetReporting '
-    - case sensitive: false
-      op: contains
-      path: Event/EventData/NewValue
-      value: '\Real-Time Protection\SubmitSamplesConsent '
   target: log
 respond:
 - action: report
@@ -47,5 +43,5 @@ respond:
     tags:
     - attack.defense_evasion
     - attack.t1562.001
-  name: Windows Defender Suspicious Configuration Changes
+  name: Windows Defender Configuration Changes
 

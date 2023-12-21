@@ -64,23 +64,15 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: '%Public%\'
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: '%TEMP%'
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: '%TMP%'
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
         value: :\$Recycle.bin\
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: :\RECYCLER\
+        value: :\RECYCLER.BIN\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: :\RECYCLERS.BIN\
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -149,6 +141,18 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: \Temporary Internet Files\Content.Outlook\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '%Public%\'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '%TEMP%'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '%TMP%'
 respond:
 - action: report
   metadata:

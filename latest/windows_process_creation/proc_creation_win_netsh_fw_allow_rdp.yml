@@ -35,22 +35,12 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: '3389'
-    - op: or
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: portopening
-      - op: and
+      - op: or
         rules:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: advfirewall
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: rule
+          value: portopening
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE

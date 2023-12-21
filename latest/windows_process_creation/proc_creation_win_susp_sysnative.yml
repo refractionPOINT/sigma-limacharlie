@@ -5,10 +5,16 @@ detect:
   op: and
   rules:
   - op: is windows
-  - case sensitive: false
-    op: starts with
-    path: event/COMMAND_LINE
-    value: C:\Windows\Sysnative\
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: :\Windows\Sysnative\
+    - case sensitive: false
+      op: contains
+      path: event/FILE_PATH
+      value: :\Windows\Sysnative\
 respond:
 - action: report
   metadata:
@@ -21,6 +27,8 @@ respond:
     references:
     - https://thedfirreport.com/2021/08/29/cobalt-strike-a-defenders-guide/
     tags:
+    - attack.defense_evasion
+    - attack.privilege_escalation
     - attack.t1055
   name: Process Creation Using Sysnative Folder
 

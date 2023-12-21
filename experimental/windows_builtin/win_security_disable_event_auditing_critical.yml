@@ -13,18 +13,6 @@ detect:
       - case sensitive: false
         op: is
         path: Event/EventData/SubcategoryGuid
-        value: '{0CCE9215-69AE-11D9-BED3-505054503030}'
-      - case sensitive: false
-        op: is
-        path: Event/EventData/SubcategoryGuid
-        value: '{0CCE922B-69AE-11D9-BED3-505054503030}'
-      - case sensitive: false
-        op: is
-        path: Event/EventData/SubcategoryGuid
-        value: '{0CCE9240-69AE-11D9-BED3-505054503030}'
-      - case sensitive: false
-        op: is
-        path: Event/EventData/SubcategoryGuid
         value: '{0CCE9210-69AE-11D9-BED3-505054503030}'
       - case sensitive: false
         op: is
@@ -37,7 +25,15 @@ detect:
       - case sensitive: false
         op: is
         path: Event/EventData/SubcategoryGuid
+        value: '{0CCE9215-69AE-11D9-BED3-505054503030}'
+      - case sensitive: false
+        op: is
+        path: Event/EventData/SubcategoryGuid
         value: '{0CCE921B-69AE-11D9-BED3-505054503030}'
+      - case sensitive: false
+        op: is
+        path: Event/EventData/SubcategoryGuid
+        value: '{0CCE922B-69AE-11D9-BED3-505054503030}'
       - case sensitive: false
         op: is
         path: Event/EventData/SubcategoryGuid
@@ -62,6 +58,10 @@ detect:
         op: is
         path: Event/EventData/SubcategoryGuid
         value: '{0CCE923F-69AE-11D9-BED3-505054503030}'
+      - case sensitive: false
+        op: is
+        path: Event/EventData/SubcategoryGuid
+        value: '{0CCE9240-69AE-11D9-BED3-505054503030}'
       - case sensitive: false
         op: is
         path: Event/EventData/SubcategoryGuid
