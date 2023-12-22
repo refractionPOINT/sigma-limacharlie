@@ -10,7 +10,7 @@ detect:
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
-      value: \System\CurrentControlSet\Control\Lsa\
+      value: \System\CurrentControlSet\Control\Lsa
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
