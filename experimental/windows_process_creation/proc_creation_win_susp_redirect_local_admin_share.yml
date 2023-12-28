@@ -13,10 +13,12 @@ detect:
       value: '>'
     - op: or
       rules:
-      - op: is
+      - case sensitive: false
+        op: contains
         path: event/COMMAND_LINE
         value: \\\\127.0.0.1\\admin$\\
-      - op: is
+      - case sensitive: false
+        op: contains
         path: event/COMMAND_LINE
         value: \\\\localhost\\admin$\\
 respond:
