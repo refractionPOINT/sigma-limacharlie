@@ -1,0 +1,68 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \chisel.exe
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'exe client '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'exe server '
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: -socks5
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: -reverse
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' r:'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ':127.0.0.1:'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '-tls-skip-verify '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: :socks
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects usage of the Chisel tunneling tool via the commandline arguments
+    falsepositives:
+    - Some false positives may occur with other tools with similar commandlines
+    level: high
+    references:
+    - https://github.com/jpillora/chisel/
+    - https://arcticwolf.com/resources/blog/lorenz-ransomware-chiseling-in/
+    - https://blog.sekoia.io/lucky-mouse-incident-response-to-detection-engineering/
+    tags:
+    - attack.command_and_control
+    - attack.t1090.001
+  name: PUA - Chisel Tunneling Tool Execution
+

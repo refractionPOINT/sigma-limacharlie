@@ -1,0 +1,173 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: .doc.lnk
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: .docx.lnk
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: .xls.lnk
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: .xlsx.lnk
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: .ppt.lnk
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: .pptx.lnk
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: .rtf.lnk
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: .pdf.lnk
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: .txt.lnk
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: .doc.js
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: .docx.js
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: .xls.js
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: .xlsx.js
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: .ppt.js
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: .pptx.js
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: .rtf.js
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: .pdf.js
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: .txt.js
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: .doc.lnk
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: .docx.lnk
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: .xls.lnk
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: .xlsx.lnk
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: .ppt.lnk
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: .pptx.lnk
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: .rtf.lnk
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: .pdf.lnk
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: .txt.lnk
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: .doc.js
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: .docx.js
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: .xls.js
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: .xlsx.js
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: .ppt.js
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: .pptx.js
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: .rtf.js
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: .pdf.js
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: .txt.js
+respond:
+- action: report
+  metadata:
+    author: frack113, Nasreddine Bencherchali (Nextron Systems)
+    description: Detect execution of suspicious double extension files in ParentCommandLine
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.virustotal.com/gui/file/7872d8845a332dce517adae9c3389fde5313ff2fed38c2577f3b498da786db68/behavior
+    - https://symantec-enterprise-blogs.security.com/blogs/threat-intelligence/bluebottle-banks-targeted-africa
+    tags:
+    - attack.defense_evasion
+    - attack.t1036.007
+  name: Suspicious Parent Double Extension File Execution
+

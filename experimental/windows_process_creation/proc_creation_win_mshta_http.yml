@@ -1,0 +1,51 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \mshta.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: MSHTA.EXE
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: http://
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: https://
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ftp://
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects execution of the "mshta" utility with an argument containing
+      the "http" keyword, which could indicate that an attacker is executing a remotely
+      hosted malicious hta file
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.trendmicro.com/en_us/research/22/e/avoslocker-ransomware-variant-abuses-driver-file-to-disable-anti-Virus-scans-log4shell.html
+    tags:
+    - attack.defense_evasion
+    - attack.execution
+    - attack.t1218.005
+  name: Remotely Hosted HTA File Executed Via Mshta.EXE
+

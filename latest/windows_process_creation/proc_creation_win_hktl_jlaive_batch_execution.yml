@@ -1,0 +1,83 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \cmd.exe
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/COMMAND_LINE
+        value: .bat
+    - op: or
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \xcopy.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: powershell.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .bat.exe
+      - op: and
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \xcopy.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: pwsh.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .bat.exe
+      - op: and
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \attrib.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: +s
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: +h
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .bat.exe
+respond:
+- action: report
+  metadata:
+    author: Jose Luis Sanchez Martinez (@Joseliyo_Jstnk)
+    description: Detects the use of Jlaive to execute assemblies in a copied PowerShell
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://jstnk9.github.io/jstnk9/research/Jlaive-Antivirus-Evasion-Tool
+    - https://web.archive.org/web/20220514073704/https://github.com/ch2sh/Jlaive
+    tags:
+    - attack.execution
+    - attack.t1059.003
+  name: HackTool - Jlaive In-Memory Assembly Execution
+

@@ -1,0 +1,41 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: wmic.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \WMIC.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' qfe'
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects the execution of wmic with the "qfe" flag in order to obtain
+      information about installed hotfix updates on the system. This is often used
+      by pentester and attacker enumeration scripts
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://github.com/carlospolop/PEASS-ng/blob/fa0f2e17fbc1d86f1fd66338a40e665e7182501d/winPEAS/winPEASbat/winPEAS.bat
+    - https://sushant747.gitbooks.io/total-oscp-guide/content/privilege_escalation_windows.html
+    tags:
+    - attack.execution
+    - attack.t1047
+  name: Windows Hotfix Updates Reconnaissance Via Wmic.EXE
+

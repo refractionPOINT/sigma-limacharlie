@@ -1,0 +1,47 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/ORIGINAL_FILE_NAME
+      value: sdelete.exe
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -h'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -c'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -z'
+      - case sensitive: false
+        op: matches
+        path: event/COMMAND_LINE
+        re: .*\ /\?.*
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Detects the use of SDelete to erase a file not the free space
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1485/T1485.md
+    tags:
+    - attack.impact
+    - attack.t1485
+  name: Potential File Overwrite Via Sysinternals SDelete
+

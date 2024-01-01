@@ -1,0 +1,62 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: sc.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \sc.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' stop '
+    - not: true
+      op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/COMMAND_LINE
+          value: sc  stop KSCWebConsoleMessageQueue
+        - case sensitive: false
+          op: is
+          path: event/COMMAND_LINE
+          value: sc  stop LGHUBUpdaterService
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/USER_NAME
+          value: AUTHORI
+        - case sensitive: false
+          op: contains
+          path: event/USER_NAME
+          value: AUTORI
+respond:
+- action: report
+  metadata:
+    author: Jakob Weinzettl, oscd.community, Nasreddine Bencherchali (Nextron Systems)
+    description: Detects the stopping of a Windows service
+    falsepositives:
+    - There are many legitimate reasons to stop a service. This rule isn't looking
+      for any suspicious behaviour in particular. Filter legitimate activity accordingly
+    level: low
+    tags:
+    - attack.impact
+    - attack.t1489
+  name: Stop Windows Service Via Sc.EXE
+

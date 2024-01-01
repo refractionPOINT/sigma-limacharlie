@@ -1,0 +1,41 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \regini.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: REGINI.EXE
+    - not: true
+      op: matches
+      path: event/COMMAND_LINE
+      re: :[^ \\]
+respond:
+- action: report
+  metadata:
+    author: Eli Salem, Sander Wiebing, oscd.community
+    description: Detects the execution of regini.exe which can be used to modify registry
+      keys, the changes are imported from one or more text files.
+    falsepositives:
+    - Legitimate modification of keys
+    level: low
+    references:
+    - https://lolbas-project.github.io/lolbas/Binaries/Regini/
+    - https://gist.github.com/api0cradle/cdd2d0d0ec9abb686f0e89306e277b8f
+    - https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/regini
+    tags:
+    - attack.t1112
+    - attack.defense_evasion
+  name: Registry Modification Via Regini.EXE
+

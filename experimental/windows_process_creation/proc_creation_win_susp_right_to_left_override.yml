@@ -1,0 +1,34 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - case sensitive: false
+    op: contains
+    path: event/COMMAND_LINE
+    value: "\u202E"
+respond:
+- action: report
+  metadata:
+    author: Micah Babinski, @micahbabinski
+    description: 'Detects the presence of the "u202+E" character, which causes a terminal,
+      browser, or operating system to render text in a right-to-left sequence.
+
+      This is used as an obfuscation and masquerading techniques.
+
+      '
+    falsepositives:
+    - Commandlines that contains scriptures such as arabic or hebrew might make use
+      of this character
+    level: high
+    references:
+    - https://redcanary.com/blog/right-to-left-override/
+    - https://www.malwarebytes.com/blog/news/2014/01/the-rtlo-method
+    - https://unicode-explorer.com/c/202E
+    tags:
+    - attack.defense_evasion
+    - attack.t1036.002
+  name: Potential Defense Evasion Via Right-to-Left Override
+

@@ -1,0 +1,412 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \onenote.exe
+      - op: or
+        rules:
+        - op: or
+          rules:
+          - op: or
+            rules:
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: bitsadmin.exe
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: CertOC.exe
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: CertUtil.exe
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: Cmd.Exe
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: CMSTP.EXE
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: cscript.exe
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: curl.exe
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: HH.exe
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: IEExec.exe
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: InstallUtil.exe
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: javaw.exe
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: Microsoft.Workflow.Compiler.exe
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: msdt.exe
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: MSHTA.EXE
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: msiexec.exe
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: Msxsl.exe
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: odbcconf.exe
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: pcalua.exe
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: PowerShell.EXE
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: RegAsm.exe
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: RegSvcs.exe
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: REGSVR32.exe
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: RUNDLL32.exe
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: schtasks.exe
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: ScriptRunner.exe
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: wmic.exe
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: WorkFolders.exe
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: wscript.exe
+          - op: or
+            rules:
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \AppVLP.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \bash.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \bitsadmin.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \certoc.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \certutil.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \cmd.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \cmstp.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \control.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \cscript.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \curl.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \forfiles.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \hh.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \ieexec.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \installutil.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \javaw.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \mftrace.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \Microsoft.Workflow.Compiler.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \msbuild.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \msdt.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \mshta.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \msidb.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \msiexec.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \msxsl.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \odbcconf.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \pcalua.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \powershell.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \pwsh.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \regasm.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \regsvcs.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \regsvr32.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \rundll32.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \schtasks.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \scrcons.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \scriptrunner.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \sh.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \svchost.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \verclsid.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \wmic.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \workfolders.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \wscript.exe
+        - op: and
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \explorer.exe
+          - op: or
+            rules:
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: .hta
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: .vb
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: .wsh
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: .js
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: .ps
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: .scr
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: .pif
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: .bat
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: .cmd
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/FILE_PATH
+            value: \AppData\
+          - case sensitive: false
+            op: contains
+            path: event/FILE_PATH
+            value: \Users\Public\
+          - case sensitive: false
+            op: contains
+            path: event/FILE_PATH
+            value: \ProgramData\
+          - case sensitive: false
+            op: contains
+            path: event/FILE_PATH
+            value: \Windows\Tasks\
+          - case sensitive: false
+            op: contains
+            path: event/FILE_PATH
+            value: \Windows\Temp\
+          - case sensitive: false
+            op: contains
+            path: event/FILE_PATH
+            value: \Windows\System32\Tasks\
+    - not: true
+      op: or
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \AppData\Local\Microsoft\Teams\current\Teams.exe
+        - case sensitive: false
+          op: ends with
+          path: event/COMMAND_LINE
+          value: -Embedding
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: \AppData\Local\Microsoft\OneDrive\
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \FileCoAuth.exe
+        - case sensitive: false
+          op: ends with
+          path: event/COMMAND_LINE
+          value: -Embedding
+respond:
+- action: report
+  metadata:
+    author: Tim Rauch (Nextron Systems), Nasreddine Bencherchali (Nextron Systems),
+      Elastic (idea)
+    description: Detects suspicious child processes of the Microsoft OneNote application.
+      This may indicate an attempt to execute malicious embedded objects from a .one
+      file.
+    falsepositives:
+    - File located in the AppData folder with trusted signature
+    level: high
+    references:
+    - https://github.com/elastic/protections-artifacts/commit/746086721fd385d9f5c6647cada1788db4aea95f#diff-e34e43eb5666427602ddf488b2bf3b545bd9aae81af3e6f6c7949f9652abdf18
+    - https://micahbabinski.medium.com/detecting-onenote-one-malware-delivery-407e9321ecf0
+    tags:
+    - attack.t1566
+    - attack.t1566.001
+    - attack.initial_access
+  name: Suspicious Microsoft OneNote Child Process
+

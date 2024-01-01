@@ -1,0 +1,47 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \certoc.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: CertOC.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -LoadDLL '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /LoadDLL '
+respond:
+- action: report
+  metadata:
+    author: Austin Songer @austinsonger
+    description: Detects when a user installs certificates by using CertOC.exe to
+      loads the target DLL file.
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://twitter.com/sblmsrsn/status/1445758411803480072?s=20
+    - https://github.com/elastic/protections-artifacts/commit/746086721fd385d9f5c6647cada1788db4aea95f#diff-fe98e74189873d6df72a15df2eaa0315c59ba9cdaca93ecd68afc4ea09194ef2
+    - https://lolbas-project.github.io/lolbas/Binaries/Certoc/
+    tags:
+    - attack.defense_evasion
+    - attack.t1218
+  name: DLL Loaded via CertOC.EXE
+

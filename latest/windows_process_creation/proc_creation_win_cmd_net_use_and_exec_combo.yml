@@ -1,0 +1,73 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: \cmd.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: Cmd.EXE
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' net use http'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '& start /b '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \DavWWWRoot\
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '.exe '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '.dll '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '.bat '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '.vbs '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '.ps1 '
+respond:
+- action: report
+  metadata:
+    author: pH-T (Nextron Systems)
+    description: Detects the execution of the "net use" command to mount a WebDAV
+      server and then immediately execute some content in it. As seen being used in
+      malicious LNK files
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://twitter.com/ShadowChasing1/status/1552595370961944576
+    - https://www.virustotal.com/gui/file/a63376ee1dba76361df73338928e528ca5b20171ea74c24581605366dcaa0104/behavior
+    tags:
+    - attack.execution
+    - attack.t1059.001
+  name: Suspicious File Execution From Internet Hosted WebDav Share
+

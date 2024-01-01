@@ -1,0 +1,121 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \net.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \net1.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: net.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: net1.exe
+    - op: or
+      rules:
+      - op: and
+        rules:
+        - op: and
+          rules:
+          - op: or
+            rules:
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: ' group '
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: ' localgroup '
+          - op: or
+            rules:
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: domain admins
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: ' administrator'
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: ' administrateur'
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: enterprise admins
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: Exchange Trusted Subsystem
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: Remote Desktop Users
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: "Utilisateurs du Bureau \xE0 distance"
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: Usuarios de escritorio remoto
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: ' /do'
+        - case sensitive: false
+          not: true
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /add'
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' accounts '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /do'
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems), omkar72, @svch0st, Nasreddine Bencherchali
+      (Nextron Systems)
+    description: Detects suspicious reconnaissance command line activity on Windows
+      systems using Net.EXE
+    falsepositives:
+    - Inventory tool runs
+    - Administrative activity
+    level: medium
+    references:
+    - https://redcanary.com/blog/how-one-hospital-thwarted-a-ryuk-ransomware-outbreak/
+    - https://thedfirreport.com/2020/10/18/ryuk-in-5-hours/
+    - https://research.nccgroup.com/2022/08/19/back-in-black-unlocking-a-lockbit-3-0-ransomware-attack/
+    tags:
+    - attack.discovery
+    - attack.t1087.001
+    - attack.t1087.002
+  name: Suspicious Group And Account Reconnaissance Activity Using Net.EXE
+

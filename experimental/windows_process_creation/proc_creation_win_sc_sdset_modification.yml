@@ -1,0 +1,45 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \sc.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: sc.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: sdset
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detection of sc.exe utility adding a new service with special permission
+      which hides that service.
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://blog.talosintelligence.com/2021/10/threat-hunting-in-large-datasets-by.html
+    - https://www.sans.org/blog/red-team-tactics-hiding-windows-services/
+    - https://twitter.com/Alh4zr3d/status/1580925761996828672
+    - https://twitter.com/0gtweet/status/1628720819537936386
+    - https://itconnect.uw.edu/tools-services-support/it-systems-infrastructure/msinf/other-help/understanding-sddl-syntax/
+    tags:
+    - attack.persistence
+    - attack.defense_evasion
+    - attack.privilege_escalation
+    - attack.t1574.011
+  name: Service Security Descriptor Tampering Via Sc.EXE
+

@@ -1,0 +1,85 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ^^
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ^|^
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ',;,'
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ;;;;
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ;; ;;
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: (,(,
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: '%COMSPEC:~'
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' c^m^d'
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ^c^m^d
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' c^md'
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' cm^d'
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ^cm^d
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' s^et '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' s^e^t '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' se^t '
+respond:
+- action: report
+  metadata:
+    author: frack113, Nasreddine Bencherchali (Nextron Systems)
+    description: Detects possible payload obfuscation via the commandline
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://www.fireeye.com/content/dam/fireeye-www/blog/pdfs/dosfuscation-report.pdf
+    - https://github.com/danielbohannon/Invoke-DOSfuscation
+    tags:
+    - attack.execution
+    - attack.t1059
+  name: Potential Dosfuscation Activity
+

@@ -1,0 +1,40 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \rundll32.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: RUNDLL32.EXE
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: InstallScreenSaver
+respond:
+- action: report
+  metadata:
+    author: Christopher Peacock @securepeacock, SCYTHE @scythe_io, TactiKoolSec
+    description: An attacker may execute an application as a SCR File using rundll32.exe
+      desk.cpl,InstallScreenSaver
+    falsepositives:
+    - Legitimate installation of a new screensaver
+    level: medium
+    references:
+    - https://lolbas-project.github.io/lolbas/Libraries/Desk/
+    - https://github.com/redcanaryco/atomic-red-team/blob/0f229c0e42bfe7ca736a14023836d65baa941ed2/atomics/T1218.011/T1218.011.md#atomic-test-13---rundll32-with-deskcpl
+    tags:
+    - attack.t1218.011
+    - attack.defense_evasion
+  name: Rundll32 InstallScreenSaver Execution
+

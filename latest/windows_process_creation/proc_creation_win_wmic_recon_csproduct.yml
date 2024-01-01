@@ -1,0 +1,41 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \wmic.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: wmic.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: csproduct
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects the execution of WMIC with the "csproduct" which is used
+      to obtain information such as hardware models and vendor information
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://jonconwayuk.wordpress.com/2014/01/31/wmic-csproduct-using-wmi-to-identify-make-and-model-of-hardware/
+    - https://www.uptycs.com/blog/kuraystealer-a-bandit-using-discord-webhooks
+    tags:
+    - attack.execution
+    - attack.t1047
+    - car.2016-03-002
+  name: Hardware Model Reconnaissance Via Wmic.EXE
+

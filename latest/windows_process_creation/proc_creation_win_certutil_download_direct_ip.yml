@@ -1,0 +1,95 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \certutil.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: CertUtil.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'urlcache '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'verifyctl '
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ://1
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ://2
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ://3
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ://4
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ://5
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ://6
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ://7
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ://8
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ://9
+    - case sensitive: false
+      not: true
+      op: contains
+      path: event/COMMAND_LINE
+      value: ://7-
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects the execution of certutil with certain flags that allow the
+      utility to download files from direct IPs.
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/certutil
+    - https://forensicitguy.github.io/agenttesla-vba-certutil-download/
+    - https://news.sophos.com/en-us/2021/04/13/compromised-exchange-server-hosting-cryptojacker-targeting-other-exchange-servers/
+    - https://twitter.com/egre55/status/1087685529016193025
+    - https://lolbas-project.github.io/lolbas/Binaries/Certutil/
+    - https://twitter.com/_JohnHammond/status/1708910264261980634
+    tags:
+    - attack.defense_evasion
+    - attack.t1027
+  name: Suspicious File Downloaded From Direct IP Via Certutil.EXE
+

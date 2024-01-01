@@ -1,0 +1,33 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/FILE_PATH
+      value: C:\Windows\PSEXESVC.exe
+    - case sensitive: false
+      op: is
+      path: event/ORIGINAL_FILE_NAME
+      value: psexesvc.exe
+respond:
+- action: report
+  metadata:
+    author: Thomas Patzke, Romaissa Adjailia, Florian Roth (Nextron Systems)
+    description: Detects launch of the PSEXESVC service, which means that this system
+      was the target of a psexec remote execution
+    falsepositives:
+    - Legitimate administrative tasks
+    level: medium
+    references:
+    - https://docs.microsoft.com/en-us/sysinternals/downloads/psexec
+    - https://www.youtube.com/watch?v=ro2QuZTIMBM
+    tags:
+    - attack.execution
+  name: PsExec Service Execution
+

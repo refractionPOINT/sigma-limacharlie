@@ -1,0 +1,69 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \reg.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: reg.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' import '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: C:\Users\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '%temp%'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '%tmp%'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '%appdata%'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \AppData\Local\Temp\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: C:\Windows\Temp\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: C:\ProgramData\
+respond:
+- action: report
+  metadata:
+    author: frack113, Nasreddine Bencherchali
+    description: Detects the import of '.reg' files from suspicious paths using the
+      'reg.exe' utility
+    falsepositives:
+    - Legitimate import of keys
+    level: medium
+    references:
+    - https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/reg-import
+    tags:
+    - attack.t1112
+    - attack.defense_evasion
+  name: Potential Suspicious Registry File Imported Via Reg.EXE
+

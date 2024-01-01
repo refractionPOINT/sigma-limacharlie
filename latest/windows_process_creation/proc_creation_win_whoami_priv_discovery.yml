@@ -1,0 +1,47 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \whoami.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: whoami.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /priv'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -priv'
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects a whoami.exe executed with the /priv command line flag instructing
+      the tool to show all current user privileges. This is often used after a privilege
+      escalation attempt.
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/whoami
+    tags:
+    - attack.privilege_escalation
+    - attack.discovery
+    - attack.t1033
+  name: Security Privileges Enumeration Via Whoami.EXE
+

@@ -1,0 +1,34 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' -accepteula'
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' /accepteula'
+respond:
+- action: report
+  metadata:
+    author: Markus Neis
+    description: Detects command lines that contain the 'accepteula' flag which could
+      be a sign of execution of one of the Sysinternals tools
+    falsepositives:
+    - Legitimate use of SysInternals tools
+    - Programs that use the same command line flag
+    level: low
+    references:
+    - https://twitter.com/Moti_B/status/1008587936735035392
+    tags:
+    - attack.resource_development
+    - attack.t1588.002
+  name: Potential Execution of Sysinternals Tools
+

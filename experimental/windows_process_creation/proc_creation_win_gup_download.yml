@@ -1,0 +1,53 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \GUP.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: gup.exe
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -unzipTo '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: http
+    - case sensitive: false
+      not: true
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \notepad++.exe
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects execution of the Notepad++ updater (gup) from a process other
+      than Notepad++ to download files.
+    falsepositives:
+    - Other parent processes other than notepad++ using GUP that are not currently
+      identified
+    level: high
+    references:
+    - https://twitter.com/nas_bench/status/1535322182863179776
+    tags:
+    - attack.command_and_control
+    - attack.t1105
+  name: File Download Using Notepad++ GUP Utility
+

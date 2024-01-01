@@ -1,0 +1,54 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \gup.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \explorer.exe
+    - not: true
+      op: or
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \explorer.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \Notepad++\notepad++.exe
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/FILE_PATH
+        value: \Notepad++\updater\
+      - not: true
+        op: exists
+        path: event/COMMAND_LINE
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects execution of the Notepad++ updater (gup) to launch other
+      commands or executables
+    falsepositives:
+    - Other parent binaries using GUP not currently identified
+    level: medium
+    references:
+    - https://twitter.com/nas_bench/status/1535322445439180803
+    tags:
+    - attack.execution
+  name: Arbitrary Binary Execution Using GUP Utility
+

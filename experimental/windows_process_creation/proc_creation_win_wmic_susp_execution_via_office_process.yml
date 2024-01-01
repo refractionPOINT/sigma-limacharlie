@@ -1,0 +1,126 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \WINWORD.EXE
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \EXCEL.EXE
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \POWERPNT.exe
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \MSPUB.exe
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \VISIO.exe
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \MSACCESS.EXE
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \EQNEDT32.EXE
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \ONENOTE.EXE
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \wordpad.exe
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \wordview.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \wbem\WMIC.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: wmic.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: process
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: create
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: call
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: regsvr32
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: rundll32
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: msiexec
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: mshta
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: verclsid
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: wscript
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: cscript
+respond:
+- action: report
+  metadata:
+    author: Vadim Khrykov, Cyb3rEng
+    description: Office application called wmic to proxye execution through a LOLBIN
+      process. This is often used to break suspicious parent-child chain (Office app
+      spawns LOLBin).
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://thedfirreport.com/2021/03/29/sodinokibi-aka-revil-ransomware/
+    - https://github.com/vadim-hunter/Detection-Ideas-Rules/blob/02bcbfc2bfb8b4da601bb30de0344ae453aa1afe/Threat%20Intelligence/The%20DFIR%20Report/20210329_Sodinokibi_(aka_REvil)_Ransomware.yaml
+    tags:
+    - attack.t1204.002
+    - attack.t1047
+    - attack.t1218.010
+    - attack.execution
+    - attack.defense_evasion
+  name: Suspicious WMIC Execution Via Office Process
+

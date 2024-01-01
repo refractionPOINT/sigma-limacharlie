@@ -1,0 +1,69 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -n '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /n '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Nul
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /f '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -f '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /q '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -q '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ping
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: 'del '
+respond:
+- action: report
+  metadata:
+    author: Ilya Krestinichev
+    description: Detects a method often used by ransomware. Which combines the "ping"
+      to wait a couple of seconds and then "del" to delete the file in question. Its
+      used to hide the file responsible for the initial infection for example
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://blog.sygnia.co/kaseya-ransomware-supply-chain-attack
+    - https://media.kasperskycontenthub.com/wp-content/uploads/sites/43/2022/06/23093553/Common-TTPs-of-the-modern-ransomware_low-res.pdf
+    - https://www.acronis.com/en-us/blog/posts/lockbit-ransomware/
+    - https://symantec-enterprise-blogs.security.com/blogs/threat-intelligence/blackbyte-exbyte-ransomware
+    tags:
+    - attack.defense_evasion
+    - attack.t1070.004
+  name: Suspicious Ping/Del Command Combination
+

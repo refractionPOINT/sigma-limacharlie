@@ -1,0 +1,370 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/ORIGINAL_FILE_NAME
+      value: SharpView.exe
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \SharpView.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Add-RemoteConnection
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Convert-ADName
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ConvertFrom-SID
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ConvertFrom-UACValue
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Convert-SidToName
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Export-PowerViewCSV
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Find-DomainObjectPropertyOutlier
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Find-DomainProcess
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Find-DomainShare
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Find-DomainUserEvent
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Find-DomainUserLocation
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Find-ForeignGroup
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Find-ForeignUser
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Find-GPOComputerAdmin
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Find-GPOLocation
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Find-Interesting
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Find-LocalAdminAccess
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Find-ManagedSecurityGroups
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-CachedRDPConnection
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-DFSshare
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-DomainComputer
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-DomainController
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-DomainDFSShare
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-DomainDNSRecord
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-DomainFileServer
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-DomainForeign
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-DomainGPO
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-DomainGroup
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-DomainGUIDMap
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-DomainManagedSecurityGroup
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-DomainObject
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-DomainOU
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-DomainPolicy
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-DomainSID
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-DomainSite
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-DomainSPNTicket
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-DomainSubnet
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-DomainTrust
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-DomainUserEvent
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-ForestDomain
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-ForestGlobalCatalog
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-ForestTrust
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-GptTmpl
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-GroupsXML
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-LastLoggedOn
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-LoggedOnLocal
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-NetComputer
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-NetDomain
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-NetFileServer
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-NetForest
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-NetGPO
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-NetGroupMember
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-NetLocalGroup
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-NetLoggedon
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-NetOU
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-NetProcess
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-NetRDPSession
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-NetSession
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-NetShare
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-NetSite
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-NetSubnet
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-NetUser
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-PathAcl
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-PrincipalContext
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-RegistryMountedDrive
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-RegLoggedOn
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-WMIRegCachedRDPConnection
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-WMIRegLastLoggedOn
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-WMIRegMountedDrive
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Get-WMIRegProxy
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Invoke-ACLScanner
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Invoke-CheckLocalAdminAccess
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Invoke-Kerberoast
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Invoke-MapDomainTrust
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Invoke-RevertToSelf
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Invoke-Sharefinder
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Invoke-UserImpersonation
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Remove-DomainObjectAcl
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Remove-RemoteConnection
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Request-SPNTicket
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Set-DomainObject
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Test-AdminAccess
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Adversaries may look for details about the network configuration
+      and settings of systems they access or through information discovery of remote
+      systems
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://github.com/tevora-threat/SharpView/
+    - https://github.com/PowerShellMafia/PowerSploit/blob/dev/Recon/PowerView.ps1
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1049/T1049.md#atomic-test-4---system-discovery-using-sharpview
+    tags:
+    - attack.discovery
+    - attack.t1049
+    - attack.t1069.002
+    - attack.t1482
+    - attack.t1135
+    - attack.t1033
+  name: HackTool - SharpView Execution
+

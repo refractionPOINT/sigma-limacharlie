@@ -1,0 +1,50 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \schtasks.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: schtasks.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'run '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Application Experience\Microsoft Compatibility Appraiser
+respond:
+- action: report
+  metadata:
+    author: Sreeman
+    description: 'Detects manual execution of the "Microsoft Compatibility Appraiser"
+      task via schtasks.
+
+      In order to trigger persistence stored in the "\AppCompatFlags\TelemetryController"
+      registry key.
+
+      '
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://www.trustedsec.com/blog/abusing-windows-telemetry-for-persistence/
+    tags:
+    - attack.persistence
+    - attack.t1053.005
+  name: Potential Persistence Via Microsoft Compatibility Appraiser
+

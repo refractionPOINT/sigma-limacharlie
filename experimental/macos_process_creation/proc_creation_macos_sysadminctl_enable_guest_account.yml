@@ -1,0 +1,38 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is mac
+  - op: and
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /sysadminctl
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' -guestAccount'
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' on'
+respond:
+- action: report
+  metadata:
+    author: Sohan G (D4rkCiph3r)
+    description: Detects attempts to enable the guest account using the sysadminctl
+      utility
+    falsepositives:
+    - Unknown
+    level: low
+    references:
+    - https://ss64.com/osx/sysadminctl.html
+    tags:
+    - attack.initial_access
+    - attack.t1078
+    - attack.t1078.001
+  name: Guest Account Enabled Via Sysadminctl
+

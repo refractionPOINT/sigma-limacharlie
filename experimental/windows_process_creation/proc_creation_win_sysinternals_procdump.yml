@@ -1,0 +1,33 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \procdump.exe
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \procdump64.exe
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects usage of the SysInternals Procdump utility
+    falsepositives:
+    - Legitimate use of procdump by a developer or administrator
+    level: medium
+    references:
+    - https://learn.microsoft.com/en-us/sysinternals/downloads/procdump
+    tags:
+    - attack.defense_evasion
+    - attack.t1036
+    - attack.t1003.001
+  name: Procdump Execution
+

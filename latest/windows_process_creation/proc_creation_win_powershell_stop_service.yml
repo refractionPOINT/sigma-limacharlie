@@ -1,0 +1,49 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: PowerShell.EXE
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: pwsh.dll
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \pwsh.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: 'Stop-Service '
+respond:
+- action: report
+  metadata:
+    author: Jakob Weinzettl, oscd.community, Nasreddine Bencherchali (Nextron Systems)
+    description: Detects the stopping of a Windows service
+    falsepositives:
+    - There are many legitimate reasons to stop a service. This rule isn't looking
+      for any suspicious behaviour in particular. Filter legitimate activity accordingly
+    level: low
+    tags:
+    - attack.impact
+    - attack.t1489
+  name: Stop Windows Service Via PowerShell Stop-Service
+

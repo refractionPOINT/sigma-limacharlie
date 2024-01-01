@@ -1,0 +1,67 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '141'
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/TaskName
+        value: \Windows\SystemRestore\SR
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/TaskName
+        value: \Windows\Windows Defender\
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/TaskName
+        value: \Windows\BitLocker
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/TaskName
+        value: \Windows\WindowsBackup\
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/TaskName
+        value: \Windows\WindowsUpdate\
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/TaskName
+        value: \Windows\UpdateOrchestrator\
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/TaskName
+        value: \Windows\ExploitGuard
+  - not: true
+    op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/UserName
+      value: AUTHORI
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/UserName
+      value: AUTORI
+  target: log
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Detects when adversaries try to stop system services or processes
+      by deleting their respective scheduled tasks in order to conduct data destructive
+      activities
+    falsepositives:
+    - Unknown
+    level: high
+    tags:
+    - attack.impact
+    - attack.t1489
+  name: Important Scheduled Task Deleted
+

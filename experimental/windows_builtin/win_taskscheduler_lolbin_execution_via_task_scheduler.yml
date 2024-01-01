@@ -1,0 +1,58 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '129'
+  - op: or
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/Path
+      value: \calc.exe
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/Path
+      value: \cscript.exe
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/Path
+      value: \mshta.exe
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/Path
+      value: \mspaint.exe
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/Path
+      value: \notepad.exe
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/Path
+      value: \regsvr32.exe
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/Path
+      value: \wscript.exe
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects the execution of Scheduled Tasks where the program being
+      run is located in a suspicious location or where it is an unusual program to
+      be run from a Scheduled Task
+    falsepositives:
+    - False positives may occur with some of the selected binaries if you have tasks
+      using them (which could be very common in your environment). Exclude all the
+      specific trusted tasks before using this rule
+    level: medium
+    references:
+    - Internal Research
+    tags:
+    - attack.persistence
+    - attack.t1053.005
+  name: Scheduled Task Executed Uncommon LOLBIN
+

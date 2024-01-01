@@ -1,0 +1,75 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \Regsvcs.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \Regasm.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: RegSvcs.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: RegAsm.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .dat
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .gif
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .jpeg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .jpg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .png
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .txt
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects potentially suspicious execution of the Regasm/Regsvcs utilities
+      with an uncommon extension.
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://www.fortiguard.com/threat-signal-report/4718?s=09
+    - https://lolbas-project.github.io/lolbas/Binaries/Regasm/
+    - https://lolbas-project.github.io/lolbas/Binaries/Regsvcs/
+    tags:
+    - attack.defense_evasion
+    - attack.t1218.009
+  name: Potentially Suspicious Execution Of Regasm/Regsvcs With Uncommon Extension
+

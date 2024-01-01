@@ -1,0 +1,73 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cmd.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: Cmd.Exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'del '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'erase '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /f'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /s'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /q'
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: 'Detects execution of the builtin "del"/"erase" commands in order
+      to delete files.
+
+      Adversaries may delete files left behind by the actions of their intrusion activity.
+
+      Malware, tools, or other non-native files dropped or created on a system by
+      an adversary may leave traces to indicate to what was done within a network
+      and how.
+
+      Removal of these files can occur during an intrusion, or as part of a post-intrusion
+      process to minimize the adversary''s footprint.
+
+      '
+    falsepositives:
+    - False positives levels will differ Depending on the environment. You can use
+      a combination of ParentImage and other keywords from the CommandLine field to
+      filter legitimate activity
+    level: low
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1070.004/T1070.004.md
+    - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/erase
+    tags:
+    - attack.defense_evasion
+    - attack.t1070.004
+  name: File Deletion Via Del
+

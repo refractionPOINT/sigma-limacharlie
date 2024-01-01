@@ -1,0 +1,38 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \rundll32.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: RUNDLL32.EXE
+    - op: matches
+      path: event/COMMAND_LINE
+      re: '[Rr][Uu][Nn][Dd][Ll][Ll]32(\.[Ee][Xx][Ee])? \S+?\w:\S+?:'
+respond:
+- action: report
+  metadata:
+    author: Harjot Singh, '@cyb3rjy0t'
+    description: Detects execution of rundll32 where the DLL being called is stored
+      in an Alternate Data Stream (ADS).
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://lolbas-project.github.io/lolbas/Binaries/Rundll32
+    tags:
+    - attack.defense_evasion
+    - attack.t1564.004
+  name: Potential Rundll32 Execution With DLL Stored In ADS
+

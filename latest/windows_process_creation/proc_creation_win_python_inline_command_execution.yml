@@ -1,0 +1,75 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: python.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: python.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: python3.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: python2.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -c'
+    - not: true
+      op: or
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: starts with
+          path: event/PARENT/FILE_PATH
+          value: C:\Program Files\Python
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \python.exe
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: -E -s -m ensurepip -U --default-pip
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \AppData\Local\Programs\Microsoft VS Code\Code.exe
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects execution of python using the "-c" flag. This is could be
+      used as a way to launch a reverse shell or execute live python code.
+    falsepositives:
+    - Python libraries that use a flag starting with "-c". Filter according to your
+      environment
+    level: medium
+    references:
+    - https://docs.python.org/3/using/cmdline.html#cmdoption-c
+    - https://www.revshells.com/
+    - https://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet
+    tags:
+    - attack.execution
+    - attack.t1059
+  name: Python Inline Command Execution
+

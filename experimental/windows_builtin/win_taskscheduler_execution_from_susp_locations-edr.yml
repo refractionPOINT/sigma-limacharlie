@@ -1,0 +1,54 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '129'
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Path
+        value: C:\Windows\Temp\
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Path
+        value: \AppData\Local\Temp\
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Path
+        value: \Desktop\
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Path
+        value: \Downloads\
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Path
+        value: \Users\Public\
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Path
+        value: C:\Temp\
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects the execution of Scheduled Tasks where the Program being
+      run is located in a suspicious location or it's an unusale program to be run
+      from a Scheduled Task
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - Internal Research
+    tags:
+    - attack.persistence
+    - attack.t1053.005
+  name: Scheduled Task Executed From A Suspicious Location
+

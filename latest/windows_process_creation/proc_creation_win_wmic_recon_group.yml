@@ -1,0 +1,48 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \wmic.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: wmic.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' group'
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: 'Detects the execution of "wmic" with the "group" flag.
+
+      Adversaries may attempt to find local system groups and permission settings.
+
+      The knowledge of local system permission groups can help adversaries determine
+      which groups exist and which users belong to a particular group.
+
+      Adversaries may use this information to determine which users have elevated
+      permissions, such as the users found within the local administrators group.
+
+      '
+    falsepositives:
+    - Unknown
+    level: low
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1069.001/T1069.001.md
+    tags:
+    - attack.discovery
+    - attack.t1069.001
+  name: Local Groups Reconnaissance Via Wmic.EXE
+

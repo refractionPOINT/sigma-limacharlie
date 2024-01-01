@@ -1,0 +1,46 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \whoami.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: whoami.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /groups'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -groups'
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects the execution of whoami.exe with the /group command line
+      flag to show group membership for the current user, account type, security identifiers
+      (SID), and attributes.
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/whoami
+    tags:
+    - attack.discovery
+    - attack.t1033
+  name: Group Membership Reconnaissance Via Whoami.EXE
+

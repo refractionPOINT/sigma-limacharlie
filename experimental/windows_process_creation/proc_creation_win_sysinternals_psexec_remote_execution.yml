@@ -1,0 +1,43 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: accepteula
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' -u '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' -p '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' \\\\'
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems), Nasreddine Bencherchali (Nextron Systems)
+    description: Detects potential psexec command that initiate execution on a remote
+      systems via common commandline flags used by the utility
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://docs.microsoft.com/en-us/sysinternals/downloads/psexec
+    - https://www.poweradmin.com/paexec/
+    - https://www.fireeye.com/blog/threat-research/2020/10/kegtap-and-singlemalt-with-a-ransomware-chaser.html
+    tags:
+    - attack.resource_development
+    - attack.t1587.001
+  name: Potential PsExec Remote Execution
+

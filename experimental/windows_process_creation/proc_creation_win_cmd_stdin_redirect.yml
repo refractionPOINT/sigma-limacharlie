@@ -1,0 +1,40 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: Cmd.Exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cmd.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: <
+respond:
+- action: report
+  metadata:
+    author: frack113, Nasreddine Bencherchali (Nextron Systems)
+    description: Detect the use of "<" to read and potentially execute a file via
+      cmd.exe
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/40b77d63808dd4f4eafb83949805636735a1fd15/atomics/T1059.003/T1059.003.md
+    - https://web.archive.org/web/20220306121156/https://www.x86matthew.com/view_post?id=ntdll_pipe
+    tags:
+    - attack.execution
+    - attack.t1059.003
+  name: Read Contents From Stdin Via Cmd.EXE
+

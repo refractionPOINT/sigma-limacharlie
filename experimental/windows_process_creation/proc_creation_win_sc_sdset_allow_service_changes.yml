@@ -1,0 +1,70 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \sc.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: sc.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: sdset
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: A;
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ;IU
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ;SU
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ;BA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ;SY
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ;WD
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects suspicious DACL modifications to allow access to a service
+      from a suspicious trustee. This can be used to override access restrictions
+      set by previous ACLs.
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://twitter.com/0gtweet/status/1628720819537936386
+    - https://itconnect.uw.edu/tools-services-support/it-systems-infrastructure/msinf/other-help/understanding-sddl-syntax/
+    - https://learn.microsoft.com/en-us/windows/win32/secauthz/sid-strings
+    tags:
+    - attack.persistence
+    - attack.t1543.003
+  name: Allow Service Access Using Security Descriptor Tampering Via Sc.EXE
+

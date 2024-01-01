@@ -1,0 +1,41 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: wmic.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \WMIC.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: /Namespace:\\\\root\\Microsoft\\Windows\\Defender
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Detects potential tampering with Windows Defender settings such as
+      adding exclusion using wmic
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/5c1e6f1b4fafd01c8d1ece85f510160fc1275fbf/atomics/T1562.001/T1562.001.md
+    - https://www.bleepingcomputer.com/news/security/gootkit-malware-bypasses-windows-defender-by-setting-path-exclusions/
+    - https://www.bleepingcomputer.com/news/security/iobit-forums-hacked-to-spread-ransomware-to-its-members/
+    tags:
+    - attack.credential_access
+    - attack.t1546.008
+  name: Potential Windows Defender Tampering Via Wmic.EXE
+

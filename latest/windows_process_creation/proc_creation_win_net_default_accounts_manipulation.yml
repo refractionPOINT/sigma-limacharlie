@@ -1,0 +1,181 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \net.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \net1.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: net.exe
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: net1.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' user '
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: " J\xE4rjestelm\xE4nvalvoja "
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' Rendszergazda '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: " \u0410\u0434\u043C\u0438\u043D\u0438\u0441\u0442\u0440\u0430\u0442\
+            \u043E\u0440 "
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' Administrateur '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' Administrador '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: " Administrat\xF6r "
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' Administrator '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' guest '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' DefaultAccount '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: " \"J\xE4rjestelm\xE4nvalvoja\" "
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' "Rendszergazda" '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: " \"\u0410\u0434\u043C\u0438\u043D\u0438\u0441\u0442\u0440\u0430\u0442\
+            \u043E\u0440\" "
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' "Administrateur" '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' "Administrador" '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: " \"Administrat\xF6r\" "
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' "Administrator" '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' "guest" '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' "DefaultAccount" '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: " 'J\xE4rjestelm\xE4nvalvoja' "
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' ''Rendszergazda'' '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: " '\u0410\u0434\u043C\u0438\u043D\u0438\u0441\u0442\u0440\u0430\u0442\
+            \u043E\u0440' "
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' ''Administrateur'' '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' ''Administrador'' '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: " 'Administrat\xF6r' "
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' ''Administrator'' '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' ''guest'' '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' ''DefaultAccount'' '
+    - not: true
+      op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: guest
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /active no
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects suspicious manipulations of default accounts such as 'administrator'
+      and 'guest'. For example 'enable' or 'disable' accounts or change the password...etc
+    falsepositives:
+    - Some false positives could occur with the admin or guest account. It depends
+      on the scripts being used by the admins in your env. If you experience a lot
+      of FP you could reduce the level to medium
+    level: high
+    references:
+    - https://www.trellix.com/en-sg/about/newsroom/stories/threat-labs/lockergoga-ransomware-family-used-in-targeted-attacks.html
+    - https://redacted.com/blog/bianlian-ransomware-gang-gives-it-a-go/
+    - https://www.microsoft.com/security/blog/2022/09/07/profiling-dev-0270-phosphorus-ransomware-operations/
+    tags:
+    - attack.collection
+    - attack.t1560.001
+  name: Suspicious Manipulation Of Default Accounts Via Net.EXE
+

@@ -1,0 +1,80 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \nc.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \ncat.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \netcat.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -lvp '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -lvnp'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -l -v -p '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -lv -p '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -l --proxy-type http '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -vnl --exec '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -vnl -e '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' --lua-exec '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' --sh-exec '
+respond:
+- action: report
+  metadata:
+    author: frack113, Florian Roth (Nextron Systems)
+    description: Detects execution of Netcat. Adversaries may use a non-application
+      layer protocol for communication between host and C2 server or among infected
+      hosts within a network
+    falsepositives:
+    - Legitimate ncat use
+    level: high
+    references:
+    - https://nmap.org/ncat/
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1095/T1095.md
+    - https://www.revshells.com/
+    tags:
+    - attack.command_and_control
+    - attack.t1095
+  name: PUA - Netcat Suspicious Execution
+

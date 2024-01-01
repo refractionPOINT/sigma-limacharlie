@@ -1,0 +1,82 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \pwsh.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell_ise.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: PowerShell.EXE
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: pwsh.dll
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'Set-NetFirewallProfile '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -Enabled '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' False'
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -All '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Public
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Domain
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Private
+respond:
+- action: report
+  metadata:
+    author: Tim Rauch
+    description: Detects attempts to disable the Windows Firewall using PowerShell
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://www.elastic.co/guide/en/security/current/windows-firewall-disabled-via-powershell.html
+    tags:
+    - attack.defense_evasion
+    - attack.t1562
+  name: Windows Firewall Disabled via PowerShell
+

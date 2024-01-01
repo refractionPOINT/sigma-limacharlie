@@ -1,0 +1,56 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \powershell.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: PowerShell.EXE
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Set-Service
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -StartupType
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: Disabled
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: Manual
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects the use of the PowerShell "Set-Service" cmdlet to change
+      the startup type of a service to "disabled" or "manual"
+    falsepositives:
+    - False positives may occur with troubleshooting scripts
+    level: medium
+    references:
+    - https://www.virustotal.com/gui/file/38283b775552da8981452941ea74191aa0d203edd3f61fb2dee7b0aea3514955
+    tags:
+    - attack.execution
+    - attack.defense_evasion
+    - attack.t1562.001
+  name: Service StartupType Change Via PowerShell Set-Service
+

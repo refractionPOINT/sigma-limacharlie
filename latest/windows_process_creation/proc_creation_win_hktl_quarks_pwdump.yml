@@ -1,0 +1,63 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \QuarksPwDump.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/COMMAND_LINE
+        value: ' -dhl'
+      - case sensitive: false
+        op: is
+        path: event/COMMAND_LINE
+        value: ' --dump-hash-local'
+      - case sensitive: false
+        op: is
+        path: event/COMMAND_LINE
+        value: ' -dhdc'
+      - case sensitive: false
+        op: is
+        path: event/COMMAND_LINE
+        value: ' --dump-hash-domain-cached'
+      - case sensitive: false
+        op: is
+        path: event/COMMAND_LINE
+        value: ' --dump-bitlocker'
+      - case sensitive: false
+        op: is
+        path: event/COMMAND_LINE
+        value: ' -dhd '
+      - case sensitive: false
+        op: is
+        path: event/COMMAND_LINE
+        value: ' --dump-hash-domain '
+      - case sensitive: false
+        op: is
+        path: event/COMMAND_LINE
+        value: --ntds-file
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects usage of the Quarks PwDump tool via commandline arguments
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://github.com/quarkslab/quarkspwdump
+    - https://symantec-enterprise-blogs.security.com/blogs/threat-intelligence/seedworm-apt-iran-middle-east
+    tags:
+    - attack.credential_access
+    - attack.t1003.002
+  name: HackTool - Quarks PwDump Execution
+

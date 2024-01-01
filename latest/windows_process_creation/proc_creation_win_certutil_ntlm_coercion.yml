@@ -1,0 +1,45 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \certutil.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: CertUtil.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -syncwithWU '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' \\\\'
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects possible NTLM coercion via certutil using the 'syncwithWU'
+      flag
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://github.com/LOLBAS-Project/LOLBAS/issues/243
+    tags:
+    - attack.defense_evasion
+    - attack.t1218
+  name: Potential NTLM Coercion Via Certutil.EXE
+
