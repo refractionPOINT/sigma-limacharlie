@@ -26,10 +26,24 @@ detect:
         value: .sdb
       - op: or
         rules:
-        - case sensitive: false
-          op: ends with
-          path: event/COMMAND_LINE
-          value: ' -mm'
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/COMMAND_LINE
+            value: ' -c'
+          - case sensitive: false
+            op: ends with
+            path: event/COMMAND_LINE
+            value: ' -f'
+          - case sensitive: false
+            op: ends with
+            path: event/COMMAND_LINE
+            value: ' -mm'
+          - case sensitive: false
+            op: ends with
+            path: event/COMMAND_LINE
+            value: ' -t'
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
@@ -57,6 +71,7 @@ respond:
     level: medium
     references:
     - https://www.fireeye.com/blog/threat-research/2017/05/fin7-shim-databases-persistence.html
+    - https://github.com/nasbench/Misc-Research/blob/8ee690e43a379cbce8c9d61107442c36bd9be3d3/Other/Undocumented-Flags-Sdbinst.md
     tags:
     - attack.persistence
     - attack.privilege_escalation
