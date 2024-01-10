@@ -22,26 +22,6 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ' /p '
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ' -p '
-    - op: or
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ' /m '
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ' -m '
-    - op: or
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
         value: ' /c '
       - case sensitive: false
         op: contains
@@ -50,9 +30,16 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Nasreddine Bencherchali (Nextron Systems)
-    description: Execute commands and binaries from the context of "forfiles". This
-      is used as a LOLBIN for example to bypass application whitelisting.
+    author: Tim Rauch, Elastic, E.M. Anhaus (originally from Atomic Blue Detections,
+      Endgame), oscd.community
+    description: 'Detects the execution of "forfiles" with the "/c" flag.
+
+      While this is an expected behavior of the tool, it can be abused in order to
+      proxy execution through it with any binary.
+
+      Can be used to bypass application whitelisting.
+
+      '
     falsepositives:
     - Legitimate use via a batch script or by an administrator.
     level: medium
@@ -62,5 +49,5 @@ respond:
     tags:
     - attack.execution
     - attack.t1059
-  name: Use of Forfiles For Execution
+  name: Forfiles Command Execution
 

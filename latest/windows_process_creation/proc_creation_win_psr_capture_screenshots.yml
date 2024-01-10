@@ -11,16 +11,22 @@ detect:
       op: ends with
       path: event/FILE_PATH
       value: \Psr.exe
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: /start
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /start
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -start
 respond:
 - action: report
   metadata:
     author: Beyu Denis, oscd.community
-    description: The psr.exe captures desktop screenshots and saves them on the local
-      machine
+    description: Detects execution of Windows Problem Steps Recorder (psr.exe), a
+      utility used to record the user screen and clicks.
     falsepositives:
     - Unknown
     level: medium
@@ -31,5 +37,5 @@ respond:
     tags:
     - attack.collection
     - attack.t1113
-  name: Psr.exe Capture Screenshots
+  name: Screen Capture Activity Via Psr.EXE
 
