@@ -29,10 +29,20 @@ detect:
           op: is
           path: event/ORIGINAL_FILE_NAME
           value: FINDSTR.EXE
-    - case sensitive: false
-      op: ends with
-      path: event/COMMAND_LINE
-      value: .lnk
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .lnk
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .lnk"
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .lnk'
 respond:
 - action: report
   metadata:
