@@ -32,11 +32,14 @@ respond:
 - action: report
   metadata:
     author: Florian Roth (Nextron Systems)
-    description: Detects the creation of scheduled tasks in user session
+    description: Detects the creation of scheduled tasks by user accounts via the
+      "schtasks" utility.
     falsepositives:
     - Administrative activity
     - Software installation
     level: low
+    references:
+    - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/schtasks-create
     tags:
     - attack.execution
     - attack.persistence
@@ -45,5 +48,5 @@ respond:
     - attack.s0111
     - car.2013-08-001
     - stp.1u
-  name: Scheduled Task Creation
+  name: Scheduled Task Creation Via Schtasks.EXE
 

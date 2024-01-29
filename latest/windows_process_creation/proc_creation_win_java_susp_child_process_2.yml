@@ -18,6 +18,10 @@ detect:
         - case sensitive: false
           op: ends with
           path: event/FILE_PATH
+          value: \bash.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
           value: \cmd.exe
         - case sensitive: false
           op: ends with
@@ -48,6 +52,8 @@ respond:
     - Legitimate calls to system binaries
     - Company specific internal usage
     level: medium
+    references:
+    - https://www.lunasec.io/docs/blog/log4j-zero-day/
     tags:
     - attack.initial_access
     - attack.persistence

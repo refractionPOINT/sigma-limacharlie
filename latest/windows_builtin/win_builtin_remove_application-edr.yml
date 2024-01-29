@@ -14,11 +14,11 @@ detect:
       - case sensitive: false
         op: is
         path: event/EVENT/System/EventID
-        value: '11724'
+        value: '1034'
       - case sensitive: false
         op: is
         path: event/EVENT/System/EventID
-        value: '1034'
+        value: '11724'
 respond:
 - action: report
   metadata:
@@ -27,6 +27,9 @@ respond:
     falsepositives:
     - Unknown
     level: low
+    references:
+    - https://github.com/nasbench/EVTX-ETW-Resources/blob/f1b010ce0ee1b71e3024180de1a3e67f99701fe4/ETWProvidersManifests/Windows11/22H2/W11_22H2_Pro_20221220_22621.963/WEPExplorer/Microsoft-Windows-MsiServer.xml
+    - https://learn.microsoft.com/en-us/windows/win32/msi/event-logging
     tags:
     - attack.impact
     - attack.t1489

@@ -22,7 +22,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Tim Rauch
+    author: Tim Rauch, Elastic (idea)
     description: Detects the desktopimgdownldr utility being used to download a remote
       file. An adversary may use desktopimgdownldr to download arbitrary files as
       an alternative to certutil.

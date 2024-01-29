@@ -27,9 +27,6 @@ detect:
       re: ^[A-Za-z0-9]{16}$
   - op: and
     rules:
-    - not: true
-      op: exists
-      path: Event/EventData/ProcessName
     - case sensitive: false
       op: is
       path: Event/System/EventID

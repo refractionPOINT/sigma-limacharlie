@@ -15,11 +15,16 @@ respond:
 - action: report
   metadata:
     author: Daniil Yugoslavskiy, Ian Davis, oscd.community
-    description: Well-known TAP software installation. Possible preparation for data
-      exfiltration using tunnelling techniques
+    description: 'Detects the installation of a well-known TAP driver service. This
+      could be a sign of potential preparation for data exfiltration using tunnelling
+      techniques.
+
+      '
     falsepositives:
-    - Legitimate OpenVPN TAP insntallation
-    level: medium
+    - Legitimate OpenVPN TAP installation
+    level: low
+    references:
+    - https://community.openvpn.net/openvpn/wiki/ManagingWindowsTAPDrivers
     tags:
     - attack.exfiltration
     - attack.t1048

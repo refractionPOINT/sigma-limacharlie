@@ -17,8 +17,10 @@ respond:
     falsepositives:
     - Unknown
     level: high
+    references:
+    - Internal Research
     tags:
     - attack.initial_access
     - attack.t1566.001
-  name: Execution in Outlook Temp Folder
+  name: Suspicious Execution From Outlook Temporary Folder
 

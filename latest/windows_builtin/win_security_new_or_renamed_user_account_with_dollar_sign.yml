@@ -1,38 +1,57 @@
 detect:
   log type: wel
-  op: or
+  op: and
   rules:
-  - op: and
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: Event/System/EventID
+        value: '4720'
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/SamAccountName
+        value: $
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: Event/System/EventID
+        value: '4781'
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/NewTargetUserName
+        value: $
+  - not: true
+    op: and
     rules:
     - case sensitive: false
       op: is
       path: Event/System/EventID
       value: '4720'
     - case sensitive: false
-      op: contains
-      path: Event/EventData/SamAccountName
-      value: $
-  - op: and
-    rules:
-    - case sensitive: false
       op: is
-      path: Event/System/EventID
-      value: '4781'
-    - case sensitive: false
-      op: contains
-      path: Event/EventData/NewTargetUserName
-      value: $
+      path: Event/EventData/TargetUserName
+      value: HomeGroupUser$
   target: log
 respond:
 - action: report
   metadata:
     author: Ilyas Ochkov, oscd.community
-    description: Detects possible bypass EDR and SIEM via abnormal user account name.
+    description: 'Detects the creation of a user with the "$" character. This can
+      be used by attackers to hide a user or trick detection systems that lack the
+      parsing mechanisms.
+
+      '
     falsepositives:
     - Unknown
-    level: high
+    level: medium
+    references:
+    - https://twitter.com/SBousseaden/status/1387743867663958021
     tags:
     - attack.defense_evasion
     - attack.t1036
-  name: New or Renamed User Account with '$' in Attribute 'SamAccountName'
+  name: New or Renamed User Account with '$' Character
 

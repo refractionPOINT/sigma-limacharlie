@@ -37,11 +37,14 @@ respond:
 - action: report
   metadata:
     author: Jakob Weinzettl, oscd.community, Nasreddine Bencherchali (Nextron Systems)
-    description: Detects the stopping of a Windows service
+    description: Detects the stopping of a Windows service via the PowerShell Cmdlet
+      "Stop-Service"
     falsepositives:
     - There are many legitimate reasons to stop a service. This rule isn't looking
       for any suspicious behaviour in particular. Filter legitimate activity accordingly
     level: low
+    references:
+    - https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/stop-service?view=powershell-7.4
     tags:
     - attack.impact
     - attack.t1489

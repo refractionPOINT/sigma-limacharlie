@@ -43,12 +43,12 @@ respond:
     author: Florian Roth (Nextron Systems)
     description: Execution of plink to perform data exfiltration and tunneling
     falsepositives:
-    - Administrative activity
+    - Unknown
     level: high
     references:
     - https://www.microsoft.com/security/blog/2022/07/26/malicious-iis-extensions-quietly-open-persistent-backdoors-into-servers/
     tags:
     - attack.command_and_control
     - attack.t1572
-  name: Potential RDP Tunneling Via SSH Plink
+  name: Potential RDP Tunneling Via Plink
 

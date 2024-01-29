@@ -22,7 +22,7 @@ respond:
     description: Execution of ssh.exe to perform data exfiltration and tunneling through
       RDP
     falsepositives:
-    - Administrative activity
+    - Unknown
     level: high
     references:
     - https://www.absolomb.com/2018-01-26-Windows-Privilege-Escalation-Guide/

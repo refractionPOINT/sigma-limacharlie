@@ -7,54 +7,31 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - op: and
+    - op: or
       rules:
-      - op: or
-        rules:
-        - case sensitive: false
-          op: is
-          path: event/ORIGINAL_FILE_NAME
-          value: sc.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \sc.exe
       - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ' stop '
-    - not: true
-      op: and
-      rules:
-      - op: or
-        rules:
-        - case sensitive: false
-          op: is
-          path: event/COMMAND_LINE
-          value: sc  stop KSCWebConsoleMessageQueue
-        - case sensitive: false
-          op: is
-          path: event/COMMAND_LINE
-          value: sc  stop LGHUBUpdaterService
-      - op: or
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/USER_NAME
-          value: AUTHORI
-        - case sensitive: false
-          op: contains
-          path: event/USER_NAME
-          value: AUTORI
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: sc.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \sc.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' stop '
 respond:
 - action: report
   metadata:
     author: Jakob Weinzettl, oscd.community, Nasreddine Bencherchali (Nextron Systems)
-    description: Detects the stopping of a Windows service
+    description: Detects the stopping of a Windows service via the "sc.exe" utility
     falsepositives:
     - There are many legitimate reasons to stop a service. This rule isn't looking
-      for any suspicious behaviour in particular. Filter legitimate activity accordingly
+      for any suspicious behavior in particular. Filter legitimate activity accordingly
     level: low
+    references:
+    - https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/cc742107(v=ws.11)
     tags:
     - attack.impact
     - attack.t1489

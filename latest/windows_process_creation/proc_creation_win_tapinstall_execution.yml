@@ -39,8 +39,10 @@ respond:
     description: Well-known TAP software installation. Possible preparation for data
       exfiltration using tunneling techniques
     falsepositives:
-    - Legitimate OpenVPN TAP insntallation
+    - Legitimate OpenVPN TAP installation
     level: medium
+    references:
+    - https://community.openvpn.net/openvpn/wiki/ManagingWindowsTAPDrivers
     tags:
     - attack.exfiltration
     - attack.t1048

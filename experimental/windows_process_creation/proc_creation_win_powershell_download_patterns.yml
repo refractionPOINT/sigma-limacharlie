@@ -62,6 +62,10 @@ respond:
     falsepositives:
     - Unknown
     level: medium
+    references:
+    - https://blog.redteam.pl/2020/06/black-kingdom-ransomware.html
+    - https://lab52.io/blog/winter-vivern-all-summer/
+    - https://hatching.io/blog/powershell-analysis/
     tags:
     - attack.execution
     - attack.t1059.001

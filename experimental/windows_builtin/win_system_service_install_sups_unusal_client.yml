@@ -18,7 +18,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Tim Rauch (Nextron Systems), Elastic
+    author: Tim Rauch (Nextron Systems), Elastic (idea)
     description: Detects a service installed by a client which has PID 0 or whose
       parent has PID 0
     falsepositives:

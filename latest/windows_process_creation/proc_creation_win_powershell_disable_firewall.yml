@@ -68,7 +68,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Tim Rauch
+    author: Tim Rauch, Elastic (idea)
     description: Detects attempts to disable the Windows Firewall using PowerShell
     falsepositives:
     - Unknown

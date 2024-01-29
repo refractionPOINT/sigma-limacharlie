@@ -19,7 +19,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Tim Rauch
+    author: Tim Rauch, Elastic (idea)
     description: Detects an unexpected process spawning from dns.exe which may indicate
       activity related to remote code execution or other forms of exploitation as
       seen in CVE-2020-1350 (SigRed)

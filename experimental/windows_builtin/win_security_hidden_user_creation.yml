@@ -2,14 +2,21 @@ detect:
   log type: wel
   op: and
   rules:
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '4720'
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/TargetUserName
+      value: $
   - case sensitive: false
+    not: true
     op: is
-    path: Event/System/EventID
-    value: '4720'
-  - case sensitive: false
-    op: ends with
     path: Event/EventData/TargetUserName
-    value: $
+    value: HomeGroupUser$
   target: log
 respond:
 - action: report

@@ -62,6 +62,8 @@ respond:
     falsepositives:
     - Legitimate WinRM usage
     level: high
+    references:
+    - Internal Research
     tags:
     - attack.t1190
     - attack.initial_access

@@ -37,7 +37,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth (Nextron Systems)
+    author: Florian Roth (Nextron Systems), Elastic (idea)
     description: Detects the pattern of UAC Bypass using ICMLuaUtil Elevated COM interface
     falsepositives:
     - Unknown

@@ -25,7 +25,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Tim Rauch
+    author: Tim Rauch, Elastic (idea)
     description: Detects attempts to bypass User Account Control (UAC) by hijacking
       the Microsoft Management Console (MMC) Windows Firewall snap-in
     falsepositives:

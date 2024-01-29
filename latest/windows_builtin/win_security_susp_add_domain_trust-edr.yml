@@ -15,8 +15,10 @@ respond:
     falsepositives:
     - Legitimate extension of domain structure
     level: medium
+    references:
+    - https://learn.microsoft.com/en-us/windows/security/threat-protection/auditing/event-4706
     tags:
     - attack.persistence
     - attack.t1098
-  name: Addition of Domain Trusts
+  name: A New Trust Was Created To A Domain
 

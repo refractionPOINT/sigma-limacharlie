@@ -17,13 +17,15 @@ respond:
 - action: report
   metadata:
     author: Thomas Patzke
-    description: Detection of logins performed with WMI
+    description: Detects successful logon attempts performed with WMI
     falsepositives:
     - Monitoring tools
     - Legitimate system administration
     level: low
+    references:
+    - Internal Research
     tags:
     - attack.execution
     - attack.t1047
-  name: Login with WMI
+  name: Successful Account Login Via WMI
 

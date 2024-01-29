@@ -22,12 +22,14 @@ respond:
 - action: report
   metadata:
     author: Florian Roth (Nextron Systems)
-    description: Detects access to $ADMIN share
+    description: Detects access to ADMIN$ network share
     falsepositives:
     - Legitimate administrative activity
     level: low
+    references:
+    - https://learn.microsoft.com/en-us/windows/security/threat-protection/auditing/event-5140
     tags:
     - attack.lateral_movement
     - attack.t1021.002
-  name: Access to ADMIN$ Share
+  name: Access To ADMIN$ Network Share
 

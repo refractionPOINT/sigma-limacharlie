@@ -37,9 +37,9 @@ detect:
         path: event/EVENT/EventData/ServiceName
         value: Zoom Sharing Service
       - case sensitive: false
-        op: starts with
+        op: contains
         path: event/EVENT/EventData/ImagePath
-        value: '"C:\Program Files\Common Files\Zoom\Support\CptService.exe'
+        value: :\Program Files\Common Files\Zoom\Support\CptService.exe
 respond:
 - action: report
   metadata:
@@ -48,6 +48,8 @@ respond:
     falsepositives:
     - Unknown
     level: medium
+    references:
+    - Internal Research
     tags:
     - attack.persistence
     - attack.privilege_escalation

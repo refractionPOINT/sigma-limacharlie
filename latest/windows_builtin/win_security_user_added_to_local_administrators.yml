@@ -28,16 +28,18 @@ respond:
 - action: report
   metadata:
     author: Florian Roth (Nextron Systems)
-    description: This rule triggers on user accounts that are added to the local Administrators
-      group, which could be legitimate activity or a sign of privilege escalation
-      activity
+    description: Detects the addition of a new member to the local administrator group,
+      which could be legitimate activity or a sign of privilege escalation activity
     falsepositives:
     - Legitimate administrative activity
     level: medium
+    references:
+    - https://learn.microsoft.com/en-us/windows/security/threat-protection/auditing/event-4732
+    - https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-identifiers
     tags:
     - attack.privilege_escalation
     - attack.t1078
     - attack.persistence
     - attack.t1098
-  name: User Added to Local Administrators
+  name: User Added to Local Administrator Group
 

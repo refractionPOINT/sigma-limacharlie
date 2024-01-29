@@ -19,26 +19,26 @@ detect:
       op: contains
       path: event/COMMAND_LINE
       value: '0'
-    - op: or
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: storage
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: storagedevicepolicies
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: storage
 respond:
 - action: report
   metadata:
     author: Sreeman
-    description: Looks for changes to registry to disable any write-protect property
-      for storage devices. This could be a precursor to a ransomware attack and has
-      been an observed technique used by cypherpunk group.
+    description: 'Detects applications trying to modify the registry in order to disable
+      any write-protect property for storage devices.
+
+      This could be a precursor to a ransomware attack and has been an observed technique
+      used by cypherpunk group.
+
+      '
     falsepositives:
     - Unknown
     level: medium
+    references:
+    - https://www.manageengine.com/products/desktop-central/os-imaging-deployment/media-is-write-protected.html
     tags:
     - attack.defense_evasion
     - attack.t1562

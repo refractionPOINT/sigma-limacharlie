@@ -25,18 +25,17 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: \\SECURITY
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: C:\\tmp\\log
 respond:
 - action: report
   metadata:
     author: Max Altgelt (Nextron Systems), Tobias Michalski (Nextron Systems)
-    description: Detects a command that accesses password storing registry hives via
-      volume shadow backups
+    description: 'Detects a command that accesses the VolumeShadowCopy in order to
+      extract sensitive files such as the Security or SAM registry hives or the AD
+      database (ntds.dit)
+
+      '
     falsepositives:
-    - Some rare backup scenarios
+    - Unlikely
     level: high
     references:
     - https://twitter.com/vxunderground/status/1423336151860002816?s=20
@@ -45,5 +44,5 @@ respond:
     tags:
     - attack.impact
     - attack.t1490
-  name: Sensitive Registry Access via Volume Shadow Copy
+  name: Sensitive File Access Via Volume Shadow Copy Backup
 

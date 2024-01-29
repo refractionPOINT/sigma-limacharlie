@@ -116,12 +116,14 @@ respond:
 - action: report
   metadata:
     author: NVISO
-    description: A login from a public IP can indicate a misconfigured firewall or
-      network boundary.
+    description: Detects a failed logon attempt from a public IP. A login from a public
+      IP can indicate a misconfigured firewall or network boundary.
     falsepositives:
     - Legitimate logon attempts over the internet
     - IPv4-to-IPv6 mapped IPs
     level: medium
+    references:
+    - https://learn.microsoft.com/en-us/windows/security/threat-protection/auditing/event-4625
     tags:
     - attack.initial_access
     - attack.persistence

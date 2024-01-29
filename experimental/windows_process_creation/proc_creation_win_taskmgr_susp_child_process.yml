@@ -17,25 +17,28 @@ detect:
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
-        value: \resmon.exe
+        value: :\Windows\System32\mmc.exe
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
-        value: \mmc.exe
+        value: :\Windows\System32\resmon.exe
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
-        value: \taskmgr.exe
+        value: :\Windows\System32\Taskmgr.exe
 respond:
 - action: report
   metadata:
     author: Florian Roth (Nextron Systems)
-    description: Detects the creation of a process from Windows task manager
+    description: Detects the creation of a process via the Windows task manager. This
+      might be an attempt to bypass UAC
     falsepositives:
     - Administrative activity
     level: low
+    references:
+    - https://twitter.com/ReneFreingruber/status/1172244989335810049
     tags:
     - attack.defense_evasion
     - attack.t1036
-  name: Taskmgr as Parent
+  name: New Process Created Via Taskmgr.EXE
 

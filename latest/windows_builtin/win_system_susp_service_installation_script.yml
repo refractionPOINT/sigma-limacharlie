@@ -63,6 +63,8 @@ respond:
     falsepositives:
     - Unknown
     level: high
+    references:
+    - Internal Research
     tags:
     - attack.persistence
     - attack.privilege_escalation

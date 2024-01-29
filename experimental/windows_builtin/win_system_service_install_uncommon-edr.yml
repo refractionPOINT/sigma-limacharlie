@@ -85,14 +85,20 @@ respond:
 - action: report
   metadata:
     author: Florian Roth (Nextron Systems)
-    description: Detects uncommon service installation commands
+    description: 'Detects uncommon service installation commands by looking at suspicious
+      or uncommon image path values containing references to encoded powershell commands,
+      temporary paths, etc.
+
+      '
     falsepositives:
     - Unknown
     level: medium
+    references:
+    - Internal Research
     tags:
     - attack.persistence
     - attack.privilege_escalation
     - car.2013-09-005
     - attack.t1543.003
-  name: Uncommon Service Installation
+  name: Uncommon Service Installation Image Path
 

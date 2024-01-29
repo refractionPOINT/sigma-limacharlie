@@ -29,6 +29,8 @@ respond:
     falsepositives:
     - Unknown
     level: high
+    references:
+    - Internal Research
     tags:
     - attack.defense_evasion
     - attack.t1036

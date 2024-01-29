@@ -5,14 +5,21 @@ detect:
   - op: is windows
   - op: and
     rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '4720'
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/TargetUserName
+        value: $
     - case sensitive: false
+      not: true
       op: is
-      path: event/EVENT/System/EventID
-      value: '4720'
-    - case sensitive: false
-      op: ends with
       path: event/EVENT/EventData/TargetUserName
-      value: $
+      value: HomeGroupUser$
 respond:
 - action: report
   metadata:

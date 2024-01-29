@@ -11,15 +11,27 @@ detect:
     - case sensitive: false
       op: ends with
       path: Event/EventData/RelativeTargetName
-      value: .pst
+      value: .bak
     - case sensitive: false
       op: ends with
       path: Event/EventData/RelativeTargetName
-      value: .ost
+      value: .dmp
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/RelativeTargetName
+      value: .edb
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/RelativeTargetName
+      value: .kirbi
     - case sensitive: false
       op: ends with
       path: Event/EventData/RelativeTargetName
       value: .msg
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/RelativeTargetName
+      value: .nsf
     - case sensitive: false
       op: ends with
       path: Event/EventData/RelativeTargetName
@@ -31,31 +43,19 @@ detect:
     - case sensitive: false
       op: ends with
       path: Event/EventData/RelativeTargetName
-      value: .edb
+      value: .ost
     - case sensitive: false
       op: ends with
       path: Event/EventData/RelativeTargetName
-      value: .nsf
-    - case sensitive: false
-      op: ends with
-      path: Event/EventData/RelativeTargetName
-      value: .bak
-    - case sensitive: false
-      op: ends with
-      path: Event/EventData/RelativeTargetName
-      value: .dmp
-    - case sensitive: false
-      op: ends with
-      path: Event/EventData/RelativeTargetName
-      value: .kirbi
-    - case sensitive: false
-      op: ends with
-      path: Event/EventData/RelativeTargetName
-      value: \groups.xml
+      value: .pst
     - case sensitive: false
       op: ends with
       path: Event/EventData/RelativeTargetName
       value: .rdp
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/RelativeTargetName
+      value: \groups.xml
   target: log
 respond:
 - action: report
@@ -66,6 +66,8 @@ respond:
     - Help Desk operator doing backup or re-imaging end user machine or backup software
     - Users working with these data types or exchanging message files
     level: medium
+    references:
+    - Internal Research
     tags:
     - attack.collection
     - attack.t1039

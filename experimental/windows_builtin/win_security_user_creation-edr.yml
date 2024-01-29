@@ -11,9 +11,11 @@ respond:
 - action: report
   metadata:
     author: Patrick Bareiss
-    description: Detects local user creation on Windows servers, which shouldn't happen
-      in an Active Directory environment. Apply this Sigma Use Case on your Windows
-      server logs and not on your DC logs.
+    description: 'Detects local user creation on Windows servers, which shouldn''t
+      happen in an Active Directory environment. Apply this Sigma Use Case on your
+      Windows server logs and not on your DC logs.
+
+      '
     falsepositives:
     - Domain Controller Logs
     - Local accounts managed by privileged account management tools
