@@ -1,0 +1,84 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/EVENT/System/EventID
+          value: '4699'
+        - case sensitive: false
+          op: is
+          path: event/EVENT/System/EventID
+          value: '4701'
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/TaskName
+          value: \Windows\SystemRestore\SR
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/TaskName
+          value: \Windows\Windows Defender\
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/TaskName
+          value: \Windows\BitLocker
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/TaskName
+          value: \Windows\WindowsBackup\
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/TaskName
+          value: \Windows\WindowsUpdate\
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/TaskName
+          value: \Windows\UpdateOrchestrator\Schedule
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/TaskName
+          value: \Windows\ExploitGuard
+    - not: true
+      op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '4699'
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/SubjectUserName
+        value: $
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/TaskName
+        value: \Windows\Windows Defender\
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects when adversaries stop services or processes by deleting or
+      disabling their respective scheduled tasks in order to conduct data destructive
+      activities
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://learn.microsoft.com/en-us/windows/security/threat-protection/auditing/event-4699
+    - https://learn.microsoft.com/en-us/windows/security/threat-protection/auditing/event-4701
+    tags:
+    - attack.execution
+    - attack.privilege_escalation
+    - attack.persistence
+    - attack.t1053.005
+  name: Important Scheduled Task Deleted/Disabled
+

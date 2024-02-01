@@ -1,0 +1,64 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: \Windows\
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \..\Windows\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \..\System32\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \..\..\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .exe\..\
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Google\Drive\googledrivesync.exe\..\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Citrix\Virtual Smart Card\Citrix.Authentication.VirtualSmartcard.Launcher.exe\..\
+respond:
+- action: report
+  metadata:
+    author: Christian Burkard (Nextron Systems)
+    description: Detects potential evasion or obfuscation attempts using bogus path
+      traversal via the commandline
+    falsepositives:
+    - Google Drive
+    - Citrix
+    level: medium
+    references:
+    - https://twitter.com/hexacorn/status/1448037865435320323
+    - https://twitter.com/Gal_B1t/status/1062971006078345217
+    tags:
+    - attack.defense_evasion
+    - attack.t1036
+  name: Potential Command Line Path Traversal Evasion Attempt
+

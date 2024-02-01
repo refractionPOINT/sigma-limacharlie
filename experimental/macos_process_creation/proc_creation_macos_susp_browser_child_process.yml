@@ -1,0 +1,212 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is mac
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/FILE_PATH
+            value: com.apple.WebKit.WebContent
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/FILE_PATH
+            value: firefox
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/FILE_PATH
+            value: Google Chrome Helper
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/FILE_PATH
+            value: Google Chrome
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/FILE_PATH
+            value: Microsoft Edge
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/FILE_PATH
+            value: Opera
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/FILE_PATH
+            value: Safari
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/FILE_PATH
+            value: Tor Browser
+        - op: or
+          rules:
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /bash
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /curl
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /dash
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /ksh
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /osascript
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /perl
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /php
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /pwsh
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /python
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /sh
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /tcsh
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /wget
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /zsh
+      - not: true
+        op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: --defaults-torrc
+        - case sensitive: false
+          op: matches
+          path: event/COMMAND_LINE
+          re: .*/Library/Application\ Support/Microsoft/MAU.*/Microsoft\ AutoUpdate\.app/Contents/MacOS/msupdate.*
+        - op: and
+          rules:
+          - op: or
+            rules:
+            - case sensitive: false
+              op: contains
+              path: event/PARENT/FILE_PATH
+              value: Google Chrome Helper
+            - case sensitive: false
+              op: contains
+              path: event/PARENT/FILE_PATH
+              value: Google Chrome
+          - op: or
+            rules:
+            - case sensitive: false
+              op: matches
+              path: event/COMMAND_LINE
+              re: .*/Volumes/Google\ Chrome/Google\ Chrome\.app/Contents/Frameworks/.*/Resources/install\.sh.*
+            - case sensitive: false
+              op: matches
+              path: event/COMMAND_LINE
+              re: .*/Applications/Google\ Chrome\.app/Contents/Frameworks/Google\
+                Chrome\ Framework\.framework/.*/Resources/keystone_promote_preflight\.sh.*
+            - case sensitive: false
+              op: matches
+              path: event/COMMAND_LINE
+              re: .*/Applications/Google\ Chrome\.app/Contents/Frameworks/Google\
+                Chrome\ Framework\.framework/.*/Resources/keystone_promote_postflight\.sh.*
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/FILE_PATH
+            value: Microsoft Edge
+          - op: or
+            rules:
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: IOPlatformExpertDevice
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: hw.model
+        - op: and
+          rules:
+          - op: or
+            rules:
+            - case sensitive: false
+              op: contains
+              path: event/PARENT/FILE_PATH
+              value: Google Chrome Helper
+            - case sensitive: false
+              op: contains
+              path: event/PARENT/FILE_PATH
+              value: Google Chrome
+          - op: and
+            rules:
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: /Users/
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: /Library/Application Support/Google/Chrome/recovery/
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: /ChromeRecovery
+    - not: true
+      op: or
+      rules:
+      - not: true
+        op: exists
+        path: event/COMMAND_LINE
+      - case sensitive: false
+        op: is
+        path: event/COMMAND_LINE
+        value: ''
+respond:
+- action: report
+  metadata:
+    author: Sohan G (D4rkCiph3r)
+    description: Detects suspicious child processes spawned from browsers. This could
+      be a result of a potential web browser exploitation.
+    falsepositives:
+    - Legitimate browser install, update and recovery scripts
+    level: medium
+    references:
+    - https://fr.slideshare.net/codeblue_jp/cb19-recent-apt-attack-on-crypto-exchange-employees-by-heungsoo-kang
+    - https://github.com/elastic/detection-rules/blob/4312d8c9583be524578a14fe6295c3370b9a9307/rules/macos/execution_initial_access_suspicious_browser_childproc.toml
+    tags:
+    - attack.initial_access
+    - attack.execution
+    - attack.t1189
+    - attack.t1203
+    - attack.t1059
+  name: Suspicious Browser Child Process - MacOS
+

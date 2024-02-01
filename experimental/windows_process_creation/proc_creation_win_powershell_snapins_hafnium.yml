@@ -1,0 +1,79 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \powershell.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \pwsh.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: PowerShell.EXE
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: pwsh.dll
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Add-PSSnapin
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: Microsoft.Exchange.Powershell.Snapin
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: Microsoft.Exchange.Management.PowerShell.SnapIn
+    - not: true
+      op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/PARENT/FILE_PATH
+        value: C:\Windows\System32\msiexec.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: $exserver=Get-ExchangeServer ([Environment]::MachineName) -ErrorVariable
+          exerr 2> $null
+respond:
+- action: report
+  metadata:
+    author: FPT.EagleEye, Nasreddine Bencherchali (Nextron Systems)
+    description: Detects adding and using Exchange PowerShell snap-ins to export mailbox
+      data. As seen used by HAFNIUM and APT27
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.volexity.com/blog/2021/03/02/active-exploitation-of-microsoft-exchange-zero-day-vulnerabilities/
+    - https://www.microsoft.com/security/blog/2021/03/02/hafnium-targeting-exchange-servers/
+    - https://www.intrinsec.com/apt27-analysis/
+    tags:
+    - attack.execution
+    - attack.t1059.001
+    - attack.collection
+    - attack.t1114
+  name: Exchange PowerShell Snap-Ins Usage
+

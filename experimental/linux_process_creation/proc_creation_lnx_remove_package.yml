@@ -1,0 +1,93 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /yum
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: erase
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: remove
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /apt
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /apt-get
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: remove
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: purge
+    - op: and
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /dpkg
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '--remove '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -r '
+    - op: and
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /rpm
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -e '
+respond:
+- action: report
+  metadata:
+    author: Tuan Le (NCSGroup), Nasreddine Bencherchali (Nextron Systems)
+    description: Detects linux package removal using builtin tools such as "yum",
+      "apt", "apt-get" or "dpkg".
+    falsepositives:
+    - Administrator or administrator scripts might delete packages for several reasons
+      (debugging, troubleshooting).
+    level: low
+    references:
+    - https://sysdig.com/blog/mitre-defense-evasion-falco
+    - https://www.tutorialspoint.com/how-to-install-a-software-on-linux-using-yum-command
+    - https://linuxhint.com/uninstall_yum_package/
+    - https://linuxhint.com/uninstall-debian-packages/
+    tags:
+    - attack.defense_evasion
+    - attack.t1070
+  name: Linux Package Uninstall
+

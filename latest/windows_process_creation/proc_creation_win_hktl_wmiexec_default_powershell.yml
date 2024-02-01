@@ -1,0 +1,27 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - case sensitive: false
+    op: contains
+    path: event/COMMAND_LINE
+    value: -NoP -NoL -sta -NonI -W Hidden -Exec Bypass -Enc
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects the execution of PowerShell with a specific flag sequence
+      that is used by the Wmiexec script
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://github.com/fortra/impacket/blob/f4b848fa27654ca95bc0f4c73dbba8b9c2c9f30a/examples/wmiexec.py
+    tags:
+    - attack.defense_evasion
+    - attack.lateral_movement
+  name: HackTool - Wmiexec Default Powershell Command
+

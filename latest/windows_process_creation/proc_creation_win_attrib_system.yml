@@ -1,0 +1,41 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \attrib.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: ATTRIB.EXE
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' +s '
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Detects the execution of "attrib" with the "+s" flag to mark files
+      as system files
+    falsepositives:
+    - Unknown
+    level: low
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1564.001/T1564.001.md#atomic-test-3---create-windows-system-file-with-attrib
+    - https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/attrib
+    - https://unit42.paloaltonetworks.com/unit42-sure-ill-take-new-combojack-malware-alters-clipboards-steal-cryptocurrency/
+    tags:
+    - attack.defense_evasion
+    - attack.t1564.001
+  name: Set Files as System Files Using Attrib.EXE
+

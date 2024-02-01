@@ -1,0 +1,43 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is mac
+  - op: and
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /dscl
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' -append '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' /Groups/admin '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' GroupMembership '
+respond:
+- action: report
+  metadata:
+    author: Sohan G (D4rkCiph3r)
+    description: Detects attempts to create and add an account to the admin group
+      via "dscl"
+    falsepositives:
+    - Legitimate administration activities
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1078.003/T1078.003.md#atomic-test-2---create-local-account-with-admin-privileges---macos
+    - https://ss64.com/osx/dscl.html
+    tags:
+    - attack.initial_access
+    - attack.privilege_escalation
+    - attack.t1078.003
+  name: User Added To Admin Group Via Dscl
+

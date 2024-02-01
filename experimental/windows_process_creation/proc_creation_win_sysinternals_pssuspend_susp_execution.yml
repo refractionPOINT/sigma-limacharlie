@@ -1,0 +1,46 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: pssuspend.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \pssuspend.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \pssuspend64.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: msmpeng.exe
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects suspicious execution of Sysinternals PsSuspend, where the
+      utility is used to suspend critical processes such as AV or EDR to bypass defenses
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://docs.microsoft.com/en-us/sysinternals/downloads/pssuspend
+    - https://twitter.com/0gtweet/status/1638069413717975046
+    tags:
+    - attack.defense_evasion
+    - attack.t1562.001
+  name: Sysinternals PsSuspend Suspicious Execution
+

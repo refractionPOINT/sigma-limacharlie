@@ -1,0 +1,40 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \ADExplorer.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: AdExp
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: snapshot
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects the execution of Sysinternals ADExplorer with the "-snapshot"
+      flag in order to save a local copy of the active directory database.
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://www.documentcloud.org/documents/5743766-Global-Threat-Report-2019.html
+    tags:
+    - attack.credential_access
+    - attack.t1552.001
+    - attack.t1003.003
+  name: Active Directory Database Snapshot Via ADExplorer
+

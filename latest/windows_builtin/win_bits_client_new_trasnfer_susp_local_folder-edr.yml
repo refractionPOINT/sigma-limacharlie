@@ -1,0 +1,42 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '16403'
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/LocalName
+        value: \Desktop\
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/LocalName
+        value: C:\Users\Public\
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/LocalName
+        value: C:\PerfLogs\
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects new BITS transfer job where the LocalName/Saved file is stored
+      in a potentially suspicious location
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1197/T1197.md
+    tags:
+    - attack.defense_evasion
+    - attack.persistence
+    - attack.t1197
+  name: BITS Transfer Job Download To Potential Suspicious Folder
+

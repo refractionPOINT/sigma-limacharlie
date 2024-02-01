@@ -1,0 +1,155 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /nc
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /ncat
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -c '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -e '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' ash'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' bash'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' bsh'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' csh'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' ksh'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' pdksh'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' sh'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' tcsh'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /bin/ash
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /bin/bash
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /bin/bsh
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /bin/csh
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /bin/ksh
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /bin/pdksh
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /bin/sh
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /bin/tcsh
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /bin/zsh
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: $IFSash
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: $IFSbash
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: $IFSbsh
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: $IFScsh
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: $IFSksh
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: $IFSpdksh
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: $IFSsh
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: $IFStcsh
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: $IFSzsh
+respond:
+- action: report
+  metadata:
+    author: '@d4ns4n_, Nasreddine Bencherchali (Nextron Systems)'
+    description: Detects execution of netcat with the "-e" flag followed by common
+      shells. This could be a sign of a potential reverse shell setup.
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet
+    - https://www.revshells.com/
+    - https://www.hackingtutorials.org/networking/hacking-netcat-part-2-bind-reverse-shells/
+    - https://www.infosecademy.com/netcat-reverse-shells/
+    - https://man7.org/linux/man-pages/man1/ncat.1.html
+    tags:
+    - attack.execution
+    - attack.t1059
+  name: Potential Netcat Reverse Shell Execution
+

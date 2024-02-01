@@ -1,0 +1,34 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: GZipStream
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ::Decompress
+respond:
+- action: report
+  metadata:
+    author: Hieu Tran
+    description: Detects attempts of decoding encoded Gzip archives via PowerShell.
+    falsepositives:
+    - Legitimate administrative scripts may use this functionality. Use "ParentImage"
+      in combination with the script names and allowed users and applications to filter
+      legitimate executions
+    level: medium
+    references:
+    - https://www.zscaler.com/blogs/security-research/onenote-growing-threat-malware-distribution
+    tags:
+    - attack.command_and_control
+    - attack.t1132.001
+  name: Gzip Archive Decode Via PowerShell
+

@@ -1,0 +1,37 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '3'
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/processPath
+        value: \powershell.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/processPath
+        value: \pwsh.exe
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Detects the creation of a new bits job by PowerShell
+    falsepositives:
+    - Administrator PowerShell scripts
+    level: low
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1197/T1197.md
+    tags:
+    - attack.defense_evasion
+    - attack.persistence
+    - attack.t1197
+  name: New BITS Job Created Via PowerShell
+

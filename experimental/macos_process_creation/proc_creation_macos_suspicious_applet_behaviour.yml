@@ -1,0 +1,38 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is mac
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: /applet
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: /osascript
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: osacompile
+respond:
+- action: report
+  metadata:
+    author: Sohan G (D4rkCiph3r), Red Canary (Idea)
+    description: Detects potential suspicious applet or osascript executing "osacompile".
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://redcanary.com/blog/mac-application-bundles/
+    tags:
+    - attack.execution
+    - attack.t1059.002
+  name: Osacompile Execution By Potentially Suspicious Applet/Osascript
+

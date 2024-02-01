@@ -1,0 +1,80 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '16403'
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/EVENT/EventData/LocalName
+          value: .bat
+        - case sensitive: false
+          op: ends with
+          path: event/EVENT/EventData/LocalName
+          value: .dll
+        - case sensitive: false
+          op: ends with
+          path: event/EVENT/EventData/LocalName
+          value: .exe
+        - case sensitive: false
+          op: ends with
+          path: event/EVENT/EventData/LocalName
+          value: .hta
+        - case sensitive: false
+          op: ends with
+          path: event/EVENT/EventData/LocalName
+          value: .ps1
+        - case sensitive: false
+          op: ends with
+          path: event/EVENT/EventData/LocalName
+          value: .psd1
+        - case sensitive: false
+          op: ends with
+          path: event/EVENT/EventData/LocalName
+          value: .sh
+        - case sensitive: false
+          op: ends with
+          path: event/EVENT/EventData/LocalName
+          value: .vbe
+        - case sensitive: false
+          op: ends with
+          path: event/EVENT/EventData/LocalName
+          value: .vbs
+    - not: true
+      op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/LocalName
+        value: \AppData\
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/RemoteName
+        value: .com
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Detects new BITS transfer job saving local files with potential suspicious
+      extensions
+    falsepositives:
+    - While the file extensions in question can be suspicious at times. It's best
+      to add filters according to your environment to avoid large amount false positives
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1197/T1197.md
+    tags:
+    - attack.defense_evasion
+    - attack.persistence
+    - attack.t1197
+  name: BITS Transfer Job Downloading File Potential Suspicious Extension
+

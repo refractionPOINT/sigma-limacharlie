@@ -1,0 +1,52 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \ldifde.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: ldifde.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -i
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -f
+respond:
+- action: report
+  metadata:
+    author: '@gott_cyber'
+    description: 'Detects the execution of "Ldifde.exe" with the import flag "-i".
+      The can be abused to include HTTP-based arguments which will allow the arbitrary
+      download of files from a remote server.
+
+      '
+    falsepositives:
+    - Since the content of the files are unknown, false positives are expected
+    level: medium
+    references:
+    - https://twitter.com/0gtweet/status/1564968845726580736
+    - https://strontic.github.io/xcyclopedia/library/ldifde.exe-979DE101F5059CEC1D2C56967CA2BAC0.html
+    - https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/cc731033(v=ws.11)
+    tags:
+    - attack.command_and_control
+    - attack.defense_evasion
+    - attack.t1218
+    - attack.t1105
+  name: Import LDAP Data Interchange Format File Via Ldifde.EXE
+

@@ -1,0 +1,200 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '16403'
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: http://1
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: http://2
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: http://3
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: http://4
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: http://5
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: http://6
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: http://7
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: http://8
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: http://9
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: https://1
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: https://2
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: https://3
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: https://4
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: https://5
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: https://6
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: https://7
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: https://8
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: https://9
+  - not: true
+    op: or
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: ://10.
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: ://192.168.
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: ://172.16.
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: ://172.17.
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: ://172.18.
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: ://172.19.
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: ://172.20.
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: ://172.21.
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: ://172.22.
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: ://172.23.
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: ://172.24.
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: ://172.25.
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: ://172.26.
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: ://172.27.
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: ://172.28.
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: ://172.29.
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: ://172.30.
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: ://172.31.
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: ://127.
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: ://169.254.
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: https://7-
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/RemoteName
+        value: http://7-
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects a BITS transfer job downloading file(s) from a direct IP
+      address.
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://blog.netspi.com/15-ways-to-download-a-file/#bitsadmin
+    - https://isc.sans.edu/diary/22264
+    - https://lolbas-project.github.io/lolbas/Binaries/Bitsadmin/
+    - https://blog.talosintelligence.com/breaking-the-silence-recent-truebot-activity/
+    tags:
+    - attack.defense_evasion
+    - attack.persistence
+    - attack.t1197
+  name: BITS Transfer Job Download From Direct IP
+

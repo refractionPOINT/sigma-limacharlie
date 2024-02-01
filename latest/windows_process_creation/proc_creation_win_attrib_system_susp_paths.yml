@@ -1,0 +1,114 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \attrib.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: ATTRIB.EXE
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' +s'
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' %'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \Users\Public\
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \AppData\Local\
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \ProgramData\
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \Downloads\
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \Windows\Temp\
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .bat
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .dll
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .hta
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .ps1
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .vbe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .vbs
+    - not: true
+      op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Windows\TEMP\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .exe
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: 'Detects the usage of attrib with the "+s" option to set scripts
+      or executables located in suspicious locations as system files to hide them
+      from users and make them unable to be deleted with simple rights. The rule limits
+      the search to specific extensions and directories to avoid FPs
+
+      '
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://app.any.run/tasks/c28cabc8-a19f-40f3-a78b-cae506a5c0d4
+    - https://app.any.run/tasks/cfc8870b-ccd7-4210-88cf-a8087476a6d0
+    - https://unit42.paloaltonetworks.com/unit42-sure-ill-take-new-combojack-malware-alters-clipboards-steal-cryptocurrency/
+    tags:
+    - attack.defense_evasion
+    - attack.t1564.001
+  name: Set Suspicious Files as System Files Using Attrib.EXE
+

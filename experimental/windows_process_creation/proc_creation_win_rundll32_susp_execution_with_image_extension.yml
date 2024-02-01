@@ -1,0 +1,93 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \rundll32.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: RUNDLL32.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .bmp
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .cr2
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .eps
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .gif
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .ico
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .jpeg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .jpg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .nef
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .orf
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .png
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .raw
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .sr2
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .tif
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .tiff
+respond:
+- action: report
+  metadata:
+    author: Hieu Tran
+    description: Detects the execution of Rundll32.exe with DLL files masquerading
+      as image files
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.zscaler.com/blogs/security-research/onenote-growing-threat-malware-distribution
+    tags:
+    - attack.defense_evasion
+    - attack.t1218.011
+  name: Suspicious Rundll32 Execution With Image Extension
+

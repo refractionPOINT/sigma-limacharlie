@@ -1,0 +1,33 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /bash
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' -i '
+respond:
+- action: report
+  metadata:
+    author: '@d4ns4n_'
+    description: Detects execution of the bash shell with the interactive flag "-i".
+    falsepositives:
+    - Unknown
+    level: low
+    references:
+    - https://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet
+    - https://www.revshells.com/
+    - https://linux.die.net/man/1/bash
+    tags:
+    - attack.execution
+  name: Bash Interactive Shell
+

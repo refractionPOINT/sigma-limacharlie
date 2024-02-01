@@ -1,0 +1,104 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/ORIGINAL_FILE_NAME
+      value: winPEAS.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \winPEASany_ofs.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \winPEASany.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \winPEASx64_ofs.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \winPEASx64.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \winPEASx86_ofs.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \winPEASx86.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' applicationsinfo'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' browserinfo'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' eventsinfo'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' fileanalysis'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' filesinfo'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' processinfo'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' servicesinfo'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' windowscreds'
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: https://github.com/carlospolop/PEASS-ng/releases/latest/download/
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/COMMAND_LINE
+      value: ' -linpeas'
+    - case sensitive: false
+      op: ends with
+      path: event/COMMAND_LINE
+      value: ' -linpeas'
+respond:
+- action: report
+  metadata:
+    author: Georg Lauenstein (sure[secure])
+    description: WinPEAS is a script that search for possible paths to escalate privileges
+      on Windows hosts. The checks are explained on book.hacktricks.xyz
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://github.com/carlospolop/PEASS-ng
+    - https://book.hacktricks.xyz/windows-hardening/windows-local-privilege-escalation
+    tags:
+    - attack.privilege_escalation
+    - attack.t1082
+    - attack.t1087
+    - attack.t1046
+  name: HackTool - winPEAS Execution
+

@@ -1,0 +1,76 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - case sensitive: true
+      op: contains
+      path: event/FILE_PATH
+      value: ruby
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' -e'
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: rsocket
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: TCPSocket
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' ash'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' bash'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' bsh'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' csh'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' ksh'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' pdksh'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' sh'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' tcsh'
+respond:
+- action: report
+  metadata:
+    author: '@d4ns4n_'
+    description: Detects execution of ruby with the "-e" flag and calls to "socket"
+      related functions. This could be an indication of a potential attempt to setup
+      a reverse shell
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet
+    - https://www.revshells.com/
+    tags:
+    - attack.execution
+  name: Potential Ruby Reverse Shell
+
