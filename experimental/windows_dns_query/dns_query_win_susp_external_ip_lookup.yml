@@ -79,10 +79,6 @@ detect:
     - case sensitive: false
       op: contains
       path: event/DOMAIN_NAME
-      value: ipapi.co
-    - case sensitive: false
-      op: contains
-      path: event/DOMAIN_NAME
       value: ip-api.com
     - case sensitive: false
       op: contains
@@ -96,6 +92,14 @@ detect:
       op: contains
       path: event/DOMAIN_NAME
       value: ipaddressworld.com
+    - case sensitive: false
+      op: contains
+      path: event/DOMAIN_NAME
+      value: ipapi.co
+    - case sensitive: false
+      op: contains
+      path: event/DOMAIN_NAME
+      value: ipconfig.io
     - case sensitive: false
       op: contains
       path: event/DOMAIN_NAME

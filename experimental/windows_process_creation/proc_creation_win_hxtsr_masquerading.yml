@@ -1,0 +1,48 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \hxtsr.exe
+    - not: true
+      op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: :\program files\windowsapps\microsoft.windowscommunicationsapps_
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \hxtsr.exe
+respond:
+- action: report
+  metadata:
+    author: Sreeman
+    description: 'HxTsr.exe is a Microsoft compressed executable file called Microsoft
+      Outlook Communications.
+
+      HxTsr.exe is part of Outlook apps, because it resides in a hidden "WindowsApps"
+      subfolder of "C:\Program Files".
+
+      Any instances of hxtsr.exe not in this folder may be malware camouflaging itself
+      as HxTsr.exe
+
+      '
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - Internal Research
+    tags:
+    - attack.defense_evasion
+    - attack.t1036
+  name: Potential Fake Instance Of Hxtsr.EXE Executed
+
