@@ -3,28 +3,27 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: or
+  - op: and
     rules:
-    - op: and
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '6416'
+    - op: or
       rules:
-      - case sensitive: false
-        op: is
-        path: event/EVENT/System/EventID
-        value: '6416'
       - case sensitive: false
         op: is
         path: event/EVENT/EventData/ClassName
         value: DiskDrive
-    - case sensitive: false
-      op: is
-      path: event/EVENT/EventData/DeviceDescription
-      value: USB Mass Storage Device
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/DeviceDescription
+        value: USB Mass Storage Device
 respond:
 - action: report
   metadata:
     author: Keith Wright
-    description: Detects external diskdrives or plugged in USB devices, EventID 6416
-      on Windows 10 or later
+    description: Detects external disk drives or plugged-in USB devices.
     falsepositives:
     - Likely
     level: low

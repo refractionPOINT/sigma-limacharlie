@@ -70,14 +70,14 @@ detect:
               value: ' SUVYI'
     - case sensitive: false
       not: true
-      op: contains
+      op: starts with
       path: Event/EventData/ImagePath
-      value: :\ProgramData\Microsoft\Windows Defender\Definition Updates\
+      value: C:\ProgramData\Microsoft\Windows Defender\Definition Updates\
   - case sensitive: false
     not: true
     op: starts with
     path: Event/EventData/ImagePath
-    value: :\WINDOWS\TEMP\thor10-remote\thor64.exe
+    value: C:\WINDOWS\TEMP\thor10-remote\thor64.exe
   target: log
 respond:
 - action: report
