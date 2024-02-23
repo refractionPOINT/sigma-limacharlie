@@ -47,8 +47,8 @@ respond:
 - action: report
   metadata:
     author: Florian Roth (Nextron Systems)
-    description: Detects suspicious command line in which a user gets added to the
-      local Remote Desktop Users group
+    description: Detects addition of users to the local Remote Desktop Users group
+      via "Net" or "Add-LocalGroupMember".
     falsepositives:
     - Administrative activity
     level: high
@@ -60,5 +60,5 @@ respond:
     - attack.t1133
     - attack.t1136.001
     - attack.t1021.001
-  name: Suspicious Add User to Remote Desktop Users Group
+  name: User Added to Remote Desktop Users Group
 

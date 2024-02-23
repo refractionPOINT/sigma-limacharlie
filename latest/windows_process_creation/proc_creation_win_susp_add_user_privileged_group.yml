@@ -34,24 +34,24 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ' administrators '
+        value: Group Policy Creator Owners
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ' administrateur'
+        value: Schema Admins
 respond:
 - action: report
   metadata:
-    author: Florian Roth (Nextron Systems), Nasreddine Bencherchali (Nextron Systems)
-    description: Detects addition of users to the local administrator group via "Net"
-      or "Add-LocalGroupMember".
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects addition of users to highly privileged groups via "Net" or
+      "Add-LocalGroupMember".
     falsepositives:
-    - Administrative activity
-    level: medium
+    - Administrative activity that must be investigated
+    level: high
     references:
-    - https://blog.talosintelligence.com/2022/08/recent-cyber-attack.html?m=1
+    - https://www.huntress.com/blog/slashandgrab-screen-connect-post-exploitation-in-the-wild-cve-2024-1709-cve-2024-1708
     tags:
     - attack.persistence
     - attack.t1098
-  name: User Added to Local Administrators Group
+  name: User Added To Highly Privileged Group
 

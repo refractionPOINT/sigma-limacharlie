@@ -43,8 +43,8 @@ respond:
 - action: report
   metadata:
     author: Florian Roth (Nextron Systems), Nasreddine Bencherchali (Nextron Systems)
-    description: Detects suspicious command line that adds an account to the local
-      administrators/administrateurs group
+    description: Detects addition of users to the local administrator group via "Net"
+      or "Add-LocalGroupMember".
     falsepositives:
     - Administrative activity
     level: medium
@@ -53,5 +53,5 @@ respond:
     tags:
     - attack.persistence
     - attack.t1098
-  name: Add User to Local Administrators Group
+  name: User Added to Local Administrators Group
 
