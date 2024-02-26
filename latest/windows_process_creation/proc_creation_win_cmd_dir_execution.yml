@@ -11,14 +11,26 @@ detect:
       op: contains
       path: event/COMMAND_LINE
       value: 'dir '
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: ' /s'
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: ' /b'
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /s'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -s'
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /b'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -b'
 respond:
 - action: report
   metadata:

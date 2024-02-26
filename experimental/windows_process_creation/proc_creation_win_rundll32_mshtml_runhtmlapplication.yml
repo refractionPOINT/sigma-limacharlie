@@ -15,23 +15,35 @@ detect:
       op: contains
       path: event/COMMAND_LINE
       value: mshtml
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: RunHTMLApplication
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '#135'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: RunHTMLApplication
 respond:
 - action: report
   metadata:
-    author: Nasreddine Bencherchali (Nextron Systems)
-    description: Detects suspicious command line using the "mshtml.dll" RunHTMLApplication
+    author: Nasreddine Bencherchali (Nextron Systems),  Florian Roth (Nextron Systems),
+      Josh Nickels, frack113, Zaw Min Htun (ZETA)
+    description: 'Detects execution of commands that leverage the "mshtml.dll" RunHTMLApplication
       export to run arbitrary code via different protocol handlers (vbscript, javascript,
-      file, htpp...)
+      file, http...)
+
+      '
     falsepositives:
     - Unlikely
     level: high
     references:
     - https://twitter.com/n1nj4sec/status/1421190238081277959
+    - https://hyp3rlinx.altervista.org/advisories/MICROSOFT_WINDOWS_DEFENDER_TROJAN.WIN32.POWESSERE.G_MITIGATION_BYPASS_PART2.txt
+    - http://hyp3rlinx.altervista.org/advisories/MICROSOFT_WINDOWS_DEFENDER_DETECTION_BYPASS.txt
     tags:
     - attack.defense_evasion
-  name: Mshtml DLL RunHTMLApplication Abuse
+    - attack.execution
+  name: Mshtml.DLL RunHTMLApplication Suspicious Usage
 

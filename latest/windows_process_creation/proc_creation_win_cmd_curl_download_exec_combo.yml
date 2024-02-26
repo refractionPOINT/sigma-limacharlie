@@ -7,10 +7,16 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: ' /c '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /c '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -c '
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE

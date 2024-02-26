@@ -19,25 +19,25 @@ detect:
     - case sensitive: false
       op: contains
       path: Event/EventData/ImagePath
+      value: ' -c '
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ImagePath
       value: ' /r '
     - case sensitive: false
       op: contains
       path: Event/EventData/ImagePath
+      value: ' -r '
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ImagePath
       value: ' /k '
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ImagePath
+      value: ' -k '
   - op: or
     rules:
-    - case sensitive: false
-      op: contains
-      path: Event/EventData/ImagePath
-      value: powershell
-    - case sensitive: false
-      op: contains
-      path: Event/EventData/ImagePath
-      value: pwsh
-    - case sensitive: false
-      op: contains
-      path: Event/EventData/ImagePath
-      value: wscript
     - case sensitive: false
       op: contains
       path: Event/EventData/ImagePath
@@ -49,11 +49,23 @@ detect:
     - case sensitive: false
       op: contains
       path: Event/EventData/ImagePath
-      value: rundll32
+      value: powershell
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ImagePath
+      value: pwsh
     - case sensitive: false
       op: contains
       path: Event/EventData/ImagePath
       value: regsvr32
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ImagePath
+      value: rundll32
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ImagePath
+      value: wscript
   target: log
 respond:
 - action: report
