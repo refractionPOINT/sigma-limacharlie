@@ -14,10 +14,16 @@ detect:
       - not: true
         op: or
         rules:
-        - case sensitive: false
-          op: is
-          path: event/EVENT/EventData/AllowedToDelegateTo
-          value: '-'
+        - op: or
+          rules:
+          - case sensitive: false
+            op: is
+            path: event/EVENT/EventData/AllowedToDelegateTo
+            value: ''
+          - case sensitive: false
+            op: is
+            path: event/EVENT/EventData/AllowedToDelegateTo
+            value: '-'
         - not: true
           op: exists
           path: event/EVENT/EventData/AllowedToDelegateTo

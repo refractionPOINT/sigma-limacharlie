@@ -11,10 +11,16 @@ detect:
     - not: true
       op: or
       rules:
-      - case sensitive: false
-        op: is
-        path: Event/EventData/AllowedToDelegateTo
-        value: '-'
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: Event/EventData/AllowedToDelegateTo
+          value: ''
+        - case sensitive: false
+          op: is
+          path: Event/EventData/AllowedToDelegateTo
+          value: '-'
       - not: true
         op: exists
         path: Event/EventData/AllowedToDelegateTo
