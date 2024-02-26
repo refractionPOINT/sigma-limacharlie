@@ -40,7 +40,7 @@ respond:
     - https://twitter.com/_felamos/status/1204705548668555264
     - https://bohops.com/2019/08/19/dotnet-core-a-vector-for-awl-bypass-defense-evasion/
     tags:
-    - attack.execution
+    - attack.defense_evasion
     - attack.t1218
   name: Dotnet.exe Exec Dll and Execute Unsigned Code LOLBIN
 

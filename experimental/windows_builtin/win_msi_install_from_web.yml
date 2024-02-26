@@ -32,7 +32,7 @@ respond:
     references:
     - https://twitter.com/_st0pp3r_/status/1583922009842802689
     tags:
-    - attack.execution
+    - attack.defense_evasion
     - attack.t1218
     - attack.t1218.007
   name: MSI Installation From Web

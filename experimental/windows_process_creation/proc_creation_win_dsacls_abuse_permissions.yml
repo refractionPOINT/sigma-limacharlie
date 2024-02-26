@@ -59,7 +59,7 @@ respond:
     - https://ss64.com/nt/dsacls.html
     - https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/cc771151(v=ws.11)
     tags:
-    - attack.execution
+    - attack.defense_evasion
     - attack.t1218
   name: Potentially Over Permissive Permissions Granted Using Dsacls.EXE
 

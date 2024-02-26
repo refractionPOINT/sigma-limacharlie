@@ -45,7 +45,7 @@ respond:
     references:
     - https://medium.com/@reegun/curl-exe-is-the-new-rundll32-exe-lolbin-3f79c5f35983
     tags:
-    - attack.execution
+    - attack.defense_evasion
     - attack.t1218
     - attack.command_and_control
     - attack.t1105

@@ -32,14 +32,14 @@ respond:
   metadata:
     author: Florian Roth (Nextron Systems)
     description: Detects ScreenConnect program starts that establish a remote access
-      to that system (not meeting, not remote support)
+      to a system.
     falsepositives:
     - Legitimate use by administrative staff
-    level: high
+    level: medium
     references:
     - https://www.anomali.com/blog/probable-iranian-cyber-actors-static-kitten-conducting-cyberespionage-campaign-targeting-uae-and-kuwait-government-agencies
     tags:
     - attack.initial_access
     - attack.t1133
-  name: Remote Access Tool - ScreenConnect Suspicious Execution
+  name: Remote Access Tool - ScreenConnect Installation Execution
 

@@ -112,7 +112,7 @@ respond:
     - https://labs.sentinelone.com/meteorexpress-mysterious-wiper-paralyzes-iranian-trains-with-epic-troll
     - https://blog.malwarebytes.com/threat-intelligence/2021/08/new-variant-of-konni-malware-used-in-campaign-targetting-russia/
     tags:
-    - attack.execution
+    - attack.defense_evasion
     - attack.t1218
   name: Potentially Suspicious Cabinet File Expansion
 

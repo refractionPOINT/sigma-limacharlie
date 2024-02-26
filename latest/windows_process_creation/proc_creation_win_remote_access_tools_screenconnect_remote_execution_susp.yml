@@ -1,0 +1,61 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/PARENT/COMMAND_LINE
+      value: :\Windows\TEMP\ScreenConnect\
+    - case sensitive: false
+      op: contains
+      path: event/PARENT/COMMAND_LINE
+      value: run.cmd
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cmd.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \curl.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \powershell.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \pwsh.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \wevtutil.exe
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems), Nasreddine Bencherchali (Nextron Systems),
+      @Kostastsale
+    description: 'Detects potentially suspicious child processes launched via the
+      ScreenConnect client service.
+
+      '
+    falsepositives:
+    - If the script being executed make use of any of the utilities mentioned in the
+      detection then they should filtered out or allowed.
+    level: medium
+    references:
+    - https://www.mandiant.com/resources/telegram-malware-iranian-espionage
+    - https://docs.connectwise.com/ConnectWise_Control_Documentation/Get_started/Host_client/View_menu/Backstage_mode
+    - https://www.huntress.com/blog/slashandgrab-screen-connect-post-exploitation-in-the-wild-cve-2024-1709-cve-2024-1708
+    tags:
+    - attack.command_and_control
+    - attack.t1219
+  name: Remote Access Tool - ScreenConnect Potential Suspicious Remote Command Execution
+
