@@ -20,6 +20,10 @@ detect:
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
+        value: \bitsadmin.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
         value: \cmd.exe
       - case sensitive: false
         op: ends with
@@ -28,11 +32,27 @@ detect:
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
+        value: \dllhost.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \net.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \nltest.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
         value: \powershell.exe
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
         value: \pwsh.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \rundll32.exe
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
@@ -54,6 +74,7 @@ respond:
     - https://www.mandiant.com/resources/telegram-malware-iranian-espionage
     - https://docs.connectwise.com/ConnectWise_Control_Documentation/Get_started/Host_client/View_menu/Backstage_mode
     - https://www.huntress.com/blog/slashandgrab-screen-connect-post-exploitation-in-the-wild-cve-2024-1709-cve-2024-1708
+    - https://www.trendmicro.com/en_us/research/24/b/threat-actor-groups-including-black-basta-are-exploiting-recent-.html
     tags:
     - attack.command_and_control
     - attack.t1219
