@@ -1,0 +1,45 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '4624'
+  - case sensitive: false
+    op: is
+    path: Event/EventData/LogonType
+    value: '9'
+  - case sensitive: false
+    op: is
+    path: Event/EventData/LogonProcessName
+    value: Advapi
+  - case sensitive: false
+    op: is
+    path: Event/EventData/AuthenticationPackageName
+    value: Negotiate
+  - case sensitive: false
+    op: is
+    path: Event/EventData/ImpersonationLevel
+    value: '%%1833'
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Michaela Adams, Zach Mathis
+    description: Detects potential token impersonation and theft. Example, when using
+      "DuplicateToken(Ex)" and "ImpersonateLoggedOnUser" with the "LOGON32_LOGON_NEW_CREDENTIALS
+      flag".
+    falsepositives:
+    - Anti-Virus
+    level: medium
+    references:
+    - https://www.elastic.co/fr/blog/how-attackers-abuse-access-token-manipulation
+    - https://www.manageengine.com/log-management/cyber-security/access-token-manipulation.html
+    tags:
+    - attack.defense_evasion
+    - attack.privilege_escalation
+    - attack.t1134.001
+    - stp.4u
+  name: Potential Access Token Abuse
+

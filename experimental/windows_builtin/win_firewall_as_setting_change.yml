@@ -1,0 +1,39 @@
+detect:
+  log type: wel
+  op: or
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '2002'
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '2083'
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '2003'
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '2082'
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '2008'
+  target: log
+respond:
+- action: report
+  metadata:
+    author: frack113, Nasreddine Bencherchali (Nextron Systems)
+    description: Detects activity when the settings of the Windows firewall have been
+      changed
+    level: low
+    references:
+    - https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-r2-and-2008/dd364427(v=ws.10)
+    tags:
+    - attack.defense_evasion
+    - attack.t1562.004
+  name: Windows Firewall Settings Have Been Changed
+

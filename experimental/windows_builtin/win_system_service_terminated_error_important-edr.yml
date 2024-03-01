@@ -1,0 +1,95 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/Provider_Name
+        value: Service Control Manager
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '7023'
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/param1
+          value: ' Antivirus'
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/param1
+          value: ' Firewall'
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/param1
+          value: Application Guard
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/param1
+          value: BitLocker Drive Encryption Service
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/param1
+          value: Encrypting File System
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/param1
+          value: Microsoft Defender
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/param1
+          value: Threat Protection
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/param1
+          value: Windows Event Log
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/Binary
+          value: 770069006e0064006500660065006e006400
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/Binary
+          value: 4500760065006e0074004c006f006700
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/Binary
+          value: 6d0070007300730076006300
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/Binary
+          value: 530065006e0073006500
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/Binary
+          value: '450046005300'
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/Binary
+          value: '420044004500530056004300'
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects important or interesting Windows services that got terminated
+      for whatever reason
+    falsepositives:
+    - Rare false positives could occur since service termination could happen due
+      to multiple reasons
+    level: high
+    references:
+    - https://www.microsoft.com/en-us/security/blog/2023/04/11/guidance-for-investigating-attacks-using-cve-2022-21894-the-blacklotus-campaign/
+    tags:
+    - attack.defense_evasion
+  name: Important Windows Service Terminated With Error
+

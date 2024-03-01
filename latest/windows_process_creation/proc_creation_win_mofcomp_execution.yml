@@ -1,0 +1,128 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \mofcomp.exe
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: mofcomp.exe
+        - op: or
+          rules:
+          - op: or
+            rules:
+            - case sensitive: false
+              op: ends with
+              path: event/PARENT/FILE_PATH
+              value: \cmd.exe
+            - case sensitive: false
+              op: ends with
+              path: event/PARENT/FILE_PATH
+              value: \powershell.exe
+            - case sensitive: false
+              op: ends with
+              path: event/PARENT/FILE_PATH
+              value: \pwsh.exe
+            - case sensitive: false
+              op: ends with
+              path: event/PARENT/FILE_PATH
+              value: \wsl.exe
+            - case sensitive: false
+              op: ends with
+              path: event/PARENT/FILE_PATH
+              value: \wscript.exe
+            - case sensitive: false
+              op: ends with
+              path: event/PARENT/FILE_PATH
+              value: \cscript.exe
+          - op: or
+            rules:
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: \AppData\Local\Temp
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: \Users\Public\
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: \WINDOWS\Temp\
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: '%temp%'
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: '%tmp%'
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: '%appdata%'
+      - not: true
+        op: and
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/PARENT/FILE_PATH
+          value: C:\Windows\System32\wbem\WmiPrvSE.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: C:\Windows\TEMP\
+        - case sensitive: false
+          op: ends with
+          path: event/COMMAND_LINE
+          value: .mof
+    - not: true
+      op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: C:\Windows\TEMP\
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .mof
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: 'Detects execution of the "mofcomp" utility as a child of a suspicious
+      shell or script running utility or by having a suspicious path in the commandline.
+
+      The "mofcomp" utility parses a file containing MOF statements and adds the classes
+      and class instances defined in the file to the WMI repository.
+
+      Attackers abuse this utility to install malicious MOF scripts
+
+      '
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://thedfirreport.com/2022/07/11/select-xmrig-from-sqlserver/
+    - https://github.com/The-DFIR-Report/Sigma-Rules/blob/75260568a7ffe61b2458ca05f6f25914efb44337/win_mofcomp_execution.yml
+    - https://docs.microsoft.com/en-us/windows/win32/wmisdk/mofcomp
+    tags:
+    - attack.defense_evasion
+    - attack.t1218
+  name: Potential Suspicious Mofcomp Execution
+

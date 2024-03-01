@@ -1,0 +1,58 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \mstsc.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: mstsc.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/COMMAND_LINE
+          value: .rdp
+        - case sensitive: false
+          op: ends with
+          path: event/COMMAND_LINE
+          value: .rdp"
+    - not: true
+      op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/PARENT/FILE_PATH
+        value: C:\Windows\System32\lxss\wslhost.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: C:\ProgramData\Microsoft\WSL\wslg.rdp
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems), Christopher Peacock @securepeacock
+    description: Detects potential RDP connection via Mstsc using a local ".rdp" file
+    falsepositives:
+    - Likely with legitimate usage of ".rdp" files
+    level: low
+    references:
+    - https://www.blackhillsinfosec.com/rogue-rdp-revisiting-initial-access-methods/
+    - https://blog.thickmints.dev/mintsights/detecting-rogue-rdp/
+    tags:
+    - attack.command_and_control
+    - attack.t1219
+  name: Mstsc.EXE Execution With Local RDP File
+

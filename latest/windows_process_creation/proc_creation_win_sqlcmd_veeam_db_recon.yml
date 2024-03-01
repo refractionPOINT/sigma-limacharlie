@@ -1,0 +1,67 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \sqlcmd.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: VeeamBackup
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: 'From '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: BackupRepositories
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Backups
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Credentials
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: HostCreds
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: SmbFileShares
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Ssh_creds
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: VSphereInfo
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects potentially suspicious SQL queries using SQLCmd targeting
+      the Veeam backup databases in order to steal information.
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://labs.withsecure.com/publications/fin7-target-veeam-servers
+    tags:
+    - attack.collection
+    - attack.t1005
+  name: Veeam Backup Database Suspicious Query
+

@@ -1,0 +1,30 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/EventData/Provider_Name
+      value: Service Control Manager
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '7023'
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects Windows services that got terminated for whatever reason
+    falsepositives:
+    - False positives could occur since service termination could happen due to multiple
+      reasons
+    level: low
+    references:
+    - https://www.microsoft.com/en-us/security/blog/2023/04/11/guidance-for-investigating-attacks-using-cve-2022-21894-the-blacklotus-campaign/
+    tags:
+    - attack.defense_evasion
+  name: Windows Service Terminated With Error
+

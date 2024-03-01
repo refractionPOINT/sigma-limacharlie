@@ -1,0 +1,55 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \winget.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: winget.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'source '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'add '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: http://
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: 'Detects usage of winget to add a new insecure (http) download source.
+
+      Winget will not allow the addition of insecure sources, hence this could indicate
+      potential suspicious activity (or typos)
+
+      '
+    falsepositives:
+    - False positives might occur if the users are unaware of such control checks
+    level: high
+    references:
+    - https://learn.microsoft.com/en-us/windows/package-manager/winget/source
+    - https://github.com/nasbench/Misc-Research/tree/b9596e8109dcdb16ec353f316678927e507a5b8d/LOLBINs/Winget
+    tags:
+    - attack.defense_evasion
+    - attack.execution
+    - attack.t1059
+  name: Add Insecure Download Source To Winget
+

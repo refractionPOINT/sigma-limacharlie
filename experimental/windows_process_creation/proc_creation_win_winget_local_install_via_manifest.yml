@@ -1,0 +1,66 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \winget.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: winget.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: install
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' add '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-m '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: --manifest
+respond:
+- action: report
+  metadata:
+    author: Sreeman, Florian Roth (Nextron Systems), frack113
+    description: 'Detects usage of winget to install applications via manifest file.
+      Adversaries can abuse winget to download payloads remotely and execute them.
+
+      The manifest option enables you to install an application by passing in a YAML
+      file directly to the client.
+
+      Winget can be used to download and install exe, msi or msix files later.
+
+      '
+    falsepositives:
+    - Some false positives are expected in some environment that may use this functionality
+      to install and test their custom applications
+    level: medium
+    references:
+    - https://docs.microsoft.com/en-us/windows/package-manager/winget/install#local-install
+    - https://lolbas-project.github.io/lolbas/Binaries/Winget/
+    - https://github.com/nasbench/Misc-Research/tree/b9596e8109dcdb16ec353f316678927e507a5b8d/LOLBINs/Winget
+    tags:
+    - attack.defense_evasion
+    - attack.execution
+    - attack.t1059
+  name: Install New Package Via Winget Local Manifest
+

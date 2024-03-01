@@ -1,0 +1,86 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .DownloadString(
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .DownloadFile(
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'Invoke-WebRequest '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'iwr '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ;iex $
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '| IEX'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '|IEX '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: I`E`X
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: I`EX
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: IE`X
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'iex '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: IEX (
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: IEX(
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Invoke-Expression
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects PowerShell download and execution cradles.
+    falsepositives:
+    - Some PowerShell installers were seen using similar combinations. Apply filters
+      accordingly
+    level: high
+    references:
+    - https://github.com/VirtualAlllocEx/Payload-Download-Cradles/blob/88e8eca34464a547c90d9140d70e9866dcbc6a12/Download-Cradles.cmd
+    - https://labs.withsecure.com/publications/fin7-target-veeam-servers
+    tags:
+    - attack.execution
+    - attack.t1059
+  name: PowerShell Download and Execution Cradles
+

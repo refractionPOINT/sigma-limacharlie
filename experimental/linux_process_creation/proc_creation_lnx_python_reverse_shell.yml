@@ -1,0 +1,49 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - case sensitive: true
+      op: contains
+      path: event/FILE_PATH
+      value: python
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' -c '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: import
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: pty
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: spawn(
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: .connect
+respond:
+- action: report
+  metadata:
+    author: '@d4ns4n_, Nasreddine Bencherchali (Nextron Systems)'
+    description: Detects executing python with keywords related to network activity
+      that could indicate a potential reverse shell
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet
+    - https://www.revshells.com/
+    tags:
+    - attack.execution
+  name: Potential Python Reverse Shell
+

@@ -1,0 +1,49 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/Provider_Name
+        value: Service Control Manager
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '7034'
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/param1
+        value: Message Queuing
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/Binary
+          value: 4d0053004d005100
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/Binary
+          value: 6d0073006d007100
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects important or interesting Windows services that got terminated
+      unexpectedly.
+    falsepositives:
+    - Rare false positives could occur since service termination could happen due
+      to multiple reasons
+    level: high
+    references:
+    - https://www.randori.com/blog/vulnerability-analysis-queuejumper-cve-2023-21554/
+    tags:
+    - attack.defense_evasion
+  name: Important Windows Service Terminated Unexpectedly
+

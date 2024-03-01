@@ -1,0 +1,103 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \pwsh.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: PowerShell.EXE
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: pwsh.dll
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'curl '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Invoke-WebRequest
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'iwr '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'wget '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ://1
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ://2
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ://3
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ://4
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ://5
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ://6
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ://7
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ://8
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ://9
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects calls to PowerShell with Invoke-WebRequest cmdlet using direct
+      IP access
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://www.huntress.com/blog/critical-vulnerabilities-in-papercut-print-management-software
+    tags:
+    - attack.command_and_control
+    - attack.t1105
+  name: Suspicious Invoke-WebRequest Execution With DirectIP
+
