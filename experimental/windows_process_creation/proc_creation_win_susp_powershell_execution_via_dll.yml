@@ -14,29 +14,25 @@ detect:
         - case sensitive: false
           op: ends with
           path: event/FILE_PATH
-          value: \rundll32.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \regsvcs.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
           value: \InstallUtil.exe
         - case sensitive: false
           op: ends with
           path: event/FILE_PATH
-          value: \regasm.exe
+          value: \RegAsm.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \RegSvcs.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \regsvr32.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \rundll32.exe
       - op: or
         rules:
-        - case sensitive: false
-          op: is
-          path: event/ORIGINAL_FILE_NAME
-          value: RUNDLL32.EXE
-        - case sensitive: false
-          op: is
-          path: event/ORIGINAL_FILE_NAME
-          value: RegSvcs.exe
         - case sensitive: false
           op: is
           path: event/ORIGINAL_FILE_NAME
@@ -45,6 +41,18 @@ detect:
           op: is
           path: event/ORIGINAL_FILE_NAME
           value: RegAsm.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: RegSvcs.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: REGSVR32.EXE
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: RUNDLL32.EXE
     - op: or
       rules:
       - case sensitive: false
@@ -54,11 +62,15 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: DownloadString
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: FromBase64String
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: Invoke-Expression
+        value: 'ICM '
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -70,17 +82,17 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: 'ICM '
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: DownloadString
+        value: Invoke-Expression
 respond:
 - action: report
   metadata:
-    author: Markus Neis, Nasreddine Bencherchali
-    description: Detects potential PowerShell execution from a DLL instead of the
-      usual PowerShell process as seen used in PowerShdll
+    author: Markus Neis, Nasreddine Bencherchali (Nextron Systems)
+    description: 'Detects potential PowerShell execution from a DLL instead of the
+      usual PowerShell process as seen used in PowerShdll.
+
+      This detection assumes that PowerShell commands are passed via the CommandLine.
+
+      '
     falsepositives:
     - Unknown
     level: high
