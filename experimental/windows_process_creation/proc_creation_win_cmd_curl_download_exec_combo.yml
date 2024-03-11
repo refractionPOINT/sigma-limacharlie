@@ -12,27 +12,29 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ' /c '
+        value: ' -c '
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ' -c '
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: 'curl '
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: http
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: -o
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: '&'
+        value: ' /c '
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'curl '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: http
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -o
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '&'
 respond:
 - action: report
   metadata:

@@ -22,37 +22,41 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ' /g'
+        value: ' -g'
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ' -g'
+        value: ' /g'
     - op: or
       rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ' /u'
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
         value: ' -u'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /u'
     - op: or
       rules:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ' /p'
+        value: ' -p'
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ' -p'
+        value: ' /p'
 respond:
 - action: report
   metadata:
     author: frack113, Nasreddine Bencherchali (Nextron Systems)
-    description: Detects usage of cmdkey to add generic credentials. As an example,
-      this has to be used before connecting to an RDP session via command line interface.
+    description: 'Detects usage of "cmdkey.exe" to add generic credentials.
+
+      As an example, this can be used before connecting to an RDP session via command
+      line interface.
+
+      '
     falsepositives:
     - Legitimate usage for administration purposes
     level: medium

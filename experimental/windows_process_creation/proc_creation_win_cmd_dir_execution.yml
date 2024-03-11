@@ -5,45 +5,32 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: and
+  - op: or
     rules:
     - case sensitive: false
-      op: contains
+      op: matches
       path: event/COMMAND_LINE
-      value: 'dir '
-    - op: or
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ' /s'
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ' -s'
-    - op: or
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ' /b'
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ' -b'
+      re: .*dir.*\-s.*
+    - case sensitive: false
+      op: matches
+      path: event/COMMAND_LINE
+      re: .*dir.*/s.*
 respond:
 - action: report
   metadata:
     author: frack113
-    description: Detects usage of the "dir" command that is part of Windows batch/cmd
-      to collect information about directories
+    description: 'Detects usage of the "dir" command part of Widows CMD with the "/S"
+      command line flag in order to enumerate files in a specified directory and all
+      subdirectories.
+
+      '
     falsepositives:
-    - Unknown
+    - Likely
     level: low
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1217/T1217.md
     tags:
     - attack.discovery
     - attack.t1217
-  name: Files And Subdirectories Listing Using Dir
+  name: File Enumeration Via Dir Command
 

@@ -20,11 +20,11 @@ detect:
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
-            value: '/F:'
+            value: '-F:'
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
-            value: '-F:'
+            value: '/F:'
       - op: or
         rules:
         - op: or

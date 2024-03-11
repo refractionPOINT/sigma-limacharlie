@@ -22,11 +22,11 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: /addstore
+        value: -addstore
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: -addstore
+        value: /addstore
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE

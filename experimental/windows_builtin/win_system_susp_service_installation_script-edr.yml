@@ -16,29 +16,17 @@ detect:
     - op: or
       rules:
       - case sensitive: false
-        op: contains
+        op: is
         path: event/EVENT/EventData/ImagePath
-        value: ' /c '
+        value: '[ Subexpression: [''* -c *'', ''* /c *''] ]'
       - case sensitive: false
-        op: contains
+        op: is
         path: event/EVENT/EventData/ImagePath
-        value: ' -c '
+        value: '[ Subexpression: [''* -r *'', ''* /r *''] ]'
       - case sensitive: false
-        op: contains
+        op: is
         path: event/EVENT/EventData/ImagePath
-        value: ' /r '
-      - case sensitive: false
-        op: contains
-        path: event/EVENT/EventData/ImagePath
-        value: ' -r '
-      - case sensitive: false
-        op: contains
-        path: event/EVENT/EventData/ImagePath
-        value: ' /k '
-      - case sensitive: false
-        op: contains
-        path: event/EVENT/EventData/ImagePath
-        value: ' -k '
+        value: '[ Subexpression: [''* -k *'', ''* /k *''] ]'
     - op: or
       rules:
       - case sensitive: false
