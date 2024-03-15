@@ -24,11 +24,11 @@ detect:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: ' /E '
+          value: ' -E '
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: ' -E '
+          value: ' /E '
     - not: true
       op: and
       rules:

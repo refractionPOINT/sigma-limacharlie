@@ -22,11 +22,11 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ' /cab '
+        value: ' -cab '
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ' -cab '
+        value: ' /cab '
 respond:
 - action: report
   metadata:

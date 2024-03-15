@@ -18,22 +18,22 @@ detect:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: ' /i:'
+          value: ' -i:'
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: ' -i:'
+          value: ' /i:'
     - not: true
       op: or
       rules:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ' /n '
+        value: ' -n '
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ' -n '
+        value: ' /n '
 respond:
 - action: report
   metadata:

@@ -34,11 +34,11 @@ detect:
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
-            value: ' /af '
+            value: ' -af '
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
-            value: ' -af '
+            value: ' /af '
 respond:
 - action: report
   metadata:

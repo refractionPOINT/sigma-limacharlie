@@ -21,24 +21,26 @@ detect:
           value: appcmd.exe
       - op: and
         rules:
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: install
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: module
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: install
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: module
         - op: or
           rules:
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
-            value: '/name:'
+            value: '-name:'
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
-            value: '-name:'
+            value: '/name:'
     - case sensitive: false
       not: true
       op: is

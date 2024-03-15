@@ -11,28 +11,30 @@ detect:
       op: ends with
       path: event/FILE_PATH
       value: \reg.exe
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: 'add '
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: SYSTEM\CurrentControlSet\Services\
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: ' ImagePath '
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'add '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: SYSTEM\CurrentControlSet\Services\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' ImagePath '
     - op: or
       rules:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ' /d '
+        value: ' -d '
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ' -d '
+        value: ' /d '
 respond:
 - action: report
   metadata:

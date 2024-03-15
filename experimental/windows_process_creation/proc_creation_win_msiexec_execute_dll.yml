@@ -18,11 +18,11 @@ detect:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: ' /y'
+          value: ' -y'
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: ' -y'
+          value: ' /y'
     - not: true
       op: or
       rules:

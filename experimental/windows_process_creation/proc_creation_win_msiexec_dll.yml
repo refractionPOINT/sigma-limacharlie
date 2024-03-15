@@ -22,11 +22,11 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ' /z '
+        value: ' -z '
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ' -z '
+        value: ' /z '
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
