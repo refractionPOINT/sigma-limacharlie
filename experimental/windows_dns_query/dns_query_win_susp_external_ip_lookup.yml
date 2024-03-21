@@ -4,146 +4,182 @@ detect:
   rules:
   - op: or
     rules:
-    - case sensitive: false
-      op: contains
-      path: event/DOMAIN_NAME
-      value: api.2ip.ua
-    - case sensitive: false
-      op: contains
-      path: event/DOMAIN_NAME
-      value: api.bigdatacloud.net
-    - case sensitive: false
-      op: contains
-      path: event/DOMAIN_NAME
-      value: api.ipify.org
-    - case sensitive: false
-      op: contains
-      path: event/DOMAIN_NAME
-      value: bot.whatismyipaddress.com
-    - case sensitive: false
-      op: contains
-      path: event/DOMAIN_NAME
-      value: canireachthe.net
-    - case sensitive: false
-      op: contains
-      path: event/DOMAIN_NAME
-      value: checkip.amazonaws.com
-    - case sensitive: false
-      op: contains
-      path: event/DOMAIN_NAME
-      value: checkip.dyndns.org
-    - case sensitive: false
-      op: contains
-      path: event/DOMAIN_NAME
-      value: curlmyip.com
-    - case sensitive: false
-      op: contains
-      path: event/DOMAIN_NAME
-      value: db-ip.com
-    - case sensitive: false
-      op: contains
-      path: event/DOMAIN_NAME
-      value: edns.ip-api.com
-    - case sensitive: false
-      op: contains
-      path: event/DOMAIN_NAME
-      value: eth0.me
-    - case sensitive: false
-      op: contains
-      path: event/DOMAIN_NAME
-      value: freegeoip.app
-    - case sensitive: false
-      op: contains
-      path: event/DOMAIN_NAME
-      value: geoipy.com
-    - case sensitive: false
-      op: contains
-      path: event/DOMAIN_NAME
-      value: getip.pro
-    - case sensitive: false
-      op: contains
-      path: event/DOMAIN_NAME
-      value: icanhazip.com
-    - case sensitive: false
-      op: contains
-      path: event/DOMAIN_NAME
-      value: ident.me
-    - case sensitive: false
-      op: contains
-      path: event/DOMAIN_NAME
-      value: ifconfig.io
-    - case sensitive: false
-      op: contains
-      path: event/DOMAIN_NAME
-      value: ifconfig.me
-    - case sensitive: false
-      op: contains
-      path: event/DOMAIN_NAME
-      value: ip-api.com
-    - case sensitive: false
-      op: contains
-      path: event/DOMAIN_NAME
-      value: ip.anysrc.net
-    - case sensitive: false
-      op: contains
-      path: event/DOMAIN_NAME
-      value: ip.tyk.nu
-    - case sensitive: false
-      op: contains
-      path: event/DOMAIN_NAME
-      value: ipaddressworld.com
-    - case sensitive: false
-      op: contains
-      path: event/DOMAIN_NAME
-      value: ipapi.co
-    - case sensitive: false
-      op: contains
-      path: event/DOMAIN_NAME
-      value: ipconfig.io
-    - case sensitive: false
-      op: contains
-      path: event/DOMAIN_NAME
-      value: ipecho.net
-    - case sensitive: false
-      op: contains
-      path: event/DOMAIN_NAME
-      value: ipinfo.io
-    - case sensitive: false
-      op: contains
-      path: event/DOMAIN_NAME
-      value: ipof.in
-    - case sensitive: false
-      op: contains
-      path: event/DOMAIN_NAME
-      value: ipv4.icanhazip.com
-    - case sensitive: false
-      op: contains
-      path: event/DOMAIN_NAME
-      value: ipv4bot.whatismyipaddress.com
-    - case sensitive: false
-      op: contains
-      path: event/DOMAIN_NAME
-      value: ipwho.is
-    - case sensitive: false
-      op: contains
-      path: event/DOMAIN_NAME
-      value: l2.io
-    - case sensitive: false
-      op: contains
-      path: event/DOMAIN_NAME
-      value: myexternalip.com
-    - case sensitive: false
-      op: contains
-      path: event/DOMAIN_NAME
-      value: wgetip.com
-    - case sensitive: false
-      op: contains
-      path: event/DOMAIN_NAME
-      value: whatismyip.akamai.com
-    - case sensitive: false
-      op: contains
-      path: event/DOMAIN_NAME
-      value: wtfismyip.com
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/DOMAIN_NAME
+        value: ip.cn
+      - case sensitive: false
+        op: is
+        path: event/DOMAIN_NAME
+        value: l2.io
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: api.2ip.ua
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: api.bigdatacloud.net
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: api.ipify.org
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: bot.whatismyipaddress.com
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: canireachthe.net
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: checkip.amazonaws.com
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: checkip.dyndns.org
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: curlmyip.com
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: db-ip.com
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: edns.ip-api.com
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: eth0.me
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: freegeoip.app
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: geoipy.com
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: getip.pro
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: icanhazip.com
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: ident.me
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: ifconfig.io
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: ifconfig.me
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: ip-api.com
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: ip.360.cn
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: ip.anysrc.net
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: ip.taobao.com
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: ip.tyk.nu
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: ipaddressworld.com
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: ipapi.co
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: ipconfig.io
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: ipecho.net
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: ipinfo.io
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: ipip.net
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: ipof.in
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: ipv4.icanhazip.com
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: ipv4bot.whatismyipaddress.com
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: ipv6-test.com
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: ipwho.is
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: jsonip.com
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: myexternalip.com
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: seeip.org
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: wgetip.com
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: whatismyip.akamai.com
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: whois.pconline.com.cn
+      - case sensitive: false
+        op: contains
+        path: event/DOMAIN_NAME
+        value: wtfismyip.com
   - not: true
     op: or
     rules:
