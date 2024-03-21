@@ -27,7 +27,7 @@ respond:
     - Unknown
     level: high
     references:
-    - https://www.elastic.co/guide/en/security/current/unusual-child-process-of-dns.exe.html
+    - https://www.elastic.co/guide/en/security/current/unusual-child-process-of-dns-exe.html
     tags:
     - attack.initial_access
     - attack.t1133
