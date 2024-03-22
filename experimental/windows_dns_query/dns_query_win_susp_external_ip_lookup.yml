@@ -9,7 +9,7 @@ detect:
       - case sensitive: false
         op: is
         path: event/DOMAIN_NAME
-        value: ip.cn
+        value: www.ip.cn
       - case sensitive: false
         op: is
         path: event/DOMAIN_NAME
