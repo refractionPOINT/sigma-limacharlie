@@ -1,0 +1,26 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - case sensitive: false
+    op: is
+    path: event/EVENT/System/EventID
+    value: '3036'
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects blocked image load events with revoked certificates by code
+      integrity.
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/event-id-explanations
+    - https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/event-tag-explanations
+    - Internal Research
+    tags:
+    - attack.privilege_escalation
+  name: CodeIntegrity - Blocked Image Load With Revoked Certificate
+

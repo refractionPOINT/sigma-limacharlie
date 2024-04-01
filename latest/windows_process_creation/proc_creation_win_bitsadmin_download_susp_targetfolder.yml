@@ -1,0 +1,97 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \bitsadmin.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: bitsadmin.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /transfer '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /create '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /addfile '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: :\Perflogs
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: :\ProgramData\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: :\Temp\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: :\Users\Public\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: :\Windows\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \AppData\Local\Temp\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \AppData\Roaming\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Desktop\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '%ProgramData%'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '%public%'
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems), Nasreddine Bencherchali (Nextron Systems)
+    description: Detects usage of bitsadmin downloading a file to a suspicious target
+      folder
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://blog.netspi.com/15-ways-to-download-a-file/#bitsadmin
+    - https://isc.sans.edu/diary/22264
+    - https://lolbas-project.github.io/lolbas/Binaries/Bitsadmin/
+    - https://blog.talosintelligence.com/breaking-the-silence-recent-truebot-activity/
+    tags:
+    - attack.defense_evasion
+    - attack.persistence
+    - attack.t1197
+    - attack.s0190
+    - attack.t1036.003
+  name: File Download Via Bitsadmin To A Suspicious Target Folder
+

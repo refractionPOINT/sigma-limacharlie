@@ -1,0 +1,59 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \rundll32.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: RUNDLL32.EXE
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: rundll32
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: advpack
+    - op: or
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '#+'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '12'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '#-'
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems), Nasreddine Bencherchali (Nextron Systems)
+    description: Detects execution of "rundll32" calling "advpack.dll" with potential
+      obfuscated ordinal calls in order to leverage the "RegisterOCX" function
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://twitter.com/Hexacorn/status/1224848930795552769
+    - http://www.hexacorn.com/blog/2020/02/05/stay-positive-lolbins-not/
+    tags:
+    - attack.defense_evasion
+  name: Suspicious Advpack Call Via Rundll32.EXE
+

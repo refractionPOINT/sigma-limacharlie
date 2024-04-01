@@ -1,0 +1,119 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \regsvr32.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: REGSVR32.EXE
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .bin
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .bmp
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .cr2
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .dat
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .eps
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .gif
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .ico
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .jpeg
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .jpg
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .nef
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .orf
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .png
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .raw
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .sr2
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .temp
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .tif
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .tiff
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .tmp
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .rtf
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .txt
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems), frack113
+    description: Detects the execution of REGSVR32.exe with DLL files masquerading
+      as other files
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://thedfirreport.com/2021/11/29/continuing-the-bazar-ransomware-story/
+    - https://blog.talosintelligence.com/2021/10/threat-hunting-in-large-datasets-by.html
+    - https://guides.lib.umich.edu/c.php?g=282942&p=1885348
+    tags:
+    - attack.defense_evasion
+    - attack.t1218.010
+  name: Regsvr32 DLL Execution With Suspicious File Extension
+

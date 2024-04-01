@@ -1,0 +1,53 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \GoogleUpdate.exe
+    - not: true
+      op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: \Google
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \setup.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: chrome_updater.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: chrome_installer.exe
+      - not: true
+        op: exists
+        path: event/FILE_PATH
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects potentially suspicious child processes of "GoogleUpdate.exe"
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.ncsc.gov.uk/static-assets/documents/malware-analysis-reports/goofy-guineapig/NCSC-MAR-Goofy-Guineapig.pdf
+    tags:
+    - attack.defense_evasion
+  name: Potentially Suspicious GoogleUpdate Child Process
+

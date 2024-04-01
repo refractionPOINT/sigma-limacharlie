@@ -1,0 +1,48 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \rundll32.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: RUNDLL32.EXE
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: rundll32
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '#+'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '#-'
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects execution of "rundll32" with potential obfuscated ordinal
+      calls
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - Internal Research
+    tags:
+    - attack.defense_evasion
+  name: Potential Obfuscated Ordinal Call Via Rundll32
+

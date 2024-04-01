@@ -1,0 +1,232 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u0410"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u0412"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u0415"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u041A"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u041C"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u041D"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u041E"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u0420"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u0421"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u0422"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u0425"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u0405"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u0406"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u0408"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u04AE"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u04C0"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u050C"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u051A"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u051C"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u0391"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u0392"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u0395"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u0396"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u0397"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u0399"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u039A"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u039C"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u039D"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u039F"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u03A1"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u03A4"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u03A5"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u03A7"
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u0430"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u0435"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u043E"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u0440"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u0441"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u0445"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u0455"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u0456"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u04CF"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u0458"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u04BB"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u0501"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u051B"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u051D"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u03BF"
+respond:
+- action: report
+  metadata:
+    author: Micah Babinski, @micahbabinski
+    description: 'Detects the presence of unicode characters which are homoglyphs,
+      or identical in appearance, to ASCII letter characters.
+
+      This is used as an obfuscation and masquerading techniques. Only "perfect" homoglyphs
+      are included; these are characters that
+
+      are indistinguishable from ASCII characters and thus may make excellent candidates
+      for homoglyph attack characters.
+
+      '
+    falsepositives:
+    - Commandlines with legitimate Cyrillic text; will likely require tuning (or not
+      be usable) in countries where these alphabets are in use.
+    level: medium
+    references:
+    - https://redcanary.com/threat-detection-report/threats/socgholish/#threat-socgholish
+    - http://www.irongeek.com/homoglyph-attack-generator.php
+    tags:
+    - attack.defense_evasion
+    - attack.t1036
+    - attack.t1036.003
+  name: Potential Homoglyph Attack Using Lookalike Characters
+

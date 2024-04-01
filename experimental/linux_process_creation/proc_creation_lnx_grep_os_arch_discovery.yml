@@ -1,0 +1,61 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /grep
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: aarch64
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: arm
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: i386
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: i686
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: mips
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: x86_64
+respond:
+- action: report
+  metadata:
+    author: Joseliyo Sanchez, @Joseliyo_Jstnk
+    description: 'Detects the use of grep to identify information about the operating
+      system architecture. Often combined beforehand with the execution of "uname"
+      or "cat /proc/cpuinfo"
+
+      '
+    falsepositives:
+    - Unknown
+    level: low
+    references:
+    - https://blogs.jpcert.or.jp/en/2023/05/gobrat.html
+    - https://jstnk9.github.io/jstnk9/research/GobRAT-Malware/
+    - https://www.virustotal.com/gui/file/60bcd645450e4c846238cf0e7226dc40c84c96eba99f6b2cffcd0ab4a391c8b3/detection
+    - https://www.virustotal.com/gui/file/3e44c807a25a56f4068b5b8186eee5002eed6f26d665a8b791c472ad154585d1/detection
+    tags:
+    - attack.discovery
+    - attack.t1082
+  name: OS Architecture Discovery Via Grep
+

@@ -1,0 +1,29 @@
+detect:
+  log type: wel
+  op: or
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '3021'
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '3022'
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects the load of a revoked kernel driver
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/event-id-explanations
+    - https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/event-tag-explanations
+    - Internal Research
+    tags:
+    - attack.privilege_escalation
+  name: CodeIntegrity - Revoked Kernel Driver Loaded
+

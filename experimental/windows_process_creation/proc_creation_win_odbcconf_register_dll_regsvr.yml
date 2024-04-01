@@ -1,0 +1,54 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \odbcconf.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: odbcconf.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'REGSVR '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .dll
+respond:
+- action: report
+  metadata:
+    author: Kirill Kiryanov, Beyu Denis, Daniil Yugoslavskiy, oscd.community, Nasreddine
+      Bencherchali (Nextron Systems)
+    description: Detects execution of "odbcconf" with "REGSVR" in order to register
+      a new DLL (equivalent to running regsvr32). Attackers abuse this to install
+      and run malicious DLLs.
+    falsepositives:
+    - Legitimate DLLs being registered via "odbcconf" will generate false positives.
+      Investigate the path of the DLL and its content to determine if the action is
+      authorized.
+    level: medium
+    references:
+    - https://learn.microsoft.com/en-us/sql/odbc/odbcconf-exe?view=sql-server-ver16
+    - https://lolbas-project.github.io/lolbas/Binaries/Odbcconf/
+    - https://redcanary.com/blog/raspberry-robin/
+    - https://web.archive.org/web/20191023232753/https://twitter.com/Hexacorn/status/1187143326673330176
+    - https://www.hexacorn.com/blog/2020/08/23/odbcconf-lolbin-trifecta/
+    - https://www.trendmicro.com/en_us/research/17/h/backdoor-carrying-emails-set-sights-on-russian-speaking-businesses.html
+    tags:
+    - attack.defense_evasion
+    - attack.t1218.008
+  name: New DLL Registered Via Odbcconf.EXE
+

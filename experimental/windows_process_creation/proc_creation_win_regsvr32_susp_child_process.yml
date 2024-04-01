@@ -1,0 +1,102 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \regsvr32.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \calc.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \cscript.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \explorer.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \mshta.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \net.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \net1.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \nltest.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \notepad.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \pwsh.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \reg.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \schtasks.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \werfault.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \wscript.exe
+    - not: true
+      op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \werfault.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -u -p '
+respond:
+- action: report
+  metadata:
+    author: elhoim, Florian Roth (Nextron Systems), Nasreddine Bencherchali (Nextron
+      Systems)
+    description: Detects potentially suspicious child processes of "regsvr32.exe".
+    falsepositives:
+    - Unlikely, but can rarely occur. Apply additional filters accordingly.
+    level: high
+    references:
+    - https://redcanary.com/blog/intelligence-insights-april-2022/
+    - https://www.echotrail.io/insights/search/regsvr32.exe
+    - https://www.ired.team/offensive-security/code-execution/t1117-regsvr32-aka-squiblydoo
+    tags:
+    - attack.defense_evasion
+    - attack.t1218.010
+  name: Potentially Suspicious Child Process Of Regsvr32
+

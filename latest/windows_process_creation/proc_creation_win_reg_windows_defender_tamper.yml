@@ -1,0 +1,181 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \reg.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: reg.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: SOFTWARE\Microsoft\Windows Defender\
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: SOFTWARE\Policies\Microsoft\Windows Defender Security Center
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: SOFTWARE\Policies\Microsoft\Windows Defender\
+    - op: or
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' add '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: d 0
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: DisallowExploitProtectionOverride
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: EnableControlledFolderAccess
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: MpEnablePus
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: PUAProtection
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: SpynetReporting
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: SubmitSamplesConsent
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: TamperProtection
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' add '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: d 1
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: DisableAntiSpyware
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: DisableAntiSpywareRealtimeProtection
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: DisableAntiVirus
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: DisableArchiveScanning
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: DisableBehaviorMonitoring
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: DisableBlockAtFirstSeen
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: DisableConfig
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: DisableEnhancedNotifications
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: DisableIntrusionPreventionSystem
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: DisableIOAVProtection
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: DisableOnAccessProtection
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: DisablePrivacyMode
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: DisableRealtimeMonitoring
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: DisableRoutinelyTakingAction
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: DisableScanOnRealtimeEnable
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: DisableScriptScanning
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: Notification_Suppress
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: SignatureDisableUpdateOnStartupWithoutEngine
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems), Swachchhanda Shrawan Poudel, Nasreddine
+      Bencherchali (Nextron Systems)
+    description: Detects the usage of "reg.exe" to tamper with different Windows Defender
+      registry keys in order to disable some important features related to protection
+      and detection
+    falsepositives:
+    - Rare legitimate use by administrators to test software (should always be investigated)
+    level: high
+    references:
+    - https://thedfirreport.com/2022/03/21/apt35-automates-initial-access-using-proxyshell/
+    - https://github.com/swagkarna/Defeat-Defender-V1.2.0
+    - https://www.elevenforum.com/t/video-guide-how-to-completely-disable-microsoft-defender-antivirus.14608/page-2
+    tags:
+    - attack.defense_evasion
+    - attack.t1562.001
+  name: Suspicious Windows Defender Registry Key Tampering Via Reg.EXE
+

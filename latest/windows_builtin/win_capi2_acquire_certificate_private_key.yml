@@ -1,0 +1,23 @@
+detect:
+  case sensitive: false
+  log type: wel
+  op: is
+  path: Event/System/EventID
+  target: log
+  value: '70'
+respond:
+- action: report
+  metadata:
+    author: Zach Mathis
+    description: Detects when an application acquires a certificate private key
+    falsepositives:
+    - Legitimate application requesting certificate exports will trigger this. Apply
+      additional filters as needed
+    level: medium
+    references:
+    - https://www.splunk.com/en_us/blog/security/breaking-the-chain-defending-against-certificate-services-abuse.html
+    tags:
+    - attack.credential_access
+    - attack.t1649
+  name: Certificate Private Key Acquired
+

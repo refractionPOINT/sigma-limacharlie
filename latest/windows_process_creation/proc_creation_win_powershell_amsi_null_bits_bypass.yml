@@ -1,0 +1,33 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: if(0){{{0}}}' -f $(0 -as [char]) +
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: '#<NULL>'
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects usage of special strings/null bits in order to potentially
+      bypass AMSI functionalities
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://github.com/r00t-3xp10it/hacking-material-books/blob/43cb1e1932c16ff1f58b755bc9ab6b096046853f/obfuscation/simple_obfuscation.md#amsi-bypass-using-null-bits-satoshi
+    tags:
+    - attack.defense_evasion
+    - attack.t1562.001
+  name: Potential AMSI Bypass Using NULL Bits
+

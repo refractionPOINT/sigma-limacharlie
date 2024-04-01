@@ -1,0 +1,25 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - case sensitive: false
+    op: is
+    path: event/EVENT/System/EventID
+    value: '3001'
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects the presence of a loaded unsigned kernel module on the system.
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/event-id-explanations
+    - https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/event-tag-explanations
+    - Internal Research
+    tags:
+    - attack.privilege_escalation
+  name: CodeIntegrity - Unsigned Kernel Module Loaded
+

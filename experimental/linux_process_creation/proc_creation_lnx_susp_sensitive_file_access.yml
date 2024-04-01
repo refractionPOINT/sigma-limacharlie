@@ -1,0 +1,136 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /cat
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /echo
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /grep
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /head
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /more
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /tail
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '>'
+      - op: or
+        rules:
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /emacs
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /nano
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /sed
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /vi
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /vim
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /bin/login
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /bin/passwd
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /boot/
+      - case sensitive: false
+        op: matches
+        path: event/COMMAND_LINE
+        re: .*/etc/.*\.conf.*
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /etc/cron.
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /etc/crontab
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /etc/hosts
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /etc/init.d
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /etc/sudoers
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /opt/bin/
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /sbin
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /usr/bin/
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /usr/local/bin/
+respond:
+- action: report
+  metadata:
+    author: '@d4ns4n_ (Wuerth-Phoenix)'
+    description: Detects changes of sensitive and critical files. Monitors files that
+      you don't expect to change without planning on Linux system.
+    falsepositives:
+    - Some false positives are to be expected on user or administrator machines. Apply
+      additional filters as needed.
+    level: medium
+    references:
+    - https://docs.microsoft.com/en-us/azure/defender-for-cloud/file-integrity-monitoring-overview#which-files-should-i-monitor
+    tags:
+    - attack.impact
+    - attack.t1565.001
+  name: Potential Suspicious Change To Sensitive/Critical Files
+

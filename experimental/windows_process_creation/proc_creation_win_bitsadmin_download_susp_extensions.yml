@@ -1,0 +1,183 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \bitsadmin.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: bitsadmin.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /transfer '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /create '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /addfile '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .7z
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .asax
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .ashx
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .asmx
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .asp
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .aspx
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .bat
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .cfm
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .cgi
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .chm
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .cmd
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .dll
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .gif
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .jpeg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .jpg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .jsp
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .jspx
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .log
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .png
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .ps1
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .psm1
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .rar
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .scf
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .sct
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .txt
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .vbe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .vbs
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .war
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .wsf
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .wsh
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .xll
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .zip
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems), Nasreddine Bencherchali (Nextron Systems)
+    description: Detects usage of bitsadmin downloading a file with a suspicious extension
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://blog.netspi.com/15-ways-to-download-a-file/#bitsadmin
+    - https://isc.sans.edu/diary/22264
+    - https://lolbas-project.github.io/lolbas/Binaries/Bitsadmin/
+    tags:
+    - attack.defense_evasion
+    - attack.persistence
+    - attack.t1197
+    - attack.s0190
+    - attack.t1036.003
+  name: File With Suspicious Extension Downloaded Via Bitsadmin
+

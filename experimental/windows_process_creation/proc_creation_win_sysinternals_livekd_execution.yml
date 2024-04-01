@@ -1,0 +1,37 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \livekd.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \livekd64.exe
+    - case sensitive: false
+      op: is
+      path: event/ORIGINAL_FILE_NAME
+      value: livekd.exe
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects execution of LiveKD based on PE metadata or image name
+    falsepositives:
+    - Administration and debugging activity (must be investigated)
+    level: medium
+    references:
+    - https://learn.microsoft.com/en-us/sysinternals/downloads/livekd
+    tags:
+    - attack.defense_evasion
+  name: Potential Memory Dumping Activity Via LiveKD
+

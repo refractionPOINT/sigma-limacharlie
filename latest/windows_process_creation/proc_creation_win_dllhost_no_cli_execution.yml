@@ -1,0 +1,47 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \dllhost.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/COMMAND_LINE
+          value: dllhost.exe
+        - case sensitive: false
+          op: is
+          path: event/COMMAND_LINE
+          value: dllhost
+    - not: false
+      op: exists
+      path: event/COMMAND_LINE
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects a "dllhost" process spawning with no commandline arguments
+      which is very rare to happen and could indicate process injection activity or
+      malware mimicking similar system processes.
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://redcanary.com/blog/child-processes/
+    - https://nasbench.medium.com/what-is-the-dllhost-exe-process-actually-running-ef9fe4c19c08
+    - https://www.ncsc.gov.uk/static-assets/documents/malware-analysis-reports/goofy-guineapig/NCSC-MAR-Goofy-Guineapig.pdf
+    tags:
+    - attack.defense_evasion
+    - attack.t1055
+  name: Dllhost.EXE Execution Anomaly
+

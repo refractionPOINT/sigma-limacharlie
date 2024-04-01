@@ -1,0 +1,22 @@
+detect:
+  case sensitive: false
+  log type: wel
+  op: is
+  path: Event/System/EventID
+  target: log
+  value: '6004'
+respond:
+- action: report
+  metadata:
+    author: Zach Mathis
+    description: Detects when a DNS zone transfer failed.
+    falsepositives:
+    - Unlikely
+    level: medium
+    references:
+    - https://kb.eventtracker.com/evtpass/evtpages/EventId_6004_Microsoft-Windows-DNS-Server-Service_65410.asp
+    tags:
+    - attack.reconnaissance
+    - attack.t1590.002
+  name: Failed DNS Zone Transfer
+

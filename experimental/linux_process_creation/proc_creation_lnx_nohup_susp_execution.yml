@@ -1,0 +1,35 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /nohup
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: /tmp/
+respond:
+- action: report
+  metadata:
+    author: Joseliyo Sanchez, @Joseliyo_Jstnk
+    description: Detects execution of binaries located in potentially suspicious locations
+      via "nohup"
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://blogs.jpcert.or.jp/en/2023/05/gobrat.html
+    - https://jstnk9.github.io/jstnk9/research/GobRAT-Malware/
+    - https://www.virustotal.com/gui/file/60bcd645450e4c846238cf0e7226dc40c84c96eba99f6b2cffcd0ab4a391c8b3/detection
+    - https://www.virustotal.com/gui/file/3e44c807a25a56f4068b5b8186eee5002eed6f26d665a8b791c472ad154585d1/detection
+    tags:
+    - attack.execution
+  name: Suspicious Nohup Execution
+

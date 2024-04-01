@@ -1,0 +1,24 @@
+detect:
+  case sensitive: false
+  log type: wel
+  op: is
+  path: Event/System/EventID
+  target: log
+  value: '3023'
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects blocked load attempts of revoked drivers
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/event-id-explanations
+    - https://learn.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/event-tag-explanations
+    - Internal Research
+    tags:
+    - attack.privilege_escalation
+    - attack.t1543
+  name: CodeIntegrity - Blocked Driver Load With Revoked Certificate
+
