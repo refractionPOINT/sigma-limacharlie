@@ -106,10 +106,16 @@ detect:
     - not: true
       op: or
       rules:
-      - case sensitive: false
-        op: is
-        path: event/PARENT/FILE_PATH
-        value: C:\ProgramData\chocolatey\choco.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/PARENT/FILE_PATH
+          value: C:\ProgramData\chocolatey\choco.exe
+        - case sensitive: false
+          op: is
+          path: event/PARENT/FILE_PATH
+          value: C:\ProgramData\chocolatey\tools\shimgen.exe
       - case sensitive: false
         op: contains
         path: event/PARENT/COMMAND_LINE
