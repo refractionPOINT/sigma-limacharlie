@@ -5,44 +5,9 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: and
-    rules:
-    - op: and
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: cmd
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: powershell
-      - op: or
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: /c
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: /r
-    - op: or
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: noexit
-      - op: and
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: input
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: $
+  - op: matches
+    path: event/COMMAND_LINE
+    re: cmd.{0,5}(?:/c|/r).+powershell.+(?:\$\{?input\}?|noexit).+\"
 respond:
 - action: report
   metadata:

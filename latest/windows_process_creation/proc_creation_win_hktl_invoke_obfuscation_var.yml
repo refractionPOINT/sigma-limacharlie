@@ -5,30 +5,9 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: and
-    rules:
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: cmd
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: '"set'
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: -f
-    - op: or
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /c
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /r
+  - op: matches
+    path: event/COMMAND_LINE
+    re: cmd.{0,5}(?:/c|/r)(?:\s|)\"set\s[a-zA-Z]{3,6}.*(?:\{\d\}){1,}\\\"\s+?\-f(?:.*\)){1,}.*\"
 respond:
 - action: report
   metadata:
