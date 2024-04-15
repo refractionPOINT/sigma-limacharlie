@@ -5,16 +5,28 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: or
+  - op: and
     rules:
-    - case sensitive: false
-      op: matches
-      path: event/COMMAND_LINE
-      re: .*dir.*\-s.*
-    - case sensitive: false
-      op: matches
-      path: event/COMMAND_LINE
-      re: .*dir.*/s.*
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cmd.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: Cmd.Exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: matches
+        path: event/COMMAND_LINE
+        re: .*dir.*\-s.*
+      - case sensitive: false
+        op: matches
+        path: event/COMMAND_LINE
+        re: .*dir.*/s.*
 respond:
 - action: report
   metadata:
@@ -32,5 +44,5 @@ respond:
     tags:
     - attack.discovery
     - attack.t1217
-  name: File Enumeration Via Dir Command
+  name: File And SubFolder Enumeration Via Dir Command
 
