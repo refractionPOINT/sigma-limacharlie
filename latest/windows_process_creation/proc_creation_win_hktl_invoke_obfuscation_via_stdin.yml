@@ -7,7 +7,7 @@ detect:
   - op: is windows
   - op: matches
     path: event/COMMAND_LINE
-    re: (?i)(set).*&&\s?set.*(environment|invoke|\${?input).*&&.*"
+    re: (?i)(set).*&&\s?set.*(environment|invoke|\$\{?input).*&&.*"
 respond:
 - action: report
   metadata:
