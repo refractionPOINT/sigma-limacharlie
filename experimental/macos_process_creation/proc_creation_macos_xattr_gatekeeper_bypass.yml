@@ -14,7 +14,7 @@ detect:
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
-      value: -r
+      value: -d
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
@@ -28,7 +28,8 @@ respond:
     - Legitimate activities
     level: low
     references:
-    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1553.001/T1553.001.md
+    - https://github.com/redcanaryco/atomic-red-team/blob/1fed40dc7e48f16ed44dcdd9c73b9222a70cca85/atomics/T1553.001/T1553.001.md
+    - https://www.loobins.io/binaries/xattr/
     tags:
     - attack.defense_evasion
     - attack.t1553.001
