@@ -1,0 +1,39 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \jsc.exe
+    - case sensitive: false
+      op: is
+      path: event/ORIGINAL_FILE_NAME
+      value: jsc.exe
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: 'Detects the execution of the "jsc.exe" (JScript Compiler).
+
+      Attacker might abuse this in order to compile JScript files on the fly and bypassing
+      application whitelisting.
+
+      '
+    falsepositives:
+    - Legitimate use to compile JScript by developers.
+    level: low
+    references:
+    - https://lolbas-project.github.io/lolbas/Binaries/Jsc/
+    - https://www.phpied.com/make-your-javascript-a-windows-exe/
+    - https://twitter.com/DissectMalware/status/998797808907046913
+    tags:
+    - attack.defense_evasion
+    - attack.t1127
+  name: JScript Compiler Execution
+

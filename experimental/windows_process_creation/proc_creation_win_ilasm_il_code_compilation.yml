@@ -12,35 +12,35 @@ detect:
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
-        value: \dotnet.exe
+        value: \ilasm.exe
       - case sensitive: false
         op: is
         path: event/ORIGINAL_FILE_NAME
-        value: .NET Host
+        value: ilasm.exe
     - op: or
       rules:
       - case sensitive: false
-        op: ends with
+        op: contains
         path: event/COMMAND_LINE
-        value: .dll
+        value: ' /dll'
       - case sensitive: false
-        op: ends with
+        op: contains
         path: event/COMMAND_LINE
-        value: .csproj
+        value: ' /exe'
 respond:
 - action: report
   metadata:
-    author: Beyu Denis, oscd.community
-    description: dotnet.exe will execute any DLL and execute unsigned code
+    author: frack113, Nasreddine Bencherchali (Nextron Systems)
+    description: Detects the use of "Ilasm.EXE" in order to compile C# intermediate
+      (IL) code to EXE or DLL.
     falsepositives:
-    - System administrator Usage
+    - Unknown
     level: medium
     references:
-    - https://lolbas-project.github.io/lolbas/OtherMSBinaries/Dotnet/
-    - https://twitter.com/_felamos/status/1204705548668555264
-    - https://bohops.com/2019/08/19/dotnet-core-a-vector-for-awl-bypass-defense-evasion/
+    - https://lolbas-project.github.io/lolbas/Binaries/Ilasm/
+    - https://www.echotrail.io/insights/search/ilasm.exe
     tags:
     - attack.defense_evasion
-    - attack.t1218
-  name: Dotnet.exe Exec Dll and Execute Unsigned Code LOLBIN
+    - attack.t1127
+  name: C# IL Code Compilation Via Ilasm.EXE
 

@@ -37,8 +37,8 @@ respond:
 - action: report
   metadata:
     author: Victor Sergeev, oscd.community
-    description: Detects execution of ftp.exe script execution with the "-s" or "/s"
-      flag and any child processes ran by ftp.exe
+    description: Detects execution of "ftp.exe" script with the "-s" or "/s" flag
+      and any child processes ran by "ftp.exe".
     falsepositives:
     - Unknown
     level: medium
@@ -49,5 +49,5 @@ respond:
     - attack.t1059
     - attack.defense_evasion
     - attack.t1202
-  name: LOLBIN Execution Of The FTP.EXE Binary
+  name: Potential Arbitrary Command Execution Via FTP.EXE
 

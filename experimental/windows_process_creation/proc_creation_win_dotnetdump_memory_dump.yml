@@ -25,9 +25,11 @@ respond:
 - action: report
   metadata:
     author: Nasreddine Bencherchali (Nextron Systems)
-    description: Detects the execution of "dotnet-dump" with the "collect" flag. The
-      execution could indicate potential process dumping of critical processes such
-      as LSASS
+    description: 'Detects the execution of "dotnet-dump" with the "collect" flag.
+      The execution could indicate potential process dumping of critical processes
+      such as LSASS.
+
+      '
     falsepositives:
     - Process dumping is the expected behavior of the tool. So false positives are
       expected in legitimate usage. The PID/Process Name of the process being dumped

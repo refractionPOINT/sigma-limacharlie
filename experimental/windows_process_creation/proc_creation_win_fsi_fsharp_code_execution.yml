@@ -7,28 +7,36 @@ detect:
   - op: is windows
   - op: or
     rules:
-    - case sensitive: false
-      op: ends with
-      path: event/FILE_PATH
-      value: \fsianycpu.exe
-    - case sensitive: false
-      op: is
-      path: event/ORIGINAL_FILE_NAME
-      value: fsianycpu.exe
-    - case sensitive: false
-      op: ends with
-      path: event/FILE_PATH
-      value: \fsi.exe
-    - case sensitive: false
-      op: is
-      path: event/ORIGINAL_FILE_NAME
-      value: fsi.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \fsi.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \fsianycpu.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: fsi.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: fsianycpu.exe
 respond:
 - action: report
   metadata:
     author: Christopher Peacock @SecurePeacock, SCYTHE @scythe_io
-    description: The FSharp Interpreters, FsiAnyCpu.exe and FSi.exe, can be used for
-      AWL bypass and is listed in Microsoft recommended block rules.
+    description: 'Detects the execution of FSharp Interpreters "FsiAnyCpu.exe" and
+      "FSi.exe"
+
+      Both can be used for AWL bypass and to execute F# code via scripts or inline.
+
+      '
     falsepositives:
     - Legitimate use by a software developer.
     level: medium

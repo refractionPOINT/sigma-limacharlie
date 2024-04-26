@@ -1,0 +1,51 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \xwizard.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: xwizard.exe
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: matches
+        path: event/FILE_PATH
+        re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Windows\\System32\\
+      - case sensitive: false
+        op: matches
+        path: event/FILE_PATH
+        re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Windows\\SysWOW64\\
+respond:
+- action: report
+  metadata:
+    author: Christian Burkard (Nextron Systems)
+    description: 'Detects the execution of Xwizard tool from a non-default directory.
+
+      When executed from a non-default directory, this utility can be abused in order
+      to side load a custom version of "xwizards.dll".
+
+      '
+    falsepositives:
+    - Windows installed on non-C drive
+    level: high
+    references:
+    - https://lolbas-project.github.io/lolbas/Binaries/Xwizard/
+    - http://www.hexacorn.com/blog/2017/07/31/the-wizard-of-x-oppa-plugx-style/
+    tags:
+    - attack.defense_evasion
+    - attack.t1574.002
+  name: Xwizard.EXE Execution From Non-Default Location
+

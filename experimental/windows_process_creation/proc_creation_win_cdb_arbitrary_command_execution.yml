@@ -30,9 +30,9 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Beyu Denis, oscd.community, Nasreddine Bencherchali
-    description: Detects usage of "cdb.exe" to launch 64-bit shellcode or arbitrary
-      processes or commands from a debugger script file
+    author: Beyu Denis, oscd.community, Nasreddine Bencherchali (Nextron Systems)
+    description: Detects usage of "cdb.exe" to launch arbitrary processes or commands
+      from a debugger script file
     falsepositives:
     - Legitimate use of debugging tools
     level: medium
@@ -46,5 +46,5 @@ respond:
     - attack.defense_evasion
     - attack.t1218
     - attack.t1127
-  name: WinDbg/CDB LOLBIN Usage
+  name: Potential Binary Proxy Execution Via Cdb.EXE
 

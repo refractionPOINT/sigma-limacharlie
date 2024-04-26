@@ -1,0 +1,45 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'type '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' > \\\\'
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: type \\\\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' > '
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects usage of the "type" command to download/upload data from
+      WebDAV server
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://mr0range.com/a-new-lolbin-using-the-windows-type-command-to-upload-download-files-81d7b6179e22
+    tags:
+    - attack.command_and_control
+    - attack.t1105
+  name: Potential Download/Upload Activity Using Type Command
+

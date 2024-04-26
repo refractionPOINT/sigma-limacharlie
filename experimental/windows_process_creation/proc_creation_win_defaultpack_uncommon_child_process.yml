@@ -8,13 +8,13 @@ detect:
   - case sensitive: false
     op: ends with
     path: event/PARENT/FILE_PATH
-    value: \defaultpack.exe
+    value: \DefaultPack.exe
 respond:
 - action: report
   metadata:
     author: frack113
-    description: Detect usage of the "defaultpack.exe" binary as a proxy to launch
-      other programs
+    description: Detects uncommon child processes of "DefaultPack.EXE" binary as a
+      proxy to launch other programs
     falsepositives:
     - Unknown
     level: medium
@@ -25,5 +25,5 @@ respond:
     - attack.t1218
     - attack.defense_evasion
     - attack.execution
-  name: Lolbin Defaultpack.exe Use As Proxy
+  name: Uncommon Child Process Of Defaultpack.EXE
 

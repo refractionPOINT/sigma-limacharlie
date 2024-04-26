@@ -12,36 +12,35 @@ detect:
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
-        value: \cmdl32.exe
+        value: \ilasm.exe
       - case sensitive: false
         op: is
         path: event/ORIGINAL_FILE_NAME
-        value: CMDL32.EXE
-    - op: and
+        value: ilasm.exe
+    - op: or
       rules:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: '/vpn '
+        value: ' /dll'
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: '/lan '
+        value: ' /exe'
 respond:
 - action: report
   metadata:
-    author: frack113
-    description: lolbas Cmdl32 is use to download a payload to evade antivirus
+    author: frack113, Nasreddine Bencherchali (Nextron Systems)
+    description: Detects the use of "Ilasm.EXE" in order to compile C# intermediate
+      (IL) code to EXE or DLL.
     falsepositives:
     - Unknown
     level: medium
     references:
-    - https://lolbas-project.github.io/lolbas/Binaries/Cmdl32/
-    - https://twitter.com/SwiftOnSecurity/status/1455897435063074824
+    - https://lolbas-project.github.io/lolbas/Binaries/Ilasm/
+    - https://www.echotrail.io/insights/search/ilasm.exe
     tags:
-    - attack.execution
     - attack.defense_evasion
-    - attack.t1218
-    - attack.t1202
-  name: Suspicious Cmdl32 Execution
+    - attack.t1127
+  name: C# IL Code Compilation Via Ilasm.EXE
 

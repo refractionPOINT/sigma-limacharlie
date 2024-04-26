@@ -23,7 +23,7 @@ respond:
     falsepositives:
     - Rare occasions of legitimate cases where kernel debugging is necessary in production.
       Investigation is required
-    level: high
+    level: medium
     references:
     - Internal Research
     tags:
