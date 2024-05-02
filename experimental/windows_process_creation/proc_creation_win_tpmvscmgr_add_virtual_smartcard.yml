@@ -1,0 +1,36 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \tpmvscmgr.exe
+    - case sensitive: false
+      op: is
+      path: event/ORIGINAL_FILE_NAME
+      value: TpmVscMgr.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: create
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects execution of "Tpmvscmgr.exe" to create a new virtual smart
+      card.
+    falsepositives:
+    - Legitimate usage by an administrator
+    level: medium
+    references:
+    - https://learn.microsoft.com/en-us/windows/security/identity-protection/virtual-smart-cards/virtual-smart-card-tpmvscmgr
+    tags:
+    - attack.execution
+  name: New Virtual Smart Card Created Via TpmVscMgr.EXE
+

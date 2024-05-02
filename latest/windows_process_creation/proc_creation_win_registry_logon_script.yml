@@ -1,0 +1,28 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - case sensitive: false
+    op: contains
+    path: event/COMMAND_LINE
+    value: UserInitMprLogonScript
+respond:
+- action: report
+  metadata:
+    author: Tom Ueltschi (@c_APT_ure)
+    description: Detects the addition of a new LogonScript to the registry value "UserInitMprLogonScript"
+      for potential persistence
+    falsepositives:
+    - Legitimate addition of Logon Scripts via the command line by administrators
+      or third party tools
+    level: high
+    references:
+    - https://cocomelonc.github.io/persistence/2022/12/09/malware-pers-20.html
+    tags:
+    - attack.persistence
+    - attack.t1037.001
+  name: Potential Persistence Via Logon Scripts - CommandLine
+

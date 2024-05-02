@@ -1,0 +1,33 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /mkfifo
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' /tmp/'
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects the creation of a new named pipe using the "mkfifo" utility
+      in a potentially suspicious location
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://dev.to/0xbf/use-mkfifo-to-create-named-pipe-linux-tips-5bbk
+    - https://www.mandiant.com/resources/blog/barracuda-esg-exploited-globally
+    tags:
+    - attack.execution
+  name: Potentially Suspicious Named Pipe Created Via Mkfifo
+

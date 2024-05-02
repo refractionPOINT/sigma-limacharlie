@@ -1,0 +1,66 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: Event/System/EventID
+        value: '2006'
+      - case sensitive: false
+        op: is
+        path: Event/System/EventID
+        value: '2052'
+    - not: true
+      op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: starts with
+          path: Event/EventData/ModifyingApplication
+          value: C:\Program Files\
+        - case sensitive: false
+          op: starts with
+          path: Event/EventData/ModifyingApplication
+          value: C:\Program Files (x86)\
+      - case sensitive: false
+        op: is
+        path: Event/EventData/ModifyingApplication
+        value: C:\Windows\System32\svchost.exe
+      - not: true
+        op: exists
+        path: Event/EventData/ModifyingApplication
+      - case sensitive: false
+        op: is
+        path: Event/EventData/ModifyingApplication
+        value: ''
+  - not: true
+    op: and
+    rules:
+    - case sensitive: false
+      op: starts with
+      path: Event/EventData/ModifyingApplication
+      value: C:\ProgramData\Microsoft\Windows Defender\Platform\
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/ModifyingApplication
+      value: \MsMpEng.exe
+  target: log
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Detects when a single rules or all of the rules have been deleted
+      from the Windows Defender Firewall
+    level: medium
+    references:
+    - https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-r2-and-2008/dd364427(v=ws.10)
+    tags:
+    - attack.defense_evasion
+    - attack.t1562.004
+  name: A Rule Has Been Deleted From The Windows Firewall Exception List
+

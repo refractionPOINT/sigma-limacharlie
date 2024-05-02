@@ -1,0 +1,94 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: wscript.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: cscript.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \wscript.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \cscript.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .csv
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .dat
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .doc
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .gif
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .jpeg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .jpg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .png
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .ppt
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .txt
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .xls
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .xml
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects Wscript/Cscript executing a file with an uncommon (i.e. non-script)
+      extension
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - Internal Research
+    tags:
+    - attack.execution
+    - attack.t1059.005
+    - attack.t1059.007
+  name: Cscript/Wscript Uncommon Script Extension Execution
+

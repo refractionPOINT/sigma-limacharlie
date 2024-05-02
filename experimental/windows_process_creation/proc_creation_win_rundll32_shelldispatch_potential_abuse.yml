@@ -1,0 +1,39 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \rundll32.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: RUNDLL32.EXE
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: RunDll_ShellExecuteW
+respond:
+- action: report
+  metadata:
+    author: X__Junior (Nextron Systems)
+    description: Detects potential "ShellDispatch.dll" functionality abuse to execute
+      arbitrary binaries via "ShellExecute"
+    falsepositives:
+    - Unlikely
+    level: medium
+    references:
+    - https://www.hexacorn.com/blog/2023/06/07/this-lolbin-doesnt-exist/
+    tags:
+    - attack.execution
+    - attack.defense_evasion
+  name: Potential ShellDispatch.DLL Functionality Abuse
+

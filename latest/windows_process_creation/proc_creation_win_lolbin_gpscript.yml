@@ -1,0 +1,53 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \gpscript.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: GPSCRIPT.EXE
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /logon'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /startup'
+    - case sensitive: false
+      not: true
+      op: is
+      path: event/PARENT/COMMAND_LINE
+      value: C:\windows\system32\svchost.exe -k netsvcs -p -s gpsvc
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Detects the execution of the LOLBIN gpscript, which executes logon
+      or startup scripts configured in Group Policy
+    falsepositives:
+    - Legitimate uses of logon scripts distributed via group policy
+    level: medium
+    references:
+    - https://oddvar.moe/2018/04/27/gpscript-exe-another-lolbin-to-the-list/
+    - https://lolbas-project.github.io/lolbas/Binaries/Gpscript/
+    tags:
+    - attack.defense_evasion
+    - attack.t1218
+  name: Gpscript Execution
+

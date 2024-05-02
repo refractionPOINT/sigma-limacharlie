@@ -1,0 +1,69 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \adplus.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: Adplus.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -hang '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -pn '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -pmn '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -p '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -po '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -c '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -sc '
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects execution of "AdPlus.exe", a binary that is part of the Windows
+      SDK that can be used as a LOLBIN in order to dump process memory and execute
+      arbitrary commands.
+    falsepositives:
+    - Legitimate usage of Adplus for debugging purposes
+    level: high
+    references:
+    - https://lolbas-project.github.io/lolbas/OtherMSBinaries/Adplus/
+    - https://twitter.com/nas_bench/status/1534916659676422152
+    - https://twitter.com/nas_bench/status/1534915321856917506
+    tags:
+    - attack.defense_evasion
+    - attack.execution
+    - attack.t1003.001
+  name: Potential Adplus.EXE Abuse
+
