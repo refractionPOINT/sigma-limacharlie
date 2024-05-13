@@ -23,11 +23,11 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: /fs:FAT
+        value: /fs:exFAT
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: /fs:exFAT
+        value: /fs:FAT
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -35,18 +35,20 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: /fs:UDF
+        value: /fs:ReFS
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: /fs:ReFS
+        value: /fs:UDF
 respond:
 - action: report
   metadata:
     author: Florian Roth (Nextron Systems)
-    description: Detects the execution of format.com with a suspicious filesystem
-      selection that could indicate a defense evasion activity in which format.com
-      is used to load malicious DLL files or other programs
+    description: 'Detects the execution of format.com with an uncommon filesystem
+      selection that could indicate a defense evasion activity in which "format.com"
+      is used to load malicious DLL files or other programs.
+
+      '
     falsepositives:
     - Unknown
     level: high
@@ -55,5 +57,5 @@ respond:
     - https://twitter.com/wdormann/status/1478011052130459653?s=20
     tags:
     - attack.defense_evasion
-  name: Format.com FileSystem LOLBIN
+  name: Uncommon FileSystem Load Attempt By Format.com
 

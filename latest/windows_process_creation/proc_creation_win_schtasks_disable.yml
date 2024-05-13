@@ -28,15 +28,23 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: \Windows\BitLocker
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Windows\ExploitGuard
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: \Windows\SystemRestore\SR
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: \Windows\Windows Defender\
+        value: \Windows\UpdateOrchestrator\
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: \Windows\BitLocker
+        value: \Windows\Windows Defender\
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -45,14 +53,6 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: \Windows\WindowsUpdate\
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: \Windows\UpdateOrchestrator\
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: \Windows\ExploitGuard
 respond:
 - action: report
   metadata:

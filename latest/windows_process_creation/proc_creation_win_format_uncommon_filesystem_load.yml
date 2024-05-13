@@ -1,0 +1,61 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \format.com
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '/fs:'
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /fs:exFAT
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /fs:FAT
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /fs:NTFS
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /fs:ReFS
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /fs:UDF
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: 'Detects the execution of format.com with an uncommon filesystem
+      selection that could indicate a defense evasion activity in which "format.com"
+      is used to load malicious DLL files or other programs.
+
+      '
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://twitter.com/0gtweet/status/1477925112561209344
+    - https://twitter.com/wdormann/status/1478011052130459653?s=20
+    tags:
+    - attack.defense_evasion
+  name: Uncommon FileSystem Load Attempt By Format.com
+
