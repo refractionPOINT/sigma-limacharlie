@@ -22,10 +22,6 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: C:\Users\
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
         value: /deny
       - case sensitive: false
         op: contains
@@ -38,7 +34,7 @@ respond:
     description: Detect use of icacls to deny access for everyone in Users folder
       sometimes used to hide malicious files
     falsepositives:
-    - Legitimate use
+    - Unknown
     level: medium
     references:
     - https://app.any.run/tasks/1df999e6-1cb8-45e3-8b61-499d1b7d5a9b/

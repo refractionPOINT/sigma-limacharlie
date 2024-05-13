@@ -9,41 +9,42 @@ detect:
     rules:
     - op: and
       rules:
-      - op: or
+      - op: and
         rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \attrib.exe
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: ATTRIB.EXE
         - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \attrib.exe
-        - case sensitive: false
-          op: is
-          path: event/ORIGINAL_FILE_NAME
-          value: ATTRIB.EXE
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' +h '
       - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ' +h '
-    - not: true
-      op: or
-      rules:
-      - case sensitive: false
+        not: true
         op: contains
         path: event/COMMAND_LINE
         value: '\desktop.ini '
-      - op: and
-        rules:
-        - case sensitive: false
-          op: ends with
-          path: event/PARENT/FILE_PATH
-          value: \cmd.exe
-        - case sensitive: false
-          op: matches
-          path: event/COMMAND_LINE
-          re: \+R\ \+H\ \+S\ \+A\ \\\*\.cui
-        - case sensitive: false
-          op: matches
-          path: event/PARENT/COMMAND_LINE
-          re: C:\\\\WINDOWS\\\\system32\\\*\.bat
+    - not: true
+      op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \cmd.exe
+      - case sensitive: false
+        op: matches
+        path: event/COMMAND_LINE
+        re: \+R\ \+H\ \+S\ \+A\ \\\*\.cui
+      - case sensitive: false
+        op: matches
+        path: event/PARENT/COMMAND_LINE
+        re: C:\\\\WINDOWS\\\\system32\\\*\.bat
 respond:
 - action: report
   metadata:

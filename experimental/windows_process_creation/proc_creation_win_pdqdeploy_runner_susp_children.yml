@@ -10,7 +10,7 @@ detect:
     - case sensitive: false
       op: contains
       path: event/PARENT/FILE_PATH
-      value: PDQDeployRunner-
+      value: \PDQDeployRunner-
     - op: or
       rules:
       - op: or
@@ -18,39 +18,7 @@ detect:
         - case sensitive: false
           op: ends with
           path: event/FILE_PATH
-          value: \wscript.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \cscript.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \rundll32.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \regsvr32.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \wmic.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \msiexec.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \mshta.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \csc.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \dllhost.exe
+          value: \bash.exe
         - case sensitive: false
           op: ends with
           path: event/FILE_PATH
@@ -58,11 +26,47 @@ detect:
         - case sensitive: false
           op: ends with
           path: event/FILE_PATH
+          value: \cmd.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \csc.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \cscript.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \dllhost.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \mshta.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \msiexec.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \regsvr32.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \rundll32.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
           value: \scriptrunner.exe
         - case sensitive: false
           op: ends with
           path: event/FILE_PATH
-          value: \bash.exe
+          value: \wmic.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \wscript.exe
         - case sensitive: false
           op: ends with
           path: event/FILE_PATH
@@ -72,15 +76,15 @@ detect:
         - case sensitive: false
           op: contains
           path: event/FILE_PATH
-          value: C:\Users\Public\
+          value: :\ProgramData\
         - case sensitive: false
           op: contains
           path: event/FILE_PATH
-          value: C:\ProgramData\
+          value: :\Users\Public\
         - case sensitive: false
           op: contains
           path: event/FILE_PATH
-          value: C:\Windows\TEMP\
+          value: :\Windows\TEMP\
         - case sensitive: false
           op: contains
           path: event/FILE_PATH
@@ -90,19 +94,7 @@ detect:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: 'iex '
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: Invoke-
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: DownloadString
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: http
+          value: ' -decode '
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
@@ -114,15 +106,27 @@ detect:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
+          value: ' -w hidden'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: DownloadString
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
           value: FromBase64String
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: ' -decode '
+          value: http
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: ' -w hidden'
+          value: 'iex '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: Invoke-
 respond:
 - action: report
   metadata:
@@ -137,5 +141,5 @@ respond:
     - https://twitter.com/malmoeb/status/1550483085472432128
     tags:
     - attack.execution
-  name: Suspicious Execution Of PDQDeployRunner
+  name: Potentially Suspicious Execution Of PDQDeployRunner
 
