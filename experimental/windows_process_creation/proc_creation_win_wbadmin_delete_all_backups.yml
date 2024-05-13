@@ -22,22 +22,23 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: 'delete '
+        value: delete
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: 'systemstatebackup '
+        value: backup
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: -keepVersions:0
+        value: keepVersions:0
 respond:
 - action: report
   metadata:
-    author: frack113
-    description: 'Deletes the Windows systemstatebackup using wbadmin.exe.
+    author: frack113, Nasreddine Bencherchali (Nextron Systems)
+    description: 'Detects the deletion of all backups or system state backups via
+      "wbadmin.exe".
 
-      This technique is used by numerous ransomware families.
+      This technique is used by numerous ransomware families and actors.
 
       This may only be successful on server platforms that have Windows Backup enabled.
 
@@ -47,8 +48,13 @@ respond:
     level: high
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1490/T1490.md#atomic-test-5---windows---delete-volume-shadow-copies-via-wmi-with-powershell
+    - https://github.com/albertzsigovits/malware-notes/blob/558898932c1579ff589290092a2c8febefc3a4c9/Ransomware/Lockbit.md
+    - https://www.sentinelone.com/labs/ranzy-ransomware-better-encryption-among-new-features-of-thunderx-derivative/
+    - https://www.trendmicro.com/vinfo/us/security/news/cybercrime-and-digital-threats/ransomware-report-avaddon-and-new-techniques-emerge-industrial-sector-targeted
+    - https://www.trendmicro.com/content/dam/trendmicro/global/en/research/24/b/lockbit-attempts-to-stay-afloat-with-a-new-version/technical-appendix-lockbit-ng-dev-analysis.pdf
+    - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/wbadmin-delete-systemstatebackup
     tags:
     - attack.impact
     - attack.t1490
-  name: SystemStateBackup Deleted Using Wbadmin.EXE
+  name: All Backups Deleted Via Wbadmin.EXE
 
