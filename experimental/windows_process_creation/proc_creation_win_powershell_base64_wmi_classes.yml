@@ -166,7 +166,7 @@ respond:
   metadata:
     author: Christian Burkard (Nextron Systems), Nasreddine Bencherchali (Nextron
       Systems)
-    description: Detects calls to base64 encoded WMI class such as "Win32_Shadowcopy",
+    description: Detects calls to base64 encoded WMI class such as "Win32_ShadowCopy",
       "Win32_ScheduledJob", etc.
     falsepositives:
     - Unknown

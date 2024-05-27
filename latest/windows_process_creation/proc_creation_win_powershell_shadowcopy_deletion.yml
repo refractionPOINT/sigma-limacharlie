@@ -28,7 +28,7 @@ detect:
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
-      value: Win32_Shadowcopy
+      value: Win32_ShadowCopy
     - op: or
       rules:
       - case sensitive: false
