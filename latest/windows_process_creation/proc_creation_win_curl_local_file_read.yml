@@ -1,0 +1,38 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \curl.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: curl.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: file:///
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects execution of "curl.exe" with the "file://" protocol handler
+      in order to read local files.
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://curl.se/docs/manpage.html
+    tags:
+    - attack.execution
+  name: Local File Read Using Curl.EXE
+

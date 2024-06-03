@@ -1,0 +1,67 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Win32_NTEventlogFile
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .BackupEventlog(
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .ChangeSecurityPermissions(
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .ChangeSecurityPermissionsEx(
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .ClearEventLog(
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .Delete(
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .DeleteEx(
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .Rename(
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .TakeOwnerShip(
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .TakeOwnerShipEx(
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects usage of the WMI class "Win32_NTEventlogFile" in a potentially
+      suspicious way (delete, backup, change permissions, etc.) from a PowerShell
+      script
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://learn.microsoft.com/en-us/previous-versions/windows/desktop/legacy/aa394225(v=vs.85)
+    tags:
+    - attack.defense_evasion
+  name: Potentially Suspicious Call To Win32_NTEventlogFile Class
+

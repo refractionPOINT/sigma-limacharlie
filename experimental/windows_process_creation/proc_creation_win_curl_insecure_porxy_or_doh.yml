@@ -1,0 +1,44 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \curl.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: curl.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: --doh-insecure
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: --proxy-insecure
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects execution of "curl.exe" with the "insecure" flag over proxy
+      or DOH.
+    falsepositives:
+    - Access to badly maintained internal or development systems
+    level: medium
+    references:
+    - https://curl.se/docs/manpage.html
+    tags:
+    - attack.execution
+  name: Insecure Proxy/DOH Transfer Via Curl.EXE
+

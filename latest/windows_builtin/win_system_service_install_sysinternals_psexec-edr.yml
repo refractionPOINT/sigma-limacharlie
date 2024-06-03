@@ -1,0 +1,44 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/Provider_Name
+        value: Service Control Manager
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '7045'
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/ServiceName
+        value: PSEXESVC
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/ImagePath
+        value: \PSEXESVC.exe
+respond:
+- action: report
+  metadata:
+    author: Thomas Patzke
+    description: Detects PsExec service installation and execution events
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://www.jpcert.or.jp/english/pub/sr/ir_research.html
+    - https://jpcertcc.github.io/ToolAnalysisResultSheet
+    tags:
+    - attack.execution
+    - attack.t1569.002
+    - attack.s0029
+  name: PsExec Service Installation
+

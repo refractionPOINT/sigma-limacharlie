@@ -1,0 +1,23 @@
+detect:
+  case sensitive: false
+  log type: wel
+  op: is
+  path: Event/System/EventID
+  target: log
+  value: '29'
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Triggers on any Sysmon "FileExecutableDetected" event, which triggers
+      every time a PE that is monitored by the config is created.
+    falsepositives:
+    - Unlikely
+    level: medium
+    references:
+    - https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon
+    - https://medium.com/@olafhartong/sysmon-15-0-file-executable-detected-40fd64349f36
+    tags:
+    - attack.defense_evasion
+  name: Sysmon File Executable Creation Detected
+

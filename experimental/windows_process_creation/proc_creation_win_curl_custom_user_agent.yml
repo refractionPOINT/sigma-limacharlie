@@ -1,0 +1,45 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \curl.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: curl.exe
+    - op: and
+      rules:
+      - op: matches
+        path: event/COMMAND_LINE
+        re: \s-H\s
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'User-Agent:'
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects execution of "curl.exe" with a potential custom "User-Agent".
+      Attackers can leverage this to download or exfiltrate data via "curl" to a domain
+      that only accept specific "User-Agent" strings
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://labs.withsecure.com/publications/fin7-target-veeam-servers
+    - https://github.com/WithSecureLabs/iocs/blob/344203de742bb7e68bd56618f66d34be95a9f9fc/FIN7VEEAM/iocs.csv
+    tags:
+    - attack.execution
+  name: Curl Web Request With Potential Custom User-Agent
+

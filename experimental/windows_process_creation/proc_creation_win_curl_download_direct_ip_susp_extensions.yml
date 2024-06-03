@@ -1,0 +1,227 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \curl.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: curl.exe
+    - op: matches
+      path: event/COMMAND_LINE
+      re: ://[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: http
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -O'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: --remote-name
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: --output
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .bat
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .bat"
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .dat
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .dat"
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .dll
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .dll"
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .exe
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .exe"
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .gif
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .gif"
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .hta
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .hta"
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .jpeg
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .jpeg"
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .log
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .log"
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .msi
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .msi"
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .png
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .png"
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .ps1
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .ps1"
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .psm1
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .psm1"
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .vbe
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .vbe"
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .vbs
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .vbs"
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .bat'
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .dat'
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .dll'
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .exe'
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .gif'
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .hta'
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .jpeg'
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .log'
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .msi'
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .png'
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .ps1'
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .psm1'
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .vbe'
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .vbs'
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects potentially suspicious file downloads directly from IP addresses
+      using curl.exe
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://labs.withsecure.com/publications/fin7-target-veeam-servers
+    - https://github.com/WithSecureLabs/iocs/blob/344203de742bb7e68bd56618f66d34be95a9f9fc/FIN7VEEAM/iocs.csv
+    - https://github.com/pr0xylife/IcedID/blob/8dd1e218460db4f750d955b4c65b2f918a1db906/icedID_09.28.2023.txt
+    tags:
+    - attack.execution
+  name: Suspicious File Download From IP Via Curl.EXE
+

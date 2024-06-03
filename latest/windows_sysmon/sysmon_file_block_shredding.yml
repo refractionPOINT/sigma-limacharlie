@@ -1,0 +1,22 @@
+detect:
+  case sensitive: false
+  log type: wel
+  op: is
+  path: Event/System/EventID
+  target: log
+  value: '28'
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Triggers on any Sysmon "FileBlockShredding" event, which indicates
+      a violation of the configured shredding policy.
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon
+    tags:
+    - attack.defense_evasion
+  name: Sysmon Blocked File Shredding
+
