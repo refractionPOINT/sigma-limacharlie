@@ -1,0 +1,62 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: starts with
+        path: event/FILE_PATH
+        value: :\Program Files
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: \Microsoft Visual Studio\
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \dump64.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: procdump
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -ma '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -mp '
+respond:
+- action: report
+  metadata:
+    author: Austin Songer @austinsonger, Florian Roth (Nextron Systems), Nasreddine
+      Bencherchali (Nextron Systems)
+    description: 'Detects when a user is potentially trying to bypass the Windows
+      Defender AV by renaming a tool to dump64.exe and placing it in the Visual Studio
+      folder.
+
+      Currently the rule is covering only usage of procdump but other utilities can
+      be added in order to increase coverage.
+
+      '
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://twitter.com/mrd0x/status/1460597833917251595
+    tags:
+    - attack.credential_access
+    - attack.t1003.001
+  name: Potential Windows Defender AV Bypass Via Dump64.EXE Rename
+

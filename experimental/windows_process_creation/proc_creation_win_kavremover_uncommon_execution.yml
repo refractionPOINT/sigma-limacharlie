@@ -17,11 +17,11 @@ detect:
       - case sensitive: false
         op: ends with
         path: event/PARENT/FILE_PATH
-        value: \kavremover.exe
+        value: \cleanapi.exe
       - case sensitive: false
         op: ends with
         path: event/PARENT/FILE_PATH
-        value: \cleanapi.exe
+        value: \kavremover.exe
 respond:
 - action: report
   metadata:

@@ -17,10 +17,16 @@ detect:
         op: is
         path: event/ORIGINAL_FILE_NAME
         value: unregmp2.exe
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: ' /HideWMP'
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -HideWMP'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /HideWMP'
 respond:
 - action: report
   metadata:

@@ -23,19 +23,45 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: unload
-    - case sensitive: false
-      not: true
-      op: ends with
-      path: event/COMMAND_LINE
-      value: unload rtp_filesystem_filter
+    - not: true
+      op: or
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: starts with
+          path: event/PARENT/FILE_PATH
+          value: C:\Users\
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/FILE_PATH
+          value: \AppData\Local\Temp\
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \endpoint-protection-installer-x64.tmp
+        - case sensitive: false
+          op: ends with
+          path: event/COMMAND_LINE
+          value: unload rtp_filesystem_filter
+      - op: and
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/PARENT/FILE_PATH
+          value: C:\Program Files (x86)\ManageEngine\uems_agent\bin\dcfaservice64.exe
+        - case sensitive: false
+          op: ends with
+          path: event/COMMAND_LINE
+          value: unload DFMFilter
 respond:
 - action: report
   metadata:
-    author: Nasreddine Bencherchali
+    author: Nasreddine Bencherchali (Nextron Systems)
     description: Detect filter driver unloading activity via fltmc.exe
     falsepositives:
     - Unknown
-    level: high
+    level: medium
     references:
     - https://www.darkoperator.com/blog/2018/10/5/operating-offensively-against-sysmon
     - https://www.cybereason.com/blog/threat-analysis-report-lockbit-2.0-all-paths-lead-to-ransom

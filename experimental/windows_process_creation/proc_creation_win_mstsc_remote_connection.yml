@@ -19,10 +19,16 @@ detect:
           op: is
           path: event/ORIGINAL_FILE_NAME
           value: mstsc.exe
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ' /v:'
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -v:'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /v:'
     - not: true
       op: and
       rules:
