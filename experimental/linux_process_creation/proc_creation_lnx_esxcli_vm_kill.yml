@@ -1,0 +1,39 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /esxcli
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: vm process
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: kill
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems), Cedric Maurugeon
+    description: Detects execution of the "esxcli" command with the "vm" and "kill"
+      flag in order to kill/shutdown a specific VM.
+    falsepositives:
+    - Legitimate administration activities
+    level: medium
+    references:
+    - https://www.crowdstrike.com/blog/hypervisor-jackpotting-ecrime-actors-increase-targeting-of-esxi-servers/
+    - https://developer.vmware.com/docs/11743/esxi-7-0-esxcli-command-reference/namespace/esxcli_vm.html
+    - https://www.secuinfra.com/en/techtalk/hide-your-hypervisor-analysis-of-esxiargs-ransomware/
+    - https://www.trendmicro.com/en_us/research/22/e/new-linux-based-ransomware-cheerscrypt-targets-exsi-devices.html
+    tags:
+    - attack.execution
+  name: ESXi VM Kill Via ESXCLI
+

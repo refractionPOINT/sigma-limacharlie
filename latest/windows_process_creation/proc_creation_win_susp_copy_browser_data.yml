@@ -1,0 +1,191 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: copy-item
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'copy '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'cpi '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' cp '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'move '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: move-item
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' mi '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' mv '
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \xcopy.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \robocopy.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: XCOPY.EXE
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: robocopy.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Amigo\User Data
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \BraveSoftware\Brave-Browser\User Data
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \CentBrowser\User Data
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Chromium\User Data
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \CocCoc\Browser\User Data
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Comodo\Dragon\User Data
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Elements Browser\User Data
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Epic Privacy Browser\User Data
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Google\Chrome Beta\User Data
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Google\Chrome SxS\User Data
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Google\Chrome\User Data\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Kometa\User Data
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Maxthon5\Users
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Microsoft\Edge\User Data
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Mozilla\Firefox\Profiles
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Nichrome\User Data
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Opera Software\Opera GX Stable\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Opera Software\Opera Neon\User Data
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Opera Software\Opera Stable\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Orbitum\User Data
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \QIP Surf\User Data
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Sputnik\User Data
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Torch\User Data
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \uCozMedia\Uran\User Data
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Vivaldi\User Data
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: 'Adversaries may acquire credentials from web browsers by reading
+      files specific to the target browser.
+
+      Web browsers commonly save credentials such as website usernames and passwords
+      so that they do not need to be entered manually in the future.
+
+      Web browsers typically store the credentials in an encrypted format within a
+      credential store.
+
+      '
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1555.003/T1555.003.md
+    tags:
+    - attack.credential_access
+    - attack.t1555.003
+  name: Potential Browser Data Stealing
+

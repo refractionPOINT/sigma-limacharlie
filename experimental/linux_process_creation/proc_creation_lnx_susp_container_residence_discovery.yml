@@ -1,0 +1,84 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: awk
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /cat
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: grep
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /head
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /less
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /more
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /nl
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /tail
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /proc/2/
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /proc/
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/COMMAND_LINE
+            value: /cgroup
+          - case sensitive: false
+            op: ends with
+            path: event/COMMAND_LINE
+            value: /sched
+respond:
+- action: report
+  metadata:
+    author: Seth Hanford
+    description: Detects potential container discovery via listing of certain kernel
+      features in the "/proc" virtual filesystem
+    falsepositives:
+    - Legitimate system administrator usage of these commands
+    - Some container tools or deployments may use these techniques natively to determine
+      how they proceed with execution, and will need to be filtered
+    level: low
+    references:
+    - https://blog.skyplabs.net/posts/container-detection/
+    - https://stackoverflow.com/questions/20010199/how-to-determine-if-a-process-runs-inside-lxc-docker
+    tags:
+    - attack.discovery
+    - attack.t1082
+  name: Container Residence Discovery Via Proc Virtual FS
+

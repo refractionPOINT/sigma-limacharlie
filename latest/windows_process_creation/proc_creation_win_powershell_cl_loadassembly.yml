@@ -1,0 +1,35 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: 'LoadAssemblyFromPath '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: 'LoadAssemblyFromNS '
+respond:
+- action: report
+  metadata:
+    author: frack113, Nasreddine Bencherchali (Nextron Systems)
+    description: Detects calls to "LoadAssemblyFromPath" or "LoadAssemblyFromNS" that
+      are part of the "CL_LoadAssembly.ps1" script. This can be abused to load different
+      assemblies and bypass App locker controls.
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://bohops.com/2018/01/07/executing-commands-and-bypassing-applocker-with-powershell-diagnostic-scripts/
+    - https://lolbas-project.github.io/lolbas/Scripts/CL_LoadAssembly/
+    tags:
+    - attack.defense_evasion
+    - attack.t1216
+  name: Assembly Loading Via CL_LoadAssembly.ps1
+

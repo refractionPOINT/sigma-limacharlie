@@ -1,0 +1,54 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \powershell.exe
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \pwsh.exe
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \powershell.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' -nologo -windowstyle minimized -file '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \AppData\Local\Temp\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Windows\Temp\
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems), oscd.community, Natalia Shornikova,
+      frack113
+    description: Detects the use of the Microsoft signed script "CL_mutexverifiers"
+      to proxy the execution of additional PowerShell script commands
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://lolbas-project.github.io/lolbas/Scripts/CL_mutexverifiers/
+    tags:
+    - attack.defense_evasion
+    - attack.t1216
+  name: Potential Script Proxy Execution Via CL_Mutexverifiers.ps1
+

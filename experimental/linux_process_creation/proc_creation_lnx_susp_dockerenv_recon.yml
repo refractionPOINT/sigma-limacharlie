@@ -1,0 +1,62 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /cat
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /dir
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /find
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /ls
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /stat
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /test
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: grep
+    - case sensitive: false
+      op: ends with
+      path: event/COMMAND_LINE
+      value: .dockerenv
+respond:
+- action: report
+  metadata:
+    author: Seth Hanford
+    description: Detects listing or file reading of ".dockerenv" which can be a sing
+      of potential container discovery
+    falsepositives:
+    - Legitimate system administrator usage of these commands
+    - Some container tools or deployments may use these techniques natively to determine
+      how they proceed with execution, and will need to be filtered
+    level: low
+    references:
+    - https://blog.skyplabs.net/posts/container-detection/
+    - https://stackoverflow.com/questions/20010199/how-to-determine-if-a-process-runs-inside-lxc-docker
+    tags:
+    - attack.discovery
+    - attack.t1082
+  name: Docker Container Discovery Via Dockerenv Listing
+

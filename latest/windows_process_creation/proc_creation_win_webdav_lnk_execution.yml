@@ -1,0 +1,60 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \explorer.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cmd.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cscript.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \mshta.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \powershell.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \pwsh.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \wscript.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: \DavWWWRoot\
+respond:
+- action: report
+  metadata:
+    author: Micah Babinski
+    description: Detects possible execution via LNK file accessed on a WebDAV server.
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://www.trellix.com/en-us/about/newsroom/stories/research/beyond-file-search-a-novel-method.html
+    - https://micahbabinski.medium.com/search-ms-webdav-and-chill-99c5b23ac462
+    tags:
+    - attack.execution
+    - attack.t1059.001
+    - attack.t1204
+  name: Potentially Suspicious WebDAV LNK Execution
+

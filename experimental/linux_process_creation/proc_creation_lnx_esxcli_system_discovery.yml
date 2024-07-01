@@ -1,0 +1,46 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /esxcli
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: system
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' get'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' list'
+respond:
+- action: report
+  metadata:
+    author: Cedric Maurugeon
+    description: Detects execution of the "esxcli" command with the "system" flag
+      in order to retrieve information about the different component of the system.
+      Such as accounts, modules, NTP, etc.
+    falsepositives:
+    - Legitimate administration activities
+    level: medium
+    references:
+    - https://www.crowdstrike.com/blog/hypervisor-jackpotting-ecrime-actors-increase-targeting-of-esxi-servers/
+    - https://developer.vmware.com/docs/11743/esxi-7-0-esxcli-command-reference/namespace/esxcli_system.html
+    tags:
+    - attack.discovery
+    - attack.t1033
+    - attack.t1007
+  name: ESXi System Information Discovery Via ESXCLI
+

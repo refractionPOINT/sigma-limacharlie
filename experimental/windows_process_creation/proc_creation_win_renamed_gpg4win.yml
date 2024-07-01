@@ -1,0 +1,38 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/ORIGINAL_FILE_NAME
+      value: gpg.exe
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \gpg.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \gpg2.exe
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems), frack113
+    description: Detects the execution of a renamed "gpg.exe". Often used by ransomware
+      and loaders to decrypt/encrypt data.
+    level: high
+    references:
+    - https://securelist.com/locked-out/68960/
+    tags:
+    - attack.impact
+    - attack.t1486
+  name: Renamed Gpg.EXE Execution
+

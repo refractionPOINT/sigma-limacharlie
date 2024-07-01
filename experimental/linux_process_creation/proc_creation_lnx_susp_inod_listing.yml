@@ -1,0 +1,44 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /ls
+    - case sensitive: false
+      op: matches
+      path: event/COMMAND_LINE
+      re: .*\ \-.*i.*
+    - case sensitive: false
+      op: matches
+      path: event/COMMAND_LINE
+      re: .*\ \-.*d.*
+    - case sensitive: false
+      op: ends with
+      path: event/COMMAND_LINE
+      value: ' /'
+respond:
+- action: report
+  metadata:
+    author: Seth Hanford
+    description: Detects listing of the inodes of the "/" directory to determine if
+      the we are running inside of a container.
+    falsepositives:
+    - Legitimate system administrator usage of these commands
+    - Some container tools or deployments may use these techniques natively to determine
+      how they proceed with execution, and will need to be filtered
+    level: low
+    references:
+    - https://blog.skyplabs.net/posts/container-detection/
+    - https://stackoverflow.com/questions/20010199/how-to-determine-if-a-process-runs-inside-lxc-docker
+    tags:
+    - attack.discovery
+    - attack.t1082
+  name: Potential Container Discovery Via Inodes Listing
+

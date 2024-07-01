@@ -1,0 +1,42 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/Provider_Name
+        value: Service Control Manager
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '7045'
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/ServiceName
+        value: RemComSvc
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/ImagePath
+        value: \RemComSvc.exe
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects RemCom service installation and execution events
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://github.com/kavika13/RemCom/
+    tags:
+    - attack.execution
+    - attack.t1569.002
+  name: RemCom Service Installation
+

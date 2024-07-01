@@ -1,0 +1,144 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \cmd.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'copy '
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \powershell.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \pwsh.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: copy-item
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' copy '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: 'cpi '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' cp '
+      - op: or
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \robocopy.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \xcopy.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: robocopy.exe
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: XCOPY.EXE
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \System32
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \SysWOW64
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \WinSxS
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \bitsadmin.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \calc.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \certutil.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \cmdl32.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \cscript.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \mshta.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \rundll32.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \wscript.exe
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: 'Detects a suspicious copy operation that tries to copy a known LOLBIN
+      from system (System32, SysWOW64, WinSxS) directories to another on disk in order
+      to bypass detections based on locations.
+
+      '
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.hybrid-analysis.com/sample/8da5b75b6380a41eee3a399c43dfe0d99eeefaa1fd21027a07b1ecaa4cd96fdd?environmentId=120
+    - https://web.archive.org/web/20180331144337/https://www.fireeye.com/blog/threat-research/2018/03/sanny-malware-delivery-method-updated-in-recently-observed-attacks.html
+    - https://thedfirreport.com/2023/08/28/html-smuggling-leads-to-domain-wide-ransomware/
+    tags:
+    - attack.defense_evasion
+    - attack.t1036.003
+  name: LOL-Binary Copied From System Directory
+

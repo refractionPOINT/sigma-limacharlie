@@ -1,0 +1,107 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/FILE_PATH
+        value: C:\Program Files\WindowsApps\
+      - op: or
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \cmd.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \cscript.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \mshta.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \powershell.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \pwsh.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \regsvr32.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \rundll32.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \wscript.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: cmd /c
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: Invoke-
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: Base64
+    - not: true
+      op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/FILE_PATH
+        value: :\Program Files\WindowsApps\Microsoft.WindowsTerminal
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \WindowsTerminal.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \cmd.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \pwsh.exe
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects potentially suspicious child process of applications launched
+      from inside the WindowsApps directory. This could be a sign of a rogue ".appx"
+      package installation/execution
+    falsepositives:
+    - Legitimate packages that make use of external binaries such as Windows Terminal
+    level: medium
+    references:
+    - https://news.sophos.com/en-us/2021/11/11/bazarloader-call-me-back-attack-abuses-windows-10-apps-mechanism/
+    - https://www.sentinelone.com/labs/inside-malicious-windows-apps-for-malware-deployment/
+    tags:
+    - attack.defense_evasion
+  name: Potentially Suspicious Windows App Activity
+

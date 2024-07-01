@@ -1,0 +1,59 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is mac
+  - op: and
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /jamf
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: createAccount
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: manage
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: removeFramework
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: removeMdmProfile
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: resetPassword
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: setComputerName
+respond:
+- action: report
+  metadata:
+    author: Jay Pandit
+    description: 'Detects execution of the "jamf" binary to create user accounts and
+      run commands. For example, the binary can be abused by attackers on the system
+      in order to bypass security controls or remove application control polices.
+
+      '
+    falsepositives:
+    - Legitimate use of the JAMF CLI tool by IT support and administrators
+    level: low
+    references:
+    - https://github.com/MythicAgents/typhon/
+    - https://www.zoocoup.org/casper/jamf_cheatsheet.pdf
+    - https://docs.jamf.com/10.30.0/jamf-pro/administrator-guide/Components_Installed_on_Managed_Computers.html
+    tags:
+    - attack.execution
+  name: JAMF MDM Execution
+

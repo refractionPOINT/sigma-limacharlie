@@ -1,0 +1,38 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is mac
+  - op: and
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /dsenableroot
+    - case sensitive: false
+      not: true
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' -d '
+respond:
+- action: report
+  metadata:
+    author: Sohan G (D4rkCiph3r)
+    description: Detects attempts to enable the root account via "dsenableroot"
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/b27a3cb25025161d49ac861cb216db68c46a3537/atomics/T1078.003/T1078.003.md
+    - https://github.com/elastic/detection-rules/blob/4312d8c9583be524578a14fe6295c3370b9a9307/rules/macos/persistence_enable_root_account.toml
+    - https://ss64.com/osx/dsenableroot.html
+    tags:
+    - attack.t1078
+    - attack.t1078.001
+    - attack.t1078.003
+    - attack.initial_access
+    - attack.persistence
+  name: Root Account Enable Via Dsenableroot
+

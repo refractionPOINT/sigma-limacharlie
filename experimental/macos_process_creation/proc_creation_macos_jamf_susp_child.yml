@@ -1,0 +1,41 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is mac
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: /jamf
+    - op: or
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /bash
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /sh
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects potential suspicious child processes of "jamf". Could be
+      a sign of potential abuse of Jamf as a C2 server as seen by Typhon MythicAgent.
+    falsepositives:
+    - Legitimate execution of custom scripts or commands by Jamf administrators. Apply
+      additional filters accordingly
+    level: medium
+    references:
+    - https://github.com/MythicAgents/typhon/
+    - https://www.zoocoup.org/casper/jamf_cheatsheet.pdf
+    - https://docs.jamf.com/10.30.0/jamf-pro/administrator-guide/Components_Installed_on_Managed_Computers.html
+    tags:
+    - attack.execution
+  name: JAMF MDM Potential Suspicious Child Process
+

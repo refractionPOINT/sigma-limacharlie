@@ -1,0 +1,152 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/FILE_PATH
+        value: \ManageEngine\ServiceDesk\
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/FILE_PATH
+        value: \java.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \AppVLP.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \bash.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \bitsadmin.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \calc.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \certutil.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \cscript.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \curl.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \forfiles.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \mftrace.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \mshta.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \net.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \net1.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \notepad.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \pwsh.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \query.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \reg.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \schtasks.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \scrcons.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \sh.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \systeminfo.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \whoami.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \wmic.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \wscript.exe
+    - not: true
+      op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \net.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \net1.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' stop'
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects suspicious child processes of the "Manage Engine ServiceDesk
+      Plus" Java web service
+    falsepositives:
+    - Legitimate sub processes started by Manage Engine ServiceDesk Pro
+    level: high
+    references:
+    - https://www.horizon3.ai/manageengine-cve-2022-47966-technical-deep-dive/
+    - https://github.com/horizon3ai/CVE-2022-47966/blob/3a51c6b72ebbd87392babd955a8fbeaee2090b35/CVE-2022-47966.py
+    - https://blog.viettelcybersecurity.com/saml-show-stopper/
+    tags:
+    - attack.command_and_control
+    - attack.t1102
+  name: Suspicious Child Process Of Manage Engine ServiceDesk
+

@@ -1,0 +1,104 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \provlaunch.exe
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \calc.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \cmd.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \cscript.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \mshta.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \notepad.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \pwsh.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \regsvr32.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \rundll32.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \wscript.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: :\PerfLogs\
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: :\Temp\
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: :\Users\Public\
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: \AppData\Temp\
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: \Windows\System32\Tasks\
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: \Windows\Tasks\
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: \Windows\Temp\
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects suspicious child processes of "provlaunch.exe" which might
+      indicate potential abuse to proxy execution.
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://lolbas-project.github.io/lolbas/Binaries/Provlaunch/
+    - https://twitter.com/0gtweet/status/1674399582162153472
+    tags:
+    - attack.defense_evasion
+    - attack.t1218
+  name: Suspicious Provlaunch.EXE Child Process
+

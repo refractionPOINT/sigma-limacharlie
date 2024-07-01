@@ -1,0 +1,53 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \explorer.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \rundll32.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: RUNDLL32.EXE
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' C:\Windows\System32\'
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: ' -localserver 22d8c27b-47a1-48d1-ad08-7da7abd79617'
+respond:
+- action: report
+  metadata:
+    author: CD_ROM_
+    description: Detects execution of "rundll32.exe" with a parent process of Explorer.exe.
+      This has been observed by variants of Raspberry Robin, as first reported by
+      Red Canary.
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://redcanary.com/blog/raspberry-robin/
+    - https://thedfirreport.com/2022/09/26/bumblebee-round-two/
+    tags:
+    - attack.defense_evasion
+  name: Rundll32 Spawned Via Explorer.EXE
+
