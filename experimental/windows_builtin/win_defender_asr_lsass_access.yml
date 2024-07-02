@@ -94,7 +94,7 @@ respond:
     - Some Taskmgr.exe related activity
     level: high
     references:
-    - https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-exploit-guard/attack-surface-reduction-exploit-guard?WT.mc_id=twitter
+    - https://learn.microsoft.com/en-us/defender-endpoint/attack-surface-reduction
     tags:
     - attack.credential_access
     - attack.t1003.001

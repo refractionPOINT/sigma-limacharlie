@@ -25,7 +25,7 @@ respond:
     - Legitimate administrative tasks
     level: medium
     references:
-    - https://docs.microsoft.com/en-us/sysinternals/downloads/psexec
+    - https://learn.microsoft.com/en-us/sysinternals/downloads/psexec
     - https://www.youtube.com/watch?v=ro2QuZTIMBM
     tags:
     - attack.execution

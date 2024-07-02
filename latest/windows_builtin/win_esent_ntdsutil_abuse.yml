@@ -39,7 +39,7 @@ respond:
     level: medium
     references:
     - https://twitter.com/mgreen27/status/1558223256704122882
-    - https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj574207(v=ws.11)
+    - https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/jj574207(v=ws.11)
     tags:
     - attack.credential_access
     - attack.t1003.003

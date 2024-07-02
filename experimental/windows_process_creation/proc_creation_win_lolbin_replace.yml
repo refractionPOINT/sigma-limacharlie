@@ -32,7 +32,7 @@ respond:
     level: medium
     references:
     - https://lolbas-project.github.io/lolbas/Binaries/Replace/
-    - https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/replace
+    - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/replace
     tags:
     - attack.command_and_control
     - attack.t1105

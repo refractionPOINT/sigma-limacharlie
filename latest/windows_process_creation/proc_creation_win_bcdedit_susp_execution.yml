@@ -46,7 +46,7 @@ respond:
     description: Detects potential malicious and unauthorized usage of bcdedit.exe
     level: medium
     references:
-    - https://docs.microsoft.com/en-us/windows-hardware/drivers/devtest/bcdedit--set
+    - https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/bcdedit--set
     - https://twitter.com/malwrhunterteam/status/1372536434125512712/photo/2
     tags:
     - attack.defense_evasion

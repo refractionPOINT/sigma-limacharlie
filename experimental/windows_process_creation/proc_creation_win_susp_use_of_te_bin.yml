@@ -37,7 +37,7 @@ respond:
     references:
     - https://lolbas-project.github.io/lolbas/OtherMSBinaries/Te/
     - https://twitter.com/pabraeken/status/993298228840992768
-    - https://docs.microsoft.com/en-us/windows-hardware/drivers/taef/
+    - https://learn.microsoft.com/en-us/windows-hardware/drivers/taef/
     tags:
     - attack.defense_evasion
     - attack.t1218

@@ -71,8 +71,8 @@ respond:
     - Unknown
     level: high
     references:
-    - https://learn.microsoft.com/en-us/windows/security/threat-protection/auditing/event-4699
-    - https://learn.microsoft.com/en-us/windows/security/threat-protection/auditing/event-4701
+    - https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4699
+    - https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4701
     tags:
     - attack.execution
     - attack.privilege_escalation

@@ -120,7 +120,7 @@ respond:
     references:
     - https://thedfirreport.com/2022/07/11/select-xmrig-from-sqlserver/
     - https://github.com/The-DFIR-Report/Sigma-Rules/blob/75260568a7ffe61b2458ca05f6f25914efb44337/win_mofcomp_execution.yml
-    - https://docs.microsoft.com/en-us/windows/win32/wmisdk/mofcomp
+    - https://learn.microsoft.com/en-us/windows/win32/wmisdk/mofcomp
     tags:
     - attack.defense_evasion
     - attack.t1218

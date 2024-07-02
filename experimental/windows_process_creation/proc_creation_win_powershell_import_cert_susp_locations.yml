@@ -56,7 +56,7 @@ respond:
     level: high
     references:
     - https://www.microsoft.com/security/blog/2022/09/07/profiling-dev-0270-phosphorus-ransomware-operations/
-    - https://docs.microsoft.com/en-us/powershell/module/pki/import-certificate?view=windowsserver2022-ps
+    - https://learn.microsoft.com/en-us/powershell/module/pki/import-certificate?view=windowsserver2022-ps
     tags:
     - attack.defense_evasion
     - attack.t1553.004

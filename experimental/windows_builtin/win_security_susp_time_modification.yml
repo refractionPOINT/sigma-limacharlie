@@ -47,7 +47,7 @@ respond:
     references:
     - Private Cuckoo Sandbox (from many years ago, no longer have hash, NDA as well)
     - Live environment caused by malware
-    - https://docs.microsoft.com/en-us/windows/security/threat-protection/auditing/event-4616
+    - https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4616
     tags:
     - attack.defense_evasion
     - attack.t1070.006

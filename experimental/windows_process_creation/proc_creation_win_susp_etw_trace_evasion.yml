@@ -93,7 +93,7 @@ respond:
     - Unknown
     level: high
     references:
-    - https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/wevtutil
+    - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/wevtutil
     - https://abuse.io/lockergoga.txt
     - https://medium.com/palantir/tampering-with-windows-event-tracing-background-offense-and-defense-4be7ac62ac63
     tags:

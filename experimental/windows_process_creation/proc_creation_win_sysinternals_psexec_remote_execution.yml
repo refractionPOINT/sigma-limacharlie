@@ -33,7 +33,7 @@ respond:
     - Unknown
     level: high
     references:
-    - https://docs.microsoft.com/en-us/sysinternals/downloads/psexec
+    - https://learn.microsoft.com/en-us/sysinternals/downloads/psexec
     - https://www.poweradmin.com/paexec/
     - https://www.fireeye.com/blog/threat-research/2020/10/kegtap-and-singlemalt-with-a-ransomware-chaser.html
     tags:

@@ -60,8 +60,8 @@ respond:
       them in your environment
     level: medium
     references:
-    - https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/schtasks-change
-    - https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/schtasks-create
+    - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/schtasks-change
+    - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/schtasks-create
     tags:
     - attack.execution
     - attack.t1053.005

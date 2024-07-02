@@ -71,7 +71,7 @@ respond:
     level: high
     references:
     - https://www.sans.org/blog/red-team-tactics-hiding-windows-services/
-    - https://docs.microsoft.com/pt-br/windows/win32/secauthz/sid-strings
+    - https://learn.microsoft.com/pt-br/windows/win32/secauthz/sid-strings
     tags:
     - attack.persistence
     - attack.t1543.003

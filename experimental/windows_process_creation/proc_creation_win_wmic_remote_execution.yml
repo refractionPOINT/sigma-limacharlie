@@ -44,7 +44,7 @@ respond:
     level: medium
     references:
     - https://securelist.com/moonbounce-the-dark-side-of-uefi-firmware/105468/
-    - https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/wmic
+    - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/wmic
     tags:
     - attack.execution
     - attack.t1047

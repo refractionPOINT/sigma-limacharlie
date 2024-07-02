@@ -34,7 +34,7 @@ respond:
       official documentation; see https://learn.microsoft.com/en-us/mem/intune/apps/intune-management-extension
     level: high
     references:
-    - https://docs.microsoft.com/en-us/sysinternals/downloads/psexec
+    - https://learn.microsoft.com/en-us/sysinternals/downloads/psexec
     tags:
     - attack.execution
   name: PsExec Service Child Process Execution as LOCAL SYSTEM

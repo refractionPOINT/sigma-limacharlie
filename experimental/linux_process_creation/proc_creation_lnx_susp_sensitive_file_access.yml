@@ -128,7 +128,7 @@ respond:
       additional filters as needed.
     level: medium
     references:
-    - https://docs.microsoft.com/en-us/azure/defender-for-cloud/file-integrity-monitoring-overview#which-files-should-i-monitor
+    - https://learn.microsoft.com/en-us/azure/defender-for-cloud/file-integrity-monitoring-overview#which-files-should-i-monitor
     tags:
     - attack.impact
     - attack.t1565.001

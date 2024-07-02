@@ -38,7 +38,7 @@ respond:
     - Unknown
     level: high
     references:
-    - https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/whoami
+    - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/whoami
     tags:
     - attack.privilege_escalation
     - attack.discovery

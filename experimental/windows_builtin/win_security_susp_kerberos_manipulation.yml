@@ -153,7 +153,7 @@ respond:
     - Faulty legacy applications
     level: high
     references:
-    - https://learn.microsoft.com/en-us/windows/security/threat-protection/auditing/event-4771
+    - https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4771
     tags:
     - attack.credential_access
     - attack.t1212

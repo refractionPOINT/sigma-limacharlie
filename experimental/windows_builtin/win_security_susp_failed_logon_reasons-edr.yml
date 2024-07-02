@@ -59,7 +59,7 @@ respond:
     - User using a disabled account
     level: medium
     references:
-    - https://docs.microsoft.com/en-us/windows/security/threat-protection/auditing/event-4625
+    - https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4625
     - https://twitter.com/SBousseaden/status/1101431884540710913
     tags:
     - attack.persistence

@@ -26,7 +26,7 @@ respond:
     - Unknown
     level: low
     references:
-    - https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/clip
+    - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/clip
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1115/T1115.md
     tags:
     - attack.collection

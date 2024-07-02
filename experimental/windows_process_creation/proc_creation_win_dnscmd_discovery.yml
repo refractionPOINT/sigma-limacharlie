@@ -39,8 +39,8 @@ respond:
     - Legitimate administration use
     level: medium
     references:
-    - https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/dnscmd
-    - https://docs.microsoft.com/en-us/azure/dns/dns-zones-records
+    - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/dnscmd
+    - https://learn.microsoft.com/en-us/azure/dns/dns-zones-records
     - https://lolbas-project.github.io/lolbas/Binaries/Dnscmd/
     tags:
     - attack.discovery

@@ -26,7 +26,7 @@ respond:
     - Legitimate use
     level: medium
     references:
-    - https://docs.microsoft.com/en-us/windows/compatibility/ntvdm-and-16-bit-app-support
+    - https://learn.microsoft.com/en-us/windows/compatibility/ntvdm-and-16-bit-app-support
     - https://support.microsoft.com/fr-fr/topic/an-ms-dos-based-program-that-uses-the-ms-dos-protected-mode-interface-crashes-on-a-computer-that-is-running-windows-7-5dc739ea-987b-b458-15e4-d28d5cca63c7
     - https://app.any.run/tasks/93fe92fa-8b2b-4d92-8c09-a841aed2e793/
     - https://app.any.run/tasks/214094a7-0abc-4a7b-a564-1b757faed79d/

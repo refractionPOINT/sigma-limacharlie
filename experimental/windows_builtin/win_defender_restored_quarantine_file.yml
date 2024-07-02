@@ -14,7 +14,7 @@ respond:
     - Legitimate administrator activity restoring a file
     level: high
     references:
-    - https://learn.microsoft.com/en-us/microsoft-365/security/defender-endpoint/troubleshoot-microsoft-defender-antivirus?view=o365-worldwide
+    - https://learn.microsoft.com/en-us/defender-endpoint/troubleshoot-microsoft-defender-antivirus?view=o365-worldwide
     tags:
     - attack.defense_evasion
     - attack.t1562.001

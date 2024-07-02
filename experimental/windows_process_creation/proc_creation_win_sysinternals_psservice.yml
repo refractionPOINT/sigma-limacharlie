@@ -31,7 +31,7 @@ respond:
     - Legitimate use of PsService by an administrator
     level: medium
     references:
-    - https://docs.microsoft.com/en-us/sysinternals/downloads/psservice
+    - https://learn.microsoft.com/en-us/sysinternals/downloads/psservice
     tags:
     - attack.discovery
     - attack.persistence

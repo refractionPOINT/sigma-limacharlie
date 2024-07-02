@@ -53,7 +53,7 @@ respond:
     - Unknown
     level: high
     references:
-    - https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/assoc
+    - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/assoc
     tags:
     - attack.persistence
     - attack.t1546.001

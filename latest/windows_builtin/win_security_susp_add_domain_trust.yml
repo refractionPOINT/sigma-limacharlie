@@ -14,7 +14,7 @@ respond:
     - Legitimate extension of domain structure
     level: medium
     references:
-    - https://learn.microsoft.com/en-us/windows/security/threat-protection/auditing/event-4706
+    - https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4706
     tags:
     - attack.persistence
     - attack.t1098

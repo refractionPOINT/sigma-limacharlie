@@ -32,7 +32,7 @@ respond:
       region)
     level: medium
     references:
-    - https://docs.microsoft.com/en-us/windows/win32/intl/code-page-identifiers
+    - https://learn.microsoft.com/en-us/windows/win32/intl/code-page-identifiers
     - https://twitter.com/cglyer/status/1183756892952248325
     tags:
     - attack.t1036

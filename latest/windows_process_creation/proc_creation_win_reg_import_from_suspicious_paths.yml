@@ -61,7 +61,7 @@ respond:
     - Legitimate import of keys
     level: medium
     references:
-    - https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/reg-import
+    - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/reg-import
     tags:
     - attack.t1112
     - attack.defense_evasion

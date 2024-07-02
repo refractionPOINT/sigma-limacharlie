@@ -69,8 +69,8 @@ respond:
     references:
     - https://www.specterops.io/assets/resources/an_ace_up_the_sleeve.pdf
     - http://www.stuffithoughtiknew.com/2019/02/detecting-bloodhound.html
-    - https://docs.microsoft.com/en-us/windows/win32/adschema/attributes-all
-    - https://learn.microsoft.com/en-us/windows/security/threat-protection/auditing/event-4662
+    - https://learn.microsoft.com/en-us/windows/win32/adschema/attributes-all
+    - https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4662
     tags:
     - attack.discovery
     - attack.t1087.002

@@ -48,7 +48,7 @@ respond:
       known behavior is causing false positives, it can be exempted from the rule.
     level: medium
     references:
-    - https://docs.microsoft.com/en-us/windows-hardware/drivers/devtest/pnputil-command-syntax
+    - https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/pnputil-command-syntax
     - https://strontic.github.io/xcyclopedia/library/pnputil.exe-60EDC5E6BDBAEE441F2E3AEACD0340D2.html
     tags:
     - attack.persistence

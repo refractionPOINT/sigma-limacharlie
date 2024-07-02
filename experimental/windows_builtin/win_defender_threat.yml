@@ -28,7 +28,7 @@ respond:
     - Unlikely
     level: high
     references:
-    - https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-antivirus/troubleshoot-windows-defender-antivirus
+    - https://learn.microsoft.com/en-us/defender-endpoint/troubleshoot-microsoft-defender-antivirus
     tags:
     - attack.execution
     - attack.t1059

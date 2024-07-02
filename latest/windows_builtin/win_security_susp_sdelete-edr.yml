@@ -40,7 +40,7 @@ respond:
     references:
     - https://jpcertcc.github.io/ToolAnalysisResultSheet/details/sdelete.htm
     - https://www.jpcert.or.jp/english/pub/sr/ir_research.html
-    - https://docs.microsoft.com/en-gb/sysinternals/downloads/sdelete
+    - https://learn.microsoft.com/en-gb/sysinternals/downloads/sdelete
     tags:
     - attack.impact
     - attack.defense_evasion

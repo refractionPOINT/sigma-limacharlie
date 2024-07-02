@@ -45,7 +45,7 @@ respond:
       spawned by sqlagent.exe is a legitimate action.
     level: medium
     references:
-    - https://docs.microsoft.com/en-us/sql/tools/sqlps-utility?view=sql-server-ver15
+    - https://learn.microsoft.com/en-us/sql/tools/sqlps-utility?view=sql-server-ver15
     - https://lolbas-project.github.io/lolbas/OtherMSBinaries/Sqlps/
     - https://twitter.com/bryon_/status/975835709587075072
     tags:

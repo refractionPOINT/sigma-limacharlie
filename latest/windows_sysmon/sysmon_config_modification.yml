@@ -15,7 +15,7 @@ respond:
     - Legitimate administrative action
     level: medium
     references:
-    - https://docs.microsoft.com/en-us/sysinternals/downloads/sysmon
+    - https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon
     tags:
     - attack.defense_evasion
   name: Sysmon Configuration Change
