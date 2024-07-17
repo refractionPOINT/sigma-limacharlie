@@ -1,0 +1,72 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \link.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: LINK /
+    - not: true
+      op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: starts with
+          path: event/PARENT/FILE_PATH
+          value: C:\Program Files\Microsoft Visual Studio\
+        - case sensitive: false
+          op: starts with
+          path: event/PARENT/FILE_PATH
+          value: C:\Program Files (x86)\Microsoft Visual Studio\
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/FILE_PATH
+          value: \VC\bin\
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/FILE_PATH
+          value: \VC\Tools\
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: 'Detects an uncommon parent process of "LINK.EXE".
+
+      Link.EXE in Microsoft incremental linker. Its a utility usually bundled with
+      Visual Studio installation.
+
+      Multiple utilities often found in the same folder (editbin.exe, dumpbin.exe,
+      lib.exe, etc) have a hardcode call to the "LINK.EXE" binary without checking
+      its validity.
+
+      This would allow an attacker to sideload any binary with the name "link.exe"
+      if one of the aforementioned tools get executed from a different location.
+
+      By filtering the known locations of such utilities we can spot uncommon parent
+      process of LINK.EXE that might be suspicious or malicious.
+
+      '
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://twitter.com/0gtweet/status/1560732860935729152
+    tags:
+    - attack.defense_evasion
+    - attack.t1218
+  name: Uncommon Link.EXE Parent Process
+

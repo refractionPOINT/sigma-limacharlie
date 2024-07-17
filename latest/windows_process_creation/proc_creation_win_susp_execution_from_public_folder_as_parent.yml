@@ -8,65 +8,96 @@ detect:
   - op: and
     rules:
     - case sensitive: false
-      op: starts with
+      op: contains
       path: event/PARENT/FILE_PATH
-      value: C:\Users\Public\
+      value: :\Users\Public\
     - op: or
       rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: powershell
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: 'cmd.exe /c '
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: 'cmd.exe /r '
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: 'cmd.exe /k '
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: 'cmd /c '
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: 'cmd /r '
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: 'cmd /k '
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: wscript.exe
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: cscript.exe
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: bitsadmin
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: certutil
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: mshta.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \bitsadmin.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \certutil.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \cmd.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \cscript.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \mshta.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \pwsh.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \regsvr32.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \rundll32.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \wscript.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: bitsadmin
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: certutil
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: cscript
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: mshta
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: powershell
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: regsvr32
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: rundll32
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: wscript
 respond:
 - action: report
   metadata:
-    author: Florian Roth (Nextron Systems)
-    description: This rule detects suspicious processes with parent images located
-      in the C:\Users\Public folder
+    author: Florian Roth (Nextron Systems), Nasreddine Bencherchali (Nextron Systems)
+    description: 'Detects a potentially suspicious execution of a parent process located
+      in the "\Users\Public" folder executing a child process containing references
+      to shell or scripting binaries and commandlines.
+
+      '
     falsepositives:
     - Unknown
     level: high
@@ -77,5 +108,5 @@ respond:
     - attack.execution
     - attack.t1564
     - attack.t1059
-  name: Parent in Public Folder Suspicious Process
+  name: Potentially Suspicious Execution From Parent Process In Public Folder
 

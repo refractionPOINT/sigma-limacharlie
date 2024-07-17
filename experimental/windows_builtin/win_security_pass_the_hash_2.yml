@@ -57,7 +57,7 @@ respond:
     level: medium
     references:
     - https://github.com/iadgov/Event-Forwarding-Guidance/tree/master/Events
-    - https://blog.binarydefense.com/reliably-detecting-pass-the-hash-through-event-log-analysis
+    - https://web.archive.org/web/20170909091934/https://blog.binarydefense.com/reliably-detecting-pass-the-hash-through-event-log-analysis
     - https://blog.stealthbits.com/how-to-detect-pass-the-hash-attacks/
     tags:
     - attack.lateral_movement

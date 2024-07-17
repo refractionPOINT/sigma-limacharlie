@@ -30,17 +30,36 @@ detect:
           op: starts with
           path: event/PARENT/FILE_PATH
           value: C:\Program Files (x86)\Microsoft Visual Studio\
-      - case sensitive: false
-        op: contains
-        path: event/PARENT/FILE_PATH
-        value: \VC\Tools\MSVC\
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/FILE_PATH
+          value: \VC\bin\
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/FILE_PATH
+          value: \VC\Tools\
 respond:
 - action: report
   metadata:
     author: Nasreddine Bencherchali (Nextron Systems)
-    description: Detects the execution utitilies often found in Visual Studio tools
-      that hardcode the call to the binary "link.exe". They can be abused to sideload
-      any binary with the same name
+    description: 'Detects an uncommon parent process of "LINK.EXE".
+
+      Link.EXE in Microsoft incremental linker. Its a utility usually bundled with
+      Visual Studio installation.
+
+      Multiple utilities often found in the same folder (editbin.exe, dumpbin.exe,
+      lib.exe, etc) have a hardcode call to the "LINK.EXE" binary without checking
+      its validity.
+
+      This would allow an attacker to sideload any binary with the name "link.exe"
+      if one of the aforementioned tools get executed from a different location.
+
+      By filtering the known locations of such utilities we can spot uncommon parent
+      process of LINK.EXE that might be suspicious or malicious.
+
+      '
     falsepositives:
     - Unknown
     level: medium
@@ -49,5 +68,5 @@ respond:
     tags:
     - attack.defense_evasion
     - attack.t1218
-  name: Sideloading Link.EXE
+  name: Uncommon Link.EXE Parent Process
 

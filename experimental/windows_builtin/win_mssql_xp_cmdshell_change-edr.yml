@@ -6,9 +6,9 @@ detect:
   - op: and
     rules:
     - case sensitive: false
-      op: is
+      op: contains
       path: event/EVENT/EventData/Provider_Name
-      value: MSSQLSERVER
+      value: MSSQL
     - case sensitive: false
       op: is
       path: event/EVENT/System/EventID
@@ -21,8 +21,10 @@ respond:
 - action: report
   metadata:
     author: Nasreddine Bencherchali (Nextron Systems)
-    description: Detects when the MSSQL "xp_cmdshell" stored procedure setting is
-      changed
+    description: 'Detects when the MSSQL "xp_cmdshell" stored procedure setting is
+      changed.
+
+      '
     falsepositives:
     - Legitimate enable/disable of the setting
     - Note that since the event contain the change for both values. This means that

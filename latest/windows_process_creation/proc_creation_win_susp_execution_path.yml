@@ -9,84 +9,78 @@ detect:
     rules:
     - op: or
       rules:
-      - op: or
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/FILE_PATH
-          value: \$Recycle.bin\
-        - case sensitive: false
-          op: contains
-          path: event/FILE_PATH
-          value: \config\systemprofile\
-        - case sensitive: false
-          op: contains
-          path: event/FILE_PATH
-          value: \Intel\Logs\
-        - case sensitive: false
-          op: contains
-          path: event/FILE_PATH
-          value: \RSA\MachineKeys\
-        - case sensitive: false
-          op: contains
-          path: event/FILE_PATH
-          value: \Users\All Users\
-        - case sensitive: false
-          op: contains
-          path: event/FILE_PATH
-          value: \Users\Default\
-        - case sensitive: false
-          op: contains
-          path: event/FILE_PATH
-          value: \Users\NetworkService\
-        - case sensitive: false
-          op: contains
-          path: event/FILE_PATH
-          value: \Users\Public\
-        - case sensitive: false
-          op: contains
-          path: event/FILE_PATH
-          value: \Windows\addins\
-        - case sensitive: false
-          op: contains
-          path: event/FILE_PATH
-          value: \Windows\debug\
-        - case sensitive: false
-          op: contains
-          path: event/FILE_PATH
-          value: \Windows\Fonts\
-        - case sensitive: false
-          op: contains
-          path: event/FILE_PATH
-          value: \Windows\Help\
-        - case sensitive: false
-          op: contains
-          path: event/FILE_PATH
-          value: \Windows\IME\
-        - case sensitive: false
-          op: contains
-          path: event/FILE_PATH
-          value: \Windows\Media\
-        - case sensitive: false
-          op: contains
-          path: event/FILE_PATH
-          value: \Windows\repair\
-        - case sensitive: false
-          op: contains
-          path: event/FILE_PATH
-          value: \Windows\security\
-        - case sensitive: false
-          op: contains
-          path: event/FILE_PATH
-          value: \Windows\System32\Tasks\
-        - case sensitive: false
-          op: contains
-          path: event/FILE_PATH
-          value: \Windows\Tasks\
       - case sensitive: false
-        op: matches
+        op: contains
         path: event/FILE_PATH
-        re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Perflogs\\
+        value: :\Perflogs\
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: :\Users\All Users\
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: :\Users\Default\
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: :\Users\NetworkService\
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: :\Windows\addins\
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: :\Windows\debug\
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: :\Windows\Fonts\
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: :\Windows\Help\
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: :\Windows\IME\
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: :\Windows\Media\
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: :\Windows\repair\
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: :\Windows\security\
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: :\Windows\System32\Tasks\
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: :\Windows\Tasks\
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: $Recycle.bin
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: \config\systemprofile\
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: \Intel\Logs\
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: \RSA\MachineKeys\
     - not: true
       op: or
       rules:
@@ -108,7 +102,7 @@ respond:
 - action: report
   metadata:
     author: Florian Roth (Nextron Systems), Tim Shelton
-    description: Detects a suspicious execution from an uncommon folder
+    description: Detects a potentially suspicious execution from an uncommon folder.
     falsepositives:
     - Unknown
     level: high
@@ -120,5 +114,5 @@ respond:
     tags:
     - attack.defense_evasion
     - attack.t1036
-  name: Execution from Suspicious Folder
+  name: Process Execution From A Potentially Suspicious Folder
 

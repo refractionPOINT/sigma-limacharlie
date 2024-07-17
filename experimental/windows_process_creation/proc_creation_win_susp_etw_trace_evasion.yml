@@ -87,8 +87,10 @@ respond:
 - action: report
   metadata:
     author: '@neu5ron, Florian Roth (Nextron Systems), Jonhnathan Ribeiro, oscd.community'
-    description: Detects a command that clears or disables any ETW trace log which
-      could indicate a logging evasion.
+    description: 'Detects command line activity that tries to clear or disable any
+      ETW trace log which could be a sign of logging evasion.
+
+      '
     falsepositives:
     - Unknown
     level: high
@@ -101,5 +103,5 @@ respond:
     - attack.t1070
     - attack.t1562.006
     - car.2016-04-002
-  name: Disable of ETW Trace
+  name: ETW Trace Evasion Activity
 

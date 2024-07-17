@@ -6,9 +6,9 @@ detect:
   - op: and
     rules:
     - case sensitive: false
-      op: is
+      op: contains
       path: event/EVENT/EventData/Provider_Name
-      value: MSSQLSERVER
+      value: MSSQL
     - case sensitive: false
       op: is
       path: event/EVENT/System/EventID

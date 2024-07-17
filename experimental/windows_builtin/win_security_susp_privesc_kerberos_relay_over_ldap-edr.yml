@@ -32,17 +32,25 @@ detect:
 respond:
 - action: report
   metadata:
-    author: '@SBousseaden, Florian Roth'
-    description: Detects logon events that have characteristics of events generated
-      during an attack with KrbRelayUp and the like
+    author: Elastic, @SBousseaden
+    description: 'Detects a suspicious local successful logon event where the Logon
+      Package is Kerberos, the remote address is set to localhost, and the target
+      user SID is the built-in local Administrator account.
+
+      This may indicate an attempt to leverage a Kerberos relay attack variant that
+      can be used to elevate privilege locally from a domain joined limited user to
+      local System privileges.
+
+      '
     falsepositives:
     - Unknown
     level: high
     references:
     - https://twitter.com/sbousseaden/status/1518976397364056071?s=12&t=qKO5eKHvWhAP19a50FTZ7g
-    - https://github.com/elastic/detection-rules/blob/fb6ee2c69864ffdfe347bf3b050cb931f53067a6/rules/windows/privilege_escalation_krbrelayup_suspicious_logon.toml
+    - https://github.com/elastic/detection-rules/blob/5fe7833312031a4787e07893e27e4ea7a7665745/rules/_deprecated/privilege_escalation_krbrelayup_suspicious_logon.toml#L38
     tags:
     - attack.privilege_escalation
     - attack.credential_access
-  name: KrbRelayUp Attack Pattern
+    - attack.t1548
+  name: Potential Privilege Escalation via Local Kerberos Relay over LDAP
 

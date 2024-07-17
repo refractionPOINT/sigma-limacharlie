@@ -108,9 +108,13 @@ respond:
 - action: report
   metadata:
     author: Ecco, Daniil Yugoslavskiy, oscd.community, D3F7A5105
-    description: Detects clearing or configuration of eventlogs using wevtutil, powershell
-      and wmic. Might be used by ransomwares during the attack (seen by NotPetya and
-      others).
+    description: 'Detects the clearing or configuration tampering of EventLog using
+      utilities such as "wevtutil", "powershell" and "wmic".
+
+      This technique were seen used by threat actors and ransomware strains in order
+      to evade defenses.
+
+      '
     falsepositives:
     - Admin activity
     - Scripts and administrative tools used in the monitored environment
@@ -127,5 +131,5 @@ respond:
     - attack.t1070.001
     - attack.t1562.002
     - car.2016-04-002
-  name: Suspicious Eventlog Clear or Configuration Change
+  name: Suspicious Eventlog Clearing or Configuration Change Activity
 

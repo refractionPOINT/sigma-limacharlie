@@ -19,8 +19,18 @@ respond:
 - action: report
   metadata:
     author: Florian Roth (Nextron Systems), omkar72, oscd.community
-    description: Detects suspicious aged finger.exe tool execution often used in malware
-      attacks nowadays
+    description: 'Detects execution of the "finger.exe" utility.
+
+      Finger.EXE or "TCPIP Finger Command" is an old utility that is still present
+      on modern Windows installation. It Displays information about users on a specified
+      remote computer (typically a UNIX computer) that is running the finger service
+      or daemon.
+
+      Due to the old nature of this utility and the rareness of machines having the
+      finger service. Any execution of "finger.exe" can be considered "suspicious"
+      and worth investigating.
+
+      '
     falsepositives:
     - Admin activity (unclear what they do nowadays with finger.exe)
     level: high
@@ -31,5 +41,5 @@ respond:
     tags:
     - attack.command_and_control
     - attack.t1105
-  name: Finger.exe Suspicious Invocation
+  name: Finger.EXE Execution
 

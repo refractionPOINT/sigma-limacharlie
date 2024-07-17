@@ -9,199 +9,102 @@ detect:
     rules:
     - op: and
       rules:
-      - op: and
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \chrome.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \discord.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \GitHubDesktop.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \keybase.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \msedge.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \msedgewebview2.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \msteams.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \slack.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \teams.exe
+      - op: or
         rules:
         - op: or
           rules:
           - case sensitive: false
             op: ends with
-            path: event/PARENT/FILE_PATH
-            value: \chrome.exe
-          - case sensitive: false
-            op: ends with
-            path: event/PARENT/FILE_PATH
-            value: \discord.exe
-          - case sensitive: false
-            op: ends with
-            path: event/PARENT/FILE_PATH
-            value: \GitHubDesktop.exe
-          - case sensitive: false
-            op: ends with
-            path: event/PARENT/FILE_PATH
-            value: \keybase.exe
-          - case sensitive: false
-            op: ends with
-            path: event/PARENT/FILE_PATH
-            value: \msedge.exe
-          - case sensitive: false
-            op: ends with
-            path: event/PARENT/FILE_PATH
-            value: \msedgewebview2.exe
-          - case sensitive: false
-            op: ends with
-            path: event/PARENT/FILE_PATH
-            value: \msteams.exe
-          - case sensitive: false
-            op: ends with
-            path: event/PARENT/FILE_PATH
-            value: \slack.exe
-          - case sensitive: false
-            op: ends with
-            path: event/PARENT/FILE_PATH
-            value: \Teams.exe
-        - op: or
-          rules:
-          - op: or
-            rules:
-            - case sensitive: false
-              op: ends with
-              path: event/FILE_PATH
-              value: \cmd.exe
-            - case sensitive: false
-              op: ends with
-              path: event/FILE_PATH
-              value: \cscript.exe
-            - case sensitive: false
-              op: ends with
-              path: event/FILE_PATH
-              value: \mshta.exe
-            - case sensitive: false
-              op: ends with
-              path: event/FILE_PATH
-              value: \powershell.exe
-            - case sensitive: false
-              op: ends with
-              path: event/FILE_PATH
-              value: \pwsh.exe
-            - case sensitive: false
-              op: ends with
-              path: event/FILE_PATH
-              value: \regsvr32.exe
-            - case sensitive: false
-              op: ends with
-              path: event/FILE_PATH
-              value: \wscript.exe
-          - op: or
-            rules:
-            - case sensitive: false
-              op: contains
-              path: event/FILE_PATH
-              value: \AppData\Local\Temp\
-            - case sensitive: false
-              op: contains
-              path: event/FILE_PATH
-              value: \Users\Public\
-            - case sensitive: false
-              op: contains
-              path: event/FILE_PATH
-              value: \Windows\Temp\
-            - case sensitive: false
-              op: contains
-              path: event/FILE_PATH
-              value: :\Temp\
-      - not: true
-        op: or
-        rules:
-        - op: and
-          rules:
-          - case sensitive: false
-            op: ends with
-            path: event/PARENT/FILE_PATH
-            value: \chrome.exe
+            path: event/FILE_PATH
+            value: \cmd.exe
           - case sensitive: false
             op: ends with
             path: event/FILE_PATH
-            value: \chrome.exe
-        - op: and
-          rules:
-          - case sensitive: false
-            op: ends with
-            path: event/PARENT/FILE_PATH
-            value: \discord.exe
+            value: \cscript.exe
           - case sensitive: false
             op: ends with
             path: event/FILE_PATH
-            value: \discord.exe
-        - op: and
-          rules:
-          - case sensitive: false
-            op: ends with
-            path: event/PARENT/FILE_PATH
-            value: \GitHubDesktop.exe
+            value: \mshta.exe
           - case sensitive: false
             op: ends with
             path: event/FILE_PATH
-            value: \GitHubDesktop.exe
-        - op: and
-          rules:
-          - case sensitive: false
-            op: ends with
-            path: event/PARENT/FILE_PATH
-            value: \keybase.exe
+            value: \powershell.exe
           - case sensitive: false
             op: ends with
             path: event/FILE_PATH
-            value: \keybase.exe
-        - op: and
-          rules:
-          - case sensitive: false
-            op: ends with
-            path: event/PARENT/FILE_PATH
-            value: \msedge.exe
+            value: \pwsh.exe
           - case sensitive: false
             op: ends with
             path: event/FILE_PATH
-            value: \msedge.exe
-        - op: and
-          rules:
-          - case sensitive: false
-            op: ends with
-            path: event/PARENT/FILE_PATH
-            value: \msedgewebview2.exe
+            value: \regsvr32.exe
           - case sensitive: false
             op: ends with
             path: event/FILE_PATH
-            value: \msedgewebview2.exe
-        - op: and
-          rules:
-          - case sensitive: false
-            op: ends with
-            path: event/PARENT/FILE_PATH
-            value: \msteams.exe
+            value: \whoami.exe
           - case sensitive: false
             op: ends with
             path: event/FILE_PATH
-            value: \msteams.exe
-        - op: and
-          rules:
-          - case sensitive: false
-            op: ends with
-            path: event/PARENT/FILE_PATH
-            value: \slack.exe
-          - case sensitive: false
-            op: ends with
-            path: event/FILE_PATH
-            value: \slack.exe
-        - op: and
-          rules:
-          - case sensitive: false
-            op: ends with
-            path: event/PARENT/FILE_PATH
-            value: \teams.exe
-          - case sensitive: false
-            op: ends with
-            path: event/FILE_PATH
-            value: \teams.exe
+            value: \wscript.exe
         - op: or
           rules:
           - case sensitive: false
-            op: is
+            op: contains
             path: event/FILE_PATH
-            value: C:\Windows\SysWOW64\WerFault.exe
+            value: :\ProgramData\
           - case sensitive: false
-            op: is
+            op: contains
             path: event/FILE_PATH
-            value: C:\Windows\System32\WerFault.exe
+            value: :\Temp\
+          - case sensitive: false
+            op: contains
+            path: event/FILE_PATH
+            value: \AppData\Local\Temp\
+          - case sensitive: false
+            op: contains
+            path: event/FILE_PATH
+            value: \Users\Public\
+          - case sensitive: false
+            op: contains
+            path: event/FILE_PATH
+            value: \Windows\Temp\
     - not: true
       op: and
       rules:
@@ -209,6 +112,10 @@ detect:
         op: ends with
         path: event/PARENT/FILE_PATH
         value: \Discord.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cmd.exe
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -224,7 +131,7 @@ respond:
 
       '
     falsepositives:
-    - Legitimate child processes can occur in cases of debugging
+    - Unknown
     level: medium
     references:
     - https://taggart-tech.com/quasar-electron/

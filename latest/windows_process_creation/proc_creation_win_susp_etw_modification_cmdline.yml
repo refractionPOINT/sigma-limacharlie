@@ -19,9 +19,13 @@ respond:
 - action: report
   metadata:
     author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)
-    description: Detects changes to environment variables related to ETW logging.
+    description: 'Detects changes to environment variables related to ETW logging
+      via the CommandLine.
+
       This could indicate potential adversaries stopping ETW providers recording loaded
       .NET assemblies.
+
+      '
     falsepositives:
     - Unlikely
     level: high
@@ -39,5 +43,5 @@ respond:
     tags:
     - attack.defense_evasion
     - attack.t1562
-  name: ETW Logging Tamper In .NET Processes
+  name: ETW Logging Tamper In .NET Processes Via CommandLine
 
