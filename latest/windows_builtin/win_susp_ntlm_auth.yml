@@ -1,14 +1,10 @@
 detect:
+  case sensitive: false
   log type: wel
-  op: and
-  rules:
-  - case sensitive: false
-    op: is
-    path: Event/System/EventID
-    value: '8002'
-  - op: exists
-    path: Event/EventData/ProcessName
+  op: is
+  path: Event/System/EventID
   target: log
+  value: '8002'
 respond:
 - action: report
   metadata:
@@ -20,7 +16,6 @@ respond:
     level: low
     references:
     - https://twitter.com/JohnLaTwC/status/1004895028995477505
-    - https://goo.gl/PsqrhT
     tags:
     - attack.lateral_movement
     - attack.t1550.002

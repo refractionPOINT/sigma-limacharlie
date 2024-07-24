@@ -46,27 +46,11 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: "\xE2"
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: "\u20AC"
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: "\xA3"
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
         value: "\xAF"
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
         value: "\xAE"
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: "\xB5"
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE

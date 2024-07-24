@@ -3,14 +3,10 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: and
-    rules:
-    - case sensitive: false
-      op: is
-      path: event/EVENT/System/EventID
-      value: '8002'
-    - op: exists
-      path: event/EVENT/EventData/ProcessName
+  - case sensitive: false
+    op: is
+    path: event/EVENT/System/EventID
+    value: '8002'
 respond:
 - action: report
   metadata:
@@ -22,7 +18,6 @@ respond:
     level: low
     references:
     - https://twitter.com/JohnLaTwC/status/1004895028995477505
-    - https://goo.gl/PsqrhT
     tags:
     - attack.lateral_movement
     - attack.t1550.002
