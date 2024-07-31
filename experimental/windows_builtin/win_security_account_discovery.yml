@@ -80,7 +80,7 @@ respond:
     - If source account name is not an admin then its super suspicious
     level: high
     references:
-    - https://blog.menasec.net/2019/02/threat-hunting-5-detecting-enumeration.html
+    - https://web.archive.org/web/20230329163438/https://blog.menasec.net/2019/02/threat-hunting-5-detecting-enumeration.html
     tags:
     - attack.discovery
     - attack.t1087.002
