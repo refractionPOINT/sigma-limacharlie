@@ -1,0 +1,30 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '3008'
+  - case sensitive: false
+    op: contains
+    path: Event/EventData/QueryName
+    value: ufile.io
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects DNS queries to "ufile.io", which was seen abused by malware
+      and threat actors as a method for data exfiltration
+    falsepositives:
+    - DNS queries for "ufile" are not malicious by nature necessarily. Investigate
+      the source to determine the necessary actions to take
+    level: low
+    references:
+    - https://thedfirreport.com/2021/12/13/diavol-ransomware/
+    tags:
+    - attack.exfiltration
+    - attack.t1567.002
+  name: DNS Query To Ufile.io - DNS Client
+

@@ -1,0 +1,22 @@
+detect:
+  case sensitive: false
+  event: DNS_REQUEST
+  op: contains
+  path: event/DOMAIN_NAME
+  value: .onion
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Detects DNS queries to an ".onion" address related to Tor routing
+      networks
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.logpoint.com/en/blog/detecting-tor-use-with-logpoint/
+    tags:
+    - attack.command_and_control
+    - attack.t1090.003
+  name: DNS Query Tor .Onion Address - Sysmon
+

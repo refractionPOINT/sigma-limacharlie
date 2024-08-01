@@ -1,0 +1,66 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cmd.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: Cmd.Exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'del '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'erase '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: matches
+        path: event/COMMAND_LINE
+        re: .*\\\*\.au3.*
+      - case sensitive: false
+        op: matches
+        path: event/COMMAND_LINE
+        re: .*\\\*\.dll.*
+      - case sensitive: false
+        op: matches
+        path: event/COMMAND_LINE
+        re: .*\\\*\.exe.*
+      - case sensitive: false
+        op: matches
+        path: event/COMMAND_LINE
+        re: .*\\\*\.js.*
+respond:
+- action: report
+  metadata:
+    author: frack113 , X__Junior (Nextron Systems)
+    description: Detects execution of the "del" builtin command to remove files using
+      greedy/wildcard expression. This is often used by malware to delete content
+      of folders that perhaps contains the initial malware infection or to delete
+      evidence.
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://www.joesandbox.com/analysis/509330/0/html#1044F3BDBE3BB6F734E357235F4D5898582D
+    - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/erase
+    tags:
+    - attack.defense_evasion
+    - attack.t1070.004
+  name: Greedy File Deletion Using Del
+

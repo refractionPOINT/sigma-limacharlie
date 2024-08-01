@@ -1,0 +1,138 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \svchost.exe
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: -s WebClient
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \rundll32.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: C:\windows\system32\davclnt.dll,DavSetCookie
+      - op: matches
+        path: event/COMMAND_LINE
+        re: ://\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ://10.
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ://192.168.
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ://172.16.
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ://172.17.
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ://172.18.
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ://172.19.
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ://172.20.
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ://172.21.
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ://172.22.
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ://172.23.
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ://172.24.
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ://172.25.
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ://172.26.
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ://172.27.
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ://172.28.
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ://172.29.
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ://172.30.
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ://172.31.
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ://127.
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ://169.254.
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems), Florian Roth (Nextron Systems)
+    description: 'Detects "svchost.exe" spawning "rundll32.exe" with command arguments
+      like C:\windows\system32\davclnt.dll,DavSetCookie. This could be an indicator
+      of exfiltration or use of WebDav to launch code (hosted on WebDav Server) or
+      potentially a sign of exploitation of CVE-2023-23397
+
+      '
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://twitter.com/aceresponder/status/1636116096506818562
+    - https://www.mdsec.co.uk/2023/03/exploiting-cve-2023-23397-microsoft-outlook-elevation-of-privilege-vulnerability/
+    - https://www.pwndefend.com/2023/03/15/the-long-game-persistent-hash-theft/
+    - https://www.microsoft.com/en-us/security/blog/wp-content/uploads/2023/03/Figure-7-sample-webdav-process-create-event.png
+    - https://www.microsoft.com/en-us/security/blog/2023/03/24/guidance-for-investigating-attacks-using-cve-2023-23397/
+    tags:
+    - attack.exfiltration
+    - attack.t1048.003
+    - cve.2023.23397
+  name: Suspicious WebDav Client Execution Via Rundll32.EXE
+

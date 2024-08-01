@@ -1,0 +1,82 @@
+detect:
+  event: DNS_REQUEST
+  op: and
+  rules:
+  - op: and
+    rules:
+    - case sensitive: false
+      op: starts with
+      path: event/DOMAIN_NAME
+      value: _ldap.
+    - not: true
+      op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: :\Program Files\
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: :\Program Files (x86)\
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: :\Windows\
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: :\ProgramData\Microsoft\Windows Defender\Platform\
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \MsMpEng.exe
+      - case sensitive: false
+        op: is
+        path: event/FILE_PATH
+        value: <unknown process>
+      - not: true
+        op: exists
+        path: event/FILE_PATH
+  - not: true
+    op: or
+    rules:
+    - case sensitive: false
+      op: starts with
+      path: event/FILE_PATH
+      value: C:\WindowsAzure\GuestAgent
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \chrome.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \firefox.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \opera.exe
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Detects DNS server discovery via LDAP query requests from uncommon
+      applications
+    falsepositives:
+    - Likely
+    level: low
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/980f3f83fd81f37c1ca9c02dccfd1c3d9f9d0841/atomics/T1016/T1016.md#atomic-test-9---dns-server-discovery-using-nslookup
+    - https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-adts/7fcdce70-5205-44d6-9c3a-260e616a2f04
+    tags:
+    - attack.discovery
+    - attack.t1482
+  name: DNS Server Discovery Via LDAP Query
+

@@ -1,0 +1,58 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cmd.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: Cmd.Exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'copy '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' \\\\'
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .dmp
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .dump
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .hdmp
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects usage of the copy builtin cmd command to copy files with
+      the ".dmp"/".dump" extension from a remote share
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://thedfirreport.com/2022/09/26/bumblebee-round-two/
+    tags:
+    - attack.credential_access
+  name: Copy .DMP/.DUMP Files From Remote Share Via Cmd.EXE
+

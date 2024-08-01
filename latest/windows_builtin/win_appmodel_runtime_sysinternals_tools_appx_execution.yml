@@ -1,0 +1,48 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '201'
+  - op: or
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/EventData/ImageName
+      value: procdump.exe
+    - case sensitive: false
+      op: is
+      path: Event/EventData/ImageName
+      value: psloglist.exe
+    - case sensitive: false
+      op: is
+      path: Event/EventData/ImageName
+      value: psexec.exe
+    - case sensitive: false
+      op: is
+      path: Event/EventData/ImageName
+      value: livekd.exe
+    - case sensitive: false
+      op: is
+      path: Event/EventData/ImageName
+      value: ADExplorer.exe
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects execution of Sysinternals tools via an AppX package. Attackers
+      could install the Sysinternals Suite to get access to tools such as psexec and
+      procdump to avoid detection based on System paths
+    falsepositives:
+    - Legitimate usage of the applications from the Windows Store
+    level: low
+    references:
+    - Internal Research
+    tags:
+    - attack.defense_evasion
+    - attack.execution
+  name: Sysinternals Tools AppX Versions Execution
+

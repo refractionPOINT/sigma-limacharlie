@@ -1,0 +1,118 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - op: and
+          rules:
+          - not: true
+            op: exists
+            path: event/ORIGINAL_FILE_NAME
+          - case sensitive: false
+            op: ends with
+            path: event/COMMAND_LINE
+            value: .exe tunnel
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: .exe tunnel
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '--name '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: --accept-server-license-terms
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: 'tunnel '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: service
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: internal-run
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: tunnel-service.log
+      - not: true
+        op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \code-tunnel.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \code.exe
+    - op: and
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/COMMAND_LINE
+          value: ' tunnel'
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \cmd.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '/d /c '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \servers\Stable-
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: code-server.cmd
+      - not: true
+        op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \code-tunnel.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \code.exe
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects renamed Visual Studio Code tunnel execution. Attackers can
+      abuse this functionality to establish a C2 channel
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://ipfyx.fr/post/visual-studio-code-tunnel/
+    - https://badoption.eu/blog/2023/01/31/code_c2.html
+    - https://code.visualstudio.com/docs/remote/tunnels
+    tags:
+    - attack.command_and_control
+    - attack.t1071.001
+  name: Renamed Visual Studio Code Tunnel Execution
+

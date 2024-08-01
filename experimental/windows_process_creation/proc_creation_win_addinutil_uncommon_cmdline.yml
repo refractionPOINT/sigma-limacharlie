@@ -1,0 +1,70 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \addinutil.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: AddInUtil.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '-AddInRoot:'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '-PipelineRoot:'
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -AddInRoot:"C:\Program Files (x86)\Common Files\Microsoft Shared\VSTA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -AddInRoot:C:\Program Files (x86)\Common Files\Microsoft Shared\VSTA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -PipelineRoot:"C:\Program Files (x86)\Common Files\Microsoft Shared\VSTA
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -PipelineRoot:C:\Program Files (x86)\Common Files\Microsoft Shared\VSTA
+respond:
+- action: report
+  metadata:
+    author: Michael McKinley (@McKinleyMike), Tony Latteri (@TheLatteri)
+    description: 'Detects execution of the Add-In deployment cache updating utility
+      (AddInutil.exe) with uncommon Addinroot or Pipelineroot paths. An adversary
+      may execute AddinUtil.exe with uncommon Addinroot/Pipelineroot paths that point
+      to the adversaries Addins.Store payload.
+
+      '
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://www.blue-prints.blog/content/blog/posts/lolbin/addinutil-lolbas.html
+    tags:
+    - attack.defense_evasion
+    - attack.t1218
+  name: Uncommon AddinUtil.EXE CommandLine Execution
+

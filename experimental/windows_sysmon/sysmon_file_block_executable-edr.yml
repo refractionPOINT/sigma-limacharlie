@@ -1,0 +1,24 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - case sensitive: false
+    op: is
+    path: event/EVENT/System/EventID
+    value: '27'
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Triggers on any Sysmon "FileBlockExecutable" event, which indicates
+      a violation of the configured block policy
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://medium.com/@olafhartong/sysmon-14-0-fileblockexecutable-13d7ba3dff3e
+    tags:
+    - attack.defense_evasion
+  name: Sysmon Blocked Executable
+

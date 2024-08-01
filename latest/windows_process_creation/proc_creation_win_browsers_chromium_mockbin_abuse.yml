@@ -1,0 +1,61 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \brave.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \chrome.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \msedge.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \opera.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \vivaldi.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: --headless
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ://run.mocky
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ://mockbin
+respond:
+- action: report
+  metadata:
+    author: X__Junior (Nextron Systems)
+    description: Detects the execution of a Chromium based browser process with the
+      "headless" flag and a URL pointing to the mockbin.org service (which can be
+      used to exfiltrate data).
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.zscaler.com/blogs/security-research/steal-it-campaign
+    tags:
+    - attack.execution
+  name: Chromium Browser Headless Execution To Mockbin Like Site
+

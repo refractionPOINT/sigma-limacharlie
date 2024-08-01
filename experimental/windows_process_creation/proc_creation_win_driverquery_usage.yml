@@ -1,0 +1,75 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: driverquery.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: drvqry.exe
+    - not: true
+      op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \cscript.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \mshta.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \regsvr32.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \rundll32.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \wscript.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/FILE_PATH
+          value: \AppData\Local\
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/FILE_PATH
+          value: \Users\Public\
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/FILE_PATH
+          value: \Windows\Temp\
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detect usage of the "driverquery" utility. Which can be used to perform
+      reconnaissance on installed drivers
+    falsepositives:
+    - Legitimate use by third party tools in order to investigate installed drivers
+    level: medium
+    references:
+    - https://thedfirreport.com/2023/01/09/unwrapping-ursnifs-gifts/
+    - https://www.vmray.com/cyber-security-blog/analyzing-ursnif-behavior-malware-sandbox/
+    - https://www.fireeye.com/blog/threat-research/2020/01/saigon-mysterious-ursnif-fork.html
+    tags:
+    - attack.discovery
+  name: DriverQuery.EXE Execution
+

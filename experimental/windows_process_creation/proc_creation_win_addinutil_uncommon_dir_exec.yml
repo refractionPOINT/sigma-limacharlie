@@ -1,0 +1,50 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \addinutil.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: AddInUtil.exe
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: :\Windows\Microsoft.NET\Framework\
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: :\Windows\Microsoft.NET\Framework64\
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: :\Windows\WinSxS\
+respond:
+- action: report
+  metadata:
+    author: Michael McKinley (@McKinleyMike), Tony Latteri (@TheLatteri)
+    description: Detects execution of the Add-In deployment cache updating utility
+      (AddInutil.exe) from a non-standard directory.
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://www.blue-prints.blog/content/blog/posts/lolbin/addinutil-lolbas.html
+    tags:
+    - attack.defense_evasion
+    - attack.t1218
+  name: AddinUtil.EXE Execution From Uncommon Directory
+

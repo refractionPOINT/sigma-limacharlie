@@ -1,0 +1,48 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '4663'
+  - case sensitive: false
+    op: contains
+    path: Event/EventData/ObjectName
+    value: \SYSTEM\
+  - case sensitive: false
+    op: contains
+    path: Event/EventData/ObjectName
+    value: ControlSet\Services\
+  - case sensitive: false
+    op: contains
+    path: Event/EventData/AccessList
+    value: '%%1538'
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Center for Threat Informed Defense (CTID) Summiting the Pyramid Team
+    description: 'Detects "read access" requests on the services registry key.
+
+      Adversaries may execute their own malicious payloads by hijacking the Registry
+      entries used by services.
+
+      Adversaries may use flaws in the permissions for Registry keys related to services
+      to redirect from the originally specified executable to one that they control,
+      in order to launch their own code when a service starts.
+
+      '
+    falsepositives:
+    - Likely from legitimate applications reading their key. Requires heavy tuning
+    level: low
+    references:
+    - https://center-for-threat-informed-defense.github.io/summiting-the-pyramid/analytics/service_registry_permissions_weakness_check/
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1574.011/T1574.011.md#atomic-test-1---service-registry-permissions-weakness
+    tags:
+    - attack.defense_evasion
+    - attack.persistence
+    - attack.privilege_escalation
+    - attack.t1574.011
+  name: Service Registry Key Read Access Request
+

@@ -1,0 +1,23 @@
+detect:
+  case sensitive: false
+  event: DNS_REQUEST
+  op: contains
+  path: event/DOMAIN_NAME
+  value: ufile.io
+respond:
+- action: report
+  metadata:
+    author: yatinwad, TheDFIRReport
+    description: Detects DNS queries to "ufile.io", which was seen abused by malware
+      and threat actors as a method for data exfiltration
+    falsepositives:
+    - DNS queries for "ufile" are not malicious by nature necessarily. Investigate
+      the source to determine the necessary actions to take
+    level: low
+    references:
+    - https://thedfirreport.com/2021/12/13/diavol-ransomware/
+    tags:
+    - attack.exfiltration
+    - attack.t1567.002
+  name: DNS Query To Ufile.io
+

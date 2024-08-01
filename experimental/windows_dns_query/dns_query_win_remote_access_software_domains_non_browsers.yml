@@ -1,0 +1,480 @@
+detect:
+  event: DNS_REQUEST
+  op: and
+  rules:
+  - op: or
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: agent.jumpcloud.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: agentreporting.atera.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: ammyy.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: api.parsec.app
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: api.playanext.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: api.splashtop.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: app.atera.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: assist.zoho.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: authentication.logmeininc.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: beyondtrustcloud.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: cdn.kaseya.net
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: client.teamviewer.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: comserver.corporate.beanywhere.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: control.connectwise.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: downloads.zohocdn.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: dwservice.net
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: express.gotoassist.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: getgo.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: integratedchat.teamviewer.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: join.zoho.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: kickstart.jumpcloud.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: license.bomgar.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: logmein-gateway.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: logmein.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: logmeincdn.http.internapcdn.net
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: n-able.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: net.anydesk.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: netsupportsoftware.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: parsecusercontent.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: pubsub.atera.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: relay.kaseya.net
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: relay.screenconnect.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: relay.splashtop.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: remotedesktop-pa.googleapis.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: remoteutilities.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: secure.logmeinrescue.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: services.vnc.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: static.remotepc.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: swi-rc.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: swi-tc.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: telemetry.servers.qetqo.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: tmate.io
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: zohoassist.com
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: .rustdesk.com
+      - case sensitive: false
+        op: starts with
+        path: event/DOMAIN_NAME
+        value: rs-
+  - not: true
+    op: or
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/FILE_PATH
+        value: C:\Program Files\Google\Chrome\Application\chrome.exe
+      - case sensitive: false
+        op: is
+        path: event/FILE_PATH
+        value: C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/FILE_PATH
+        value: C:\Program Files\Mozilla Firefox\firefox.exe
+      - case sensitive: false
+        op: is
+        path: event/FILE_PATH
+        value: C:\Program Files (x86)\Mozilla Firefox\firefox.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/FILE_PATH
+        value: C:\Program Files (x86)\Internet Explorer\iexplore.exe
+      - case sensitive: false
+        op: is
+        path: event/FILE_PATH
+        value: C:\Program Files\Internet Explorer\iexplore.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: starts with
+        path: event/FILE_PATH
+        value: C:\Program Files (x86)\Microsoft\EdgeWebView\Application\
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \WindowsApps\MicrosoftEdge.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/FILE_PATH
+          value: C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe
+        - case sensitive: false
+          op: is
+          path: event/FILE_PATH
+          value: C:\Program Files\Microsoft\Edge\Application\msedge.exe
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: starts with
+          path: event/FILE_PATH
+          value: C:\Program Files (x86)\Microsoft\EdgeCore\
+        - case sensitive: false
+          op: starts with
+          path: event/FILE_PATH
+          value: C:\Program Files\Microsoft\EdgeCore\
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \msedge.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \msedgewebview2.exe
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \safari.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \MsMpEng.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \MsSense.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \brave.exe
+      - case sensitive: false
+        op: starts with
+        path: event/FILE_PATH
+        value: C:\Program Files\BraveSoftware\
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: \AppData\Local\Maxthon\
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \maxthon.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: \AppData\Local\Programs\Opera\
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \opera.exe
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: starts with
+          path: event/FILE_PATH
+          value: C:\Program Files\SeaMonkey\
+        - case sensitive: false
+          op: starts with
+          path: event/FILE_PATH
+          value: C:\Program Files (x86)\SeaMonkey\
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \seamonkey.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: \AppData\Local\Vivaldi\
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \vivaldi.exe
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: starts with
+          path: event/FILE_PATH
+          value: C:\Program Files\Naver\Naver Whale\
+        - case sensitive: false
+          op: starts with
+          path: event/FILE_PATH
+          value: C:\Program Files (x86)\Naver\Naver Whale\
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \whale.exe
+    - case sensitive: false
+      op: contains
+      path: event/FILE_PATH
+      value: \Tor Browser\
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: starts with
+          path: event/FILE_PATH
+          value: C:\Program Files\Waterfox\
+        - case sensitive: false
+          op: starts with
+          path: event/FILE_PATH
+          value: C:\Program Files (x86)\Waterfox\
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \Waterfox.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: \AppData\Local\Programs\midori-ng\
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \Midori Next Generation.exe
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: starts with
+          path: event/FILE_PATH
+          value: C:\Program Files\SlimBrowser\
+        - case sensitive: false
+          op: starts with
+          path: event/FILE_PATH
+          value: C:\Program Files (x86)\SlimBrowser\
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \slimbrowser.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: \AppData\Local\Flock\
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \Flock.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: \AppData\Local\Phoebe\
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \Phoebe.exe
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: starts with
+          path: event/FILE_PATH
+          value: C:\Program Files\Falkon\
+        - case sensitive: false
+          op: starts with
+          path: event/FILE_PATH
+          value: C:\Program Files (x86)\Falkon\
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \falkon.exe
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: starts with
+          path: event/FILE_PATH
+          value: C:\Program Files (x86)\Avant Browser\
+        - case sensitive: false
+          op: starts with
+          path: event/FILE_PATH
+          value: C:\Program Files\Avant Browser\
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \avant.exe
+respond:
+- action: report
+  metadata:
+    author: frack113, Connor Martin
+    description: 'An adversary may use legitimate desktop support and remote access
+      software, such as Team Viewer, Go2Assist, LogMein, AmmyyAdmin, etc, to establish
+      an interactive command and control channel to target systems within networks.
+
+      These services are commonly used as legitimate technical support software, and
+      may be allowed by application control within a target environment.
+
+      Remote access tools like VNC, Ammyy, and Teamviewer are used frequently when
+      compared with other legitimate software commonly used by adversaries. (Citation:
+      Symantec Living off the Land)
+
+      '
+    falsepositives:
+    - Likely with other browser software. Apply additional filters for any other browsers
+      you might use.
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1219/T1219.md#atomic-test-4---gotoassist-files-detected-test-on-windows
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1219/T1219.md#atomic-test-3---logmein-files-detected-test-on-windows
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1219/T1219.md#atomic-test-6---ammyy-admin-software-execution
+    - https://redcanary.com/blog/misbehaving-rats/
+    - https://techcommunity.microsoft.com/t5/microsoft-sentinel-blog/hunting-for-omi-vulnerability-exploitation-with-azure-sentinel/ba-p/2764093
+    tags:
+    - attack.command_and_control
+    - attack.t1219
+  name: DNS Query To Remote Access Software Domain From Non-Browser App
+

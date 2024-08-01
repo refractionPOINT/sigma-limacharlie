@@ -1,0 +1,47 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \addinutil.exe
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: :\Windows\System32\conhost.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: :\Windows\System32\werfault.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: :\Windows\SysWOW64\werfault.exe
+respond:
+- action: report
+  metadata:
+    author: Michael McKinley (@McKinleyMike), Tony Latteri (@TheLatteri)
+    description: 'Detects uncommon child processes of the Add-In deployment cache
+      updating utility (AddInutil.exe) which could be a sign of potential abuse of
+      the binary to proxy execution via a custom Addins.Store payload.
+
+      '
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://www.blue-prints.blog/content/blog/posts/lolbin/addinutil-lolbas.html
+    tags:
+    - attack.defense_evasion
+    - attack.t1218
+  name: Uncommon Child Process Of AddinUtil.EXE
+
