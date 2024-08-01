@@ -16,7 +16,7 @@ detect:
     value: svcctl
   - case sensitive: false
     op: contains
-    path: Event/EventData/Accesses
+    path: Event/EventData/AccessList
     value: WriteData
   target: log
 respond:

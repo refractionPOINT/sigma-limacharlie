@@ -18,11 +18,11 @@ detect:
     rules:
     - case sensitive: false
       op: contains
-      path: Event/EventData/Accesses
+      path: Event/EventData/AccessList
       value: WriteData
     - case sensitive: false
       op: contains
-      path: Event/EventData/Accesses
+      path: Event/EventData/AccessList
       value: '%%4417'
   target: log
 respond:

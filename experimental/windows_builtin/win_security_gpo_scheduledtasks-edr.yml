@@ -21,11 +21,11 @@ detect:
       rules:
       - case sensitive: false
         op: contains
-        path: event/EVENT/EventData/Accesses
+        path: event/EVENT/EventData/AccessList
         value: WriteData
       - case sensitive: false
         op: contains
-        path: event/EVENT/EventData/Accesses
+        path: event/EVENT/EventData/AccessList
         value: '%%4417'
 respond:
 - action: report

@@ -19,7 +19,7 @@ detect:
       value: svcctl
     - case sensitive: false
       op: contains
-      path: event/EVENT/EventData/Accesses
+      path: event/EVENT/EventData/AccessList
       value: WriteData
 respond:
 - action: report
