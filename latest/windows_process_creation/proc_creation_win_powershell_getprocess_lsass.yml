@@ -29,7 +29,7 @@ respond:
     - Unknown
     level: high
     references:
-    - https://twitter.com/PythonResponder/status/1385064506049630211
+    - https://web.archive.org/web/20220205033028/https://twitter.com/PythonResponder/status/1385064506049630211
     tags:
     - attack.credential_access
     - attack.t1552.004

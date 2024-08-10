@@ -72,7 +72,7 @@ respond:
     level: high
     references:
     - https://www.blackhillsinfosec.com/rogue-rdp-revisiting-initial-access-methods/
-    - https://blog.thickmints.dev/mintsights/detecting-rogue-rdp/
+    - https://web.archive.org/web/20230726144748/https://blog.thickmints.dev/mintsights/detecting-rogue-rdp/
     tags:
     - attack.command_and_control
     - attack.t1219
