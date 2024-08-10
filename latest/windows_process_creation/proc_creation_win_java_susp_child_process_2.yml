@@ -53,7 +53,7 @@ respond:
     - Company specific internal usage
     level: medium
     references:
-    - https://www.lunasec.io/docs/blog/log4j-zero-day/
+    - https://web.archive.org/web/20231230220738/https://www.lunasec.io/docs/blog/log4j-zero-day/
     tags:
     - attack.initial_access
     - attack.persistence

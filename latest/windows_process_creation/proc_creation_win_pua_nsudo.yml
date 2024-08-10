@@ -100,7 +100,7 @@ respond:
     - Legitimate use by administrators
     level: high
     references:
-    - https://nsudo.m2team.org/en-us/
+    - https://web.archive.org/web/20221019044836/https://nsudo.m2team.org/en-us/
     - https://www.winhelponline.com/blog/run-program-as-system-localsystem-account-windows/
     tags:
     - attack.execution
