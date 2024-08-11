@@ -1,0 +1,52 @@
+detect:
+  events:
+  - FILE_CREATE
+  - FILE_DELETE
+  - FILE_MODIFIED
+  - NEW_DOCUMENT
+  op: and
+  rules:
+  - op: is mac
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: true
+        op: starts with
+        path: event/FILE_PATH
+        value: /Library/StartupItems/
+      - case sensitive: true
+        op: starts with
+        path: event/FILE_PATH
+        value: /System/Library/StartupItems
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: .plist
+respond:
+- action: report
+  metadata:
+    author: Alejandro Ortuno, oscd.community
+    description: 'Detects the creation of a startup item plist file, that automatically
+      get executed at boot initialization to establish persistence.
+
+      Adversaries may use startup items automatically executed at boot initialization
+      to establish persistence.
+
+      Startup items execute during the final phase of the boot process and contain
+      shell scripts or other executable files along with configuration information
+      used by the system to determine the execution order for all startup items.
+
+      '
+    falsepositives:
+    - Legitimate administration activities
+    level: low
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1037.005/T1037.005.md
+    - https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/StartupItems.html
+    tags:
+    - attack.persistence
+    - attack.privilege_escalation
+    - attack.t1037.005
+  name: Startup Item File Created - MacOS
+
