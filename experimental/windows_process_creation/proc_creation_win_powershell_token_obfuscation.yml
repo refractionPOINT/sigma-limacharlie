@@ -5,17 +5,24 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: or
+  - op: and
     rules:
-    - op: matches
+    - op: or
+      rules:
+      - op: matches
+        path: event/COMMAND_LINE
+        re: \w+`(\w+|-|.)`[\w+|\s]
+      - op: matches
+        path: event/COMMAND_LINE
+        re: '"(\{\d\})+"\s*-f'
+      - op: matches
+        path: event/COMMAND_LINE
+        re: (?i)\$\{`?e`?n`?v`?:`?p`?a`?t`?h`?\}
+    - case sensitive: false
+      not: true
+      op: contains
       path: event/COMMAND_LINE
-      re: \w+`(\w+|-|.)`[\w+|\s]
-    - op: matches
-      path: event/COMMAND_LINE
-      re: '"(\{\d\})+"\s*-f'
-    - op: matches
-      path: event/COMMAND_LINE
-      re: (?i)\$\{(?=.*`)+?`?e`?n`?v`?:`?p`?a`?t`?h`?\}
+      value: ${env:path}
 respond:
 - action: report
   metadata:
