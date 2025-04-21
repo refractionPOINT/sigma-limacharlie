@@ -111,7 +111,7 @@ steps:
   - |
     ls -lahR
     git add ./
-    git commit -m "`git status --porcelain`"
+    git commit -m "Automated update: $(git status --porcelain | head -n 1000)"
     git push
   volumes:
   - name: 'ssh'
