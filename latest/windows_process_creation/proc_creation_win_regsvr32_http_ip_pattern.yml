@@ -177,7 +177,7 @@ respond:
     - https://twitter.com/tccontre18/status/1480950986650832903
     - https://lolbas-project.github.io/lolbas/Binaries/Regsvr32/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1218.010
   name: Potentially Suspicious Regsvr32 HTTP IP Pattern
 

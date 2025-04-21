@@ -1,0 +1,70 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/FILE_PATH
+        value: \servers\Stable-
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \server\node.exe
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: .vscode-server
+    - op: or
+      rules:
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \powershell.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \pwsh.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \terminal\browser\media\shellIntegration.ps1
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \wsl.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \bash.exe
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects the execution of a shell (powershell, bash, wsl...) via Visual
+      Studio Code tunnel. Attackers can abuse this functionality to establish a C2
+      channel and execute arbitrary commands on the system.
+    falsepositives:
+    - Legitimate use of Visual Studio Code tunnel and running code from there
+    level: medium
+    references:
+    - https://ipfyx.fr/post/visual-studio-code-tunnel/
+    - https://badoption.eu/blog/2023/01/31/code_c2.html
+    - https://code.visualstudio.com/docs/remote/tunnels
+    tags:
+    - attack.command-and-control
+    - attack.t1071.001
+  name: Visual Studio Code Tunnel Shell Execution
+

@@ -94,7 +94,7 @@ respond:
     - https://twitter.com/mrd0x/status/1478116126005641220
     - https://lolbas-project.github.io/lolbas/Binaries/Msedge/
     tags:
-    - attack.command_and_control
+    - attack.command-and-control
     - attack.t1105
   name: File Download From Browser Process Via Inline URL
 

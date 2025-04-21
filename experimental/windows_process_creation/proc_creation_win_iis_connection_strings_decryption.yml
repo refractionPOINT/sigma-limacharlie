@@ -41,7 +41,7 @@ respond:
     references:
     - https://www.elastic.co/guide/en/security/current/microsoft-iis-connection-strings-decryption.html
     tags:
-    - attack.credential_access
+    - attack.credential-access
     - attack.t1003
   name: Microsoft IIS Connection Strings Decryption
 

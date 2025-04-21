@@ -56,7 +56,7 @@ respond:
     references:
     - https://www.slideshare.net/heirhabarov/hunting-for-credentials-dumping-in-windows-environment
     tags:
-    - attack.credential_access
+    - attack.credential-access
     - attack.t1003.002
     - attack.t1003.001
     - attack.t1003.003

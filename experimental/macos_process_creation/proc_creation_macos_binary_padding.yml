@@ -52,7 +52,7 @@ respond:
     - https://linux.die.net/man/1/truncate
     - https://linux.die.net/man/1/dd
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1027.001
   name: Binary Padding - MacOS
 

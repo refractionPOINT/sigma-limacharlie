@@ -1,0 +1,65 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' --buildcache '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' --bhdump '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' --certdump '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' --dnsdump '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -c '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' --cachefilename '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -o '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' --outputdirectory'
+respond:
+- action: report
+  metadata:
+    author: '@kostastsale'
+    description: 'Detects the execution of SOAPHound, a .NET tool for collecting Active
+      Directory data, using specific command-line arguments that may indicate an attempt
+      to extract sensitive AD information.
+
+      '
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://github.com/FalconForceTeam/SOAPHound
+    - https://medium.com/falconforce/soaphound-tool-to-collect-active-directory-data-via-adws-165aca78288c
+    tags:
+    - attack.discovery
+    - attack.t1087
+  name: HackTool - SOAPHound Execution
+

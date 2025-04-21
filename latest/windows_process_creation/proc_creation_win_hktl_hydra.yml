@@ -37,7 +37,7 @@ respond:
     references:
     - https://github.com/vanhauser-thc/thc-hydra
     tags:
-    - attack.credential_access
+    - attack.credential-access
     - attack.t1110
     - attack.t1110.001
   name: HackTool - Hydra Password Bruteforce Execution

@@ -1,0 +1,56 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' tunnel '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' run '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-config '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-credentials-contents '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-credentials-file '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-token '
+respond:
+- action: report
+  metadata:
+    author: Janantha Marasinghe, Nasreddine Bencherchali (Nextron Systems)
+    description: Detects execution of the "cloudflared" tool to connect back to a
+      tunnel. This was seen used by threat actors to maintain persistence and remote
+      access to compromised networks.
+    falsepositives:
+    - Legitimate usage of Cloudflared tunnel.
+    level: medium
+    references:
+    - https://blog.reconinfosec.com/emergence-of-akira-ransomware-group
+    - https://github.com/cloudflare/cloudflared
+    - https://developers.cloudflare.com/cloudflare-one/connections/connect-apps
+    tags:
+    - attack.command-and-control
+    - attack.t1102
+    - attack.t1090
+    - attack.t1572
+  name: Cloudflared Tunnel Execution
+

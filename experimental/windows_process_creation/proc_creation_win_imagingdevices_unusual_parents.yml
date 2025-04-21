@@ -43,7 +43,7 @@ respond:
     references:
     - https://thedfirreport.com/2022/09/26/bumblebee-round-two/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.execution
   name: ImagingDevices Unusual Parent/Child Processes
 

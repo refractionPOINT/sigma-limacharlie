@@ -28,6 +28,14 @@ detect:
         op: contains
         path: event/EVENT/EventData/RemoteName
         value: download.mozilla.org/
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/RemoteName
+        value: cdn.onenote.net/
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/RemoteName
+        value: cdn.office.net/
 respond:
 - action: report
   metadata:
@@ -44,7 +52,7 @@ respond:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1197/T1197.md
     - https://twitter.com/malmoeb/status/1535142803075960832
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.persistence
     - attack.t1197
   name: BITS Transfer Job With Uncommon Or Suspicious Remote TLD

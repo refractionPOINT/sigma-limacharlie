@@ -26,7 +26,7 @@ respond:
     - Internal Research
     - https://www.sentinelone.com/labs/inside-malicious-windows-apps-for-malware-deployment/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.execution
   name: Suspicious Digital Signature Of AppX Package
 

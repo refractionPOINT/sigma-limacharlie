@@ -52,7 +52,7 @@ respond:
     - https://www.crowdstrike.com/blog/overwatch-exposes-aquatic-panda-in-possession-of-log-4-shell-exploit-tools/
     - https://twitter.com/bopin2020/status/1366400799199272960
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1036
     - attack.t1003.001
   name: CreateDump Process Dump

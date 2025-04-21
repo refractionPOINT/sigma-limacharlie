@@ -1,0 +1,168 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \rundll32.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: RUNDLL32.EXE
+      - not: true
+        op: or
+        rules:
+        - not: true
+          op: exists
+          path: event/COMMAND_LINE
+        - case sensitive: false
+          op: is
+          path: event/COMMAND_LINE
+          value: ''
+        - op: or
+          rules:
+          - op: or
+            rules:
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: '.cpl '
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: .cpl,
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: .cpl"
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: .cpl'
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: '.dll '
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: .dll,
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: .dll"
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: .dll'
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: '.inf '
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: .inf,
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: .inf"
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: .inf'
+          - op: or
+            rules:
+            - case sensitive: false
+              op: ends with
+              path: event/COMMAND_LINE
+              value: .cpl
+            - case sensitive: false
+              op: ends with
+              path: event/COMMAND_LINE
+              value: .dll
+            - case sensitive: false
+              op: ends with
+              path: event/COMMAND_LINE
+              value: '.inf'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -localserver '
+        - op: and
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \msiexec.exe
+          - op: and
+            rules:
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: :\Windows\Installer\
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: .tmp
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: zzzzInvokeManagedCustomActionOutOfProc
+    - not: true
+      op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: :\Users\
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: \AppData\Local\Microsoft\EdgeUpdate\Install\{
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: \EDGEMITMP_
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: .tmp\setup.exe
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: --install-archive=
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: --previous-version=
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: --msedgewebview --verbose-logging --do-not-launch-msedge --user-level
+respond:
+- action: report
+  metadata:
+    author: Tim Shelton, Florian Roth (Nextron Systems), Yassine Oukessou
+    description: Detects the execution of rundll32 with a command line that doesn't
+      contain a common extension
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://twitter.com/mrd0x/status/1481630810495139841?s=12
+    tags:
+    - attack.defense-evasion
+    - attack.t1218.011
+  name: Rundll32 Execution With Uncommon DLL Extension
+

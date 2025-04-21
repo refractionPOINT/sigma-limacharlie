@@ -1,0 +1,47 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: Event/System/EventID
+        value: '2033'
+      - case sensitive: false
+        op: is
+        path: Event/System/EventID
+        value: '2059'
+    - case sensitive: false
+      not: true
+      op: ends with
+      path: Event/EventData/ModifyingApplication
+      value: :\Windows\System32\svchost.exe
+  - not: true
+    op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ModifyingApplication
+      value: :\ProgramData\Microsoft\Windows Defender\Platform\
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ModifyingApplication
+      value: \MsMpEng.exe
+  target: log
+respond:
+- action: report
+  metadata:
+    author: frack113, Nasreddine Bencherchali (Nextron Systems)
+    description: Detects when a all the rules have been deleted from the Windows Defender
+      Firewall configuration
+    level: high
+    references:
+    - https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-r2-and-2008/dd364427(v=ws.10)
+    tags:
+    - attack.defense-evasion
+    - attack.t1562.004
+  name: All Rules Have Been Deleted From The Windows Firewall Configuration
+

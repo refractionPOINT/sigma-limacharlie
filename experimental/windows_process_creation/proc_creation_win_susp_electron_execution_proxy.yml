@@ -1,0 +1,142 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \chrome.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \code.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \discord.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \GitHubDesktop.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \keybase.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \msedge_proxy.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \msedge.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \msedgewebview2.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \msteams.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \slack.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \Teams.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: chrome.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: code.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: discord.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: GitHubDesktop.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: keybase.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: msedge_proxy.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: msedge.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: msedgewebview2.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: msteams.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: slack.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: Teams.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: --browser-subprocess-path
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: --gpu-launcher
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: --renderer-cmd-prefix
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: --utility-cmd-prefix
+respond:
+- action: report
+  metadata:
+    author: frack113, Nasreddine Bencherchali (Nextron Systems)
+    description: Detects potentially suspicious CommandLine of electron apps (teams,
+      discord, slack, etc.). This could be a sign of abuse to proxy execution through
+      a signed binary.
+    falsepositives:
+    - Legitimate usage for debugging purposes
+    level: medium
+    references:
+    - https://positive.security/blog/ms-officecmd-rce
+    - https://lolbas-project.github.io/lolbas/Binaries/Teams/
+    - https://lolbas-project.github.io/lolbas/Binaries/Msedge/
+    - https://lolbas-project.github.io/lolbas/Binaries/msedgewebview2/
+    - https://medium.com/@MalFuzzer/one-electron-to-rule-them-all-dc2e9b263daf
+    - https://chromium.googlesource.com/chromium/chromium/+/master/content/public/common/content_switches.cc
+    tags:
+    - attack.execution
+  name: Potentially Suspicious Electron Application CommandLine
+

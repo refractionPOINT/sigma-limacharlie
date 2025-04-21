@@ -63,7 +63,7 @@ respond:
     references:
     - https://image.slidesharecdn.com/kheirkhabarovoffzonefinal-181117201458/95/hunting-for-privilege-escalation-in-windows-environment-50-638.jpg
     tags:
-    - attack.privilege_escalation
+    - attack.privilege-escalation
     - attack.t1548.002
   name: Always Install Elevated MSI Spawned Cmd And Powershell
 

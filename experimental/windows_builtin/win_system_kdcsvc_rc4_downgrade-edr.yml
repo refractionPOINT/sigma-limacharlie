@@ -29,6 +29,6 @@ respond:
     references:
     - https://support.microsoft.com/en-us/topic/kb5021131-how-to-manage-the-kerberos-protocol-changes-related-to-cve-2022-37966-fd837ac3-cdec-4e76-a6ec-86e67501407d
     tags:
-    - attack.privilege_escalation
+    - attack.privilege-escalation
   name: KDC RC4-HMAC Downgrade CVE-2022-37966
 

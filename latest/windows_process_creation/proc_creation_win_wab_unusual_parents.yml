@@ -58,7 +58,7 @@ respond:
     - https://symantec-enterprise-blogs.security.com/blogs/threat-intelligence/bumblebee-loader-cybercrime
     - https://thedfirreport.com/2022/09/26/bumblebee-round-two/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.execution
   name: Wab/Wabmig Unusual Parent Or Child Processes
 

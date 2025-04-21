@@ -63,9 +63,9 @@ respond:
     - https://twitter.com/SBousseaden/status/1101431884540710913
     tags:
     - attack.persistence
-    - attack.defense_evasion
-    - attack.privilege_escalation
-    - attack.initial_access
+    - attack.defense-evasion
+    - attack.privilege-escalation
+    - attack.initial-access
     - attack.t1078
   name: Account Tampering - Suspicious Failed Logon Reasons
 

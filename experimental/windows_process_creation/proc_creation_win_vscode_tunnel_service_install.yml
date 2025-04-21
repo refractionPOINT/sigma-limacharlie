@@ -1,0 +1,42 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: 'tunnel '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: service
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: internal-run
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: tunnel-service.log
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects the installation of VsCode tunnel (code-tunnel) as a service.
+    falsepositives:
+    - Legitimate installation of code-tunnel as a service
+    level: medium
+    references:
+    - https://ipfyx.fr/post/visual-studio-code-tunnel/
+    - https://badoption.eu/blog/2023/01/31/code_c2.html
+    - https://code.visualstudio.com/docs/remote/tunnels
+    tags:
+    - attack.command-and-control
+    - attack.t1071.001
+  name: Visual Studio Code Tunnel Service Installation
+

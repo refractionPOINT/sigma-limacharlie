@@ -1,0 +1,35 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/EventData/Provider_Name
+      value: ScreenConnect
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '201'
+    - case sensitive: false
+      op: contains
+      path: event/EVENT/EventData/Data
+      value: Transferred files with action
+respond:
+- action: report
+  metadata:
+    author: Ali Alwashali
+    description: Detects file being transferred via ScreenConnect RMM
+    falsepositives:
+    - Legitimate use of ScreenConnect
+    level: low
+    references:
+    - https://www.huntandhackett.com/blog/revil-the-usage-of-legitimate-remote-admin-tooling
+    - https://github.com/SigmaHQ/sigma/pull/4467
+    tags:
+    - attack.execution
+    - attack.t1059.003
+  name: Remote Access Tool - ScreenConnect File Transfer
+

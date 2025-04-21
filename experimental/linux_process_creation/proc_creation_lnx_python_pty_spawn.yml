@@ -35,33 +35,33 @@ detect:
           value: /python3.
     - op: or
       rules:
-      - op: and
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: import pty
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: .spawn(
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: from pty import spawn
+        value: import pty
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'from pty '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: spawn
 respond:
 - action: report
   metadata:
     author: Nextron Systems
-    description: Detects python spawning a pretty tty which could be indicative of
-      potential reverse shell activity
+    description: 'Detects a python process calling to the PTY module in order to spawn
+      a pretty tty which could be indicative of potential reverse shell activity.
+
+      '
     falsepositives:
     - Unknown
-    level: high
+    level: medium
     references:
     - https://www.volexity.com/blog/2022/06/02/zero-day-exploitation-of-atlassian-confluence/
     tags:
     - attack.execution
     - attack.t1059
-  name: Python Spawning Pretty TTY
+  name: Python Spawning Pretty TTY Via PTY Module
 

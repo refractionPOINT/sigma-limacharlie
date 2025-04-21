@@ -55,6 +55,10 @@ detect:
             op: contains
             path: event/COMMAND_LINE
             value: MiniDump
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '#65560'
     - op: and
       rules:
       - case sensitive: false
@@ -83,11 +87,15 @@ detect:
           op: contains
           path: event/COMMAND_LINE
           value: ', #'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '"#'
 respond:
 - action: report
   metadata:
     author: Florian Roth (Nextron Systems), Modexp, Nasreddine Bencherchali (Nextron
-      Systems)
+      Systems), Swachchhanda Shrawan Poudel (Nextron Systems)
     description: Detects a process memory dump via "comsvcs.dll" using rundll32, covering
       multiple different techniques (ordinal, minidump function, etc.)
     falsepositives:
@@ -101,9 +109,10 @@ respond:
     - https://twitter.com/SBousseaden/status/1167417096374050817
     - https://twitter.com/Wietze/status/1542107456507203586
     - https://github.com/Hackndo/lsassy/blob/14d8f8ae596ecf22b449bfe919829173b8a07635/lsassy/dumpmethod/comsvcs.py
+    - https://www.youtube.com/watch?v=52tAmVLg1KM&t=2070s
     tags:
-    - attack.defense_evasion
-    - attack.credential_access
+    - attack.defense-evasion
+    - attack.credential-access
     - attack.t1036
     - attack.t1003.001
     - car.2013-05-009

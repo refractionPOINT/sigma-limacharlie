@@ -49,7 +49,7 @@ respond:
     references:
     - https://twitter.com/splinter_code/status/1420546784250769408
     tags:
-    - attack.credential_access
+    - attack.credential-access
     - attack.t1003.002
   name: PowerShell SAM Copy
 

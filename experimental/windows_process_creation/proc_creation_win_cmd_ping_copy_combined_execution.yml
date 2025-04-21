@@ -1,0 +1,67 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cmd.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: Cmd.Exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ping
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'copy '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -n '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /n '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -y '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /y '
+respond:
+- action: report
+  metadata:
+    author: X__Junior (Nextron Systems)
+    description: 'Detects uncommon and potentially suspicious one-liner command containing
+      both "ping" and "copy" at the same time, which is usually used by malware.
+
+      '
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - Internal Research
+    tags:
+    - attack.defense-evasion
+    - attack.t1070.004
+  name: Potentially Suspicious Ping/Copy Command Combination
+

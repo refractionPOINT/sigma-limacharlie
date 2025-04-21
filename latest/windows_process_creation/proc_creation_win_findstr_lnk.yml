@@ -55,7 +55,7 @@ respond:
     references:
     - https://www.bleepingcomputer.com/news/security/hhsgov-open-redirect-used-by-coronavirus-phishing-to-spread-malware/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1036
     - attack.t1202
     - attack.t1027.003

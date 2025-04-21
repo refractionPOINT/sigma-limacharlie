@@ -90,7 +90,7 @@ respond:
     - https://twitter.com/x86matthew/status/1505476263464607744?s=12
     - https://svch0st.medium.com/stats-from-hunting-cobalt-strike-beacons-c17e56255f9b
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1036
   name: Suspicious Process Parents
 

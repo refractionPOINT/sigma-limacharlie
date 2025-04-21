@@ -1,0 +1,44 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \lodctr.exe
+    - case sensitive: false
+      op: is
+      path: event/ORIGINAL_FILE_NAME
+      value: LODCTR.EXE
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -r'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /r'
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects the execution of "lodctr.exe" to rebuild the performance
+      counter registry values. This can be abused by attackers by providing a malicious
+      config file to overwrite performance counter configuration to confuse and evade
+      monitoring and security solutions.
+    falsepositives:
+    - Legitimate usage by an administrator
+    level: medium
+    references:
+    - https://learn.microsoft.com/en-us/windows/security/identity-protection/virtual-smart-cards/virtual-smart-card-tpmvscmgr
+    tags:
+    - attack.execution
+  name: Rebuild Performance Counter Values Via Lodctr.EXE
+

@@ -29,7 +29,7 @@ respond:
     references:
     - https://lolbas-project.github.io/lolbas/Binaries/Extrac32/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1564.004
   name: Suspicious Extrac32 Alternate Data Stream Execution
 

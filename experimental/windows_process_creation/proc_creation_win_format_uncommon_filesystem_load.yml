@@ -56,6 +56,6 @@ respond:
     - https://twitter.com/0gtweet/status/1477925112561209344
     - https://twitter.com/wdormann/status/1478011052130459653?s=20
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: Uncommon FileSystem Load Attempt By Format.com
 

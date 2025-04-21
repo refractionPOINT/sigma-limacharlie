@@ -133,7 +133,7 @@ respond:
     - https://www.elastic.co/guide/en/security/current/remote-file-copy-to-a-hidden-share.html
     - https://www.microsoft.com/en-us/security/blog/2022/10/18/defenders-beware-a-case-for-post-ransomware-investigations/
     tags:
-    - attack.lateral_movement
+    - attack.lateral-movement
     - attack.collection
     - attack.exfiltration
     - attack.t1039

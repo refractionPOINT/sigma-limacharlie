@@ -33,7 +33,7 @@ respond:
     - https://www.cyberciti.biz/faq/linux-hide-processes-from-other-users/
     - https://twitter.com/Joseliyo_Jstnk/status/1620131033474822144
     tags:
-    - attack.credential_access
+    - attack.credential-access
     - attack.t1564
   name: Mount Execution With Hidepid Parameter
 

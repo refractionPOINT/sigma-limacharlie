@@ -1,0 +1,202 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - not: true
+        op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: .bin
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: .cgi
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: .com
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: .exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: .scr
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: .tmp
+      - not: true
+        op: or
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: is
+            path: event/FILE_PATH
+            value: System
+          - case sensitive: false
+            op: is
+            path: event/FILE_PATH
+            value: Registry
+          - case sensitive: false
+            op: is
+            path: event/FILE_PATH
+            value: MemCompression
+          - case sensitive: false
+            op: is
+            path: event/FILE_PATH
+            value: vmmem
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: :\Windows\Installer\MSI
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: :\Windows\System32\DriverStore\FileRepository\
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/FILE_PATH
+            value: :\Config.Msi\
+          - op: or
+            rules:
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: .rbf
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: .rbs
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/FILE_PATH
+            value: :\Windows\Temp\
+          - case sensitive: false
+            op: contains
+            path: event/FILE_PATH
+            value: :\Windows\Temp\
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: :\$Extend\$Deleted\
+        - op: or
+          rules:
+          - case sensitive: false
+            op: is
+            path: event/FILE_PATH
+            value: '-'
+          - case sensitive: false
+            op: is
+            path: event/FILE_PATH
+            value: ''
+        - not: true
+          op: exists
+          path: event/FILE_PATH
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/FILE_PATH
+        value: :\ProgramData\Avira\
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: NVIDIA\NvBackend\
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: .dat
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/FILE_PATH
+            value: :\Program Files (x86)\WINPAKPRO\
+          - case sensitive: false
+            op: contains
+            path: event/FILE_PATH
+            value: :\Program Files\WINPAKPRO\
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: .ngn
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: :\Program Files (x86)\MyQ\Server\pcltool.dll
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: :\Program Files\MyQ\Server\pcltool.dll
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: \AppData\Local\Packages\
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: \LocalState\rootfs\
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \LZMA_EXE
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: :\Program Files\Mozilla Firefox\
+      - op: and
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/PARENT/FILE_PATH
+          value: C:\Windows\System32\services.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: com.docker.service
+respond:
+- action: report
+  metadata:
+    author: Max Altgelt (Nextron Systems)
+    description: 'Detects whether the image specified in a process creation event
+      doesn''t refer to an ".exe" (or other known executable extension) file. This
+      can be caused by process ghosting or other unorthodox methods to start a process.
+
+      This rule might require some initial baselining to align with some third party
+      tooling in the user environment.
+
+      '
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://pentestlaboratories.com/2021/12/08/process-ghosting/
+    tags:
+    - attack.defense-evasion
+  name: Execution of Suspicious File Type Extension
+

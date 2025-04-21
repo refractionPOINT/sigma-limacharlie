@@ -1,0 +1,26 @@
+detect:
+  case sensitive: false
+  event: DNS_REQUEST
+  op: ends with
+  path: event/DOMAIN_NAME
+  value: .devtunnels.ms
+respond:
+- action: report
+  metadata:
+    author: citron_ninja
+    description: 'Detects DNS query requests to Devtunnels domains. Attackers can
+      abuse that feature to establish a reverse shell or persistence on a machine.
+
+      '
+    falsepositives:
+    - Legitimate use of Devtunnels will also trigger this.
+    level: medium
+    references:
+    - https://blueteamops.medium.com/detecting-dev-tunnels-16f0994dc3e2
+    - https://learn.microsoft.com/en-us/azure/developer/dev-tunnels/security
+    - https://cydefops.com/devtunnels-unleashed
+    tags:
+    - attack.command-and-control
+    - attack.t1071.001
+  name: DNS Query To Devtunnels Domain
+

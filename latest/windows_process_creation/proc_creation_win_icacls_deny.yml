@@ -39,7 +39,7 @@ respond:
     references:
     - https://app.any.run/tasks/1df999e6-1cb8-45e3-8b61-499d1b7d5a9b/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1564.001
   name: Use Icacls to Hide File to Everyone
 

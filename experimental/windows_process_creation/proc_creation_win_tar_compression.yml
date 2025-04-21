@@ -1,0 +1,56 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \tar.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: bsdtar
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -c
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -r
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -u
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems), AdmU3
+    description: 'Detects execution of "tar.exe" in order to create a compressed file.
+
+      Adversaries may abuse various utilities to compress or encrypt data before exfiltration.
+
+      '
+    falsepositives:
+    - Likely
+    level: low
+    references:
+    - https://unit42.paloaltonetworks.com/chromeloader-malware/
+    - https://lolbas-project.github.io/lolbas/Binaries/Tar/
+    - https://symantec-enterprise-blogs.security.com/blogs/threat-intelligence/cicada-apt10-japan-espionage
+    tags:
+    - attack.collection
+    - attack.exfiltration
+    - attack.t1560
+    - attack.t1560.001
+  name: Compressed File Creation Via Tar.EXE
+

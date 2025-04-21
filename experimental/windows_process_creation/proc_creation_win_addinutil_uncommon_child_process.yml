@@ -41,7 +41,7 @@ respond:
     references:
     - https://www.blue-prints.blog/content/blog/posts/lolbin/addinutil-lolbas.html
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1218
   name: Uncommon Child Process Of AddinUtil.EXE
 

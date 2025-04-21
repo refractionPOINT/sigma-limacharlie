@@ -26,7 +26,11 @@ detect:
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
-      value: spawn(
+      value: socket
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: spawn
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
@@ -35,15 +39,16 @@ respond:
 - action: report
   metadata:
     author: '@d4ns4n_, Nasreddine Bencherchali (Nextron Systems)'
-    description: Detects executing python with keywords related to network activity
-      that could indicate a potential reverse shell
+    description: 'Detects the execution of python with calls to the socket and pty
+      module in order to connect and spawn a potential reverse shell.
+
+      '
     falsepositives:
     - Unknown
     level: high
     references:
-    - https://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet
     - https://www.revshells.com/
     tags:
     - attack.execution
-  name: Potential Python Reverse Shell
+  name: Python Reverse Shell Execution Via PTY And Socket Modules
 

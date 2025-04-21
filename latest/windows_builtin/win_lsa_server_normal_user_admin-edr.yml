@@ -64,7 +64,7 @@ respond:
     - https://learn.microsoft.com/en-us/windows-server/security/credentials-protection-and-management/configuring-additional-lsa-protection
     - https://github.com/nasbench/EVTX-ETW-Resources/blob/7a806a148b3d9d381193d4a80356016e6e8b1ee8/ETWProvidersManifests/Windows11/22H2/W11_22H2_Pro_20221220_22621.963/WEPExplorer/LsaSrv.xml
     tags:
-    - attack.credential_access
-    - attack.privilege_escalation
+    - attack.credential-access
+    - attack.privilege-escalation
   name: Standard User In High Privileged Group
 

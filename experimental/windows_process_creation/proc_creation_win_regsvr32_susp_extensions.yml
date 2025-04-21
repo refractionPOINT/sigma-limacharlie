@@ -113,7 +113,7 @@ respond:
     - https://blog.talosintelligence.com/2021/10/threat-hunting-in-large-datasets-by.html
     - https://guides.lib.umich.edu/c.php?g=282942&p=1885348
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1218.010
   name: Regsvr32 DLL Execution With Suspicious File Extension
 

@@ -1,0 +1,85 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \find.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \findstr.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: FIND.EXE
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: FINDSTR.EXE
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '"Everyone"'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '''Everyone'''
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '"BUILTIN\\"'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '''BUILTIN\'''
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'icacls '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'findstr '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Everyone
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: 'Detects usage of findstr with the "EVERYONE" or "BUILTIN" keywords.
+
+      This was seen being used in combination with "icacls" and other utilities to
+      spot misconfigured files or folders permissions.
+
+      '
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://www.absolomb.com/2018-01-26-Windows-Privilege-Escalation-Guide/
+    tags:
+    - attack.credential-access
+    - attack.t1552.006
+  name: Permission Misconfiguration Reconnaissance Via Findstr.EXE
+

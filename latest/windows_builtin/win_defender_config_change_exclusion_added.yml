@@ -22,7 +22,7 @@ respond:
     references:
     - https://twitter.com/_nullbind/status/1204923340810543109
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1562.001
   name: Windows Defender Exclusions Added
 

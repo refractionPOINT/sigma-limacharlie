@@ -30,7 +30,7 @@ respond:
     - https://www.mandiant.com/resources/blog/obfuscation-wild-targeted-attackers-lead-way-evasion-techniques
     - https://web.archive.org/web/20190213114956/http://www.windowsinspired.com/understanding-the-command-line-string-and-arguments-received-by-a-windows-program/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1140
   name: Potential Commandline Obfuscation Using Escape Characters
 

@@ -22,7 +22,7 @@ respond:
     - https://www.wietzebeukema.nl/blog/hijacking-dlls-in-windows
     - https://github.com/netero1010/TrustedPath-UACBypass-BOF
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1548.002
   name: TrustedPath UAC Bypass Pattern
 

@@ -19,6 +19,6 @@ respond:
     references:
     - https://medium.com/@olafhartong/sysmon-14-0-fileblockexecutable-13d7ba3dff3e
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: Sysmon Blocked Executable
 

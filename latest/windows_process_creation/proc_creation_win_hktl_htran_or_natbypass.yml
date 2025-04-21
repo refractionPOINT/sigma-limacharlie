@@ -40,7 +40,7 @@ respond:
     - https://github.com/HiwinCN/HTran
     - https://github.com/cw1997/NATBypass
     tags:
-    - attack.command_and_control
+    - attack.command-and-control
     - attack.t1090
     - attack.s0040
   name: HackTool - Htran/NATBypass Execution

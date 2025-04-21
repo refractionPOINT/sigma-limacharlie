@@ -28,7 +28,7 @@ respond:
     - https://securelist.com/operation-tunnelsnake-and-moriya-rootkit/101831
     tags:
     - attack.persistence
-    - attack.privilege_escalation
+    - attack.privilege-escalation
     - attack.t1543.003
   name: Moriya Rootkit - System
 

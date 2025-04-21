@@ -31,7 +31,7 @@ respond:
     references:
     - https://ss64.com/osx/sysadminctl.html
     tags:
-    - attack.initial_access
+    - attack.initial-access
     - attack.t1078
     - attack.t1078.001
   name: Guest Account Enabled Via Sysadminctl

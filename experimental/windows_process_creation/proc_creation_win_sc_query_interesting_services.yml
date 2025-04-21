@@ -1,0 +1,48 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \sc.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: sc.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: query
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: termservice
+respond:
+- action: report
+  metadata:
+    author: Swachchhanda Shrawan Poudel
+    description: 'Detects the enumeration and query of interesting and in some cases
+      sensitive services on the system via "sc.exe".
+
+      Attackers often try to enumerate the services currently running on a system
+      in order to find different attack vectors.
+
+      '
+    falsepositives:
+    - Unknown
+    level: low
+    references:
+    - https://www.n00py.io/2021/05/dumping-plaintext-rdp-credentials-from-svchost-exe/
+    - https://pentestlab.blog/tag/svchost/
+    tags:
+    - attack.t1003
+  name: Interesting Service Enumeration Via Sc.EXE
+

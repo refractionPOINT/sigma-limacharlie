@@ -47,7 +47,7 @@ respond:
     references:
     - https://twitter.com/nas_bench/status/1535322182863179776
     tags:
-    - attack.command_and_control
+    - attack.command-and-control
     - attack.t1105
   name: File Download Using Notepad++ GUP Utility
 

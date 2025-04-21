@@ -1,0 +1,46 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' tunnel '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: 'cleanup '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-config '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-connector-id '
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects execution of the "cloudflared" tool with the tunnel "cleanup"
+      flag in order to cleanup tunnel connections.
+    falsepositives:
+    - Legitimate usage of Cloudflared.
+    level: medium
+    references:
+    - https://github.com/cloudflare/cloudflared
+    - https://developers.cloudflare.com/cloudflare-one/connections/connect-apps
+    tags:
+    - attack.command-and-control
+    - attack.t1102
+    - attack.t1090
+    - attack.t1572
+  name: Cloudflared Tunnel Connections Cleanup
+

@@ -23,7 +23,7 @@ respond:
     - https://www.echotrail.io/insights/search/defaultpack.exe
     tags:
     - attack.t1218
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.execution
   name: Uncommon Child Process Of Defaultpack.EXE
 

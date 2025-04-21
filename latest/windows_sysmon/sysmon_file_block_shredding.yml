@@ -17,6 +17,6 @@ respond:
     references:
     - https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: Sysmon Blocked File Shredding
 

@@ -39,7 +39,7 @@ respond:
     references:
     - https://mr0range.com/a-new-lolbin-using-the-windows-type-command-to-upload-download-files-81d7b6179e22
     tags:
-    - attack.command_and_control
+    - attack.command-and-control
     - attack.t1105
   name: Potential Download/Upload Activity Using Type Command
 

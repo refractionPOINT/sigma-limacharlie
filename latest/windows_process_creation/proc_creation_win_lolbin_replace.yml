@@ -34,7 +34,7 @@ respond:
     - https://lolbas-project.github.io/lolbas/Binaries/Replace/
     - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/replace
     tags:
-    - attack.command_and_control
+    - attack.command-and-control
     - attack.t1105
   name: Replace.exe Usage
 

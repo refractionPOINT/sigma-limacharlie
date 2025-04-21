@@ -106,7 +106,7 @@ respond:
     references:
     - https://www.trustedsec.com/july-2015/malicious-htas/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1218.005
     - car.2013-02-003
     - car.2013-03-001

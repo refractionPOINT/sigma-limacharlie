@@ -29,7 +29,7 @@ respond:
     references:
     - https://github.com/rapid7/metasploit-framework/blob/1416b5776d963f21b7b5b45d19f3e961201e0aed/modules/exploits/windows/http/exchange_proxyshell_rce.rb#L430
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1070
   name: Remove Exported Mailbox from Exchange Webserver
 

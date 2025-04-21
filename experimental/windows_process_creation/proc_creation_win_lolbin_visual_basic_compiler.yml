@@ -27,7 +27,7 @@ respond:
     references:
     - https://lolbas-project.github.io/lolbas/Binaries/Vbc/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1027.004
   name: Visual Basic Command Line Compiler Usage
 

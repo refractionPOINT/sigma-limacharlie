@@ -77,7 +77,7 @@ respond:
     - https://speakerdeck.com/heirhabarov/hunting-for-powershell-abuse?slide=64
     tags:
     - attack.execution
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1027
     - attack.t1059.001
   name: Potential PowerShell Command Line Obfuscation

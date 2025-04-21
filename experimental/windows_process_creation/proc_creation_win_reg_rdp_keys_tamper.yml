@@ -98,7 +98,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: pH-T (Nextron Systems), @Kostastsale, @TheDFIRReport
+    author: pH-T (Nextron Systems), @Kostastsale, TheDFIRReport
     description: Detects the execution of "reg.exe" for enabling/disabling the RDP
       service on the host by tampering with the 'CurrentControlSet\Control\Terminal
       Server' values
@@ -108,8 +108,8 @@ respond:
     references:
     - https://thedfirreport.com/2022/02/21/qbot-and-zerologon-lead-to-full-domain-compromise/
     tags:
-    - attack.defense_evasion
-    - attack.lateral_movement
+    - attack.defense-evasion
+    - attack.lateral-movement
     - attack.t1021.001
     - attack.t1112
   name: Potential Tampering With RDP Related Registry Keys Via Reg.EXE

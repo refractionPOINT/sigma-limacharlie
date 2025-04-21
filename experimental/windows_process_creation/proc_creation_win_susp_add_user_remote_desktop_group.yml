@@ -56,7 +56,7 @@ respond:
     - https://www.microsoft.com/security/blog/2021/11/16/evolving-trends-in-iranian-threat-actor-activity-mstic-presentation-at-cyberwarcon-2021/
     tags:
     - attack.persistence
-    - attack.lateral_movement
+    - attack.lateral-movement
     - attack.t1133
     - attack.t1136.001
     - attack.t1021.001

@@ -54,8 +54,8 @@ respond:
     - https://twitter.com/med0x2e/status/1520402518685200384
     - https://github.com/elastic/detection-rules/blob/dd224fb3f81d0b4bf8593c5f02a029d647ba2b2d/rules/windows/credential_access_relay_ntlm_auth_via_http_spoolss.toml
     tags:
-    - attack.privilege_escalation
-    - attack.credential_access
+    - attack.privilege-escalation
+    - attack.credential-access
     - attack.t1212
   name: Suspicious NTLM Authentication on the Printer Spooler Service
 

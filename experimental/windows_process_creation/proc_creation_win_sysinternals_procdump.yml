@@ -26,7 +26,7 @@ respond:
     references:
     - https://learn.microsoft.com/en-us/sysinternals/downloads/procdump
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1036
     - attack.t1003.001
   name: Procdump Execution

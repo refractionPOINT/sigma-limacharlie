@@ -31,10 +31,23 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: '#-'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '#0'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '#655'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '#656'
 respond:
 - action: report
   metadata:
-    author: Nasreddine Bencherchali (Nextron Systems)
+    author: Nasreddine Bencherchali (Nextron Systems), Swachchhanda Shrawan Poudel
+      (Nextron Systems)
     description: Detects execution of "rundll32" with potential obfuscated ordinal
       calls
     falsepositives:
@@ -42,7 +55,9 @@ respond:
     level: medium
     references:
     - Internal Research
+    - https://www.youtube.com/watch?v=52tAmVLg1KM&t=2070s
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
+    - attack.t1027.010
   name: Potential Obfuscated Ordinal Call Via Rundll32
 

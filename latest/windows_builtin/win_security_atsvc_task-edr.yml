@@ -33,7 +33,7 @@ respond:
     references:
     - https://web.archive.org/web/20230409194125/https://blog.menasec.net/2019/03/threat-hunting-25-scheduled-tasks-for.html
     tags:
-    - attack.lateral_movement
+    - attack.lateral-movement
     - attack.persistence
     - car.2013-05-004
     - car.2015-04-001

@@ -39,6 +39,6 @@ respond:
     - https://learn.microsoft.com/en-us/archive/blogs/jonathantrull/detecting-sticky-key-backdoors
     tags:
     - attack.t1546.008
-    - attack.privilege_escalation
+    - attack.privilege-escalation
   name: Persistence Via Sticky Key Backdoor
 

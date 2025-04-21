@@ -1,0 +1,34 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/FILE_PATH
+      value: RECYCLERS.BIN\
+    - case sensitive: false
+      op: contains
+      path: event/FILE_PATH
+      value: RECYCLER.BIN\
+respond:
+- action: report
+  metadata:
+    author: X__Junior (Nextron Systems)
+    description: Detects process execution from a fake recycle bin folder, often used
+      to avoid security solution.
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://www.mandiant.com/resources/blog/infected-usb-steal-secrets
+    - https://unit42.paloaltonetworks.com/cloaked-ursa-phishing/
+    tags:
+    - attack.persistence
+    - attack.defense-evasion
+  name: Suspicious Process Execution From Fake Recycle.Bin Folder
+

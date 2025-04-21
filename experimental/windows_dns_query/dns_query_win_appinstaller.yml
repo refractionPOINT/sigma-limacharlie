@@ -26,7 +26,7 @@ respond:
     - https://twitter.com/notwhickey/status/1333900137232523264
     - https://lolbas-project.github.io/lolbas/Binaries/AppInstaller/
     tags:
-    - attack.command_and_control
+    - attack.command-and-control
     - attack.t1105
   name: AppX Package Installation Attempts Via AppInstaller.EXE
 

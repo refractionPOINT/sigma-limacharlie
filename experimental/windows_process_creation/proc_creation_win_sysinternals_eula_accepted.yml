@@ -28,7 +28,7 @@ respond:
     references:
     - https://twitter.com/Moti_B/status/1008587936735035392
     tags:
-    - attack.resource_development
+    - attack.resource-development
     - attack.t1588.002
   name: Potential Execution of Sysinternals Tools
 

@@ -27,7 +27,7 @@ respond:
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1027/T1027.md
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1027
   name: Decode Base64 Encoded Text -MacOs
 

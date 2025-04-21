@@ -28,7 +28,7 @@ respond:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1218/T1218.md#atomic-test-4---infdefaultinstallexe-inf-execution
     - https://lolbas-project.github.io/lolbas/Binaries/Infdefaultinstall/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1218
   name: InfDefaultInstall.exe .inf Execution
 

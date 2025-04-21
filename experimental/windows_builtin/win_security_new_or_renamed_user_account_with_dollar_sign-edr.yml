@@ -53,7 +53,7 @@ respond:
     references:
     - https://twitter.com/SBousseaden/status/1387743867663958021
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1036
   name: New or Renamed User Account with '$' Character
 

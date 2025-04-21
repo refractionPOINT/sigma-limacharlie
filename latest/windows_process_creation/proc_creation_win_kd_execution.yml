@@ -27,7 +27,7 @@ respond:
     references:
     - Internal Research
     tags:
-    - attack.defense_evasion
-    - attack.privilege_escalation
+    - attack.defense-evasion
+    - attack.privilege-escalation
   name: Windows Kernel Debugger Execution
 

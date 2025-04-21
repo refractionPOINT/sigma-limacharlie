@@ -108,7 +108,7 @@ respond:
     - https://app.any.run/tasks/cfc8870b-ccd7-4210-88cf-a8087476a6d0
     - https://unit42.paloaltonetworks.com/unit42-sure-ill-take-new-combojack-malware-alters-clipboards-steal-cryptocurrency/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1564.001
   name: Set Suspicious Files as System Files Using Attrib.EXE
 

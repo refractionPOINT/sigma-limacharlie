@@ -32,8 +32,8 @@ respond:
     - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1078.003/T1078.003.md#atomic-test-3---create-local-account-with-admin-privileges-using-sysadminctl-utility---macos
     - https://ss64.com/osx/sysadminctl.html
     tags:
-    - attack.initial_access
-    - attack.privilege_escalation
+    - attack.initial-access
+    - attack.privilege-escalation
     - attack.t1078.003
   name: User Added To Admin Group Via Sysadminctl
 

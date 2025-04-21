@@ -40,7 +40,7 @@ respond:
     references:
     - https://github.com/audibleblink/xordump
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1036
     - attack.t1003.001
   name: HackTool - XORDump Execution

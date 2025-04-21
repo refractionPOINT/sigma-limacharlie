@@ -66,8 +66,8 @@ respond:
     - Internal Research
     tags:
     - attack.t1190
-    - attack.initial_access
+    - attack.initial-access
     - attack.persistence
-    - attack.privilege_escalation
+    - attack.privilege-escalation
   name: Suspicious Processes Spawned by WinRM
 

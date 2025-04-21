@@ -45,7 +45,7 @@ respond:
     - https://www.aon.com/cyber-solutions/aon_cyber_labs/yours-truly-signed-av-driver-weaponizing-an-antivirus-driver/
     tags:
     - attack.persistence
-    - attack.privilege_escalation
+    - attack.privilege-escalation
     - attack.t1543.003
   name: New Kernel Driver Via SC.EXE
 

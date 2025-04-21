@@ -37,6 +37,6 @@ respond:
     - https://github.com/mvelazc0/PurpleSharp
     tags:
     - attack.t1587
-    - attack.resource_development
+    - attack.resource-development
   name: HackTool - PurpleSharp Execution
 

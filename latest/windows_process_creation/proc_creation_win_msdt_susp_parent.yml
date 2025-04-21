@@ -76,7 +76,7 @@ respond:
     - https://twitter.com/nao_sec/status/1530196847679401984
     - https://app.any.run/tasks/713f05d2-fe78-4b9d-a744-f7c133e3fafb/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1036
     - attack.t1218
   name: Suspicious MSDT Parent Process

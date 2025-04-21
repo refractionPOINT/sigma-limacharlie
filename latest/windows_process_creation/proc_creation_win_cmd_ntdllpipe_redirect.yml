@@ -36,6 +36,6 @@ respond:
     references:
     - https://web.archive.org/web/20220306121156/https://www.x86matthew.com/view_post?id=ntdll_pipe
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: NtdllPipe Like Activity Execution
 

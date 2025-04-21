@@ -48,6 +48,6 @@ respond:
     - https://redcanary.com/blog/raspberry-robin/
     - https://thedfirreport.com/2022/09/26/bumblebee-round-two/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: Rundll32 Spawned Via Explorer.EXE
 

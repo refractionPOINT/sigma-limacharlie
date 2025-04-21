@@ -99,7 +99,7 @@ respond:
     references:
     - https://github.com/p3nt4/PowerShdll/blob/62cfa172fb4e1f7f4ac00ca942685baeb88ff356/README.md
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1218.011
   name: Potential PowerShell Execution Via DLL
 

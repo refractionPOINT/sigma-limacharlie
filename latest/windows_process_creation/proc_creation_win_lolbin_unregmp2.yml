@@ -39,7 +39,7 @@ respond:
     references:
     - https://lolbas-project.github.io/lolbas/Binaries/Unregmp2/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1218
   name: Lolbin Unregmp2.exe Use As Proxy
 

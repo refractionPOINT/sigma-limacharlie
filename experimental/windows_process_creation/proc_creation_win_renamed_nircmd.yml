@@ -1,0 +1,43 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/ORIGINAL_FILE_NAME
+      value: NirCmd.exe
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \nircmd.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \nircmdc.exe
+respond:
+- action: report
+  metadata:
+    author: X__Junior (Nextron Systems)
+    description: Detects the execution of a renamed "NirCmd.exe" binary based on the
+      PE metadata fields.
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.microsoft.com/en-us/security/blog/2024/01/17/new-ttps-observed-in-mint-sandstorm-campaign-targeting-high-profile-individuals-at-universities-and-research-orgs/
+    - https://www.nirsoft.net/utils/nircmd.html
+    tags:
+    - attack.execution
+    - attack.t1059
+    - attack.defense-evasion
+    - attack.t1202
+  name: Renamed NirCmd.EXE Execution
+

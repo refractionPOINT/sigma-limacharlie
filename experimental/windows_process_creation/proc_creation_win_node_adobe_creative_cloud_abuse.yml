@@ -28,7 +28,7 @@ respond:
     references:
     - https://twitter.com/mttaggart/status/1511804863293784064
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1127
     - attack.t1059.007
   name: Node Process Executions

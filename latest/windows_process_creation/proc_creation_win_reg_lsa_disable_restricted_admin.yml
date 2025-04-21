@@ -35,8 +35,9 @@ respond:
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/a8e3cf63e97b973a25903d3df9fd55da6252e564/atomics/T1112/T1112.md
     - https://social.technet.microsoft.com/wiki/contents/articles/32905.remote-desktop-services-enable-restricted-admin-mode.aspx
+    - https://thedfirreport.com/2022/05/09/seo-poisoning-a-gootloader-story/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1112
   name: RestrictedAdminMode Registry Value Tampering - ProcCreation
 

@@ -1,0 +1,66 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \mode.com
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: MODE.COM
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' con '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' cp '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' select='
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/COMMAND_LINE
+          value: =1251
+        - case sensitive: false
+          op: ends with
+          path: event/COMMAND_LINE
+          value: =866
+respond:
+- action: report
+  metadata:
+    author: Joseliyo Sanchez, @Joseliyo_Jstnk
+    description: 'Detects a CodePage modification using the "mode.com" utility to
+      Russian language.
+
+      This behavior has been used by threat actors behind Dharma ransomware.
+
+      '
+    falsepositives:
+    - Russian speaking people changing the CodePage
+    level: medium
+    references:
+    - https://learn.microsoft.com/en-us/windows/win32/intl/code-page-identifiers
+    - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/mode
+    - https://strontic.github.io/xcyclopedia/library/mode.com-59D1ED51ACB8C3D50F1306FD75F20E99.html
+    - https://www.virustotal.com/gui/file/5e75ef02517afd6e8ba6462b19217dc4a5a574abb33d10eb0f2bab49d8d48c22/behavior
+    tags:
+    - attack.defense-evasion
+    - attack.t1036
+  name: CodePage Modification Via MODE.COM To Russian Language
+

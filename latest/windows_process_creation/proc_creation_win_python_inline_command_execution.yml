@@ -9,34 +9,34 @@ detect:
     rules:
     - op: and
       rules:
-      - op: or
+      - op: and
         rules:
-        - case sensitive: false
-          op: is
-          path: event/ORIGINAL_FILE_NAME
-          value: python.exe
         - op: or
           rules:
           - case sensitive: false
-            op: ends with
-            path: event/FILE_PATH
+            op: is
+            path: event/ORIGINAL_FILE_NAME
             value: python.exe
-          - case sensitive: false
-            op: ends with
-            path: event/FILE_PATH
-            value: python3.exe
-          - case sensitive: false
-            op: ends with
-            path: event/FILE_PATH
-            value: python2.exe
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ' -c'
-    - not: true
-      op: or
-      rules:
-      - op: and
+          - op: or
+            rules:
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: python.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: python3.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: python2.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -c'
+      - not: true
+        op: and
         rules:
         - case sensitive: false
           op: starts with
@@ -50,10 +50,23 @@ detect:
           op: contains
           path: event/PARENT/COMMAND_LINE
           value: -E -s -m ensurepip -U --default-pip
+    - not: true
+      op: or
+      rules:
       - case sensitive: false
         op: ends with
         path: event/PARENT/FILE_PATH
         value: \AppData\Local\Programs\Microsoft VS Code\Code.exe
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: <pip-setuptools-caller>
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: exec(compile(
 respond:
 - action: report
   metadata:

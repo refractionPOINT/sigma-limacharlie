@@ -43,6 +43,6 @@ respond:
     references:
     - https://www.trendmicro.com/pl_pl/research/20/i/the-evolution-of-malicious-shell-scripts.html
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: Disable Or Stop Services
 

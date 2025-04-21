@@ -46,7 +46,7 @@ respond:
     - https://github.com/redcanaryco/atomic-red-team/blob/5c1e6f1b4fafd01c8d1ece85f510160fc1275fbf/atomics/T1546.008/T1546.008.md
     - https://ss64.com/nt/mklink.html
     tags:
-    - attack.privilege_escalation
+    - attack.privilege-escalation
     - attack.persistence
     - attack.t1546.008
   name: Potential Privilege Escalation Using Symlink Between Osk and Cmd

@@ -53,6 +53,6 @@ respond:
     references:
     - https://thedfirreport.com/2022/09/26/bumblebee-round-two/
     tags:
-    - attack.credential_access
+    - attack.credential-access
   name: Copy .DMP/.DUMP Files From Remote Share Via Cmd.EXE
 

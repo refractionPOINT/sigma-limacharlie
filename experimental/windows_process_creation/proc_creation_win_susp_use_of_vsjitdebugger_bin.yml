@@ -44,6 +44,6 @@ respond:
     - https://learn.microsoft.com/en-us/visualstudio/debugger/debug-using-the-just-in-time-debugger?view=vs-2019
     tags:
     - attack.t1218
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: Malicious PE Execution by Microsoft Visual Studio Debugger
 

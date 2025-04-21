@@ -24,7 +24,7 @@ respond:
     - https://gist.github.com/nasbench/a989ce64cefa8081bd50cf6ad8c491b5
     tags:
     - attack.execution
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1218
   name: Visual Studio NodejsTools PressAnyKey Arbitrary Binary Execution
 

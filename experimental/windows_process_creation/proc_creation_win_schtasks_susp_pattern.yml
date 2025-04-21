@@ -1,0 +1,184 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \schtasks.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '/Create '
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - op: and
+          rules:
+          - op: or
+            rules:
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: '/sc minute '
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: '/ru system '
+          - op: or
+            rules:
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: cmd /c
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: cmd /k
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: cmd /r
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: 'cmd.exe /c '
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: 'cmd.exe /k '
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: 'cmd.exe /r '
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' -decode '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' -enc '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' -w hidden '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' bypass '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' IEX'
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: .DownloadData
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: .DownloadFile
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: .DownloadString
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '/c start /min '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: FromBase64String
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: mshta http
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: mshta.exe http
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: :\ProgramData\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: :\Temp\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: :\Tmp\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: :\Users\Public\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: :\Windows\Temp\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \AppData\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '%AppData%'
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '%Temp%'
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '%tmp%'
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: cscript
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: curl
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: wscript
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects scheduled task creation using "schtasks" that contain potentially
+      suspicious or uncommon commands
+    falsepositives:
+    - Software installers that run from temporary folders and also install scheduled
+      tasks are expected to generate some false positives
+    level: high
+    references:
+    - https://app.any.run/tasks/512c1352-6380-4436-b27d-bb62f0c020d6/
+    - https://twitter.com/RedDrip7/status/1506480588827467785
+    - https://www.ncsc.gov.uk/static-assets/documents/malware-analysis-reports/devil-bait/NCSC-MAR-Devil-Bait.pdf
+    tags:
+    - attack.execution
+    - attack.t1053.005
+  name: Suspicious Command Patterns In Scheduled Task Creation
+

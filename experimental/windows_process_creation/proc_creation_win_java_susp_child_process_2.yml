@@ -55,8 +55,8 @@ respond:
     references:
     - https://web.archive.org/web/20231230220738/https://www.lunasec.io/docs/blog/log4j-zero-day/
     tags:
-    - attack.initial_access
+    - attack.initial-access
     - attack.persistence
-    - attack.privilege_escalation
+    - attack.privilege-escalation
   name: Shell Process Spawned by Java.EXE
 

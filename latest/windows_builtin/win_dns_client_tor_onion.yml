@@ -23,7 +23,7 @@ respond:
     references:
     - https://www.logpoint.com/en/blog/detecting-tor-use-with-logpoint/
     tags:
-    - attack.command_and_control
+    - attack.command-and-control
     - attack.t1090.003
   name: Query Tor Onion Address - DNS Client
 

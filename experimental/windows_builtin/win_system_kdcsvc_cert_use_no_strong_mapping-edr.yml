@@ -1,0 +1,49 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/EventData/Provider_Name
+      value: Kerberos-Key-Distribution-Center
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '39'
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '41'
+respond:
+- action: report
+  metadata:
+    author: '@br4dy5'
+    description: 'Detects a user certificate that was valid but could not be mapped
+      to a user in a strong way (such as via explicit mapping, key trust mapping,
+      or a SID)
+
+      This could be a sign of exploitation of the elevation of privilege vulnerabilities
+      (CVE-2022-34691, CVE-2022-26931, CVE-2022-26923) that can occur when the KDC
+      allows certificate spoofing by not requiring a strong mapping.
+
+      Events where the AccountName and CN of the Subject do not match, or where the
+      CN ends in a dollar sign indicating a machine, may indicate certificate spoofing.
+
+      '
+    falsepositives:
+    - If prevalent in the environment, filter on events where the AccountName and
+      CN of the Subject do not reference the same user
+    - If prevalent in the environment, filter on CNs that end in a dollar sign indicating
+      it is a machine name
+    level: medium
+    references:
+    - https://support.microsoft.com/en-us/topic/kb5014754-certificate-based-authentication-changes-on-windows-domain-controllers-ad2c23b0-15d8-4340-a468-4d4f3b188f16
+    tags:
+    - attack.privilege-escalation
+  name: Certificate Use With No Strong Mapping
+

@@ -31,7 +31,7 @@ respond:
     references:
     - https://threathunterplaybook.com/hunts/windows/201009-RemoteDCOMIErtUtilDLLHijack/notebook.html
     tags:
-    - attack.lateral_movement
+    - attack.lateral-movement
     - attack.t1021.002
     - attack.t1021.003
   name: DCOM InternetExplorer.Application Iertutil DLL Hijack - Security

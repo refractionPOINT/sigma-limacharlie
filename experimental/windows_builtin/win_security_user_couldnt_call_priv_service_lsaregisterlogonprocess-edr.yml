@@ -30,8 +30,8 @@ respond:
     references:
     - https://posts.specterops.io/hunting-in-active-directory-unconstrained-delegation-forests-trusts-71f2b33688e1
     tags:
-    - attack.lateral_movement
-    - attack.privilege_escalation
+    - attack.lateral-movement
+    - attack.privilege-escalation
     - attack.t1558.003
   name: User Couldn't Call a Privileged Service 'LsaRegisterLogonProcess'
 

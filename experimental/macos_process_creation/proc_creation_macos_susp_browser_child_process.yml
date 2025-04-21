@@ -203,7 +203,7 @@ respond:
     - https://fr.slideshare.net/codeblue_jp/cb19-recent-apt-attack-on-crypto-exchange-employees-by-heungsoo-kang
     - https://github.com/elastic/detection-rules/blob/4312d8c9583be524578a14fe6295c3370b9a9307/rules/macos/execution_initial_access_suspicious_browser_childproc.toml
     tags:
-    - attack.initial_access
+    - attack.initial-access
     - attack.execution
     - attack.t1189
     - attack.t1203

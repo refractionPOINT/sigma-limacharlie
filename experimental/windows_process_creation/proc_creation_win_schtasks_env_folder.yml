@@ -1,0 +1,188 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \schtasks.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /create '
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: :\Perflogs
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: :\Users\All Users\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: :\Users\Default\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: :\Users\Public
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: :\Windows\Temp
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \AppData\Local\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \AppData\Roaming\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '%AppData%'
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '%Public%'
+      - op: and
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/COMMAND_LINE
+          value: \svchost.exe -k netsvcs -p -s Schedule
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: :\Perflogs
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: :\Windows\Temp
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \Users\Public
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '%Public%'
+    - not: true
+      op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: unattended.ini
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: update_task.xml
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /Create /TN TVInstallRestore /TR
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /Create /Xml "C:\Users\
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \AppData\Local\Temp\.CR.
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: Avira_Security_Installation.xml
+      - op: and
+        rules:
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: /Create /F /TN
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '/Xml '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \AppData\Local\Temp\is-
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: Avira_
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: .tmp\UpdateFallbackTask.xml
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: .tmp\WatchdogServiceControlManagerTimeout.xml
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: .tmp\SystrayAutostart.xml
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: .tmp\MaintenanceTask.xml
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \AppData\Local\Temp\
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '/Create /TN "klcp_update" /XML '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \klcp_update_task.xml
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects Schtask creations that point to a suspicious folder or an
+      environment variable often used by malware
+    falsepositives:
+    - Benign scheduled tasks creations or executions that happen often during software
+      installations
+    - Software that uses the AppData folder and scheduled tasks to update the software
+      in the AppData folders
+    level: medium
+    references:
+    - https://www.welivesecurity.com/2022/01/18/donot-go-do-not-respawn/
+    - https://www.joesandbox.com/analysis/514608/0/html#324415FF7D8324231381BAD48A052F85DF04
+    - https://blog.talosintelligence.com/gophish-powerrat-dcrat/
+    tags:
+    - attack.execution
+    - attack.t1053.005
+  name: Schedule Task Creation From Env Variable Or Potentially Suspicious Path Via
+    Schtasks.EXE
+

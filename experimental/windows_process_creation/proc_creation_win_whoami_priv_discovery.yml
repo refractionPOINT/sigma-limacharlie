@@ -40,7 +40,7 @@ respond:
     references:
     - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/whoami
     tags:
-    - attack.privilege_escalation
+    - attack.privilege-escalation
     - attack.discovery
     - attack.t1033
   name: Security Privileges Enumeration Via Whoami.EXE

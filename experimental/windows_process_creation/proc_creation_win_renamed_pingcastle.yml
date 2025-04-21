@@ -1,0 +1,149 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: PingCastleReporting.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: PingCastleCloud.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: PingCastle.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: --scanner aclcheck
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: --scanner antivirus
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: --scanner computerversion
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: --scanner foreignusers
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: --scanner laps_bitlocker
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: --scanner localadmin
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: --scanner nullsession
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: --scanner nullsession-trust
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: --scanner oxidbindings
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: --scanner remote
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: --scanner share
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: --scanner smb
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: --scanner smb3querynetwork
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: --scanner spooler
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: --scanner startup
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: --scanner zerologon
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: --no-enum-limit
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: --healthcheck
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: --level Full
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: --healthcheck
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '--server '
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \PingCastleReporting.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \PingCastleCloud.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \PingCastle.exe
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems), X__Junior (Nextron Systems)
+    description: Detects the execution of a renamed "PingCastle" binary based on the
+      PE metadata fields.
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://thedfirreport.com/2023/10/30/netsupport-intrusion-results-in-domain-compromise/
+    - https://www.pingcastle.com/documentation/scanner/
+    tags:
+    - attack.execution
+    - attack.t1059
+    - attack.defense-evasion
+    - attack.t1202
+  name: Renamed PingCastle Binary Execution
+

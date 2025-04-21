@@ -85,7 +85,7 @@ respond:
     - https://lolbas-project.github.io/lolbas/OtherMSBinaries/Appvlp/
     tags:
     - attack.t1218
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.execution
   name: Uncommon Child Process Of Appvlp.EXE
 

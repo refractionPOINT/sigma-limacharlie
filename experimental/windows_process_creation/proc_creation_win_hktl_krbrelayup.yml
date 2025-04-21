@@ -71,9 +71,9 @@ respond:
     references:
     - https://github.com/Dec0ne/KrbRelayUp
     tags:
-    - attack.credential_access
+    - attack.credential-access
     - attack.t1558.003
-    - attack.lateral_movement
+    - attack.lateral-movement
     - attack.t1550.003
   name: HackTool - KrbRelayUp Execution
 

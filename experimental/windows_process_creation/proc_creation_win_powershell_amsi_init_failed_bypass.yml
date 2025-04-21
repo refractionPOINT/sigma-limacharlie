@@ -7,7 +7,7 @@ detect:
   - op: is windows
   - op: or
     rules:
-    - op: or
+    - op: and
       rules:
       - case sensitive: false
         op: contains
@@ -44,7 +44,7 @@ respond:
     - https://s3cur3th1ssh1t.github.io/Bypass_AMSI_by_manual_modification/
     - https://www.mdsec.co.uk/2018/06/exploring-powershell-amsi-and-logging-evasion/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1562.001
   name: Potential AMSI Bypass Via .NET Reflection
 

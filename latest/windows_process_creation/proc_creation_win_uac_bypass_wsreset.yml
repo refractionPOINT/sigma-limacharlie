@@ -38,8 +38,8 @@ respond:
     - https://www.activecyber.us/activelabs/windows-uac-bypass
     - https://twitter.com/ReaQta/status/1222548288731217921
     tags:
-    - attack.privilege_escalation
-    - attack.defense_evasion
+    - attack.privilege-escalation
+    - attack.defense-evasion
     - attack.t1548.002
   name: Bypass UAC via WSReset.exe
 

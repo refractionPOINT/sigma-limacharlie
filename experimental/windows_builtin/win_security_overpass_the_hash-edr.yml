@@ -33,7 +33,7 @@ respond:
     references:
     - https://web.archive.org/web/20220419045003/https://cyberwardog.blogspot.com/2017/04/chronicles-of-threat-hunter-hunting-for.html
     tags:
-    - attack.lateral_movement
+    - attack.lateral-movement
     - attack.s0002
     - attack.t1550.002
   name: Successful Overpass the Hash Attempt

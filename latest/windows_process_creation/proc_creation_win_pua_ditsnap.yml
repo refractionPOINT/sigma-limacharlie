@@ -28,7 +28,7 @@ respond:
     - https://thedfirreport.com/2020/06/21/snatch-ransomware/
     - https://web.archive.org/web/20201124182207/https://github.com/yosqueoy/ditsnap
     tags:
-    - attack.credential_access
+    - attack.credential-access
     - attack.t1003.003
   name: PUA - DIT Snapshot Viewer
 

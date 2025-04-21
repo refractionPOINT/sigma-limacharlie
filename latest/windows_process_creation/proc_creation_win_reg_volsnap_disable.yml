@@ -26,7 +26,7 @@ respond:
     references:
     - https://twitter.com/0gtweet/status/1354766164166115331
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1562.001
   name: Disabled Volume Snapshots
 

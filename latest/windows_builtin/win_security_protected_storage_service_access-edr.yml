@@ -29,7 +29,7 @@ respond:
     references:
     - https://threathunterplaybook.com/hunts/windows/190620-DomainDPAPIBackupKeyExtraction/notebook.html
     tags:
-    - attack.lateral_movement
+    - attack.lateral-movement
     - attack.t1021.002
   name: Protected Storage Service Access
 

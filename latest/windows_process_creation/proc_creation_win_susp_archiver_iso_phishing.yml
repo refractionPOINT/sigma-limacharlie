@@ -51,7 +51,7 @@ respond:
     - https://twitter.com/1ZRR4H/status/1534259727059787783
     - https://app.any.run/tasks/e1fe6a62-bce8-4323-a49a-63795d9afd5d/
     tags:
-    - attack.initial_access
+    - attack.initial-access
     - attack.t1566
   name: Phishing Pattern ISO in Archive
 

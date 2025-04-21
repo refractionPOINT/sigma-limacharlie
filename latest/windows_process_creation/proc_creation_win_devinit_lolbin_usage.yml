@@ -30,7 +30,7 @@ respond:
     - https://lolbas-project.github.io/lolbas/OtherMSBinaries/Devinit/
     tags:
     - attack.execution
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1218
   name: Arbitrary MSI Download Via Devinit.EXE
 

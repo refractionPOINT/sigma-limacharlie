@@ -1,0 +1,62 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is mac
+  - op: and
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /nscurl
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '--download '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '--download-directory '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '--output '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-dir '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-dl '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -ld
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-o '
+respond:
+- action: report
+  metadata:
+    author: Daniel Cortez
+    description: Detects the execution of the nscurl utility in order to download
+      files.
+    falsepositives:
+    - Legitimate usage of nscurl by administrators and users.
+    level: medium
+    references:
+    - https://www.loobins.io/binaries/nscurl/
+    - https://www.agnosticdev.com/content/how-diagnose-app-transport-security-issues-using-nscurl-and-openssl
+    - https://gist.github.com/nasbench/ca6ef95db04ae04ffd1e0b1ce709cadd
+    tags:
+    - attack.defense-evasion
+    - attack.command-and-control
+    - attack.t1105
+  name: File Download Via Nscurl - MacOS
+

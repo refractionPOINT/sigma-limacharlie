@@ -39,8 +39,8 @@ respond:
     - https://www.elastic.co/fr/blog/how-attackers-abuse-access-token-manipulation
     - https://www.manageengine.com/log-management/cyber-security/access-token-manipulation.html
     tags:
-    - attack.defense_evasion
-    - attack.privilege_escalation
+    - attack.defense-evasion
+    - attack.privilege-escalation
     - attack.t1134.001
     - stp.4u
   name: Potential Access Token Abuse

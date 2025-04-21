@@ -33,7 +33,7 @@ respond:
     references:
     - https://twitter.com/elliotkillick/status/1449812843772227588
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1218
   name: Execution via WorkFolders.exe
 

@@ -1,0 +1,40 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \ScreenConnect.Service.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cmd.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \csc.exe
+respond:
+- action: report
+  metadata:
+    author: Jason Rathbun (Blackpoint Cyber)
+    description: Detects potential web shell execution from the ScreenConnect server
+      process.
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://blackpointcyber.com/resources/blog/breaking-through-the-screen/
+    - https://www.connectwise.com/company/trust/security-bulletins/connectwise-screenconnect-23.9.8
+    tags:
+    - attack.initial-access
+    - attack.t1190
+  name: Remote Access Tool - ScreenConnect Server Web Shell Execution
+

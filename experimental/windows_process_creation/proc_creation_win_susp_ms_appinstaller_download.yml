@@ -1,0 +1,38 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: matches
+      path: event/COMMAND_LINE
+      re: .*ms\-appinstaller://.source=.*
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: http
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems), Swachchhanda Shrawan Poudel
+    description: 'Detects usage of the "ms-appinstaller" protocol handler via command
+      line to potentially download arbitrary files via AppInstaller.EXE
+
+      The downloaded files are temporarly stored in ":\Users\%username%\AppData\Local\Packages\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\AC\INetCache\<RANDOM-8-CHAR-DIRECTORY>"
+
+      '
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://lolbas-project.github.io/lolbas/Binaries/AppInstaller/
+    tags:
+    - attack.defense-evasion
+    - attack.execution
+    - attack.t1218
+  name: Potential File Download Via MS-AppInstaller Protocol Handler
+

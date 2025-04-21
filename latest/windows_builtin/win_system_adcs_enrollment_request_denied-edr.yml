@@ -1,0 +1,36 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/EventData/Provider_Name
+      value: Microsoft-Windows-CertificationAuthority
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '53'
+respond:
+- action: report
+  metadata:
+    author: '@SerkinValery'
+    description: 'Detects denied requests by Active Directory Certificate Services.
+
+      Example of these requests denial include issues with permissions on the certificate
+      template or invalid signatures.
+
+      '
+    falsepositives:
+    - Unknown
+    level: low
+    references:
+    - https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/dd299871(v=ws.10)
+    - https://www.gradenegger.eu/en/details-of-the-event-with-id-53-of-the-source-microsoft-windows-certificationauthority/
+    tags:
+    - attack.credential-access
+    - attack.t1553.004
+  name: Active Directory Certificate Services Denied Certificate Enrollment Request
+

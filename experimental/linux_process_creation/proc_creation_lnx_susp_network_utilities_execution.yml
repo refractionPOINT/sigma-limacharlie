@@ -72,6 +72,10 @@ detect:
         op: ends with
         path: event/FILE_PATH
         value: /telnet
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /zenmap
 respond:
 - action: report
   metadata:

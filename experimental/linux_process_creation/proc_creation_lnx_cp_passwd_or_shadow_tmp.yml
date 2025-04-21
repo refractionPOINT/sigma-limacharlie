@@ -37,7 +37,7 @@ respond:
     - https://blogs.blackberry.com/
     - https://twitter.com/Joseliyo_Jstnk/status/1620131033474822144
     tags:
-    - attack.credential_access
+    - attack.credential-access
     - attack.t1552.001
   name: Copy Passwd Or Shadow From TMP Path
 

@@ -1,0 +1,3932 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F600"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F603"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F604"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F601"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F606"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F605"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F602"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F923"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F972"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F979"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\u263A\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F60A"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F607"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F642"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F643"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F609"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F60C"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F60D"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F970"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F618"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F617"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F619"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F61A"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F60B"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F61B"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F61D"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F61C"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F92A"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F928"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D0"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F913"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F60E"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F978"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F929"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F973"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F60F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F612"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F61E"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F614"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F61F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F615"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F641"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\u2639\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F623"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F616"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F62B"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F629"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F97A"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F622"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F62D"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F62E\u200D\U0001F4A8"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F624"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F620"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F621"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F92C"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F92F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F633"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F975"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F976"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F631"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F628"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F630"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F625"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F613"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAE3"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F917"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAE1"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F914"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAE2"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F92D"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F92B"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F925"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F636"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F636\u200D\U0001F32B\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F610"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F611"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F62C"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAE0"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F644"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F62F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F626"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F627"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F62E"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F632"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F971"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F634"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F924"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F62A"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F635"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F635\u200D\U0001F4AB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAE5"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F910"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F974"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F922"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F92E"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F927"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F637"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F912"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F915"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F911"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F920"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F608"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F47F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F479"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F47A"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F921"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F4A9"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F47B"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F480"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\u2620\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F47D"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F47E"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F916"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F383"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F63A"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F638"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F639"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F63B"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F63C"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F63D"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F640"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F63F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F63E"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F44B"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F91A"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F590"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\u270B"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F596"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F44C"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F90C"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F90F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\u270C\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F91E"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAF0"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F91F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F918"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F919"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAF5"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAF1"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAF2"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAF3"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAF4"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F448"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F449"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F446"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F595"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F447"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\u261D\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F44D"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F44E"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\u270A"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F44A"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F91B"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F91C"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F44F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAF6"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F64C"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F450"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F932"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F91D"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F64F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\u270D\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F4AA"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9BE"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9B5"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9BF"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9B6"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F463"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F442"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9BB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F443"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAC0"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAC1"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9E0"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9B7"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9B4"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F440"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F441"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F445"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F444"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAE6"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F48B"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FA78"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F476"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F467"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D2"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F466"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\U0001F9B1"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\u200D\U0001F9B1"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\U0001F9B1"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\U0001F9B0"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\u200D\U0001F9B0"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\U0001F9B0"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F471\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F471"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F471\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\U0001F9B3"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\u200D\U0001F9B3"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\U0001F9B3"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\U0001F9B2"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\u200D\U0001F9B2"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\U0001F9B2"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D4\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D4"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D4\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F475"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D3"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F474"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F472"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F473\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F473"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F473\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D5"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F46E\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F46E"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F46E\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F477\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F477"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F477\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F482\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F482"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F482\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F575\uFE0F\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F575\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F575\uFE0F\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\u2695\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\u200D\u2695\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\u2695\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\U0001F33E"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\u200D\U0001F33E"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\U0001F33E"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\U0001F373"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\u200D\U0001F373"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\U0001F373"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\U0001F393"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\u200D\U0001F393"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\U0001F393"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\U0001F3A4"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\u200D\U0001F3A4"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\U0001F3A4"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\U0001F3EB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\u200D\U0001F3EB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\U0001F3EB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\U0001F3ED"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\u200D\U0001F3ED"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\U0001F3ED"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\U0001F4BB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\u200D\U0001F4BB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\U0001F4BB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\U0001F4BC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\u200D\U0001F4BC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\U0001F4BC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\U0001F527"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\u200D\U0001F527"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\U0001F527"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\U0001F52C"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\u200D\U0001F52C"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\U0001F52C"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\U0001F3A8"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\u200D\U0001F3A8"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\U0001F3A8"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\U0001F692"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\u200D\U0001F692"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\U0001F692"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\u2708\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\u200D\u2708\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\u2708\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\U0001F680"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\u200D\U0001F680"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\U0001F680"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\u2696\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\u200D\u2696\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\u2696\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F470\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F470"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F470\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F935\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F935"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F935\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F478"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAC5"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F934"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F977"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9B8\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9B8"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9B8\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9B9\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9B9"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9B9\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F936"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\u200D\U0001F384"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F385"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D9\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D9"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D9\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DD\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DD"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DD\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DF\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DF"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DF\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DE\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DE"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DE\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DC\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DC\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DA\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DA"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DA\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9CC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F47C"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F930"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAC4"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAC3"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F931"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\U0001F37C"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\u200D\U0001F37C"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\U0001F37C"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F647\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F647"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F647\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F481\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F481"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F481\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F645\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F645"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F645\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F646\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F646"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F646\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F64B\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F64B"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F64B\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9CF\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9CF"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9CF\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F926\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F926"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F926\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F937\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F937"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F937\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F64E\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F64E"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F64E\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F64D\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F64D"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F64D\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F487\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F487"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F487\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F486\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F486"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F486\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D6\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D6"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D6\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F485"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F483"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F57A"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F46F\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F46F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F46F\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F574"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\U0001F9BD"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\u200D\U0001F9BD"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\U0001F9BD"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\U0001F9BC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\u200D\U0001F9BC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\U0001F9BC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F6B6\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F6B6"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F6B6\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\U0001F9AF"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\u200D\U0001F9AF"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\U0001F9AF"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9CE\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9CE"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9CE\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F3C3\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F3C3"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F3C3\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9CD\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9CD"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9CD\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F46D"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\u200D\U0001F91D\u200D\U0001F9D1"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F46C"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F46B"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\u2764\uFE0F\u200D\U0001F469"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F491"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\u2764\uFE0F\u200D\U0001F468"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\u2764\uFE0F\u200D\U0001F468"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\u2764\uFE0F\u200D\U0001F48B\u200D\U0001F469"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F48F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\u2764\uFE0F\u200D\U0001F48B\u200D\U0001F468"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\u2764\uFE0F\u200D\U0001F48B\u200D\U0001F468"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F46A"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\U0001F469\u200D\U0001F466"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\U0001F469\u200D\U0001F467"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\U0001F469\u200D\U0001F467\u200D\U0001F466"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\U0001F469\u200D\U0001F466\u200D\U0001F466"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\U0001F469\u200D\U0001F467\u200D\U0001F467"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\U0001F468\u200D\U0001F466"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\U0001F468\u200D\U0001F467"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\U0001F468\u200D\U0001F467\u200D\U0001F466"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\U0001F468\u200D\U0001F466\u200D\U0001F466"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\U0001F468\u200D\U0001F467\u200D\U0001F467"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\U0001F469\u200D\U0001F466"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\U0001F469\u200D\U0001F467"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\U0001F469\u200D\U0001F467\u200D\U0001F466"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\U0001F469\u200D\U0001F466\u200D\U0001F466"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\U0001F469\u200D\U0001F467\u200D\U0001F467"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\U0001F466"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\U0001F466\u200D\U0001F466"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\U0001F467"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\U0001F467\u200D\U0001F466"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\u200D\U0001F467\u200D\U0001F467"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\U0001F466"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\U0001F466\u200D\U0001F466"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\U0001F467"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\U0001F467\u200D\U0001F466"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\u200D\U0001F467\u200D\U0001F467"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F5E3"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F464"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F465"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAC2"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9F3"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F302"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\u2602\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9F5"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAA1"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAA2"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9F6"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F453"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F576"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F97D"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F97C"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9BA"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F454"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F455"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F456"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9E3"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9E4"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9E5"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9E6"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F457"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F458"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F97B"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FA74"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FA71"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FA72"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FA73"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F459"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F45A"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F45B"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F45C"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F45D"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F392"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F45E"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F45F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F97E"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F97F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F460"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F461"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FA70"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F462"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F451"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F452"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F3A9"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F393"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9E2"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\u26D1"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FA96"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F484"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F48D"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F4BC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F44B\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F91A\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F590\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\u270B\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F596\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F44C\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F90C\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F90F\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\u270C\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F91E\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAF0\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F91F\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F918\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F919\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAF5\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAF1\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAF2\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAF3\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAF4\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F448\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F449\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F446\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F595\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F447\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\u261D\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F44D\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F44E\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\u270A\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F44A\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F91B\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F91C\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F44F\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAF6\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F64C\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F450\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F932\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F64F\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\u270D\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F4AA\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9B5\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9B6\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F442\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9BB\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F443\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F476\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F467\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D2\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F466\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FB\u200D\U0001F9B1"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FB\u200D\U0001F9B1"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FB\u200D\U0001F9B1"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FB\u200D\U0001F9B0"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FB\u200D\U0001F9B0"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FB\u200D\U0001F9B0"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F471\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F471\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F471\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FB\u200D\U0001F9B3"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FB\u200D\U0001F9B3"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FB\u200D\U0001F9B3"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FB\u200D\U0001F9B2"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FB\u200D\U0001F9B2"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FB\u200D\U0001F9B2"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D4\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D4\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D4\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F475\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D3\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F474\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F472\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F473\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F473\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F473\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D5\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F46E\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F46E\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F46E\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F477\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F477\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F477\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F482\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F482\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F482\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F575\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F575\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F575\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FB\u200D\u2695\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FB\u200D\u2695\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FB\u200D\u2695\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FB\u200D\U0001F33E"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FB\u200D\U0001F33E"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FB\u200D\U0001F33E"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FB\u200D\U0001F373"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FB\u200D\U0001F373"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FB\u200D\U0001F373"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FB\u200D\U0001F393"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FB\u200D\U0001F393"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FB\u200D\U0001F393"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FB\u200D\U0001F3A4"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FB\u200D\U0001F3A4"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FB\u200D\U0001F3A4"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FB\u200D\U0001F3EB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FB\u200D\U0001F3EB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FB\u200D\U0001F3EB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FB\u200D\U0001F3ED"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FB\u200D\U0001F3ED"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FB\u200D\U0001F3ED"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FB\u200D\U0001F4BB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FB\u200D\U0001F4BB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FB\u200D\U0001F4BB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FB\u200D\U0001F4BC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FB\u200D\U0001F4BC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FB\u200D\U0001F4BC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FB\u200D\U0001F527"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FB\u200D\U0001F527"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FB\u200D\U0001F527"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FB\u200D\U0001F52C"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FB\u200D\U0001F52C"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FB\u200D\U0001F52C"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FB\u200D\U0001F3A8"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FB\u200D\U0001F3A8"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FB\u200D\U0001F3A8"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FB\u200D\U0001F692"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FB\u200D\U0001F692"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FB\u200D\U0001F692"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FB\u200D\u2708\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FB\u200D\u2708\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FB\u200D\u2708\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FB\u200D\U0001F680"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FB\u200D\U0001F680"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FB\u200D\U0001F680"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FB\u200D\u2696\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FB\u200D\u2696\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FB\u200D\u2696\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F470\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F470\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F470\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F935\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F935\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F935\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F478\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAC5\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F934\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F977\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9B8\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9B8\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9B8\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9B9\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9B9\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9B9\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F936\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FB\u200D\U0001F384"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F385\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D9\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D9\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D9\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DD\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DD\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DD\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DB\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DB\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DB\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DC\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DC\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DC\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DA\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DA\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DA\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F47C\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F930\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAC4\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAC3\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F931\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FB\u200D\U0001F37C"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FB\u200D\U0001F37C"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FB\u200D\U0001F37C"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F647\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F647\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F647\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F481\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F481\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F481\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F645\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F645\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F645\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F646\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F646\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F646\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F64B\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F64B\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F64B\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9CF\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9CF\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9CF\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F926\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F926\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F926\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F937\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F937\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F937\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F64E\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F64E\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F64E\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F64D\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F64D\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F64D\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F487\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F487\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F487\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F486\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F486\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F486\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D6\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D6\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D6\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F483\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F57A\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F574\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FB\u200D\U0001F9BD"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FB\u200D\U0001F9BD"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FB\u200D\U0001F9BD"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FB\u200D\U0001F9BC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FB\u200D\U0001F9BC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FB\u200D\U0001F9BC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F6B6\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F6B6\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F6B6\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FB\u200D\U0001F9AF"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FB\u200D\U0001F9AF"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FB\u200D\U0001F9AF"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9CE\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9CE\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9CE\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F3C3\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F3C3\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F3C3\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9CD\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9CD\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9CD\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F46D\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FB\u200D\U0001F91D\u200D\U0001F9D1\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F46C\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F46B\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D7\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D7\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D7\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F3C7\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F3C2\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F3CC\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F3CC\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F3CC\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F3C4\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F3C4\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F3C4\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F6A3\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F6A3\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F6A3\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F3CA\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F3CA\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F3CA\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\u26F9\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\u26F9\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\u26F9\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F3CB\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F3CB\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F3CB\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F6B4\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F6B4\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F6B4\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F6B5\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F6B5\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F6B5\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F938\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F938\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F938\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F93D\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F93D\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F93D\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F93E\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F93E\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F93E\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F939\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F939\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F939\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D8\U0001F3FB\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D8\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D8\U0001F3FB\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F6C0\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F6CC\U0001F3FB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F44B\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F91A\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F590\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\u270B\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F596\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F44C\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F90C\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F90F\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\u270C\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F91E\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAF0\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F91F\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F918\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F919\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAF5\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAF1\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAF2\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAF3\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAF4\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F448\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F449\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F446\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F595\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F447\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\u261D\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F44D\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F44E\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\u270A\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F44A\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F91B\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F91C\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F44F\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAF6\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F64C\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F450\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F932\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F64F\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\u270D\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F4AA\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9B5\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9B6\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F442\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9BB\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F443\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F476\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F467\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D2\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F466\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FC\u200D\U0001F9B1"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FC\u200D\U0001F9B1"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FC\u200D\U0001F9B1"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FC\u200D\U0001F9B0"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FC\u200D\U0001F9B0"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FC\u200D\U0001F9B0"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F471\U0001F3FC\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F471\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F471\U0001F3FC\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FC\u200D\U0001F9B3"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FC\u200D\U0001F9B3"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FC\u200D\U0001F9B3"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FC\u200D\U0001F9B2"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FC\u200D\U0001F9B2"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FC\u200D\U0001F9B2"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D4\U0001F3FC\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D4\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D4\U0001F3FC\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F475\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D3\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F474\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F472\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F473\U0001F3FC\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F473\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F473\U0001F3FC\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D5\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F46E\U0001F3FC\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F46E\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F46E\U0001F3FC\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F477\U0001F3FC\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F477\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F477\U0001F3FC\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F482\U0001F3FC\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F482\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F482\U0001F3FC\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F575\U0001F3FC\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F575\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F575\U0001F3FC\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FC\u200D\u2695\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FC\u200D\u2695\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FC\u200D\u2695\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FC\u200D\U0001F33E"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FC\u200D\U0001F33E"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FC\u200D\U0001F33E"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FC\u200D\U0001F373"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FC\u200D\U0001F373"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FC\u200D\U0001F373"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FC\u200D\U0001F393"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FC\u200D\U0001F393"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FC\u200D\U0001F393"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FC\u200D\U0001F3A4"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FC\u200D\U0001F3A4"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FC\u200D\U0001F3A4"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FC\u200D\U0001F3EB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FC\u200D\U0001F3EB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FC\u200D\U0001F3EB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FC\u200D\U0001F3ED"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FC\u200D\U0001F3ED"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FC\u200D\U0001F3ED"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FC\u200D\U0001F4BB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FC\u200D\U0001F4BB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FC\u200D\U0001F4BB"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FC\u200D\U0001F4BC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FC\u200D\U0001F4BC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FC\u200D\U0001F4BC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FC\u200D\U0001F527"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FC\u200D\U0001F527"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FC\u200D\U0001F527"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FC\u200D\U0001F52C"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FC\u200D\U0001F52C"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FC\u200D\U0001F52C"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FC\u200D\U0001F3A8"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FC\u200D\U0001F3A8"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FC\u200D\U0001F3A8"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FC\u200D\U0001F692"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FC\u200D\U0001F692"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FC\u200D\U0001F692"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FC\u200D\u2708\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FC\u200D\u2708\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FC\u200D\u2708\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FC\u200D\U0001F680"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FC\u200D\U0001F680"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FC\u200D\U0001F680"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FC\u200D\u2696\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FC\u200D\u2696\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FC\u200D\u2696\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F470\U0001F3FC\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F470\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F470\U0001F3FC\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F935\U0001F3FC\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F935\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F935\U0001F3FC\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F478\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAC5\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F934\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F977\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9B8\U0001F3FC\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9B8\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9B8\U0001F3FC\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9B9\U0001F3FC\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9B9\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9B9\U0001F3FC\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F936\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FC\u200D\U0001F384"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F385\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D9\U0001F3FC\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D9\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D9\U0001F3FC\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DD\U0001F3FC\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DD\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DD\U0001F3FC\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DB\U0001F3FC\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DB\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DB\U0001F3FC\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DC\U0001F3FC\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DC\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DC\U0001F3FC\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DA\U0001F3FC\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DA\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9DA\U0001F3FC\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F47C\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F930\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAC4\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001FAC3\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F931\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F469\U0001F3FC\u200D\U0001F37C"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9D1\U0001F3FC\u200D\U0001F37C"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F468\U0001F3FC\u200D\U0001F37C"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F647\U0001F3FC\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F647\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F647\U0001F3FC\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F481\U0001F3FC\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F481\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F481\U0001F3FC\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F645\U0001F3FC\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F645\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F645\U0001F3FC\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F646\U0001F3FC\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F646\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F646\U0001F3FC\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F64B\U0001F3FC\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F64B\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F64B\U0001F3FC\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9CF\U0001F3FC\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9CF\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F9CF\U0001F3FC\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F926\U0001F3FC\u200D\u2640\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F926\U0001F3FC"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F926\U0001F3FC\u200D\u2642\uFE0F"
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: "\U0001F937\U0001F3FC\u200D\u2640\uFE0F"
+respond:
+- action: report
+  metadata:
+    author: '@Kostastsale, TheDFIRReport'
+    description: Detects the usage of emojis in the command line, this could be a
+      sign of potential defense evasion activity.
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - Internal Research
+    tags:
+    - attack.defense-evasion
+  name: Potential Defense Evasion Activity Via Emoji Usage In CommandLine - 1
+

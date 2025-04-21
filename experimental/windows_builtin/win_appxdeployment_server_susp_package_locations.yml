@@ -72,6 +72,6 @@ respond:
     - https://learn.microsoft.com/en-us/windows/win32/appxpkg/troubleshooting
     - https://news.sophos.com/en-us/2021/11/11/bazarloader-call-me-back-attack-abuses-windows-10-apps-mechanism/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: Suspicious AppX Package Locations
 

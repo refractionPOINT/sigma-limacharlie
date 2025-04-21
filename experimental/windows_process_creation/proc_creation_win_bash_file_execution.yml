@@ -72,7 +72,7 @@ respond:
     - https://linux.die.net/man/1/bash
     - Internal Research
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1202
   name: Indirect Command Execution From Script File Via Bash.EXE
 

@@ -1,0 +1,124 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \pwsh.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: PowerShell.EXE
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: pwsh.dll
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'Get-ChildItem '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'dir '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'gci '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'ls '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'Get-Content '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'gc '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'cat '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'type '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ReadAllBytes
+    - op: or
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' ^| '
+        - case sensitive: false
+          op: matches
+          path: event/COMMAND_LINE
+          re: .*\*\.lnk.*
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: -Recurse
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '-Skip '
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -ExpandProperty '
+        - case sensitive: false
+          op: matches
+          path: event/COMMAND_LINE
+          re: .*\*\.lnk.*
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: WriteAllBytes
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' .length '
+respond:
+- action: report
+  metadata:
+    author: X__Junior (Nextron Systems), Nasreddine Bencherchali (Nextron Systems)
+    description: Detects PowerShell commands that decrypt an ".LNK" "file to drop
+      the next stage of the malware.
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://research.checkpoint.com/2023/chinese-threat-actors-targeting-europe-in-smugx-campaign/
+    tags:
+    - attack.execution
+  name: PowerShell Execution With Potential Decryption Capabilities
+

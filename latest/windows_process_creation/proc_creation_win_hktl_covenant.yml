@@ -63,7 +63,7 @@ respond:
     - https://posts.specterops.io/covenant-v0-5-eee0507b85ba
     tags:
     - attack.execution
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1059.001
     - attack.t1564.003
   name: HackTool - Covenant PowerShell Launcher

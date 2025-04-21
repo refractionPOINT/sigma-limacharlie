@@ -74,7 +74,7 @@ respond:
     references:
     - https://blog.truesec.com/2021/03/07/exchange-zero-day-proxylogon-and-hafnium/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1202
   name: Suspicious Service Binary Directory
 

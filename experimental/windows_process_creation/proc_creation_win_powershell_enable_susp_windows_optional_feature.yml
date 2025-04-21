@@ -64,6 +64,6 @@ respond:
     - https://learn.microsoft.com/en-us/windows/win32/projfs/enabling-windows-projected-file-system
     - https://learn.microsoft.com/en-us/windows/wsl/install-on-server
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: Potential Suspicious Windows Feature Enabled - ProcCreation
 

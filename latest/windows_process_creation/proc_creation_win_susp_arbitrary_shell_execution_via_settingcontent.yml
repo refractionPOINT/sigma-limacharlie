@@ -32,6 +32,6 @@ respond:
     - attack.t1204
     - attack.t1566.001
     - attack.execution
-    - attack.initial_access
+    - attack.initial-access
   name: Arbitrary Shell Command Execution Via Settingcontent-Ms
 

@@ -1,0 +1,72 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \wbadmin.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: WBADMIN.EXE
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: start
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: backup
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \config\SAM
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \config\SECURITY
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \config\SYSTEM
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Windows\NTDS\NTDS.dit
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems), frack113
+    description: 'Detects the dump of highly sensitive files such as "NTDS.DIT" and
+      "SECURITY" hive.
+
+      Attackers can leverage the "wbadmin" utility in order to dump sensitive files
+      that might contain credential or sensitive information.
+
+      '
+    falsepositives:
+    - Legitimate backup operation by authorized administrators. Matches must be investigated
+      and allowed on a case by case basis.
+    level: high
+    references:
+    - https://github.com/LOLBAS-Project/LOLBAS/blob/2cc01b01132b5c304027a658c698ae09dd6a92bf/yml/OSBinaries/Wbadmin.yml
+    - https://lolbas-project.github.io/lolbas/Binaries/Wbadmin/
+    - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/wbadmin-start-recovery
+    - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/wbadmin-start-backup
+    tags:
+    - attack.credential-access
+    - attack.t1003.003
+  name: Sensitive File Dump Via Wbadmin.EXE
+

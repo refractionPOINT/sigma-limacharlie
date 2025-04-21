@@ -77,7 +77,7 @@ respond:
     references:
     - https://thedfirreport.com/2021/12/13/diavol-ransomware/
     tags:
-    - attack.credential_access
+    - attack.credential-access
     - attack.t1003
   name: Suspicious Reg Add Open Command
 

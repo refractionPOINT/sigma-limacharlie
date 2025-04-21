@@ -42,7 +42,7 @@ respond:
     references:
     - Internal Research
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.execution
   name: Sysinternals Tools AppX Versions Execution
 

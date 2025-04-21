@@ -1,0 +1,58 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Offline_Winpwn
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: 'WinPwn '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: WinPwn.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: WinPwn.ps1
+respond:
+- action: report
+  metadata:
+    author: Swachchhanda Shrawan Poudel
+    description: 'Detects commandline keywords indicative of potential usge of the
+      tool WinPwn. A tool for Windows and Active Directory reconnaissance and exploitation.
+
+      '
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://github.com/S3cur3Th1sSh1t/WinPwn
+    - https://www.publicnow.com/view/EB87DB49C654D9B63995FAD4C9DE3D3CC4F6C3ED?1671634841
+    - https://reconshell.com/winpwn-tool-for-internal-windows-pentesting-and-ad-security/
+    - https://github.com/redcanaryco/atomic-red-team/blob/4d6c4e8e23d465af7a2388620cfe3f8c76e16cf0/atomics/T1082/T1082.md
+    - https://grep.app/search?q=winpwn&filter[repo][0]=redcanaryco/atomic-red-team
+    tags:
+    - attack.credential-access
+    - attack.defense-evasion
+    - attack.discovery
+    - attack.execution
+    - attack.privilege-escalation
+    - attack.t1046
+    - attack.t1082
+    - attack.t1106
+    - attack.t1518
+    - attack.t1548.002
+    - attack.t1552.001
+    - attack.t1555
+    - attack.t1555.003
+  name: HackTool - WinPwn Execution
+

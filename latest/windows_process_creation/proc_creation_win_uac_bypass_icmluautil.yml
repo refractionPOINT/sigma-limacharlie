@@ -45,8 +45,8 @@ respond:
     references:
     - https://www.elastic.co/guide/en/security/current/uac-bypass-via-icmluautil-elevated-com-interface.html
     tags:
-    - attack.defense_evasion
-    - attack.privilege_escalation
+    - attack.defense-evasion
+    - attack.privilege-escalation
     - attack.t1548.002
   name: UAC Bypass via ICMLuaUtil
 

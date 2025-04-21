@@ -1,0 +1,253 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: or
+    rules:
+    - op: or
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /crackmapexec
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /havoc
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /merlin-agent
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /merlinServer-Linux-x64
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /msfconsole
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /msfvenom
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /ps-empire server
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /ps-empire
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /sliver-client
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /sliver-server
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /Villain.py
+    - op: or
+      rules:
+      - case sensitive: true
+        op: contains
+        path: event/FILE_PATH
+        value: /cobaltstrike
+      - case sensitive: true
+        op: contains
+        path: event/FILE_PATH
+        value: /teamserver
+    - op: or
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /autorecon
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /httpx
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /legion
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /naabu
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /netdiscover
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /nuclei
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /recon-ng
+    - case sensitive: true
+      op: contains
+      path: event/FILE_PATH
+      value: /sniper
+    - op: or
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /dirb
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /dirbuster
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /eyewitness
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /feroxbuster
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /ffuf
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /gobuster
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /wfuzz
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /whatweb
+    - op: or
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /joomscan
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /nikto
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /wpscan
+    - op: or
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /aircrack-ng
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /bloodhound-python
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /bpfdos
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /ebpfki
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /evil-winrm
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /hashcat
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /hoaxshell.py
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /hydra
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /john
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /ncrack
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /nxc-ubuntu-latest
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /pidhide
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /pspy32
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /pspy32s
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /pspy64
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /pspy64s
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /setoolkit
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /sqlmap
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /writeblocker
+    - case sensitive: true
+      op: contains
+      path: event/FILE_PATH
+      value: /linpeas
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems), Georg Lauenstein (sure[secure])
+    description: Detects known hacktool execution based on image name.
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://github.com/Gui774ume/ebpfkit
+    - https://github.com/pathtofile/bad-bpf
+    - https://github.com/carlospolop/PEASS-ng
+    - https://github.com/t3l3machus/hoaxshell
+    - https://github.com/t3l3machus/Villain
+    - https://github.com/HavocFramework/Havoc
+    - https://github.com/1N3/Sn1per
+    - https://github.com/Ne0nd0g/merlin
+    - https://github.com/Pennyw0rth/NetExec/
+    tags:
+    - attack.execution
+    - attack.resource-development
+    - attack.t1587
+  name: Linux HackTool Execution
+

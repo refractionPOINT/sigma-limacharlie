@@ -1,0 +1,54 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \wbadmin.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: WBADMIN.EXE
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' recovery'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: recoveryTarget
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: itemtype:File
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems), frack113
+    description: 'Detects the recovery of files from backups via "wbadmin.exe".
+
+      Attackers can restore sensitive files such as NTDS.DIT or Registry Hives from
+      backups in order to potentially extract credentials.
+
+      '
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/wbadmin-start-recovery
+    - https://lolbas-project.github.io/lolbas/Binaries/Wbadmin/
+    tags:
+    - attack.impact
+    - attack.t1490
+  name: File Recovery From Backup Via Wbadmin.EXE
+

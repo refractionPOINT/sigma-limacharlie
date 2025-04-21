@@ -27,7 +27,7 @@ respond:
     references:
     - https://github.com/r00t-3xp10it/hacking-material-books/blob/43cb1e1932c16ff1f58b755bc9ab6b096046853f/obfuscation/simple_obfuscation.md#amsi-bypass-using-null-bits-satoshi
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1562.001
   name: Potential AMSI Bypass Using NULL Bits
 

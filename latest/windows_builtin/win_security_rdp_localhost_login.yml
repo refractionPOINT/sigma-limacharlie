@@ -32,7 +32,7 @@ respond:
     references:
     - https://www.fireeye.com/blog/threat-research/2019/01/bypassing-network-restrictions-through-rdp-tunneling.html
     tags:
-    - attack.lateral_movement
+    - attack.lateral-movement
     - car.2013-07-002
     - attack.t1021.001
   name: RDP Login from Localhost

@@ -1,0 +1,117 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '4697'
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ServiceName
+      value: AmmyyAdmin
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ServiceName
+      value: AnyDesk
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ServiceName
+      value: Atera
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ServiceName
+      value: BASupportExpressSrvcUpdater
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ServiceName
+      value: BASupportExpressStandaloneService
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ServiceName
+      value: chromoting
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ServiceName
+      value: GoToAssist
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ServiceName
+      value: GoToMyPC
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ServiceName
+      value: jumpcloud
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ServiceName
+      value: LMIGuardianSvc
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ServiceName
+      value: LogMeIn
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ServiceName
+      value: monblanking
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ServiceName
+      value: Parsec
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ServiceName
+      value: RManService
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ServiceName
+      value: RPCPerformanceService
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ServiceName
+      value: RPCService
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ServiceName
+      value: SplashtopRemoteService
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ServiceName
+      value: SSUService
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ServiceName
+      value: TeamViewer
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ServiceName
+      value: TightVNC
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ServiceName
+      value: vncserver
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ServiceName
+      value: Zoho
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Connor Martin, Nasreddine Bencherchali (Nextron Systems)
+    description: Detects service installation of different remote access tools software.
+      These software are often abused by threat actors to perform
+    falsepositives:
+    - The rule doesn't look for anything suspicious so false positives are expected.
+      If you use one of the tools mentioned, comment it out
+    level: medium
+    references:
+    - https://redcanary.com/blog/misbehaving-rats/
+    tags:
+    - attack.persistence
+    - attack.t1543.003
+    - attack.t1569.002
+  name: Remote Access Tool Services Have Been Installed - Security
+

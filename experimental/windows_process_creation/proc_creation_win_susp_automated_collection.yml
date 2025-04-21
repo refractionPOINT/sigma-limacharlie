@@ -92,7 +92,7 @@ respond:
     tags:
     - attack.collection
     - attack.t1119
-    - attack.credential_access
+    - attack.credential-access
     - attack.t1552.001
   name: Automated Collection Command Prompt
 

@@ -20,7 +20,7 @@ respond:
     references:
     - Internal Research
     tags:
-    - attack.initial_access
+    - attack.initial-access
     - attack.t1566.001
   name: Suspicious Execution From Outlook Temporary Folder
 

@@ -1,0 +1,44 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is mac
+  - op: and
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /sw_vers
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -buildVersion
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -productName
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -productVersion
+respond:
+- action: report
+  metadata:
+    author: Joseliyo Sanchez, @Joseliyo_Jstnk
+    description: Detects the use of "sw_vers" for system information discovery
+    falsepositives:
+    - Legitimate administrative activities
+    level: medium
+    references:
+    - https://www.virustotal.com/gui/file/d3fa64f63563fe958b75238742d1e473800cb5f49f5cb79d38d4aa3c93709026/behavior
+    - https://www.virustotal.com/gui/file/03b71eaceadea05bc0eea5cddecaa05f245126d6b16cfcd0f3ba0442ac58dab3/behavior
+    - https://ss64.com/osx/sw_vers.html
+    tags:
+    - attack.discovery
+    - attack.t1082
+  name: System Information Discovery Using sw_vers
+

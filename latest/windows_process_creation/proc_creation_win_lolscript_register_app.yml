@@ -48,7 +48,7 @@ respond:
     - https://twitter.com/sblmsrsn/status/1456613494783160325?s=20
     - https://github.com/microsoft/Windows-classic-samples/blob/7cbd99ac1d2b4a0beffbaba29ea63d024ceff700/Samples/Win7Samples/winbase/vss/vsssampleprovider/register_app.vbs
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1218
   name: Potential Register_App.Vbs LOLScript Abuse
 

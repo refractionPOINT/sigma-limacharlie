@@ -45,7 +45,7 @@ respond:
     - https://www.cobaltstrike.com/help-opsec
     - https://twitter.com/ber_m1ng/status/1397948048135778309
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1202
   name: Rundll32 Execution Without CommandLine Parameters
 

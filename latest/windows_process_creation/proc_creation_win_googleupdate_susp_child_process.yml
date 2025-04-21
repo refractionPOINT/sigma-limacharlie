@@ -48,6 +48,6 @@ respond:
     references:
     - https://www.ncsc.gov.uk/static-assets/documents/malware-analysis-reports/goofy-guineapig/NCSC-MAR-Goofy-Guineapig.pdf
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: Potentially Suspicious GoogleUpdate Child Process
 

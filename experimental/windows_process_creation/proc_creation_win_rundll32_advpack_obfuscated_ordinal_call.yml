@@ -54,6 +54,6 @@ respond:
     - https://twitter.com/Hexacorn/status/1224848930795552769
     - http://www.hexacorn.com/blog/2020/02/05/stay-positive-lolbins-not/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: Suspicious Advpack Call Via Rundll32.EXE
 

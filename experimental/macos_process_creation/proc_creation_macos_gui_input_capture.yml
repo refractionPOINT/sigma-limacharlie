@@ -73,7 +73,7 @@ respond:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1056.002/T1056.002.md
     - https://scriptingosx.com/2018/08/user-interaction-from-bash-scripts/
     tags:
-    - attack.credential_access
+    - attack.credential-access
     - attack.t1056.002
   name: GUI Input Capture - macOS
 

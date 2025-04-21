@@ -1,0 +1,78 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/COMMAND_LINE
+          value: .exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/COMMAND_LINE
+          value: .exe"
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cmd.exe
+      - case sensitive: false
+        op: starts with
+        path: event/COMMAND_LINE
+        value: /c echo "
+    - not: true
+      op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/FILE_PATH
+          value: :\Windows\System32\
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/FILE_PATH
+          value: :\Windows\SysWOW64\
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \forfiles.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: :\Windows\System32\
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: :\Windows\SysWOW64\
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cmd.exe
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems), Anish Bogati
+    description: 'Detects the execution of "forfiles" from a non-default location,
+      in order to potentially spawn a custom "cmd.exe" from the current working directory.
+
+      '
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.hexacorn.com/blog/2023/12/31/1-little-known-secret-of-forfiles-exe/
+    tags:
+    - attack.defense-evasion
+    - attack.t1036
+  name: Forfiles.EXE Child Process Masquerading
+

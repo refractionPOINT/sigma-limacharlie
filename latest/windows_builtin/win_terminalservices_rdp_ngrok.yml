@@ -24,7 +24,7 @@ respond:
     - https://twitter.com/tekdefense/status/1519711183162556416?s=12&t=OTsHCBkQOTNs1k3USz65Zg
     - https://ngrok.com/
     tags:
-    - attack.command_and_control
+    - attack.command-and-control
     - attack.t1090
   name: Ngrok Usage with Remote Desktop Service
 

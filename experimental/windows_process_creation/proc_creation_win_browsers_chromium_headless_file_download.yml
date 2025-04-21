@@ -54,7 +54,7 @@ respond:
     - https://twitter.com/mrd0x/status/1478234484881436672?s=12
     - https://www.trendmicro.com/en_us/research/23/e/managed-xdr-investigation-of-ducktail-in-trend-micro-vision-one.html
     tags:
-    - attack.command_and_control
+    - attack.command-and-control
     - attack.t1105
   name: File Download with Headless Browser
 

@@ -101,7 +101,7 @@ respond:
     - https://twitter.com/xorJosh/status/1598646907802451969
     - https://www.softwaretestinghelp.com/how-to-use-ngrok/
     tags:
-    - attack.command_and_control
+    - attack.command-and-control
     - attack.t1572
   name: PUA - Ngrok Execution
 

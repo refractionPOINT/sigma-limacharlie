@@ -190,16 +190,42 @@ detect:
         path: event/COMMAND_LINE
         value: ZeroFreeGlobalAllocUnicode
     - not: true
-      op: and
+      op: or
       rules:
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \MpCmdRun.exe
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: GetLoadLibraryWAddress32
+      - op: and
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \MpCmdRun.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: GetLoadLibraryWAddress32
+      - op: and
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \CompatTelRunner.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: FreeHGlobal
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: PtrToString
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: kernel32
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: CloseHandle
 respond:
 - action: report
   metadata:
@@ -207,7 +233,8 @@ respond:
     description: Detects the use of WinAPI Functions via the commandline. As seen
       used by threat actors via the tool winapiexec
     falsepositives:
-    - Unknown
+    - Some legitimate action or applications may use these functions. Investigate
+      further to determine the legitimacy of the activity.
     level: high
     references:
     - https://twitter.com/m417z/status/1566674631788007425

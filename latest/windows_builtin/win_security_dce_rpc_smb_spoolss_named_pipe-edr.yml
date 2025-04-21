@@ -32,7 +32,7 @@ respond:
     - https://dirkjanm.io/a-different-way-of-abusing-zerologon/
     - https://twitter.com/_dirkjan/status/1309214379003588608
     tags:
-    - attack.lateral_movement
+    - attack.lateral-movement
     - attack.t1021.002
   name: DCERPC SMB Spoolss Named Pipe
 

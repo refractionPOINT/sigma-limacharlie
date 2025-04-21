@@ -1,0 +1,56 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \tasklist.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: tasklist.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -m
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /m
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: rdpcorets.dll
+respond:
+- action: report
+  metadata:
+    author: Swachchhanda Shrawan Poudel
+    description: 'Detects the enumeration of a specific DLL or EXE being used by a
+      binary via "tasklist.exe".
+
+      This is often used by attackers in order to find the specific process identifier
+      (PID) that is using the DLL in question.
+
+      In order to dump the process memory or perform other nefarious actions.
+
+      '
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://www.n00py.io/2021/05/dumping-plaintext-rdp-credentials-from-svchost-exe/
+    - https://pentestlab.blog/tag/svchost/
+    tags:
+    - attack.t1003
+  name: Loaded Module Enumeration Via Tasklist.EXE
+

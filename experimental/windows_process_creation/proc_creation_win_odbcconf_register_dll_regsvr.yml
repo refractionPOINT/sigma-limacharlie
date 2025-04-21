@@ -48,7 +48,7 @@ respond:
     - https://www.hexacorn.com/blog/2020/08/23/odbcconf-lolbin-trifecta/
     - https://www.trendmicro.com/en_us/research/17/h/backdoor-carrying-emails-set-sights-on-russian-speaking-businesses.html
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1218.008
   name: New DLL Registered Via Odbcconf.EXE
 

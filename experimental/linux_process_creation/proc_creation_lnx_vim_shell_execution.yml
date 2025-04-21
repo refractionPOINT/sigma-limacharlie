@@ -1,0 +1,90 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /rvim
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /vim
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /vimdiff
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' --cmd'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -c '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: :!/
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ':lua '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ':py '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /bin/bash
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /bin/dash
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /bin/fish
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /bin/sh
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /bin/zsh
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: 'Detects the use of "vim" and it''s siblings commands to execute
+      a shell or proxy commands.
+
+      Such behavior may be associated with privilege escalation, unauthorized command
+      execution, or to break out from restricted environments.
+
+      '
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://gtfobins.github.io/gtfobins/vim/
+    - https://gtfobins.github.io/gtfobins/rvim/
+    - https://gtfobins.github.io/gtfobins/vimdiff/
+    tags:
+    - attack.discovery
+    - attack.t1083
+  name: Vim GTFOBin Abuse - Linux
+

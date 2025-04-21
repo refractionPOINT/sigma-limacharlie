@@ -40,7 +40,7 @@ respond:
     - https://www.trendmicro.com/pl_pl/research/20/i/the-evolution-of-malicious-shell-scripts.html
     - https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1140
   name: Linux Base64 Encoded Shebang In CLI
 

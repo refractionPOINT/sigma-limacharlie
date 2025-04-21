@@ -36,6 +36,6 @@ respond:
     - https://securelist.com/moonbounce-the-dark-side-of-uefi-firmware/105468/
     - https://learn.microsoft.com/en-us/dotnet/framework/tools/installutil-exe-installer-tool
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: Suspicious Execution of InstallUtil Without Log
 

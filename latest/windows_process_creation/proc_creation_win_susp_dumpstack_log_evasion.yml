@@ -27,6 +27,6 @@ respond:
     references:
     - https://twitter.com/mrd0x/status/1479094189048713219
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: DumpStack.log Defender Evasion
 

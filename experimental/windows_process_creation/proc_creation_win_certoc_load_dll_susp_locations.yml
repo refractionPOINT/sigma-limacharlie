@@ -67,7 +67,7 @@ respond:
     - https://github.com/elastic/protections-artifacts/commit/746086721fd385d9f5c6647cada1788db4aea95f#diff-fe98e74189873d6df72a15df2eaa0315c59ba9cdaca93ecd68afc4ea09194ef2
     - https://lolbas-project.github.io/lolbas/Binaries/Certoc/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1218
   name: Suspicious DLL Loaded via CertOC.EXE
 

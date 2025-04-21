@@ -35,7 +35,7 @@ respond:
     references:
     - https://redcanary.com/blog/intelligence-insights-november-2021/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1218.011
   name: RunDLL32 Spawning Explorer
 

@@ -33,7 +33,7 @@ respond:
     - https://twitter.com/orange_8361/status/1518970259868626944
     - https://lolbas-project.github.io/lolbas/Binaries/Eventvwr/#execute
     tags:
-    - attack.defense_evasion
-    - attack.privilege_escalation
+    - attack.defense-evasion
+    - attack.privilege-escalation
   name: UAC Bypass Using Event Viewer RecentViews
 

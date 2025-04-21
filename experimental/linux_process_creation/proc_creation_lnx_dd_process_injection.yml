@@ -1,0 +1,42 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /dd
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: of=
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: /proc/
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: /mem
+respond:
+- action: report
+  metadata:
+    author: Joseph Kamau
+    description: Detects the injection of code by overwriting the memory map of a
+      Linux process using the "dd" Linux command.
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://www.aon.com/cyber-solutions/aon_cyber_labs/linux-based-inter-process-code-injection-without-ptrace2/
+    - https://github.com/AonCyberLabs/Cexigua/blob/34d338620afae4c6335ba8d8d499e1d7d3d5d7b5/overwrite.sh
+    tags:
+    - attack.defense-evasion
+    - attack.t1055.009
+  name: Potential Linux Process Code Injection Via DD Utility
+

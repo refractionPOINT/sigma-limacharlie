@@ -62,7 +62,7 @@ respond:
     - https://github.com/arget13/DDexec
     - https://www.mandiant.com/resources/blog/barracuda-esg-exploited-globally
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1140
   name: Linux Base64 Encoded Pipe to Shell
 

@@ -59,8 +59,8 @@ respond:
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/40b77d63808dd4f4eafb83949805636735a1fd15/atomics/T1484.001/T1484.001.md
     tags:
-    - attack.defense_evasion
-    - attack.privilege_escalation
+    - attack.defense-evasion
+    - attack.privilege-escalation
     - attack.t1484.001
   name: Modify Group Policy Settings
 

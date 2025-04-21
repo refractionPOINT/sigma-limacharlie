@@ -57,7 +57,7 @@ respond:
     references:
     - https://github.com/Neo23x0/Raccine
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1562.001
   name: Raccine Uninstall
 

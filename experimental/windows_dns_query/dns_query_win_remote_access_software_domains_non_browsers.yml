@@ -81,6 +81,10 @@ detect:
       - case sensitive: false
         op: ends with
         path: event/DOMAIN_NAME
+        value: getscreen.me
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
         value: integratedchat.teamviewer.com
       - case sensitive: false
         op: ends with
@@ -141,6 +145,10 @@ detect:
       - case sensitive: false
         op: ends with
         path: event/DOMAIN_NAME
+        value: remoteassistance.support.services.microsoft.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
         value: remotedesktop-pa.googleapis.com
       - case sensitive: false
         op: ends with
@@ -169,11 +177,19 @@ detect:
       - case sensitive: false
         op: ends with
         path: event/DOMAIN_NAME
+        value: tailscale.com
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
         value: telemetry.servers.qetqo.com
       - case sensitive: false
         op: ends with
         path: event/DOMAIN_NAME
         value: tmate.io
+      - case sensitive: false
+        op: ends with
+        path: event/DOMAIN_NAME
+        value: twingate.com
       - case sensitive: false
         op: ends with
         path: event/DOMAIN_NAME
@@ -473,8 +489,11 @@ respond:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1219/T1219.md#atomic-test-6---ammyy-admin-software-execution
     - https://redcanary.com/blog/misbehaving-rats/
     - https://techcommunity.microsoft.com/t5/microsoft-sentinel-blog/hunting-for-omi-vulnerability-exploitation-with-azure-sentinel/ba-p/2764093
+    - https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-320a
+    - https://blog.sekoia.io/scattered-spider-laying-new-eggs/
+    - https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist#disable-quick-assist-within-your-organization
     tags:
-    - attack.command_and_control
+    - attack.command-and-control
     - attack.t1219
   name: DNS Query To Remote Access Software Domain From Non-Browser App
 

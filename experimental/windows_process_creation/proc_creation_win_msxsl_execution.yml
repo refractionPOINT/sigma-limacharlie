@@ -28,7 +28,7 @@ respond:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1220/T1220.md
     - https://lolbas-project.github.io/lolbas/OtherMSBinaries/Msxsl/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1220
   name: Msxsl.EXE Execution
 

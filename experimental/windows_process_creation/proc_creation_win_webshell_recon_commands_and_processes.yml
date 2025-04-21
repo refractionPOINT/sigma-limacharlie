@@ -137,6 +137,44 @@ detect:
           op: contains
           path: event/COMMAND_LINE
           value: ' /node:'
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \cmd.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \powershell.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \pwsh.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' -enc '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' -EncodedCommand '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' -w hidden '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' -windowstyle hidden'
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: .WebClient).Download
       - op: or
         rules:
         - op: or
@@ -280,7 +318,8 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Florian Roth (Nextron Systems), Jonhnathan Ribeiro, Anton Kutepov, oscd.community
+    author: Florian Roth (Nextron Systems), Jonhnathan Ribeiro, Anton Kutepov, oscd.community,
+      Chad Hudson, Matt Anderson
     description: Detects certain command line parameters often used during reconnaissance
       activity via web shells
     falsepositives:
@@ -289,6 +328,7 @@ respond:
     references:
     - https://www.fireeye.com/blog/threat-research/2013/08/breaking-down-the-china-chopper-web-shell-part-ii.html
     - https://unit42.paloaltonetworks.com/bumblebee-webshell-xhunt-campaign/
+    - https://www.huntress.com/blog/threat-advisory-oh-no-cleo-cleo-software-actively-being-exploited-in-the-wild
     tags:
     - attack.persistence
     - attack.t1505.003

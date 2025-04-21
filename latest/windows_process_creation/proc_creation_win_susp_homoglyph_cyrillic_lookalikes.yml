@@ -225,7 +225,7 @@ respond:
     - https://redcanary.com/threat-detection-report/threats/socgholish/#threat-socgholish
     - http://www.irongeek.com/homoglyph-attack-generator.php
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1036
     - attack.t1036.003
   name: Potential Homoglyph Attack Using Lookalike Characters

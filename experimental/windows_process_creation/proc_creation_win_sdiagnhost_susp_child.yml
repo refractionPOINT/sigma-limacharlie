@@ -7,56 +7,87 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - case sensitive: false
-      op: ends with
-      path: event/PARENT/FILE_PATH
-      value: \sdiagnhost.exe
-    - op: or
+    - op: and
       rules:
       - case sensitive: false
         op: ends with
-        path: event/FILE_PATH
-        value: \powershell.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \pwsh.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \cmd.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \mshta.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \cscript.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \wscript.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \taskkill.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \regsvr32.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \rundll32.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \calc.exe
+        path: event/PARENT/FILE_PATH
+        value: \sdiagnhost.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \pwsh.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \cmd.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \mshta.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \cscript.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \wscript.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \taskkill.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \regsvr32.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \rundll32.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \calc.exe
+    - not: true
+      op: or
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \cmd.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: bits
+      - op: and
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/COMMAND_LINE
+            value: -noprofile -
+          - case sensitive: false
+            op: ends with
+            path: event/COMMAND_LINE
+            value: -noprofile
 respond:
 - action: report
   metadata:
-    author: Nextron Systems
+    author: Nextron Systems, @Kostastsale
     description: Detects sdiagnhost.exe calling a suspicious child process (e.g. used
       in exploits for Follina / CVE-2022-30190)
     falsepositives:
@@ -64,11 +95,12 @@ respond:
     level: high
     references:
     - https://twitter.com/nao_sec/status/1530196847679401984
+    - https://doublepulsar.com/follina-a-microsoft-office-code-execution-vulnerability-1a47fce5629e
     - https://app.any.run/tasks/713f05d2-fe78-4b9d-a744-f7c133e3fafb/
     - https://app.any.run/tasks/f420d295-0457-4e9b-9b9e-6732be227583/
     - https://app.any.run/tasks/c4117d9a-f463-461a-b90f-4cd258746798/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1036
     - attack.t1218
   name: Sdiagnhost Calling Suspicious Child Process

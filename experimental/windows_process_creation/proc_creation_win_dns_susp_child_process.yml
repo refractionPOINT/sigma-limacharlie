@@ -29,7 +29,7 @@ respond:
     references:
     - https://www.elastic.co/guide/en/security/current/unusual-child-process-of-dns-exe.html
     tags:
-    - attack.initial_access
+    - attack.initial-access
     - attack.t1133
   name: Unusual Child Process of dns.exe
 

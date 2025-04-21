@@ -43,6 +43,6 @@ respond:
     references:
     - https://learn.microsoft.com/de-de/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-7.3
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: Potential PowerShell Execution Policy Tampering - ProcCreation
 

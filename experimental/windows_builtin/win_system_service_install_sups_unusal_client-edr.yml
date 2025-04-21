@@ -29,7 +29,7 @@ respond:
     references:
     - https://www.elastic.co/guide/en/security/current/windows-service-installed-via-an-unusual-client.html
     tags:
-    - attack.privilege_escalation
+    - attack.privilege-escalation
     - attack.t1543
   name: Service Installed By Unusual Client - System
 

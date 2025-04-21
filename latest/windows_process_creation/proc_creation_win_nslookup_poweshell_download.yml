@@ -51,6 +51,6 @@ respond:
     references:
     - https://twitter.com/Alh4zr3d/status/1566489367232651264
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: Nslookup PowerShell Download Cradle - ProcessCreation
 

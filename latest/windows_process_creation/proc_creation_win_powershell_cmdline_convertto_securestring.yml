@@ -47,7 +47,7 @@ respond:
     - https://speakerdeck.com/heirhabarov/hunting-for-powershell-abuse?slide=65
     - https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.security/convertto-securestring?view=powershell-7.3#examples
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1027
     - attack.execution
     - attack.t1059.001

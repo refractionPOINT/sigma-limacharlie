@@ -48,7 +48,7 @@ respond:
     references:
     - https://lolbas-project.github.io/lolbas/Scripts/CL_mutexverifiers/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1216
   name: Potential Script Proxy Execution Via CL_Mutexverifiers.ps1
 

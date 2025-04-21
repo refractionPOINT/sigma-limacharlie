@@ -35,8 +35,8 @@ respond:
     - https://github.com/SigmaHQ/sigma/issues/3742
     - https://github.com/keyboardcrunch/SentinelOne-ATTACK-Queries/blob/6a228d23eefe963ca81f2d52f94b815f61ef5ee0/Tactics/DefenseEvasion.md#t1055-process-injection
     tags:
-    - attack.defense_evasion
-    - attack.privilege_escalation
+    - attack.defense-evasion
+    - attack.privilege-escalation
     - attack.t1055.001
     - attack.t1218.013
   name: Mavinject Inject DLL Into Running Process

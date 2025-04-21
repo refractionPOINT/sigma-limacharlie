@@ -27,7 +27,7 @@ respond:
     references:
     - https://lolbas-project.github.io/lolbas/Binaries/Msdt/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1036.003
   name: Renamed Msdt.EXE Execution
 

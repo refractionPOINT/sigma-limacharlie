@@ -44,7 +44,7 @@ respond:
     references:
     - https://github.com/nasbench/Misc-Research/blob/b20da2336de0f342d31ef4794959d28c8d3ba5ba/ETW/Microsoft-Windows-Kernel-General.md
     tags:
-    - attack.credential_access
+    - attack.credential-access
     - attack.t1003.002
   name: Critical Hive In Suspicious Location Access Bits Cleared
 

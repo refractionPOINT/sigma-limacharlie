@@ -59,7 +59,7 @@ respond:
     references:
     - https://medium.com/@blueteamops/shimcache-flush-89daff28d15e
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1112
   name: ShimCache Flush
 

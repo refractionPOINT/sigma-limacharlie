@@ -106,7 +106,7 @@ respond:
     - https://docs.google.com/presentation/d/1dkrldTTlN3La-OjWtkWJBb4hVk6vfsSMBFBERs6R8zA/edit
     - https://github.com/SigmaHQ/sigma/blob/master/documentation/logsource-guides/windows/service/security.md
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1562.002
   name: Important Windows Event Auditing Disabled
 

@@ -1,0 +1,87 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \cmd.exe
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \cscript.exe
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \mshta.exe
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \powershell.exe
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \pwsh.exe
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \regsvr32.exe
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \rundll32.exe
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \wscript.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \brave.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \chrome.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \msedge.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \opera.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \vivaldi.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: --load-extension=
+respond:
+- action: report
+  metadata:
+    author: Aedan Russell, frack113, X__Junior (Nextron Systems)
+    description: Detects a suspicious process spawning a Chromium based browser process
+      with the 'load-extension' flag to start an instance with a custom extension
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://redcanary.com/blog/chromeloader/
+    - https://emkc.org/s/RJjuLa
+    - https://www.mandiant.com/resources/blog/lnk-between-browsers
+    tags:
+    - attack.persistence
+    - attack.t1176
+  name: Suspicious Chromium Browser Instance Executed With Custom Extension
+

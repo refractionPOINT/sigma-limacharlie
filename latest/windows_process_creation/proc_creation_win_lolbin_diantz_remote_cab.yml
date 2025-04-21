@@ -31,7 +31,7 @@ respond:
     references:
     - https://lolbas-project.github.io/lolbas/Binaries/Diantz/
     tags:
-    - attack.command_and_control
+    - attack.command-and-control
     - attack.t1105
   name: Suspicious Diantz Download and Compress Into a CAB File
 

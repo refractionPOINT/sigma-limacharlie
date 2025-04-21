@@ -1,0 +1,312 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '5157'
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \AmSvc.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \cb.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \CETASvc.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \CNTAoSMgr.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \CrAmTray.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \CrsSvc.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \CSFalconContainer.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \CSFalconService.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \CybereasonAV.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \CylanceSvc.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \cyserver.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \CyveraService.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \CyvrFsFlt.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \EIConnector.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \elastic-agent.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \elastic-endpoint.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \EndpointBasecamp.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \ExecutionPreventionSvc.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \filebeat.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \fortiedr.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \hmpalert.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \hurukai.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \LogProcessorService.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \mcsagent.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \mcsclient.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \MsMpEng.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \MsSense.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \Ntrtscan.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \PccNTMon.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \QualysAgent.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \RepMgr.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \RepUtils.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \RepUx.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \RepWAV.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \RepWSC.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \sedservice.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \SenseCncProxy.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \SenseIR.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \SenseNdr.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \SenseSampleUploader.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \SentinelAgent.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \SentinelAgentWorker.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \SentinelBrowserNativeHost.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \SentinelHelperService.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \SentinelServiceHost.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \SentinelStaticEngine.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \SentinelStaticEngineScanner.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \sfc.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \sophos ui.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \sophosfilescanner.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \sophosfs.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \sophoshealth.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \sophosips.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \sophosLivequeryservice.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \sophosnetfilter.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \sophosntpservice.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \sophososquery.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \sspservice.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \TaniumClient.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \TaniumCX.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \TaniumDetectEngine.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \TMBMSRV.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \TmCCSF.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \TmListen.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \TmWSCSvc.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \Traps.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \winlogbeat.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \WSCommunicator.exe
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/Application
+        value: \xagt.exe
+respond:
+- action: report
+  metadata:
+    author: '@gott_cyber'
+    description: 'Detects a Windows Filtering Platform (WFP) blocked connection event
+      involving common Endpoint Detection and Response (EDR) agents.
+
+      Adversaries may use WFP filters to prevent Endpoint Detection and Response (EDR)
+      agents from reporting security events.
+
+      '
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://github.com/netero1010/EDRSilencer
+    - https://github.com/amjcyber/EDRNoiseMaker
+    - https://ghoulsec.medium.com/misc-series-4-forensics-on-edrsilencer-events-428b20b3f983
+    tags:
+    - attack.defense-evasion
+    - attack.t1562
+  name: Windows Filtering Platform Blocked Connection From EDR Agent Binary
+

@@ -1,0 +1,47 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: \Microsoft\Office\
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: \Excel\Security
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: PythonFunctionWarnings
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' 0'
+respond:
+- action: report
+  metadata:
+    author: '@Kostastsale'
+    description: 'Detects changes to the registry value "PythonFunctionWarnings" that
+      would prevent any warnings or alerts from showing when Python functions are
+      about to be executed.
+
+      Threat actors could run malicious code through the new Microsoft Excel feature
+      that allows Python to run within the spreadsheet.
+
+      '
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://support.microsoft.com/en-us/office/data-security-and-python-in-excel-33cc88a4-4a87-485e-9ff9-f35958278327
+    tags:
+    - attack.defense-evasion
+    - attack.t1562.001
+  name: Python Function Execution Security Warning Disabled In Excel
+

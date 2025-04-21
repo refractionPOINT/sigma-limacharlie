@@ -21,7 +21,7 @@ respond:
     references:
     - https://github.com/fortra/impacket/blob/f4b848fa27654ca95bc0f4c73dbba8b9c2c9f30a/examples/wmiexec.py
     tags:
-    - attack.defense_evasion
-    - attack.lateral_movement
+    - attack.defense-evasion
+    - attack.lateral-movement
   name: HackTool - Wmiexec Default Powershell Command
 

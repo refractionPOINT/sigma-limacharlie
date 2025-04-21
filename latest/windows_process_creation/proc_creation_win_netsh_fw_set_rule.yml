@@ -40,6 +40,6 @@ respond:
     references:
     - https://ss64.com/nt/netsh.html
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: Firewall Rule Update Via Netsh.EXE
 

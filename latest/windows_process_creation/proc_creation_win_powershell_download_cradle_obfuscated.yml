@@ -1,0 +1,44 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \powershell.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: http://127.0.0.1
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: '%{(IRM $_)}'
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke
+respond:
+- action: report
+  metadata:
+    author: '@Kostastsale, TheDFIRReport'
+    description: Detects the execution of a specific OneLiner to download and execute
+      powershell modules in memory.
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://thedfirreport.com/2022/05/09/seo-poisoning-a-gootloader-story/
+    - https://gist.github.com/mgeeky/3b11169ab77a7de354f4111aa2f0df38
+    tags:
+    - attack.defense-evasion
+    - attack.execution
+    - attack.t1059.001
+    - attack.t1562.001
+  name: Obfuscated PowerShell OneLiner Execution
+

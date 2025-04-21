@@ -37,7 +37,7 @@ respond:
     - https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4732
     - https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-identifiers
     tags:
-    - attack.privilege_escalation
+    - attack.privilege-escalation
     - attack.t1078
     - attack.persistence
     - attack.t1098

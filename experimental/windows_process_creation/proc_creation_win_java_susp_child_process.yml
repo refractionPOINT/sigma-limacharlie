@@ -1,0 +1,125 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \java.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \AppVLP.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \bitsadmin.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \certutil.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cscript.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \curl.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \forfiles.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \hh.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \mftrace.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \mshta.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \net.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \net1.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \query.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \reg.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \regsvr32.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \rundll32.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \schtasks.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \scrcons.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \scriptrunner.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \sh.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \systeminfo.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \whoami.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \wmic.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \wscript.exe
+respond:
+- action: report
+  metadata:
+    author: Andreas Hunkeler (@Karneades), Florian Roth
+    description: Detects suspicious processes spawned from a Java host process which
+      could indicate a sign of exploitation (e.g. log4j)
+    falsepositives:
+    - Legitimate calls to system binaries
+    - Company specific internal usage
+    level: high
+    references:
+    - https://web.archive.org/web/20231230220738/https://www.lunasec.io/docs/blog/log4j-zero-day/
+    tags:
+    - attack.initial-access
+    - attack.persistence
+    - attack.privilege-escalation
+  name: Suspicious Processes Spawned by Java.EXE
+

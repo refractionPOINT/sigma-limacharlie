@@ -47,7 +47,7 @@ respond:
     references:
     - https://thedfirreport.com/2022/03/21/apt35-automates-initial-access-using-proxyshell/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1562.010
   name: LSA PPL Protection Disabled Via Reg.EXE
 

@@ -32,7 +32,7 @@ respond:
     - https://twitter.com/1kwpeter/status/1397816101455765504
     tags:
     - attack.execution
-    - attack.privilege_escalation
+    - attack.privilege-escalation
     - attack.t1543.003
     - attack.t1569.002
   name: ProcessHacker Privilege Elevation

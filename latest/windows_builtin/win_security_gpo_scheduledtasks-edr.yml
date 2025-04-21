@@ -3,30 +3,58 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: and
+  - op: or
     rules:
-    - case sensitive: false
-      op: is
-      path: event/EVENT/System/EventID
-      value: '5145'
-    - case sensitive: false
-      op: matches
-      path: event/EVENT/EventData/ShareName
-      re: \\\\\*\\\\SYSVOL
-    - case sensitive: false
-      op: ends with
-      path: event/EVENT/EventData/RelativeTargetName
-      value: ScheduledTasks.xml
-    - op: or
+    - op: and
       rules:
       - case sensitive: false
-        op: contains
-        path: event/EVENT/EventData/AccessList
-        value: WriteData
+        op: is
+        path: event/EVENT/System/EventID
+        value: '5136'
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/AttributeLDAPDisplayName
+          value: gPCMachineExtensionNames
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/AttributeLDAPDisplayName
+          value: gPCUserExtensionNames
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/AttributeValue
+          value: CAB54552-DEEA-4691-817E-ED4A4D1AFC72
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/AttributeValue
+          value: AADCED64-746C-4633-A97C-D61349046527
+    - op: and
+      rules:
       - case sensitive: false
-        op: contains
-        path: event/EVENT/EventData/AccessList
-        value: '%%4417'
+        op: is
+        path: event/EVENT/System/EventID
+        value: '5145'
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/ShareName
+        value: \SYSVOL
+      - case sensitive: false
+        op: ends with
+        path: event/EVENT/EventData/RelativeTargetName
+        value: ScheduledTasks.xml
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/AccessList
+          value: WriteData
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/AccessList
+          value: '%%4417'
 respond:
 - action: report
   metadata:
@@ -35,14 +63,15 @@ respond:
       deploy ransomware at scale
     falsepositives:
     - If the source IP is not localhost then it's super suspicious, better to monitor
-      both local and remote changes to GPO scheduledtasks
+      both local and remote changes to GPO scheduled tasks.
     level: high
     references:
     - https://twitter.com/menasec1/status/1106899890377052160
     - https://www.secureworks.com/blog/ransomware-as-a-distraction
+    - https://www.elastic.co/guide/en/security/7.17/prebuilt-rule-0-16-1-scheduled-task-execution-at-scale-via-gpo.html
     tags:
     - attack.persistence
-    - attack.lateral_movement
+    - attack.lateral-movement
     - attack.t1053.005
   name: Persistence and Execution at Scale via GPO Scheduled Task
 

@@ -75,6 +75,6 @@ respond:
     references:
     - https://pentestlaboratories.com/2021/12/08/process-ghosting/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: Execution Of Non-Existing File
 

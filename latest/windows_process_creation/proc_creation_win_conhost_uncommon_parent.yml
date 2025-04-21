@@ -104,6 +104,10 @@ detect:
           op: contains
           path: event/PARENT/COMMAND_LINE
           value: -k wsappx -p -s ClipSVC
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: -k wusvcs -p -s WaaSMedicSvc
     - not: true
       op: or
       rules:

@@ -53,7 +53,7 @@ respond:
     references:
     - https://www.microsoft.com/security/blog/2021/01/20/deep-dive-into-the-solorigate-second-stage-activation-from-sunburst-to-teardrop-and-raindrop/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1562.002
   name: Audit Policy Tampering Via Auditpol
 

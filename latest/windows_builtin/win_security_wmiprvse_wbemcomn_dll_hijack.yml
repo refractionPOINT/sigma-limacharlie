@@ -33,7 +33,7 @@ respond:
     tags:
     - attack.execution
     - attack.t1047
-    - attack.lateral_movement
+    - attack.lateral-movement
     - attack.t1021.002
   name: T1047 Wmiprvse Wbemcomn DLL Hijack
 

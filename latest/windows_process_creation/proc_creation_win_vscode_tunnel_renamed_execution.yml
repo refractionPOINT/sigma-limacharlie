@@ -112,7 +112,7 @@ respond:
     - https://badoption.eu/blog/2023/01/31/code_c2.html
     - https://code.visualstudio.com/docs/remote/tunnels
     tags:
-    - attack.command_and_control
+    - attack.command-and-control
     - attack.t1071.001
   name: Renamed Visual Studio Code Tunnel Execution
 

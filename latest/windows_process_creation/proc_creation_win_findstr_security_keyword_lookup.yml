@@ -1,0 +1,144 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \find.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \findstr.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: FIND.EXE
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: FINDSTR.EXE
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: ' avira'
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: ' avira"'
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: ' cb'
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: ' cb"'
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: ' cylance'
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: ' cylance"'
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: ' defender'
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: ' defender"'
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: ' kaspersky'
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: ' kaspersky"'
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: ' kes'
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: ' kes"'
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: ' mc'
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: ' mc"'
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: ' sec'
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: ' sec"'
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: ' sentinel'
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: ' sentinel"'
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: ' symantec'
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: ' symantec"'
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: ' virus'
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: ' virus"'
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems), frack113
+    description: 'Detects execution of "findstr" to search for common names of security
+      tools. Attackers often pipe the results of recon commands such as "tasklist"
+      or "whoami" to "findstr" in order to filter out the results.
+
+      This detection focuses on the keywords that the attacker might use as a filter.
+
+      '
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/987e3ca988ae3cff4b9f6e388c139c05bf44bbb8/atomics/T1518.001/T1518.001.md#atomic-test-1---security-software-discovery
+    - https://www.microsoft.com/en-us/security/blog/2023/10/18/multiple-north-korean-threat-actors-exploiting-the-teamcity-cve-2023-42793-vulnerability/
+    - https://www.hhs.gov/sites/default/files/manage-engine-vulnerability-sector-alert-tlpclear.pdf
+    tags:
+    - attack.discovery
+    - attack.t1518.001
+  name: Security Tools Keyword Lookup Via Findstr.EXE
+

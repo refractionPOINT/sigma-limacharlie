@@ -122,7 +122,7 @@ respond:
     - https://github.com/The-DFIR-Report/Sigma-Rules/blob/75260568a7ffe61b2458ca05f6f25914efb44337/win_mofcomp_execution.yml
     - https://learn.microsoft.com/en-us/windows/win32/wmisdk/mofcomp
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1218
   name: Potential Suspicious Mofcomp Execution
 

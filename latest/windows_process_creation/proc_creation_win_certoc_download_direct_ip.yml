@@ -1,0 +1,42 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \certoc.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: CertOC.exe
+    - op: matches
+      path: event/COMMAND_LINE
+      re: ://[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: -GetCACAPS
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects when a user downloads a file from an IP based URL using CertOC.exe
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://lolbas-project.github.io/lolbas/Binaries/Certoc/
+    tags:
+    - attack.command-and-control
+    - attack.execution
+    - attack.t1105
+  name: File Download From IP Based URL Via CertOC.EXE
+

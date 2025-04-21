@@ -98,7 +98,7 @@ respond:
     - https://lolbas-project.github.io/lolbas/Binaries/Provlaunch/
     - https://twitter.com/0gtweet/status/1674399582162153472
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1218
   name: Suspicious Provlaunch.EXE Child Process
 

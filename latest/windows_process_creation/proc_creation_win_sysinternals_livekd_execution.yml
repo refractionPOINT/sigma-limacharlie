@@ -32,6 +32,6 @@ respond:
     references:
     - https://learn.microsoft.com/en-us/sysinternals/downloads/livekd
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: Potential Memory Dumping Activity Via LiveKD
 

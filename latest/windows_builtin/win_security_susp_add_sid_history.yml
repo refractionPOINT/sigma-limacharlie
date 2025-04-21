@@ -48,7 +48,7 @@ respond:
     - https://adsecurity.org/?p=1772
     tags:
     - attack.persistence
-    - attack.privilege_escalation
+    - attack.privilege-escalation
     - attack.t1134.005
   name: Addition of SID History to Active Directory Object
 

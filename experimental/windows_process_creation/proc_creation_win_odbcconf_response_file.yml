@@ -1,0 +1,56 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \odbcconf.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: odbcconf.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -f '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /f '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: .rsp
+respond:
+- action: report
+  metadata:
+    author: Kirill Kiryanov, Beyu Denis, Daniil Yugoslavskiy, oscd.community, Nasreddine
+      Bencherchali (Nextron Systems)
+    description: Detects execution of "odbcconf" with the "-f" flag in order to load
+      a response file which might contain a malicious action.
+    falsepositives:
+    - The rule is looking for any usage of response file, which might generate false
+      positive when this function is used legitimately. Investigate the contents of
+      the ".rsp" file to determine if it is malicious and apply additional filters
+      if necessary.
+    level: medium
+    references:
+    - https://learn.microsoft.com/en-us/sql/odbc/odbcconf-exe?view=sql-server-ver16
+    - https://lolbas-project.github.io/lolbas/Binaries/Odbcconf/
+    - https://www.cybereason.com/blog/threat-analysis-report-bumblebee-loader-the-high-road-to-enterprise-domain-control
+    - https://www.hexacorn.com/blog/2020/08/23/odbcconf-lolbin-trifecta/
+    tags:
+    - attack.defense-evasion
+    - attack.t1218.008
+  name: Response File Execution Via Odbcconf.EXE
+

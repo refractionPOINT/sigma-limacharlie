@@ -44,6 +44,6 @@ respond:
     references:
     - https://www.randori.com/blog/vulnerability-analysis-queuejumper-cve-2023-21554/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: Important Windows Service Terminated Unexpectedly
 

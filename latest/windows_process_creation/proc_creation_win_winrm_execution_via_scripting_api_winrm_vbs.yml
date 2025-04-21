@@ -45,7 +45,7 @@ respond:
     - https://redcanary.com/blog/lateral-movement-winrm-wmi/
     - https://lolbas-project.github.io/lolbas/Scripts/Winrm/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1216
   name: Remote Code Execute via Winrm.vbs
 

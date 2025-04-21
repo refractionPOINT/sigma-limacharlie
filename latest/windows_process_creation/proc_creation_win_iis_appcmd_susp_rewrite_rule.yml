@@ -49,6 +49,6 @@ respond:
     - https://twitter.com/malmoeb/status/1616702107242971144
     - https://learn.microsoft.com/en-us/answers/questions/739120/how-to-add-re-write-global-rule-with-action-type-r
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: Suspicious IIS URL GlobalRules Rewrite Via AppCmd
 

@@ -56,7 +56,7 @@ respond:
     references:
     - https://twitter.com/mrd0x/status/1460597833917251595
     tags:
-    - attack.credential_access
+    - attack.credential-access
     - attack.t1003.001
   name: Potential Windows Defender AV Bypass Via Dump64.EXE Rename
 

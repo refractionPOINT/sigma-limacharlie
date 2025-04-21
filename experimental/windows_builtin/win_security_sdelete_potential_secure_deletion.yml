@@ -1,0 +1,53 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - op: or
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '4656'
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '4663'
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '4658'
+  - op: or
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/ObjectName
+      value: .AAA
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/ObjectName
+      value: .ZZZ
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Thomas Patzke
+    description: Detects files that have extensions commonly seen while SDelete is
+      used to wipe files.
+    falsepositives:
+    - Legitimate usage of SDelete
+    - Files that are interacted with that have these extensions legitimately
+    level: medium
+    references:
+    - https://jpcertcc.github.io/ToolAnalysisResultSheet/details/sdelete.htm
+    - https://www.jpcert.or.jp/english/pub/sr/ir_research.html
+    - https://learn.microsoft.com/en-gb/sysinternals/downloads/sdelete
+    tags:
+    - attack.impact
+    - attack.defense-evasion
+    - attack.t1070.004
+    - attack.t1027.005
+    - attack.t1485
+    - attack.t1553.002
+    - attack.s0195
+  name: Potential Secure Deletion with SDelete
+

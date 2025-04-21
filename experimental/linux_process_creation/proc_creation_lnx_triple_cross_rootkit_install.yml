@@ -41,7 +41,7 @@ respond:
     references:
     - https://github.com/h3xduck/TripleCross/blob/1f1c3e0958af8ad9f6ebe10ab442e75de33e91de/apps/deployer.sh
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1014
   name: Triple Cross eBPF Rootkit Install Commands
 

@@ -37,7 +37,7 @@ respond:
     - https://twitter.com/gbti_sa/status/1249653895900602375?lang=en
     - https://www.softpedia.com/get/Antivirus/Removal-Tools/ithurricane-PowerTool.shtml
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1562.001
   name: HackTool - PowerTool Execution
 

@@ -1,0 +1,74 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: Event/System/EventID
+        value: '2004'
+      - case sensitive: false
+        op: is
+        path: Event/System/EventID
+        value: '2071'
+      - case sensitive: false
+        op: is
+        path: Event/System/EventID
+        value: '2097'
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/ApplicationPath
+        value: :\PerfLogs\
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/ApplicationPath
+        value: :\Temp\
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/ApplicationPath
+        value: :\Tmp\
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/ApplicationPath
+        value: :\Users\Public\
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/ApplicationPath
+        value: :\Windows\Tasks\
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/ApplicationPath
+        value: :\Windows\Temp\
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/ApplicationPath
+        value: \AppData\Local\Temp\
+  - case sensitive: false
+    not: true
+    op: is
+    path: Event/EventData/Action
+    value: '2'
+  target: log
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Detects the addition of a new rule to the Windows Firewall exception
+      list for an application located in a potentially suspicious location.
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-r2-and-2008/dd364427(v=ws.10)
+    - https://app.any.run/tasks/7123e948-c91e-49e0-a813-00e8d72ab393/#
+    tags:
+    - attack.defense-evasion
+    - attack.t1562.004
+  name: New Firewall Rule Added In Windows Firewall Exception List For Potential Suspicious
+    Application
+

@@ -186,7 +186,7 @@ respond:
     - https://blu3-team.blogspot.com/2019/06/misleading-extensions-xlsexe-docexe.html
     - https://twitter.com/blackorbird/status/1140519090961825792
     tags:
-    - attack.initial_access
+    - attack.initial-access
     - attack.t1566.001
   name: Suspicious Double Extension File Execution
 

@@ -1,0 +1,102 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cmd.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: Cmd.Exe
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: matches
+          path: event/COMMAND_LINE
+          re: .*>.%APPDATA%\\.*
+        - case sensitive: false
+          op: matches
+          path: event/COMMAND_LINE
+          re: .*>.%TEMP%\\.*
+        - case sensitive: false
+          op: matches
+          path: event/COMMAND_LINE
+          re: .*>.%TMP%\\.*
+        - case sensitive: false
+          op: matches
+          path: event/COMMAND_LINE
+          re: .*>.%USERPROFILE%\\.*
+        - case sensitive: false
+          op: matches
+          path: event/COMMAND_LINE
+          re: .*>.C:\\ProgramData\\.*
+        - case sensitive: false
+          op: matches
+          path: event/COMMAND_LINE
+          re: .*>.C:\\Temp\\.*
+        - case sensitive: false
+          op: matches
+          path: event/COMMAND_LINE
+          re: .*>.C:\\Users\\Public\\.*
+        - case sensitive: false
+          op: matches
+          path: event/COMMAND_LINE
+          re: .*>.C:\\Windows\\Temp\\.*
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' >'
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '">'
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '''>'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: C:\Users\
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \AppData\Local\
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: 'Detects inline Windows shell commands redirecting output via the
+      ">" symbol to a suspicious location.
+
+      This technique is sometimes used by malicious actors in order to redirect the
+      output of reconnaissance commands such as "hostname" and "dir" to files for
+      future exfiltration.
+
+      '
+    falsepositives:
+    - Legitimate admin or third party scripts used for diagnostic collection might
+      generate some false positives
+    level: medium
+    references:
+    - https://thedfirreport.com/2022/07/11/select-xmrig-from-sqlserver/
+    tags:
+    - attack.defense-evasion
+    - attack.t1218
+  name: Potentially Suspicious CMD Shell Output Redirect
+

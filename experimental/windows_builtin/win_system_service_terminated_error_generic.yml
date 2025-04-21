@@ -23,6 +23,6 @@ respond:
     references:
     - https://www.microsoft.com/en-us/security/blog/2023/04/11/guidance-for-investigating-attacks-using-cve-2022-21894-the-blacklotus-campaign/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: Windows Service Terminated With Error
 

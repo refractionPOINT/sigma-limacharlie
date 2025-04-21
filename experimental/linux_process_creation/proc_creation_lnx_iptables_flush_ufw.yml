@@ -75,7 +75,7 @@ respond:
     - https://www.cyberciti.biz/tips/linux-iptables-how-to-flush-all-rules.html
     - https://twitter.com/Joseliyo_Jstnk/status/1620131033474822144
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1562.004
   name: Flush Iptables Ufw Chain
 

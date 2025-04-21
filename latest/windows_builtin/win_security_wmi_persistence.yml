@@ -30,7 +30,7 @@ respond:
     - https://www.eideon.com/2018-03-02-THL03-WMIBackdoors/
     tags:
     - attack.persistence
-    - attack.privilege_escalation
+    - attack.privilege-escalation
     - attack.t1546.003
   name: WMI Persistence - Security
 

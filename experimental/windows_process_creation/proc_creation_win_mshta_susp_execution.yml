@@ -62,11 +62,11 @@ respond:
     - https://medium.com/tsscyber/pentesting-and-hta-bypassing-powershell-constrained-language-mode-53a42856c997
     - https://twitter.com/mattifestation/status/1326228491302563846
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1140
     - attack.t1218.005
     - attack.execution
     - attack.t1059.007
-    - cve.2020.1599
+    - cve.2020-1599
   name: MSHTA Suspicious Execution 01
 

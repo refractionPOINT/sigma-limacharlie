@@ -147,7 +147,7 @@ respond:
     - https://redcanary.com/blog/intelligence-insights-october-2021/
     - https://symantec-enterprise-blogs.security.com/blogs/threat-intelligence/blackbyte-exbyte-ransomware
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.impact
     - attack.t1070
     - attack.t1490

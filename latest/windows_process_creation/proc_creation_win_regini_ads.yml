@@ -35,6 +35,6 @@ respond:
     - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/regini
     tags:
     - attack.t1112
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: Suspicious Registry Modification From ADS Via Regini.EXE
 

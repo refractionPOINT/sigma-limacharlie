@@ -129,7 +129,7 @@ respond:
     - https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-2000-server/cc959352(v=technet.10)
     - https://twitter.com/jonasLyk/status/1555914501802921984
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1564.004
   name: Use NTFS Short Name in Image
 

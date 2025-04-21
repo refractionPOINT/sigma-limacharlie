@@ -45,7 +45,7 @@ respond:
     references:
     - https://lolbas-project.github.io/lolbas/Binaries/Msdt/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1218
     - attack.execution
   name: Execute MSDT Via Answer File

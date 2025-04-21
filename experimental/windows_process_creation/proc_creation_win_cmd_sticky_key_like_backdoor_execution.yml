@@ -88,7 +88,7 @@ respond:
     references:
     - https://learn.microsoft.com/en-us/archive/blogs/jonathantrull/detecting-sticky-key-backdoors
     tags:
-    - attack.privilege_escalation
+    - attack.privilege-escalation
     - attack.persistence
     - attack.t1546.008
     - car.2014-11-003

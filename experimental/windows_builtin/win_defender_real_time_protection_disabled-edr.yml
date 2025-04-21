@@ -12,7 +12,7 @@ respond:
   metadata:
     author: "J\xE1n Tren\u010Dansk\xFD, frack113"
     description: 'Detects disabling of Windows Defender Real-time Protection. As this
-      event doesn''t contain a lot of information on who initaited this action you
+      event doesn''t contain a lot of information on who initiated this action you
       might want to reduce it to a "medium" level if this occurs too many times in
       your environment
 
@@ -26,7 +26,7 @@ respond:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1562.001/T1562.001.md
     - https://craigclouditpro.wordpress.com/2020/03/04/hunting-malicious-windows-defender-activity/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1562.001
   name: Windows Defender Real-time Protection Disabled
 

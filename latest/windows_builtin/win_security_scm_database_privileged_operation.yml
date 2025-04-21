@@ -44,7 +44,7 @@ respond:
     references:
     - https://threathunterplaybook.com/hunts/windows/190826-RemoteSCMHandle/notebook.html
     tags:
-    - attack.privilege_escalation
+    - attack.privilege-escalation
     - attack.t1548
   name: SCM Database Privileged Operation
 

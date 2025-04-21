@@ -59,7 +59,7 @@ respond:
     - https://bazaar.abuse.ch/sample/6f3aa9362d72e806490a8abce245331030d1ab5ac77e400dd475748236a6cc81/
     tags:
     - attack.persistence
-    - attack.privilege_escalation
+    - attack.privilege-escalation
     - attack.t1546.008
   name: Suspicious Debugger Registration Cmdline
 

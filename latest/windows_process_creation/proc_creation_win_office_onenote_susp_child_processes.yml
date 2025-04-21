@@ -407,6 +407,6 @@ respond:
     tags:
     - attack.t1566
     - attack.t1566.001
-    - attack.initial_access
+    - attack.initial-access
   name: Suspicious Microsoft OneNote Child Process
 

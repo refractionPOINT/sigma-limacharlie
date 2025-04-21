@@ -38,6 +38,6 @@ respond:
     - https://learn.microsoft.com/en-us/sql/t-sql/statements/drop-server-audit-transact-sql?view=sql-server-ver16
     - https://learn.microsoft.com/en-us/sql/t-sql/statements/alter-server-audit-transact-sql?view=sql-server-ver16
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: MSSQL Disable Audit Settings
 

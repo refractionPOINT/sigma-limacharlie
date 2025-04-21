@@ -70,7 +70,7 @@ respond:
     references:
     - https://github.com/cube0x0/KrbRelay
     tags:
-    - attack.credential_access
+    - attack.credential-access
     - attack.t1558.003
   name: HackTool - KrbRelay Execution
 

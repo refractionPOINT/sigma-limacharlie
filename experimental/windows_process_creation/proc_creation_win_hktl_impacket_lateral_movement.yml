@@ -92,7 +92,7 @@ respond:
     tags:
     - attack.execution
     - attack.t1047
-    - attack.lateral_movement
+    - attack.lateral-movement
     - attack.t1021.003
   name: HackTool - Potential Impacket Lateral Movement Activity
 

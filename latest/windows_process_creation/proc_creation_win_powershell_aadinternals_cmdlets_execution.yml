@@ -18,6 +18,10 @@ detect:
         - case sensitive: false
           op: ends with
           path: event/FILE_PATH
+          value: \powershell_ise.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
           value: \pwsh.exe
       - op: or
         rules:
@@ -54,11 +58,19 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: Find-AADInt
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: Get-AADInt
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
         value: Grant-AADInt
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Initialize-AADInt
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -94,7 +106,19 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: Reset-AADInt
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Resolve-AADInt
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: Restore-AADInt
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Save-AADInt
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -114,11 +138,16 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: Unprotect-AADInt
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: Update-AADInt
 respond:
 - action: report
   metadata:
-    author: Austin Songer (@austinsonger), Nasreddine Bencherchali (Nextron Systems)
+    author: Austin Songer (@austinsonger), Nasreddine Bencherchali (Nextron Systems),
+      Swachchhanda Shrawan Poudel (Nextron Systems)
     description: Detects ADDInternals Cmdlet execution. A tool for administering Azure
       AD and Office 365. Which can be abused by threat actors to attack Azure AD or
       Office 365.
@@ -132,7 +161,7 @@ respond:
     - attack.execution
     - attack.reconnaissance
     - attack.discovery
-    - attack.credential_access
+    - attack.credential-access
     - attack.impact
   name: AADInternals PowerShell Cmdlets Execution - ProccessCreation
 

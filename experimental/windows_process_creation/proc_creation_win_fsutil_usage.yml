@@ -52,7 +52,7 @@ respond:
     - https://github.com/albertzsigovits/malware-notes/blob/558898932c1579ff589290092a2c8febefc3a4c9/Ransomware/Lockbit.md
     - https://blog.cluster25.duskrise.com/2023/05/22/back-in-black-blackbyte-nt
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.impact
     - attack.t1070
     - attack.t1485

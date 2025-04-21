@@ -1,0 +1,45 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is mac
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /tmutil
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: tmutil
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: addexclusion
+respond:
+- action: report
+  metadata:
+    author: Pratinav Chandra
+    description: 'Detects the addition of a new file or path exclusion to MacOS Time
+      Machine via the "tmutil" utility.
+
+      An adversary could exclude a path from Time Machine backups to prevent certain
+      files from being backed up.
+
+      '
+    falsepositives:
+    - Legitimate administrator activity
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1490/T1490.md#atomic-test-12---disable-time-machine
+    - https://www.loobins.io/binaries/tmutil/
+    tags:
+    - attack.impact
+    - attack.t1490
+  name: New File Exclusion Added To Time Machine Via Tmutil - MacOS
+

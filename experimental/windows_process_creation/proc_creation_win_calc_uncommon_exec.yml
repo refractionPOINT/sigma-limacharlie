@@ -47,7 +47,7 @@ respond:
     references:
     - https://twitter.com/ItsReallyNick/status/1094080242686312448
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1036
   name: Suspicious Calculator Usage
 

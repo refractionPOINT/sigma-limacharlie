@@ -34,7 +34,7 @@ respond:
     - https://bugs.chromium.org/p/project-zero/issues/detail?id=1252&desc=5
     - https://technet.microsoft.com/en-us/library/security/4022344
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1211
     - attack.t1562.001
   name: Microsoft Malware Protection Engine Crash

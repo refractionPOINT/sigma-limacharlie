@@ -68,7 +68,7 @@ respond:
     references:
     - https://www.group-ib.com/resources/threat-research/red-curl-2.html
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.execution
     - attack.t1218.011
   name: Shell32 DLL Execution in Suspicious Directory

@@ -25,9 +25,9 @@ respond:
     - Unlikely
     level: critical
     references:
-    - https://github.com/snovvcrash/DInjector
+    - https://web.archive.org/web/20211001064856/https://github.com/snovvcrash/DInjector
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1055
   name: HackTool - DInjector PowerShell Cradle Execution
 

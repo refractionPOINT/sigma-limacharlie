@@ -45,6 +45,6 @@ respond:
     - Internal Research
     - https://www.sentinelone.com/labs/inside-malicious-windows-apps-for-malware-deployment/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: Potential Signing Bypass Via Windows Developer Features
 

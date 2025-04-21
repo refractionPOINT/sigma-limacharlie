@@ -21,7 +21,7 @@ respond:
     references:
     - https://jpcertcc.github.io/ToolAnalysisResultSheet/details/ntdsutil.htm
     tags:
-    - attack.credential_access
+    - attack.credential-access
     - attack.t1003.003
   name: Invocation of Active Directory Diagnostic Tool (ntdsutil.exe)
 

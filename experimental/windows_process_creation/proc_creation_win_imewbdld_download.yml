@@ -1,0 +1,46 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \IMEWDBLD.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: imewdbld.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: http://
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: https://
+respond:
+- action: report
+  metadata:
+    author: Swachchhanda Shrawan Poudel
+    description: Detects usage of "IMEWDBLD.exe" to download arbitrary files
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1105/T1105.md#atomic-test-10---windows---powershell-download
+    - https://lolbas-project.github.io/lolbas/Binaries/IMEWDBLD/
+    tags:
+    - attack.defense-evasion
+    - attack.execution
+    - attack.t1218
+  name: Arbitrary File Download Via IMEWDBLD.EXE
+

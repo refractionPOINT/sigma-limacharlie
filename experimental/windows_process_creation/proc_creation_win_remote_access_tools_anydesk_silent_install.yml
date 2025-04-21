@@ -32,7 +32,7 @@ respond:
     - https://twitter.com/TheDFIRReport/status/1423361119926816776?s=20
     - https://support.anydesk.com/Automatic_Deployment
     tags:
-    - attack.command_and_control
+    - attack.command-and-control
     - attack.t1219
   name: Remote Access Tool - AnyDesk Silent Installation
 

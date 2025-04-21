@@ -36,27 +36,35 @@ detect:
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
-            value: :\Users\Public\
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: \Temporary Internet
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
             value: :\ProgramData
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
-            value: \AppData\Local\Temp
+            value: :\Users\Public\
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
-            value: \AppData\Roaming\Temp
+            value: :\Windows\Temp\
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
-            value: :\Windows\Temp
+            value: \Admin$\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \AppData\Local\Temp\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \AppData\Roaming\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \C$\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \Temporary Internet
         - op: and
           rules:
           - case sensitive: false
@@ -112,7 +120,7 @@ respond:
     - https://labs.sentinelone.com/meteorexpress-mysterious-wiper-paralyzes-iranian-trains-with-epic-troll
     - https://blog.malwarebytes.com/threat-intelligence/2021/08/new-variant-of-konni-malware-used-in-campaign-targetting-russia/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1218
   name: Potentially Suspicious Cabinet File Expansion
 

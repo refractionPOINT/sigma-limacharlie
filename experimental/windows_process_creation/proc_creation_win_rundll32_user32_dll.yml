@@ -42,6 +42,6 @@ respond:
     references:
     - https://app.any.run/tasks/2aef9c63-f944-4763-b3ef-81eee209d128/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: Suspicious Workstation Locking via Rundll32
 

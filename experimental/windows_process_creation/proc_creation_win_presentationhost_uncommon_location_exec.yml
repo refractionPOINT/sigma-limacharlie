@@ -49,7 +49,7 @@ respond:
     references:
     - https://lolbas-project.github.io/lolbas/Binaries/Presentationhost/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.execution
     - attack.t1218
   name: XBAP Execution From Uncommon Locations Via PresentationHost.EXE

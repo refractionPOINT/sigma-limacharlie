@@ -37,7 +37,7 @@ respond:
     - Legitimate administration activities
     level: high
     references:
-    - https://developer.vmware.com/docs/11743/esxi-7-0-esxcli-command-reference/namespace/esxcli_system.html
+    - https://developer.broadcom.com/xapis/esxcli-command-reference/7.0.0/namespace/esxcli_system.html
     tags:
     - attack.execution
   name: ESXi Admin Permission Assigned To Account Via ESXCLI

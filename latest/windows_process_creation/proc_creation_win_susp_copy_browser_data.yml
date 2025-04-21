@@ -48,6 +48,10 @@ detect:
         - case sensitive: false
           op: ends with
           path: event/FILE_PATH
+          value: \esentutl.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
           value: \xcopy.exe
         - case sensitive: false
           op: ends with
@@ -55,6 +59,10 @@ detect:
           value: \robocopy.exe
       - op: or
         rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: esentutl.exe
         - case sensitive: false
           op: is
           path: event/ORIGINAL_FILE_NAME
@@ -184,8 +192,9 @@ respond:
     level: medium
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1555.003/T1555.003.md
+    - https://www.cisa.gov/sites/default/files/2024-04/aa24-109a-stopransomware-akira-ransomware_2.pdf
     tags:
-    - attack.credential_access
+    - attack.credential-access
     - attack.t1555.003
   name: Potential Browser Data Stealing
 

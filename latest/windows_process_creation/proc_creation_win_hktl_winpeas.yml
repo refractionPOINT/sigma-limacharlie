@@ -96,7 +96,7 @@ respond:
     - https://github.com/carlospolop/PEASS-ng
     - https://book.hacktricks.xyz/windows-hardening/windows-local-privilege-escalation
     tags:
-    - attack.privilege_escalation
+    - attack.privilege-escalation
     - attack.t1082
     - attack.t1087
     - attack.t1046

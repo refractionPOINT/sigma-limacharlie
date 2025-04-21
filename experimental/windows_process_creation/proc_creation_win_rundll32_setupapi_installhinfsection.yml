@@ -44,7 +44,7 @@ respond:
     - https://raw.githubusercontent.com/huntresslabs/evading-autoruns/master/shady.inf
     - https://twitter.com/Z3Jpa29z/status/1313742350292746241?s=20
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1218.011
   name: Suspicious Rundll32 Setupapi.dll Activity
 

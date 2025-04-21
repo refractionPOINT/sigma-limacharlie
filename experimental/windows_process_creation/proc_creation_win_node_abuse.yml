@@ -53,7 +53,7 @@ respond:
     - https://www.rapid7.com/blog/post/2022/01/18/active-exploitation-of-vmware-horizon-servers/
     - https://nodejs.org/api/cli.html
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1127
   name: Potential Arbitrary Code Execution Via Node.EXE
 

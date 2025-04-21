@@ -1,0 +1,41 @@
+detect:
+  event: DNS_REQUEST
+  op: or
+  rules:
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .v2.argotunnel.com
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: protocol-v2.argotunnel.com
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: trycloudflare.com
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: update.argotunnel.com
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: 'Detects DNS requests to Cloudflared tunnels domains.
+
+      Attackers can abuse that feature to establish a reverse shell or persistence
+      on a machine.
+
+      '
+    falsepositives:
+    - Legitimate use of cloudflare tunnels will also trigger this.
+    level: medium
+    references:
+    - https://www.guidepointsecurity.com/blog/tunnel-vision-cloudflared-abused-in-the-wild/
+    - Internal Research
+    tags:
+    - attack.command-and-control
+    - attack.t1071.001
+  name: Cloudflared Tunnels Related DNS Requests
+

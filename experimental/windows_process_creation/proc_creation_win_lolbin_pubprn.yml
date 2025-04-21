@@ -27,7 +27,7 @@ respond:
     references:
     - https://lolbas-project.github.io/lolbas/Scripts/Pubprn/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1216.001
   name: Pubprn.vbs Proxy Execution
 

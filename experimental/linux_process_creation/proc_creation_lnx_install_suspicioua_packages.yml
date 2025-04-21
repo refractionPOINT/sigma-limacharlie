@@ -109,7 +109,7 @@ respond:
     references:
     - https://gist.githubusercontent.com/MichaelKoczwara/12faba9c061c12b5814b711166de8c2f/raw/e2068486692897b620c25fde1ea258c8218fe3d3/history.txt
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1553.004
   name: Suspicious Package Installed - Linux
 

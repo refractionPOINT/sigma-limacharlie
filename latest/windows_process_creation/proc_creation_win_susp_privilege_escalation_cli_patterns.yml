@@ -87,6 +87,6 @@ respond:
     references:
     - https://www.trendmicro.com/en_us/research/22/k/hack-the-real-box-apt41-new-subgroup-earth-longzhi.html
     tags:
-    - attack.privilege_escalation
+    - attack.privilege-escalation
   name: Suspicious RunAs-Like Flag Combination
 

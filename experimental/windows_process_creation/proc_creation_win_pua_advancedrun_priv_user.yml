@@ -70,8 +70,8 @@ respond:
     - https://www.elastic.co/security-labs/operation-bleeding-bear
     - https://www.winhelponline.com/blog/run-program-as-system-localsystem-account-windows/
     tags:
-    - attack.defense_evasion
-    - attack.privilege_escalation
+    - attack.defense-evasion
+    - attack.privilege-escalation
     - attack.t1134.002
   name: PUA - AdvancedRun Suspicious Execution
 

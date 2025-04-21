@@ -39,7 +39,7 @@ respond:
     references:
     - https://twitter.com/NinjaParanoid/status/1516442028963659777
     tags:
-    - attack.credential_access
+    - attack.credential-access
     - attack.t1555.004
   name: Suspicious Key Manager Access
 

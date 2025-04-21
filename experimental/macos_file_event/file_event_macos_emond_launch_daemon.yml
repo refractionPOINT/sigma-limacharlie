@@ -37,7 +37,7 @@ respond:
     - https://posts.specterops.io/leveraging-emond-on-macos-for-persistence-a040a2785124
     tags:
     - attack.persistence
-    - attack.privilege_escalation
+    - attack.privilege-escalation
     - attack.t1546.014
   name: MacOS Emond Launch Daemon
 

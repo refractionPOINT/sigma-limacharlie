@@ -39,6 +39,6 @@ respond:
     - https://www.kernel.org/doc/html/v5.0/trace/kprobetrace.html
     tags:
     - attack.execution
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: Enable BPF Kprobes Tracing
 

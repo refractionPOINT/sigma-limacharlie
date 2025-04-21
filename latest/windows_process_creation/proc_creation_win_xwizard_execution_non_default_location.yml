@@ -28,6 +28,10 @@ detect:
         op: matches
         path: event/FILE_PATH
         re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Windows\\SysWOW64\\
+      - case sensitive: false
+        op: matches
+        path: event/FILE_PATH
+        re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Windows\\WinSxS\\
 respond:
 - action: report
   metadata:
@@ -45,7 +49,7 @@ respond:
     - https://lolbas-project.github.io/lolbas/Binaries/Xwizard/
     - http://www.hexacorn.com/blog/2017/07/31/the-wizard-of-x-oppa-plugx-style/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1574.002
   name: Xwizard.EXE Execution From Non-Default Location
 

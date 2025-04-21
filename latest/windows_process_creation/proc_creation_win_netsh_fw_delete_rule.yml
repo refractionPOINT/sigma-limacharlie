@@ -53,7 +53,7 @@ respond:
     references:
     - https://app.any.run/tasks/8bbd5b4c-b82d-4e6d-a3ea-d454594a37cc/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1562.004
   name: Firewall Rule Deleted Via Netsh.EXE
 

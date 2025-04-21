@@ -1,0 +1,46 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Microsoft\Teams\Cookies
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Microsoft\Teams\Local Storage\leveldb
+    - case sensitive: false
+      not: true
+      op: ends with
+      path: event/FILE_PATH
+      value: \Microsoft\Teams\current\Teams.exe
+respond:
+- action: report
+  metadata:
+    author: '@SerkinValery'
+    description: 'Detects a commandline containing references to the Microsoft Teams
+      database or cookies files from a process other than Teams.
+
+      The database might contain authentication tokens and other sensitive information
+      about the logged in accounts.
+
+      '
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://www.bleepingcomputer.com/news/security/microsoft-teams-stores-auth-tokens-as-cleartext-in-windows-linux-macs/
+    - https://www.vectra.ai/blogpost/undermining-microsoft-teams-security-by-mining-tokens
+    tags:
+    - attack.credential-access
+    - attack.t1528
+  name: Potentially Suspicious Command Targeting Teams Sensitive Files
+

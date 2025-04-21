@@ -29,7 +29,7 @@ respond:
     tags:
     - attack.reconnaissance
     - attack.t1592.004
-    - attack.credential_access
+    - attack.credential-access
     - attack.t1552.001
   name: Linux Recon Indicators
 

@@ -41,7 +41,7 @@ respond:
     references:
     - https://redcanary.com/blog/blackbyte-ransomware/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1036
   name: Suspicious Windows Update Agent Empty Cmdline
 

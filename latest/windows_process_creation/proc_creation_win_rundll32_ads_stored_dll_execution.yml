@@ -32,7 +32,7 @@ respond:
     references:
     - https://lolbas-project.github.io/lolbas/Binaries/Rundll32
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1564.004
   name: Potential Rundll32 Execution With DLL Stored In ADS
 

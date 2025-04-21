@@ -1,0 +1,52 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is mac
+  - op: and
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /launchctl
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: submit
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: load
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: start
+respond:
+- action: report
+  metadata:
+    author: Pratinav Chandra
+    description: Detects the execution of programs as Launch Agents or Launch Daemons
+      using launchctl on macOS.
+    falsepositives:
+    - Legitimate administration activities is expected to trigger false positives.
+      Investigate the command line being passed to determine if the service or launch
+      agent are suspicious.
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1569.001/T1569.001.md
+    - https://www.sentinelone.com/labs/20-common-tools-techniques-used-by-macos-threat-actors-malware/
+    - https://www.welivesecurity.com/2020/07/16/mac-cryptocurrency-trading-application-rebranded-bundled-malware/
+    - https://www.trendmicro.com/en_us/research/18/d/new-macos-backdoor-linked-to-oceanlotus-found.html
+    - https://www.loobins.io/binaries/launchctl/
+    tags:
+    - attack.execution
+    - attack.persistence
+    - attack.t1569.001
+    - attack.t1543.001
+    - attack.t1543.004
+  name: Launch Agent/Daemon Execution Via Launchctl
+

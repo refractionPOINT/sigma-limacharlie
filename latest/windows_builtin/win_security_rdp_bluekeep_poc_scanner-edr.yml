@@ -24,9 +24,9 @@ respond:
     level: high
     references:
     - https://twitter.com/AdamTheAnalyst/status/1134394070045003776
-    - https://github.com/zerosum0x0/CVE-2019-0708
+    - https://web.archive.org/web/20190710034152/https://github.com/zerosum0x0/CVE-2019-0708
     tags:
-    - attack.lateral_movement
+    - attack.lateral-movement
     - attack.t1210
     - car.2013-07-002
   name: Scanner PoC for CVE-2019-0708 RDP RCE Vuln

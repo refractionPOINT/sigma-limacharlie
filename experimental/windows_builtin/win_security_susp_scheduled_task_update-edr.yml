@@ -154,7 +154,7 @@ respond:
     - https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4698
     tags:
     - attack.execution
-    - attack.privilege_escalation
+    - attack.privilege-escalation
     - attack.persistence
     - attack.t1053.005
   name: Suspicious Scheduled Task Update

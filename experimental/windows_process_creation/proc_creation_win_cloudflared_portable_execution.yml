@@ -1,0 +1,46 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \cloudflared.exe
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: :\Program Files (x86)\cloudflared\
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: :\Program Files\cloudflared\
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: 'Detects the execution of the "cloudflared" binary from a non standard
+      location.
+
+      '
+    falsepositives:
+    - Legitimate usage of Cloudflared portable versions
+    level: medium
+    references:
+    - https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/do-more-with-tunnels/trycloudflare/
+    - https://github.com/cloudflare/cloudflared
+    - https://www.intrinsec.com/akira_ransomware/
+    - https://www.guidepointsecurity.com/blog/tunnel-vision-cloudflared-abused-in-the-wild/
+    - https://github.com/cloudflare/cloudflared/releases
+    tags:
+    - attack.command-and-control
+    - attack.t1090.001
+  name: Cloudflared Portable Execution
+

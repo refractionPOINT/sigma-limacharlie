@@ -31,6 +31,6 @@ respond:
     - https://app.any.run/tasks/93fe92fa-8b2b-4d92-8c09-a841aed2e793/
     - https://app.any.run/tasks/214094a7-0abc-4a7b-a564-1b757faed79d/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: Start of NT Virtual DOS Machine
 

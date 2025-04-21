@@ -22,7 +22,7 @@ respond:
     - https://research.splunk.com/endpoint/linux_doas_tool_execution/
     - https://www.makeuseof.com/how-to-install-and-use-doas/
     tags:
-    - attack.privilege_escalation
+    - attack.privilege-escalation
     - attack.t1548
   name: Linux Doas Tool Execution
 

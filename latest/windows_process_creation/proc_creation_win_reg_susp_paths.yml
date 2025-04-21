@@ -57,7 +57,7 @@ respond:
     - https://github.com/redcanaryco/atomic-red-team/blob/40b77d63808dd4f4eafb83949805636735a1fd15/atomics/T1562.001/T1562.001.md
     - https://www.absolomb.com/2018-01-26-Windows-Privilege-Escalation-Guide/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1112
     - attack.t1562.001
   name: Reg Add Suspicious Paths

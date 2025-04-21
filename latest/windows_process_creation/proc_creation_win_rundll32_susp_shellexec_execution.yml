@@ -16,22 +16,6 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: regsvr32
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: msiexec
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: \Users\Public\
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: odbcconf
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
         value: \Desktop\
       - case sensitive: false
         op: contains
@@ -40,7 +24,11 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: Invoke-
+        value: \Users\Public\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: comspec
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -48,7 +36,19 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: comspec
+        value: Invoke-
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: msiexec
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: odbcconf
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: regsvr32
 respond:
 - action: report
   metadata:
@@ -63,6 +63,6 @@ respond:
     - https://www.microsoft.com/en-us/security/blog/2022/10/27/raspberry-robin-worm-part-of-larger-ecosystem-facilitating-pre-ransomware-activity/
     - https://github.com/SigmaHQ/sigma/issues/1009
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: Suspicious Usage Of ShellExec_RunDLL
 

@@ -91,7 +91,7 @@ respond:
     - https://lolbas-project.github.io/lolbas/Binaries/Bitsadmin/
     - https://blog.talosintelligence.com/breaking-the-silence-recent-truebot-activity/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.persistence
     - attack.t1197
     - attack.s0190

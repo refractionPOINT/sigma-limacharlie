@@ -1,0 +1,43 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: /TeamViewer_Service
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /TeamViewer_Desktop
+    - case sensitive: false
+      op: ends with
+      path: event/COMMAND_LINE
+      value: /TeamViewer_Desktop --IPCport 5939 --Module 1
+respond:
+- action: report
+  metadata:
+    author: Josh Nickels, Qi Nan
+    description: 'Detects the command line executed when TeamViewer starts a session
+      started by a remote host.
+
+      Once a connection has been started, an investigator can verify the connection
+      details by viewing the "incoming_connections.txt" log file in the TeamViewer
+      folder.
+
+      '
+    falsepositives:
+    - Legitimate usage of TeamViewer
+    level: low
+    references:
+    - Internal Research
+    tags:
+    - attack.initial-access
+    - attack.t1133
+  name: Remote Access Tool - Team Viewer Session Started On Linux Host
+

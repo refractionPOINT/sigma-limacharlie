@@ -31,7 +31,7 @@ respond:
     - https://github.com/redcanaryco/atomic-red-team/blob/1fed40dc7e48f16ed44dcdd9c73b9222a70cca85/atomics/T1553.001/T1553.001.md
     - https://www.loobins.io/binaries/xattr/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1553.001
   name: Gatekeeper Bypass via Xattr
 

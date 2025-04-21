@@ -121,7 +121,7 @@ respond:
     - https://www.trendmicro.com/en_us/research/17/h/backdoor-carrying-emails-set-sights-on-russian-speaking-businesses.html
     - https://securityintelligence.com/posts/raspberry-robin-worm-dridex-malware/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1218.008
   name: Odbcconf.EXE Suspicious DLL Location
 

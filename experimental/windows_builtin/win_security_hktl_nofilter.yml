@@ -1,0 +1,47 @@
+detect:
+  log type: wel
+  op: or
+  rules:
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '5447'
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/FilterName
+      value: RonPolicy
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '5449'
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/ProviderContextName
+      value: RonPolicy
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Stamatis Chatzimangou (st0pp3r)
+    description: 'Detects execution of NoFilter, a tool for abusing the Windows Filtering
+      Platform for privilege escalation via hardcoded policy name indicators
+
+      '
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://github.com/deepinstinct/NoFilter/blob/121d215ab130c5e8e3ad45a7e7fcd56f4de97b4d/NoFilter/Consts.cpp
+    - https://github.com/deepinstinct/NoFilter
+    - https://www.deepinstinct.com/blog/nofilter-abusing-windows-filtering-platform-for-privilege-escalation
+    - https://x.com/_st0pp3r_/status/1742203752361128162?s=20
+    tags:
+    - attack.privilege-escalation
+    - attack.t1134
+    - attack.t1134.001
+  name: HackTool - NoFilter Execution
+

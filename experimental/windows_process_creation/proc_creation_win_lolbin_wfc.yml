@@ -28,7 +28,7 @@ respond:
     - https://lolbas-project.github.io/lolbas/OtherMSBinaries/Wfc/
     - https://learn.microsoft.com/en-us/windows/security/application-security/application-control/windows-defender-application-control/design/applications-that-can-bypass-wdac
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1127
   name: Use of Wfc.exe
 

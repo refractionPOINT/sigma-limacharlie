@@ -1,0 +1,35 @@
+detect:
+  event: DNS_REQUEST
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: event/DOMAIN_NAME
+    value: update.onelaunch.com
+  - case sensitive: false
+    op: ends with
+    path: event/FILE_PATH
+    value: \OneLaunch.exe
+respond:
+- action: report
+  metadata:
+    author: Josh Nickels
+    description: 'Detects DNS query requests to "update.onelaunch.com". This domain
+      is associated with the OneLaunch adware application.
+
+      When the OneLaunch application is installed it will attempt to get updates from
+      this domain.
+
+      '
+    falsepositives:
+    - Unlikely
+    level: low
+    references:
+    - https://www.malwarebytes.com/blog/detections/pup-optional-onelaunch-silentcf
+    - https://www.myantispyware.com/2020/12/14/how-to-uninstall-onelaunch-browser-removal-guide/
+    - https://malware.guide/browser-hijacker/remove-onelaunch-virus/
+    tags:
+    - attack.collection
+    - attack.t1056
+  name: DNS Query Request To OneLaunch Update Service
+

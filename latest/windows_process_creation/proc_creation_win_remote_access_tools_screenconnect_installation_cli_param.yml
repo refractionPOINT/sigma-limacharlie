@@ -39,7 +39,7 @@ respond:
     references:
     - https://www.anomali.com/blog/probable-iranian-cyber-actors-static-kitten-conducting-cyberespionage-campaign-targeting-uae-and-kuwait-government-agencies
     tags:
-    - attack.initial_access
+    - attack.initial-access
     - attack.t1133
   name: Remote Access Tool - ScreenConnect Installation Execution
 

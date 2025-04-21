@@ -34,7 +34,7 @@ respond:
     references:
     - https://github.com/danielbohannon/Invoke-Obfuscation
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1027.009
   name: Powershell Token Obfuscation - Process Creation
 

@@ -37,7 +37,7 @@ respond:
     references:
     - https://www.cybereason.com/blog/rundll32-the-infamous-proxy-for-executing-malicious-code
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.execution
     - attack.t1021.002
     - attack.t1218.011

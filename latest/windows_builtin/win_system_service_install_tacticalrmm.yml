@@ -35,7 +35,7 @@ respond:
     references:
     - https://thedfirreport.com/2022/11/28/emotet-strikes-again-lnk-file-leads-to-domain-wide-ransomware/
     tags:
-    - attack.command_and_control
+    - attack.command-and-control
     - attack.t1219
   name: TacticalRMM Service Installation
 

@@ -33,7 +33,7 @@ respond:
     - https://www.x86matthew.com/view_post?id=create_svc_rpc
     - https://twitter.com/SBousseaden/status/1490608838701166596
     tags:
-    - attack.privilege_escalation
+    - attack.privilege-escalation
     - attack.t1543
   name: Service Installed By Unusual Client - Security
 

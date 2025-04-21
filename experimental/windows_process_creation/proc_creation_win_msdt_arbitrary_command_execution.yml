@@ -54,7 +54,7 @@ respond:
     - https://app.any.run/tasks/713f05d2-fe78-4b9d-a744-f7c133e3fafb/
     - https://twitter.com/_JohnHammond/status/1531672601067675648
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1202
   name: Potential Arbitrary Command Execution Using Msdt.EXE
 

@@ -94,6 +94,6 @@ respond:
     - https://posts.specterops.io/less-smartscreen-more-caffeine-ab-using-clickonce-for-trusted-code-execution-1446ea8051c5
     tags:
     - attack.execution
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: Potentially Suspicious Child Process Of ClickOnce Application
 

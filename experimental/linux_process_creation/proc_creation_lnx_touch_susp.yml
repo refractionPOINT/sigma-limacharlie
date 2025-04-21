@@ -31,7 +31,7 @@ respond:
     - https://blogs.blackberry.com/
     - https://twitter.com/Joseliyo_Jstnk/status/1620131033474822144
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1070.006
   name: Touch Suspicious Service File
 

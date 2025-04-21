@@ -27,7 +27,7 @@ respond:
     - https://technet.microsoft.com/en-us/library/cc726884(v=ws.10).aspx
     - https://msdn.microsoft.com/de-de/library/windows/desktop/aa363389(v=vs.85).aspx
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1574.002
   name: DHCP Server Loaded the CallOut DLL
 

@@ -64,7 +64,7 @@ respond:
     - https://speakerdeck.com/heirhabarov/hunting-for-privilege-escalation-in-windows-environment
     - https://blog.cobaltstrike.com/2014/04/02/what-happens-when-i-type-getsystem/
     tags:
-    - attack.privilege_escalation
+    - attack.privilege-escalation
     - attack.t1134.001
     - attack.t1134.002
   name: Meterpreter or Cobalt Strike Getsystem Service Installation - Security

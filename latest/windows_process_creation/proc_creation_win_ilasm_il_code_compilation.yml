@@ -40,7 +40,7 @@ respond:
     - https://lolbas-project.github.io/lolbas/Binaries/Ilasm/
     - https://www.echotrail.io/insights/search/ilasm.exe
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1127
   name: C# IL Code Compilation Via Ilasm.EXE
 

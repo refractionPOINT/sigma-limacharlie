@@ -26,7 +26,7 @@ respond:
     references:
     - https://lolbas-project.github.io/lolbas/Binaries/Pktmon/
     tags:
-    - attack.credential_access
+    - attack.credential-access
     - attack.t1040
   name: PktMon.EXE Execution
 

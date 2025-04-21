@@ -27,7 +27,7 @@ respond:
     - https://github.com/vysecurity/Aggressor-VYSEC/blob/0d61c80387b9432dab64b8b8a9fb52d20cfef80e/ping.cna
     - https://twitter.com/vysecurity/status/977198418354491392
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1140
     - attack.t1027
   name: Ping Hex IP

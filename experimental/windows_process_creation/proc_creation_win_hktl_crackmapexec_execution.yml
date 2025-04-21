@@ -154,8 +154,8 @@ respond:
     tags:
     - attack.execution
     - attack.persistence
-    - attack.privilege_escalation
-    - attack.credential_access
+    - attack.privilege-escalation
+    - attack.credential-access
     - attack.discovery
     - attack.t1047
     - attack.t1053

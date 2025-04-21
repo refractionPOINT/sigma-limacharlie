@@ -55,7 +55,7 @@ respond:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1070.004/T1070.004.md
     - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/erase
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1070.004
   name: Directory Removal Via Rmdir
 

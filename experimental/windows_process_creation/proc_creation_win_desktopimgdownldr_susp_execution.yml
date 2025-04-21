@@ -52,7 +52,7 @@ respond:
     - https://labs.sentinelone.com/living-off-windows-land-a-new-native-file-downldr/
     - https://twitter.com/SBousseaden/status/1278977301745741825
     tags:
-    - attack.command_and_control
+    - attack.command-and-control
     - attack.t1105
   name: Suspicious Desktopimgdownldr Command
 

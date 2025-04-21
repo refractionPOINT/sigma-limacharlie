@@ -1,0 +1,85 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/FILE_PATH
+        value: Acrobat Reader
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/FILE_PATH
+        value: Microsoft Office
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/FILE_PATH
+        value: PDF Reader
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \brave.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \chrome.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \firefox.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \msedge.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \opera.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \maxthon.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \seamonkey.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \vivaldi.exe
+      - op: exists
+        path: event/FILE_PATH
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: http
+respond:
+- action: report
+  metadata:
+    author: Joseph Kamau
+    description: 'Detects when a browser process or browser tab is launched from an
+      application that handles document files such as Adobe, Microsoft Office, etc.
+      And connects to a web application over http(s), this could indicate a possible
+      phishing attempt.
+
+      '
+    falsepositives:
+    - Unlikely in most cases, further investigation should be done in the commandline
+      of the browser process to determine the context of the URL accessed.
+    level: medium
+    references:
+    - https://app.any.run/tasks/69c5abaa-92ad-45ba-8c53-c11e23e05d04/
+    - https://app.any.run/tasks/64043a79-165f-4052-bcba-e6e49f847ec1/
+    tags:
+    - attack.execution
+    - attack.t1204.002
+  name: Potential Suspicious Browser Launch From Document Reader Process
+

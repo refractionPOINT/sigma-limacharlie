@@ -33,7 +33,7 @@ respond:
     - https://medium.com/@esnesenon/feature-not-bug-dnsadmin-to-dc-compromise-in-one-line-a0f779b8dc83
     - https://blog.3or.de/hunting-dns-server-level-plugin-dll-injection.html
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1574.002
     - attack.t1112
   name: New DNS ServerLevelPluginDll Installed Via Dnscmd.EXE

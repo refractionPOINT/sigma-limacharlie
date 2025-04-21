@@ -26,7 +26,7 @@ respond:
     - https://lolbas-project.github.io/lolbas/Binaries/Odbcconf/
     - https://medium.com/@cyberjyot/t1218-008-dll-execution-using-odbcconf-exe-803fa9e08dac
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1218.008
   name: Uncommon Child Process Spawned By Odbcconf.EXE
 

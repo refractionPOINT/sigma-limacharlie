@@ -27,7 +27,7 @@ respond:
     references:
     - https://codewhitesec.blogspot.com/2018/07/lethalhta.html
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1218.005
   name: Potential LethalHTA Technique Execution
 

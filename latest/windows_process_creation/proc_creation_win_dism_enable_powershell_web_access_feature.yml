@@ -1,0 +1,51 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \dism.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: DISM.EXE
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: WindowsPowerShellWebAccess
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /online
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /enable-feature
+respond:
+- action: report
+  metadata:
+    author: Michael Haag
+    description: Detects the use of DISM to enable the PowerShell Web Access feature,
+      which could be used for remote access and potential abuse
+    falsepositives:
+    - Legitimate PowerShell Web Access installations by administrators
+    level: high
+    references:
+    - https://docs.microsoft.com/en-us/powershell/module/dism/enable-windowsoptionalfeature
+    - https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-241a
+    - https://gist.github.com/MHaggis/7e67b659af9148fa593cf2402edebb41
+    tags:
+    - attack.persistence
+    - attack.t1548.002
+  name: PowerShell Web Access Feature Enabled Via DISM
+

@@ -104,7 +104,7 @@ respond:
     references:
     - https://redcanary.com/blog/blackbyte-ransomware/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.execution
     - attack.t1564
     - attack.t1059

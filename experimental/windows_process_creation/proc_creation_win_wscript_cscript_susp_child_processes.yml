@@ -1,0 +1,114 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \wscript.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \cscript.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \rundll32.exe
+        - op: and
+          rules:
+          - op: or
+            rules:
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \cmd.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \powershell.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \pwsh.exe
+          - op: or
+            rules:
+            - op: and
+              rules:
+              - case sensitive: false
+                op: contains
+                path: event/COMMAND_LINE
+                value: mshta
+              - case sensitive: false
+                op: contains
+                path: event/COMMAND_LINE
+                value: http
+            - op: or
+              rules:
+              - case sensitive: false
+                op: contains
+                path: event/COMMAND_LINE
+                value: rundll32
+              - case sensitive: false
+                op: contains
+                path: event/COMMAND_LINE
+                value: regsvr32
+              - case sensitive: false
+                op: contains
+                path: event/COMMAND_LINE
+                value: msiexec
+    - not: true
+      op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \rundll32.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: UpdatePerUserSystemParameters
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: PrintUIEntry
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ClearMyTracksByProcess
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems), Alejandro Houspanossian ('@lekz86')
+    description: 'Detects potentially suspicious child processes of Wscript/Cscript.
+      These include processes such as rundll32 with uncommon exports or PowerShell
+      spawning rundll32 or regsvr32.
+
+      Malware such as Pikabot and Qakbot were seen using similar techniques as well
+      as many others.
+
+      '
+    falsepositives:
+    - Some false positives might occur with admin or third party software scripts.
+      Investigate and apply additional filters accordingly.
+    level: medium
+    references:
+    - Internal Research
+    - https://github.com/pr0xylife/Pikabot/blob/main/Pikabot_30.10.2023.txt
+    - https://github.com/pr0xylife/Pikabot/blob/main/Pikabot_22.12.2023.txt
+    tags:
+    - attack.execution
+  name: Cscript/Wscript Potentially Suspicious Child Process
+

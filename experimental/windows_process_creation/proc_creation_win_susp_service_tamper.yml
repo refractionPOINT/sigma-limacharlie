@@ -9,6 +9,98 @@ detect:
     rules:
     - op: or
       rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: net.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: net1.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: PowerShell.EXE
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: psservice.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: pwsh.dll
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: sc.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \net.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \net1.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \PsService.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \PsService64.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \pwsh.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \sc.exe
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' delete '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' pause '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' stop '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'Stop-Service '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'Remove-Service '
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: config
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: start=disabled
+    - op: or
+      rules:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -28,7 +120,19 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: AdobeARMservice
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: AHS Service
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: Antivirus
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Apache4
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -37,6 +141,10 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: aswBcc
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: AteraAgent
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -80,6 +188,14 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: CASLicenceServer
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: CASWebServer
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: Client Agent 7.60
       - case sensitive: false
         op: contains
@@ -97,6 +213,10 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: DCAgent
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: dwmrcs
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -160,11 +280,11 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: HealthTLService
+        value: FontCache3.0.0.0
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: MSSQLFDLauncher$
+        value: HealthTLService
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -173,6 +293,26 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: HMS
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: HostControllerService
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: hvdsvc
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: IAStorDataMgrSvc
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: IBMHPS
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ibmspsvc
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -188,6 +328,10 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: instance2
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: KAVFS
       - case sensitive: false
         op: contains
@@ -197,6 +341,10 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: kavfsslp
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: KeyIso
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -332,6 +480,18 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: mpssvc
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: MSComplianceAudit
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: MSDTC
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: MsDtsServer
       - case sensitive: false
         op: contains
@@ -345,6 +505,10 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: msftesql$PROD
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: msftesql$SQLEXPRESS
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -392,6 +556,10 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: MSSQLFDLauncher$
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: MySQL
       - case sensitive: false
         op: contains
@@ -404,7 +572,27 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: NetPipeActivator
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: netprofm
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: NetTcpActivator
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: NetTcpPortSharing
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: ntrtscan
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: nvspwmi
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -417,6 +605,30 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: OracleClientCache80
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OracleDBConsole
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OracleMTSRecoveryService
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OracleOraDb11g_home1
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OracleService
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: OracleVssWriter
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: osppsvc
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -433,6 +645,10 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: POP3Svc
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: postgresql-x64-9.4
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -489,6 +705,10 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: SDRSVC
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: SearchExchangeTracing
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -552,6 +772,10 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: SQLANYs_Sage_FAS_Fixed_Assets
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: SQLBrowser
       - case sensitive: false
         op: contains
@@ -580,6 +804,10 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: storflt
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: svcGenericHost
       - case sensitive: false
         op: contains
@@ -601,6 +829,14 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: Symantec
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: sysmon
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: TeamViewer
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -656,6 +892,10 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: Tomcat
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: Trend Micro Deep Security Manager
       - case sensitive: false
         op: contains
@@ -664,11 +904,23 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: UFNet
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: UI0Detect
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: UniFi
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: UTODetect
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: vds
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -681,6 +933,18 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: Veritas System Recovery
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: vmic
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: VMTools
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: vmvss
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -716,7 +980,15 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: wmms
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: wozyprobackup
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: WPFFontCache_v0400
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -724,106 +996,28 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: wsbexchange
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: WSearch
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: wscsvc
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: Zoolz 2 Service
-    - op: or
-      rules:
-      - op: or
-        rules:
-        - op: and
-          rules:
-          - op: or
-            rules:
-            - op: or
-              rules:
-              - case sensitive: false
-                op: is
-                path: event/ORIGINAL_FILE_NAME
-                value: net.exe
-              - case sensitive: false
-                op: is
-                path: event/ORIGINAL_FILE_NAME
-                value: net1.exe
-            - op: or
-              rules:
-              - case sensitive: false
-                op: ends with
-                path: event/FILE_PATH
-                value: \net.exe
-              - case sensitive: false
-                op: ends with
-                path: event/FILE_PATH
-                value: \net1.exe
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: ' stop '
-        - op: and
-          rules:
-          - op: or
-            rules:
-            - op: or
-              rules:
-              - case sensitive: false
-                op: is
-                path: event/ORIGINAL_FILE_NAME
-                value: PowerShell.EXE
-              - case sensitive: false
-                op: is
-                path: event/ORIGINAL_FILE_NAME
-                value: pwsh.dll
-            - op: or
-              rules:
-              - case sensitive: false
-                op: ends with
-                path: event/FILE_PATH
-                value: \powershell.exe
-              - case sensitive: false
-                op: ends with
-                path: event/FILE_PATH
-                value: \pwsh.exe
-          - op: or
-            rules:
-            - case sensitive: false
-              op: contains
-              path: event/COMMAND_LINE
-              value: 'Stop-Service '
-            - case sensitive: false
-              op: contains
-              path: event/COMMAND_LINE
-              value: 'Remove-Service '
-      - op: and
-        rules:
-        - op: or
-          rules:
-          - case sensitive: false
-            op: is
-            path: event/ORIGINAL_FILE_NAME
-            value: sc.exe
-          - case sensitive: false
-            op: ends with
-            path: event/FILE_PATH
-            value: \sc.exe
-        - op: or
-          rules:
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: ' stop '
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: ' delete '
-          - case sensitive: false
-            op: contains
-            path: event/COMMAND_LINE
-            value: ' pause '
 respond:
 - action: report
   metadata:
-    author: Nasreddine Bencherchali (Nextron Systems), frack113
-    description: Detects the usage of binaries such as 'net', 'sc' or 'powershell'
-      in order to stop, pause or delete critical or important Windows services such
-      as AV, Backup, etc. As seen being used in some ransomware scripts
+    author: Nasreddine Bencherchali (Nextron Systems), frack113 , X__Junior
+    description: 'Detects the usage of binaries such as ''net'', ''sc'' or ''powershell''
+      in order to stop, pause, disable or delete critical or important Windows services
+      such as AV, Backup, etc. As seen being used in some ransomware scripts
+
+      '
     falsepositives:
     - Administrators or tools shutting down the services due to upgrade or removal
       purposes. If you experience some false positive, please consider adding filters
@@ -836,7 +1030,8 @@ respond:
     - https://research.nccgroup.com/2022/08/19/back-in-black-unlocking-a-lockbit-3-0-ransomware-attack/
     - https://www.virustotal.com/gui/file/38283b775552da8981452941ea74191aa0d203edd3f61fb2dee7b0aea3514955
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1489
+    - attack.t1562.001
   name: Suspicious Windows Service Tampering
 

@@ -53,7 +53,7 @@ respond:
     references:
     - https://github.com/nasbench/EVTX-ETW-Resources/blob/45fd5be71a51aa518b1b36d4e1f36af498084e27/ETWEventsList/CSV/Windows11/21H2/W11_21H2_Pro_20220719_22000.795/Providers/Microsoft-Windows-Security-Mitigations.csv
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1574.002
   name: Unsigned Binary Loaded From Suspicious Location
 

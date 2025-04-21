@@ -45,7 +45,7 @@ respond:
     - https://lolbas-project.github.io/lolbas/Binaries/Msiexec/
     - https://twitter.com/_st0pp3r_/status/1583914515996897281
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1218.007
   name: DllUnregisterServer Function Call Via Msiexec.EXE
 

@@ -78,7 +78,7 @@ respond:
     - https://ired.team/offensive-security/code-execution/code-execution-through-control-panel-add-ins
     tags:
     - attack.execution
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1218.002
     - attack.persistence
     - attack.t1546

@@ -44,7 +44,7 @@ respond:
     - https://www.hexacorn.com/blog/2020/02/02/settingsynchost-exe-as-a-lolbin
     tags:
     - attack.execution
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1574.008
   name: Using SettingSyncHost.exe as LOLBin
 

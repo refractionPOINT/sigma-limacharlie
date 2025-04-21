@@ -48,7 +48,7 @@ respond:
     references:
     - https://www.microsoft.com/security/blog/2022/07/26/malicious-iis-extensions-quietly-open-persistent-backdoors-into-servers/
     tags:
-    - attack.command_and_control
+    - attack.command-and-control
     - attack.t1572
   name: Potential RDP Tunneling Via Plink
 

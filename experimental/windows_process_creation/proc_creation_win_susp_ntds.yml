@@ -152,7 +152,7 @@ respond:
     - https://github.com/rapid7/metasploit-framework/blob/d297adcebb5c1df6fe30b12ca79b161deb71571c/data/post/powershell/NTDSgrab.ps1
     - https://blog.talosintelligence.com/2022/08/recent-cyber-attack.html?m=1
     tags:
-    - attack.credential_access
+    - attack.credential-access
     - attack.t1003.003
   name: Suspicious Process Patterns NTDS.DIT Exfil
 

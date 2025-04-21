@@ -32,6 +32,6 @@ respond:
     references:
     - https://www.trendmicro.com/en_us/research/22/i/how-malicious-actors-abuse-native-linux-tools-in-their-attacks.html
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: Remove Scheduled Cron Task/Job
 

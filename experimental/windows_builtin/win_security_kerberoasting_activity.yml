@@ -1,0 +1,62 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '4769'
+    - case sensitive: false
+      op: is
+      path: Event/EventData/Status
+      value: '0x0'
+    - case sensitive: false
+      op: is
+      path: Event/EventData/TicketEncryptionType
+      value: '0x17'
+  - not: true
+    op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: Event/EventData/ServiceName
+        value: krbtgt
+      - case sensitive: false
+        op: ends with
+        path: Event/EventData/ServiceName
+        value: $
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/TargetUserName
+      value: $@
+  target: log
+respond:
+- action: report
+  metadata:
+    author: '@kostastsale'
+    description: 'This rule will collect the data needed to start looking into possible
+      kerberoasting activity.
+
+      Further analysis or computation within the query is needed focusing on requests
+      from one specific host/IP towards multiple service names within a time period
+      of 5 seconds.
+
+      You can then set a threshold for the number of requests and time between the
+      requests to turn this into an alert.
+
+      '
+    falsepositives:
+    - Legacy applications.
+    level: medium
+    references:
+    - https://www.trustedsec.com/blog/art_of_kerberoast/
+    - https://adsecurity.org/?p=3513
+    tags:
+    - attack.credential-access
+    - attack.t1558.003
+  name: Kerberoasting Activity - Initial Query
+

@@ -57,7 +57,7 @@ respond:
     - https://www.mandiant.com/resources/blog/fin7-shim-databases-persistence
     tags:
     - attack.persistence
-    - attack.privilege_escalation
+    - attack.privilege-escalation
     - attack.t1546.011
   name: Potential Shim Database Persistence via Sdbinst.EXE
 

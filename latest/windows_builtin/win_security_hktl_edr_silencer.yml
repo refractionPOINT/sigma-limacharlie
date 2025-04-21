@@ -1,0 +1,38 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - op: or
+    rules:
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '5441'
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '5447'
+  - case sensitive: false
+    op: contains
+    path: Event/EventData/FilterName
+    value: Custom Outbound Filter
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Thodoris Polyzos (@SmoothDeploy)
+    description: 'Detects execution of EDRSilencer, a tool that abuses the Windows
+      Filtering Platform (WFP) to block the outbound traffic of running EDR agents
+      based on specific hardcoded filter names.
+
+      '
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://github.com/netero1010/EDRSilencer
+    tags:
+    - attack.defense-evasion
+    - attack.t1562
+  name: HackTool - EDRSilencer Execution - Filter Added
+

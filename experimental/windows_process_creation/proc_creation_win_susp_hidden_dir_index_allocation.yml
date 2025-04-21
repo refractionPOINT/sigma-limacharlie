@@ -1,0 +1,34 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - case sensitive: false
+    op: contains
+    path: event/COMMAND_LINE
+    value: ::$index_allocation
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems), Scoubi (@ScoubiMtl)
+    description: 'Detects command line containing reference to the "::$index_allocation"
+      stream, which can be used as a technique to prevent access to folders or files
+      from tooling such as "explorer.exe" or "powershell.exe"
+
+      '
+    falsepositives:
+    - Unlikely
+    level: medium
+    references:
+    - https://twitter.com/pfiatde/status/1681977680688738305
+    - https://soroush.me/blog/2010/12/a-dotty-salty-directory-a-secret-place-in-ntfs-for-secret-files/
+    - https://sec-consult.com/blog/detail/pentesters-windows-ntfs-tricks-collection/
+    - https://github.com/redcanaryco/atomic-red-team/blob/5c3b23002d2bbede3c07e7307165fc2a235a427d/atomics/T1564.004/T1564.004.md#atomic-test-5---create-hidden-directory-via-index_allocation
+    - https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-fscc/c54dec26-1551-4d3a-a0ea-4fa40f848eb3
+    tags:
+    - attack.defense-evasion
+    - attack.t1564.004
+  name: Potential Hidden Directory Creation Via NTFS INDEX_ALLOCATION Stream - CLI
+

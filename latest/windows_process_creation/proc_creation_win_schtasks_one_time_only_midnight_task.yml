@@ -75,7 +75,7 @@ respond:
     tags:
     - attack.execution
     - attack.persistence
-    - attack.privilege_escalation
+    - attack.privilege-escalation
     - attack.t1053.005
   name: Uncommon One Time Only Scheduled Task At 00:00
 

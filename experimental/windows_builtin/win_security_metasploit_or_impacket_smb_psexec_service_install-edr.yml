@@ -43,7 +43,7 @@ respond:
     references:
     - https://bczyz1.github.io/2021/01/30/psexec.html
     tags:
-    - attack.lateral_movement
+    - attack.lateral-movement
     - attack.t1021.002
     - attack.t1570
     - attack.execution

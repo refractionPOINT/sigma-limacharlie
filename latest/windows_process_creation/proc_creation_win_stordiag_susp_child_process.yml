@@ -51,7 +51,7 @@ respond:
     - https://strontic.github.io/xcyclopedia/library/stordiag.exe-1F08FC87C373673944F6A7E8B18CD845.html
     - https://twitter.com/eral4m/status/1451112385041911809
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1218
   name: Execution via stordiag.exe
 

@@ -39,7 +39,7 @@ respond:
     references:
     - https://twitter.com/SBousseaden/status/1139811587760562176
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1055
   name: Suspicious Userinit Child Process
 

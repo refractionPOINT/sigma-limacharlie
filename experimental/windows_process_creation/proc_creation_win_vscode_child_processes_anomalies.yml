@@ -1,0 +1,127 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \code.exe
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \calc.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \regsvr32.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \rundll32.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \cscript.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \wscript.exe
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \powershell.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \pwsh.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \cmd.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: Invoke-Expressions
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: IEX
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: Invoke-Command
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ICM
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: DownloadString
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: rundll32
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: regsvr32
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: wscript
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: cscript
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: :\Users\Public\
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: :\Windows\Temp\
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: :\Temp\
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects uncommon or suspicious child processes spawning from a VsCode
+      "code.exe" process. This could indicate an attempt of persistence via VsCode
+      tasks or terminal profiles.
+    falsepositives:
+    - In development environment where VsCode is used heavily. False positives may
+      occur when developers use task to compile or execute different types of code.
+      Remove or add processes accordingly
+    level: medium
+    references:
+    - https://twitter.com/nas_bench/status/1618021838407495681
+    - https://twitter.com/nas_bench/status/1618021415852335105
+    tags:
+    - attack.execution
+    - attack.defense-evasion
+    - attack.t1218
+    - attack.t1202
+  name: Potentially Suspicious Child Process Of VsCode
+

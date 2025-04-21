@@ -97,7 +97,7 @@ respond:
     references:
     - https://www.huntress.com/blog/critical-vulnerabilities-in-papercut-print-management-software
     tags:
-    - attack.command_and_control
+    - attack.command-and-control
     - attack.t1105
   name: Suspicious Invoke-WebRequest Execution With DirectIP
 

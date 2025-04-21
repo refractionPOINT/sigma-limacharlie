@@ -39,6 +39,6 @@ respond:
     - https://www.virustotal.com/gui/file/339ff720c74dc44265b917b6d3e3ba0411d61f3cd3c328e9a2bae81592c8a6e5/content
     tags:
     - attack.execution
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: IE ZoneMap Setting Downgraded To MyComputer Zone For HTTP Protocols Via CLI
 

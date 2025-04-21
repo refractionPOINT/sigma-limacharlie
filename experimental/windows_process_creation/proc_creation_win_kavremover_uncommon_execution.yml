@@ -35,7 +35,7 @@ respond:
     references:
     - https://nasbench.medium.com/lolbined-using-kaspersky-endpoint-security-kes-installer-to-execute-arbitrary-commands-1c999f1b7fea
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1127
   name: Kavremover Dropped Binary LOLBIN Usage
 

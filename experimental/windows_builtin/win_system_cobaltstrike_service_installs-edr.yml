@@ -72,8 +72,8 @@ respond:
     - https://thedfirreport.com/2021/08/29/cobalt-strike-a-defenders-guide/
     tags:
     - attack.execution
-    - attack.privilege_escalation
-    - attack.lateral_movement
+    - attack.privilege-escalation
+    - attack.lateral-movement
     - attack.t1021.002
     - attack.t1543.003
     - attack.t1569.002

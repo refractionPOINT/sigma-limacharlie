@@ -1,0 +1,95 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is mac
+  - op: and
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /bash
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: tail
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: -c
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: base64
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: -d
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: '>'
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .avif
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .gif
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .jfif
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .jpeg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .jpg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .pjp
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .pjpeg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .png
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .svg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .webp
+respond:
+- action: report
+  metadata:
+    author: Joseliyo Sanchez, @Joseliyo_Jstnk
+    description: 'Detects the use of tail to extract bytes at an offset from an image
+      and then decode the base64 value to create a new file with the decoded content.
+      The detected execution is a bash one-liner.
+
+      '
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.virustotal.com/gui/file/16bafdf741e7a13137c489f3c8db1334f171c7cb13b62617d691b0a64783cc48/behavior
+    - https://www.virustotal.com/gui/file/483fafc64a2b84197e1ef6a3f51e443f84dc5742602e08b9e8ec6ad690b34ed0/behavior
+    tags:
+    - attack.defense-evasion
+    - attack.t1140
+  name: Potential Base64 Decoded From Images
+

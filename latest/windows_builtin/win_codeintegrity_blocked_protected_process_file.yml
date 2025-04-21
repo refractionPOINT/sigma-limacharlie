@@ -19,6 +19,6 @@ respond:
     - https://learn.microsoft.com/en-us/windows/security/application-security/application-control/windows-defender-application-control/operations/event-tag-explanations
     - Internal Research
     tags:
-    - attack.privilege_escalation
+    - attack.privilege-escalation
   name: CodeIntegrity - Disallowed File For Protected Processes Has Been Blocked
 

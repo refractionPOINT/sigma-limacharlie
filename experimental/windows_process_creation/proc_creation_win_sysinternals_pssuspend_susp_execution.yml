@@ -40,7 +40,7 @@ respond:
     - https://learn.microsoft.com/en-us/sysinternals/downloads/pssuspend
     - https://twitter.com/0gtweet/status/1638069413717975046
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1562.001
   name: Sysinternals PsSuspend Suspicious Execution
 

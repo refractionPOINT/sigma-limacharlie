@@ -51,7 +51,7 @@ respond:
     tags:
     - attack.execution
     - attack.t1059.001
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1127
   name: Detection of PowerShell Execution via Sqlps.exe
 

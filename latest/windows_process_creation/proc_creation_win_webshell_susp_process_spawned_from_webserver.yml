@@ -162,7 +162,7 @@ detect:
         - case sensitive: false
           op: ends with
           path: event/FILE_PATH
-          value: \ntdutil.exe
+          value: \ntdsutil.exe
         - case sensitive: false
           op: ends with
           path: event/FILE_PATH

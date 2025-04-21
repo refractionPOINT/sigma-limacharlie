@@ -115,6 +115,6 @@ respond:
     references:
     - https://app.any.run/tasks/fcadca91-3580-4ede-aff4-4d2bf809bf99/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: Suspicious Obfuscated PowerShell Code
 

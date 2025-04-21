@@ -46,7 +46,7 @@ respond:
     references:
     - https://www.elastic.co/guide/en/security/current/potential-remote-desktop-tunneling-detected.html
     tags:
-    - attack.lateral_movement
+    - attack.lateral-movement
     - attack.t1021
   name: Potential Remote Desktop Tunneling
 

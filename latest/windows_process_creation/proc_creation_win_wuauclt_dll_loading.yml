@@ -74,7 +74,7 @@ respond:
     - https://dtm.uk/wuauclt/
     - https://blog.malwarebytes.com/threat-intelligence/2022/01/north-koreas-lazarus-apt-leverages-windows-update-client-github-in-latest-campaign/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1218
     - attack.execution
   name: Proxy Execution Via Wuauclt.EXE

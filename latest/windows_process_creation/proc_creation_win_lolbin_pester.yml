@@ -46,7 +46,7 @@ respond:
     tags:
     - attack.execution
     - attack.t1059.001
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1216
   name: Execute Code with Pester.bat as Parent
 

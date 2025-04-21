@@ -1,0 +1,70 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \odbcconf.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: odbcconf.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -f '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /f '
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .rsp
+      - op: and
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/PARENT/FILE_PATH
+          value: C:\Windows\System32\runonce.exe
+        - case sensitive: false
+          op: is
+          path: event/FILE_PATH
+          value: C:\Windows\System32\odbcconf.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .exe /E /F "C:\WINDOWS\system32\odbcconf.tmp"
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects execution of "odbcconf" with the "-f" flag in order to load
+      a response file with a non-".rsp" extension.
+    falsepositives:
+    - Unlikely
+    level: high
+    references:
+    - https://learn.microsoft.com/en-us/sql/odbc/odbcconf-exe?view=sql-server-ver16
+    - https://lolbas-project.github.io/lolbas/Binaries/Odbcconf/
+    - https://www.trendmicro.com/en_us/research/17/h/backdoor-carrying-emails-set-sights-on-russian-speaking-businesses.html
+    tags:
+    - attack.defense-evasion
+    - attack.t1218.008
+  name: Suspicious Response File Execution Via Odbcconf.EXE
+

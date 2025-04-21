@@ -34,7 +34,7 @@ respond:
     - https://pberba.github.io/security/2021/11/23/linux-threat-hunting-for-persistence-account-creation-manipulation/
     - https://www.configserverfirewall.com/ubuntu-linux/ubuntu-add-user-to-root-group/
     tags:
-    - attack.privilege_escalation
+    - attack.privilege-escalation
     - attack.persistence
   name: User Added To Root/Sudoers Group Using Usermod
 

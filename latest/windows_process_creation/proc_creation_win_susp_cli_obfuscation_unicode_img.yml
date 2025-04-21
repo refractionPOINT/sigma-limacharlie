@@ -1,0 +1,122 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cmd.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cscript.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \powershell.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \pwsh.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \wscript.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: Cmd.EXE
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: cscript.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: PowerShell.EXE
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: pwsh.dll
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: wscript.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u02E3"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u02EA"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u02E2"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u2215"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u2044"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u2015"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\u2014"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\_"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\xAF"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\xAE"
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: "\xB6"
+respond:
+- action: report
+  metadata:
+    author: frack113, Florian Roth (Nextron Systems), Josh Nickels
+    description: 'Detects potential commandline obfuscation using unicode characters.
+
+      Adversaries may attempt to make an executable or file difficult to discover
+      or analyze by encrypting, encoding, or otherwise obfuscating its contents on
+      the system or in transit.
+
+      '
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.wietzebeukema.nl/blog/windows-command-line-obfuscation
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1027/T1027.md#atomic-test-6---dlp-evasion-via-sensitive-data-in-vba-macro-over-http
+    tags:
+    - attack.defense-evasion
+    - attack.t1027
+  name: Potential CommandLine Obfuscation Using Unicode Characters From Suspicious
+    Image
+

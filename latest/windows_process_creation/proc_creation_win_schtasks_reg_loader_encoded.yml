@@ -62,7 +62,7 @@ detect:
 respond:
 - action: report
   metadata:
-    author: pH-T (Nextron Systems), @Kostastsale, @TheDFIRReport, X__Junior (Nextron
+    author: pH-T (Nextron Systems), @Kostastsale, TheDFIRReport, X__Junior (Nextron
       Systems), Nasreddine Bencherchali (Nextron Systems)
     description: Detects the creation of a schtask that potentially executes a base64
       encoded payload stored in the Windows Registry using PowerShell.

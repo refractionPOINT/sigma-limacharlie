@@ -76,7 +76,7 @@ respond:
     references:
     - https://www.elastic.co/guide/en/security/current/windows-firewall-disabled-via-powershell.html
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1562
   name: Windows Firewall Disabled via PowerShell
 

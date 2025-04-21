@@ -1,0 +1,45 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \dotnet-trace.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: dotnet-trace.dll
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '-- '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: collect
+respond:
+- action: report
+  metadata:
+    author: Jimmy Bayne (@bohops)
+    description: Detects commandline arguments for executing a child process via dotnet-trace.exe
+    falsepositives:
+    - Legitimate usage of the utility in order to debug and trace a program.
+    level: medium
+    references:
+    - https://twitter.com/bohops/status/1740022869198037480
+    tags:
+    - attack.execution
+    - attack.defense-evasion
+    - attack.t1218
+  name: Binary Proxy Execution Via Dotnet-Trace.EXE
+

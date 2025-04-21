@@ -39,7 +39,7 @@ respond:
     - https://www.bleepingcomputer.com/news/security/microsoft-teams-stores-auth-tokens-as-cleartext-in-windows-linux-macs/
     - https://www.vectra.ai/blogpost/undermining-microsoft-teams-security-by-mining-tokens
     tags:
-    - attack.credential_access
+    - attack.credential-access
     - attack.t1528
   name: Suspicious Teams Application Related ObjectAcess Event
 

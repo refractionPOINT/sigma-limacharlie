@@ -41,8 +41,8 @@ respond:
     references:
     - https://twitter.com/SBousseaden/status/1195284233729777665
     tags:
-    - attack.privilege_escalation
-    - attack.credential_access
+    - attack.privilege-escalation
+    - attack.credential-access
     - attack.t1557.001
   name: RottenPotato Like Attack Pattern
 

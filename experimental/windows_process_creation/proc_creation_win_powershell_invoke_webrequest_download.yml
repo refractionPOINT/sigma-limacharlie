@@ -1,0 +1,113 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \pwsh.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: PowerShell.EXE
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: pwsh.dll
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'curl '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: Invoke-WebRequest
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'iwr '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'wget '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -ur'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -o'
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \AppData\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Desktop\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Temp\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Users\Public\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '%AppData%'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '%Public%'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '%Temp%'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '%tmp%'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: :\Windows\
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects a suspicious call to Invoke-WebRequest cmdlet where the and
+      output is located in a suspicious location
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.sentinelone.com/blog/living-off-windows-defender-lockbit-ransomware-sideloads-cobalt-strike-through-microsoft-security-tool/
+    tags:
+    - attack.command-and-control
+    - attack.t1105
+  name: Suspicious Invoke-WebRequest Execution
+

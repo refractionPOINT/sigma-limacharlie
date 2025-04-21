@@ -38,7 +38,7 @@ respond:
     references:
     - https://www.trendmicro.com/en_us/research/21/e/darkside-linux-vms-targeted.html
     - https://www.trendmicro.com/en_us/research/22/a/analysis-and-Impact-of-lockbit-ransomwares-first-linux-and-vmware-esxi-variant.html
-    - https://developer.vmware.com/docs/11743/esxi-7-0-esxcli-command-reference/namespace/esxcli_vsan.html
+    - https://developer.broadcom.com/xapis/esxcli-command-reference/7.0.0/namespace/esxcli_vsan.html
     tags:
     - attack.discovery
     - attack.t1033

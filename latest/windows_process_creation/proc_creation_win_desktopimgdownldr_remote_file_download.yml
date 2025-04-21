@@ -32,7 +32,7 @@ respond:
     references:
     - https://www.elastic.co/guide/en/security/current/remote-file-download-via-desktopimgdownldr-utility.html
     tags:
-    - attack.command_and_control
+    - attack.command-and-control
     - attack.t1105
   name: Remote File Download Via Desktopimgdownldr Utility
 

@@ -34,6 +34,6 @@ respond:
     - https://www.hexacorn.com/blog/2023/06/07/this-lolbin-doesnt-exist/
     tags:
     - attack.execution
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: Potential ShellDispatch.DLL Functionality Abuse
 

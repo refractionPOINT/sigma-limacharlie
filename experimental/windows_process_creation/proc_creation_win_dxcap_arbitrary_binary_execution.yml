@@ -1,0 +1,43 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \DXCap.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: DXCap.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' -c '
+respond:
+- action: report
+  metadata:
+    author: Beyu Denis, oscd.community, Nasreddine Bencherchali (Nextron Systems)
+    description: 'Detects the execution of "DXCap.EXE" with the "-c" flag, which allows
+      a user to launch any arbitrary binary or windows package through DXCap itself.
+      This can be abused to potentially bypass application whitelisting.
+
+      '
+    falsepositives:
+    - Legitimate execution of dxcap.exe by legitimate user
+    level: medium
+    references:
+    - https://lolbas-project.github.io/lolbas/OtherMSBinaries/Dxcap/
+    - https://twitter.com/harr0ey/status/992008180904419328
+    tags:
+    - attack.defense-evasion
+    - attack.t1218
+  name: New Capture Session Launched Via DXCap.EXE
+

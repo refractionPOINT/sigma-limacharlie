@@ -30,7 +30,7 @@ respond:
     tags:
     - attack.execution
     - attack.persistence
-    - attack.privilege_escalation
+    - attack.privilege-escalation
     - attack.t1053.003
   name: Scheduled Cron Task/Job - Linux
 

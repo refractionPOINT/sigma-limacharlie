@@ -33,7 +33,7 @@ respond:
     references:
     - https://car.mitre.org/wiki/CAR-2016-04-005
     tags:
-    - attack.lateral_movement
+    - attack.lateral-movement
     - attack.t1078.001
     - attack.t1078.002
     - attack.t1078.003

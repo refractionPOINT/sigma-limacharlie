@@ -57,7 +57,7 @@ respond:
     - https://twitter.com/_felamos/status/1204705548668555264
     - https://bohops.com/2019/08/19/dotnet-core-a-vector-for-awl-bypass-defense-evasion/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1218
   name: Arbitrary DLL or Csproj Code Execution Via Dotnet.EXE
 

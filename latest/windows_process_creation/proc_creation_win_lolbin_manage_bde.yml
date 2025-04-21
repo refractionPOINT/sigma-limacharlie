@@ -62,7 +62,7 @@ respond:
     - https://twitter.com/JohnLaTwC/status/1223292479270600706
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1216/T1216.md
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1216
   name: Potential Manage-bde.wsf Abuse To Proxy Execution
 

@@ -72,7 +72,7 @@ respond:
     - https://www.zscaler.com/blogs/security-research/technical-analysis-crytox-ransomware
     - https://research.checkpoint.com/2022/evilplayout-attack-against-irans-state-broadcaster/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1218
   name: Diskshadow Script Mode - Execution From Potential Suspicious Location
 

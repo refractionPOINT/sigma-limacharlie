@@ -1,0 +1,104 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \schtasks.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /change '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /create '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '/ru '
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: NT AUT
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' SYSTEM '
+    - not: true
+      op: or
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \schtasks.exe
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: /TN TVInstallRestore
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \TeamViewer_.exe
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: Subscription Heartbeat
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \HeartbeatConfig.xml
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: \Microsoft Shared\OFFICE
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '/Create /F /RU System /SC WEEKLY /TN AviraSystemSpeedupVerify /TR '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: :\Program Files (x86)\Avira\System Speedup\setup\avira_speedup_setup.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /VERIFY /VERYSILENT /NOSTART /NODOTNET /NORESTART" /RL HIGHEST
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects the creation or update of a scheduled task to run with "NT
+      AUTHORITY\SYSTEM" privileges
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.elastic.co/security-labs/exploring-the-qbot-attack-pattern
+    - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/schtasks
+    tags:
+    - attack.execution
+    - attack.persistence
+    - attack.t1053.005
+  name: Schtasks Creation Or Modification With SYSTEM Privileges
+

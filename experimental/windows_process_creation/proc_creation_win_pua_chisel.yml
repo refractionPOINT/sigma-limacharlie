@@ -62,7 +62,7 @@ respond:
     - https://arcticwolf.com/resources/blog/lorenz-ransomware-chiseling-in/
     - https://blog.sekoia.io/lucky-mouse-incident-response-to-detection-engineering/
     tags:
-    - attack.command_and_control
+    - attack.command-and-control
     - attack.t1090.001
   name: PUA - Chisel Tunneling Tool Execution
 

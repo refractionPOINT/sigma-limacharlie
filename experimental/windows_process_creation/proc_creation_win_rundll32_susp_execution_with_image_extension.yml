@@ -87,7 +87,7 @@ respond:
     references:
     - https://www.zscaler.com/blogs/security-research/onenote-growing-threat-malware-distribution
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1218.011
   name: Suspicious Rundll32 Execution With Image Extension
 

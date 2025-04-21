@@ -35,7 +35,7 @@ respond:
     - https://unit42.paloaltonetworks.com/unit-42-title-gamaredon-group-toolset-evolution
     - https://uvnc.com/docs/uvnc-viewer/52-ultravnc-viewer-commandline-parameters.html
     tags:
-    - attack.lateral_movement
+    - attack.lateral-movement
     - attack.g0047
     - attack.t1021.005
   name: Suspicious UltraVNC Execution

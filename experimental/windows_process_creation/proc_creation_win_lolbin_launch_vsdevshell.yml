@@ -33,7 +33,7 @@ respond:
     references:
     - https://twitter.com/nas_bench/status/1535981653239255040
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1216.001
   name: Launch-VsDevShell.PS1 Proxy Execution
 

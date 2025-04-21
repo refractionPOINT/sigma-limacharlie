@@ -64,7 +64,7 @@ respond:
     references:
     - https://enigma0x3.net/2017/01/05/lateral-movement-using-the-mmc20-application-com-object/
     tags:
-    - attack.lateral_movement
+    - attack.lateral-movement
     - attack.t1021.003
   name: MMC Spawning Windows Shell
 

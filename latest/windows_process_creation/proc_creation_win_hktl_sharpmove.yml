@@ -1,0 +1,87 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \SharpMove.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: SharpMove.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: computername=
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: action=create
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: action=dcom
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: action=executevbs
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: action=hijackdcom
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: action=modschtask
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: action=modsvc
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: action=query
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: action=scm
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: action=startservice
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: action=taskscheduler
+respond:
+- action: report
+  metadata:
+    author: Luca Di Bartolomeo (CrimpSec)
+    description: 'Detects the execution of SharpMove, a .NET utility performing multiple
+      tasks such as "Task Creation", "SCM" query, VBScript execution using WMI via
+      its PE metadata and command line options.
+
+      '
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://github.com/0xthirteen/SharpMove/
+    - https://pentestlab.blog/tag/sharpmove/
+    tags:
+    - attack.lateral-movement
+    - attack.t1021.002
+  name: HackTool - SharpMove Tool Execution
+

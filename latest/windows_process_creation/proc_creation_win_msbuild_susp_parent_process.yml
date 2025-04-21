@@ -57,6 +57,6 @@ respond:
     - https://app.any.run/tasks/abdf586e-df0c-4d39-89a7-06bf24913401/
     - https://www.echotrail.io/insights/search/msbuild.exe
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: Suspicious Msbuild Execution By Uncommon Parent Process
 

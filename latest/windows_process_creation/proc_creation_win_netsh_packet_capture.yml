@@ -41,7 +41,7 @@ respond:
     - https://klausjochem.me/2016/02/03/netsh-the-cyber-attackers-tool-of-choice/
     tags:
     - attack.discovery
-    - attack.credential_access
+    - attack.credential-access
     - attack.t1040
   name: New Network Trace Capture Started Via Netsh.EXE
 

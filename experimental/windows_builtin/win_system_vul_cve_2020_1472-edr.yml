@@ -25,7 +25,7 @@ respond:
     references:
     - https://support.microsoft.com/en-us/help/4557222/how-to-manage-the-changes-in-netlogon-secure-channel-connections-assoc
     tags:
-    - attack.privilege_escalation
+    - attack.privilege-escalation
     - attack.t1548
   name: Vulnerable Netlogon Secure Channel Connection Allowed
 

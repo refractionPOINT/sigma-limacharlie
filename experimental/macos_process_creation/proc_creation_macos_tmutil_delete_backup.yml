@@ -1,0 +1,45 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is mac
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /tmutil
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: tmutil
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: delete
+respond:
+- action: report
+  metadata:
+    author: Pratinav Chandra
+    description: 'Detects deletion attempts of MacOS Time Machine backups via the
+      native backup utility "tmutil".
+
+      An adversary may perform this action before launching a ransonware attack to
+      prevent the victim from restoring their files.
+
+      '
+    falsepositives:
+    - Legitimate activities
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1490/T1490.md#atomic-test-12---disable-time-machine
+    - https://www.loobins.io/binaries/tmutil/
+    tags:
+    - attack.impact
+    - attack.t1490
+  name: Time Machine Backup Deletion Attempt Via Tmutil - MacOS
+

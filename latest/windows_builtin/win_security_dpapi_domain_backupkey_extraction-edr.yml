@@ -33,7 +33,7 @@ respond:
     references:
     - https://threathunterplaybook.com/hunts/windows/190620-DomainDPAPIBackupKeyExtraction/notebook.html
     tags:
-    - attack.credential_access
+    - attack.credential-access
     - attack.t1003.004
   name: DPAPI Domain Backup Key Extraction
 

@@ -1,0 +1,51 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: HH.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \hh.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: http://
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: https://
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \\\\
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects the usage of "hh.exe" to execute/download remotely hosted
+      ".chm" files.
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.splunk.com/en_us/blog/security/follina-for-protocol-handlers.html
+    - https://github.com/redcanaryco/atomic-red-team/blob/1cf4dd51f83dcb0ebe6ade902d6157ad2dbc6ac8/atomics/T1218.001/T1218.001.md
+    - https://www.zscaler.com/blogs/security-research/unintentional-leak-glimpse-attack-vectors-apt37
+    tags:
+    - attack.defense-evasion
+    - attack.t1218.001
+  name: Remote CHM File Download/Execution Via HH.EXE
+

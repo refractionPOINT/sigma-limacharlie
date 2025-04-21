@@ -62,6 +62,6 @@ respond:
     references:
     - https://learn.microsoft.com/en-us/previous-versions/windows/desktop/legacy/aa394225(v=vs.85)
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: Potentially Suspicious Call To Win32_NTEventlogFile Class
 

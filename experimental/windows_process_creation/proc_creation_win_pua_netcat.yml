@@ -74,7 +74,7 @@ respond:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1095/T1095.md
     - https://www.revshells.com/
     tags:
-    - attack.command_and_control
+    - attack.command-and-control
     - attack.t1095
   name: PUA - Netcat Suspicious Execution
 

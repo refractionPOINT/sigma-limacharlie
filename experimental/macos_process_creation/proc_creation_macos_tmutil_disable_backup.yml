@@ -1,0 +1,44 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is mac
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /tmutil
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: tmutil
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: disable
+respond:
+- action: report
+  metadata:
+    author: Pratinav Chandra
+    description: 'Detects disabling of Time Machine (Apple''s automated backup utility
+      software) via the native macOS backup utility "tmutil".
+
+      An attacker can use this to prevent backups from occurring.
+
+      '
+    falsepositives:
+    - Legitimate administrator activity
+    level: medium
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1490/T1490.md#atomic-test-12---disable-time-machine
+    - https://www.loobins.io/binaries/tmutil/
+    tags:
+    - attack.impact
+    - attack.t1490
+  name: Time Machine Backup Disabled Via Tmutil - MacOS
+

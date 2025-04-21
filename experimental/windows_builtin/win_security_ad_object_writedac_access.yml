@@ -38,7 +38,7 @@ respond:
     - https://threathunterplaybook.com/library/windows/active_directory_replication.html
     - https://threathunterplaybook.com/hunts/windows/190101-ADModDirectoryReplication/notebook.html
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1222.001
   name: AD Object WriteDAC Access
 

@@ -33,7 +33,7 @@ respond:
     - https://www.phpied.com/make-your-javascript-a-windows-exe/
     - https://twitter.com/DissectMalware/status/998797808907046913
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1127
   name: JScript Compiler Execution
 

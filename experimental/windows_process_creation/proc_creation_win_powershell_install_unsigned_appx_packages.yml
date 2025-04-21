@@ -57,6 +57,6 @@ respond:
     - https://twitter.com/WindowsDocs/status/1620078135080325122
     tags:
     - attack.persistence
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: Unsigned AppX Installation Attempt Using Add-AppxPackage
 

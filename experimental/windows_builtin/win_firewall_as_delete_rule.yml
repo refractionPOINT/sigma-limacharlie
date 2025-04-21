@@ -22,11 +22,15 @@ detect:
         - case sensitive: false
           op: starts with
           path: Event/EventData/ModifyingApplication
+          value: C:\Program Files (x86)\
+        - case sensitive: false
+          op: starts with
+          path: Event/EventData/ModifyingApplication
           value: C:\Program Files\
         - case sensitive: false
           op: starts with
           path: Event/EventData/ModifyingApplication
-          value: C:\Program Files (x86)\
+          value: C:\Windows\WinSxS\
       - case sensitive: false
         op: is
         path: Event/EventData/ModifyingApplication
@@ -60,7 +64,7 @@ respond:
     references:
     - https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-r2-and-2008/dd364427(v=ws.10)
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1562.004
   name: A Rule Has Been Deleted From The Windows Firewall Exception List
 

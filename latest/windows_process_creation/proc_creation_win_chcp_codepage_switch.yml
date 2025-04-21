@@ -36,6 +36,6 @@ respond:
     - https://twitter.com/cglyer/status/1183756892952248325
     tags:
     - attack.t1036
-    - attack.defense_evasion
+    - attack.defense-evasion
   name: Suspicious CodePage Switch Via CHCP
 

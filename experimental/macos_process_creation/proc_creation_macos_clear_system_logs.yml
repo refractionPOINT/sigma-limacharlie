@@ -48,7 +48,7 @@ respond:
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1070.002/T1070.002.md
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1070.002
   name: Indicator Removal on Host - Clear Mac System Logs
 

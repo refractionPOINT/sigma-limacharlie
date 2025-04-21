@@ -5,22 +5,37 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - case sensitive: false
-      op: is
-      path: event/EVENT/EventData/Provider_Name
-      value: Service Control Manager
-    - case sensitive: false
-      op: is
-      path: event/EVENT/System/EventID
-      value: '7045'
-    - case sensitive: false
-      op: is
-      path: event/EVENT/EventData/ServiceName
-      value: AnyDesk Service
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/Provider_Name
+        value: Service Control Manager
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '7045'
+    - op: or
+      rules:
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/ServiceName
+          value: AnyDesk
+        - case sensitive: false
+          op: contains
+          path: event/EVENT/EventData/ServiceName
+          value: Service
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ImagePath
+        value: AnyDesk
 respond:
 - action: report
   metadata:
-    author: Nasreddine Bencherchali (Nextron Systems)
+    author: Nasreddine Bencherchali (Nextron Systems), Swachchhanda Shrawan Poudel
+      (Nextron Systems)
     description: Detects the installation of the anydesk software service. Which could
       be an indication of anydesk abuse if you the software isn't already used.
     falsepositives:
@@ -28,6 +43,7 @@ respond:
     level: medium
     references:
     - https://thedfirreport.com/2022/08/08/bumblebee-roasts-its-way-to-domain-admin/
+    - https://thedfirreport.com/2025/02/24/confluence-exploit-leads-to-lockbit-ransomware/
     tags:
     - attack.persistence
   name: Anydesk Remote Access Software Service Installation

@@ -1,0 +1,819 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Add-Exfiltration
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Add-Persistence
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Add-RegBackdoor
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Add-RemoteRegBackdoor
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Add-ScrnSaveBackdoor
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Check-VM
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ConvertTo-Rc4ByteStream
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Decrypt-Hash
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Disable-ADIDNSNode
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Disable-MachineAccount
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Do-Exfiltration
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Enable-ADIDNSNode
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Enable-MachineAccount
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Enabled-DuplicateToken
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Exploit-Jboss
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Export-ADR
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Export-ADRCSV
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Export-ADRExcel
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Export-ADRHTML
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Export-ADRJSON
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Export-ADRXML
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Find-Fruit
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Find-GPOLocation
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Find-TrustedDocuments
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-ADIDNS
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-ApplicationHost
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-ChromeDump
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-ClipboardContents
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-FoxDump
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-GPPPassword
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-IndexedItem
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-KerberosAESKey
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-Keystrokes
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-LSASecret
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-MachineAccountAttribute
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-MachineAccountCreator
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-PassHashes
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-RegAlwaysInstallElevated
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-RegAutoLogon
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-RemoteBootKey
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-RemoteCachedCredential
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-RemoteLocalAccountHash
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-RemoteLSAKey
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-RemoteMachineAccountHash
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-RemoteNLKMKey
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-RickAstley
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-Screenshot
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-SecurityPackages
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-ServiceFilePermission
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-ServicePermission
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-ServiceUnquoted
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-SiteListPassword
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-System
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-TimedScreenshot
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-UnattendedInstallFile
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-Unconstrained
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-USBKeystrokes
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-VaultCredential
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-VulnAutoRun
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-VulnSchTask
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Grant-ADIDNSPermission
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Gupt-Backdoor
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: HTTP-Login
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Install-ServiceBinary
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Install-SSP
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-ACLScanner
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-ADRecon
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-ADSBackdoor
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-AgentSmith
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-AllChecks
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-ARPScan
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-AzureHound
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-BackdoorLNK
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-BadPotato
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-BetterSafetyKatz
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-BypassUAC
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-Carbuncle
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-Certify
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-ConPtyShell
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-CredentialInjection
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-DAFT
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-DCSync
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-DinvokeKatz
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-DllInjection
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-DNSUpdate
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-DomainPasswordSpray
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-DowngradeAccount
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-EgressCheck
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-Eyewitness
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-FakeLogonScreen
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-Farmer
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-Get-RBCD-Threaded
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-Gopher
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-Grouper
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-HandleKatz
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-ImpersonatedProcess
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-ImpersonateSystem
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-InteractiveSystemPowerShell
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-Internalmonologue
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-Inveigh
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-InveighRelay
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-KrbRelay
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-LdapSignCheck
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-Lockless
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-MalSCCM
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-Mimikatz
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-Mimikittenz
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-MITM6
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-NanoDump
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-NetRipper
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-Nightmare
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-NinjaCopy
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-OfficeScrape
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-OxidResolver
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-P0wnedshell
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-Paranoia
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-PortScan
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-PoshRatHttp
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-PostExfil
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-PowerDump
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-PowerShellTCP
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-PowerShellWMI
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-PPLDump
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-PsExec
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-PSInject
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-PsUaCme
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-ReflectivePEInjection
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-ReverseDNSLookup
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-Rubeus
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-RunAs
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-SafetyKatz
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-SauronEye
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-SCShell
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-Seatbelt
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-ServiceAbuse
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-ShadowSpray
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-Sharp
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-Shellcode
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-SMBScanner
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-Snaffler
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-Spoolsample
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-SpraySinglePassword
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-SSHCommand
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-StandIn
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-StickyNotesExtract
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-SystemCommand
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-Tasksbackdoor
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-Tater
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-Thunderfox
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-ThunderStruck
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-TokenManipulation
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-Tokenvator
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-TotalExec
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-UrbanBishop
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-UserHunter
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-VoiceTroll
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-Whisker
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-WinEnum
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-winPEAS
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-WireTap
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-WmiCommand
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-WMIExec
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-WScriptBypassUAC
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Invoke-Zerologon
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: MailRaider
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: New-ADIDNSNode
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: New-DNSRecordArray
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: New-HoneyHash
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: New-InMemoryModule
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: New-MachineAccount
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: New-SOASerialNumberArray
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Out-Minidump
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Port-Scan
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: PowerBreach
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: 'powercat '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: PowerUp
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: PowerView
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Remove-ADIDNSNode
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Remove-MachineAccount
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Remove-Update
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Rename-ADIDNSNode
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Revoke-ADIDNSPermission
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Set-ADIDNSNode
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Set-MacAttribute
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Set-MachineAccountAttribute
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Set-Wallpaper
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Show-TargetScreen
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Start-CaptureServer
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Start-Dnscat2
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Start-WebcamRecorder
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Veeam-Get-Creds
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: VolumeShadowCopyTools
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects Commandlet names from well-known PowerShell exploitation
+      frameworks
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://adsecurity.org/?p=2921
+    - https://github.com/S3cur3Th1sSh1t/PowerSharpPack/tree/master/PowerSharpBinaries
+    - https://github.com/BC-SECURITY/Invoke-ZeroLogon/blob/111d17c7fec486d9bb23387e2e828b09a26075e4/Invoke-ZeroLogon.ps1
+    - https://github.com/xorrior/RandomPS-Scripts/blob/848c919bfce4e2d67b626cbcf4404341cfe3d3b6/Get-DXWebcamVideo.ps1
+    - https://github.com/rvrsh3ll/Misc-Powershell-Scripts/blob/6f23bb41f9675d7e2d32bacccff75e931ae00554/OfficeMemScraper.ps1
+    - https://github.com/dafthack/DomainPasswordSpray/blob/b13d64a5834694aa73fd2aea9911a83027c465a7/DomainPasswordSpray.ps1
+    - https://unit42.paloaltonetworks.com/threat-assessment-black-basta-ransomware/
+    - https://research.nccgroup.com/2022/06/06/shining-the-light-on-black-basta/
+    - https://github.com/calebstewart/CVE-2021-1675
+    - https://github.com/BloodHoundAD/BloodHound/blob/0927441f67161cc6dc08a53c63ceb8e333f55874/Collectors/AzureHound.ps1
+    - https://bloodhound.readthedocs.io/en/latest/data-collection/azurehound.html
+    - https://github.com/HarmJ0y/DAMP
+    - https://github.com/samratashok/nishang
+    - https://github.com/DarkCoderSc/PowerRunAsSystem/
+    - https://github.com/besimorhino/powercat
+    - https://github.com/Kevin-Robertson/Powermad
+    - https://github.com/adrecon/ADRecon
+    - https://github.com/adrecon/AzureADRecon
+    - https://github.com/sadshade/veeam-creds/blob/6010eaf31ba41011b58d6af3950cffbf6f5cea32/Veeam-Get-Creds.ps1
+    tags:
+    - attack.execution
+    - attack.discovery
+    - attack.t1482
+    - attack.t1087
+    - attack.t1087.001
+    - attack.t1087.002
+    - attack.t1069.001
+    - attack.t1069.002
+    - attack.t1069
+    - attack.t1059.001
+  name: Malicious PowerShell Commandlets - ProcessCreation
+

@@ -52,7 +52,7 @@ respond:
     references:
     - https://posts.specterops.io/application-whitelisting-bypass-and-arbitrary-unsigned-code-execution-technique-in-winrm-vbs-c8c24fb40404
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1216
   name: AWL Bypass with Winrm.vbs and Malicious WsmPty.xsl/WsmTxt.xsl
 

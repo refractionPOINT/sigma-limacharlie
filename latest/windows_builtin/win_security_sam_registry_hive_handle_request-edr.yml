@@ -30,7 +30,7 @@ respond:
     tags:
     - attack.discovery
     - attack.t1012
-    - attack.credential_access
+    - attack.credential-access
     - attack.t1552.002
   name: SAM Registry Hive Handle Request
 

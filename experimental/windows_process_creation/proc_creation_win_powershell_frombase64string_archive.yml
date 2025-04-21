@@ -32,7 +32,7 @@ respond:
     references:
     - https://speakerdeck.com/heirhabarov/hunting-for-powershell-abuse?slide=43
     tags:
-    - attack.command_and_control
+    - attack.command-and-control
     - attack.t1132.001
   name: Suspicious FromBase64String Usage On Gzip Archive - Process Creation
 

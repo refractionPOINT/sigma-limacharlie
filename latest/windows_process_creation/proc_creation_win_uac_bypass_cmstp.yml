@@ -57,8 +57,8 @@ respond:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1218.003/T1218.003.md
     - https://lolbas-project.github.io/lolbas/Binaries/Cmstp/
     tags:
-    - attack.privilege_escalation
-    - attack.defense_evasion
+    - attack.privilege-escalation
+    - attack.defense-evasion
     - attack.t1548.002
     - attack.t1218.003
   name: Bypass UAC via CMSTP

@@ -11,14 +11,6 @@ detect:
     - case sensitive: false
       op: is
       path: Event/System/EventID
-      value: '4658'
-    - case sensitive: false
-      op: is
-      path: Event/System/EventID
-      value: '4660'
-    - case sensitive: false
-      op: is
-      path: Event/System/EventID
       value: '4663'
   - case sensitive: false
     op: ends with
@@ -38,7 +30,7 @@ respond:
     - https://www.jpcert.or.jp/english/pub/sr/ir_research.html
     - https://jpcertcc.github.io/ToolAnalysisResultSheet
     tags:
-    - attack.credential_access
+    - attack.credential-access
     - attack.t1003
     - attack.s0005
   name: WCE wceaux.dll Access

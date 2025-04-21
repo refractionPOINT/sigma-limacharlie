@@ -112,7 +112,7 @@ respond:
     references:
     - https://twitter.com/menasec1/status/1104489274387451904
     tags:
-    - attack.lateral_movement
+    - attack.lateral-movement
     - attack.t1021.002
   name: First Time Seen Remote Named Pipe
 

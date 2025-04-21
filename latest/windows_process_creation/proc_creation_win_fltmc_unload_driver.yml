@@ -66,7 +66,7 @@ respond:
     - https://www.darkoperator.com/blog/2018/10/5/operating-offensively-against-sysmon
     - https://www.cybereason.com/blog/threat-analysis-report-lockbit-2.0-all-paths-lead-to-ransom
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1070
     - attack.t1562
     - attack.t1562.002

@@ -91,10 +91,16 @@ detect:
         - not: true
           op: exists
           path: event/PARENT/FILE_PATH
-        - case sensitive: false
-          op: is
-          path: event/PARENT/FILE_PATH
-          value: '-'
+        - op: or
+          rules:
+          - case sensitive: false
+            op: is
+            path: event/PARENT/FILE_PATH
+            value: ''
+          - case sensitive: false
+            op: is
+            path: event/PARENT/FILE_PATH
+            value: '-'
 respond:
 - action: report
   metadata:
@@ -108,7 +114,7 @@ respond:
     - https://www.carbonblack.com/2014/06/10/screenshot-demo-hunt-evil-faster-than-ever-with-carbon-black/
     - https://www.13cubed.com/downloads/windows_process_genealogy_v2.pdf
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1036.003
     - attack.t1036.005
   name: Windows Processes Suspicious Parent Directory

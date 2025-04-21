@@ -376,7 +376,7 @@ respond:
     - https://www.vmray.com/analyses/2d2fa29185ad/report/overview.html
     - https://app.any.run/tasks/c903e9c8-0350-440c-8688-3881b556b8e0/
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.execution
     - attack.t1047
     - attack.t1204.002

@@ -48,7 +48,7 @@ respond:
     references:
     - https://documentation.pdq.com/PDQDeploy/13.0.3.0/index.html?windows-services.htm
     tags:
-    - attack.privilege_escalation
+    - attack.privilege-escalation
     - attack.t1543.003
   name: New PDQDeploy Service - Server Side
 

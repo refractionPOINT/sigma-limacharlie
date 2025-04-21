@@ -58,7 +58,7 @@ respond:
     - https://twitter.com/hexacorn/status/1448037865435320323
     - https://twitter.com/Gal_B1t/status/1062971006078345217
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.t1036
   name: Potential Command Line Path Traversal Evasion Attempt
 

@@ -20,7 +20,7 @@ respond:
     - https://learn.microsoft.com/en-us/windows/security/application-security/application-control/windows-defender-application-control/operations/event-tag-explanations
     - Internal Research
     tags:
-    - attack.privilege_escalation
+    - attack.privilege-escalation
     - attack.t1543
   name: CodeIntegrity - Blocked Driver Load With Revoked Certificate
 

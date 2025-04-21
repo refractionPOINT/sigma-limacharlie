@@ -62,8 +62,9 @@ respond:
     - https://twitter.com/nas_bench/status/1534916659676422152
     - https://twitter.com/nas_bench/status/1534915321856917506
     tags:
-    - attack.defense_evasion
+    - attack.defense-evasion
     - attack.execution
+    - attack.credential-access
     - attack.t1003.001
   name: Potential Adplus.EXE Abuse
 
