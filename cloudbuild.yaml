@@ -110,7 +110,7 @@ steps:
   - -c
   - |
     ls -lahR
-    git add ./*
+    git add ./
     git commit -m "`git status --porcelain`"
     git push
   volumes:
