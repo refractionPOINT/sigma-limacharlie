@@ -91,6 +91,7 @@ respond:
     - https://lolbas-project.github.io/lolbas/OtherMSBinaries/DumpMinitool/
     tags:
     - attack.defense-evasion
+    - attack.credential-access
     - attack.t1036
     - attack.t1003.001
   name: Suspicious DumpMinitool Execution

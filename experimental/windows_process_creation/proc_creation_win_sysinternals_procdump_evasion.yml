@@ -68,5 +68,6 @@ respond:
     - attack.defense-evasion
     - attack.t1036
     - attack.t1003.001
+    - attack.credential-access
   name: Potential SysInternals ProcDump Evasion
 
