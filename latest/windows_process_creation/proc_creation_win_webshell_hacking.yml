@@ -237,6 +237,7 @@ respond:
     - https://youtu.be/7aemGhaE9ds?t=641
     tags:
     - attack.persistence
+    - attack.discovery
     - attack.t1505.003
     - attack.t1018
     - attack.t1033

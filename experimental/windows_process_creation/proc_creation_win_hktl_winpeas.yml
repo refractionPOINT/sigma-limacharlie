@@ -97,6 +97,7 @@ respond:
     - https://book.hacktricks.xyz/windows-hardening/windows-local-privilege-escalation
     tags:
     - attack.privilege-escalation
+    - attack.discovery
     - attack.t1082
     - attack.t1087
     - attack.t1046

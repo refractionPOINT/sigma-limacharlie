@@ -331,6 +331,7 @@ respond:
     - https://www.huntress.com/blog/threat-advisory-oh-no-cleo-cleo-software-actively-being-exploited-in-the-wild
     tags:
     - attack.persistence
+    - attack.discovery
     - attack.t1505.003
     - attack.t1018
     - attack.t1033
