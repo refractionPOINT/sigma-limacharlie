@@ -40,6 +40,6 @@ respond:
     - https://strontic.github.io/xcyclopedia/library/DeviceEnroller.exe-24BEF0D6B0ECED36BB41831759FDE18D.html
     tags:
     - attack.defense-evasion
-    - attack.t1574.002
+    - attack.t1574.001
   name: Potential DLL Sideloading Via DeviceEnroller.EXE
 

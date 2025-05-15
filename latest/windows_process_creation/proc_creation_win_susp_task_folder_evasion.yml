@@ -59,6 +59,6 @@ respond:
     - attack.defense-evasion
     - attack.persistence
     - attack.execution
-    - attack.t1574.002
+    - attack.t1574.001
   name: Tasks Folder Evasion
 

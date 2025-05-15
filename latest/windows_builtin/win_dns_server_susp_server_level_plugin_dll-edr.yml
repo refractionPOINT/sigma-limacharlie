@@ -32,6 +32,6 @@ respond:
     - https://twitter.com/gentilkiwi/status/861641945944391680
     tags:
     - attack.defense-evasion
-    - attack.t1574.002
+    - attack.t1574.001
   name: DNS Server Error Failed Loading the ServerLevelPluginDLL
 

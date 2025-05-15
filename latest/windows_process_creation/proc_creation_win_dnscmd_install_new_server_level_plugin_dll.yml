@@ -34,7 +34,7 @@ respond:
     - https://blog.3or.de/hunting-dns-server-level-plugin-dll-injection.html
     tags:
     - attack.defense-evasion
-    - attack.t1574.002
+    - attack.t1574.001
     - attack.t1112
   name: New DNS ServerLevelPluginDll Installed Via Dnscmd.EXE
 

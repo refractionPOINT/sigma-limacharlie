@@ -96,6 +96,6 @@ respond:
     - attack.defense-evasion
     - attack.privilege-escalation
     - attack.t1203
-    - attack.t1574.002
+    - attack.t1574.001
   name: Potentially Suspicious Child Process of KeyScrambler.exe
 

@@ -29,6 +29,6 @@ respond:
     - https://twitter.com/malmoeb/status/1525901219247845376
     tags:
     - attack.defense-evasion
-    - attack.t1574.002
+    - attack.t1574.001
   name: Renamed Vmnat.exe Execution
 

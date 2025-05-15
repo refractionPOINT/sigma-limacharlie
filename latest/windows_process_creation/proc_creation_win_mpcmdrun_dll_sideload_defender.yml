@@ -56,6 +56,6 @@ respond:
     - https://www.sentinelone.com/blog/living-off-windows-defender-lockbit-ransomware-sideloads-cobalt-strike-through-microsoft-security-tool
     tags:
     - attack.defense-evasion
-    - attack.t1574.002
+    - attack.t1574.001
   name: Potential Mpclient.DLL Sideloading Via Defender Binaries
 

@@ -50,6 +50,6 @@ respond:
     - http://www.hexacorn.com/blog/2017/07/31/the-wizard-of-x-oppa-plugx-style/
     tags:
     - attack.defense-evasion
-    - attack.t1574.002
+    - attack.t1574.001
   name: Xwizard.EXE Execution From Non-Default Location
 
