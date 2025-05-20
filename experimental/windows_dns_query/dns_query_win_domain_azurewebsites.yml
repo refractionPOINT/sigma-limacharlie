@@ -1,0 +1,290 @@
+detect:
+  event: DNS_REQUEST
+  op: and
+  rules:
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: azurewebsites.net
+  - not: true
+    op: or
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/FILE_PATH
+        value: C:\Program Files\Google\Chrome\Application\chrome.exe
+      - case sensitive: false
+        op: is
+        path: event/FILE_PATH
+        value: C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/FILE_PATH
+        value: C:\Program Files\Mozilla Firefox\firefox.exe
+      - case sensitive: false
+        op: is
+        path: event/FILE_PATH
+        value: C:\Program Files (x86)\Mozilla Firefox\firefox.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/FILE_PATH
+        value: C:\Program Files (x86)\Internet Explorer\iexplore.exe
+      - case sensitive: false
+        op: is
+        path: event/FILE_PATH
+        value: C:\Program Files\Internet Explorer\iexplore.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: starts with
+        path: event/FILE_PATH
+        value: C:\Program Files (x86)\Microsoft\EdgeWebView\Application\
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \WindowsApps\MicrosoftEdge.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/FILE_PATH
+          value: C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe
+        - case sensitive: false
+          op: is
+          path: event/FILE_PATH
+          value: C:\Program Files\Microsoft\Edge\Application\msedge.exe
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: starts with
+          path: event/FILE_PATH
+          value: C:\Program Files (x86)\Microsoft\EdgeCore\
+        - case sensitive: false
+          op: starts with
+          path: event/FILE_PATH
+          value: C:\Program Files\Microsoft\EdgeCore\
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \msedge.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \msedgewebview2.exe
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \safari.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \MsMpEng.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \MsSense.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \brave.exe
+      - case sensitive: false
+        op: starts with
+        path: event/FILE_PATH
+        value: C:\Program Files\BraveSoftware\
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: \AppData\Local\Maxthon\
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \maxthon.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: \AppData\Local\Programs\Opera\
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \opera.exe
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: starts with
+          path: event/FILE_PATH
+          value: C:\Program Files\SeaMonkey\
+        - case sensitive: false
+          op: starts with
+          path: event/FILE_PATH
+          value: C:\Program Files (x86)\SeaMonkey\
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \seamonkey.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: \AppData\Local\Vivaldi\
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \vivaldi.exe
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: starts with
+          path: event/FILE_PATH
+          value: C:\Program Files\Naver\Naver Whale\
+        - case sensitive: false
+          op: starts with
+          path: event/FILE_PATH
+          value: C:\Program Files (x86)\Naver\Naver Whale\
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \whale.exe
+    - case sensitive: false
+      op: contains
+      path: event/FILE_PATH
+      value: \Tor Browser\
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: starts with
+          path: event/FILE_PATH
+          value: C:\Program Files\Waterfox\
+        - case sensitive: false
+          op: starts with
+          path: event/FILE_PATH
+          value: C:\Program Files (x86)\Waterfox\
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \Waterfox.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: \AppData\Local\Programs\midori-ng\
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \Midori Next Generation.exe
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: starts with
+          path: event/FILE_PATH
+          value: C:\Program Files\SlimBrowser\
+        - case sensitive: false
+          op: starts with
+          path: event/FILE_PATH
+          value: C:\Program Files (x86)\SlimBrowser\
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \slimbrowser.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: \AppData\Local\Flock\
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \Flock.exe
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: \AppData\Local\Phoebe\
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \Phoebe.exe
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: starts with
+          path: event/FILE_PATH
+          value: C:\Program Files\Falkon\
+        - case sensitive: false
+          op: starts with
+          path: event/FILE_PATH
+          value: C:\Program Files (x86)\Falkon\
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \falkon.exe
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: starts with
+          path: event/FILE_PATH
+          value: C:\Program Files (x86)\Avant Browser\
+        - case sensitive: false
+          op: starts with
+          path: event/FILE_PATH
+          value: C:\Program Files\Avant Browser\
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \avant.exe
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: 'Detects a DNS query by a non browser process on the system to "azurewebsites.net".
+      The latter was often used by threat actors as a malware hosting and exfiltration
+      site.
+
+      '
+    falsepositives:
+    - Likely with other browser software. Apply additional filters for any other browsers
+      you might use.
+    level: medium
+    references:
+    - https://www.sentinelone.com/labs/wip26-espionage-threat-actors-abuse-cloud-infrastructure-in-targeted-telco-attacks/
+    - https://symantec-enterprise-blogs.security.com/threat-intelligence/harvester-new-apt-attacks-asia
+    - https://www.ptsecurity.com/ww-en/analytics/pt-esc-threat-intelligence/higaisa-or-winnti-apt-41-backdoors-old-and-new/
+    - https://intezer.com/blog/research/how-we-escaped-docker-in-azure-functions/
+    tags:
+    - attack.command-and-control
+    - attack.t1219
+  name: DNS Query To AzureWebsites.NET By Non-Browser Process
+

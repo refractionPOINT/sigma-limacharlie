@@ -1031,6 +1031,7 @@ respond:
     - https://www.virustotal.com/gui/file/38283b775552da8981452941ea74191aa0d203edd3f61fb2dee7b0aea3514955
     tags:
     - attack.defense-evasion
+    - attack.impact
     - attack.t1489
     - attack.t1562.001
   name: Suspicious Windows Service Tampering

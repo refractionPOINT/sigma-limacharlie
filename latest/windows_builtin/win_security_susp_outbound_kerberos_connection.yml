@@ -99,6 +99,7 @@ respond:
     - https://github.com/GhostPack/Rubeus
     tags:
     - attack.lateral-movement
+    - attack.credential-access
     - attack.t1558.003
   name: Uncommon Outbound Kerberos Connection - Security
 

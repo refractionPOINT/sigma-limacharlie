@@ -1,0 +1,31 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: contains
+    path: Event/EventData/Provider_Name
+    value: MSSQL
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '18456'
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems), j4son
+    description: Detects failed logon attempts from clients to MSSQL server.
+    falsepositives:
+    - This event could stem from users changing an account's password that's used
+      to authenticate via a job or an automated process. Investigate the source of
+      such events and mitigate them
+    level: low
+    references:
+    - https://cybersecthreat.com/2020/07/08/enable-mssql-authentication-log-to-eventlog/
+    - https://www.experts-exchange.com/questions/27800944/EventID-18456-Failed-to-open-the-explicitly-specified-database.html
+    tags:
+    - attack.credential-access
+    - attack.t1110
+  name: MSSQL Server Failed Logon
+

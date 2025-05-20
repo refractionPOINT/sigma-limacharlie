@@ -42,6 +42,7 @@ respond:
     - https://redcanary.com/blog/detecting-attacks-leveraging-the-net-framework/
     tags:
     - attack.execution
+    - attack.defense-evasion
     - attack.t1127
   name: Suspicious Use of CSharp Interactive Console
 

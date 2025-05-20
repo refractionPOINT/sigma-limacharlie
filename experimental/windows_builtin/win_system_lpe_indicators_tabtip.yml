@@ -36,6 +36,7 @@ respond:
     - https://github.com/antonioCoco/JuicyPotatoNG
     tags:
     - attack.execution
+    - attack.credential-access
     - attack.t1557.001
   name: Local Privilege Escalation Indicator TabTip
 

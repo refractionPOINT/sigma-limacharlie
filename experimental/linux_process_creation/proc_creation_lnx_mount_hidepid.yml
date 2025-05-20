@@ -34,6 +34,7 @@ respond:
     - https://twitter.com/Joseliyo_Jstnk/status/1620131033474822144
     tags:
     - attack.credential-access
+    - attack.defense-evasion
     - attack.t1564
   name: Mount Execution With Hidepid Parameter
 

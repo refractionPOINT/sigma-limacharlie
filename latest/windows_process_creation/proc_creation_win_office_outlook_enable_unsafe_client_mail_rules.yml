@@ -25,6 +25,7 @@ respond:
     - https://support.microsoft.com/en-us/topic/how-to-control-the-rule-actions-to-start-an-application-or-run-a-macro-in-outlook-2016-and-outlook-2013-e4964b72-173c-959d-5d7b-ead562979048
     tags:
     - attack.execution
+    - attack.defense-evasion
     - attack.t1059
     - attack.t1202
   name: Outlook EnableUnsafeClientMailRules Setting Enabled

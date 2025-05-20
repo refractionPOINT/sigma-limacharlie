@@ -37,6 +37,7 @@ respond:
     - https://github.com/wunderwuzzi23/firefox-cookiemonster
     tags:
     - attack.credential-access
+    - attack.collection
     - attack.t1185
   name: Browser Started with Remote Debugging
 

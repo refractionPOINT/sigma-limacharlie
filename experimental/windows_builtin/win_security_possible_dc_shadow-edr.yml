@@ -43,6 +43,7 @@ respond:
     - https://web.archive.org/web/20180203014709/https://blog.alsid.eu/dcshadow-explained-4510f52fc19d?gi=c426ac876c48
     tags:
     - attack.credential-access
+    - attack.defense-evasion
     - attack.t1207
   name: Possible DC Shadow Attack
 

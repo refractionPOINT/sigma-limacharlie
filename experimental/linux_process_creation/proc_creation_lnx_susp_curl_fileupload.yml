@@ -64,6 +64,7 @@ respond:
     - https://www.trendmicro.com/en_us/research/22/i/how-malicious-actors-abuse-native-linux-tools-in-their-attacks.html
     tags:
     - attack.exfiltration
+    - attack.command-and-control
     - attack.t1567
     - attack.t1105
   name: Suspicious Curl File Upload - Linux

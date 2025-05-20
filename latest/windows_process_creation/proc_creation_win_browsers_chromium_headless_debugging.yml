@@ -36,6 +36,7 @@ respond:
     - https://embracethered.com/blog/posts/2020/chrome-spy-remote-control/
     tags:
     - attack.credential-access
+    - attack.collection
     - attack.t1185
   name: Potential Data Stealing Via Chromium Headless Debugging
 

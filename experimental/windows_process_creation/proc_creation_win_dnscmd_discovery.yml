@@ -45,6 +45,5 @@ respond:
     tags:
     - attack.discovery
     - attack.execution
-    - attack.t1543.003
   name: Potential Discovery Activity Via Dnscmd.EXE
 

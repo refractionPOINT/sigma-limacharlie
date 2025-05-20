@@ -27,6 +27,7 @@ respond:
     - https://attack.mitre.org/techniques/T1090/
     tags:
     - attack.defense-evasion
+    - attack.command-and-control
     - attack.t1090
   name: Connection Proxy
 

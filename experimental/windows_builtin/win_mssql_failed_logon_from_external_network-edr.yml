@@ -1,0 +1,117 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Provider_Name
+        value: MSSQL
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '18456'
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Data
+        value: 'CLIENT: 10.'
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Data
+        value: 'CLIENT: 172.16.'
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Data
+        value: 'CLIENT: 172.17.'
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Data
+        value: 'CLIENT: 172.18.'
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Data
+        value: 'CLIENT: 172.19.'
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Data
+        value: 'CLIENT: 172.20.'
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Data
+        value: 'CLIENT: 172.21.'
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Data
+        value: 'CLIENT: 172.22.'
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Data
+        value: 'CLIENT: 172.23.'
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Data
+        value: 'CLIENT: 172.24.'
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Data
+        value: 'CLIENT: 172.25.'
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Data
+        value: 'CLIENT: 172.26.'
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Data
+        value: 'CLIENT: 172.27.'
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Data
+        value: 'CLIENT: 172.28.'
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Data
+        value: 'CLIENT: 172.29.'
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Data
+        value: 'CLIENT: 172.30.'
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Data
+        value: 'CLIENT: 172.31.'
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Data
+        value: 'CLIENT: 192.168.'
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Data
+        value: 'CLIENT: 127.'
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Data
+        value: 'CLIENT: 169.254.'
+respond:
+- action: report
+  metadata:
+    author: j4son
+    description: Detects failed logon attempts from clients with external network
+      IP to an MSSQL server. This can be a sign of a bruteforce attack.
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://cybersecthreat.com/2020/07/08/enable-mssql-authentication-log-to-eventlog/
+    - https://www.experts-exchange.com/questions/27800944/EventID-18456-Failed-to-open-the-explicitly-specified-database.html
+    tags:
+    - attack.credential-access
+    - attack.t1110
+  name: MSSQL Server Failed Logon From External Network
+

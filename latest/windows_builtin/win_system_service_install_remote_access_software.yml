@@ -116,6 +116,7 @@ respond:
     - https://redcanary.com/blog/misbehaving-rats/
     tags:
     - attack.persistence
+    - attack.execution
     - attack.t1543.003
     - attack.t1569.002
   name: Remote Access Tool Services Have Been Installed - System

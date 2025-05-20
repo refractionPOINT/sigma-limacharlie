@@ -1,0 +1,285 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Add-ADDBSidHistory
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Add-ADNgcKey
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Add-ADReplNgcKey
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ConvertFrom-ADManagedPasswordBlob
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ConvertFrom-GPPrefPassword
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ConvertFrom-ManagedPasswordBlob
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ConvertFrom-UnattendXmlPassword
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ConvertFrom-UnicodePassword
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ConvertTo-AADHash
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ConvertTo-GPPrefPassword
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ConvertTo-KerberosKey
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ConvertTo-LMHash
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ConvertTo-MsoPasswordHash
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ConvertTo-NTHash
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ConvertTo-OrgIdHash
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ConvertTo-UnicodePassword
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Disable-ADDBAccount
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Enable-ADDBAccount
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-ADDBAccount
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-ADDBBackupKey
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-ADDBDomainController
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-ADDBGroupManagedServiceAccount
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-ADDBKdsRootKey
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-ADDBSchemaAttribute
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-ADDBServiceAccount
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-ADDefaultPasswordPolicy
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-ADKeyCredential
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-ADPasswordPolicy
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-ADReplAccount
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-ADReplBackupKey
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-ADReplicationAccount
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-ADSIAccount
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-AzureADUserEx
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-BootKey
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-KeyCredential
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-LsaBackupKey
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-LsaPolicy
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-SamPasswordPolicy
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-SysKey
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Get-SystemKey
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: New-ADDBRestoreFromMediaScript
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: New-ADKeyCredential
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: New-ADNgcKey
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: New-NTHashSet
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Remove-ADDBObject
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Save-DPAPIBlob
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Set-ADAccountPasswordHash
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Set-ADDBAccountPassword
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Set-ADDBBootKey
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Set-ADDBDomainController
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Set-ADDBPrimaryGroup
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Set-ADDBSysKey
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Set-AzureADUserEx
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Set-LsaPolicy
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Set-SamAccountPasswordHash
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Set-WinUserPasswordHash
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Test-ADDBPasswordQuality
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Test-ADPasswordQuality
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Test-ADReplPasswordQuality
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Test-PasswordQuality
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Unlock-ADDBAccount
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Write-ADNgcKey
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: Write-ADReplNgcKey
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems), Nounou Mbeiri
+    description: 'Detects execution and usage of the DSInternals PowerShell module.
+      Which can be used to perform what might be considered as suspicious activity
+      such as dumping DPAPI backup keys or manipulating NTDS.DIT files.
+
+      The DSInternals PowerShell Module exposes several internal features of Active
+      Directory and Azure Active Directory. These include FIDO2 and NGC key auditing,
+      offline ntds.dit file manipulation, password auditing, DC recovery from IFM
+      backups and password hash calculation.
+
+      '
+    falsepositives:
+    - Legitimate usage of DSInternals for administration or audit purpose.
+    level: high
+    references:
+    - https://github.com/MichaelGrafnetter/DSInternals/blob/39ee8a69bbdc1cfd12c9afdd7513b4788c4895d4/Src/DSInternals.PowerShell/DSInternals.psd1
+    tags:
+    - attack.execution
+    - attack.t1059.001
+  name: DSInternals Suspicious PowerShell Cmdlets
+

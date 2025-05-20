@@ -29,6 +29,7 @@ respond:
     - https://www.gradenegger.eu/en/details-of-the-event-with-id-53-of-the-source-microsoft-windows-certificationauthority/
     tags:
     - attack.credential-access
+    - attack.defense-evasion
     - attack.t1553.004
   name: Active Directory Certificate Services Denied Certificate Enrollment Request
 
