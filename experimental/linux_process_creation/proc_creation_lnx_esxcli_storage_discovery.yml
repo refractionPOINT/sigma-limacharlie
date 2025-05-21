@@ -41,7 +41,9 @@ respond:
     - https://developer.broadcom.com/xapis/esxcli-command-reference/7.0.0/namespace/esxcli_storage.html
     tags:
     - attack.discovery
+    - attack.execution
     - attack.t1033
     - attack.t1007
+    - attack.t1059.012
   name: ESXi Storage Information Discovery Via ESXCLI
 

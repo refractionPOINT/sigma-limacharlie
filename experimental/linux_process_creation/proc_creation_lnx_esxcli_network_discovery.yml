@@ -39,7 +39,9 @@ respond:
     - https://developer.broadcom.com/xapis/esxcli-command-reference/7.0.0/namespace/esxcli_network.html
     tags:
     - attack.discovery
+    - attack.execution
     - attack.t1033
     - attack.t1007
+    - attack.t1059.012
   name: ESXi Network Configuration Discovery Via ESXCLI
 
