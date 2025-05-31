@@ -98,6 +98,10 @@ detect:
         op: contains
         path: event/EVENT/EventData/Data
         value: 'CLIENT: 169.254.'
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Data
+        value: 'CLIENT: <local machine>'
 respond:
 - action: report
   metadata:
