@@ -1,0 +1,26 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - case sensitive: false
+    op: ends with
+    path: event/FILE_PATH
+    value: \.exe
+respond:
+- action: report
+  metadata:
+    author: Matt Anderson (Huntress)
+    description: Detect the use of processes with no name (".exe"), which can be used
+      to evade Image-based detections.
+    falsepositives:
+    - Rare legitimate software.
+    level: medium
+    references:
+    - https://www.huntress.com/blog/fake-browser-updates-lead-to-boinc-volunteer-computing-software
+    tags:
+    - attack.defense-evasion
+  name: Process Launched Without Image Name
+

@@ -1,0 +1,44 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: msteams.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: teams.exe
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \msteams.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \teams.exe
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects the execution of a renamed Microsoft Teams binary.
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - Internal Research
+    tags:
+    - attack.defense-evasion
+  name: Renamed Microsoft Teams Execution
+

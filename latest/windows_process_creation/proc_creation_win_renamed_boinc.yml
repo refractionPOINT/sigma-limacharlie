@@ -1,0 +1,35 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/ORIGINAL_FILE_NAME
+      value: BOINC.exe
+    - case sensitive: false
+      not: true
+      op: ends with
+      path: event/FILE_PATH
+      value: \BOINC.exe
+respond:
+- action: report
+  metadata:
+    author: Matt Anderson (Huntress)
+    description: Detects the execution of a renamed BOINC binary.
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://boinc.berkeley.edu/
+    - https://www.virustotal.com/gui/file/91e405e8a527023fb8696624e70498ae83660fe6757cef4871ce9bcc659264d3/details
+    - https://www.huntress.com/blog/fake-browser-updates-lead-to-boinc-volunteer-computing-software
+    tags:
+    - attack.defense-evasion
+    - attack.t1553
+  name: Renamed BOINC Client Execution
+

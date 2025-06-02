@@ -1,0 +1,50 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \conhost.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: CONHOST.EXE
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: --headless
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: powershell
+respond:
+- action: report
+  metadata:
+    author: Matt Anderson (Huntress)
+    description: 'Detects the use of powershell commands from headless ConHost window.
+
+      The "--headless" flag hides the windows from the user upon execution.
+
+      '
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://www.huntress.com/blog/fake-browser-updates-lead-to-boinc-volunteer-computing-software
+    tags:
+    - attack.defense-evasion
+    - attack.execution
+    - attack.t1059.001
+    - attack.t1059.003
+  name: Powershell Executed From Headless ConHost Process
+
