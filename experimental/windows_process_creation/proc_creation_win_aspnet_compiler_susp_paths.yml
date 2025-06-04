@@ -12,11 +12,19 @@ detect:
       - case sensitive: false
         op: contains
         path: event/FILE_PATH
-        value: C:\Windows\Microsoft.NET\Framework\
+        value: :\Windows\Microsoft.NET\Framework\
       - case sensitive: false
         op: contains
         path: event/FILE_PATH
-        value: C:\Windows\Microsoft.NET\Framework64\
+        value: :\Windows\Microsoft.NET\Framework64\
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: :\Windows\Microsoft.NET\FrameworkArm\
+      - case sensitive: false
+        op: contains
+        path: event/FILE_PATH
+        value: :\Windows\Microsoft.NET\FrameworkArm64\
     - case sensitive: false
       op: ends with
       path: event/FILE_PATH

@@ -5,10 +5,16 @@ detect:
   op: and
   rules:
   - op: is windows
-  - case sensitive: false
-    op: contains
-    path: event/COMMAND_LINE
-    value: (WCHAR)0x
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: '[char]0x'
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: (WCHAR)0x
 respond:
 - action: report
   metadata:
@@ -25,5 +31,5 @@ respond:
     - attack.t1059.001
     - attack.defense-evasion
     - attack.t1027
-  name: Potential PowerShell Obfuscation Via WCHAR
+  name: Potential PowerShell Obfuscation Via WCHAR/CHAR
 
