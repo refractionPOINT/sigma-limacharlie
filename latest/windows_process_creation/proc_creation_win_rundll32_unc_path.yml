@@ -39,6 +39,7 @@ respond:
     tags:
     - attack.defense-evasion
     - attack.execution
+    - attack.lateral-movement
     - attack.t1021.002
     - attack.t1218.011
   name: Rundll32 UNC Path Execution

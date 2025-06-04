@@ -44,5 +44,6 @@ respond:
     - https://pentestlab.blog/tag/svchost/
     tags:
     - attack.t1003
+    - attack.credential-access
   name: Interesting Service Enumeration Via Sc.EXE
 

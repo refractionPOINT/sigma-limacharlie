@@ -27,7 +27,7 @@ respond:
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/40b77d63808dd4f4eafb83949805636735a1fd15/atomics/T1482/T1482.md
     - https://github.com/dsnezhkov/TruffleSnout
-    - https://github.com/dsnezhkov/TruffleSnout/blob/master/TruffleSnout/Docs/USAGE.md
+    - https://github.com/dsnezhkov/TruffleSnout/blob/7c2f22e246ef704bc96c396f66fa854e9ca742b9/TruffleSnout/Docs/USAGE.md
     tags:
     - attack.discovery
     - attack.t1482

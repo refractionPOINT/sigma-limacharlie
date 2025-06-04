@@ -27,11 +27,11 @@ respond:
     level: medium
     references:
     - https://twitter.com/vxunderground/status/1423336151860002816
-    - https://attack.mitre.org/software/S0404/
     - https://thedfirreport.com/2021/08/01/bazarcall-to-conti-ransomware-via-trickbot-and-cobalt-strike/
     tags:
     - attack.credential-access
     - attack.t1003
     - attack.t1003.003
+    - attack.s0404
   name: Esentutl Gather Credentials
 

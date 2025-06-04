@@ -106,8 +106,8 @@ respond:
     level: medium
     references:
     - Internal Research
-    - https://github.com/pr0xylife/Pikabot/blob/main/Pikabot_30.10.2023.txt
-    - https://github.com/pr0xylife/Pikabot/blob/main/Pikabot_22.12.2023.txt
+    - https://github.com/pr0xylife/Pikabot/blob/fc58126127adf0f65e78f4eec59675523f48f086/Pikabot_30.10.2023.txt
+    - https://github.com/pr0xylife/Pikabot/blob/fc58126127adf0f65e78f4eec59675523f48f086/Pikabot_22.12.2023.txt
     tags:
     - attack.execution
   name: Cscript/Wscript Potentially Suspicious Child Process

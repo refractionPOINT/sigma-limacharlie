@@ -165,6 +165,7 @@ respond:
     - https://github.com/ropnop/impacket_static_binaries/releases/tag/0.9.21-dev-binaries
     tags:
     - attack.execution
+    - attack.credential-access
     - attack.t1557.001
   name: HackTool - Impacket Tools Execution
 

@@ -23,6 +23,7 @@ respond:
     tags:
     - attack.t1027
     - attack.defense-evasion
+    - attack.execution
     - attack.t1140
     - attack.t1059.001
   name: Base64 Encoded PowerShell Command Detected

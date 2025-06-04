@@ -29,6 +29,7 @@ respond:
     - https://threathunterplaybook.com/hunts/windows/190511-RemotePwshExecution/notebook.html
     tags:
     - attack.execution
+    - attack.lateral-movement
     - attack.t1059.001
     - attack.t1021.006
   name: Remote PowerShell Session Host Process (WinRM)

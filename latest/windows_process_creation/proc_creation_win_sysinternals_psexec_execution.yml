@@ -27,6 +27,7 @@ respond:
     - https://www.fireeye.com/blog/threat-research/2020/10/kegtap-and-singlemalt-with-a-ransomware-chaser.html
     tags:
     - attack.execution
+    - attack.lateral-movement
     - attack.t1569
     - attack.t1021
   name: Psexec Execution

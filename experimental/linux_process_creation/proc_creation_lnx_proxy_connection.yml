@@ -23,8 +23,6 @@ respond:
     falsepositives:
     - Legitimate administration activities
     level: low
-    references:
-    - https://attack.mitre.org/techniques/T1090/
     tags:
     - attack.defense-evasion
     - attack.command-and-control

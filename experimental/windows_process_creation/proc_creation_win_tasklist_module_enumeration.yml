@@ -52,5 +52,6 @@ respond:
     - https://pentestlab.blog/tag/svchost/
     tags:
     - attack.t1003
+    - attack.credential-access
   name: Loaded Module Enumeration Via Tasklist.EXE
 
