@@ -22,7 +22,23 @@ detect:
         - case sensitive: true
           op: ends with
           path: event/FILE_PATH
+          value: /ed
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
           value: /head
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /less
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /more
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /nano
         - case sensitive: true
           op: ends with
           path: event/FILE_PATH
@@ -30,7 +46,11 @@ detect:
         - case sensitive: true
           op: ends with
           path: event/FILE_PATH
-          value: /more
+          value: /vi
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /vim
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
