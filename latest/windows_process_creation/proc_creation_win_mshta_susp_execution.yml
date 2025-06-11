@@ -7,32 +7,46 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - case sensitive: false
-      op: ends with
-      path: event/FILE_PATH
-      value: \mshta.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \mshta.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: mshta.exe
     - op: or
       rules:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: vbscript
+        value: .7z
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: .jpg
+        value: .avi
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: .png
+        value: .bat
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: .lnk
+        value: .bmp
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: .xls
+        value: .conf
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .csv
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .dll
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -40,17 +54,125 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: .gif
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .gz
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .ini
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .jpe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .jpg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .json
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .lnk
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .log
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .mkv
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .mp3
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .mp4
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .pdf
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .png
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .ppt
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .rar
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .rtf
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .svg
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .tar
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .tmp
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .txt
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .xls
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .xml
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .yaml
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .yml
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: .zip
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: .dll
+        value: vbscript
 respond:
 - action: report
   metadata:
-    author: Diego Perez (@darkquassar), Markus Neis, Swisscom (Improve Rule)
-    description: Detection for mshta.exe suspicious execution patterns sometimes involving
-      file polyglotism
+    author: Diego Perez (@darkquassar), Markus Neis, Swisscom (Improve Rule), Swachchhanda
+      Shrawan Poudel (Nextron Systems)
+    description: 'Detects execution of mshta.exe with file types that looks like they
+      do not typically represent HTA (HTML Application) content,
+
+      such as .png, .jpg, .zip, .pdf, and others, which are often polyglots. MSHTA
+      is a legitimate Windows utility for executing HTML Applications
+
+      containing VBScript or JScript. Threat actors often abuse this lolbin utility
+      to download and
+
+      execute malicious scripts disguised as benign files or hosted under misleading
+      extensions to evade detection.
+
+      '
     falsepositives:
     - False positives depend on scripts and administrative tools used in the monitored
       environment
@@ -61,6 +183,7 @@ respond:
     - https://learn.microsoft.com/en-us/previous-versions/dotnet/framework/data/xml/xslt/xslt-stylesheet-scripting-using-msxsl-script
     - https://medium.com/tsscyber/pentesting-and-hta-bypassing-powershell-constrained-language-mode-53a42856c997
     - https://twitter.com/mattifestation/status/1326228491302563846
+    - https://www.virustotal.com/gui/file/c1f27d9795a2eba630db8a043580a0761798f06370fb1317067805f8a845b00c
     tags:
     - attack.defense-evasion
     - attack.t1140
@@ -68,5 +191,5 @@ respond:
     - attack.execution
     - attack.t1059.007
     - cve.2020-1599
-  name: MSHTA Suspicious Execution 01
+  name: MSHTA Execution with Suspicious File Extensions
 

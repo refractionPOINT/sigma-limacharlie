@@ -90,6 +90,10 @@ detect:
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
+            value: DisableAccess
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
             value: DisableAntiSpyware
           - case sensitive: false
             op: contains
@@ -102,6 +106,10 @@ detect:
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
+            value: DisableAntiVirusSignatures
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
             value: DisableArchiveScanning
           - case sensitive: false
             op: contains
@@ -111,6 +119,10 @@ detect:
             op: contains
             path: event/COMMAND_LINE
             value: DisableBlockAtFirstSeen
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: DisableCloudProtection
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
@@ -127,6 +139,10 @@ detect:
             op: contains
             path: event/COMMAND_LINE
             value: DisableIOAVProtection
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: DisableNetworkProtection
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
@@ -154,6 +170,10 @@ detect:
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
+            value: DisableSecurityCenter
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
             value: Notification_Suppress
           - case sensitive: false
             op: contains
@@ -164,9 +184,11 @@ respond:
   metadata:
     author: Florian Roth (Nextron Systems), Swachchhanda Shrawan Poudel, Nasreddine
       Bencherchali (Nextron Systems)
-    description: Detects the usage of "reg.exe" to tamper with different Windows Defender
-      registry keys in order to disable some important features related to protection
-      and detection
+    description: 'Detects the usage of "reg.exe" to tamper with different Windows
+      Defender registry keys in order to disable some important features related to
+      protection and detection
+
+      '
     falsepositives:
     - Rare legitimate use by administrators to test software (should always be investigated)
     level: high
@@ -174,6 +196,7 @@ respond:
     - https://thedfirreport.com/2022/03/21/apt35-automates-initial-access-using-proxyshell/
     - https://github.com/swagkarna/Defeat-Defender-V1.2.0
     - https://www.elevenforum.com/t/video-guide-how-to-completely-disable-microsoft-defender-antivirus.14608/page-2
+    - https://tria.ge/241231-j9yatstqbm/behavioral1
     tags:
     - attack.defense-evasion
     - attack.t1562.001
