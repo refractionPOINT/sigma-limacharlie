@@ -53,6 +53,6 @@ respond:
     - https://web.archive.org/web/20230726144748/https://blog.thickmints.dev/mintsights/detecting-rogue-rdp/
     tags:
     - attack.command-and-control
-    - attack.t1219
+    - attack.t1219.002
   name: Mstsc.EXE Execution With Local RDP File
 

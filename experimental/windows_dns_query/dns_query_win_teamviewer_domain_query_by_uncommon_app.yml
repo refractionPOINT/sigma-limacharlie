@@ -33,6 +33,6 @@ respond:
     - https://www.teamviewer.com/en-us/
     tags:
     - attack.command-and-control
-    - attack.t1219
+    - attack.t1219.002
   name: TeamViewer Domain Query By Non-TeamViewer Application
 

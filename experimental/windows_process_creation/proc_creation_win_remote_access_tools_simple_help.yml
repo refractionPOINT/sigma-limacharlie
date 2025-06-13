@@ -44,6 +44,6 @@ respond:
     - https://www.huntress.com/blog/slashandgrab-screen-connect-post-exploitation-in-the-wild-cve-2024-1709-cve-2024-1708
     tags:
     - attack.command-and-control
-    - attack.t1219
+    - attack.t1219.002
   name: Remote Access Tool - Simple Help Execution
 

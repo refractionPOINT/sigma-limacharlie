@@ -285,6 +285,6 @@ respond:
     - https://intezer.com/blog/research/how-we-escaped-docker-in-azure-functions/
     tags:
     - attack.command-and-control
-    - attack.t1219
+    - attack.t1219.002
   name: DNS Query To AzureWebsites.NET By Non-Browser Process
 

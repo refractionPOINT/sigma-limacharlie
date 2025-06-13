@@ -33,6 +33,6 @@ respond:
     - https://support.anydesk.com/Automatic_Deployment
     tags:
     - attack.command-and-control
-    - attack.t1219
+    - attack.t1219.002
   name: Remote Access Tool - AnyDesk Silent Installation
 

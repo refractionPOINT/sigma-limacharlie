@@ -28,6 +28,6 @@ respond:
     - https://www.advintel.io/post/secret-backdoor-behind-conti-ransomware-operation-introducing-atera-agent
     tags:
     - attack.command-and-control
-    - attack.t1219
+    - attack.t1219.002
   name: Atera Agent Installation
 

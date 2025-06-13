@@ -28,6 +28,6 @@ respond:
     - n/a
     tags:
     - attack.command-and-control
-    - attack.t1219
+    - attack.t1219.002
   name: Potential Remote Desktop Connection to Non-Domain Host
 

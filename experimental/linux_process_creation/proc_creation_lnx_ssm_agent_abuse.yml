@@ -43,6 +43,6 @@ respond:
     tags:
     - attack.command-and-control
     - attack.persistence
-    - attack.t1219
+    - attack.t1219.002
   name: Potential Linux Amazon SSM Agent Hijacking
 

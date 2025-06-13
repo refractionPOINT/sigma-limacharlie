@@ -77,6 +77,6 @@ respond:
     - https://www.trendmicro.com/en_us/research/24/b/threat-actor-groups-including-black-basta-are-exploiting-recent-.html
     tags:
     - attack.command-and-control
-    - attack.t1219
+    - attack.t1219.002
   name: Remote Access Tool - ScreenConnect Potential Suspicious Remote Command Execution
 

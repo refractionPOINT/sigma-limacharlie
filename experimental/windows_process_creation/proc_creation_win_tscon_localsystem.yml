@@ -35,6 +35,6 @@ respond:
     - https://www.ired.team/offensive-security/lateral-movement/t1076-rdp-hijacking-for-lateral-movement
     tags:
     - attack.command-and-control
-    - attack.t1219
+    - attack.t1219.002
   name: Suspicious TSCON Start as SYSTEM
 

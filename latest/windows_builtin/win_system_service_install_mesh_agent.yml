@@ -36,6 +36,6 @@ respond:
     - https://thedfirreport.com/2022/11/28/emotet-strikes-again-lnk-file-leads-to-domain-wide-ransomware/
     tags:
     - attack.command-and-control
-    - attack.t1219
+    - attack.t1219.002
   name: Mesh Agent Service Installation
 

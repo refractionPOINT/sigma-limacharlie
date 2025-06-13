@@ -494,6 +494,6 @@ respond:
     - https://learn.microsoft.com/en-us/windows/client-management/client-tools/quick-assist#disable-quick-assist-within-your-organization
     tags:
     - attack.command-and-control
-    - attack.t1219
+    - attack.t1219.002
   name: DNS Query To Remote Access Software Domain From Non-Browser App
 
