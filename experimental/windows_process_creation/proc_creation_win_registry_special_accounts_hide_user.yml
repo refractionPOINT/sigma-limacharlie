@@ -1,0 +1,51 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \reg.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: \SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\UserList
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: add
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: /v
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: /d 0
+respond:
+- action: report
+  metadata:
+    author: '@Kostastsale, TheDFIRReport'
+    description: 'Detects changes to the registry key "HKLM\Software\Microsoft\Windows
+      NT\CurrentVersion\Winlogon\SpecialAccounts\Userlist" where the value is set
+      to "0" in order to hide user account from being listed on the logon screen.
+
+      '
+    falsepositives:
+    - System administrator activities
+    level: medium
+    references:
+    - https://thedfirreport.com/2024/01/29/buzzing-on-christmas-eve-trigona-ransomware-in-3-hours/
+    - https://thedfirreport.com/2024/04/01/from-onenote-to-ransomnote-an-ice-cold-intrusion/
+    - https://thedfirreport.com/2024/04/29/from-icedid-to-dagon-locker-ransomware-in-29-days/
+    - https://thedfirreport.com/2022/07/11/select-xmrig-from-sqlserver/
+    tags:
+    - attack.defense-evasion
+    - attack.t1564.002
+  name: Hiding User Account Via SpecialAccounts Registry Key - CommandLine
+

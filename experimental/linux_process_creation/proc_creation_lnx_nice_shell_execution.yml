@@ -1,0 +1,55 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /nice
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: /bin/bash
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: /bin/dash
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: /bin/fish
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: /bin/sh
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: /bin/zsh
+respond:
+- action: report
+  metadata:
+    author: Li Ling, Andy Parkidomo, Robert Rakowski, Blake Hartstein (Bloomberg L.P.)
+    description: 'Detects the use of the "nice" utility to execute a shell. Such behavior
+      may be associated with privilege escalation, unauthorized command execution,
+      or to break out from restricted environments.
+
+      '
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://gtfobins.github.io/gtfobins/nice/#shell
+    - https://www.elastic.co/guide/en/security/current/linux-restricted-shell-breakout-via-linux-binary-s.html
+    tags:
+    - attack.discovery
+    - attack.t1083
+  name: Shell Execution via Nice - Linux
+

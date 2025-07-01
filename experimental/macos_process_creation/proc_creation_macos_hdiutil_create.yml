@@ -1,0 +1,34 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is mac
+  - op: and
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /hdiutil
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: create
+respond:
+- action: report
+  metadata:
+    author: Omar Khaled (@beacon_exe)
+    description: Detects the execution of the hdiutil utility in order to create a
+      disk image.
+    falsepositives:
+    - Legitimate usage of hdiutil by administrators and users.
+    level: medium
+    references:
+    - https://www.loobins.io/binaries/hdiutil/
+    - https://www.sentinelone.com/blog/from-the-front-linesunsigned-macos-orat-malware-gambles-for-the-win/
+    - https://ss64.com/mac/hdiutil.html
+    tags:
+    - attack.exfiltration
+  name: Disk Image Creation Via Hdiutil - MacOS
+

@@ -1,0 +1,33 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '3008'
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/QueryName
+      value: api.put.io
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/QueryName
+      value: upload.put.io
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Omar Khaled (@beacon_exe)
+    description: Detects DNS queries for subdomains related to "Put.io" sharing website.
+    falsepositives:
+    - Legitimate DNS queries and usage of Put.io
+    level: medium
+    references:
+    - https://darkatlas.io/blog/medusa-ransomware-group-opsec-failure
+    tags:
+    - attack.command-and-control
+  name: DNS Query To Put.io - DNS Client
+

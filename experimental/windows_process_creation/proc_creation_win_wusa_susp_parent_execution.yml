@@ -1,0 +1,105 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \wusa.exe
+      - op: or
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/FILE_PATH
+            value: :\Perflogs\
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/FILE_PATH
+            value: :\Users\Public\
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/FILE_PATH
+            value: :\Windows\Temp\
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/FILE_PATH
+            value: \Appdata\Local\Temp\
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/FILE_PATH
+            value: \Temporary Internet
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/FILE_PATH
+            value: :\Users\
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/FILE_PATH
+            value: \Favorites\
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/FILE_PATH
+            value: :\Users\
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/FILE_PATH
+            value: \Favourites\
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/FILE_PATH
+            value: :\Users\
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/FILE_PATH
+            value: \Contacts\
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/FILE_PATH
+            value: :\Users\
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/FILE_PATH
+            value: \Pictures\
+    - case sensitive: false
+      not: true
+      op: contains
+      path: event/COMMAND_LINE
+      value: .msu
+respond:
+- action: report
+  metadata:
+    author: X__Junior (Nextron Systems)
+    description: 'Detects execution of the "wusa.exe" (Windows Update Standalone Installer)
+      utility by a parent process that is located in a suspicious location.
+
+      Attackers could instantiate an instance of "wusa.exe" in order to bypass User
+      Account Control (UAC). They can duplicate the access token from "wusa.exe" to
+      gain elevated privileges.
+
+      '
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.fortinet.com/blog/threat-research/konni-campaign-distributed-via-malicious-document
+    tags:
+    - attack.execution
+  name: Wusa.EXE Executed By Parent Process Located In Suspicious Location
+

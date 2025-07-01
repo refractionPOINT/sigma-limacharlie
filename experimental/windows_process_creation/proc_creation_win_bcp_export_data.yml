@@ -1,0 +1,58 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \bcp.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: BCP.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' out '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' queryout '
+respond:
+- action: report
+  metadata:
+    author: Omar Khaled (@beacon_exe), MahirAli Khan (in/mahiralikhan), Nasreddine
+      Bencherchali (Nextron Systems)
+    description: 'Detects the execution of the BCP utility in order to export data
+      from the database.
+
+      Attackers were seen saving their malware to a database column or table and then
+      later extracting it via "bcp.exe" into a file.
+
+      '
+    falsepositives:
+    - Legitimate data export operations.
+    level: medium
+    references:
+    - https://docs.microsoft.com/en-us/sql/tools/bcp-utility
+    - https://asec.ahnlab.com/en/61000/
+    - https://asec.ahnlab.com/en/78944/
+    - https://www.huntress.com/blog/attacking-mssql-servers
+    - https://www.huntress.com/blog/attacking-mssql-servers-pt-ii
+    - https://news.sophos.com/en-us/2024/08/07/sophos-mdr-hunt-tracks-mimic-ransomware-campaign-against-organizations-in-india/
+    - https://research.nccgroup.com/2018/03/10/apt15-is-alive-and-strong-an-analysis-of-royalcli-and-royaldns/
+    tags:
+    - attack.execution
+    - attack.exfiltration
+    - attack.t1048
+  name: Data Export From MSSQL Table Via BCP.EXE
+

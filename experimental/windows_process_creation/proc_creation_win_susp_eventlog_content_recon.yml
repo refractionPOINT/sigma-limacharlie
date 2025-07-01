@@ -1,0 +1,200 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: Microsoft-Windows-PowerShell
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: Microsoft-Windows-Security-Auditing
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: Microsoft-Windows-TerminalServices-LocalSessionManager
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: Microsoft-Windows-TerminalServices-RemoteConnectionManager
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: Microsoft-Windows-Windows Defender
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: PowerShellCore
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: Security
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: Windows PowerShell
+      - op: or
+        rules:
+        - case sensitive: false
+          op: matches
+          path: event/COMMAND_LINE
+          re: .*\-InstanceId\ 462..*
+        - case sensitive: false
+          op: matches
+          path: event/COMMAND_LINE
+          re: .*\.eventid\ \-eq\ 462..*
+        - case sensitive: false
+          op: matches
+          path: event/COMMAND_LINE
+          re: .*EventCode=.462..*
+        - case sensitive: false
+          op: matches
+          path: event/COMMAND_LINE
+          re: .*EventIdentifier=.462..*
+        - case sensitive: false
+          op: matches
+          path: event/COMMAND_LINE
+          re: .*System\[EventID=462.\].*
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: -InstanceId 4778
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .eventid -eq 4778
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: System[EventID=4778]
+        - case sensitive: false
+          op: matches
+          path: event/COMMAND_LINE
+          re: .*EventCode=.4778..*
+        - case sensitive: false
+          op: matches
+          path: event/COMMAND_LINE
+          re: .*EventIdentifier=.4778..*
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: -InstanceId 25
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .eventid -eq 25
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: System[EventID=25]
+        - case sensitive: false
+          op: matches
+          path: event/COMMAND_LINE
+          re: .*EventCode=.25..*
+        - case sensitive: false
+          op: matches
+          path: event/COMMAND_LINE
+          re: .*EventIdentifier=.25..*
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: Select
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: Win32_NTLogEvent
+        - op: and
+          rules:
+          - op: or
+            rules:
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \wevtutil.exe
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: wevtutil.exe
+          - op: or
+            rules:
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: ' qe '
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: ' query-events '
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \wmic.exe
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: wmic.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' ntevent'
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'Get-WinEvent '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: 'get-eventlog '
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems), X__Junior (Nextron Systems)
+    description: 'Detects execution of different log query utilities and commands
+      to search and dump the content of specific event logs or look for specific event
+      IDs.
+
+      This technique is used by threat actors in order to extract sensitive information
+      from events logs such as usernames, IP addresses, hostnames, etc.
+
+      '
+    falsepositives:
+    - Legitimate usage of the utility by administrators to query the event log
+    level: medium
+    references:
+    - http://blog.talosintelligence.com/2022/09/lazarus-three-rats.html
+    - https://thedfirreport.com/2023/10/30/netsupport-intrusion-results-in-domain-compromise/
+    - https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-144a
+    - https://www.group-ib.com/blog/apt41-world-tour-2021/
+    - https://labs.withsecure.com/content/dam/labs/docs/f-secureLABS-tlp-white-lazarus-threat-intel-report2.pdf
+    - https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.diagnostics/get-winevent?view=powershell-7.3
+    - https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-eventlog?view=powershell-5.1
+    - http://www.solomonson.com/posts/2010-07-09-reading-eventviewer-command-line/
+    - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/wevtutil
+    tags:
+    - attack.credential-access
+    - attack.discovery
+    - attack.t1552
+  name: Potentially Suspicious EventLog Recon Activity Using Log Query Utilities
+

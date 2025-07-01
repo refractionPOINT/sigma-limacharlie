@@ -1,0 +1,172 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \certutil.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: CertUtil.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'urlcache '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'verifyctl '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .githubusercontent.com
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: anonfiles.com
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: cdn.discordapp.com
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ddns.net
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: dl.dropboxusercontent.com
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ghostbin.co
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: glitch.me
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: gofile.io
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: hastebin.com
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: mediafire.com
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: mega.nz
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: onrender.com
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: pages.dev
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: paste.ee
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: pastebin.com
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: pastebin.pl
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: pastetext.net
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: privatlab.com
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: privatlab.net
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: send.exploit.in
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: sendspace.com
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: storage.googleapis.com
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: storjshare.io
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: supabase.co
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: temp.sh
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: transfer.sh
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: trycloudflare.com
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ufile.io
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: w3spaces.com
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: workers.dev
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: Detects the execution of certutil with certain flags that allow the
+      utility to download files from file-sharing websites.
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/certutil
+    - https://forensicitguy.github.io/agenttesla-vba-certutil-download/
+    - https://news.sophos.com/en-us/2021/04/13/compromised-exchange-server-hosting-cryptojacker-targeting-other-exchange-servers/
+    - https://twitter.com/egre55/status/1087685529016193025
+    - https://lolbas-project.github.io/lolbas/Binaries/Certutil/
+    - https://www.microsoft.com/en-us/security/blog/2024/01/17/new-ttps-observed-in-mint-sandstorm-campaign-targeting-high-profile-individuals-at-universities-and-research-orgs/
+    tags:
+    - attack.defense-evasion
+    - attack.t1027
+  name: Suspicious File Downloaded From File-Sharing Website Via Certutil.EXE
+

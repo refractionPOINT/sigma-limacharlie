@@ -1,0 +1,42 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '5136'
+  - case sensitive: false
+    op: is
+    path: Event/EventData/AttributeLDAPDisplayName
+    value: gPCMachineExtensionNames
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/AttributeValue
+      value: 827D319E-6EAC-11D2-A4EA-00C04F79F83A
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/AttributeValue
+      value: 803E14A0-B4FB-11D0-A0D0-00A0C90F574B
+  target: log
+respond:
+- action: report
+  metadata:
+    author: "Elastic, Josh Nickels, Marius Rothenb\xFCcher"
+    description: 'Detects the first occurrence of a modification to Group Policy Object
+      Attributes to add privileges to user accounts or use them to add users as local
+      admins.
+
+      '
+    falsepositives:
+    - Users allowed to perform these modifications (user found in field SubjectUserName)
+    level: medium
+    references:
+    - https://www.elastic.co/guide/en/security/current/group-policy-abuse-for-privilege-addition.html#_setup_275
+    tags:
+    - attack.privilege-escalation
+    - attack.t1484.001
+  name: Group Policy Abuse for Privilege Addition
+

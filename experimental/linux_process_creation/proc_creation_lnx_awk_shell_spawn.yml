@@ -1,0 +1,78 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /awk
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /gawk
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /mawk
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /nawk
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: BEGIN {system
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /bin/bash
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /bin/dash
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /bin/fish
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /bin/sh
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /bin/zsh
+respond:
+- action: report
+  metadata:
+    author: Li Ling, Andy Parkidomo, Robert Rakowski, Blake Hartstein (Bloomberg L.P.)
+    description: 'Detects the execution of "awk" or it''s sibling commands, to invoke
+      a shell using the system() function.
+
+      This behavior is commonly associated with attempts to execute arbitrary commands
+      or escalate privileges, potentially leading to unauthorized access or further
+      exploitation.
+
+      '
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://gtfobins.github.io/gtfobins/awk/#shell
+    - https://gtfobins.github.io/gtfobins/gawk/#shell
+    - https://gtfobins.github.io/gtfobins/nawk/#shell
+    - https://gtfobins.github.io/gtfobins/mawk/#shell
+    tags:
+    - attack.execution
+    - attack.t1059
+  name: Suspicious Invocation of Shell via AWK - Linux
+

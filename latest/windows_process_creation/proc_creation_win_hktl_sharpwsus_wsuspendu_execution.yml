@@ -1,0 +1,88 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -Inject '
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -PayloadArgs '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' -PayloadFile '
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' approve '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' create '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' check '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' delete '
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /payload:'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /payload='
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /updateid:'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /updateid='
+respond:
+- action: report
+  metadata:
+    author: '@Kostastsale, Nasreddine Bencherchali (Nextron Systems)'
+    description: 'Detects the execution of SharpWSUS or WSUSpendu, utilities that
+      allow for lateral movement through WSUS.
+
+      Windows Server Update Services (WSUS) is a critical component of Windows systems
+      and is frequently configured in a way that allows an attacker to circumvent
+      internal networking limitations.
+
+      '
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://labs.nettitude.com/blog/introducing-sharpwsus/
+    - https://github.com/nettitude/SharpWSUS
+    - https://web.archive.org/web/20210512154016/https://github.com/AlsidOfficial/WSUSpendu/blob/master/WSUSpendu.ps1
+    tags:
+    - attack.execution
+    - attack.lateral-movement
+    - attack.t1210
+  name: HackTool - SharpWSUS/WSUSpendu Execution
+

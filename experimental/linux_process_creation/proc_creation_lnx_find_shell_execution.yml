@@ -1,0 +1,63 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /find
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: ' . '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: -exec
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /bin/bash
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /bin/dash
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /bin/fish
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /bin/sh
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /bin/zsh
+respond:
+- action: report
+  metadata:
+    author: Li Ling, Andy Parkidomo, Robert Rakowski, Blake Hartstein (Bloomberg L.P.)
+    description: 'Detects the use of the find command to execute a shell. Such behavior
+      may be associated with privilege escalation, unauthorized command execution,
+      or exploitation attempt.
+
+      '
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://gtfobins.github.io/gtfobins/find/#shell
+    - https://www.elastic.co/guide/en/security/current/linux-restricted-shell-breakout-via-linux-binary-s.html
+    tags:
+    - attack.discovery
+    - attack.t1083
+  name: Shell Execution via Find - Linux
+

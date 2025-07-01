@@ -1,0 +1,46 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is mac
+  - op: and
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /chflags
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: 'hidden '
+respond:
+- action: report
+  metadata:
+    author: Omar Khaled (@beacon_exe)
+    description: 'Detects the execution of the "chflags" utility with the "hidden"
+      flag, in order to hide files on MacOS.
+
+      When a file or directory has this hidden flag set, it becomes invisible to the
+      default file listing commands and in graphical file browsers.
+
+      '
+    falsepositives:
+    - Legitimate usage of chflags by administrators and users.
+    level: medium
+    references:
+    - https://www.sentinelone.com/labs/apt32-multi-stage-macos-trojan-innovates-on-crimeware-scripting-technique/
+    - https://www.welivesecurity.com/2019/04/09/oceanlotus-macos-malware-update/
+    - https://www.paloaltonetworks.com/content/dam/pan/en_US/assets/pdf/reports/Unit_42/unit42-wirelurker.pdf
+    - https://ss64.com/mac/chflags.html
+    tags:
+    - attack.defense-evasion
+    - attack.credential-access
+    - attack.command-and-control
+    - attack.t1218
+    - attack.t1564.004
+    - attack.t1552.001
+    - attack.t1105
+  name: Hidden Flag Set On File/Directory Via Chflags - MacOS
+

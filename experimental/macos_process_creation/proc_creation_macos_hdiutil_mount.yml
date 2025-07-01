@@ -1,0 +1,43 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is mac
+  - op: and
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /hdiutil
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'attach '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'mount '
+respond:
+- action: report
+  metadata:
+    author: Omar Khaled (@beacon_exe)
+    description: Detects the execution of the hdiutil utility in order to mount disk
+      images.
+    falsepositives:
+    - Legitimate usage of hdiutil by administrators and users.
+    level: medium
+    references:
+    - https://www.loobins.io/binaries/hdiutil/
+    - https://www.sentinelone.com/blog/from-the-front-linesunsigned-macos-orat-malware-gambles-for-the-win/
+    - https://ss64.com/mac/hdiutil.html
+    tags:
+    - attack.initial-access
+    - attack.collection
+    - attack.t1566.001
+    - attack.t1560.001
+  name: Disk Image Mounting Via Hdiutil - MacOS
+

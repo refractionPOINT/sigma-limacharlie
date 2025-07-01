@@ -1,0 +1,85 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /python
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /python2
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /python3
+      - op: or
+        rules:
+        - case sensitive: true
+          op: contains
+          path: event/FILE_PATH
+          value: /python2.
+        - case sensitive: true
+          op: contains
+          path: event/FILE_PATH
+          value: /python3.
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' -c '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: os.system(
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /bin/bash
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /bin/dash
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /bin/fish
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /bin/sh
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /bin/zsh
+respond:
+- action: report
+  metadata:
+    author: Li Ling, Andy Parkidomo, Robert Rakowski, Blake Hartstein (Bloomberg L.P.)
+    description: 'Detects execution of inline Python code via the "-c" in order to
+      call the "system" function from the "os" library, and spawn a shell.
+
+      '
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://gtfobins.github.io/gtfobins/python/#shell
+    tags:
+    - attack.execution
+    - attack.t1059
+  name: Inline Python Execution - Spawn Shell Via OS System Library
+

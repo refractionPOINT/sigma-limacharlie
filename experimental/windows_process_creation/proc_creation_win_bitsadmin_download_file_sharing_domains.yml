@@ -1,0 +1,178 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \bitsadmin.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: bitsadmin.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /transfer '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /create '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' /addfile '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .githubusercontent.com
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: anonfiles.com
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: cdn.discordapp.com
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ddns.net
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: dl.dropboxusercontent.com
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ghostbin.co
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: glitch.me
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: gofile.io
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: hastebin.com
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: mediafire.com
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: mega.nz
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: onrender.com
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: pages.dev
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: paste.ee
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: pastebin.com
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: pastebin.pl
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: pastetext.net
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: privatlab.com
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: privatlab.net
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: send.exploit.in
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: sendspace.com
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: storage.googleapis.com
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: storjshare.io
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: supabase.co
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: temp.sh
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: transfer.sh
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: trycloudflare.com
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ufile.io
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: w3spaces.com
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: workers.dev
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects usage of bitsadmin downloading a file from a suspicious domain
+    falsepositives:
+    - Some legitimate apps use this, but limited.
+    level: high
+    references:
+    - https://blog.netspi.com/15-ways-to-download-a-file/#bitsadmin
+    - https://isc.sans.edu/diary/22264
+    - https://lolbas-project.github.io/lolbas/Binaries/Bitsadmin/
+    - https://symantec-enterprise-blogs.security.com/blogs/threat-intelligence/ransomware-hive-conti-avoslocker
+    - https://www.cisa.gov/uscert/ncas/alerts/aa22-321a
+    - https://www.microsoft.com/en-us/security/blog/2024/01/17/new-ttps-observed-in-mint-sandstorm-campaign-targeting-high-profile-individuals-at-universities-and-research-orgs/
+    tags:
+    - attack.defense-evasion
+    - attack.persistence
+    - attack.t1197
+    - attack.s0190
+    - attack.t1036.003
+  name: Suspicious Download From File-Sharing Website Via Bitsadmin
+

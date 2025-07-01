@@ -1,0 +1,126 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: Event/System/EventID
+        value: '2004'
+      - case sensitive: false
+        op: is
+        path: Event/System/EventID
+        value: '2071'
+      - case sensitive: false
+        op: is
+        path: Event/System/EventID
+        value: '2097'
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: Event/EventData/Action
+        value: '2'
+      - op: or
+        rules:
+        - case sensitive: false
+          op: starts with
+          path: Event/EventData/ApplicationPath
+          value: C:\Program Files (x86)\
+        - case sensitive: false
+          op: starts with
+          path: Event/EventData/ApplicationPath
+          value: C:\Program Files\
+        - case sensitive: false
+          op: starts with
+          path: Event/EventData/ApplicationPath
+          value: C:\Windows\System32\
+        - case sensitive: false
+          op: starts with
+          path: Event/EventData/ApplicationPath
+          value: C:\Windows\SysWOW64\
+        - case sensitive: false
+          op: starts with
+          path: Event/EventData/ApplicationPath
+          value: C:\Windows\WinSxS\
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: Event/EventData/ApplicationPath
+          value: C:\PerfLogs\
+        - case sensitive: false
+          op: contains
+          path: Event/EventData/ApplicationPath
+          value: C:\Temp\
+        - case sensitive: false
+          op: contains
+          path: Event/EventData/ApplicationPath
+          value: C:\Tmp\
+        - case sensitive: false
+          op: contains
+          path: Event/EventData/ApplicationPath
+          value: C:\Users\Public\
+        - case sensitive: false
+          op: contains
+          path: Event/EventData/ApplicationPath
+          value: C:\Windows\Tasks\
+        - case sensitive: false
+          op: contains
+          path: Event/EventData/ApplicationPath
+          value: C:\Windows\Temp\
+        - case sensitive: false
+          op: contains
+          path: Event/EventData/ApplicationPath
+          value: \AppData\Local\Temp\
+      - not: true
+        op: exists
+        path: Event/EventData/ApplicationPath
+  - not: true
+    op: or
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: starts with
+        path: Event/EventData/ModifyingApplication
+        value: C:\ProgramData\Microsoft\Windows Defender\Platform\
+      - case sensitive: false
+        op: ends with
+        path: Event/EventData/ModifyingApplication
+        value: \MsMpEng.exe
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: Event/EventData/ModifyingApplication
+          value: C:\Windows\System32\svchost.exe
+        - case sensitive: false
+          op: is
+          path: Event/EventData/ModifyingApplication
+          value: C:\Windows\System32\dllhost.exe
+      - case sensitive: false
+        op: is
+        path: Event/EventData/ApplicationPath
+        value: ''
+  target: log
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Detects when a rule has been added to the Windows Firewall exception
+      list
+    level: medium
+    references:
+    - https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-r2-and-2008/dd364427(v=ws.10)
+    tags:
+    - attack.defense-evasion
+    - attack.t1562.004
+  name: Uncommon New Firewall Rule Added In Windows Firewall Exception List
+

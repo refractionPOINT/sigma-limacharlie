@@ -1,0 +1,49 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \cmd.exe
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \powershell.exe
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: \pwsh.exe
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \explorer.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: shell:mycomputerfolder
+respond:
+- action: report
+  metadata:
+    author: '@Kostastsale'
+    description: 'Detects the initial execution of "cmd.exe" which spawns "explorer.exe"
+      with the appropriate command line arguments for opening the "My Computer" folder.
+
+      '
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://ss64.com/nt/shell.html
+    tags:
+    - attack.discovery
+    - attack.t1135
+  name: File Explorer Folder Opened Using Explorer Folder Shortcut Via Shell
+

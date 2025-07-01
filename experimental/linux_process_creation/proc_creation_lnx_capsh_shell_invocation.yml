@@ -1,0 +1,35 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /capsh
+    - case sensitive: false
+      op: ends with
+      path: event/COMMAND_LINE
+      value: ' --'
+respond:
+- action: report
+  metadata:
+    author: Li Ling, Andy Parkidomo, Robert Rakowski, Blake Hartstein (Bloomberg L.P.)
+    description: 'Detects the use of the "capsh" utility to invoke a shell.
+
+      '
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://gtfobins.github.io/gtfobins/capsh/#shell
+    - https://www.elastic.co/guide/en/security/current/linux-restricted-shell-breakout-via-linux-binary-s.html
+    tags:
+    - attack.execution
+    - attack.t1059
+  name: Capsh Shell Invocation - Linux
+

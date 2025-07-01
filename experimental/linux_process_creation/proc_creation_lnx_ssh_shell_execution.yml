@@ -1,0 +1,77 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /ssh
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ProxyCommand=;
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: permitlocalcommand=yes
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: localhost
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /bin/bash
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /bin/dash
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /bin/fish
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /bin/sh
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /bin/zsh
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: sh 0<&2 1>&2
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: sh 1>&2 0<&2
+respond:
+- action: report
+  metadata:
+    author: Li Ling, Andy Parkidomo, Robert Rakowski, Blake Hartstein (Bloomberg L.P.)
+    description: 'Detects the use of the "ssh" utility to execute a shell. Such behavior
+      may be associated with privilege escalation, unauthorized command execution,
+      or to break out from restricted environments.
+
+      '
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://gtfobins.github.io/gtfobins/ssh/
+    - https://www.elastic.co/guide/en/security/current/linux-restricted-shell-breakout-via-linux-binary-s.html
+    tags:
+    - attack.execution
+    - attack.t1059
+  name: Shell Invocation Via Ssh - Linux
+

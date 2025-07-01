@@ -1,0 +1,54 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is linux
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: /git
+    - case sensitive: false
+      op: contains
+      path: event/PARENT/COMMAND_LINE
+      value: ' -p '
+    - case sensitive: false
+      op: contains
+      path: event/PARENT/COMMAND_LINE
+      value: help
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: bash 0<&1
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: dash 0<&1
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: sh 0<&1
+respond:
+- action: report
+  metadata:
+    author: Li Ling, Andy Parkidomo, Robert Rakowski, Blake Hartstein (Bloomberg L.P.)
+    description: 'Detects the use of the "git" utility to execute a shell. Such behavior
+      may be associated with privilege escalation, unauthorized command execution,
+      or to break out from restricted environments.
+
+      '
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://gtfobins.github.io/gtfobins/git/#shell
+    tags:
+    - attack.execution
+    - attack.t1059
+  name: Shell Execution via Git - Linux
+
