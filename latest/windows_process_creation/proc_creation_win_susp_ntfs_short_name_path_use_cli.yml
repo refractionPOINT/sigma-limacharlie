@@ -56,6 +56,14 @@ detect:
           op: ends with
           path: event/PARENT/FILE_PATH
           value: \Everything\Everything.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \aurora-agent-64.exe
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \aurora-agent.exe
       - case sensitive: false
         op: contains
         path: event/PARENT/FILE_PATH

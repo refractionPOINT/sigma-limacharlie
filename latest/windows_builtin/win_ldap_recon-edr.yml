@@ -68,10 +68,6 @@ detect:
             - case sensitive: false
               op: contains
               path: event/EVENT/EventData/SearchFilter
-              value: (objectCategory=Computer)
-            - case sensitive: false
-              op: contains
-              path: event/EVENT/EventData/SearchFilter
               value: (objectCategory=nTDSDSA)
             - case sensitive: false
               op: contains

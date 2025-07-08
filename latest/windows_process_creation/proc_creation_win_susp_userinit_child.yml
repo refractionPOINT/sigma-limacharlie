@@ -28,6 +28,9 @@ detect:
           op: is
           path: event/ORIGINAL_FILE_NAME
           value: explorer.exe
+      - not: true
+        op: exists
+        path: event/FILE_PATH
 respond:
 - action: report
   metadata:
