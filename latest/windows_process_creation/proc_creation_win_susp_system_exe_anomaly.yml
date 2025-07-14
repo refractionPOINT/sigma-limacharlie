@@ -174,6 +174,10 @@ detect:
         - case sensitive: false
           op: ends with
           path: event/FILE_PATH
+          value: \taskhostw.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
           value: \Taskmgr.exe
         - case sensitive: false
           op: ends with
@@ -284,6 +288,7 @@ respond:
     references:
     - https://twitter.com/GelosSnake/status/934900723426439170
     - https://asec.ahnlab.com/en/39828/
+    - https://www.splunk.com/en_us/blog/security/inno-setup-malware-redline-stealer-campaign.html
     tags:
     - attack.defense-evasion
     - attack.t1036
