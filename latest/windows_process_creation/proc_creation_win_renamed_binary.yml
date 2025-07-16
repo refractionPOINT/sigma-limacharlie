@@ -24,6 +24,10 @@ detect:
       - case sensitive: false
         op: is
         path: event/ORIGINAL_FILE_NAME
+        value: 7za.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
         value: WinRAR.exe
       - case sensitive: false
         op: is
@@ -63,6 +67,10 @@ detect:
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
+        value: \7za.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
         value: \WinRAR.exe
       - case sensitive: false
         op: ends with
@@ -99,6 +107,7 @@ respond:
     - https://mgreen27.github.io/posts/2019/05/12/BinaryRename.html
     - https://mgreen27.github.io/posts/2019/05/29/BinaryRename2.html
     - https://github.com/redcanaryco/atomic-red-team/blob/0f229c0e42bfe7ca736a14023836d65baa941ed2/atomics/T1036.003/T1036.003.md#atomic-test-1---masquerading-as-windows-lsass-process
+    - https://www.splunk.com/en_us/blog/security/inno-setup-malware-redline-stealer-campaign.html
     tags:
     - attack.defense-evasion
     - attack.t1036.003
