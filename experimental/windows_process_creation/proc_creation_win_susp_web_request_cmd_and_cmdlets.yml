@@ -26,6 +26,10 @@ detect:
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
+      value: ' irm '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
       value: 'iwr '
     - case sensitive: false
       op: contains

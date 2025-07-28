@@ -25,6 +25,14 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: 'iwr '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'Invoke-RestMethod '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'irm '
     - op: or
       rules:
       - case sensitive: false

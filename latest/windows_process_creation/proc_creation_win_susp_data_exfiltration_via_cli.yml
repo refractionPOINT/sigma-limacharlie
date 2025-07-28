@@ -18,6 +18,10 @@ detect:
             - case sensitive: false
               op: ends with
               path: event/FILE_PATH
+              value: \powershell_ise.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
               value: \powershell.exe
             - case sensitive: false
               op: ends with
@@ -32,7 +36,19 @@ detect:
             - case sensitive: false
               op: contains
               path: event/COMMAND_LINE
+              value: 'curl '
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: Invoke-RestMethod
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
               value: Invoke-WebRequest
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: 'irm '
             - case sensitive: false
               op: contains
               path: event/COMMAND_LINE
@@ -41,10 +57,6 @@ detect:
               op: contains
               path: event/COMMAND_LINE
               value: 'wget '
-            - case sensitive: false
-              op: contains
-              path: event/COMMAND_LINE
-              value: 'curl '
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
