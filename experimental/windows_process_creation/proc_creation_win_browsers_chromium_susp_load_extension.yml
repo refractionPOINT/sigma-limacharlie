@@ -82,6 +82,6 @@ respond:
     - https://www.mandiant.com/resources/blog/lnk-between-browsers
     tags:
     - attack.persistence
-    - attack.t1176
+    - attack.t1176.001
   name: Suspicious Chromium Browser Instance Executed With Custom Extension
 

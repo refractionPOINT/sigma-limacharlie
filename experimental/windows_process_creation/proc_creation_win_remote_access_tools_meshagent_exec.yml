@@ -1,0 +1,54 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: event/PARENT/FILE_PATH
+      value: \meshagent.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cmd.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \powershell.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \pwsh.exe
+respond:
+- action: report
+  metadata:
+    author: '@Kostastsale'
+    description: 'Detects the use of MeshAgent to execute commands on the target host,
+      particularly when threat actors might abuse it to execute commands directly.
+
+      MeshAgent can execute commands on the target host by leveraging win-console
+      to obscure their activities and win-dispatcher to run malicious code through
+      IPC with child processes.
+
+      '
+    falsepositives:
+    - False positives can be found in environments using MeshAgent for remote management,
+      analysis should prioritize the grandparent process, MeshAgent.exe, and scrutinize
+      the resulting child processes triggered by any suspicious interactive commands
+      directed at the target host.
+    level: medium
+    references:
+    - https://github.com/Ylianst/MeshAgent
+    - https://github.com/Ylianst/MeshAgent/blob/52cf129ca43d64743181fbaf940e0b4ddb542a37/modules/win-dispatcher.js#L173
+    - https://github.com/Ylianst/MeshAgent/blob/52cf129ca43d64743181fbaf940e0b4ddb542a37/modules/win-info.js#L55
+    tags:
+    - attack.command-and-control
+    - attack.t1219.002
+  name: Remote Access Tool - MeshAgent Command Execution via MeshCentral
+

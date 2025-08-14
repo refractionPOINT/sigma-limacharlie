@@ -38,5 +38,6 @@ respond:
     - attack.credential-access
     - attack.collection
     - attack.t1185
+    - attack.t1564.003
   name: Potential Data Stealing Via Chromium Headless Debugging
 

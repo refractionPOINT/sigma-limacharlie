@@ -56,5 +56,6 @@ respond:
     tags:
     - attack.command-and-control
     - attack.t1105
+    - attack.t1564.003
   name: File Download with Headless Browser
 

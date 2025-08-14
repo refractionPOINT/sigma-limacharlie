@@ -47,5 +47,6 @@ respond:
     tags:
     - attack.command-and-control
     - attack.t1105
+    - attack.t1564.003
   name: Browser Execution In Headless Mode
 

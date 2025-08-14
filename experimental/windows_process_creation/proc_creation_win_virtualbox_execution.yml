@@ -49,5 +49,5 @@ respond:
     - attack.defense-evasion
     - attack.t1564.006
     - attack.t1564
-  name: Detect Virtualbox Driver Installation OR Starting Of VMs
+  name: Virtualbox Driver Installation or Starting of VMs
 

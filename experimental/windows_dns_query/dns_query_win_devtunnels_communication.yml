@@ -22,5 +22,6 @@ respond:
     tags:
     - attack.command-and-control
     - attack.t1071.001
+    - attack.t1572
   name: DNS Query To Devtunnels Domain
 
