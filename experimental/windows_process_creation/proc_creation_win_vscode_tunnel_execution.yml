@@ -25,10 +25,6 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: '--name '
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
         value: --accept-server-license-terms
     - op: and
       rules:
@@ -68,5 +64,6 @@ respond:
     tags:
     - attack.command-and-control
     - attack.t1071.001
+    - attack.t1219
   name: Visual Studio Code Tunnel Execution
 

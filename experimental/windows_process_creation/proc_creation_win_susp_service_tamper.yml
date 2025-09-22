@@ -22,6 +22,10 @@ detect:
         - case sensitive: false
           op: is
           path: event/ORIGINAL_FILE_NAME
+          value: PowerShell_ISE.EXE
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
           value: PowerShell.EXE
         - case sensitive: false
           op: is
@@ -35,6 +39,10 @@ detect:
           op: is
           path: event/ORIGINAL_FILE_NAME
           value: sc.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: wmic.exe
       - op: or
         rules:
         - case sensitive: false
@@ -45,6 +53,10 @@ detect:
           op: ends with
           path: event/FILE_PATH
           value: \net1.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \PowerShell_ISE.EXE
         - case sensitive: false
           op: ends with
           path: event/FILE_PATH
@@ -65,6 +77,10 @@ detect:
           op: ends with
           path: event/FILE_PATH
           value: \sc.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \wmic.exe
     - op: or
       rules:
       - op: or
@@ -73,6 +89,10 @@ detect:
           op: contains
           path: event/COMMAND_LINE
           value: ' delete '
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .delete()
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
@@ -1012,7 +1032,8 @@ detect:
 respond:
 - action: report
   metadata:
-    author: Nasreddine Bencherchali (Nextron Systems), frack113 , X__Junior
+    author: Nasreddine Bencherchali (Nextron Systems), frack113 , X__Junior (Nextron
+      Systems)
     description: 'Detects the usage of binaries such as ''net'', ''sc'' or ''powershell''
       in order to stop, pause, disable or delete critical or important Windows services
       such as AV, Backup, etc. As seen being used in some ransomware scripts
@@ -1029,6 +1050,7 @@ respond:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1562.001/T1562.001.md
     - https://research.nccgroup.com/2022/08/19/back-in-black-unlocking-a-lockbit-3-0-ransomware-attack/
     - https://www.virustotal.com/gui/file/38283b775552da8981452941ea74191aa0d203edd3f61fb2dee7b0aea3514955
+    - https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/delete-method-in-class-win32-service
     tags:
     - attack.defense-evasion
     - attack.impact

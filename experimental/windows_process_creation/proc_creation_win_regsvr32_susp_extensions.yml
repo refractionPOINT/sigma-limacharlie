@@ -58,6 +58,10 @@ detect:
       - case sensitive: false
         op: ends with
         path: event/COMMAND_LINE
+        value: .log
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
         value: .nef
       - case sensitive: false
         op: ends with
@@ -71,6 +75,10 @@ detect:
         op: ends with
         path: event/COMMAND_LINE
         value: .raw
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: .rtf
       - case sensitive: false
         op: ends with
         path: event/COMMAND_LINE
@@ -94,10 +102,6 @@ detect:
       - case sensitive: false
         op: ends with
         path: event/COMMAND_LINE
-        value: .rtf
-      - case sensitive: false
-        op: ends with
-        path: event/COMMAND_LINE
         value: .txt
 respond:
 - action: report
@@ -112,6 +116,7 @@ respond:
     - https://thedfirreport.com/2021/11/29/continuing-the-bazar-ransomware-story/
     - https://blog.talosintelligence.com/2021/10/threat-hunting-in-large-datasets-by.html
     - https://guides.lib.umich.edu/c.php?g=282942&p=1885348
+    - https://harfanglab.io/insidethelab/uac-0057-pressure-ukraine-poland/
     tags:
     - attack.defense-evasion
     - attack.t1218.010

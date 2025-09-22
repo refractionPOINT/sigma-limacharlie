@@ -5,10 +5,17 @@ detect:
   op: and
   rules:
   - op: is linux
-  - case sensitive: true
-    op: starts with
-    path: event/FILE_PATH
-    value: /tmp/
+  - op: and
+    rules:
+    - case sensitive: true
+      op: starts with
+      path: event/FILE_PATH
+      value: /tmp/
+    - case sensitive: true
+      not: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /usr/bin/nextcloud
 respond:
 - action: report
   metadata:
@@ -17,7 +24,7 @@ respond:
       the '/tmp/' folder
     falsepositives:
     - Unknown
-    level: high
+    level: medium
     references:
     - https://blogs.jpcert.or.jp/en/2023/05/gobrat.html
     - https://jstnk9.github.io/jstnk9/research/GobRAT-Malware/
