@@ -5,10 +5,16 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - case sensitive: false
-      op: is
-      path: event/EVENT/EventData/Provider_Name
-      value: Kerberos-Key-Distribution-Center
+    - op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/Provider_Name
+        value: Kerberos-Key-Distribution-Center
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/Provider_Name
+        value: Microsoft-Windows-Kerberos-Key-Distribution-Center
     - op: or
       rules:
       - case sensitive: false

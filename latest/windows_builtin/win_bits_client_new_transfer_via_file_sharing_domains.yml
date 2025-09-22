@@ -1,0 +1,154 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '16403'
+  - op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
+      value: .githubusercontent.com
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
+      value: anonfiles.com
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
+      value: cdn.discordapp.com
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
+      value: ddns.net
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
+      value: dl.dropboxusercontent.com
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
+      value: ghostbin.co
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
+      value: glitch.me
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
+      value: gofile.io
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
+      value: hastebin.com
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
+      value: mediafire.com
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
+      value: mega.nz
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
+      value: onrender.com
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
+      value: pages.dev
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
+      value: paste.ee
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
+      value: pastebin.com
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
+      value: pastebin.pl
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
+      value: pastetext.net
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
+      value: pixeldrain.com
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
+      value: privatlab.com
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
+      value: privatlab.net
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
+      value: send.exploit.in
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
+      value: sendspace.com
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
+      value: storage.googleapis.com
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
+      value: storjshare.io
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
+      value: supabase.co
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
+      value: temp.sh
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
+      value: transfer.sh
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
+      value: trycloudflare.com
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
+      value: ufile.io
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
+      value: w3spaces.com
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
+      value: workers.dev
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems)
+    description: Detects BITS transfer job downloading files from a file sharing domain.
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1197/T1197.md
+    - https://twitter.com/malmoeb/status/1535142803075960832
+    - https://symantec-enterprise-blogs.security.com/blogs/threat-intelligence/ransomware-hive-conti-avoslocker
+    - https://www.microsoft.com/en-us/security/blog/2024/01/17/new-ttps-observed-in-mint-sandstorm-campaign-targeting-high-profile-individuals-at-universities-and-research-orgs/
+    tags:
+    - attack.defense-evasion
+    - attack.persistence
+    - attack.t1197
+  name: BITS Transfer Job Download From File Sharing Domains
+

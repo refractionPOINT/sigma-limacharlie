@@ -1,0 +1,98 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '29'
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Configuration
+        value: /system.webServer/modules/add
+    - not: true
+      op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/NewValue
+          value: AnonymousAuthenticationModule
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/NewValue
+          value: CustomErrorModule
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/NewValue
+          value: DefaultDocumentModule
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/NewValue
+          value: DirectoryListingModule
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/NewValue
+          value: FileCacheModule
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/NewValue
+          value: HttpCacheModule
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/NewValue
+          value: HttpLoggingModule
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/NewValue
+          value: ProtocolSupportModule
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/NewValue
+          value: RequestFilteringModule
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/NewValue
+          value: StaticCompressionModule
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/NewValue
+          value: StaticFileModule
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/NewValue
+          value: TokenCacheModule
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/NewValue
+          value: UriCacheModule
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/NewValue
+        value: ''
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: Detects the addition of a new module to an IIS server.
+    falsepositives:
+    - Legitimate administrator activity
+    level: medium
+    references:
+    - https://learn.microsoft.com/en-us/iis/manage/provisioning-and-managing-iis/configure-logging-in-iis
+    - https://www.microsoft.com/en-us/security/blog/2022/12/12/iis-modules-the-evolution-of-web-shells-and-how-to-detect-them/
+    - https://www.microsoft.com/en-us/security/blog/2022/07/26/malicious-iis-extensions-quietly-open-persistent-backdoors-into-servers/
+    - https://learn.microsoft.com/en-us/iis/get-started/introduction-to-iis/iis-modules-overview
+    tags:
+    - attack.defense-evasion
+    - attack.persistence
+    - attack.t1562.002
+    - attack.t1505.004
+  name: New Module Module Added To IIS Server
+
