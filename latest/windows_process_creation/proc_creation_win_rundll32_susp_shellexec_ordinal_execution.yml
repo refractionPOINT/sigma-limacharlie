@@ -1,0 +1,165 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: SHELL32.DLL
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: '#568'
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: '#570'
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: '#572'
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: '#576'
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: comspec
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: iex
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: Invoke-
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: msiexec
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: odbcconf
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: regsvr32
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: \Desktop\
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: \ProgramData\
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: \Temp\
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/COMMAND_LINE
+          value: \Users\Public\
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \bash.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \bitsadmin.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \cmd.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \cscript.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \curl.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \mshta.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \msiexec.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \msxsl.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \odbcconf.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \pwsh.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \regsvr32.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \schtasks.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \wmic.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \wscript.exe
+respond:
+- action: report
+  metadata:
+    author: Swachchhanda Shrawan Poudel
+    description: 'Detects suspicious call to the "ShellExec_RunDLL" exported function
+      of SHELL32.DLL through the ordinal number to launch other commands.
+
+      Adversary might only use the ordinal number in order to bypass existing detection
+      that alert on usage of ShellExec_RunDLL on CommandLine.
+
+      '
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://redcanary.com/blog/raspberry-robin/
+    - https://www.microsoft.com/en-us/security/blog/2022/10/27/raspberry-robin-worm-part-of-larger-ecosystem-facilitating-pre-ransomware-activity/
+    - https://github.com/SigmaHQ/sigma/issues/1009
+    - https://strontic.github.io/xcyclopedia/library/shell32.dll-65DA072F25DE83D9F83653E3FEA3644D.html
+    tags:
+    - attack.defense-evasion
+    - attack.t1218.011
+  name: Suspicious ShellExec_RunDLL Call Via Ordinal
+

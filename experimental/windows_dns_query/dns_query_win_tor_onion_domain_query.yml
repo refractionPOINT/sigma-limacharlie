@@ -1,9 +1,151 @@
 detect:
-  case sensitive: false
   event: DNS_REQUEST
-  op: contains
-  path: event/DOMAIN_NAME
-  value: .onion
+  op: or
+  rules:
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .hiddenservice.net
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .onion.ca
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .onion.cab
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .onion.casa
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .onion.city
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .onion.direct
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .onion.dog
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .onion.glass
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .onion.gq
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .onion.ink
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .onion.it
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .onion.link
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .onion.lt
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .onion.lu
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .onion.nu
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .onion.pet
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .onion.plus
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .onion.rip
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .onion.sh
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .onion.to
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .onion.top
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .onion
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .s1.tor-gateways.de
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .s2.tor-gateways.de
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .s3.tor-gateways.de
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .s4.tor-gateways.de
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .s5.tor-gateways.de
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .t2w.pw
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .tor2web.ae.org
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .tor2web.blutmagie.de
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .tor2web.com
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .tor2web.fi
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .tor2web.io
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .tor2web.org
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .tor2web.xyz
+  - case sensitive: false
+    op: ends with
+    path: event/DOMAIN_NAME
+    value: .torlink.co
 respond:
 - action: report
   metadata:
@@ -15,6 +157,7 @@ respond:
     level: high
     references:
     - https://www.logpoint.com/en/blog/detecting-tor-use-with-logpoint/
+    - https://github.com/Azure/Azure-Sentinel/blob/f99542b94afe0ad2f19a82cc08262e7ac8e1428e/Detections/ASimDNS/imDNS_TorProxies.yaml
     tags:
     - attack.command-and-control
     - attack.t1090.003

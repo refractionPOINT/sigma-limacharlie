@@ -1,0 +1,48 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/PARENT/FILE_PATH
+        value: C:\Windows\SysWOW64\setup16.exe
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: ' -m '
+    - case sensitive: false
+      not: true
+      op: matches
+      path: event/FILE_PATH
+      re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\\~MSSETUP\.T\\
+respond:
+- action: report
+  metadata:
+    author: frack113
+    description: 'Detects the execution of "Setup16.EXE" and old installation utility
+      with a custom ".lst" file.
+
+      These ".lst" file can contain references to external program that "Setup16.EXE"
+      will execute.
+
+      Attackers and adversaries might leverage this as a living of the land utility.
+
+      '
+    falsepositives:
+    - On modern Windows system, the "Setup16" utility is practically never used, hence
+      false positive should be very rare.
+    level: medium
+    references:
+    - https://www.hexacorn.com/blog/2024/10/12/the-sweet16-the-oldbin-lolbin-called-setup16-exe/
+    tags:
+    - attack.defense-evasion
+    - attack.t1574.005
+  name: Setup16.EXE Execution With Custom .Lst File
+

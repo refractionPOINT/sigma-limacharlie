@@ -6,10 +6,188 @@ detect:
     op: is
     path: Event/System/EventID
     value: '3008'
-  - case sensitive: false
-    op: contains
-    path: Event/EventData/QueryName
-    value: .onion
+  - op: or
+    rules:
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .hiddenservice.net
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .onion.ca
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .onion.cab
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .onion.casa
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .onion.city
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .onion.direct
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .onion.dog
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .onion.glass
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .onion.gq
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .onion.guide
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .onion.in.net
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .onion.ink
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .onion.it
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .onion.link
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .onion.lt
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .onion.lu
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .onion.ly
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .onion.mn
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .onion.network
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .onion.nu
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .onion.pet
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .onion.plus
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .onion.pt
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .onion.pw
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .onion.rip
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .onion.sh
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .onion.si
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .onion.to
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .onion.top
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .onion.ws
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .onion
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .s1.tor-gateways.de
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .s2.tor-gateways.de
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .s3.tor-gateways.de
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .s4.tor-gateways.de
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .s5.tor-gateways.de
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .t2w.pw
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .tor2web.ae.org
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .tor2web.blutmagie.de
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .tor2web.com
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .tor2web.fi
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .tor2web.io
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .tor2web.org
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .tor2web.xyz
+    - case sensitive: false
+      op: ends with
+      path: Event/EventData/QueryName
+      value: .torlink.co
   target: log
 respond:
 - action: report
@@ -22,6 +200,7 @@ respond:
     level: high
     references:
     - https://www.logpoint.com/en/blog/detecting-tor-use-with-logpoint/
+    - https://github.com/Azure/Azure-Sentinel/blob/f99542b94afe0ad2f19a82cc08262e7ac8e1428e/Detections/ASimDNS/imDNS_TorProxies.yaml
     tags:
     - attack.command-and-control
     - attack.t1090.003
