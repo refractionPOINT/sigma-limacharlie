@@ -30,16 +30,28 @@ detect:
           path: event/COMMAND_LINE
           value: 'delete '
     - not: true
-      op: and
+      op: or
       rules:
-      - case sensitive: false
-        op: ends with
-        path: event/PARENT/FILE_PATH
-        value: \Dropbox.exe
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: name=Dropbox
+      - op: and
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \Dropbox.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: name=Dropbox
+      - op: and
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \instup.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: advfirewall firewall delete rule name="Avast Antivirus Admin Client"
 respond:
 - action: report
   metadata:

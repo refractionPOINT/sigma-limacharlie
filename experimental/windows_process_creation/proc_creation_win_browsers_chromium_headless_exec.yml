@@ -40,7 +40,7 @@ respond:
     description: Detects execution of Chromium based browser in headless mode
     falsepositives:
     - Unknown
-    level: medium
+    level: low
     references:
     - https://twitter.com/mrd0x/status/1478234484881436672?s=12
     - https://www.trendmicro.com/en_us/research/23/e/managed-xdr-investigation-of-ducktail-in-trend-micro-vision-one.html

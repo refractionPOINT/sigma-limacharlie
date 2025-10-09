@@ -7,26 +7,45 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - op: or
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \verclsid.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: verclsid.exe
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /S
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /C
+    - not: true
+      op: and
       rules:
       - case sensitive: false
         op: ends with
-        path: event/FILE_PATH
-        value: \verclsid.exe
-      - case sensitive: false
-        op: is
-        path: event/ORIGINAL_FILE_NAME
-        value: verclsid.exe
-    - op: and
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /S
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /C
+        path: event/PARENT/FILE_PATH
+        value: C:\Windows\System32\RuntimeBroker.exe
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: verclsid.exe" /S /C {
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '} /I {'
 respond:
 - action: report
   metadata:

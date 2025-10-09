@@ -38,22 +38,30 @@ detect:
       rules:
       - op: and
         rules:
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: :\Users\
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: \AppData\Local\Discord\Update.exe
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: ' --processStart'
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: Discord.exe
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: :\Users\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \AppData\Local\Discord\Update.exe
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: Discord.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: --createShortcut
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: --processStart
       - op: and
         rules:
         - op: and

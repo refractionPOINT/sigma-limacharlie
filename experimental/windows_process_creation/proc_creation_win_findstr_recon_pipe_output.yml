@@ -5,36 +5,57 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: or
+  - op: and
     rules:
-    - case sensitive: false
-      op: matches
-      path: event/COMMAND_LINE
-      re: .*ipconfig.*\|.*find.*
-    - case sensitive: false
-      op: matches
-      path: event/COMMAND_LINE
-      re: .*net.*\|.*find.*
-    - case sensitive: false
-      op: matches
-      path: event/COMMAND_LINE
-      re: .*netstat.*\|.*find.*
-    - case sensitive: false
-      op: matches
-      path: event/COMMAND_LINE
-      re: .*ping.*\|.*find.*
-    - case sensitive: false
-      op: matches
-      path: event/COMMAND_LINE
-      re: .*systeminfo.*\|.*find.*
-    - case sensitive: false
-      op: matches
-      path: event/COMMAND_LINE
-      re: .*tasklist.*\|.*find.*
-    - case sensitive: false
-      op: matches
-      path: event/COMMAND_LINE
-      re: .*whoami.*\|.*find.*
+    - op: or
+      rules:
+      - case sensitive: false
+        op: matches
+        path: event/COMMAND_LINE
+        re: .*ipconfig.*\|.*find.*
+      - case sensitive: false
+        op: matches
+        path: event/COMMAND_LINE
+        re: .*net.*\|.*find.*
+      - case sensitive: false
+        op: matches
+        path: event/COMMAND_LINE
+        re: .*netstat.*\|.*find.*
+      - case sensitive: false
+        op: matches
+        path: event/COMMAND_LINE
+        re: .*ping.*\|.*find.*
+      - case sensitive: false
+        op: matches
+        path: event/COMMAND_LINE
+        re: .*systeminfo.*\|.*find.*
+      - case sensitive: false
+        op: matches
+        path: event/COMMAND_LINE
+        re: .*tasklist.*\|.*find.*
+      - case sensitive: false
+        op: matches
+        path: event/COMMAND_LINE
+        re: .*whoami.*\|.*find.*
+    - not: true
+      op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: cmd.exe /c TASKLIST /V |
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: FIND /I
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \xampp\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \catalina_start.bat
 respond:
 - action: report
   metadata:

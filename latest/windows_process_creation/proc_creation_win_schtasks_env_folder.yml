@@ -15,10 +15,16 @@ detect:
           op: ends with
           path: event/FILE_PATH
           value: \schtasks.exe
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: ' /create '
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' -create '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' /create '
         - op: or
           rules:
           - case sensitive: false
@@ -103,15 +109,15 @@ detect:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: /Create /Xml "C:\Users\
+          value: '/Create /Xml '
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: \AppData\Local\Temp\.CR.
+          value: \Temp\.CR.
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: Avira_Security_Installation.xml
+          value: \Avira_Security_Installation.xml
       - op: and
         rules:
         - op: and
@@ -127,7 +133,7 @@ detect:
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
-            value: \AppData\Local\Temp\is-
+            value: \Temp\
           - case sensitive: false
             op: contains
             path: event/COMMAND_LINE
@@ -155,7 +161,7 @@ detect:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: \AppData\Local\Temp\
+          value: \Temp\
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE

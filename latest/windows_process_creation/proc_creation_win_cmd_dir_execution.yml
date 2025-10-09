@@ -31,9 +31,9 @@ respond:
 - action: report
   metadata:
     author: frack113
-    description: 'Detects usage of the "dir" command part of Widows CMD with the "/S"
-      command line flag in order to enumerate files in a specified directory and all
-      subdirectories.
+    description: 'Detects usage of the "dir" command part of Windows CMD with the
+      "/S" command line flag in order to enumerate files in a specified directory
+      and all subdirectories.
 
       '
     falsepositives:

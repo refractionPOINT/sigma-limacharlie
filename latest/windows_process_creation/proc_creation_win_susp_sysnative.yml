@@ -5,16 +5,64 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: or
+  - op: and
     rules:
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: :\Windows\Sysnative\
-    - case sensitive: false
-      op: contains
-      path: event/FILE_PATH
-      value: :\Windows\Sysnative\
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: :\Windows\Sysnative\
+        - case sensitive: false
+          op: contains
+          path: event/FILE_PATH
+          value: :\Windows\Sysnative\
+      - not: true
+        op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/FILE_PATH
+            value: C:\Windows\Microsoft.NET\Framework64\v
+          - case sensitive: false
+            op: contains
+            path: event/FILE_PATH
+            value: C:\Windows\Microsoft.NET\Framework\v
+          - case sensitive: false
+            op: contains
+            path: event/FILE_PATH
+            value: C:\Windows\Microsoft.NET\FrameworkArm\v
+          - case sensitive: false
+            op: contains
+            path: event/FILE_PATH
+            value: C:\Windows\Microsoft.NET\FrameworkArm64\v
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \ngen.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: install
+    - not: true
+      op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '"C:\Windows\sysnative\cmd.exe"'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \xampp\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \catalina_start.bat
 respond:
 - action: report
   metadata:

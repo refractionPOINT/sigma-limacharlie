@@ -28,22 +28,30 @@ detect:
       rules:
       - op: and
         rules:
-        - case sensitive: false
-          op: starts with
-          path: event/PARENT/FILE_PATH
-          value: C:\Users\
-        - case sensitive: false
-          op: contains
-          path: event/PARENT/FILE_PATH
-          value: \AppData\Local\Temp\
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/FILE_PATH
+            value: \AppData\Local\Temp\
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/FILE_PATH
+            value: :\Windows\Temp\
         - case sensitive: false
           op: ends with
           path: event/PARENT/FILE_PATH
           value: \endpoint-protection-installer-x64.tmp
-        - case sensitive: false
-          op: ends with
-          path: event/COMMAND_LINE
-          value: unload rtp_filesystem_filter
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/COMMAND_LINE
+            value: unload rtp_filesystem_filter
+          - case sensitive: false
+            op: ends with
+            path: event/COMMAND_LINE
+            value: unload rtp_filter
       - op: and
         rules:
         - case sensitive: false

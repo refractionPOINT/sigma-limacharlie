@@ -7,40 +7,123 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - op: or
+    - op: and
       rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \brave.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \chrome.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \msedge.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \opera.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \vivaldi.exe
       - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \brave.exe
+        op: contains
+        path: event/COMMAND_LINE
+        value: --headless
       - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \chrome.exe
+        op: contains
+        path: event/COMMAND_LINE
+        value: dump-dom
       - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \msedge.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \opera.exe
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \vivaldi.exe
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: --headless
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: dump-dom
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: http
+        op: contains
+        path: event/COMMAND_LINE
+        value: http
+    - not: true
+      op: or
+      rules:
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: matches
+            path: event/FILE_PATH
+            re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Program\ Files\ \(x86\)\\Microsoft\\Edge\\Application\\
+          - case sensitive: false
+            op: matches
+            path: event/FILE_PATH
+            re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Program\ Files\ \(x86\)\\Microsoft\\EdgeCore\\
+          - case sensitive: false
+            op: matches
+            path: event/FILE_PATH
+            re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Program\ Files\ \(x86\)\\Microsoft\\EdgeWebView\\
+          - case sensitive: false
+            op: matches
+            path: event/FILE_PATH
+            re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Program\ Files\\Microsoft\\Edge\\Application\\
+          - case sensitive: false
+            op: matches
+            path: event/FILE_PATH
+            re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Program\ Files\\Microsoft\\EdgeCore\\
+          - case sensitive: false
+            op: matches
+            path: event/FILE_PATH
+            re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Program\ Files\\Microsoft\\EdgeWebView\\
+          - case sensitive: false
+            op: matches
+            path: event/FILE_PATH
+            re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Program\ Files\\WindowsApps\\Microsoft\.MicrosoftEdge
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \msedge.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \msedgewebview2.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \MicrosoftEdge.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: --headless --disable-gpu --disable-extensions --disable-plugins --mute-audio
+            --no-first-run --incognito --aggressive-cache-discard --dump-dom
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/FILE_PATH
+            value: \AppData\Local\Microsoft\WindowsApps\
+          - case sensitive: false
+            op: contains
+            path: event/FILE_PATH
+            value: \Windows\SystemApps\Microsoft.MicrosoftEdge
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \msedge.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \MicrosoftEdge.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: --headless --disable-gpu --disable-extensions --disable-plugins --mute-audio
+            --no-first-run --incognito --aggressive-cache-discard --dump-dom
 respond:
 - action: report
   metadata:

@@ -36,27 +36,73 @@ detect:
           path: event/COMMAND_LINE
           value: ' -c'
       - not: true
-        op: and
+        op: or
         rules:
-        - case sensitive: false
-          op: starts with
-          path: event/PARENT/FILE_PATH
-          value: C:\Program Files\Python
-        - case sensitive: false
-          op: ends with
-          path: event/PARENT/FILE_PATH
-          value: \python.exe
-        - case sensitive: false
-          op: contains
-          path: event/PARENT/COMMAND_LINE
-          value: -E -s -m ensurepip -U --default-pip
+        - op: and
+          rules:
+          - op: or
+            rules:
+            - case sensitive: false
+              op: starts with
+              path: event/PARENT/FILE_PATH
+              value: C:\Program Files\Python
+            - case sensitive: false
+              op: starts with
+              path: event/PARENT/FILE_PATH
+              value: C:\Program Files (x86)\Python
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \python.exe
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/COMMAND_LINE
+            value: -E -s -m ensurepip -U --default-pip
+        - op: and
+          rules:
+          - op: or
+            rules:
+            - case sensitive: false
+              op: starts with
+              path: event/PARENT/FILE_PATH
+              value: C:\Program Files\Python
+            - case sensitive: false
+              op: starts with
+              path: event/PARENT/FILE_PATH
+              value: C:\Program Files (x86)\Python
+          - op: and
+            rules:
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: -W ignore::DeprecationWarning
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: '[''install'', ''--no-cache-dir'', ''--no-index'', ''--find-links'','
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: '''--upgrade'', ''pip'''
     - not: true
       op: or
       rules:
-      - case sensitive: false
-        op: ends with
-        path: event/PARENT/FILE_PATH
-        value: \AppData\Local\Programs\Microsoft VS Code\Code.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \AppData\Local\Programs\Microsoft VS Code\Code.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: is
+            path: event/PARENT/FILE_PATH
+            value: C:\Program Files\Microsoft VS Code\Code.exe
+          - case sensitive: false
+            op: is
+            path: event/PARENT/FILE_PATH
+            value: C:\Program Files (x86)\Microsoft VS Code\Code.exe
       - op: and
         rules:
         - case sensitive: false

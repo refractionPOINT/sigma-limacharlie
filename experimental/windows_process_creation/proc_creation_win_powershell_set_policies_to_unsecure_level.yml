@@ -7,52 +7,114 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - op: or
+    - op: and
+      rules:
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - op: or
+            rules:
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: powershell_ise.exe
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: PowerShell.EXE
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: pwsh.dll
+          - op: or
+            rules:
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \powershell_ise.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \powershell.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \pwsh.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '-executionpolicy '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' -ep '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' -exec '
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: Bypass
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: Unrestricted
+      - not: true
+        op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: is
+            path: event/PARENT/FILE_PATH
+            value: C:\Windows\SysWOW64\msiexec.exe
+          - case sensitive: false
+            op: is
+            path: event/PARENT/FILE_PATH
+            value: C:\Windows\System32\msiexec.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: -NoProfile -ExecutionPolicy Bypass -File "C:\Program Files\PowerShell\7\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: -NoProfile -ExecutionPolicy Bypass -File "C:\Program Files (x86)\PowerShell\7\
+    - not: true
+      op: and
       rules:
       - op: or
         rules:
         - case sensitive: false
-          op: is
-          path: event/ORIGINAL_FILE_NAME
-          value: PowerShell.EXE
+          op: contains
+          path: event/PARENT/FILE_PATH
+          value: C:\Program Files\Avast Software\Avast\
         - case sensitive: false
-          op: is
-          path: event/ORIGINAL_FILE_NAME
-          value: pwsh.dll
+          op: contains
+          path: event/PARENT/FILE_PATH
+          value: C:\Program Files (x86)\Avast Software\Avast\
+        - case sensitive: false
+          op: contains
+          path: event/PARENT/FILE_PATH
+          value: \instup.exe
       - op: or
         rules:
         - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \powershell.exe
+          op: contains
+          path: event/COMMAND_LINE
+          value: -ExecutionPolicy ByPass -File "C:\Program Files\Avast Software\Avast
         - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \pwsh.exe
-    - op: or
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: '-executionpolicy '
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ' -ep '
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ' -exec '
-    - op: or
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: Bypass
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: Unrestricted
+          op: contains
+          path: event/COMMAND_LINE
+          value: -ExecutionPolicy ByPass -File "C:\Program Files (x86)\Avast Software\Avast\
 respond:
 - action: report
   metadata:

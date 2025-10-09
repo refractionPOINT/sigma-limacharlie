@@ -4,63 +4,72 @@ detect:
   rules:
   - op: and
     rules:
-    - case sensitive: false
-      op: is
-      path: Event/System/EventID
-      value: '4673'
-    - case sensitive: false
-      op: is
-      path: Event/EventData/PrivilegeList
-      value: SeLoadDriverPrivilege
-    - case sensitive: false
-      op: is
-      path: Event/EventData/Service
-      value: '-'
-  - not: true
-    op: or
-    rules:
-    - op: or
+    - op: and
       rules:
       - case sensitive: false
         op: is
-        path: Event/EventData/ProcessName
-        value: C:\Windows\System32\Dism.exe
+        path: Event/System/EventID
+        value: '4673'
       - case sensitive: false
         op: is
-        path: Event/EventData/ProcessName
-        value: C:\Windows\System32\rundll32.exe
+        path: Event/EventData/PrivilegeList
+        value: SeLoadDriverPrivilege
       - case sensitive: false
         op: is
-        path: Event/EventData/ProcessName
-        value: C:\Windows\System32\fltMC.exe
+        path: Event/EventData/Service
+        value: '-'
+    - not: true
+      op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: Event/EventData/ProcessName
+          value: C:\Windows\System32\Dism.exe
+        - case sensitive: false
+          op: is
+          path: Event/EventData/ProcessName
+          value: C:\Windows\System32\rundll32.exe
+        - case sensitive: false
+          op: is
+          path: Event/EventData/ProcessName
+          value: C:\Windows\System32\fltMC.exe
+        - case sensitive: false
+          op: is
+          path: Event/EventData/ProcessName
+          value: C:\Windows\HelpPane.exe
+        - case sensitive: false
+          op: is
+          path: Event/EventData/ProcessName
+          value: C:\Windows\System32\mmc.exe
+        - case sensitive: false
+          op: is
+          path: Event/EventData/ProcessName
+          value: C:\Windows\System32\svchost.exe
+        - case sensitive: false
+          op: is
+          path: Event/EventData/ProcessName
+          value: C:\Windows\System32\wimserv.exe
+        - case sensitive: false
+          op: is
+          path: Event/EventData/ProcessName
+          value: C:\Windows\System32\RuntimeBroker.exe
+        - case sensitive: false
+          op: is
+          path: Event/EventData/ProcessName
+          value: C:\Windows\System32\SystemSettingsBroker.exe
+        - case sensitive: false
+          op: is
+          path: Event/EventData/ProcessName
+          value: C:\Windows\explorer.exe
       - case sensitive: false
-        op: is
+        op: starts with
         path: Event/EventData/ProcessName
-        value: C:\Windows\HelpPane.exe
-      - case sensitive: false
-        op: is
-        path: Event/EventData/ProcessName
-        value: C:\Windows\System32\mmc.exe
-      - case sensitive: false
-        op: is
-        path: Event/EventData/ProcessName
-        value: C:\Windows\System32\svchost.exe
-      - case sensitive: false
-        op: is
-        path: Event/EventData/ProcessName
-        value: C:\Windows\System32\wimserv.exe
-      - case sensitive: false
-        op: is
-        path: Event/EventData/ProcessName
-        value: C:\Windows\System32\RuntimeBroker.exe
-      - case sensitive: false
-        op: is
-        path: Event/EventData/ProcessName
-        value: C:\Windows\System32\SystemSettingsBroker.exe
-      - case sensitive: false
-        op: is
-        path: Event/EventData/ProcessName
-        value: C:\Windows\explorer.exe
+        value: C:\Program Files\WindowsApps\Microsoft
+  - not: true
+    op: or
+    rules:
     - op: or
       rules:
       - case sensitive: false
@@ -87,10 +96,22 @@ detect:
         op: ends with
         path: Event/EventData/ProcessName
         value: \AppData\Local\Microsoft\Teams\current\Teams.exe
-    - case sensitive: false
-      op: starts with
-      path: Event/EventData/ProcessName
-      value: C:\Program Files\WindowsApps\Microsoft
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: starts with
+          path: Event/EventData/ProcessName
+          value: C:\Program Files (x86)\Dropbox\
+        - case sensitive: false
+          op: starts with
+          path: Event/EventData/ProcessName
+          value: C:\Program Files\Dropbox\
+      - case sensitive: false
+        op: ends with
+        path: Event/EventData/ProcessName
+        value: \Dropbox.exe
   target: log
 respond:
 - action: report

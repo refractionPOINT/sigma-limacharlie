@@ -44,6 +44,10 @@ detect:
             op: contains
             path: event/EVENT/EventData/Path
             value: file:///C:/Program%20Files
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/Path
+            value: AppData/Local/Temp/WinGet/Microsoft.Winget.Source
         - op: or
           rules:
           - case sensitive: false

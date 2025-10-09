@@ -80,22 +80,32 @@ detect:
             op: contains
             path: event/EVENT/EventData/ApplicationPath
             value: \AppData\Local\Temp\
+        - op: and
+          rules:
+          - case sensitive: false
+            op: is
+            path: event/EVENT/EventData/ApplicationPath
+            value: System
+          - case sensitive: false
+            op: is
+            path: event/EVENT/EventData/ModifyingApplication
+            value: C:\Windows\System32\dllhost.exe
+        - op: and
+          rules:
+          - case sensitive: false
+            op: starts with
+            path: event/EVENT/EventData/ModifyingApplication
+            value: C:\Windows\WinSxS\
+          - case sensitive: false
+            op: ends with
+            path: event/EVENT/EventData/ModifyingApplication
+            value: \TiWorker.exe
         - not: true
           op: exists
           path: event/EVENT/EventData/ApplicationPath
     - not: true
       op: or
       rules:
-      - op: and
-        rules:
-        - case sensitive: false
-          op: starts with
-          path: event/EVENT/EventData/ModifyingApplication
-          value: C:\ProgramData\Microsoft\Windows Defender\Platform\
-        - case sensitive: false
-          op: ends with
-          path: event/EVENT/EventData/ModifyingApplication
-          value: \MsMpEng.exe
       - op: and
         rules:
         - op: or
@@ -112,6 +122,40 @@ detect:
           op: is
           path: event/EVENT/EventData/ApplicationPath
           value: ''
+      - op: or
+        rules:
+        - op: and
+          rules:
+          - op: or
+            rules:
+            - case sensitive: false
+              op: starts with
+              path: event/EVENT/EventData/ModifyingApplication
+              value: C:\ProgramData\Microsoft\Windows Defender\Platform\
+            - case sensitive: false
+              op: starts with
+              path: event/EVENT/EventData/ModifyingApplication
+              value: C:\Program Files\Windows Defender\
+          - case sensitive: false
+            op: ends with
+            path: event/EVENT/EventData/ModifyingApplication
+            value: \MsMpEng.exe
+        - op: and
+          rules:
+          - op: or
+            rules:
+            - case sensitive: false
+              op: starts with
+              path: event/EVENT/EventData/ApplicationPath
+              value: C:\ProgramData\Microsoft\Windows Defender\Platform\
+            - case sensitive: false
+              op: starts with
+              path: event/EVENT/EventData/ApplicationPath
+              value: C:\Program Files\Windows Defender\
+          - case sensitive: false
+            op: ends with
+            path: event/EVENT/EventData/ApplicationPath
+            value: \MsMpEng.exe
 respond:
 - action: report
   metadata:

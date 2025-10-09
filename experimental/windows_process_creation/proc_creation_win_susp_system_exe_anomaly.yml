@@ -248,16 +248,30 @@ detect:
             op: matches
             path: event/FILE_PATH
             re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Windows\\WinSxS\\
-        - op: or
+        - op: and
           rules:
+          - op: or
+            rules:
+            - case sensitive: false
+              op: contains
+              path: event/FILE_PATH
+              value: C:\Program Files\PowerShell\7\
+            - case sensitive: false
+              op: contains
+              path: event/FILE_PATH
+              value: C:\Program Files\PowerShell\7-preview\
+            - case sensitive: false
+              op: contains
+              path: event/FILE_PATH
+              value: C:\Program Files\WindowsApps\Microsoft.PowerShellPreview
+            - case sensitive: false
+              op: contains
+              path: event/FILE_PATH
+              value: \AppData\Local\Microsoft\WindowsApps\Microsoft.PowerShellPreview
           - case sensitive: false
-            op: is
+            op: ends with
             path: event/FILE_PATH
-            value: C:\Program Files\PowerShell\7\pwsh.exe
-          - case sensitive: false
-            op: is
-            path: event/FILE_PATH
-            value: C:\Program Files\PowerShell\7-preview\pwsh.exe
+            value: \pwsh.exe
         - op: and
           rules:
           - case sensitive: false
