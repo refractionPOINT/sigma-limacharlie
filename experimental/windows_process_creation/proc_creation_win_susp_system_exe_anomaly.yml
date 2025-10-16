@@ -274,10 +274,30 @@ detect:
             value: \pwsh.exe
         - op: and
           rules:
+          - op: or
+            rules:
+            - case sensitive: false
+              op: matches
+              path: event/FILE_PATH
+              re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Program\ Files\\WindowsApps\\MicrosoftCorporationII\.WindowsSubsystemForLinux
+            - case sensitive: false
+              op: matches
+              path: event/FILE_PATH
+              re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Program\ Files\\WSL\\
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \wsl.exe
+        - op: and
+          rules:
           - case sensitive: false
             op: matches
             path: event/FILE_PATH
-            re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Program\ Files\\WindowsApps\\MicrosoftCorporationII\.WindowsSubsystemForLinux
+            re: ^(?:(?:.:)|(?:\\Device\\HarddiskVolume.))\\Users\\'
+          - case sensitive: false
+            op: contains
+            path: event/FILE_PATH
+            value: \AppData\Local\Microsoft\WindowsApps\
           - case sensitive: false
             op: ends with
             path: event/FILE_PATH
