@@ -55,10 +55,6 @@ detect:
         op: ends with
         path: event/EVENT/EventData/RelativeTargetName
         value: .rdp
-      - case sensitive: false
-        op: ends with
-        path: event/EVENT/EventData/RelativeTargetName
-        value: \groups.xml
 respond:
 - action: report
   metadata:

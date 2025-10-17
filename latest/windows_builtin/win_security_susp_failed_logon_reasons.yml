@@ -16,30 +16,58 @@ detect:
         value: '4776'
     - op: or
       rules:
-      - case sensitive: false
-        op: is
-        path: Event/EventData/Status
-        value: '0xC0000072'
-      - case sensitive: false
-        op: is
-        path: Event/EventData/Status
-        value: '0xC000006F'
-      - case sensitive: false
-        op: is
-        path: Event/EventData/Status
-        value: '0xC0000070'
-      - case sensitive: false
-        op: is
-        path: Event/EventData/Status
-        value: '0xC0000413'
-      - case sensitive: false
-        op: is
-        path: Event/EventData/Status
-        value: '0xC000018C'
-      - case sensitive: false
-        op: is
-        path: Event/EventData/Status
-        value: '0xC000015B'
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: Event/EventData/Status
+          value: '0xC0000072'
+        - case sensitive: false
+          op: is
+          path: Event/EventData/Status
+          value: '0xC000006F'
+        - case sensitive: false
+          op: is
+          path: Event/EventData/Status
+          value: '0xC0000070'
+        - case sensitive: false
+          op: is
+          path: Event/EventData/Status
+          value: '0xC0000413'
+        - case sensitive: false
+          op: is
+          path: Event/EventData/Status
+          value: '0xC000018C'
+        - case sensitive: false
+          op: is
+          path: Event/EventData/Status
+          value: '0xC000015B'
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: Event/EventData/SubStatus
+          value: '0xC0000072'
+        - case sensitive: false
+          op: is
+          path: Event/EventData/SubStatus
+          value: '0xC000006F'
+        - case sensitive: false
+          op: is
+          path: Event/EventData/SubStatus
+          value: '0xC0000070'
+        - case sensitive: false
+          op: is
+          path: Event/EventData/SubStatus
+          value: '0xC0000413'
+        - case sensitive: false
+          op: is
+          path: Event/EventData/SubStatus
+          value: '0xC000018C'
+        - case sensitive: false
+          op: is
+          path: Event/EventData/SubStatus
+          value: '0xC000015B'
   - case sensitive: false
     not: true
     op: is

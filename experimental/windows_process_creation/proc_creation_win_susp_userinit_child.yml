@@ -28,6 +28,10 @@ detect:
           op: is
           path: event/ORIGINAL_FILE_NAME
           value: explorer.exe
+        - case sensitive: false
+          op: is
+          path: event/COMMAND_LINE
+          value: C:\Windows\Explorer.EXE
       - not: true
         op: exists
         path: event/FILE_PATH

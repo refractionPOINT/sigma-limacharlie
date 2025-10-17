@@ -4,23 +4,30 @@ detect:
   rules:
   - op: and
     rules:
+    - op: and
+      rules:
+      - case sensitive: false
+        op: is
+        path: Event/System/EventID
+        value: '5145'
+      - case sensitive: false
+        op: ends with
+        path: Event/EventData/ShareName
+        value: C$
+      - case sensitive: false
+        op: is
+        path: Event/EventData/AccessMask
+        value: '0x2'
     - case sensitive: false
-      op: is
-      path: Event/System/EventID
-      value: '5145'
-    - case sensitive: false
+      not: true
       op: ends with
-      path: Event/EventData/ShareName
-      value: C$
-    - case sensitive: false
-      op: is
-      path: Event/EventData/AccessMask
-      value: '0x2'
+      path: Event/EventData/SubjectUserName
+      value: $
   - case sensitive: false
     not: true
-    op: ends with
-    path: Event/EventData/SubjectUserName
-    value: $
+    op: is
+    path: Event/EventData/IpAddress
+    value: ::1
   target: log
 respond:
 - action: report

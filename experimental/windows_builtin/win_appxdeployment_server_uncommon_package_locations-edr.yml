@@ -66,6 +66,10 @@ detect:
             op: contains
             path: event/EVENT/EventData/Path
             value: https://installer.teams.static.microsoft/
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/Path
+            value: https://res.cdn.office.net
     - case sensitive: false
       not: true
       op: contains
