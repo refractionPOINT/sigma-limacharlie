@@ -14,6 +14,10 @@ detect:
         - case sensitive: false
           op: ends with
           path: event/FILE_PATH
+          value: \powershell_ise.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
           value: \powershell.exe
         - case sensitive: false
           op: ends with
@@ -21,6 +25,10 @@ detect:
           value: \pwsh.exe
       - op: or
         rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: PowerShell_ISE.EXE
         - case sensitive: false
           op: is
           path: event/ORIGINAL_FILE_NAME

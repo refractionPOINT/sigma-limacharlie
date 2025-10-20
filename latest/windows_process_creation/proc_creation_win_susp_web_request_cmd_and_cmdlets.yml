@@ -34,10 +34,6 @@ detect:
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
-      value: Net.WebClient
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
       value: Resume-BitsTransfer
     - case sensitive: false
       op: contains
