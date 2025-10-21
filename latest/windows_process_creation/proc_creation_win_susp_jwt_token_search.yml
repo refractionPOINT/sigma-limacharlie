@@ -5,49 +5,76 @@ detect:
   op: and
   rules:
   - op: is windows
-  - op: or
+  - op: and
     rules:
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: eyJ0eXAiOi
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: eyJhbGciOi
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: ' eyJ0eX'
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: ' "eyJ0eX"'
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: ' ''eyJ0eX'''
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: ' eyJhbG'
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: ' "eyJhbG"'
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: ' ''eyJhbG'''
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'find '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: find.exe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: findstr
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'select-string '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: strings
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: eyJ0eXAiOi
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: eyJhbGciOi
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' eyJ0eX'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' "eyJ0eX"'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' ''eyJ0eX'''
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' eyJhbG'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' "eyJhbG"'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' ''eyJhbG'''
 respond:
 - action: report
   metadata:
-    author: Nasreddine Bencherchali (Nextron Systems)
-    description: 'Detects possible search for JWT tokens via CLI by looking for the
-      string "eyJ0eX" or "eyJhbG".
+    author: Nasreddine Bencherchali (Nextron Systems), kagebunsher
+    description: 'Detects potentially suspicious search for JWT tokens via CLI by
+      looking for the string "eyJ0eX" or "eyJhbG".
 
-      This string is used as an anchor to look for the start of the JWT token used
-      by microsoft office and similar apps.
+      JWT tokens are often used for access-tokens across various applications and
+      services like Microsoft 365, Azure, AWS, Google Cloud, and others.
+
+      Threat actors may search for these tokens to steal them for lateral movement
+      or privilege escalation.
 
       '
     falsepositives:
@@ -55,8 +82,10 @@ respond:
     level: medium
     references:
     - https://mrd0x.com/stealing-tokens-from-office-applications/
+    - https://www.scip.ch/en/?labs.20240523
     tags:
     - attack.credential-access
     - attack.t1528
+    - attack.t1552.001
   name: Potentially Suspicious JWT Token Search Via CLI
 
