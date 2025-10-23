@@ -43,6 +43,7 @@ respond:
     references:
     - https://twitter.com/SBousseaden/status/1195284233729777665
     tags:
+    - attack.collection
     - attack.privilege-escalation
     - attack.credential-access
     - attack.t1557.001

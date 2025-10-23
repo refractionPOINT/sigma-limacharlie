@@ -75,6 +75,7 @@ respond:
     - https://adsecurity.org/?p=3466
     - https://blog.harmj0y.net/redteaming/another-word-on-delegation/
     tags:
+    - attack.privilege-escalation
     - attack.t1098
     - attack.persistence
   name: Active Directory User Backdoors

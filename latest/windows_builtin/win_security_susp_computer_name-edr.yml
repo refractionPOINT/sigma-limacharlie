@@ -38,6 +38,8 @@ respond:
     - https://twitter.com/malmoeb/status/1511760068743766026
     - https://github.com/helloexp/0day/blob/614227a7b9beb0e91e7e2c6a5e532e6f7a8e883c/00-CVE_EXP/CVE-2021-42287/sam-the-admin/sam_the_admin.py
     tags:
+    - attack.initial-access
+    - attack.defense-evasion
     - cve.2021-42278
     - cve.2021-42287
     - attack.persistence

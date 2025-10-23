@@ -38,6 +38,7 @@ respond:
     - https://www.clearskysec.com/wp-content/uploads/2020/02/ClearSky-Fox-Kitten-Campaign-v1.pdf
     - https://learn.microsoft.com/en-us/archive/blogs/jonathantrull/detecting-sticky-key-backdoors
     tags:
+    - attack.persistence
     - attack.t1546.008
     - attack.privilege-escalation
   name: Persistence Via Sticky Key Backdoor

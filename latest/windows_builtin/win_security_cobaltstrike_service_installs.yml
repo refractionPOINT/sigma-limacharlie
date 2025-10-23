@@ -65,6 +65,7 @@ respond:
     - https://www.crowdstrike.com/blog/getting-the-bacon-from-cobalt-strike-beacon/
     - https://thedfirreport.com/2021/08/29/cobalt-strike-a-defenders-guide/
     tags:
+    - attack.persistence
     - attack.execution
     - attack.privilege-escalation
     - attack.lateral-movement

@@ -41,6 +41,7 @@ respond:
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1546.001/T1546.001.md
     tags:
+    - attack.privilege-escalation
     - attack.persistence
     - attack.t1546.001
   name: Change Default File Association Via Assoc

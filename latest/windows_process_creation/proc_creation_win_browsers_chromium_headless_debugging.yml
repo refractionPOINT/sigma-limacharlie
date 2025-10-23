@@ -35,6 +35,7 @@ respond:
     - https://embracethered.com/blog/posts/2020/cookie-crimes-on-mirosoft-edge/
     - https://embracethered.com/blog/posts/2020/chrome-spy-remote-control/
     tags:
+    - attack.defense-evasion
     - attack.credential-access
     - attack.collection
     - attack.t1185

@@ -46,6 +46,8 @@ respond:
     references:
     - Internal Research
     tags:
+    - attack.privilege-escalation
+    - attack.execution
     - attack.persistence
     - attack.t1053.005
   name: Scheduled Task Executed From A Suspicious Location

@@ -63,6 +63,8 @@ respond:
     - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/schtasks-change
     - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/schtasks-create
     tags:
+    - attack.privilege-escalation
+    - attack.persistence
     - attack.execution
     - attack.t1053.005
   name: Suspicious Schtasks Schedule Type With High Privileges

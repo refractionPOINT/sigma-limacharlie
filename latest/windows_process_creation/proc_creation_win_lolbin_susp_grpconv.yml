@@ -27,6 +27,7 @@ respond:
     references:
     - https://twitter.com/0gtweet/status/1526833181831200770
     tags:
+    - attack.privilege-escalation
     - attack.persistence
     - attack.t1547
   name: Suspicious GrpConv Execution

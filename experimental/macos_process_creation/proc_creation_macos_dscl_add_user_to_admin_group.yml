@@ -36,6 +36,8 @@ respond:
     - https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1078.003/T1078.003.md#atomic-test-2---create-local-account-with-admin-privileges---macos
     - https://ss64.com/osx/dscl.html
     tags:
+    - attack.persistence
+    - attack.defense-evasion
     - attack.initial-access
     - attack.privilege-escalation
     - attack.t1078.003

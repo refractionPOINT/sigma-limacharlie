@@ -36,6 +36,7 @@ respond:
     references:
     - https://discuss.elastic.co/t/detection-and-response-for-hafnium-activity/266289/3
     tags:
+    - attack.privilege-escalation
     - attack.execution
     - attack.persistence
     - attack.t1053.005

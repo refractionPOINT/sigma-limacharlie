@@ -31,6 +31,9 @@ respond:
     references:
     - https://car.mitre.org/wiki/CAR-2016-04-005
     tags:
+    - attack.privilege-escalation
+    - attack.persistence
+    - attack.defense-evasion
     - attack.lateral-movement
     - attack.initial-access
     - attack.t1078.001

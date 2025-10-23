@@ -56,6 +56,8 @@ respond:
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1574.011/T1574.011.md#atomic-test-2---service-imagepath-change-with-regexe
     tags:
+    - attack.privilege-escalation
+    - attack.defense-evasion
     - attack.persistence
     - attack.t1574.011
   name: Changing Existing Service ImagePath Value Via Reg.EXE

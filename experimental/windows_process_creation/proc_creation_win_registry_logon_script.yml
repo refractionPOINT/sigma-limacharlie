@@ -22,6 +22,7 @@ respond:
     references:
     - https://cocomelonc.github.io/persistence/2022/12/09/malware-pers-20.html
     tags:
+    - attack.privilege-escalation
     - attack.persistence
     - attack.t1037.001
   name: Potential Persistence Via Logon Scripts - CommandLine

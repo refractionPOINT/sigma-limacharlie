@@ -75,6 +75,8 @@ respond:
     references:
     - https://www.elastic.co/guide/en/security/current/startup-logon-script-added-to-group-policy-object.html
     tags:
+    - attack.persistence
+    - attack.defense-evasion
     - attack.privilege-escalation
     - attack.t1484.001
     - attack.t1547

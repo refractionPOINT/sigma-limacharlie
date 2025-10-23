@@ -77,6 +77,7 @@ respond:
     references:
     - https://ired.team/offensive-security/code-execution/code-execution-through-control-panel-add-ins
     tags:
+    - attack.privilege-escalation
     - attack.execution
     - attack.defense-evasion
     - attack.t1218.002

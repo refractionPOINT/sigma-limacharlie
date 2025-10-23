@@ -39,6 +39,8 @@ respond:
     references:
     - https://github.com/byt3bl33d3r/CrackMapExec
     tags:
+    - attack.privilege-escalation
+    - attack.persistence
     - attack.execution
     - attack.t1047
     - attack.t1053

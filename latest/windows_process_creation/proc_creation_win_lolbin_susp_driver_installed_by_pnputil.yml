@@ -51,6 +51,7 @@ respond:
     - https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/pnputil-command-syntax
     - https://strontic.github.io/xcyclopedia/library/pnputil.exe-60EDC5E6BDBAEE441F2E3AEACD0340D2.html
     tags:
+    - attack.privilege-escalation
     - attack.persistence
     - attack.t1547
   name: Suspicious Driver Install by pnputil.exe

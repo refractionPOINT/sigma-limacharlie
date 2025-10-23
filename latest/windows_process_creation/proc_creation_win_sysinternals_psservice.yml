@@ -33,6 +33,7 @@ respond:
     references:
     - https://learn.microsoft.com/en-us/sysinternals/downloads/psservice
     tags:
+    - attack.privilege-escalation
     - attack.discovery
     - attack.persistence
     - attack.t1543.003

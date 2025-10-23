@@ -50,6 +50,7 @@ respond:
     references:
     - https://isc.sans.edu/forums/diary/Desktopini+as+a+postexploitation+tool/25912/
     tags:
+    - attack.privilege-escalation
     - attack.persistence
     - attack.t1547.009
   name: Windows Network Access Suspicious desktop.ini Action

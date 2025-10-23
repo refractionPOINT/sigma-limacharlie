@@ -33,6 +33,7 @@ respond:
     references:
     - https://twitter.com/1kwpeter/status/1397816101455765504
     tags:
+    - attack.persistence
     - attack.execution
     - attack.privilege-escalation
     - attack.t1543.003

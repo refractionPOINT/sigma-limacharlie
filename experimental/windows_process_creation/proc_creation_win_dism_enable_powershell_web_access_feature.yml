@@ -45,6 +45,8 @@ respond:
     - https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-241a
     - https://gist.github.com/MHaggis/7e67b659af9148fa593cf2402edebb41
     tags:
+    - attack.privilege-escalation
+    - attack.defense-evasion
     - attack.persistence
     - attack.t1548.002
   name: PowerShell Web Access Feature Enabled Via DISM

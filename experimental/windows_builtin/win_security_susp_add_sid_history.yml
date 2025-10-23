@@ -47,6 +47,7 @@ respond:
     references:
     - https://adsecurity.org/?p=1772
     tags:
+    - attack.defense-evasion
     - attack.persistence
     - attack.privilege-escalation
     - attack.t1134.005

@@ -68,6 +68,8 @@ respond:
     - https://www.secureworks.com/blog/ransomware-as-a-distraction
     - https://www.elastic.co/guide/en/security/7.17/prebuilt-rule-0-16-1-scheduled-task-execution-at-scale-via-gpo.html
     tags:
+    - attack.privilege-escalation
+    - attack.execution
     - attack.persistence
     - attack.lateral-movement
     - attack.t1053.005

@@ -71,6 +71,7 @@ respond:
     - https://itconnect.uw.edu/tools-services-support/it-systems-infrastructure/msinf/other-help/understanding-sddl-syntax/
     - https://learn.microsoft.com/en-us/windows/win32/secauthz/sid-strings
     tags:
+    - attack.privilege-escalation
     - attack.persistence
     - attack.t1543.003
   name: Allow Service Access Using Security Descriptor Tampering Via Sc.EXE

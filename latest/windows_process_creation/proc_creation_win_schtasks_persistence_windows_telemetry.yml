@@ -44,6 +44,8 @@ respond:
     references:
     - https://www.trustedsec.com/blog/abusing-windows-telemetry-for-persistence/
     tags:
+    - attack.privilege-escalation
+    - attack.execution
     - attack.persistence
     - attack.t1053.005
   name: Potential Persistence Via Microsoft Compatibility Appraiser

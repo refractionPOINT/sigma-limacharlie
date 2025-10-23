@@ -164,6 +164,7 @@ respond:
     references:
     - https://github.com/ropnop/impacket_static_binaries/releases/tag/0.9.21-dev-binaries
     tags:
+    - attack.collection
     - attack.execution
     - attack.credential-access
     - attack.t1557.001

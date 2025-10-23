@@ -31,6 +31,9 @@ respond:
     references:
     - https://ss64.com/osx/sysadminctl.html
     tags:
+    - attack.privilege-escalation
+    - attack.persistence
+    - attack.defense-evasion
     - attack.initial-access
     - attack.t1078
     - attack.t1078.001

@@ -178,6 +178,8 @@ respond:
     - https://twitter.com/RedDrip7/status/1506480588827467785
     - https://www.ncsc.gov.uk/static-assets/documents/malware-analysis-reports/devil-bait/NCSC-MAR-Devil-Bait.pdf
     tags:
+    - attack.privilege-escalation
+    - attack.persistence
     - attack.execution
     - attack.t1053.005
   name: Suspicious Command Patterns In Scheduled Task Creation

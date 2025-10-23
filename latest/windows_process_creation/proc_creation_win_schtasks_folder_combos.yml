@@ -77,6 +77,8 @@ respond:
     references:
     - https://symantec-enterprise-blogs.security.com/blogs/threat-intelligence/lazarus-dream-job-chemical
     tags:
+    - attack.privilege-escalation
+    - attack.persistence
     - attack.execution
     - attack.t1053.005
   name: Schtasks From Suspicious Folders

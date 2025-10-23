@@ -16,6 +16,7 @@ respond:
     references:
     - https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4706
     tags:
+    - attack.privilege-escalation
     - attack.persistence
     - attack.t1098
   name: A New Trust Was Created To A Domain

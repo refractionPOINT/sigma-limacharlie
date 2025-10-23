@@ -33,6 +33,8 @@ respond:
     - https://medium.com/@esnesenon/feature-not-bug-dnsadmin-to-dc-compromise-in-one-line-a0f779b8dc83
     - https://blog.3or.de/hunting-dns-server-level-plugin-dll-injection.html
     tags:
+    - attack.privilege-escalation
+    - attack.persistence
     - attack.defense-evasion
     - attack.t1574.001
     - attack.t1112

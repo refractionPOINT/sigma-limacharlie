@@ -43,6 +43,7 @@ respond:
     - https://www.trendmicro.com/en_us/research/18/d/new-macos-backdoor-linked-to-oceanlotus-found.html
     - https://www.loobins.io/binaries/launchctl/
     tags:
+    - attack.privilege-escalation
     - attack.execution
     - attack.persistence
     - attack.t1569.001

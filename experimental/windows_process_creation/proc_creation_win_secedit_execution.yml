@@ -52,6 +52,7 @@ respond:
     - https://blueteamops.medium.com/secedit-and-i-know-it-595056dee53d
     - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/secedit
     tags:
+    - attack.collection
     - attack.discovery
     - attack.persistence
     - attack.defense-evasion

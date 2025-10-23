@@ -55,6 +55,7 @@ respond:
     references:
     - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/assoc
     tags:
+    - attack.privilege-escalation
     - attack.persistence
     - attack.t1546.001
   name: Change Default File Association To Executable Via Assoc

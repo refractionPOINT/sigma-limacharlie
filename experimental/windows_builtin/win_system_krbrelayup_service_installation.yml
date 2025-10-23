@@ -24,6 +24,7 @@ respond:
     references:
     - https://github.com/Dec0ne/KrbRelayUp
     tags:
+    - attack.persistence
     - attack.privilege-escalation
     - attack.t1543
   name: KrbRelayUp Service Installation

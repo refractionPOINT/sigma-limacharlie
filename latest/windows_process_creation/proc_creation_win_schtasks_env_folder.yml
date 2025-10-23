@@ -187,6 +187,8 @@ respond:
     - https://www.joesandbox.com/analysis/514608/0/html#324415FF7D8324231381BAD48A052F85DF04
     - https://blog.talosintelligence.com/gophish-powerrat-dcrat/
     tags:
+    - attack.privilege-escalation
+    - attack.persistence
     - attack.execution
     - attack.t1053.005
   name: Schedule Task Creation From Env Variable Or Potentially Suspicious Path Via

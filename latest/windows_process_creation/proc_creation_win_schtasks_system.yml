@@ -97,6 +97,7 @@ respond:
     - https://www.elastic.co/security-labs/exploring-the-qbot-attack-pattern
     - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/schtasks
     tags:
+    - attack.privilege-escalation
     - attack.execution
     - attack.persistence
     - attack.t1053.005

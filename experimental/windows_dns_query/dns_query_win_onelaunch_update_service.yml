@@ -29,6 +29,7 @@ respond:
     - https://www.myantispyware.com/2020/12/14/how-to-uninstall-onelaunch-browser-removal-guide/
     - https://malware.guide/browser-hijacker/remove-onelaunch-virus/
     tags:
+    - attack.credential-access
     - attack.collection
     - attack.t1056
   name: DNS Query Request To OneLaunch Update Service

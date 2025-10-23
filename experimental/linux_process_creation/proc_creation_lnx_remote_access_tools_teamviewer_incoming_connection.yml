@@ -37,6 +37,7 @@ respond:
     references:
     - Internal Research
     tags:
+    - attack.persistence
     - attack.initial-access
     - attack.t1133
   name: Remote Access Tool - Team Viewer Session Started On Linux Host

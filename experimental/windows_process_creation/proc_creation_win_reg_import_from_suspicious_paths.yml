@@ -63,6 +63,7 @@ respond:
     references:
     - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/reg-import
     tags:
+    - attack.persistence
     - attack.t1112
     - attack.defense-evasion
   name: Potential Suspicious Registry File Imported Via Reg.EXE

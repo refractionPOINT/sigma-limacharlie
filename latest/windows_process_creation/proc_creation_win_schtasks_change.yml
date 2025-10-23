@@ -187,6 +187,8 @@ respond:
     - Internal Research
     - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/schtasks
     tags:
+    - attack.privilege-escalation
+    - attack.persistence
     - attack.execution
     - attack.t1053.005
   name: Suspicious Modification Of Scheduled Tasks

@@ -42,6 +42,7 @@ respond:
     - https://redcanary.com/blog/clipping-silver-sparrows-wings/
     - https://www.manpagez.com/man/8/PlistBuddy/
     tags:
+    - attack.privilege-escalation
     - attack.persistence
     - attack.t1543.001
     - attack.t1543.004

@@ -51,6 +51,7 @@ respond:
     references:
     - https://blog.talosintelligence.com/2022/08/recent-cyber-attack.html?m=1
     tags:
+    - attack.privilege-escalation
     - attack.persistence
     - attack.t1098
   name: User Added to Local Administrators Group

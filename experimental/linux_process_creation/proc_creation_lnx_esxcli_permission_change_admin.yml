@@ -39,6 +39,7 @@ respond:
     references:
     - https://developer.broadcom.com/xapis/esxcli-command-reference/7.0.0/namespace/esxcli_system.html
     tags:
+    - attack.persistence
     - attack.execution
     - attack.privilege-escalation
     - attack.t1059.012

@@ -71,6 +71,7 @@ respond:
     references:
     - https://github.com/Dec0ne/KrbRelayUp
     tags:
+    - attack.defense-evasion
     - attack.credential-access
     - attack.t1558.003
     - attack.lateral-movement

@@ -51,6 +51,7 @@ respond:
     references:
     - https://blog.malwarebytes.com/threat-intelligence/2022/04/colibri-loader-combines-task-scheduler-and-powershell-in-clever-persistence-technique/
     tags:
+    - attack.privilege-escalation
     - attack.execution
     - attack.persistence
     - attack.t1053.005

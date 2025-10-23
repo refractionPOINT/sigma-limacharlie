@@ -110,6 +110,7 @@ respond:
     references:
     - https://redcanary.com/blog/misbehaving-rats/
     tags:
+    - attack.privilege-escalation
     - attack.persistence
     - attack.execution
     - attack.t1543.003

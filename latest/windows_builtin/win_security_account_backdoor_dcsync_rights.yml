@@ -58,6 +58,7 @@ respond:
     - https://twitter.com/menasec1/status/1111556090137903104
     - https://www.specterops.io/assets/resources/an_ace_up_the_sleeve.pdf
     tags:
+    - attack.privilege-escalation
     - attack.persistence
     - attack.t1098
   name: Powerview Add-DomainObjectAcl DCSync AD Extend Right

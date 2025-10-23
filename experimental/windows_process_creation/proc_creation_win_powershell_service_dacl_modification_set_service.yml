@@ -73,6 +73,7 @@ respond:
     - https://www.sans.org/blog/red-team-tactics-hiding-windows-services/
     - https://learn.microsoft.com/pt-br/windows/win32/secauthz/sid-strings
     tags:
+    - attack.privilege-escalation
     - attack.persistence
     - attack.t1543.003
   name: Suspicious Service DACL Modification Via Set-Service Cmdlet

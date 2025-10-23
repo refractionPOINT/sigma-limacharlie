@@ -135,6 +135,7 @@ respond:
     - https://hunter2.gitbook.io/darthsidious/execution/responder-with-ntlm-relay-and-empire
     - https://www.localpotato.com/
     tags:
+    - attack.collection
     - attack.execution
     - attack.credential-access
     - attack.t1557.001
