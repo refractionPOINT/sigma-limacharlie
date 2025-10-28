@@ -7,63 +7,176 @@ detect:
   - op: is linux
   - op: or
     rules:
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: rm /var/log/syslog
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: rm -r /var/log/syslog
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: rm -f /var/log/syslog
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: rm -rf /var/log/syslog
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: unlink /var/log/syslog
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: unlink -r /var/log/syslog
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: unlink -f /var/log/syslog
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: unlink -rf /var/log/syslog
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: mv /var/log/syslog
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: ' >/var/log/syslog'
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: ' > /var/log/syslog'
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: journalctl --vacuum
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /var/log/syslog
+      - op: or
+        rules:
+        - op: and
+          rules:
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /rm
+          - op: or
+            rules:
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: ' -r '
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: ' -f '
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: ' -rf '
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: /var/log/syslog
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /unlink
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /mv
+        - op: and
+          rules:
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /truncate
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '0 '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: /var/log/syslog
+          - op: or
+            rules:
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: '-s '
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: '-c '
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: --size
+        - op: and
+          rules:
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /ln
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '/dev/null '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: /var/log/syslog
+          - op: or
+            rules:
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: '-sf '
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: '-sfn '
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: '-sfT '
+        - op: and
+          rules:
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /cp
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: /dev/null
+        - op: and
+          rules:
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /shred
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '-u '
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' > /var/log/syslog'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' >/var/log/syslog'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' >| /var/log/syslog'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ': > /var/log/syslog'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: :> /var/log/syslog
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: :>/var/log/syslog
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '>|/var/log/syslog'
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: journalctl --vacuum
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: journalctl --rotate
 respond:
 - action: report
   metadata:
     author: Max Altgelt (Nextron Systems), Roberto Rodriguez (Cyb3rWard0g), OTR (Open
       Threat Research), MSTIC
-    description: Detects specific commands commonly used to remove or empty the syslog.
-      Which is often used by attacker as a method to hide their tracks
+    description: 'Detects specific commands commonly used to remove or empty the syslog.
+      Which is a technique often used by attacker as a method to hide their tracks
+
+      '
     falsepositives:
     - Log rotation.
+    - Maintenance.
     level: high
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1070.002/T1070.002.md
@@ -71,5 +184,5 @@ respond:
     tags:
     - attack.defense-evasion
     - attack.t1070.002
-  name: Commands to Clear or Remove the Syslog
+  name: Syslog Clearing or Removal Via System Utilities
 
