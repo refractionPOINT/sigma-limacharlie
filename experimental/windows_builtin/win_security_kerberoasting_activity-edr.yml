@@ -20,7 +20,7 @@ detect:
         path: event/EVENT/EventData/TicketEncryptionType
         value: '0x17'
     - not: true
-      op: and
+      op: or
       rules:
       - op: or
         rules:
