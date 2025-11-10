@@ -9,25 +9,54 @@ detect:
     rules:
     - op: and
       rules:
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \schtasks.exe
+      - op: and
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \schtasks.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' /create '
+      - not: true
+        op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/USER_NAME
+          value: AUTHORI
+        - case sensitive: false
+          op: contains
+          path: event/USER_NAME
+          value: AUTORI
+    - not: true
+      op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/PARENT/FILE_PATH
+          value: C:\Program Files\Microsoft Office\root\integration\integrator.exe
+        - case sensitive: false
+          op: is
+          path: event/PARENT/FILE_PATH
+          value: C:\Program Files (x86)\Microsoft Office\root\integration\integrator.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/FILE_PATH
+          value: C:\Windows\System32\schtasks.exe
+        - case sensitive: false
+          op: is
+          path: event/FILE_PATH
+          value: C:\Windows\SysWOW64\schtasks.exe
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ' /create '
-    - not: true
-      op: or
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/USER_NAME
-        value: AUTHORI
-      - case sensitive: false
-        op: contains
-        path: event/USER_NAME
-        value: AUTORI
+        value: Microsoft\Office\Office Performance Monitor
 respond:
 - action: report
   metadata:

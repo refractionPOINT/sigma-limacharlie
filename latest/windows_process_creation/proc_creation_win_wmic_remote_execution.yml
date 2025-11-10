@@ -19,21 +19,27 @@ detect:
           op: is
           path: event/ORIGINAL_FILE_NAME
           value: wmic.exe
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: '/node:'
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '-node:'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: '/node:'
     - not: true
       op: or
       rules:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: '/node:127.0.0.1 '
+        value: localhost
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: '/node:localhost '
+        value: 127.0.0.1
 respond:
 - action: report
   metadata:

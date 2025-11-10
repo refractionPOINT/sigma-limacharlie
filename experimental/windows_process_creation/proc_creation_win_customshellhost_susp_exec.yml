@@ -20,11 +20,14 @@ respond:
 - action: report
   metadata:
     author: Nasreddine Bencherchali (Nextron Systems)
-    description: Detects the execution of CustomShellHost binary where the child isn't
-      located in 'C:\Windows\explorer.exe'
+    description: 'Detects the execution of CustomShellHost.exe where the child isn''t
+      located in ''C:\Windows\explorer.exe''. CustomShellHost is a known LOLBin that
+      can be abused by attackers for defense evasion techniques.
+
+      '
     falsepositives:
-    - Unknown
-    level: medium
+    - False positives are unlikely, investigate matches carefully.
+    level: high
     references:
     - https://github.com/LOLBAS-Project/LOLBAS/pull/180
     - https://lolbas-project.github.io/lolbas/Binaries/CustomShellHost/
