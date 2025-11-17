@@ -9,47 +9,87 @@ detect:
     rules:
     - op: or
       rules:
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \fsutil.exe
-      - case sensitive: false
-        op: is
-        path: event/ORIGINAL_FILE_NAME
-        value: fsutil.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \cmd.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \pwsh.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: Cmd.Exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: PowerShell.EXE
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: pwsh.dll
     - op: and
       rules:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: 'behavior '
+        value: fsutil
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: 'set '
+        value: behavior
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: set
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
         value: SymlinkEvaluation
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: R2L:1
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: R2R:1
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: L2L:1
 respond:
 - action: report
   metadata:
-    author: frack113
-    description: 'A symbolic link is a type of file that contains a reference to another
-      file.
-
-      This is probably done to make sure that the ransomware is able to follow shortcuts
-      on the machine in order to find the original file to encrypt
+    author: frack113, The DFIR Report
+    description: 'Detects the modification of NTFS symbolic link behavior using fsutil,
+      which could be used to enable remote to local or remote to remote symlinks for
+      potential attacks.
 
       '
     falsepositives:
-    - Legitimate use
+    - Legitimate usage, investigate the parent process and context to determine if
+      benign.
     level: medium
     references:
     - https://www.cybereason.com/blog/cybereason-vs.-blackcat-ransomware
     - https://learn.microsoft.com/fr-fr/windows-server/administration/windows-commands/fsutil-behavior
+    - https://thedfirreport.com/2025/06/30/hide-your-rdp-password-spray-leads-to-ransomhub-deployment/
     tags:
     - attack.execution
     - attack.t1059
-  name: Fsutil Behavior Set SymlinkEvaluation
+    - attack.defense-evasion
+    - attack.t1222.001
+  name: Potentially Suspicious NTFS Symlink Behavior Modification
 
