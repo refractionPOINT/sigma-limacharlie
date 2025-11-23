@@ -186,6 +186,14 @@ detect:
         - case sensitive: false
           op: ends with
           path: event/FILE_PATH
+          value: \werfault.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \werfaultsecure.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
           value: \wininit.exe
         - case sensitive: false
           op: ends with
