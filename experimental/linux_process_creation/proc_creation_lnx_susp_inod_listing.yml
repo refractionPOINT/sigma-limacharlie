@@ -11,18 +11,22 @@ detect:
       op: ends with
       path: event/FILE_PATH
       value: /ls
-    - case sensitive: false
-      op: matches
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/COMMAND_LINE
+        value: ' /'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ' / '
+    - op: matches
       path: event/COMMAND_LINE
-      re: .*\ \-.*i.*
-    - case sensitive: false
-      op: matches
+      re: (?:\s-[^-\s]{0,20}i|\s--inode\s)
+    - op: matches
       path: event/COMMAND_LINE
-      re: .*\ \-.*d.*
-    - case sensitive: false
-      op: ends with
-      path: event/COMMAND_LINE
-      value: ' /'
+      re: (?:\s-[^-\s]{0,20}d|\s--directory\s)
 respond:
 - action: report
   metadata:

@@ -14,7 +14,7 @@ detect:
     - case sensitive: false
       op: ends with
       path: event/FILE_PATH
-      value: \dirlister.exe
+      value: \DirLister.exe
 respond:
 - action: report
   metadata:
