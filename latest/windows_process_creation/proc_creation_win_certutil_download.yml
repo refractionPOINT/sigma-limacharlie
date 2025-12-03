@@ -27,6 +27,10 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: 'verifyctl '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: 'URL '
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
@@ -47,8 +51,11 @@ respond:
     - https://news.sophos.com/en-us/2021/04/13/compromised-exchange-server-hosting-cryptojacker-targeting-other-exchange-servers/
     - https://twitter.com/egre55/status/1087685529016193025
     - https://lolbas-project.github.io/lolbas/Binaries/Certutil/
+    - https://www.hexacorn.com/blog/2020/08/23/certutil-one-more-gui-lolbin
     tags:
     - attack.defense-evasion
     - attack.t1027
+    - attack.command-and-control
+    - attack.t1105
   name: Suspicious Download Via Certutil.EXE
 
