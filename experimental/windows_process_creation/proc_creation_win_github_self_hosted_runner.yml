@@ -1,0 +1,77 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: or
+    rules:
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \Runner.Worker.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: Runner.Worker.dll
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: spawnclient
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \Runner.Listener.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: Runner.Listener.dll
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: run
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: configure
+respond:
+- action: report
+  metadata:
+    author: Daniel Koifman (KoifSec)
+    description: 'Detects GitHub self-hosted runners executing workflows on local
+      infrastructure that could be abused for persistence and code execution.
+
+      Shai-Hulud is an npm supply chain worm targeting CI/CD environments.
+
+      It installs runners on compromised systems to maintain access after credential
+      theft, leveraging their access to secrets and internal networks.
+
+      '
+    falsepositives:
+    - Legitimate GitHub self-hosted runner installations on designated CI/CD infrastructure
+    - Authorized runner deployments by DevOps/Platform teams following change management
+    - Scheduled runner updates or reconfigurations on existing build agents
+    - Self-hosted runners that follow expected/known naming patterns
+    - Installation via expected/known configuration management tools (reflected mostly
+      as parent process name)
+    level: medium
+    references:
+    - https://about.gitlab.com/blog/gitlab-discovers-widespread-npm-supply-chain-attack/
+    - https://securitylabs.datadoghq.com/articles/shai-hulud-2.0-npm-worm/
+    tags:
+    - attack.command-and-control
+    - attack.t1102.002
+    - attack.t1071
+  name: Github Self-Hosted Runner Execution
+
