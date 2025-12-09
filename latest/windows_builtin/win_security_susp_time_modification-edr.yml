@@ -5,28 +5,14 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - case sensitive: false
-      op: is
-      path: event/EVENT/System/EventID
-      value: '4616'
-    - not: true
-      op: or
+    - op: and
       rules:
-      - op: or
-        rules:
-        - case sensitive: false
-          op: is
-          path: event/EVENT/EventData/ProcessName
-          value: C:\Program Files\VMware\VMware Tools\vmtoolsd.exe
-        - case sensitive: false
-          op: is
-          path: event/EVENT/EventData/ProcessName
-          value: C:\Windows\System32\VBoxService.exe
-        - case sensitive: false
-          op: is
-          path: event/EVENT/EventData/ProcessName
-          value: C:\Windows\System32\oobe\msoobe.exe
-      - op: and
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '4616'
+      - not: true
+        op: and
         rules:
         - case sensitive: false
           op: is
@@ -36,6 +22,25 @@ detect:
           op: is
           path: event/EVENT/EventData/SubjectUserSid
           value: S-1-5-19
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/ProcessName
+        value: C:\Program Files\VMware\VMware Tools\vmtoolsd.exe
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/ProcessName
+        value: C:\Program Files (x86)\VMware\VMware Tools\vmtoolsd.exe
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/ProcessName
+        value: C:\Windows\System32\VBoxService.exe
+      - case sensitive: false
+        op: is
+        path: event/EVENT/EventData/ProcessName
+        value: C:\Windows\System32\oobe\msoobe.exe
 respond:
 - action: report
   metadata:

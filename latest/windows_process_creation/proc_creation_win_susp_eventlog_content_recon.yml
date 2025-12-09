@@ -56,6 +56,10 @@ detect:
         - case sensitive: false
           op: matches
           path: event/COMMAND_LINE
+          re: .*\.ID\ \-eq\ 462..*
+        - case sensitive: false
+          op: matches
+          path: event/COMMAND_LINE
           re: .*EventCode=.462..*
         - case sensitive: false
           op: matches
@@ -76,7 +80,7 @@ detect:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: System[EventID=4778]
+          value: .ID -eq 4778
         - case sensitive: false
           op: matches
           path: event/COMMAND_LINE
@@ -88,6 +92,10 @@ detect:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
+          value: System[EventID=4778]
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
           value: -InstanceId 25
         - case sensitive: false
           op: contains
@@ -96,7 +104,7 @@ detect:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: System[EventID=25]
+          value: .ID -eq 25
         - case sensitive: false
           op: matches
           path: event/COMMAND_LINE
@@ -105,6 +113,82 @@ detect:
           op: matches
           path: event/COMMAND_LINE
           re: .*EventIdentifier=.25..*
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: System[EventID=25]
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: -InstanceId 1149
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .eventid -eq 1149
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .ID -eq 1149
+        - case sensitive: false
+          op: matches
+          path: event/COMMAND_LINE
+          re: .*EventCode=.1149..*
+        - case sensitive: false
+          op: matches
+          path: event/COMMAND_LINE
+          re: .*EventIdentifier=.1149..*
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: System[EventID=1149]
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: -InstanceId 21
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .eventid -eq 21
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .ID -eq 21
+        - case sensitive: false
+          op: matches
+          path: event/COMMAND_LINE
+          re: .*EventCode=.21..*
+        - case sensitive: false
+          op: matches
+          path: event/COMMAND_LINE
+          re: .*EventIdentifier=.21..*
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: System[EventID=21]
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: -InstanceId 22
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .eventid -eq 22
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: .ID -eq 22
+        - case sensitive: false
+          op: matches
+          path: event/COMMAND_LINE
+          re: .*EventCode=.22..*
+        - case sensitive: false
+          op: matches
+          path: event/COMMAND_LINE
+          re: .*EventIdentifier=.22..*
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: System[EventID=22]
     - op: or
       rules:
       - op: or
@@ -192,9 +276,13 @@ respond:
     - https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-eventlog?view=powershell-5.1
     - http://www.solomonson.com/posts/2010-07-09-reading-eventviewer-command-line/
     - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/wevtutil
+    - https://ptsecurity.com/research/pt-esc-threat-intelligence/striking-panda-attacks-apt31-today
+    - https://www.cybertriage.com/artifact/terminalservices_remoteconnectionmanager_log/
+    - https://ponderthebits.com/2018/02/windows-rdp-related-event-logs-identification-tracking-and-investigation/
     tags:
     - attack.credential-access
     - attack.discovery
     - attack.t1552
+    - attack.t1087
   name: Potentially Suspicious EventLog Recon Activity Using Log Query Utilities
 

@@ -8,9 +8,9 @@ detect:
   - op: and
     rules:
     - case sensitive: true
-      op: is
+      op: ends with
       path: event/FILE_PATH
-      value: /usr/sbin/osascript
+      value: /osascript
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE

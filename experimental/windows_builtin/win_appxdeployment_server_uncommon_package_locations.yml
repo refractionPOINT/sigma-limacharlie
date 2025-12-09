@@ -16,19 +16,15 @@ detect:
         - case sensitive: false
           op: contains
           path: Event/EventData/Path
-          value: C:\Program Files\WindowsApps\
-        - case sensitive: false
-          op: contains
-          path: Event/EventData/Path
           value: C:\Program Files (x86)\
         - case sensitive: false
           op: contains
           path: Event/EventData/Path
-          value: C:\Windows\SystemApps\
+          value: C:\Program Files\
         - case sensitive: false
           op: contains
           path: Event/EventData/Path
-          value: C:\Windows\PrintDialog\
+          value: C:\Program Files\WindowsApps\
         - case sensitive: false
           op: contains
           path: Event/EventData/Path
@@ -36,15 +32,23 @@ detect:
         - case sensitive: false
           op: contains
           path: Event/EventData/Path
-          value: x-windowsupdate://
+          value: C:\Windows\PrintDialog\
         - case sensitive: false
           op: contains
           path: Event/EventData/Path
-          value: file:///C:/Program%20Files
+          value: C:\Windows\SystemApps\
         - case sensitive: false
           op: contains
           path: Event/EventData/Path
-          value: AppData/Local/Temp/WinGet/Microsoft.Winget.Source
+          value: file:///C:/Program%20Files/
+        - case sensitive: false
+          op: contains
+          path: Event/EventData/Path
+          value: file:///C:/Program%20Files%20(x86)/
+        - case sensitive: false
+          op: contains
+          path: Event/EventData/Path
+          value: file:///C:/Windows/System32/
       - op: or
         rules:
         - case sensitive: false
@@ -67,11 +71,27 @@ detect:
           op: contains
           path: Event/EventData/Path
           value: https://res.cdn.office.net
-  - case sensitive: false
-    not: true
-    op: contains
-    path: Event/EventData/Path
-    value: AppData\Local\Microsoft\OneDrive\
+  - not: true
+    op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/Path
+      value: AppData\Local\Microsoft\OneDrive\
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/Path
+        value: AppData/Local/Temp/WinGet/Microsoft.Winget.Source
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/Path
+        value: AppData\Local\Temp\WinGet\Microsoft.Winget.Source
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/Path
+      value: x-windowsupdate://
   target: log
 respond:
 - action: report
