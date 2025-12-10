@@ -350,6 +350,10 @@ detect:
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE
+      value: Invoke-DNSExfiltrator
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
       value: Invoke-DomainPasswordSpray
     - case sensitive: false
       op: contains
@@ -809,6 +813,7 @@ respond:
     - https://github.com/adrecon/AzureADRecon
     - https://github.com/sadshade/veeam-creds/blob/6010eaf31ba41011b58d6af3950cffbf6f5cea32/Veeam-Get-Creds.ps1
     - https://github.com/The-Viper-One/Invoke-PowerDPAPI/
+    - https://github.com/Arno0x/DNSExfiltrator/
     tags:
     - attack.execution
     - attack.discovery
