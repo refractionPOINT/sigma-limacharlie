@@ -38,6 +38,10 @@ detect:
       - case sensitive: false
         op: contains
         path: event/EVENT/EventData/RemoteName
+        value: github.com
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/RemoteName
         value: glitch.me
       - case sensitive: false
         op: contains
