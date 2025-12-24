@@ -12,9 +12,10 @@ respond:
   metadata:
     author: frack113
     description: Detects an appx package deployment that was blocked by AppLocker
-      policy
+      policy.
     falsepositives:
-    - Unknown
+    - Unlikely, since this event notifies about blocked application deployment. Tune
+      your applocker rules to avoid blocking legitimate applications.
     level: medium
     references:
     - https://learn.microsoft.com/en-us/windows/win32/appxpkg/troubleshooting

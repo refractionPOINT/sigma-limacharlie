@@ -27,7 +27,7 @@ respond:
       malicious appx packages
     falsepositives:
     - Rare occasions where a malicious package uses the exact same name and version
-      as a legtimate application
+      as a legitimate application.
     level: medium
     references:
     - https://www.sentinelone.com/labs/inside-malicious-windows-apps-for-malware-deployment/

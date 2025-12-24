@@ -137,19 +137,19 @@ respond:
 - action: report
   metadata:
     author: Nasreddine Bencherchali (Nextron Systems)
-    description: 'Detects an appx package added to the pipeline of the "to be processed"
-      packages which was downloaded from a suspicious domain.
+    description: 'Detects an appx package that was added to the pipeline of the "to
+      be processed" packages which was downloaded from a file sharing or CDN domain.
 
       '
     falsepositives:
-    - Unknown
+    - Unlikely, unless the organization uses file sharing or CDN services to distribute
+      internal applications.
     level: high
     references:
-    - Internal Research
     - https://www.sentinelone.com/labs/inside-malicious-windows-apps-for-malware-deployment/
     - https://learn.microsoft.com/en-us/windows/win32/appxpkg/troubleshooting
     - https://news.sophos.com/en-us/2021/11/11/bazarloader-call-me-back-attack-abuses-windows-10-apps-mechanism/
     tags:
     - attack.defense-evasion
-  name: Suspicious Remote AppX Package Locations
+  name: Remote AppX Package Downloaded from File Sharing or CDN Domain
 

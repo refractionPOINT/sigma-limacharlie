@@ -15,18 +15,19 @@ respond:
 - action: report
   metadata:
     author: Nasreddine Bencherchali (Nextron Systems)
-    description: Detects an appx package installation with the error code "0x80073cff"
-      which indicates that the package didn't meet the signing requirements and could
-      be suspicious
+    description: 'Detects an appx package deployment / installation with the error
+      code "0x80073cff" which indicates that the package didn''t meet the signing
+      requirements.
+
+      '
     falsepositives:
-    - Legitimate AppX packages not signed by MS used part of an enterprise
+    - Legitimate AppX packages not signed by MS used part of an enterprise.
     level: medium
     references:
-    - Internal Research
     - https://www.sentinelone.com/labs/inside-malicious-windows-apps-for-malware-deployment/
     - https://learn.microsoft.com/en-us/windows/win32/appxpkg/troubleshooting
     - https://news.sophos.com/en-us/2021/11/11/bazarloader-call-me-back-attack-abuses-windows-10-apps-mechanism/
     tags:
     - attack.defense-evasion
-  name: Suspicious AppX Package Installation Attempt
+  name: AppX Package Deployment Failed Due to Signing Requirements
 

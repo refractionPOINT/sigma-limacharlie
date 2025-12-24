@@ -1,0 +1,83 @@
+detect:
+  log type: wel
+  op: and
+  rules:
+  - case sensitive: false
+    op: is
+    path: Event/System/EventID
+    value: '854'
+  - op: or
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/Path
+        value: :/Perflogs/
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/Path
+        value: :/Users/Public/
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/Path
+        value: :/Windows/Temp/
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/Path
+        value: /AppdData/Local/Temp/
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/Path
+        value: /Desktop/
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/Path
+        value: /Downloads/
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/Path
+        value: :\PerfLogs\
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/Path
+        value: :\Users\Public\
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/Path
+        value: :\Windows\Temp\
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/Path
+        value: \AppdData\Local\Temp\
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/Path
+        value: \Desktop\
+      - case sensitive: false
+        op: contains
+        path: Event/EventData/Path
+        value: \Downloads\
+  target: log
+respond:
+- action: report
+  metadata:
+    author: Nasreddine Bencherchali (Nextron Systems)
+    description: 'Detects an appx package that was added to the pipeline of the "to
+      be processed" packages that is located in a known folder often used as a staging
+      directory.
+
+      '
+    falsepositives:
+    - Unknown
+    level: high
+    references:
+    - https://www.sentinelone.com/labs/inside-malicious-windows-apps-for-malware-deployment/
+    - https://learn.microsoft.com/en-us/windows/win32/appxpkg/troubleshooting
+    - https://news.sophos.com/en-us/2021/11/11/bazarloader-call-me-back-attack-abuses-windows-10-apps-mechanism/
+    tags:
+    - attack.defense-evasion
+  name: AppX Located in Known Staging Directory Added to Deployment Pipeline
+

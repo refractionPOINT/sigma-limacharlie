@@ -23,11 +23,13 @@ respond:
 - action: report
   metadata:
     author: Pushkarev Dmitry
-    description: Detect run not allowed files. Applocker is a very useful tool, especially
-      on servers where unprivileged users have access. For example terminal servers.
-      You need configure applocker and log collect to receive these events.
+    description: 'Detects when AppLocker prevents the execution of an Application,
+      DLL, Script, MSI, or Packaged-App from running.
+
+      '
     falsepositives:
-    - Need tuning applocker or add exceptions in SIEM
+    - Unlikely, since this event notifies about blocked application execution. Tune
+      your applocker rules to avoid blocking legitimate applications.
     level: medium
     references:
     - https://learn.microsoft.com/en-us/windows/security/application-security/application-control/windows-defender-application-control/applocker/what-is-applocker
@@ -41,5 +43,5 @@ respond:
     - attack.t1059.005
     - attack.t1059.006
     - attack.t1059.007
-  name: File Was Not Allowed To Run
+  name: AppLocker Prevented Application or Script from Running
 
