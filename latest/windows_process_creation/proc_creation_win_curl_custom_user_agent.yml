@@ -17,7 +17,7 @@ detect:
         op: is
         path: event/ORIGINAL_FILE_NAME
         value: curl.exe
-    - op: and
+    - op: or
       rules:
       - op: matches
         path: event/COMMAND_LINE
@@ -25,7 +25,11 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: 'User-Agent:'
+        value: --header
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: 'User-Agent:'
 respond:
 - action: report
   metadata:
