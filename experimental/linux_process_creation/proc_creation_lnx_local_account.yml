@@ -111,7 +111,7 @@ respond:
 - action: report
   metadata:
     author: Alejandro Ortuno, oscd.community, CheraghiMilad
-    description: Detects enumeration of local systeam accounts. This information can
+    description: Detects enumeration of local system accounts. This information can
       help adversaries determine which local accounts exist on a system to aid in
       follow-on behavior.
     falsepositives:
