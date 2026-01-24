@@ -1,0 +1,99 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \reg.exe
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: reg.exe
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: add
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - op: or
+            rules:
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \powershell.exe
+            - case sensitive: false
+              op: ends with
+              path: event/FILE_PATH
+              value: \pwsh.exe
+          - op: or
+            rules:
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: powershell.exe
+            - case sensitive: false
+              op: is
+              path: event/ORIGINAL_FILE_NAME
+              value: pwsh.dll
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: New-ItemProperty
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: Set-ItemProperty
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: 'ni '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: 'sp '
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: \ms-settings\shell\open\command
+respond:
+- action: report
+  metadata:
+    author: frack113, Swachchhanda Shrawan Poudel (Nextron Systems)
+    description: 'Detects registry modifications to the ''ms-settings'' protocol handler,
+      which is frequently targeted for UAC bypass or persistence.
+
+      Attackers can modify this registry to execute malicious code with elevated privileges
+      by hijacking the command execution path.
+
+      '
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://thedfirreport.com/2021/12/13/diavol-ransomware/
+    - https://www.trendmicro.com/en_us/research/25/f/water-curse.html
+    tags:
+    - attack.defense-evasion
+    - attack.privilege-escalation
+    - attack.persistence
+    - attack.t1548.002
+    - attack.t1546.001
+    - attack.t1112
+  name: Registry Modification of MS-settings Protocol Handler
+
