@@ -179,5 +179,7 @@ respond:
     - attack.t1197
     - attack.s0190
     - attack.t1036.003
+    - attack.command-and-control
+    - attack.t1105
   name: File With Suspicious Extension Downloaded Via Bitsadmin
 

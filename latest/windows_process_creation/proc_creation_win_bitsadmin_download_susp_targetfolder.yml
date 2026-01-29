@@ -56,7 +56,11 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: \AppData\Local\Temp\
+        value: \$Recycle.Bin\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \AppData\Local\
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -64,7 +68,43 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: \Contacts\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: \Desktop\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Favorites\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Favourites\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \inetpub\wwwroot\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Music\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Pictures\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Start Menu\Programs\Startup\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Users\Default\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Videos\
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -73,6 +113,14 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: '%public%'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '%temp%'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '%tmp%'
 respond:
 - action: report
   metadata:
@@ -93,5 +141,7 @@ respond:
     - attack.t1197
     - attack.s0190
     - attack.t1036.003
+    - attack.command-and-control
+    - attack.t1105
   name: File Download Via Bitsadmin To A Suspicious Target Folder
 

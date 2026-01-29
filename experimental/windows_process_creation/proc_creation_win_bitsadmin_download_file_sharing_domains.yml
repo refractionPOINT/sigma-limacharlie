@@ -60,6 +60,10 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: github.com
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: glitch.me
       - case sensitive: false
         op: contains
@@ -174,5 +178,7 @@ respond:
     - attack.t1197
     - attack.s0190
     - attack.t1036.003
+    - attack.command-and-control
+    - attack.t1105
   name: Suspicious Download From File-Sharing Website Via Bitsadmin
 

@@ -50,10 +50,6 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: \software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
         value: \system\CurrentControlSet\Control\SafeBoot\AlternateShell
 respond:
 - action: report
