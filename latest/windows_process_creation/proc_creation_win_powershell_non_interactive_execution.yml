@@ -75,6 +75,10 @@ detect:
           op: ends with
           path: event/PARENT/FILE_PATH
           value: \WindowsTerminal.exe
+      - case sensitive: false
+        op: ends with
+        path: event/PARENT/FILE_PATH
+        value: :\Program Files\Windows Defender Advanced Threat Protection\SenseIR.exe
 respond:
 - action: report
   metadata:

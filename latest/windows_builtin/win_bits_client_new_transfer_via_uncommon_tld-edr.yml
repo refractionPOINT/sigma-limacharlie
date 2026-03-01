@@ -36,6 +36,10 @@ detect:
         op: contains
         path: event/EVENT/EventData/RemoteName
         value: cdn.office.net/
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/RemoteName
+        value: tscdn.m365.static.microsoft/
 respond:
 - action: report
   metadata:
