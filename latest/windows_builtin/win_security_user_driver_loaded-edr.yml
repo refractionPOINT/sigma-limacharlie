@@ -29,15 +29,7 @@ detect:
           - case sensitive: false
             op: is
             path: event/EVENT/EventData/ProcessName
-            value: C:\Windows\System32\Dism.exe
-          - case sensitive: false
-            op: is
-            path: event/EVENT/EventData/ProcessName
-            value: C:\Windows\System32\rundll32.exe
-          - case sensitive: false
-            op: is
-            path: event/EVENT/EventData/ProcessName
-            value: C:\Windows\System32\fltMC.exe
+            value: C:\Windows\explorer.exe
           - case sensitive: false
             op: is
             path: event/EVENT/EventData/ProcessName
@@ -45,15 +37,23 @@ detect:
           - case sensitive: false
             op: is
             path: event/EVENT/EventData/ProcessName
+            value: C:\Windows\ImmersiveControlPanel\SystemSettings.exe
+          - case sensitive: false
+            op: is
+            path: event/EVENT/EventData/ProcessName
+            value: C:\Windows\System32\Dism.exe
+          - case sensitive: false
+            op: is
+            path: event/EVENT/EventData/ProcessName
+            value: C:\Windows\System32\fltMC.exe
+          - case sensitive: false
+            op: is
+            path: event/EVENT/EventData/ProcessName
             value: C:\Windows\System32\mmc.exe
           - case sensitive: false
             op: is
             path: event/EVENT/EventData/ProcessName
-            value: C:\Windows\System32\svchost.exe
-          - case sensitive: false
-            op: is
-            path: event/EVENT/EventData/ProcessName
-            value: C:\Windows\System32\wimserv.exe
+            value: C:\Windows\System32\rundll32.exe
           - case sensitive: false
             op: is
             path: event/EVENT/EventData/ProcessName
@@ -61,11 +61,19 @@ detect:
           - case sensitive: false
             op: is
             path: event/EVENT/EventData/ProcessName
+            value: C:\Windows\System32\ShellHost.exe
+          - case sensitive: false
+            op: is
+            path: event/EVENT/EventData/ProcessName
+            value: C:\Windows\System32\svchost.exe
+          - case sensitive: false
+            op: is
+            path: event/EVENT/EventData/ProcessName
             value: C:\Windows\System32\SystemSettingsBroker.exe
           - case sensitive: false
             op: is
             path: event/EVENT/EventData/ProcessName
-            value: C:\Windows\explorer.exe
+            value: C:\Windows\System32\wimserv.exe
         - case sensitive: false
           op: starts with
           path: event/EVENT/EventData/ProcessName
@@ -78,19 +86,7 @@ detect:
         - case sensitive: false
           op: ends with
           path: event/EVENT/EventData/ProcessName
-          value: \procexp64.exe
-        - case sensitive: false
-          op: ends with
-          path: event/EVENT/EventData/ProcessName
-          value: \procexp.exe
-        - case sensitive: false
-          op: ends with
-          path: event/EVENT/EventData/ProcessName
-          value: \procmon64.exe
-        - case sensitive: false
-          op: ends with
-          path: event/EVENT/EventData/ProcessName
-          value: \procmon.exe
+          value: \AppData\Local\Microsoft\Teams\current\Teams.exe
         - case sensitive: false
           op: ends with
           path: event/EVENT/EventData/ProcessName
@@ -98,7 +94,19 @@ detect:
         - case sensitive: false
           op: ends with
           path: event/EVENT/EventData/ProcessName
-          value: \AppData\Local\Microsoft\Teams\current\Teams.exe
+          value: \procexp.exe
+        - case sensitive: false
+          op: ends with
+          path: event/EVENT/EventData/ProcessName
+          value: \procexp64.exe
+        - case sensitive: false
+          op: ends with
+          path: event/EVENT/EventData/ProcessName
+          value: \procmon.exe
+        - case sensitive: false
+          op: ends with
+          path: event/EVENT/EventData/ProcessName
+          value: \procmon64.exe
       - op: and
         rules:
         - op: or
