@@ -1,0 +1,98 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \reg.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \pwsh.exe
+      - op: or
+        rules:
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: reg.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: powershell.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: pwsh.dll
+    - op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ControlSet
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Control\Lsa
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: Set-ItemProperty
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: New-ItemProperty
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' add '
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: IsPplAutoEnabled
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: RunAsPPL
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: RunAsPPLBoot
+respond:
+- action: report
+  metadata:
+    author: Florian Roth (Nextron Systems), Swachchhanda Shrawan Poudel (Nextron Systems)
+    description: 'Detects modification of LSA PPL protection settings via CommandLine.
+
+      It may indicate an attempt to disable protection and enable credential dumping
+      tools to access LSASS process memory.
+
+      '
+    falsepositives:
+    - Unlikely
+    level: medium
+    references:
+    - https://thedfirreport.com/2022/03/21/apt35-automates-initial-access-using-proxyshell/
+    - https://github.com/shoober420/windows11-scripts/blob/38d83331738cd713ccb42f2c4557d17a27aefd98/Windows11Tweaks.bat#L1825
+    tags:
+    - attack.defense-evasion
+    - attack.t1562.010
+  name: LSA PPL Protection Setting Modification via CommandLine
+
