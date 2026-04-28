@@ -1,0 +1,131 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \wscript.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \cscript.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \mshta.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: :\Perflogs\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: :\Temp\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: :\Tmp\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: :\Users\Public\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: :\Windows\Temp\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \AppData\Local\Temp\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \AppData\Roaming\Temp\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Start Menu\Programs\Startup\
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Temporary Internet
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: \Windows\Temp
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '%LocalAppData%\Temp\'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '%TEMP%'
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: '%TMP%'
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .hta
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .js
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .jse
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .vba
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .vbe
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .vbs
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .wsf
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: .wsh
+respond:
+- action: report
+  metadata:
+    author: Margaritis Dimitrios (idea), Florian Roth (Nextron Systems), oscd.community,
+      Nasreddine Bencherchali (Nextron Systems), Dave Johnson
+    description: Detects wscript/cscript/mshta executions of scripts located in user
+      directories
+    falsepositives:
+    - Some installers might generate a similar behavior. An initial baseline is required
+    level: medium
+    references:
+    - https://thedfirreport.com/2023/10/30/netsupport-intrusion-results-in-domain-compromise/
+    - https://redcanary.com/blog/gootloader/
+    - https://www.microsoft.com/en-us/security/blog/2025/03/06/malvertising-campaign-leads-to-info-stealers-hosted-on-github/
+    tags:
+    - attack.execution
+    - attack.t1059.005
+    - attack.t1059.007
+  name: Potential Dropper Script Execution Via WScript/CScript/MSHTA
+

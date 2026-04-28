@@ -7,42 +7,116 @@ detect:
   - op: is linux
   - op: and
     rules:
-    - op: or
+    - op: and
       rules:
-      - case sensitive: true
-        op: ends with
-        path: event/FILE_PATH
-        value: /service
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /service
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /systemctl
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /chkconfig
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' stop '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' disable '
+      - not: true
+        op: or
+        rules:
+        - op: and
+          rules:
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /systemctl
+          - op: or
+            rules:
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: --no-reload disable snap-snapd-
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: ' stop snap-snapd-'
+        - op: and
+          rules:
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /systemctl
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/COMMAND_LINE
+            value: tmp.ci/preinst upgrade
+          - op: and
+            rules:
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: ' stop '
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: ssh.
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/COMMAND_LINE
+            value: /dpkg/info/ubuntu-pro-client.prerm upgrade
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /systemctl
+    - not: true
+      op: and
+      rules:
       - case sensitive: true
         op: ends with
         path: event/FILE_PATH
         value: /systemctl
-      - case sensitive: true
+      - case sensitive: false
         op: ends with
-        path: event/FILE_PATH
-        value: /chkconfig
-    - op: or
-      rules:
-      - case sensitive: false
-        op: contains
         path: event/COMMAND_LINE
-        value: stop
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: disable
+        value: snap.amazon-ssm-agent.amazon-ssm-agent.service
 respond:
 - action: report
   metadata:
     author: Nasreddine Bencherchali (Nextron Systems)
-    description: Detects the usage of utilities such as 'systemctl', 'service'...etc
-      to stop or disable tools and services
+    description: 'Detects the usage of utilities such as ''systemctl'', ''service''...etc
+      to stop or disable tools and services on Linux systems.
+
+      Attackers may stop or disable security tools and services to evade detection,
+      maintain persistence, or disrupt system operations.
+
+      '
     falsepositives:
     - Legitimate administration activities
+    - Some false positives are to be expected. Apply additional filters as needed
+      before pushing to production.
     level: medium
     references:
     - https://www.trendmicro.com/pl_pl/research/20/i/the-evolution-of-malicious-shell-scripts.html
     tags:
     - attack.defense-evasion
+    - attack.t1562
+    - attack.impact
+    - attack.t1489
   name: Disable Or Stop Services
 

@@ -19,18 +19,6 @@ detect:
           op: ends with
           path: event/FILE_PATH
           value: \pwsh.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \mshta.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \wscript.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \cscript.exe
       - op: or
         rules:
         - case sensitive: false
@@ -67,35 +55,68 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ' >'
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: Out-File
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ConvertTo-Json
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
         value: -WindowStyle hidden -Verb runAs
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
         value: \Windows\system32\config\systemprofile\AppData\Local\Temp\Amazon\EC2-Windows\
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' >'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: Out-File
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ConvertTo-Json
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: is
+            path: event/PARENT/FILE_PATH
+            value: C:\Windows\System32\Msiexec.exe
+          - case sensitive: false
+            op: is
+            path: event/PARENT/FILE_PATH
+            value: C:\Windows\SysWOW64\Msiexec.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \powershell.exe
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: -NoProfile -ExecutionPolicy Bypass -Command
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: AppData\Local\Temp\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: Install-Chocolatey.ps1
 respond:
 - action: report
   metadata:
     author: Florian Roth (Nextron Systems), Max Altgelt (Nextron Systems), Tim Shelton
-    description: Detects a suspicious script executions from temporary folder
+    description: Detects a potentially suspicious powershell script executions from
+      temporary folder
     falsepositives:
     - Administrative scripts
-    level: high
+    level: medium
     references:
     - https://www.microsoft.com/security/blog/2021/07/13/microsoft-discovers-threat-actor-targeting-solarwinds-serv-u-software-with-0-day-exploit/
     tags:
     - attack.execution
-    - attack.t1059
-  name: Suspicious Script Execution From Temp Folder
+    - attack.t1059.001
+  name: Potentially Suspicious Powershell Script Execution From Temp Folder
 

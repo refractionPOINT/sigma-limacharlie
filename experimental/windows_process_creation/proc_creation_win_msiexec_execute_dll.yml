@@ -18,62 +18,30 @@ detect:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: ' -y'
+          value: ' -Y'
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: ' /y'
+          value: ' /Y'
     - not: true
       op: or
       rules:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: \MsiExec.exe" /Y "C:\Program Files\Bonjour\mdnsNSP.dll
+        value: \MsiExec.exe" /Y "C:\Program Files\
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: \MsiExec.exe" /Y "C:\Program Files (x86)\Bonjour\mdnsNSP.dll
+        value: \MsiExec.exe" /Y "C:\Program Files (x86)\
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: \MsiExec.exe" /Y "C:\Program Files (x86)\Apple Software Update\ScriptingObjectModel.dll
+        value: \MsiExec.exe" /Y "C:\Windows\System32\
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: \MsiExec.exe" /Y "C:\Program Files (x86)\Apple Software Update\SoftwareUpdateAdmin.dll
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: \MsiExec.exe" /Y "C:\Windows\CCM\
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: \MsiExec.exe" /Y C:\Windows\CCM\
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: \MsiExec.exe" -Y "C:\Program Files\Bonjour\mdnsNSP.dll
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: \MsiExec.exe" -Y "C:\Program Files (x86)\Bonjour\mdnsNSP.dll
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: \MsiExec.exe" -Y "C:\Program Files (x86)\Apple Software Update\ScriptingObjectModel.dll
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: \MsiExec.exe" -Y "C:\Program Files (x86)\Apple Software Update\SoftwareUpdateAdmin.dll
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: \MsiExec.exe" -Y "C:\Windows\CCM\
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: \MsiExec.exe" -Y C:\Windows\CCM\
+        value: \MsiExec.exe" /Y "C:\Windows\SysWOW64\
 respond:
 - action: report
   metadata:

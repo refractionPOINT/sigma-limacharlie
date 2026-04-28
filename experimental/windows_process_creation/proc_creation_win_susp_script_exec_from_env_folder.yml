@@ -7,128 +7,229 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - op: or
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \cscript.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \mshta.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \wscript.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' -ep bypass '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' -ExecutionPolicy bypass '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' -w hidden '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '/e:javascript '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '/e:Jscript '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '/e:vbscript '
+        - op: or
+          rules:
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: cscript.exe
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: mshta.exe
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: wscript.exe
+      - op: or
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: :\Perflogs\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: :\Users\Public\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \%Public%
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \AppData\Local\Temp
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \AppData\Roaming\Temp
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \Temporary Internet
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \Windows\Temp
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \Start Menu\Programs\Startup\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '%TEMP%'
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '%TMP%'
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '%LocalAppData%\Temp'
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: :\Users\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \Favorites\
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: :\Users\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \Favourites\
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: :\Users\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \Contacts\
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: :\Users\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \Documents\
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: :\Users\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \Music\
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: :\Users\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \Pictures\
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: :\Users\
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \Videos\
+    - not: true
+      op: and
       rules:
       - op: or
         rules:
         - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \cscript.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \mshta.exe
-        - case sensitive: false
-          op: ends with
-          path: event/FILE_PATH
-          value: \wscript.exe
-      - op: or
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: ' -ep bypass '
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: ' -ExecutionPolicy bypass '
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: ' -w hidden '
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: '/e:javascript '
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: '/e:Jscript '
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: '/e:vbscript '
-      - op: or
-        rules:
+          op: is
+          path: event/PARENT/FILE_PATH
+          value: C:\Windows\System32\Msiexec.exe
         - case sensitive: false
           op: is
-          path: event/ORIGINAL_FILE_NAME
-          value: cscript.exe
-        - case sensitive: false
-          op: is
-          path: event/ORIGINAL_FILE_NAME
-          value: mshta.exe
-        - case sensitive: false
-          op: is
-          path: event/ORIGINAL_FILE_NAME
-          value: wscript.exe
-    - op: or
-      rules:
-      - op: or
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: :\Perflogs\
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: :\Users\Public\
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: \AppData\Local\Temp
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: \AppData\Roaming\Temp
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: \Temporary Internet
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: \Windows\Temp
+          path: event/PARENT/FILE_PATH
+          value: C:\Windows\SysWOW64\Msiexec.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \powershell.exe
       - op: and
         rules:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: :\Users\
+          value: -NoProfile -ExecutionPolicy Bypass -Command
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: \Favorites\
-      - op: and
-        rules:
+          value: AppData\Local\Temp\
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: :\Users\
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: \Favourites\
-      - op: and
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: :\Users\
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: \Contacts\
+          value: Install-Chocolatey.ps1
 respond:
 - action: report
   metadata:
     author: Florian Roth (Nextron Systems), Nasreddine Bencherchali (Nextron Systems)
-    description: Detects a suspicious script execution in temporary folders or folders
-      accessible by environment variables
+    description: 'Detects suspicious script execution from suspicious directories
+      or folders accessible by environment variables that may indicate malware activity.
+
+      Script interpreters (cscript, wscript, mshta, powershell) executing from folders
+      like Temp, Public, or user profile directories may suggest attempts to evade
+      detection or execute malicious scripts.
+
+      '
     falsepositives:
-    - Unknown
+    - Various legitimate software have been observed to use similar techniques for
+      installation or update purposes;thus, it is recommended to review and tune filters
+      for your environment to reduce false positives before deploying to production.
     level: high
     references:
     - https://www.virustotal.com/gui/file/91ba814a86ddedc7a9d546e26f912c541205b47a853d227756ab1334ade92c3f

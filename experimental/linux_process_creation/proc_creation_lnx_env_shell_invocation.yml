@@ -14,23 +14,23 @@ detect:
     - op: or
       rules:
       - case sensitive: false
-        op: ends with
+        op: contains
         path: event/COMMAND_LINE
         value: /bin/bash
       - case sensitive: false
-        op: ends with
+        op: contains
         path: event/COMMAND_LINE
         value: /bin/dash
       - case sensitive: false
-        op: ends with
+        op: contains
         path: event/COMMAND_LINE
         value: /bin/fish
       - case sensitive: false
-        op: ends with
+        op: contains
         path: event/COMMAND_LINE
         value: /bin/sh
       - case sensitive: false
-        op: ends with
+        op: contains
         path: event/COMMAND_LINE
         value: /bin/zsh
 respond:
@@ -50,6 +50,6 @@ respond:
     - https://www.elastic.co/guide/en/security/current/linux-restricted-shell-breakout-via-linux-binary-s.html
     tags:
     - attack.execution
-    - attack.t1059
+    - attack.t1059.004
   name: Shell Invocation via Env Command - Linux
 

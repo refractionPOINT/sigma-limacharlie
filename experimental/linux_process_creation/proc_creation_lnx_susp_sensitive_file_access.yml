@@ -7,122 +7,153 @@ detect:
   - op: is linux
   - op: and
     rules:
-    - op: or
+    - op: and
       rules:
-      - op: and
+      - op: or
         rules:
+        - op: and
+          rules:
+          - op: or
+            rules:
+            - case sensitive: true
+              op: ends with
+              path: event/FILE_PATH
+              value: /cat
+            - case sensitive: true
+              op: ends with
+              path: event/FILE_PATH
+              value: /echo
+            - case sensitive: true
+              op: ends with
+              path: event/FILE_PATH
+              value: /grep
+            - case sensitive: true
+              op: ends with
+              path: event/FILE_PATH
+              value: /head
+            - case sensitive: true
+              op: ends with
+              path: event/FILE_PATH
+              value: /more
+            - case sensitive: true
+              op: ends with
+              path: event/FILE_PATH
+              value: /tail
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '>'
         - op: or
           rules:
           - case sensitive: true
             op: ends with
             path: event/FILE_PATH
-            value: /cat
+            value: /emacs
           - case sensitive: true
             op: ends with
             path: event/FILE_PATH
-            value: /echo
+            value: /nano
           - case sensitive: true
             op: ends with
             path: event/FILE_PATH
-            value: /grep
+            value: /sed
           - case sensitive: true
             op: ends with
             path: event/FILE_PATH
-            value: /head
+            value: /vi
           - case sensitive: true
             op: ends with
             path: event/FILE_PATH
-            value: /more
-          - case sensitive: true
-            op: ends with
-            path: event/FILE_PATH
-            value: /tail
+            value: /vim
+      - op: or
+        rules:
         - case sensitive: false
           op: contains
           path: event/COMMAND_LINE
-          value: '>'
+          value: /bin/login
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /bin/passwd
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /boot/
+        - case sensitive: false
+          op: matches
+          path: event/COMMAND_LINE
+          re: .*/etc/.*\.conf.*
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /etc/cron.
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /etc/crontab
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /etc/hosts
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /etc/init.d
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /etc/sudoers
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /opt/bin/
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /sbin
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /usr/bin/
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: /usr/local/bin/
+    - not: true
+      op: and
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /bin/sed
       - op: or
         rules:
-        - case sensitive: true
-          op: ends with
-          path: event/FILE_PATH
-          value: /emacs
-        - case sensitive: true
-          op: ends with
-          path: event/FILE_PATH
-          value: /nano
-        - case sensitive: true
-          op: ends with
-          path: event/FILE_PATH
-          value: /sed
-        - case sensitive: true
-          op: ends with
-          path: event/FILE_PATH
-          value: /vi
-        - case sensitive: true
-          op: ends with
-          path: event/FILE_PATH
-          value: /vim
-    - op: or
-      rules:
+        - case sensitive: false
+          op: starts with
+          path: event/COMMAND_LINE
+          value: sed -i /^
+        - case sensitive: false
+          op: starts with
+          path: event/COMMAND_LINE
+          value: sed -ne s/^
       - case sensitive: false
-        op: contains
+        op: ends with
         path: event/COMMAND_LINE
-        value: /bin/login
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /bin/passwd
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /boot/
-      - case sensitive: false
-        op: matches
-        path: event/COMMAND_LINE
-        re: .*/etc/.*\.conf.*
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /etc/cron.
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /etc/crontab
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /etc/hosts
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /etc/init.d
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /etc/sudoers
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /opt/bin/
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /sbin
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /usr/bin/
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /usr/local/bin/
+        value: /etc/mdadm/mdadm.conf
 respond:
 - action: report
   metadata:
     author: '@d4ns4n_ (Wuerth-Phoenix)'
-    description: Detects changes of sensitive and critical files. Monitors files that
-      you don't expect to change without planning on Linux system.
+    description: 'Detects changes of sensitive and critical files. Monitors files
+      that you don''t expect to change without planning on Linux system.
+
+      These files include, but are not limited to, system configuration files, authentication
+      files, and critical application files.
+
+      Attackers often target these files to maintain persistence, escalate privileges,
+      or disrupt system operations.
+
+      '
     falsepositives:
     - Some false positives are to be expected on user or administrator machines. Apply
       additional filters as needed.
