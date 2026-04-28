@@ -7,7 +7,7 @@ detect:
   - op: is windows
   - op: matches
     path: event/COMMAND_LINE
-    re: (?i)echo.*clip.*&&.*(Clipboard|i`?n`?v`?o`?k`?e`?)
+    re: (?i)echo.*clip.*&&.*(?:Clipboard|i`?n`?v`?o`?k`?e`?)
 respond:
 - action: report
   metadata:

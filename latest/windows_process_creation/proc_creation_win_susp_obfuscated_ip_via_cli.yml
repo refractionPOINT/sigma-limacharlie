@@ -62,7 +62,7 @@ detect:
             re: https?://0[0-9]{3,11}
           - op: matches
             path: event/COMMAND_LINE
-            re: https?://(0[0-9]{1,11}\.){3}0[0-9]{1,11}
+            re: https?://(?:0[0-9]{1,11}\.){3}0[0-9]{1,11}
           - op: matches
             path: event/COMMAND_LINE
             re: https?://0[0-9]{1,11}
@@ -72,7 +72,7 @@ detect:
     - not: true
       op: matches
       path: event/COMMAND_LINE
-      re: https?://((25[0-5]|(2[0-4]|1\d|[1-9])?\d)(\.|\b)){4}
+      re: https?://(?:(?:25[0-5]|(?:2[0-4]|1\d|[1-9])?\d)(?:\.|\b)){4}
 respond:
 - action: report
   metadata:

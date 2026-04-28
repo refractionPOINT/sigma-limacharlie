@@ -11,10 +11,10 @@ detect:
       rules:
       - op: matches
         path: event/COMMAND_LINE
-        re: \w+`(\w+|-|.)`[\w+|\s]
+        re: \w+`(?:\w+|-|.)`[\w+|\s]
       - op: matches
         path: event/COMMAND_LINE
-        re: '"(\{\d\})+"\s*-f'
+        re: '"(?:\{\d\})+"\s*-f'
       - op: matches
         path: event/COMMAND_LINE
         re: (?i)\$\{`?e`?n`?v`?:`?p`?a`?t`?h`?\}

@@ -19,7 +19,7 @@ detect:
         value: RUNDLL32.EXE
     - op: matches
       path: event/COMMAND_LINE
-      re: '[Rr][Uu][Nn][Dd][Ll][Ll]32(\.[Ee][Xx][Ee])? \S+?\w:\S+?:'
+      re: '[Rr][Uu][Nn][Dd][Ll][Ll]32(?:\.[Ee][Xx][Ee])? \S+?\w:\S+?:'
 respond:
 - action: report
   metadata:

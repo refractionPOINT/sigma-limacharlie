@@ -18,7 +18,7 @@ detect:
       re: \$env:Public\[\s*\d{1,3}\s*\]\s*\+\s*\$env:Public\[
     - op: matches
       path: event/COMMAND_LINE
-      re: \$env:ComSpec\[(\s*\d{1,3}\s*,){2}
+      re: \$env:ComSpec\[(?:\s*\d{1,3}\s*,){2}
     - op: matches
       path: event/COMMAND_LINE
       re: \*mdr\*\W\s*\)\.Name
