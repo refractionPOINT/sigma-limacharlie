@@ -7,22 +7,26 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - case sensitive: false
-      op: ends with
-      path: event/FILE_PATH
-      value: \schtasks.exe
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: /Change
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: /TN
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: /disable
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \schtasks.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: schtasks.exe
+    - op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: -disable
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /disable
     - op: or
       rules:
       - case sensitive: false
