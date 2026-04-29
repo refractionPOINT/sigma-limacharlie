@@ -38,8 +38,8 @@ respond:
     references:
     - https://lolbas-project.github.io/lolbas/Binaries/msedge_proxy/
     tags:
-    - attack.defense-evasion
     - attack.execution
+    - attack.stealth
     - attack.t1218
   name: Arbitrary File Download Via MSEDGE_PROXY.EXE
 

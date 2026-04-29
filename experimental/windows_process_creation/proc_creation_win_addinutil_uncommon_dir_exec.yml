@@ -52,7 +52,7 @@ respond:
     references:
     - https://www.blue-prints.blog/content/blog/posts/lolbin/addinutil-lolbas.html
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1218
   name: AddinUtil.EXE Execution From Uncommon Directory
 

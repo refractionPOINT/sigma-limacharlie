@@ -30,7 +30,6 @@ respond:
     - https://x.com/Wietze/status/1933495426952421843
     tags:
     - attack.privilege-escalation
-    - attack.defense-evasion
     - attack.t1548.002
   name: TrustedPath UAC Bypass Pattern
 

@@ -116,7 +116,7 @@ respond:
     - https://github.com/GhostPack/SharpDPAPI
     tags:
     - attack.privilege-escalation
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1134.001
     - attack.t1134.003
   name: HackTool - SharpDPAPI Execution

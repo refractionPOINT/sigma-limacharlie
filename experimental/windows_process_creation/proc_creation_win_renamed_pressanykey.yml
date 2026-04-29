@@ -30,7 +30,7 @@ respond:
     - https://gist.github.com/nasbench/a989ce64cefa8081bd50cf6ad8c491b5
     tags:
     - attack.execution
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1218
   name: Visual Studio NodejsTools PressAnyKey Renamed Execution
 

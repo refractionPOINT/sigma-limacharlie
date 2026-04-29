@@ -43,8 +43,8 @@ respond:
     references:
     - https://github.com/LOLBAS-Project/LOLBAS/pull/238/files
     tags:
-    - attack.defense-evasion
     - attack.execution
+    - attack.stealth
     - attack.t1218
   name: Arbitrary File Download Via MSPUB.EXE
 

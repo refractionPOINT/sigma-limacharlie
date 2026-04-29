@@ -88,8 +88,8 @@ respond:
     - https://thedfirreport.com/2025/06/30/hide-your-rdp-password-spray-leads-to-ransomhub-deployment/
     tags:
     - attack.execution
+    - attack.defense-impairment
     - attack.t1059
-    - attack.defense-evasion
     - attack.t1222.001
   name: Potentially Suspicious NTFS Symlink Behavior Modification
 

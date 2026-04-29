@@ -94,7 +94,7 @@ respond:
     - https://learn.microsoft.com/en-us/dotnet/api/system.appdomain.load?view=net-7.0
     tags:
     - attack.execution
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1059.001
     - attack.t1027
   name: Suspicious Encoded And Obfuscated Reflection Assembly Load Function Call

@@ -39,7 +39,7 @@ respond:
     references:
     - https://github.com/LOLBAS-Project/LOLBAS/issues/243
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1218
   name: Potential NTLM Coercion Via Certutil.EXE
 

@@ -39,7 +39,7 @@ respond:
     - https://www.sans.org/blog/protecting-privileged-domain-accounts-lm-hashes-the-good-the-bad-and-the-ugly/
     tags:
     - attack.persistence
-    - attack.defense-evasion
+    - attack.defense-impairment
     - attack.t1112
   name: Enable LM Hash Storage - ProcCreation
 

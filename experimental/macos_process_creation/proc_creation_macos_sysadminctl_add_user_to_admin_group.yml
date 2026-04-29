@@ -33,9 +33,9 @@ respond:
     - https://ss64.com/osx/sysadminctl.html
     tags:
     - attack.persistence
-    - attack.defense-evasion
     - attack.initial-access
     - attack.privilege-escalation
+    - attack.stealth
     - attack.t1078.003
   name: User Added To Admin Group Via Sysadminctl
 

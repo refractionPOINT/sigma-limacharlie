@@ -131,7 +131,7 @@ respond:
     - https://learn.microsoft.com/en-us/dotnet/framework/tools/regasm-exe-assembly-registration-tool
     - https://learn.microsoft.com/en-us/dotnet/framework/tools/regsvcs-exe-net-services-installation-tool
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1218.011
   name: Bad Opsec Defaults Sacrificial Processes With Improper Arguments
 

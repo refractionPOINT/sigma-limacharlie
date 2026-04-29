@@ -47,7 +47,7 @@ respond:
     - https://twitter.com/SBousseaden/status/1139811587760562176
     tags:
     - attack.privilege-escalation
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1055
   name: Suspicious Userinit Child Process
 

@@ -38,7 +38,7 @@ respond:
     - https://thedfirreport.com/2022/05/09/seo-poisoning-a-gootloader-story/
     tags:
     - attack.persistence
-    - attack.defense-evasion
+    - attack.defense-impairment
     - attack.t1112
   name: RestrictedAdminMode Registry Value Tampering - ProcCreation
 

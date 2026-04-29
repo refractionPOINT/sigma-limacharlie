@@ -197,6 +197,6 @@ respond:
     references:
     - https://pentestlaboratories.com/2021/12/08/process-ghosting/
     tags:
-    - attack.defense-evasion
+    - attack.stealth
   name: Execution of Suspicious File Type Extension
 

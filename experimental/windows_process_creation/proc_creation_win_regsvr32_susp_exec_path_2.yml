@@ -164,7 +164,7 @@ respond:
     references:
     - Internal Research
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1218.010
   name: Regsvr32 Execution From Highly Suspicious Location
 

@@ -28,7 +28,8 @@ respond:
     - https://blog.thecybersecuritytutor.com/Exeuction-AWL-Bypass-Remote-exe-LOLBin/
     - https://lolbas-project.github.io/lolbas/OtherMSBinaries/Remote/
     tags:
-    - attack.defense-evasion
+    - attack.execution
+    - attack.stealth
     - attack.t1127
   name: Use of Remote.exe
 

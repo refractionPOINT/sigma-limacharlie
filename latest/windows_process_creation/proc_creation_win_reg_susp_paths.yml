@@ -58,8 +58,8 @@ respond:
     - https://www.absolomb.com/2018-01-26-Windows-Privilege-Escalation-Guide/
     tags:
     - attack.persistence
-    - attack.defense-evasion
+    - attack.defense-impairment
     - attack.t1112
-    - attack.t1562.001
+    - attack.t1685
   name: Reg Add Suspicious Paths
 

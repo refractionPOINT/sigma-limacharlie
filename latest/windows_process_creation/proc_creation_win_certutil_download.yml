@@ -53,7 +53,7 @@ respond:
     - https://lolbas-project.github.io/lolbas/Binaries/Certutil/
     - https://www.hexacorn.com/blog/2020/08/23/certutil-one-more-gui-lolbin
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1027
     - attack.command-and-control
     - attack.t1105

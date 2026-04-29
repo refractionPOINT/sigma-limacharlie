@@ -140,8 +140,8 @@ respond:
     - https://www.trendmicro.com/en_us/research/25/i/unmasking-the-gentlemen-ransomware.html
     tags:
     - attack.persistence
-    - attack.defense-evasion
     - attack.lateral-movement
+    - attack.defense-impairment
     - attack.t1021.001
     - attack.t1112
   name: Potential Tampering With RDP Related Registry Keys Via Reg.EXE

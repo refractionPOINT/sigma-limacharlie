@@ -195,8 +195,9 @@ respond:
     - https://lolbas-project.github.io/lolbas/Binaries/Bitsadmin/
     - https://blog.talosintelligence.com/breaking-the-silence-recent-truebot-activity/
     tags:
-    - attack.defense-evasion
     - attack.persistence
+    - attack.execution
+    - attack.stealth
     - attack.t1197
   name: BITS Transfer Job Download From Direct IP
 

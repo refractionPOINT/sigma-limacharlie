@@ -32,8 +32,9 @@ respond:
     - https://bugs.chromium.org/p/project-zero/issues/detail?id=1252&desc=5
     - https://technet.microsoft.com/en-us/library/security/4022344
     tags:
-    - attack.defense-evasion
+    - attack.stealth
+    - attack.defense-impairment
     - attack.t1211
-    - attack.t1562.001
+    - attack.t1685
   name: Microsoft Malware Protection Engine Crash
 

@@ -22,7 +22,7 @@ respond:
     - https://twitter.com/0gtweet/status/1206692239839289344
     - https://lolbas-project.github.io/lolbas/Binaries/Runexehelper/
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1218
   name: Lolbin Runexehelper Use As Proxy
 

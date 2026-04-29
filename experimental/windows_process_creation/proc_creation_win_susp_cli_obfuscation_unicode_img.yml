@@ -127,7 +127,7 @@ respond:
     - https://www.wietzebeukema.nl/blog/windows-command-line-obfuscation
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1027/T1027.md#atomic-test-6---dlp-evasion-via-sensitive-data-in-vba-macro-over-http
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1027
   name: Potential CommandLine Obfuscation Using Unicode Characters From Suspicious
     Image

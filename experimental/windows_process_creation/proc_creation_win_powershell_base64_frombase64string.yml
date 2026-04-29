@@ -45,7 +45,7 @@ respond:
     references:
     - Internal Research
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1140
     - attack.execution
     - attack.t1059.001

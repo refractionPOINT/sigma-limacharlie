@@ -34,7 +34,7 @@ respond:
     references:
     - https://github.com/netero1010/EDRSilencer
     tags:
-    - attack.defense-evasion
-    - attack.t1562
+    - attack.defense-impairment
+    - attack.t1685
   name: HackTool - EDRSilencer Execution - Filter Added
 

@@ -60,7 +60,7 @@ respond:
     - https://medium.com/@blueteamops/shimcache-flush-89daff28d15e
     tags:
     - attack.persistence
-    - attack.defense-evasion
+    - attack.defense-impairment
     - attack.t1112
   name: ShimCache Flush
 

@@ -74,9 +74,10 @@ respond:
     - https://www.darkoperator.com/blog/2018/10/5/operating-offensively-against-sysmon
     - https://www.cybereason.com/blog/threat-analysis-report-lockbit-2.0-all-paths-lead-to-ransom
     tags:
-    - attack.defense-evasion
+    - attack.stealth
+    - attack.defense-impairment
     - attack.t1070
-    - attack.t1562
-    - attack.t1562.002
+    - attack.t1685
+    - attack.t1685.001
   name: Filter Driver Unloaded Via Fltmc.EXE
 

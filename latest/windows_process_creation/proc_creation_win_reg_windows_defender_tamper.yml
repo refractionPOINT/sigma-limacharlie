@@ -198,7 +198,7 @@ respond:
     - https://www.elevenforum.com/t/video-guide-how-to-completely-disable-microsoft-defender-antivirus.14608/page-2
     - https://tria.ge/241231-j9yatstqbm/behavioral1
     tags:
-    - attack.defense-evasion
-    - attack.t1562.001
+    - attack.defense-impairment
+    - attack.t1685
   name: Suspicious Windows Defender Registry Key Tampering Via Reg.EXE
 

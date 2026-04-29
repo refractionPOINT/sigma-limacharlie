@@ -24,7 +24,6 @@ respond:
     - Legitimate administration activities
     level: low
     tags:
-    - attack.defense-evasion
     - attack.command-and-control
     - attack.t1090
   name: Connection Proxy

@@ -69,8 +69,8 @@ respond:
     - https://i.blackhat.com/EU-21/Wednesday/EU-21-Teodorescu-Veni-No-Vidi-No-Vici-Attacks-On-ETW-Blind-EDRs.pdf
     tags:
     - attack.persistence
-    - attack.defense-evasion
+    - attack.defense-impairment
     - attack.t1112
-    - attack.t1562
+    - attack.t1685
   name: ETW Logging Disabled In .NET Processes - Registry
 

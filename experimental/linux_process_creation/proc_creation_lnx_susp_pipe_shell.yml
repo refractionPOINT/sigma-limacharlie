@@ -67,7 +67,7 @@ respond:
     references:
     - Internal Research
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1140
   name: Linux Shell Pipe to Shell
 

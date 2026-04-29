@@ -40,7 +40,7 @@ respond:
     references:
     - https://github.com/audibleblink/xordump
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1036
     - attack.t1003.001
     - attack.credential-access

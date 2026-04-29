@@ -87,7 +87,7 @@ respond:
     - https://linuxhint.com/uninstall_yum_package/
     - https://linuxhint.com/uninstall-debian-packages/
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1070
   name: Linux Package Uninstall
 

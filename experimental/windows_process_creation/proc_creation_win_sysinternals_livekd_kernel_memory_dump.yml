@@ -47,6 +47,6 @@ respond:
     - https://4sysops.com/archives/creating-a-complete-memory-dump-without-a-blue-screen/
     - https://kb.acronis.com/content/60892
     tags:
-    - attack.defense-evasion
+    - attack.stealth
   name: Kernel Memory Dump Via LiveKD
 

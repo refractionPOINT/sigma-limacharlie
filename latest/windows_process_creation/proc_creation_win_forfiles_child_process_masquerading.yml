@@ -72,7 +72,7 @@ respond:
     references:
     - https://www.hexacorn.com/blog/2023/12/31/1-little-known-secret-of-forfiles-exe/
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1036
   name: Forfiles.EXE Child Process Masquerading
 

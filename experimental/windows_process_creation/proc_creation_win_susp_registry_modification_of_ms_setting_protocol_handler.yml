@@ -89,9 +89,9 @@ respond:
     - https://thedfirreport.com/2021/12/13/diavol-ransomware/
     - https://www.trendmicro.com/en_us/research/25/f/water-curse.html
     tags:
-    - attack.defense-evasion
     - attack.privilege-escalation
     - attack.persistence
+    - attack.defense-impairment
     - attack.t1548.002
     - attack.t1546.001
     - attack.t1112

@@ -50,7 +50,7 @@ respond:
     - https://www.cybereason.com/blog/threat-analysis-report-bumblebee-loader-the-high-road-to-enterprise-domain-control
     - https://www.hexacorn.com/blog/2020/08/23/odbcconf-lolbin-trifecta/
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1218.008
   name: Response File Execution Via Odbcconf.EXE
 

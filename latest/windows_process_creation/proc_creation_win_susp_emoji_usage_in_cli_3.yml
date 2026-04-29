@@ -4019,6 +4019,6 @@ respond:
     references:
     - Internal Research
     tags:
-    - attack.defense-evasion
+    - attack.stealth
   name: Potential Defense Evasion Activity Via Emoji Usage In CommandLine - 3
 

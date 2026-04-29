@@ -65,7 +65,7 @@ respond:
     - https://www.fortinet.com/content/dam/fortinet/assets/analyst-reports/ar-qakbot.pdf
     tags:
     - attack.privilege-escalation
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1055
   name: Potential Process Injection Via Msra.EXE
 

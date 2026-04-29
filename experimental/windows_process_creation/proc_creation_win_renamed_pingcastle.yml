@@ -142,8 +142,8 @@ respond:
     - https://www.pingcastle.com/documentation/scanner/
     tags:
     - attack.execution
+    - attack.stealth
     - attack.t1059
-    - attack.defense-evasion
     - attack.t1202
   name: Renamed PingCastle Binary Execution
 

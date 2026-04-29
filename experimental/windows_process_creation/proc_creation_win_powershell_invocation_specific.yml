@@ -171,6 +171,6 @@ respond:
     references:
     - Internal Research
     tags:
-    - attack.defense-evasion
+    - attack.stealth
   name: Suspicious PowerShell Invocations - Specific - ProcessCreation
 

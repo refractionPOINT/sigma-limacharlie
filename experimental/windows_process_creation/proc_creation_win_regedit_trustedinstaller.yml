@@ -33,7 +33,6 @@ respond:
     references:
     - https://twitter.com/1kwpeter/status/1397816101455765504
     tags:
-    - attack.defense-evasion
     - attack.privilege-escalation
     - attack.t1548
   name: Regedit as Trusted Installer

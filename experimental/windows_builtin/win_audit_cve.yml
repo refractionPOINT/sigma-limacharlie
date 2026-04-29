@@ -42,10 +42,10 @@ respond:
     - https://nullsec.us/windows-event-log-audit-cve/
     tags:
     - attack.execution
+    - attack.stealth
     - attack.t1203
     - attack.privilege-escalation
     - attack.t1068
-    - attack.defense-evasion
     - attack.t1211
     - attack.credential-access
     - attack.t1212

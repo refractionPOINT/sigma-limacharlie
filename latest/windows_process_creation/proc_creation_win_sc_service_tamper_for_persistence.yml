@@ -141,8 +141,9 @@ respond:
     - https://pentestlab.blog/2020/01/22/persistence-modify-existing-service/
     tags:
     - attack.privilege-escalation
-    - attack.defense-evasion
     - attack.persistence
+    - attack.execution
+    - attack.stealth
     - attack.t1543.003
     - attack.t1574.011
   name: Potential Persistence Attempt Via Existing Service Tampering

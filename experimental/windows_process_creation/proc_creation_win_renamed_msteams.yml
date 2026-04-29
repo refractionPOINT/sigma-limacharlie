@@ -39,6 +39,6 @@ respond:
     references:
     - Internal Research
     tags:
-    - attack.defense-evasion
+    - attack.stealth
   name: Renamed Microsoft Teams Execution
 

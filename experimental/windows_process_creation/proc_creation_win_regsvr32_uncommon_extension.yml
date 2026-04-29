@@ -73,7 +73,7 @@ respond:
     tags:
     - attack.privilege-escalation
     - attack.persistence
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1574
     - attack.execution
   name: Regsvr32 DLL Execution With Uncommon Extension

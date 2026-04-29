@@ -72,7 +72,7 @@ respond:
     - https://decoded.avast.io/janvojtesek/raspberry-robins-roshtyak-a-little-lesson-in-trickery/
     - https://www.virustotal.com/gui/file/602f4ae507fa8de57ada079adff25a6c2a899bd25cd092d0af7e62cdb619c93c/behavior
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1218
   name: Self Extracting Package Creation Via Iexpress.EXE From Potentially Suspicious
     Location

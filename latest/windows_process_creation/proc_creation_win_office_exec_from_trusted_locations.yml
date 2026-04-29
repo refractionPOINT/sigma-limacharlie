@@ -98,7 +98,7 @@ respond:
     - https://techcommunity.microsoft.com/t5/microsoft-365-blog/new-security-hardening-policies-for-trusted-documents/ba-p/3023465
     - https://twitter.com/_JohnHammond/status/1588155401752788994
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1202
   name: Potentially Suspicious Office Document Executed From Trusted Location
 

@@ -43,7 +43,7 @@ respond:
     references:
     - https://twitter.com/0xBoku/status/1679200664013135872
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1218
   name: Potential Binary Proxy Execution Via VSDiagnostics.EXE
 

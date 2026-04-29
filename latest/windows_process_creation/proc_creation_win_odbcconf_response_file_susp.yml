@@ -64,7 +64,7 @@ respond:
     - https://lolbas-project.github.io/lolbas/Binaries/Odbcconf/
     - https://www.trendmicro.com/en_us/research/17/h/backdoor-carrying-emails-set-sights-on-russian-speaking-businesses.html
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1218.008
   name: Suspicious Response File Execution Via Odbcconf.EXE
 

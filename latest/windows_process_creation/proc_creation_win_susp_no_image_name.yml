@@ -21,6 +21,6 @@ respond:
     references:
     - https://www.huntress.com/blog/fake-browser-updates-lead-to-boinc-volunteer-computing-software
     tags:
-    - attack.defense-evasion
+    - attack.stealth
   name: Process Launched Without Image Name
 

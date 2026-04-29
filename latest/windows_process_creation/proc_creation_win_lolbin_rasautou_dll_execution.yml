@@ -41,7 +41,7 @@ respond:
     - https://github.com/fireeye/DueDLLigence
     - https://www.fireeye.com/blog/threat-research/2019/10/staying-hidden-on-the-endpoint-evading-detection-with-shellcode.html
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1218
   name: DLL Execution via Rasautou.exe
 

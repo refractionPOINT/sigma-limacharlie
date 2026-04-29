@@ -41,7 +41,7 @@ respond:
     references:
     - https://support.microsoft.com/en-us/office/data-security-and-python-in-excel-33cc88a4-4a87-485e-9ff9-f35958278327
     tags:
-    - attack.defense-evasion
-    - attack.t1562.001
+    - attack.defense-impairment
+    - attack.t1685
   name: Python Function Execution Security Warning Disabled In Excel
 

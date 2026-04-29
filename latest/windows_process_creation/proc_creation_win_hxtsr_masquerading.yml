@@ -42,7 +42,7 @@ respond:
     references:
     - Internal Research
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1036
   name: Potential Fake Instance Of Hxtsr.EXE Executed
 

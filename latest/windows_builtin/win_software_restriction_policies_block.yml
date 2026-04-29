@@ -44,7 +44,6 @@ respond:
     tags:
     - attack.lateral-movement
     - attack.execution
-    - attack.defense-evasion
     - attack.t1072
   name: Restricted Software Access By SRP
 

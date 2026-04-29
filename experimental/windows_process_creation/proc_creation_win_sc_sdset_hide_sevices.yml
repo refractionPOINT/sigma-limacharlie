@@ -43,8 +43,9 @@ respond:
     - https://itconnect.uw.edu/tools-services-support/it-systems-infrastructure/msinf/other-help/understanding-sddl-syntax/
     tags:
     - attack.persistence
-    - attack.defense-evasion
     - attack.privilege-escalation
+    - attack.execution
+    - attack.stealth
     - attack.t1574.011
   name: Service DACL Abuse To Hide Services Via Sc.EXE
 

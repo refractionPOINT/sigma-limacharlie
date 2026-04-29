@@ -57,7 +57,7 @@ respond:
     - https://redcanary.com/threat-detection-report/
     - https://thedfirreport.com/2020/10/18/ryuk-in-5-hours/
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1218.011
   name: CobaltStrike Load by Rundll32
 

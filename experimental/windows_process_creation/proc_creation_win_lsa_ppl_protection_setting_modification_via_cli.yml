@@ -92,7 +92,7 @@ respond:
     - https://thedfirreport.com/2022/03/21/apt35-automates-initial-access-using-proxyshell/
     - https://github.com/shoober420/windows11-scripts/blob/38d83331738cd713ccb42f2c4557d17a27aefd98/Windows11Tweaks.bat#L1825
     tags:
-    - attack.defense-evasion
-    - attack.t1562.010
+    - attack.defense-impairment
+    - attack.t1689
   name: LSA PPL Protection Setting Modification via CommandLine
 

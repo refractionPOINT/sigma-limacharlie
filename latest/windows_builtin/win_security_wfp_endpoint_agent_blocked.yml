@@ -304,7 +304,7 @@ respond:
     - https://github.com/amjcyber/EDRNoiseMaker
     - https://ghoulsec.medium.com/misc-series-4-forensics-on-edrsilencer-events-428b20b3f983
     tags:
-    - attack.defense-evasion
-    - attack.t1562
+    - attack.defense-impairment
+    - attack.t1685
   name: Windows Filtering Platform Blocked Connection From EDR Agent Binary
 

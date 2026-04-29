@@ -50,8 +50,8 @@ respond:
     - https://twitter.com/bryon_/status/975835709587075072
     tags:
     - attack.execution
+    - attack.stealth
     - attack.t1059.001
-    - attack.defense-evasion
     - attack.t1127
   name: Detection of PowerShell Execution via Sqlps.exe
 

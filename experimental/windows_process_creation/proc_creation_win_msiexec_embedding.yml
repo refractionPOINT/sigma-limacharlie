@@ -72,7 +72,7 @@ respond:
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1218.007/T1218.007.md
     tags:
+    - attack.stealth
     - attack.t1218.007
-    - attack.defense-evasion
   name: Suspicious MsiExec Embedding Parent
 

@@ -31,8 +31,8 @@ respond:
     references:
     - https://lolbas-project.github.io/lolbas/Binaries/AppInstaller/
     tags:
-    - attack.defense-evasion
     - attack.execution
+    - attack.stealth
     - attack.t1218
   name: Potential File Download Via MS-AppInstaller Protocol Handler
 

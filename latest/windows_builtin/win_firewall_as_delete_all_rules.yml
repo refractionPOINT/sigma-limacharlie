@@ -41,7 +41,7 @@ respond:
     references:
     - https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-r2-and-2008/dd364427(v=ws.10)
     tags:
-    - attack.defense-evasion
-    - attack.t1562.004
+    - attack.defense-impairment
+    - attack.t1686.003
   name: All Rules Have Been Deleted From The Windows Firewall Configuration
 

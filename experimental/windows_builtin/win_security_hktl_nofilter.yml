@@ -40,8 +40,8 @@ respond:
     - https://www.deepinstinct.com/blog/nofilter-abusing-windows-filtering-platform-for-privilege-escalation
     - https://x.com/_st0pp3r_/status/1742203752361128162?s=20
     tags:
-    - attack.defense-evasion
     - attack.privilege-escalation
+    - attack.stealth
     - attack.t1134
     - attack.t1134.001
   name: HackTool - NoFilter Execution

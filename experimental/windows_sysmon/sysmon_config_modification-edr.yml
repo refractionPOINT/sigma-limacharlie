@@ -19,6 +19,6 @@ respond:
     references:
     - https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon
     tags:
-    - attack.defense-evasion
+    - attack.defense-impairment
   name: Sysmon Configuration Change
 

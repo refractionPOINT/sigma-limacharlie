@@ -29,6 +29,6 @@ respond:
     - https://unit42.paloaltonetworks.com/cloaked-ursa-phishing/
     tags:
     - attack.persistence
-    - attack.defense-evasion
+    - attack.stealth
   name: Suspicious Process Execution From Fake Recycle.Bin Folder
 

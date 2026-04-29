@@ -158,7 +158,7 @@ respond:
     - https://2019.offzone.moscow/ru/report/hunting-for-powershell-abuses/
     - https://speakerdeck.com/heirhabarov/hunting-for-powershell-abuse?slide=66
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1027
     - attack.execution
     - attack.t1059.001

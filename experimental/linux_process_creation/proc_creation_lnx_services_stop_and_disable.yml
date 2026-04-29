@@ -114,8 +114,8 @@ respond:
     references:
     - https://www.trendmicro.com/pl_pl/research/20/i/the-evolution-of-malicious-shell-scripts.html
     tags:
-    - attack.defense-evasion
-    - attack.t1562
+    - attack.defense-impairment
+    - attack.t1685
     - attack.impact
     - attack.t1489
   name: Disable Or Stop Services

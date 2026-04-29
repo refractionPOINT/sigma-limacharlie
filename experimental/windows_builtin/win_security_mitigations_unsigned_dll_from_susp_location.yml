@@ -53,7 +53,8 @@ respond:
     tags:
     - attack.privilege-escalation
     - attack.persistence
-    - attack.defense-evasion
+    - attack.execution
+    - attack.stealth
     - attack.t1574.001
   name: Unsigned Binary Loaded From Suspicious Location
 

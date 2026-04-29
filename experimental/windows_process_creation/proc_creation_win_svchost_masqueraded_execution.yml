@@ -47,7 +47,7 @@ respond:
     - https://tria.ge/240731-jh4crsycnb/behavioral2
     - https://redcanary.com/blog/threat-detection/process-masquerading/
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1036.005
   name: Suspicious Process Masquerading As SvcHost.EXE
 

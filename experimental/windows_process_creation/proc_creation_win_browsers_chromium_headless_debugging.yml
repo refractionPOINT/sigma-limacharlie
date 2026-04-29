@@ -35,9 +35,9 @@ respond:
     - https://embracethered.com/blog/posts/2020/cookie-crimes-on-mirosoft-edge/
     - https://embracethered.com/blog/posts/2020/chrome-spy-remote-control/
     tags:
-    - attack.defense-evasion
     - attack.credential-access
     - attack.collection
+    - attack.stealth
     - attack.t1185
     - attack.t1564.003
   name: Potential Data Stealing Via Chromium Headless Debugging

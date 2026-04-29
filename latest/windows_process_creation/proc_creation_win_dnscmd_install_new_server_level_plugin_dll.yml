@@ -35,7 +35,9 @@ respond:
     tags:
     - attack.privilege-escalation
     - attack.persistence
-    - attack.defense-evasion
+    - attack.execution
+    - attack.stealth
+    - attack.defense-impairment
     - attack.t1574.001
     - attack.t1112
   name: New DNS ServerLevelPluginDll Installed Via Dnscmd.EXE

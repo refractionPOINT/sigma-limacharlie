@@ -96,7 +96,7 @@ respond:
     references:
     - https://thedfirreport.com/2022/07/11/select-xmrig-from-sqlserver/
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1218
   name: Potentially Suspicious CMD Shell Output Redirect
 

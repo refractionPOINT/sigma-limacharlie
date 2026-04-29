@@ -47,8 +47,8 @@ respond:
     - https://twitter.com/pabraeken/status/993298228840992768
     tags:
     - attack.execution
+    - attack.stealth
     - attack.t1059.001
-    - attack.defense-evasion
     - attack.t1127
   name: SQL Client Tools PowerShell Session Detection
 

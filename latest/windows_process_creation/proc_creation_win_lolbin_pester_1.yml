@@ -65,8 +65,8 @@ respond:
     - https://github.com/api0cradle/LOLBAS/blob/d148d278f5f205ce67cfaf49afdfb68071c7252a/OSScripts/pester.md
     tags:
     - attack.execution
+    - attack.stealth
     - attack.t1059.001
-    - attack.defense-evasion
     - attack.t1216
   name: Execute Code with Pester.bat
 

@@ -120,8 +120,8 @@ respond:
     - https://www.echotrail.io/insights/search/wermgr.exe
     - https://github.com/binderlabs/DirCreate2System
     tags:
-    - attack.defense-evasion
     - attack.privilege-escalation
+    - attack.stealth
     - attack.t1055
     - attack.t1036
   name: Suspicious Child Process Of Wermgr.EXE

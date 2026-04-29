@@ -69,8 +69,8 @@ respond:
     - https://github.com/byt3bl33d3r/CrackMapExec/blob/0a49f75347b625e81ee6aa8c33d3970b5515ea9e/cme/helpers/powershell.py#L242
     tags:
     - attack.execution
+    - attack.stealth
     - attack.t1059.001
-    - attack.defense-evasion
     - attack.t1027.005
   name: HackTool - CrackMapExec PowerShell Obfuscation
 

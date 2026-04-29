@@ -54,8 +54,8 @@ respond:
     - http://www.hexacorn.com/blog/2019/03/30/sqirrel-packages-manager-as-a-lolbin-a-k-a-many-electron-apps-are-lolbins-by-default/
     - http://www.hexacorn.com/blog/2018/08/16/squirrel-as-a-lolbin/
     tags:
-    - attack.defense-evasion
     - attack.execution
+    - attack.stealth
     - attack.t1218
   name: Arbitrary File Download Via Squirrel.EXE
 

@@ -39,7 +39,8 @@ respond:
     references:
     - https://lolbas-project.github.io/lolbas/OtherMSBinaries/VSIISExeLauncher/
     tags:
-    - attack.defense-evasion
+    - attack.execution
+    - attack.stealth
     - attack.t1127
   name: Use of VSIISExeLauncher.exe
 

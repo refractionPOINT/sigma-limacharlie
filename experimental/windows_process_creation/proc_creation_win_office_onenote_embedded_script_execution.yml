@@ -65,7 +65,7 @@ respond:
     references:
     - https://bazaar.abuse.ch/browse/tag/one/
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1218.001
   name: OneNote.EXE Execution of Malicious Embedded Scripts
 

@@ -118,7 +118,7 @@ respond:
     - https://guides.lib.umich.edu/c.php?g=282942&p=1885348
     - https://harfanglab.io/insidethelab/uac-0057-pressure-ukraine-poland/
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1218.010
   name: Regsvr32 DLL Execution With Suspicious File Extension
 

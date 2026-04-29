@@ -37,7 +37,7 @@ respond:
     - https://lolbas-project.github.io/lolbas/OtherMSBinaries/Dxcap/
     - https://twitter.com/harr0ey/status/992008180904419328
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1218
   name: New Capture Session Launched Via DXCap.EXE
 

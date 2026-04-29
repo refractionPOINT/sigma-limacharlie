@@ -36,7 +36,7 @@ respond:
     - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/regini
     tags:
     - attack.persistence
+    - attack.defense-impairment
     - attack.t1112
-    - attack.defense-evasion
   name: Registry Modification Via Regini.EXE
 

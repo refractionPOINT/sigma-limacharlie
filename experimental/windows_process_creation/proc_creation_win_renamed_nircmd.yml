@@ -36,8 +36,8 @@ respond:
     - https://www.nirsoft.net/utils/nircmd.html
     tags:
     - attack.execution
+    - attack.stealth
     - attack.t1059
-    - attack.defense-evasion
     - attack.t1202
   name: Renamed NirCmd.EXE Execution
 

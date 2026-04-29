@@ -55,7 +55,6 @@ respond:
     - https://www.agnosticdev.com/content/how-diagnose-app-transport-security-issues-using-nscurl-and-openssl
     - https://gist.github.com/nasbench/ca6ef95db04ae04ffd1e0b1ce709cadd
     tags:
-    - attack.defense-evasion
     - attack.command-and-control
     - attack.t1105
   name: File Download Via Nscurl - MacOS

@@ -59,7 +59,6 @@ respond:
     - https://lolbas-project.github.io/lolbas/Binaries/Winget/
     - https://github.com/nasbench/Misc-Research/tree/b9596e8109dcdb16ec353f316678927e507a5b8d/LOLBINs/Winget
     tags:
-    - attack.defense-evasion
     - attack.execution
     - attack.t1059
   name: Install New Package Via Winget Local Manifest

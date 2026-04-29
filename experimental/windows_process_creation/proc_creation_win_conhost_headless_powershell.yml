@@ -42,8 +42,8 @@ respond:
     references:
     - https://www.huntress.com/blog/fake-browser-updates-lead-to-boinc-volunteer-computing-software
     tags:
-    - attack.defense-evasion
     - attack.execution
+    - attack.stealth
     - attack.t1059.001
     - attack.t1059.003
     - attack.t1564.003

@@ -38,9 +38,10 @@ respond:
     references:
     - https://www.darkoperator.com/blog/2018/10/5/operating-offensively-against-sysmon
     tags:
-    - attack.defense-evasion
+    - attack.stealth
+    - attack.defense-impairment
     - attack.t1070
-    - attack.t1562
-    - attack.t1562.002
+    - attack.t1685
+    - attack.t1685.001
   name: Sysmon Driver Unloaded Via Fltmc.EXE
 

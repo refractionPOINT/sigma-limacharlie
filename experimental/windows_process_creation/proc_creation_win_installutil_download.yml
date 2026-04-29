@@ -45,7 +45,7 @@ respond:
     references:
     - https://github.com/LOLBAS-Project/LOLBAS/pull/239
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1218
   name: File Download Via InstallUtil.EXE
 

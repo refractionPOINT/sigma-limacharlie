@@ -63,6 +63,6 @@ respond:
     - https://www.microsoft.com/en-us/security/blog/2022/10/27/raspberry-robin-worm-part-of-larger-ecosystem-facilitating-pre-ransomware-activity/
     - https://github.com/SigmaHQ/sigma/issues/1009
     tags:
-    - attack.defense-evasion
+    - attack.stealth
   name: Suspicious Usage Of ShellExec_RunDLL
 

@@ -89,7 +89,8 @@ respond:
     - https://isc.sans.edu/diary/Wipe+the+drive+Stealthy+Malware+Persistence+Mechanism+-+Part+1/15394
     tags:
     - attack.persistence
-    - attack.defense-evasion
+    - attack.execution
+    - attack.stealth
     - attack.t1197
   name: Monitoring For Persistence Via BITS
 

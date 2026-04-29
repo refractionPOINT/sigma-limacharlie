@@ -32,8 +32,8 @@ respond:
     - https://lolbas-project.github.io/lolbas/Binaries/PrintBrm/
     tags:
     - attack.command-and-control
+    - attack.stealth
     - attack.t1105
-    - attack.defense-evasion
     - attack.t1564.004
   name: PrintBrm ZIP Creation of Extraction
 

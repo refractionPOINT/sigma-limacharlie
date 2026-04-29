@@ -28,7 +28,7 @@ respond:
     - https://web.archive.org/web/20211001064856/https://github.com/snovvcrash/DInjector
     tags:
     - attack.privilege-escalation
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1055
   name: HackTool - DInjector PowerShell Cradle Execution
 

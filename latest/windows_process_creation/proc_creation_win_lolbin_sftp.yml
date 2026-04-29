@@ -33,8 +33,8 @@ respond:
     references:
     - https://github.com/LOLBAS-Project/LOLBAS/pull/264
     tags:
-    - attack.defense-evasion
     - attack.execution
+    - attack.stealth
     - attack.t1218
   name: Use Of The SFTP.EXE Binary As A LOLBIN
 

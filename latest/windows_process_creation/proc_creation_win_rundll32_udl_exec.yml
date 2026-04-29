@@ -57,9 +57,9 @@ respond:
     references:
     - https://trustedsec.com/blog/oops-i-udld-it-again
     tags:
-    - attack.defense-evasion
     - attack.execution
     - attack.command-and-control
+    - attack.stealth
     - attack.t1218.011
     - attack.t1071
   name: Potentially Suspicious Rundll32.EXE Execution of UDL File

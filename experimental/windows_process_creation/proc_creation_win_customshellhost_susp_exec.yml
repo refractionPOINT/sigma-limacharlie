@@ -32,7 +32,7 @@ respond:
     - https://github.com/LOLBAS-Project/LOLBAS/pull/180
     - https://lolbas-project.github.io/lolbas/Binaries/CustomShellHost/
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1216
   name: Suspicious CustomShellHost Execution
 

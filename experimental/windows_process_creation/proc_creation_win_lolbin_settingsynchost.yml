@@ -46,7 +46,7 @@ respond:
     - attack.privilege-escalation
     - attack.persistence
     - attack.execution
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1574.008
   name: Using SettingSyncHost.exe as LOLBin
 

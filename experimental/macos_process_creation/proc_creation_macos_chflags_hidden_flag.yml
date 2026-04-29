@@ -35,9 +35,9 @@ respond:
     - https://www.paloaltonetworks.com/content/dam/pan/en_US/assets/pdf/reports/Unit_42/unit42-wirelurker.pdf
     - https://ss64.com/mac/chflags.html
     tags:
-    - attack.defense-evasion
     - attack.credential-access
     - attack.command-and-control
+    - attack.stealth
     - attack.t1218
     - attack.t1564.004
     - attack.t1552.001

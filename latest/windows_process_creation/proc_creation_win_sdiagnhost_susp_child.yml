@@ -100,7 +100,7 @@ respond:
     - https://app.any.run/tasks/f420d295-0457-4e9b-9b9e-6732be227583/
     - https://app.any.run/tasks/c4117d9a-f463-461a-b90f-4cd258746798/
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1036
     - attack.t1218
   name: Sdiagnhost Calling Suspicious Child Process

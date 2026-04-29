@@ -86,7 +86,6 @@ respond:
     - https://www.dfirnotes.net/portproxy_detection/
     tags:
     - attack.lateral-movement
-    - attack.defense-evasion
     - attack.command-and-control
     - attack.t1090
   name: New Port Forwarding Rule Added Via Netsh.EXE

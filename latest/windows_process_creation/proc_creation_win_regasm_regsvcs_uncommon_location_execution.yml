@@ -65,7 +65,7 @@ respond:
     - https://lolbas-project.github.io/lolbas/Binaries/Regasm/
     - https://lolbas-project.github.io/lolbas/Binaries/Regsvcs/
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1218.009
   name: Potentially Suspicious Execution Of Regasm/Regsvcs From Uncommon Location
 

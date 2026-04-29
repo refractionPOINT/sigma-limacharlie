@@ -28,7 +28,7 @@ respond:
     - https://github.com/redcanaryco/atomic-red-team/blob/5c3b23002d2bbede3c07e7307165fc2a235a427d/atomics/T1564.004/T1564.004.md#atomic-test-5---create-hidden-directory-via-index_allocation
     - https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-fscc/c54dec26-1551-4d3a-a0ea-4fa40f848eb3
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1564.004
   name: Potential Hidden Directory Creation Via NTFS INDEX_ALLOCATION Stream - CLI
 

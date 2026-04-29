@@ -65,7 +65,8 @@ respond:
     - https://lolbas-project.github.io/lolbas/Binaries/Aspnet_Compiler/
     - https://ijustwannared.team/2020/08/01/the-curious-case-of-aspnet_compiler-exe/
     tags:
-    - attack.defense-evasion
+    - attack.execution
+    - attack.stealth
     - attack.t1127
   name: Suspicious Child Process of AspNetCompiler
 

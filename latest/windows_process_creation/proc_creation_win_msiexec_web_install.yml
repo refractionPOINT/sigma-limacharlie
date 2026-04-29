@@ -27,7 +27,7 @@ respond:
     references:
     - https://blog.trendmicro.com/trendlabs-security-intelligence/attack-using-windows-installer-msiexec-exe-leads-lokibot/
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1218.007
     - attack.command-and-control
     - attack.t1105

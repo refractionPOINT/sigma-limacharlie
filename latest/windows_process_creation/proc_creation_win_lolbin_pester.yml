@@ -45,8 +45,8 @@ respond:
     - https://twitter.com/_st0pp3r_/status/1560072680887525378
     tags:
     - attack.execution
+    - attack.stealth
     - attack.t1059.001
-    - attack.defense-evasion
     - attack.t1216
   name: Execute Code with Pester.bat as Parent
 

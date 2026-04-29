@@ -48,7 +48,7 @@ respond:
     - https://twitter.com/nas_bench/status/1535322450858233858
     - https://securityboulevard.com/2019/09/deobfuscating-ostap-trickbots-34000-line-javascript-downloader/
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1036
   name: Explorer Process Tree Break
 

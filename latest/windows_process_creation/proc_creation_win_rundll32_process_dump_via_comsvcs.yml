@@ -111,8 +111,8 @@ respond:
     - https://github.com/Hackndo/lsassy/blob/14d8f8ae596ecf22b449bfe919829173b8a07635/lsassy/dumpmethod/comsvcs.py
     - https://www.youtube.com/watch?v=52tAmVLg1KM&t=2070s
     tags:
-    - attack.defense-evasion
     - attack.credential-access
+    - attack.stealth
     - attack.t1036
     - attack.t1003.001
     - car.2013-05-009

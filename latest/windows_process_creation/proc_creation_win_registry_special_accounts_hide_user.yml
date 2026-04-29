@@ -45,7 +45,7 @@ respond:
     - https://thedfirreport.com/2024/04/29/from-icedid-to-dagon-locker-ransomware-in-29-days/
     - https://thedfirreport.com/2022/07/11/select-xmrig-from-sqlserver/
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1564.002
   name: Hiding User Account Via SpecialAccounts Registry Key - CommandLine
 

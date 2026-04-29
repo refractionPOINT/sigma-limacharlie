@@ -57,7 +57,7 @@ respond:
     - Internal Research
     - https://www.youtube.com/watch?v=52tAmVLg1KM&t=2070s
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1027.010
   name: Potential Obfuscated Ordinal Call Via Rundll32
 

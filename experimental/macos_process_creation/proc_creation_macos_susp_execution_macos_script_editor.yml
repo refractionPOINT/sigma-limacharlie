@@ -110,6 +110,7 @@ respond:
     - https://github.com/elastic/protections-artifacts/commit/746086721fd385d9f5c6647cada1788db4aea95f#diff-7f541fbc4a4a28a92970e8bf53effea5bd934604429112c920affb457f5b2685
     - https://wojciechregula.blog/post/macos-red-teaming-initial-access-via-applescript-url/
     tags:
+    - attack.defense-impairment
     - attack.t1566
     - attack.t1566.002
     - attack.initial-access
@@ -120,6 +121,5 @@ respond:
     - attack.execution
     - attack.persistence
     - attack.t1553
-    - attack.defense-evasion
   name: Suspicious Execution via macOS Script Editor
 

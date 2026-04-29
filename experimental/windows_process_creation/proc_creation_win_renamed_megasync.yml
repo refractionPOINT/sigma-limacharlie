@@ -29,7 +29,7 @@ respond:
     references:
     - https://redcanary.com/blog/rclone-mega-extortion/
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1218
   name: Renamed MegaSync Execution
 

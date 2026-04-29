@@ -45,7 +45,7 @@ respond:
     - https://github.com/redcanaryco/atomic-red-team/blob/1cf4dd51f83dcb0ebe6ade902d6157ad2dbc6ac8/atomics/T1218.001/T1218.001.md
     - https://www.zscaler.com/blogs/security-research/unintentional-leak-glimpse-attack-vectors-apt37
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1218.001
   name: Remote CHM File Download/Execution Via HH.EXE
 

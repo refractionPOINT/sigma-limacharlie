@@ -44,7 +44,7 @@ respond:
     - https://redmimicry.com/posts/redmimicry-winnti/
     tags:
     - attack.execution
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1106
     - attack.t1059.003
     - attack.t1218.011

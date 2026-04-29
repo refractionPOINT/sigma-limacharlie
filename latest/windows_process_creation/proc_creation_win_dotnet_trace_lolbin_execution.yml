@@ -39,7 +39,7 @@ respond:
     - https://twitter.com/bohops/status/1740022869198037480
     tags:
     - attack.execution
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1218
   name: Binary Proxy Execution Via Dotnet-Trace.EXE
 

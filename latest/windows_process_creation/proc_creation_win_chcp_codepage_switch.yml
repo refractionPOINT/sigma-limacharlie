@@ -35,7 +35,7 @@ respond:
     - https://learn.microsoft.com/en-us/windows/win32/intl/code-page-identifiers
     - https://twitter.com/cglyer/status/1183756892952248325
     tags:
+    - attack.stealth
     - attack.t1036
-    - attack.defense-evasion
   name: Suspicious CodePage Switch Via CHCP
 

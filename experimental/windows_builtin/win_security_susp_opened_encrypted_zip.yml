@@ -30,7 +30,7 @@ respond:
     references:
     - https://twitter.com/sbousseaden/status/1523383197513379841
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1027
   name: Password Protected ZIP File Opened
 

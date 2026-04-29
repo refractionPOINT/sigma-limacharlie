@@ -41,7 +41,7 @@ respond:
     - https://twitter.com/pabraeken/status/993497996179492864
     tags:
     - attack.persistence
-    - attack.defense-evasion
+    - attack.defense-impairment
     - attack.t1112
   name: Suspicious VBoxDrvInst.exe Parameters
 

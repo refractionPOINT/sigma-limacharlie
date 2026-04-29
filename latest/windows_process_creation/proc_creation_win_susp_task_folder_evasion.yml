@@ -57,9 +57,9 @@ respond:
     - https://gist.github.com/am0nsec/8378da08f848424e4ab0cc5b317fdd26
     tags:
     - attack.privilege-escalation
-    - attack.defense-evasion
     - attack.persistence
     - attack.execution
+    - attack.stealth
     - attack.t1574.001
   name: Tasks Folder Evasion
 

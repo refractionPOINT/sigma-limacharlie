@@ -42,7 +42,7 @@ respond:
     - https://tria.ge/241015-l98snsyeje/behavioral2
     - https://unprotect.it/technique/right-to-left-override-rlo-extension-spoofing/
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1036.002
   name: Potential Defense Evasion Via Right-to-Left Override
 

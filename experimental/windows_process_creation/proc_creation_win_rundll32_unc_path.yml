@@ -37,9 +37,9 @@ respond:
     references:
     - https://www.cybereason.com/blog/rundll32-the-infamous-proxy-for-executing-malicious-code
     tags:
-    - attack.defense-evasion
     - attack.execution
     - attack.lateral-movement
+    - attack.stealth
     - attack.t1021.002
     - attack.t1218.011
   name: Rundll32 UNC Path Execution

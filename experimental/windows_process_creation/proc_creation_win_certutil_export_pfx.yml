@@ -41,7 +41,7 @@ respond:
     references:
     - https://www.splunk.com/en_us/blog/security/a-golden-saml-journey-solarwinds-continued.html
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1027
   name: Certificate Exported Via Certutil.EXE
 

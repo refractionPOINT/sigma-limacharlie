@@ -159,7 +159,7 @@ respond:
     - https://github.com/SigmaHQ/sigma/issues/1009
     - https://strontic.github.io/xcyclopedia/library/shell32.dll-65DA072F25DE83D9F83653E3FEA3644D.html
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1218.011
   name: Suspicious ShellExec_RunDLL Call Via Ordinal
 

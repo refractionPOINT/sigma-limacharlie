@@ -60,7 +60,7 @@ respond:
     - https://strontic.github.io/xcyclopedia/library/mode.com-59D1ED51ACB8C3D50F1306FD75F20E99.html
     - https://www.virustotal.com/gui/file/5e75ef02517afd6e8ba6462b19217dc4a5a574abb33d10eb0f2bab49d8d48c22/behavior
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1036
   name: CodePage Modification Via MODE.COM To Russian Language
 

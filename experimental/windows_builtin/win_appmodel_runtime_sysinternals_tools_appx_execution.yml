@@ -46,7 +46,7 @@ respond:
     references:
     - https://learn.microsoft.com/en-us/sysinternals/downloads/microsoft-store
     tags:
-    - attack.defense-evasion
     - attack.execution
+    - attack.stealth
   name: Sysinternals Tools AppX Versions Execution
 

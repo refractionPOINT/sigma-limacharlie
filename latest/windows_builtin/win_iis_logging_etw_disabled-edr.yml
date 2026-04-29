@@ -38,9 +38,9 @@ respond:
     - https://www.microsoft.com/en-us/security/blog/2022/12/12/iis-modules-the-evolution-of-web-shells-and-how-to-detect-them/
     - https://learn.microsoft.com/en-us/iis/configuration/system.applicationhost/sites/sitedefaults/logfile/
     tags:
-    - attack.defense-evasion
     - attack.persistence
-    - attack.t1562.002
+    - attack.defense-impairment
+    - attack.t1685.001
     - attack.t1505.004
   name: ETW Logging/Processing Option Disabled On IIS Server
 

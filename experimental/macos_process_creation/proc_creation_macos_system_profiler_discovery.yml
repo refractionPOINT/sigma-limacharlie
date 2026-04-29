@@ -60,7 +60,7 @@ respond:
     - https://gist.github.com/nasbench/9a1ba4bc7094ea1b47bc42bf172961af
     tags:
     - attack.discovery
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1082
     - attack.t1497.001
   name: System Information Discovery Using System_Profiler

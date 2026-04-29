@@ -47,8 +47,8 @@ respond:
     - https://www.optiv.com/blog/post-exploitation-using-netntlm-downgrade-attacks
     tags:
     - attack.persistence
-    - attack.defense-evasion
-    - attack.t1562.001
+    - attack.defense-impairment
+    - attack.t1685
     - attack.t1112
   name: NetNTLM Downgrade Attack
 

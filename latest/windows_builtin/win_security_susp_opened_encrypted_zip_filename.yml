@@ -59,7 +59,7 @@ respond:
     - https://twitter.com/sbousseaden/status/1523383197513379841
     tags:
     - attack.command-and-control
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1027
     - attack.t1105
     - attack.t1036

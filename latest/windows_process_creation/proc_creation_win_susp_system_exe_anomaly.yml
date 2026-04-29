@@ -340,7 +340,7 @@ respond:
     - https://asec.ahnlab.com/en/39828/
     - https://www.splunk.com/en_us/blog/security/inno-setup-malware-redline-stealer-campaign.html
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1036
   name: System File Execution Location Anomaly
 

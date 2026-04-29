@@ -24,7 +24,7 @@ respond:
     - https://persistence-info.github.io/Data/wpbbin.html
     tags:
     - attack.persistence
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1542.001
   name: UEFI Persistence Via Wpbbin - ProcessCreation
 

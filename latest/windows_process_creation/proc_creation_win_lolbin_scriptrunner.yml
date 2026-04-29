@@ -33,8 +33,8 @@ respond:
     references:
     - https://lolbas-project.github.io/lolbas/Binaries/Scriptrunner/
     tags:
-    - attack.defense-evasion
     - attack.execution
+    - attack.stealth
     - attack.t1218
   name: Use of Scriptrunner.exe
 

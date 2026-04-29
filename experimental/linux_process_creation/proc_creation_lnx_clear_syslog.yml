@@ -182,7 +182,7 @@ respond:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1070.002/T1070.002.md
     - https://www.virustotal.com/gui/file/54d60fd58d7fa3475fa123985bfc1594df26da25c1f5fbc7dfdba15876dd8ac5/behavior
     tags:
-    - attack.defense-evasion
-    - attack.t1070.002
+    - attack.defense-impairment
+    - attack.t1685.006
   name: Syslog Clearing or Removal Via System Utilities
 

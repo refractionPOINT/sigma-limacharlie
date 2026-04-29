@@ -60,7 +60,7 @@ respond:
     - https://github.com/S3cur3Th1sSh1t/SharpImpersonation
     tags:
     - attack.privilege-escalation
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1134.001
     - attack.t1134.003
   name: HackTool - SharpImpersonation Execution

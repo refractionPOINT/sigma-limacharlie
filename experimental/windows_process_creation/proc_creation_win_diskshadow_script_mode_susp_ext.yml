@@ -57,7 +57,7 @@ respond:
     - https://www.zscaler.com/blogs/security-research/technical-analysis-crytox-ransomware
     - https://research.checkpoint.com/2022/evilplayout-attack-against-irans-state-broadcaster/
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1218
   name: Diskshadow Script Mode - Uncommon Script Extension Execution
 

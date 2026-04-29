@@ -58,7 +58,7 @@ respond:
     - https://lolbas-project.github.io/lolbas/Binaries/Cmstp/
     tags:
     - attack.privilege-escalation
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1548.002
     - attack.t1218.003
   name: Bypass UAC via CMSTP

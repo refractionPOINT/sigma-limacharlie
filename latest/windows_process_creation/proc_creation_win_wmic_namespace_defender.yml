@@ -35,9 +35,9 @@ respond:
     - https://www.bleepingcomputer.com/news/security/gootkit-malware-bypasses-windows-defender-by-setting-path-exclusions/
     - https://www.bleepingcomputer.com/news/security/iobit-forums-hacked-to-spread-ransomware-to-its-members/
     tags:
-    - attack.defense-evasion
     - attack.execution
+    - attack.defense-impairment
     - attack.t1047
-    - attack.t1562
+    - attack.t1685
   name: Potential Windows Defender Tampering Via Wmic.EXE
 

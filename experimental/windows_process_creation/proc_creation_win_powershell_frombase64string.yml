@@ -21,8 +21,8 @@ respond:
     references:
     - https://gist.github.com/Neo23x0/6af876ee72b51676c82a2db8d2cd3639
     tags:
+    - attack.stealth
     - attack.t1027
-    - attack.defense-evasion
     - attack.execution
     - attack.t1140
     - attack.t1059.001

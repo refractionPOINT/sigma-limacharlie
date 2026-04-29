@@ -104,8 +104,8 @@ respond:
     references:
     - https://redcanary.com/blog/blackbyte-ransomware/
     tags:
-    - attack.defense-evasion
     - attack.execution
+    - attack.stealth
     - attack.t1564
     - attack.t1059
   name: Potentially Suspicious Execution From Parent Process In Public Folder

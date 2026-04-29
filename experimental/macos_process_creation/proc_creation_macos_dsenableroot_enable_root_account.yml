@@ -30,7 +30,7 @@ respond:
     - https://ss64.com/osx/dsenableroot.html
     tags:
     - attack.privilege-escalation
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1078
     - attack.t1078.001
     - attack.t1078.003

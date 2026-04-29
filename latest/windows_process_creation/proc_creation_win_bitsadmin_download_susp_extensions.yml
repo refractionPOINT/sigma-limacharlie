@@ -174,8 +174,9 @@ respond:
     - https://isc.sans.edu/diary/22264
     - https://lolbas-project.github.io/lolbas/Binaries/Bitsadmin/
     tags:
-    - attack.defense-evasion
     - attack.persistence
+    - attack.execution
+    - attack.stealth
     - attack.t1197
     - attack.s0190
     - attack.t1036.003

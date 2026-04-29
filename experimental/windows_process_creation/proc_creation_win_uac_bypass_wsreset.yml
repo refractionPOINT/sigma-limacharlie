@@ -39,7 +39,6 @@ respond:
     - https://twitter.com/ReaQta/status/1222548288731217921
     tags:
     - attack.privilege-escalation
-    - attack.defense-evasion
     - attack.t1548.002
   name: Bypass UAC via WSReset.exe
 

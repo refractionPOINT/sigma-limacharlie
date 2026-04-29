@@ -61,7 +61,7 @@ respond:
     references:
     - Internal Research
     tags:
-    - attack.defense-evasion
+    - attack.stealth
     - attack.t1070.004
   name: Potentially Suspicious Ping/Copy Command Combination
 
