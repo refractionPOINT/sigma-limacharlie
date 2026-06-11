@@ -28,6 +28,10 @@ detect:
       - case sensitive: false
         op: is
         path: event/ORIGINAL_FILE_NAME
+        value: 7zr.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
         value: WinRAR.exe
       - case sensitive: false
         op: is
@@ -68,6 +72,10 @@ detect:
         op: ends with
         path: event/FILE_PATH
         value: \7za.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \7zr.exe
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH

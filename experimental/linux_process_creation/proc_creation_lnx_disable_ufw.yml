@@ -9,20 +9,30 @@ detect:
     rules:
     - op: and
       rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: -ufw-init
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: force-stop
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /ufw-init
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' force-stop'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' stop'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' flush'
     - op: and
       rules:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ufw
+        value: 'ufw '
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -31,15 +41,25 @@ respond:
 - action: report
   metadata:
     author: Joseliyo Sanchez, @Joseliyo_Jstnk
-    description: Detects attempts to force stop the ufw using ufw-init
+    description: 'Detects attempts to disable the Uncomplicated Firewall (UFW) on
+      Linux systems.
+
+      UFW is a popular firewall management tool that provides an easy-to-use interface
+      for configuring firewall rules.
+
+      Disabling UFW can leave a system vulnerable to attacks, as it may allow unauthorized
+      access to network services and resources.
+
+      '
     falsepositives:
-    - Network administrators
+    - Legitimate actions by system administrators to disable UFW.
     level: medium
     references:
-    - https://blogs.blackberry.com/
     - https://twitter.com/Joseliyo_Jstnk/status/1620131033474822144
+    - https://manpages.debian.org/unstable/ufw/ufw-framework.8.en.html
+    - https://www.cyberciti.biz/faq/linux-disable-firewall-command/
     tags:
     - attack.defense-impairment
     - attack.t1686
-  name: Ufw Force Stop Using Ufw-Init
+  name: UFW Disable Attempt
 

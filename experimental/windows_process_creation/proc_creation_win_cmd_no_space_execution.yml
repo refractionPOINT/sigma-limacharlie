@@ -158,6 +158,10 @@ detect:
           op: is
           path: event/COMMAND_LINE
           value: cmd.exe /c
+        - case sensitive: false
+          op: is
+          path: event/COMMAND_LINE
+          value: cmd /c
 respond:
 - action: report
   metadata:
@@ -169,7 +173,8 @@ respond:
 
       '
     falsepositives:
-    - Unknown
+    - Legitimate use of cmd.exe with no arguments e.g. via system("") in C to enable
+      ANSI escape codes
     level: high
     references:
     - https://twitter.com/cyb3rops/status/1562072617552678912
