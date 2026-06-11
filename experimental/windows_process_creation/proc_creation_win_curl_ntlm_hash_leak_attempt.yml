@@ -1,0 +1,53 @@
+detect:
+  events:
+  - NEW_PROCESS
+  - EXISTING_PROCESS
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - op: or
+      rules:
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \curl.exe
+      - case sensitive: false
+        op: is
+        path: event/ORIGINAL_FILE_NAME
+        value: curl.exe
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
+      value: --ntlm
+    - op: matches
+      path: event/COMMAND_LINE
+      re: '(?i)\s(-u|--user)\s*:'
+respond:
+- action: report
+  metadata:
+    author: Swachchhanda Shrawan Poudel (Nextron Systems)
+    description: "Detects the use of curl with NTLM authentication and empty credentials\
+      \ (-u :), which can be abused to leak the currently logged-in user's NTLMv2\
+      \ challenge-response to an\nattacker-controlled server, enabling offline cracking\
+      \ or relay attacks.\nWhen no credentials are provided, the Microsoft-shipped\
+      \ curl passes a NULL identity to Windows SSPI, which automatically falls back\
+      \ to the current user's logon session credentials\nstored in LSASS \u2014 without\
+      \ requiring a plaintext password.\nThis behavior is exclusive to the curl binary\
+      \ shipped by Microsoft (available since Windows 10 / Windows Server 2019), which\
+      \ is built with SSPI support.\n"
+    falsepositives:
+    - Should be very rare as it's not widely known or used, but could occur in legitimate
+      use cases where curl is used with NTLM authentication and empty credentials,
+      such as in certain scripts or automation tasks.
+    level: high
+    references:
+    - https://github.com/curl/curl/blob/master/lib/vauth/ntlm_sspi.c#L128-L140
+    - https://learn.microsoft.com/en-us/windows/win32/secauthn/acquirecredentialshandle--ntlm
+    - https://curl.se/docs/manpage.html#--ntlm
+    tags:
+    - attack.credential-access
+    - attack.t1187
+  name: NTLM Hash Leak Via Curl NTLM Authentication
+

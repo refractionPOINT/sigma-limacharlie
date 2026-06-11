@@ -16,6 +16,10 @@ detect:
       - case sensitive: true
         op: ends with
         path: event/FILE_PATH
+        value: /vi
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
         value: /vim
       - case sensitive: true
         op: ends with
@@ -26,11 +30,11 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ' --cmd'
+        value: ' --cmd '
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ' -c '
+        value: ' -c'
     - op: or
       rules:
       - case sensitive: false
@@ -40,11 +44,23 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: :!$
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: :!..
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: ':lua '
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
         value: ':py '
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: :shell
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -64,11 +80,23 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: /bin/csh
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /bin/ksh
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: /bin/zsh
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: /bin/tmux
 respond:
 - action: report
   metadata:
-    author: Nasreddine Bencherchali (Nextron Systems)
+    author: "Nasreddine Bencherchali (Nextron Systems), Luc G\xE9naux"
     description: 'Detects the use of "vim" and it''s siblings commands to execute
       a shell or proxy commands.
 
@@ -80,11 +108,14 @@ respond:
     - Unknown
     level: high
     references:
+    - https://gtfobins.github.io/gtfobins/vi/
     - https://gtfobins.github.io/gtfobins/vim/
     - https://gtfobins.github.io/gtfobins/rvim/
     - https://gtfobins.github.io/gtfobins/vimdiff/
     tags:
+    - attack.execution
     - attack.discovery
+    - attack.t1059
     - attack.t1083
   name: Vim GTFOBin Abuse - Linux
 
