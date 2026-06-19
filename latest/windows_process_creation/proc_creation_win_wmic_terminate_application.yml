@@ -31,8 +31,15 @@ respond:
 - action: report
   metadata:
     author: Nasreddine Bencherchali (Nextron Systems)
-    description: Detects calls to the "terminate" function via wmic in order to kill
-      an application
+    description: 'Detects an attempt to terminate a process via "wmic" with the "call
+      terminate" flag. Adversaries may
+
+      use wmic to terminate security products or other applications on the compromised
+      host. This event is
+
+      triggered on on attempt and process creation can be either successful or unsuccessful.
+
+      '
     falsepositives:
     - Unknown
     level: medium
@@ -42,5 +49,5 @@ respond:
     tags:
     - attack.execution
     - attack.t1047
-  name: Application Terminated Via Wmic.EXE
+  name: Application Termination Attempt via Wmic.EXE
 

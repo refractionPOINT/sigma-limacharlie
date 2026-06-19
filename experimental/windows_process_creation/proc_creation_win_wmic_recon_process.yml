@@ -24,23 +24,39 @@ detect:
         path: event/COMMAND_LINE
         value: process
     - not: true
-      op: and
+      op: or
       rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: call
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: create
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: call
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: create
+      - op: and
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: call
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: terminate
 respond:
 - action: report
   metadata:
     author: frack113
-    description: Detects the execution of "wmic" with the "process" flag, which adversary
-      might use to list processes running on the compromised host or list installed
-      software hotfixes and patches.
+    description: 'Detects the execution of "wmic" with the "process" flag, which might
+      indicate an attempt to perform reconnaissance on running processes.
+
+      Adversaries may use wmic to query for running processes and their details as
+      part of their reconnaissance efforts.
+
+      '
     falsepositives:
     - Unknown
     level: medium
@@ -50,5 +66,7 @@ respond:
     tags:
     - attack.execution
     - attack.t1047
-  name: Process Reconnaissance Via Wmic.EXE
+    - attack.discovery
+    - attack.t1057
+  name: Potential Process Reconnaissance via Wmic.EXE
 

@@ -35,8 +35,18 @@ respond:
 - action: report
   metadata:
     author: Michael Haag, Florian Roth (Nextron Systems), juju4, oscd.community
-    description: Detects new process creation using WMIC via the "process call create"
-      flag
+    description: 'Detects the attempt to create a process via "wmic" with the "process
+      call create" flag, which might
+
+      indicate an attempt to execute a malicious process on the compromised host.
+      Adversaries may use
+
+      wmic to execute a process on the compromised host as part of their attack. This
+      event is triggered on
+
+      on attempt and process creation can be either successful or unsuccessful.
+
+      '
     falsepositives:
     - Unknown
     level: medium
@@ -47,5 +57,5 @@ respond:
     - attack.execution
     - attack.t1047
     - car.2016-03-002
-  name: New Process Created Via Wmic.EXE
+  name: Process Creation Attempt via Wmic.EXE
 
