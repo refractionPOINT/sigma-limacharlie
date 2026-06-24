@@ -34,11 +34,23 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: 0x0.st
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: anonfiles.com
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: bashupload.com
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: cdn.discordapp.com
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: chunk.io
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
@@ -151,6 +163,10 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: workers.dev
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: x0.at
     - op: or
       rules:
       - case sensitive: false

@@ -26,42 +26,54 @@ detect:
     - not: true
       op: or
       rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: Change
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: Create
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: Delete
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: PauseService
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ResumeService
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: SetSecurityDescriptor
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: StartService
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: StopService
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: UserControlService
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: stopservice
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: startservice
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: Change
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: Create
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: Delete
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: PauseService
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ResumeService
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: SetSecurityDescriptor
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: StartService
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: StopService
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: UserControlService
 respond:
 - action: report
   metadata:

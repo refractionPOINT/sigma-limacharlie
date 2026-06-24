@@ -15,11 +15,23 @@ detect:
     - case sensitive: false
       op: contains
       path: Event/EventData/RemoteName
+      value: 0x0.st
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
       value: anonfiles.com
     - case sensitive: false
       op: contains
       path: Event/EventData/RemoteName
+      value: bashupload.com
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
       value: cdn.discordapp.com
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
+      value: chunk.io
     - case sensitive: false
       op: contains
       path: Event/EventData/RemoteName
@@ -136,6 +148,10 @@ detect:
       op: contains
       path: Event/EventData/RemoteName
       value: workers.dev
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/RemoteName
+      value: x0.at
   target: log
 respond:
 - action: report

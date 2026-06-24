@@ -11,26 +11,30 @@ detect:
       rules:
       - op: and
         rules:
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: wmic
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: 'product where '
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: call
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: uninstall
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: /nointeractive
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: wmic
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: 'product '
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: uninstall
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: -nointeractive
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: /nointeractive
       - op: and
         rules:
         - case sensitive: false

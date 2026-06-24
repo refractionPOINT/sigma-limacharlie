@@ -26,14 +26,20 @@ detect:
     - not: true
       op: or
       rules:
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' uninstall'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' install'
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: ' uninstall'
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: ' install'
+        value: csproduct
 respond:
 - action: report
   metadata:
