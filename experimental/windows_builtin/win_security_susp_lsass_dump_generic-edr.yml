@@ -139,6 +139,10 @@ detect:
             - case sensitive: false
               op: ends with
               path: event/EVENT/EventData/ProcessName
+              value: \procexp64a.exe
+            - case sensitive: false
+              op: ends with
+              path: event/EVENT/EventData/ProcessName
               value: \svchost.exe
             - case sensitive: false
               op: ends with
@@ -222,10 +226,16 @@ detect:
             value: :\Windows\CCM\CcmExec.exe
         - op: and
           rules:
-          - case sensitive: false
-            op: ends with
-            path: event/EVENT/EventData/ProcessName
-            value: :\Windows\Sysmon64.exe
+          - op: or
+            rules:
+            - case sensitive: false
+              op: ends with
+              path: event/EVENT/EventData/ProcessName
+              value: :\Windows\Sysmon64.exe
+            - case sensitive: false
+              op: ends with
+              path: event/EVENT/EventData/ProcessName
+              value: :\Windows\Sysmon64a.exe
           - case sensitive: false
             op: contains
             path: event/EVENT/EventData/AccessList
@@ -321,6 +331,10 @@ detect:
           op: ends with
           path: event/EVENT/EventData/ProcessName
           value: \procmon64.exe
+        - case sensitive: false
+          op: ends with
+          path: event/EVENT/EventData/ProcessName
+          value: \procmon64a.exe
         - case sensitive: false
           op: ends with
           path: event/EVENT/EventData/ProcessName

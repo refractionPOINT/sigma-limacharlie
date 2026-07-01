@@ -15,6 +15,10 @@ detect:
       op: ends with
       path: event/FILE_PATH
       value: \procdump64.exe
+    - case sensitive: false
+      op: ends with
+      path: event/FILE_PATH
+      value: \procdump64a.exe
 respond:
 - action: report
   metadata:

@@ -23,6 +23,10 @@ detect:
           op: ends with
           path: event/FILE_PATH
           value: \pssuspend64.exe
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \pssuspend64a.exe
     - case sensitive: false
       op: contains
       path: event/COMMAND_LINE

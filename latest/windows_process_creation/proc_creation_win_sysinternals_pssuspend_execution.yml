@@ -21,6 +21,10 @@ detect:
         op: ends with
         path: event/FILE_PATH
         value: \pssuspend64.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \pssuspend64a.exe
 respond:
 - action: report
   metadata:

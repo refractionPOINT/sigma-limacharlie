@@ -22,6 +22,10 @@ detect:
         op: ends with
         path: event/FILE_PATH
         value: \sdelete64.exe
+      - case sensitive: false
+        op: ends with
+        path: event/FILE_PATH
+        value: \sdelete64a.exe
 respond:
 - action: report
   metadata:
