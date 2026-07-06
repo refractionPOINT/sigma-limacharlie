@@ -35,7 +35,7 @@ detect:
           - case sensitive: false
             op: is
             path: event/FILE_PATH
-            value: System
+            value: MemCompression
           - case sensitive: false
             op: is
             path: event/FILE_PATH
@@ -43,38 +43,55 @@ detect:
           - case sensitive: false
             op: is
             path: event/FILE_PATH
-            value: MemCompression
+            value: System
           - case sensitive: false
             op: is
             path: event/FILE_PATH
             value: vmmem
+          - case sensitive: false
+            op: is
+            path: event/FILE_PATH
+            value: vmmemWSL
         - op: or
           rules:
           - case sensitive: false
             op: is
             path: event/COMMAND_LINE
-            value: Registry
-          - case sensitive: false
-            op: is
-            path: event/COMMAND_LINE
             value: MemCompression
           - case sensitive: false
             op: is
             path: event/COMMAND_LINE
+            value: Registry
+          - case sensitive: false
+            op: is
+            path: event/COMMAND_LINE
             value: vmmem
+          - case sensitive: false
+            op: is
+            path: event/COMMAND_LINE
+            value: vmmemWSL
 respond:
 - action: report
   metadata:
     author: Max Altgelt (Nextron Systems)
-    description: Checks whether the image specified in a process creation event is
-      not a full, absolute path (caused by process ghosting or other unorthodox methods
-      to start a process)
+    description: 'Detects process creation events where the Image field lacks an absolute
+      path,
+
+      which occurs when the backing file no longer exists on disk at the time of
+
+      logging - commonly caused by Process Ghosting or other unorthodox process creation
+      techniques.
+
+      '
     falsepositives:
     - Unknown
     level: high
     references:
     - https://pentestlaboratories.com/2021/12/08/process-ghosting/
+    - https://www.elastic.co/blog/process-ghosting-a-new-executable-image-tampering-attack
     tags:
     - attack.stealth
+    - attack.privilege-escalation
+    - attack.t1055
   name: Execution Of Non-Existing File
 
