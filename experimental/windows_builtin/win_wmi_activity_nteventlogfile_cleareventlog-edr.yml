@@ -1,0 +1,50 @@
+detect:
+  event: WEL
+  op: and
+  rules:
+  - op: is windows
+  - op: and
+    rules:
+    - case sensitive: false
+      op: is
+      path: event/EVENT/System/EventID
+      value: '5858'
+    - case sensitive: false
+      op: contains
+      path: event/EVENT/EventData/Operation
+      value: Win32_NTEventlogFile
+    - case sensitive: false
+      op: contains
+      path: event/EVENT/EventData/Operation
+      value: cleareventlog
+respond:
+- action: report
+  metadata:
+    author: Swachchhanda Shrawan Poudel (Nextron Systems)
+    description: 'Detects failed attempts to clear Windows event logs via the WMI
+      NTEventLogFile ClearEventLog method.
+
+      Event 5858 in the WMI-Activity operational log is an error event, meaning it
+      is only generated
+
+      when the WMI operation encounters an error (e.g. access denied, provider failure).
+
+      It could be an indication of an attacker attempting to clear event logs via
+      WMI, but failing due to insufficient privileges or other issues.
+
+      Successful clearing operations will NOT produce this event; for those, correlate
+      with
+
+      Security event 1102 or System event 104.
+
+      '
+    falsepositives:
+    - Unknown
+    level: medium
+    references:
+    - https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/cleareventlog-method-in-class-win32-nteventlogfile
+    tags:
+    - attack.defense-impairment
+    - attack.t1685.005
+  name: Failed Event Log Clear Via WMI NTEventLogFile ClearEventLog
+

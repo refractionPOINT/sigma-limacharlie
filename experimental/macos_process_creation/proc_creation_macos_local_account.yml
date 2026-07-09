@@ -36,15 +36,25 @@ detect:
         path: event/COMMAND_LINE
         value: user
     - case sensitive: false
-      op: contains
+      op: matches
       path: event/COMMAND_LINE
-      value: '''x:0:'''
+      re: .*'.*:0:'.*
     - op: and
       rules:
-      - case sensitive: true
-        op: ends with
-        path: event/FILE_PATH
-        value: /cat
+      - op: or
+        rules:
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /cat
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /awk
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /grep
       - op: or
         rules:
         - case sensitive: false
@@ -69,16 +79,77 @@ detect:
         op: contains
         path: event/COMMAND_LINE
         value: -u
+    - op: or
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /who
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /w
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /users
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /last
+    - op: and
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /ls
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/COMMAND_LINE
+          value: /Users
+        - case sensitive: false
+          op: ends with
+          path: event/COMMAND_LINE
+          value: /Users'
+        - case sensitive: false
+          op: ends with
+          path: event/COMMAND_LINE
+          value: /Users"
+    - op: and
+      rules:
+      - op: or
+        rules:
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /defaults
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /plutil
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: com.apple.loginwindow
 respond:
 - action: report
   metadata:
     author: Alejandro Ortuno, oscd.community
-    description: Detects enumeration of local systeam accounts on MacOS
+    description: 'Detects enumeration of local system accounts on MacOS systems.
+
+      This can be used by attackers to identify accounts for lateral movement or privilege
+      escalation.
+
+      '
     falsepositives:
     - Legitimate administration activities
     level: low
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1087.001/T1087.001.md
+    - https://ss64.com/osx/dscl.html
+    - https://ss64.com/mac/dscacheutil.html
     tags:
     - attack.discovery
     - attack.t1087.001
