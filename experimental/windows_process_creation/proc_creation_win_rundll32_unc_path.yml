@@ -7,35 +7,58 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - op: or
+    - op: and
       rules:
-      - case sensitive: false
-        op: ends with
-        path: event/FILE_PATH
-        value: \rundll32.exe
-      - case sensitive: false
-        op: is
-        path: event/ORIGINAL_FILE_NAME
-        value: RUNDLL32.EXE
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: rundll32
+      - op: or
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
+          value: \rundll32.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: RUNDLL32.EXE
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: rundll32
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' \\\\'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' ''\\\\'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' "\\\\'
     - case sensitive: false
+      not: true
       op: contains
       path: event/COMMAND_LINE
-      value: ' \\\\'
+      value: \\\\.\\pipe
 respond:
 - action: report
   metadata:
     author: Nasreddine Bencherchali (Nextron Systems)
-    description: Detects rundll32 execution where the DLL is located on a remote location
-      (share)
+    description: 'Detects rundll32 execution where the DLL is located on a remote
+      location (share).
+
+      Threat actors can abuse the rundll32.exe binary to execute remote DLLs from
+      a UNC pathh.
+
+      '
     falsepositives:
     - Unlikely
     level: high
     references:
     - https://www.cybereason.com/blog/rundll32-the-infamous-proxy-for-executing-malicious-code
+    - https://www.microsoft.com/en-us/security/blog/2026/07/16/acr-stealer-two-observed-intrusion-chains-amid-increased-threat-activity/
     tags:
     - attack.execution
     - attack.lateral-movement
