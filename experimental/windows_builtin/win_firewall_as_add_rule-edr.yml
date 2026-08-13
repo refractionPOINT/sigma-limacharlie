@@ -156,6 +156,16 @@ detect:
             op: ends with
             path: event/EVENT/EventData/ApplicationPath
             value: \MsMpEng.exe
+      - op: and
+        rules:
+        - case sensitive: false
+          op: starts with
+          path: event/EVENT/EventData/ApplicationPath
+          value: C:\Windows\SystemApps\
+        - case sensitive: false
+          op: is
+          path: event/EVENT/EventData/ModifyingApplication
+          value: C:\Windows\System32\svchost.exe
 respond:
 - action: report
   metadata:

@@ -58,11 +58,39 @@ detect:
             - case sensitive: false
               op: contains
               path: event/COMMAND_LINE
+              value: \Contacts\
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: \Favorites\
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: \Favourites\
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: \Music\
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: \Pictures\
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
               value: \Users\Public\
             - case sensitive: false
               op: contains
               path: event/COMMAND_LINE
+              value: \Videos\
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
               value: \WINDOWS\Temp\
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: '%appdata%'
             - case sensitive: false
               op: contains
               path: event/COMMAND_LINE
@@ -71,36 +99,46 @@ detect:
               op: contains
               path: event/COMMAND_LINE
               value: '%tmp%'
+      - not: true
+        op: or
+        rules:
+        - op: and
+          rules:
+          - case sensitive: false
+            op: is
+            path: event/PARENT/FILE_PATH
+            value: C:\Windows\System32\wbem\WmiPrvSE.exe
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: C:\Windows\TEMP\
+          - case sensitive: false
+            op: ends with
+            path: event/COMMAND_LINE
+            value: .mof
+        - op: and
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/COMMAND_LINE
+            value: \InstallUtil.exe /Uninstall C:\Windows\CCM\Microsoft.ConfigurationManager.SVProvider.dll
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: \InstallUtil.exe
+          - op: and
+            rules:
             - case sensitive: false
               op: contains
               path: event/COMMAND_LINE
-              value: '%appdata%'
-      - not: true
-        op: and
-        rules:
-        - case sensitive: false
-          op: is
-          path: event/PARENT/FILE_PATH
-          value: C:\Windows\System32\wbem\WmiPrvSE.exe
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: C:\Windows\TEMP\
-        - case sensitive: false
-          op: ends with
-          path: event/COMMAND_LINE
-          value: .mof
-    - not: true
-      op: and
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: C:\Windows\TEMP\
-      - case sensitive: false
-        op: ends with
-        path: event/COMMAND_LINE
-        value: .mof
+              value: C:\Windows\TEMP
+            - case sensitive: false
+              op: contains
+              path: event/COMMAND_LINE
+              value: .tmp
+    - not: false
+      op: exists
+      path: event/PARENT/COMMAND_LINE
 respond:
 - action: report
   metadata:
@@ -124,5 +162,5 @@ respond:
     tags:
     - attack.stealth
     - attack.t1218
-  name: Potential Suspicious Mofcomp Execution
+  name: Potentially Suspicious Mofcomp Execution
 
