@@ -7,100 +7,113 @@ detect:
   - op: is linux
   - op: and
     rules:
-    - op: or
+    - op: and
       rules:
       - op: or
         rules:
-        - case sensitive: false
-          op: ends with
-          path: event/PARENT/FILE_PATH
-          value: /httpd
-        - case sensitive: false
-          op: ends with
-          path: event/PARENT/FILE_PATH
-          value: /lighttpd
-        - case sensitive: false
-          op: ends with
-          path: event/PARENT/FILE_PATH
-          value: /nginx
-        - case sensitive: false
-          op: ends with
-          path: event/PARENT/FILE_PATH
-          value: /apache2
-        - case sensitive: false
-          op: ends with
-          path: event/PARENT/FILE_PATH
-          value: /node
-        - case sensitive: false
-          op: ends with
-          path: event/PARENT/FILE_PATH
-          value: /caddy
-      - op: and
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: /httpd
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: /lighttpd
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: /nginx
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: /apache2
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: /node
+          - case sensitive: false
+            op: ends with
+            path: event/PARENT/FILE_PATH
+            value: /caddy
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/COMMAND_LINE
+            value: /bin/java
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/COMMAND_LINE
+            value: tomcat
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/COMMAND_LINE
+            value: /bin/java
+          - case sensitive: false
+            op: contains
+            path: event/PARENT/COMMAND_LINE
+            value: websphere
+      - op: or
         rules:
-        - case sensitive: false
-          op: contains
-          path: event/PARENT/COMMAND_LINE
-          value: /bin/java
-        - case sensitive: false
-          op: contains
-          path: event/PARENT/COMMAND_LINE
-          value: tomcat
-      - op: and
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/PARENT/COMMAND_LINE
-          value: /bin/java
-        - case sensitive: false
-          op: contains
-          path: event/PARENT/COMMAND_LINE
-          value: websphere
-    - op: or
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /whoami
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /ifconfig
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /ip
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /bin/uname
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /bin/cat
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /bin/crontab
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /hostname
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /iptables
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /netstat
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /pwd
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /route
+    - not: true
+      op: and
       rules:
-      - case sensitive: true
+      - case sensitive: false
         op: ends with
-        path: event/FILE_PATH
-        value: /whoami
-      - case sensitive: true
-        op: ends with
-        path: event/FILE_PATH
-        value: /ifconfig
-      - case sensitive: true
-        op: ends with
-        path: event/FILE_PATH
-        value: /ip
-      - case sensitive: true
-        op: ends with
-        path: event/FILE_PATH
-        value: /bin/uname
-      - case sensitive: true
-        op: ends with
-        path: event/FILE_PATH
-        value: /bin/cat
-      - case sensitive: true
-        op: ends with
-        path: event/FILE_PATH
-        value: /bin/crontab
-      - case sensitive: true
-        op: ends with
-        path: event/FILE_PATH
-        value: /hostname
-      - case sensitive: true
-        op: ends with
-        path: event/FILE_PATH
-        value: /iptables
-      - case sensitive: true
-        op: ends with
-        path: event/FILE_PATH
-        value: /netstat
-      - case sensitive: true
-        op: ends with
-        path: event/FILE_PATH
-        value: /pwd
-      - case sensitive: true
-        op: ends with
-        path: event/FILE_PATH
-        value: /route
+        path: event/PARENT/FILE_PATH
+        value: /node
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: ip neigh show
 respond:
 - action: report
   metadata:
