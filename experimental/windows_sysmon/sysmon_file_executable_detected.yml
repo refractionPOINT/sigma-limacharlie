@@ -9,10 +9,25 @@ respond:
 - action: report
   metadata:
     author: frack113
-    description: Triggers on any Sysmon "FileExecutableDetected" event, which triggers
-      every time a PE that is monitored by the config is created.
+    description: 'Detects Portable Executable (PE) files creation events logged by
+      Sysmon in paths monitored by the used Sysmon configuration.
+
+      This is a high-value detection for catching unauthorized or suspicious executable
+      drops.
+
+      Alert volume and scope depend entirely on which paths or files are monitored
+      in the Sysmon config.
+
+      A high noise level or hits from known-legitimate software are a strong signal
+      that the Sysmon configuration is too permissive, not that the detection itself
+      is wrong and probably needs to be tuned to a more restrictive set of paths or
+      files.
+
+      '
     falsepositives:
-    - Unlikely
+    - Legitimate software writing executables to monitored paths - if this occurs,
+      narrow the Sysmon configuration to more sensitive paths rather than suppressing
+      this rule
     level: medium
     references:
     - https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon

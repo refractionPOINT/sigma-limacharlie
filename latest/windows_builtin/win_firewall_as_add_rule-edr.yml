@@ -85,11 +85,31 @@ detect:
           - case sensitive: false
             op: is
             path: event/EVENT/EventData/ApplicationPath
-            value: System
+            value: SYSTEM
+          - op: or
+            rules:
+            - case sensitive: false
+              op: is
+              path: event/EVENT/EventData/ModifyingApplication
+              value: C:\Windows\System32\dllhost.exe
+            - case sensitive: false
+              op: is
+              path: event/EVENT/EventData/ModifyingApplication
+              value: C:\Windows\System32\oobe\Setup.exe
+            - case sensitive: false
+              op: is
+              path: event/EVENT/EventData/ModifyingApplication
+              value: C:\Windows\System32\svchost.exe
+        - op: and
+          rules:
+          - case sensitive: false
+            op: starts with
+            path: event/EVENT/EventData/ApplicationPath
+            value: C:\Windows\ehome\
           - case sensitive: false
             op: is
             path: event/EVENT/EventData/ModifyingApplication
-            value: C:\Windows\System32\dllhost.exe
+            value: C:\Windows\System32\oobe\Setup.exe
         - op: and
           rules:
           - case sensitive: false
