@@ -12,11 +12,31 @@ detect:
       - case sensitive: true
         op: ends with
         path: event/FILE_PATH
+        value: /nc.openbsd
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /nc.traditional
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
         value: /nc
       - case sensitive: true
         op: ends with
         path: event/FILE_PATH
         value: /ncat
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /netcat.openbsd
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /netcat.traditional
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /netcat
     - op: or
       rules:
       - case sensitive: false
@@ -137,8 +157,10 @@ respond:
 - action: report
   metadata:
     author: '@d4ns4n_, Nasreddine Bencherchali (Nextron Systems)'
-    description: Detects execution of netcat with the "-e" flag followed by common
-      shells. This could be a sign of a potential reverse shell setup.
+    description: 'Detects execution of netcat with the "-e" or "-c" flags followed
+      by common shells, which are commonly used to spawn reverse shells.
+
+      '
     falsepositives:
     - Unlikely
     level: high
