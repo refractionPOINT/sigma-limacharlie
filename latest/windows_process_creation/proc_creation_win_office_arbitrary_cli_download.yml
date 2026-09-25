@@ -18,6 +18,10 @@ detect:
         - case sensitive: false
           op: ends with
           path: event/FILE_PATH
+          value: \MSOXMLED.EXE
+        - case sensitive: false
+          op: ends with
+          path: event/FILE_PATH
           value: \POWERPNT.EXE
         - case sensitive: false
           op: ends with
@@ -29,6 +33,10 @@ detect:
           op: is
           path: event/ORIGINAL_FILE_NAME
           value: Excel.exe
+        - case sensitive: false
+          op: is
+          path: event/ORIGINAL_FILE_NAME
+          value: msoxmled.exe
         - case sensitive: false
           op: is
           path: event/ORIGINAL_FILE_NAME
@@ -60,6 +68,7 @@ respond:
     - https://lolbas-project.github.io/lolbas/OtherMSBinaries/Winword/
     - https://lolbas-project.github.io/lolbas/OtherMSBinaries/Powerpnt/
     - https://lolbas-project.github.io/lolbas/OtherMSBinaries/Excel/
+    - https://lolbas-project.github.io/lolbas/Binaries/Msoxmled/
     - https://medium.com/@reegun/unsanitized-file-validation-leads-to-malicious-payload-download-via-office-binaries-202d02db7191
     tags:
     - attack.stealth
