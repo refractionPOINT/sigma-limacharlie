@@ -7,88 +7,182 @@ detect:
   - op: is windows
   - op: or
     rules:
+    - op: or
+      rules:
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \wevtutil.exe
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: wevtutil.exe
+        - op: or
+          rules:
+          - op: and
+            rules:
+            - op: or
+              rules:
+              - case sensitive: false
+                op: contains
+                path: event/COMMAND_LINE
+                value: ' cl '
+              - case sensitive: false
+                op: contains
+                path: event/COMMAND_LINE
+                value: clear-log
+            - op: or
+              rules:
+              - case sensitive: false
+                op: contains
+                path: event/COMMAND_LINE
+                value: -Trace
+              - case sensitive: false
+                op: contains
+                path: event/COMMAND_LINE
+                value: /Trace
+          - op: and
+            rules:
+            - op: or
+              rules:
+              - case sensitive: false
+                op: contains
+                path: event/COMMAND_LINE
+                value: ' sl '
+              - case sensitive: false
+                op: contains
+                path: event/COMMAND_LINE
+                value: set-log
+            - op: or
+              rules:
+              - case sensitive: false
+                op: contains
+                path: event/COMMAND_LINE
+                value: -e:false
+              - case sensitive: false
+                op: contains
+                path: event/COMMAND_LINE
+                value: /e:false
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \logman.exe
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: Logman.exe
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: update
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: trace
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: --p
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: -ets
     - op: and
       rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: cl
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /Trace
-    - op: and
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: clear-log
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /Trace
-    - op: and
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: sl
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /e:false
-    - op: and
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: set-log
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: /e:false
-    - op: and
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: logman
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: update
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: trace
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: --p
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: -ets
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: Remove-EtwTraceProvider
-    - op: and
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: Set-EtwTraceProvider
-      - case sensitive: false
-        op: contains
-        path: event/COMMAND_LINE
-        value: '0x11'
+      - op: or
+        rules:
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \powershell.exe
+          - case sensitive: false
+            op: ends with
+            path: event/FILE_PATH
+            value: \pwsh.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: powershell.exe
+          - case sensitive: false
+            op: is
+            path: event/ORIGINAL_FILE_NAME
+            value: pwsh.dll
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: Remove-EtwTraceProvider
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: Set-EtwTraceProvider
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '0x11'
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: Set-EtwTraceProvider
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' 17'
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: Set-EtwTraceProvider
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '''17'''
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: Set-EtwTraceProvider
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: '"17"'
 respond:
 - action: report
   metadata:
     author: '@neu5ron, Florian Roth (Nextron Systems), Jonhnathan Ribeiro, oscd.community'
-    description: 'Detects command line activity that tries to clear or disable any
-      ETW trace log which could be a sign of logging evasion.
+    description: 'Detects command line activity that attempts to tamper with Event
+      Tracing for Windows (ETW) by clearing or disabling
+
+      trace logs or providers. Adversaries may target ETW to blind security tooling
+      and evade detection by removing
+
+      visibility into process activity, network connections, and other telemetry sources.
+
+      Techniques include clearing logs via wevtutil, disabling trace sessions via
+      logman, and removing or modifying
+
+      ETW providers using PowerShell cmdlets such as Remove-EtwTraceProvider and Set-EtwTraceProvider.
 
       '
     falsepositives:
