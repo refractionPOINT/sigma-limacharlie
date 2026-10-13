@@ -7,13 +7,13 @@ detect:
   - op: is linux
   - op: or
     rules:
-    - case sensitive: true
-      op: ends with
-      path: event/FILE_PATH
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
       value: /update-ca-certificates
-    - case sensitive: true
-      op: ends with
-      path: event/FILE_PATH
+    - case sensitive: false
+      op: contains
+      path: event/COMMAND_LINE
       value: /update-ca-trust
 respond:
 - action: report
@@ -25,7 +25,10 @@ respond:
     - Legitimate administration activities
     level: low
     references:
-    - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1553.004/T1553.004.md
+    - https://www.trendmicro.com/en_us/research/14/h/finding-holes-operation-emmental.html
+    - https://www.kaspersky.com/blog/lenovo-pc-with-adware-superfish-preinstalled/
+    - https://www.cisa.gov/news-events/alerts/2015/02/20/lenovo-superfish-adware-vulnerable-https-spoofing
+    - https://capec.mitre.org/data/definitions/479.html
     tags:
     - attack.defense-impairment
     - attack.t1553.004
