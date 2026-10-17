@@ -128,11 +128,23 @@ detect:
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: aakore
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: Acronis VSS Provider
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
+        value: AcronisActiveProtectionService
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
         value: AcronisAgent
+      - case sensitive: false
+        op: contains
+        path: event/COMMAND_LINE
+        value: AcronisCyberProtectionService
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
