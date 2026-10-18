@@ -119,6 +119,20 @@ detect:
               op: contains
               path: event/COMMAND_LINE
               value: zzzzInvokeManagedCustomActionOutOfProc
+        - op: and
+          rules:
+          - case sensitive: false
+            op: is
+            path: event/FILE_PATH
+            value: C:\Windows\System32\rundll32.exe
+          - case sensitive: false
+            op: is
+            path: event/PARENT/FILE_PATH
+            value: C:\Windows\System32\svchost.exe
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' streamci,StreamingDeviceSetup {'
     - not: true
       op: and
       rules:
