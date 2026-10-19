@@ -19,11 +19,10 @@ detect:
           op: ends with
           path: event/FILE_PATH
           value: /netcat
-      - case sensitive: false
-        not: true
-        op: contains
+      - not: true
+        op: matches
         path: event/COMMAND_LINE
-        value: l
+        re: \s(?:--listen\b|-[46DdknrtuUvz]{0,10}l[46DdknrtuUvz]{0,10})
     - op: or
       rules:
       - case sensitive: true
