@@ -24,10 +24,6 @@ detect:
           - case sensitive: false
             op: is
             path: event/EVENT/EventData/AccessMask
-            value: '0x100000'
-          - case sensitive: false
-            op: is
-            path: event/EVENT/EventData/AccessMask
             value: '0x1010'
           - case sensitive: false
             op: is
