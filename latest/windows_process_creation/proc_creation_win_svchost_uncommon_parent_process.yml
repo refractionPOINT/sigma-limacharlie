@@ -40,6 +40,26 @@ detect:
           op: ends with
           path: event/PARENT/FILE_PATH
           value: \TiWorker.exe
+      - op: and
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \svchost.exe
+        - op: or
+          rules:
+          - case sensitive: false
+            op: ends with
+            path: event/COMMAND_LINE
+            value: svchost.exe"
+          - case sensitive: false
+            op: ends with
+            path: event/COMMAND_LINE
+            value: svchost.exe
+          - case sensitive: false
+            op: ends with
+            path: event/COMMAND_LINE
+            value: -k TSLicensing
       - not: true
         op: exists
         path: event/PARENT/FILE_PATH

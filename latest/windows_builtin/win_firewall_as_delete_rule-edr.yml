@@ -36,8 +36,32 @@ detect:
             value: C:\Windows\WinSxS\
         - case sensitive: false
           op: is
+          path: event/EVENT/EventData/ModifyingUser
+          value: S-1-5-18
+        - op: or
+          rules:
+          - case sensitive: false
+            op: is
+            path: event/EVENT/EventData/ModifyingApplication
+            value: C:\Windows\SysWOW64\msiexec.exe
+          - case sensitive: false
+            op: is
+            path: event/EVENT/EventData/ModifyingApplication
+            value: C:\Windows\System32\msiexec.exe
+        - case sensitive: false
+          op: is
           path: event/EVENT/EventData/ModifyingApplication
           value: C:\Windows\System32\svchost.exe
+        - op: and
+          rules:
+          - case sensitive: false
+            op: starts with
+            path: event/EVENT/EventData/ModifyingApplication
+            value: C:\ProgramData\Microsoft\Windows Defender\Platform\
+          - case sensitive: false
+            op: ends with
+            path: event/EVENT/EventData/ModifyingApplication
+            value: \MsMpEng.exe
         - not: true
           op: exists
           path: event/EVENT/EventData/ModifyingApplication
@@ -51,11 +75,15 @@ detect:
       - case sensitive: false
         op: starts with
         path: event/EVENT/EventData/ModifyingApplication
-        value: C:\ProgramData\Microsoft\Windows Defender\Platform\
+        value: C:\Windows\SystemTemp\
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/ModifyingApplication
+        value: GoogleUpdater
       - case sensitive: false
         op: ends with
         path: event/EVENT/EventData/ModifyingApplication
-        value: \MsMpEng.exe
+        value: \setup.exe
 respond:
 - action: report
   metadata:
