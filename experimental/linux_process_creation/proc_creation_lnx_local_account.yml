@@ -5,115 +5,185 @@ detect:
   op: and
   rules:
   - op: is linux
-  - op: or
+  - op: and
     rules:
-    - case sensitive: true
-      op: ends with
-      path: event/FILE_PATH
-      value: /lastlog
-    - case sensitive: false
-      op: contains
-      path: event/COMMAND_LINE
-      value: '''x:0:'''
-    - op: and
+    - op: or
       rules:
       - op: or
         rules:
         - case sensitive: true
           op: ends with
           path: event/FILE_PATH
-          value: /cat
+          value: /lastlog
         - case sensitive: true
           op: ends with
           path: event/FILE_PATH
-          value: /ed
+          value: /last
         - case sensitive: true
           op: ends with
           path: event/FILE_PATH
-          value: /head
-        - case sensitive: true
-          op: ends with
-          path: event/FILE_PATH
-          value: /more
-        - case sensitive: true
-          op: ends with
-          path: event/FILE_PATH
-          value: /nano
-        - case sensitive: true
-          op: ends with
-          path: event/FILE_PATH
-          value: /tail
-        - case sensitive: true
-          op: ends with
-          path: event/FILE_PATH
-          value: /vi
-        - case sensitive: true
-          op: ends with
-          path: event/FILE_PATH
-          value: /vim
-        - case sensitive: true
-          op: ends with
-          path: event/FILE_PATH
-          value: /less
-        - case sensitive: true
-          op: ends with
-          path: event/FILE_PATH
-          value: /emacs
-        - case sensitive: true
-          op: ends with
-          path: event/FILE_PATH
-          value: /sqlite3
-        - case sensitive: true
-          op: ends with
-          path: event/FILE_PATH
-          value: /makemap
-      - op: or
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: /etc/passwd
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: /etc/shadow
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: /etc/sudoers
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: /etc/spwd.db
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: /etc/pwd.db
-        - case sensitive: false
-          op: contains
-          path: event/COMMAND_LINE
-          value: /etc/master.passwd
-    - case sensitive: true
-      op: ends with
-      path: event/FILE_PATH
-      value: /id
-    - op: and
-      rules:
-      - case sensitive: true
-        op: ends with
-        path: event/FILE_PATH
-        value: /lsof
+          value: /lastb
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: -u
+        value: 'x:0:'
+      - op: and
+        rules:
+        - op: or
+          rules:
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /cat
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /ed
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /emacs
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /head
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /less
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /makemap
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /more
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /nano
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /sqlite3
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /tail
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /vi
+          - case sensitive: true
+            op: ends with
+            path: event/FILE_PATH
+            value: /vim
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: /etc/passwd
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: /etc/shadow
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: /etc/sudoers
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: master.passwd
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: pwd.db
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /id
+      - op: and
+        rules:
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /lsof
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: -u
+      - op: and
+        rules:
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /getent
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' passwd'
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: ' shadow'
+      - op: or
+        rules:
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /finger
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /users
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /w
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /who
+      - op: and
+        rules:
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /ypcat
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: passwd
+    - not: true
+      op: and
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/PARENT/COMMAND_LINE
+        value: /usr/bin/landscape-sysinfo
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /who
 respond:
 - action: report
   metadata:
     author: Alejandro Ortuno, oscd.community, CheraghiMilad
-    description: Detects enumeration of local system accounts. This information can
-      help adversaries determine which local accounts exist on a system to aid in
-      follow-on behavior.
+    description: 'Detects attempts to enumerate local user accounts via common Linux
+      utilities and sensitive file access.
+
+      Adversaries may read files such as /etc/passwd, /etc/shadow, and /etc/sudoers,
+      or use tools like getent,
+
+      id, who, and finger to identify accounts and privilege levels on a compromised
+      system.
+
+      '
     falsepositives:
     - Legitimate administration activities
     level: low
@@ -121,8 +191,10 @@ respond:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1087.001/T1087.001.md
     - https://my.f5.com/manage/s/article/K589
     - https://man.freebsd.org/cgi/man.cgi?pwd_mkdb
+    - https://man7.org/linux/man-pages/man1/getent.1.html
+    - https://linux.die.net/man/1/finger
     tags:
     - attack.discovery
     - attack.t1087.001
-  name: Local System Accounts Discovery - Linux
+  name: Local System Accounts Discovery Attempt - Linux
 

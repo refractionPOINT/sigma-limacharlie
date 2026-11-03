@@ -5,51 +5,44 @@ detect:
   op: and
   rules:
   - op: is linux
-  - op: and
+  - op: or
     rules:
-    - op: or
-      rules:
-      - case sensitive: true
-        op: ends with
-        path: event/FILE_PATH
-        value: /who
-      - case sensitive: true
-        op: ends with
-        path: event/FILE_PATH
-        value: /w
-      - case sensitive: true
-        op: ends with
-        path: event/FILE_PATH
-        value: /last
-      - case sensitive: true
-        op: ends with
-        path: event/FILE_PATH
-        value: /lsof
-      - case sensitive: true
-        op: ends with
-        path: event/FILE_PATH
-        value: /netstat
-    - not: true
-      op: and
-      rules:
-      - case sensitive: false
-        op: contains
-        path: event/PARENT/COMMAND_LINE
-        value: /usr/bin/landscape-sysinfo
-      - case sensitive: true
-        op: ends with
-        path: event/FILE_PATH
-        value: /who
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /lsof
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /netstat
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /sockstat
+    - case sensitive: true
+      op: ends with
+      path: event/FILE_PATH
+      value: /ss
 respond:
 - action: report
   metadata:
     author: Daniil Yugoslavskiy, oscd.community
-    description: Detects usage of system utilities to discover system network connections
+    description: 'Detects attempts to discover system network connections via common
+      Linux utilities.
+
+      Adversaries may use tools such as netstat, ss, or lsof to enumerate active connections,
+
+      open ports, and listening services on a compromised system.
+
+      '
     falsepositives:
-    - Legitimate activities
+    - Legitimate administration activities
     level: low
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1049/T1049.md
+    - https://man7.org/linux/man-pages/man8/netstat.8.html
+    - https://man7.org/linux/man-pages/man8/ss.8.html
+    - https://man7.org/linux/man-pages/man8/lsof.8.html
     tags:
     - attack.discovery
     - attack.t1049

@@ -26,6 +26,10 @@ detect:
         - case sensitive: true
           op: ends with
           path: event/FILE_PATH
+          value: /emacs
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
           value: /head
         - case sensitive: true
           op: ends with
@@ -34,11 +38,19 @@ detect:
         - case sensitive: true
           op: ends with
           path: event/FILE_PATH
+          value: /makemap
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
           value: /more
         - case sensitive: true
           op: ends with
           path: event/FILE_PATH
           value: /nano
+        - case sensitive: true
+          op: ends with
+          path: event/FILE_PATH
+          value: /sqlite3
         - case sensitive: true
           op: ends with
           path: event/FILE_PATH
@@ -51,23 +63,63 @@ detect:
           op: ends with
           path: event/FILE_PATH
           value: /vim
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: group
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: gshadow
+    - op: and
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /getent
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' group'
+        - case sensitive: false
+          op: contains
+          path: event/COMMAND_LINE
+          value: ' gshadow'
+    - op: and
+      rules:
+      - case sensitive: true
+        op: ends with
+        path: event/FILE_PATH
+        value: /ypcat
       - case sensitive: false
         op: contains
         path: event/COMMAND_LINE
-        value: /etc/group
+        value: group
 respond:
 - action: report
   metadata:
     author: "\xD6mer G\xFCnal, Alejandro Ortuno, oscd.community"
-    description: Detects enumeration of local system groups. Adversaries may attempt
-      to find local system groups and permission settings
+    description: 'Detects attempts to enumerate local groups and group membership
+      via common Linux utilities and sensitive file access.
+
+      Adversaries may read files such as /etc/group and /etc/gshadow, or use tools
+      like getent and groups to identify
+
+      group memberships and privilege assignments on a compromised system.
+
+      '
     falsepositives:
     - Legitimate administration activities
     level: low
     references:
     - https://github.com/redcanaryco/atomic-red-team/blob/f339e7da7d05f6057fdfcdd3742bfcf365fee2a9/atomics/T1069.001/T1069.001.md
+    - https://man7.org/linux/man-pages/man1/getent.1.html
     tags:
     - attack.discovery
     - attack.t1069.001
-  name: Local Groups Discovery - Linux
+  name: Local Groups Discovery Attempt - Linux
 
