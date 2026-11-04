@@ -16,7 +16,7 @@ detect:
       - case sensitive: false
         op: is
         path: event/ORIGINAL_FILE_NAME
-        value: \msiexec.exe
+        value: msiexec.exe
     - not: true
       op: or
       rules:

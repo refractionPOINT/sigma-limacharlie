@@ -18,7 +18,7 @@ detect:
     - case sensitive: false
       op: is
       path: event/ORIGINAL_FILE_NAME
-      value: \te.exe
+      value: te.exe
 respond:
 - action: report
   metadata:
