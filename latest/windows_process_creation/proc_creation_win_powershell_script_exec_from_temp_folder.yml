@@ -104,6 +104,22 @@ detect:
             op: contains
             path: event/COMMAND_LINE
             value: Install-Chocolatey.ps1
+      - op: and
+        rules:
+        - case sensitive: false
+          op: ends with
+          path: event/PARENT/FILE_PATH
+          value: \Amazon\EC2Launch\EC2Launch.exe
+        - op: and
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \config\systemprofile\AppData\Local\Temp\EC2Launch
+          - case sensitive: false
+            op: contains
+            path: event/COMMAND_LINE
+            value: \UserScript.ps1
 respond:
 - action: report
   metadata:
