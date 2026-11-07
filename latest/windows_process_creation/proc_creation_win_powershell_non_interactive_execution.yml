@@ -49,7 +49,7 @@ detect:
             path: event/PARENT/FILE_PATH
             value: :\Windows\SysWOW64\explorer.exe
         - case sensitive: false
-          op: is
+          op: ends with
           path: event/PARENT/FILE_PATH
           value: :\$WINDOWS.~BT\Sources\SetupHost.exe
     - not: true

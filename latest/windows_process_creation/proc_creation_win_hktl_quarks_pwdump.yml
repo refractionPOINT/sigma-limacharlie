@@ -14,35 +14,35 @@ detect:
     - op: or
       rules:
       - case sensitive: false
-        op: is
+        op: contains
         path: event/COMMAND_LINE
         value: ' -dhl'
       - case sensitive: false
-        op: is
+        op: contains
         path: event/COMMAND_LINE
         value: ' --dump-hash-local'
       - case sensitive: false
-        op: is
+        op: contains
         path: event/COMMAND_LINE
         value: ' -dhdc'
       - case sensitive: false
-        op: is
+        op: contains
         path: event/COMMAND_LINE
         value: ' --dump-hash-domain-cached'
       - case sensitive: false
-        op: is
+        op: contains
         path: event/COMMAND_LINE
         value: ' --dump-bitlocker'
       - case sensitive: false
-        op: is
+        op: contains
         path: event/COMMAND_LINE
         value: ' -dhd '
       - case sensitive: false
-        op: is
+        op: contains
         path: event/COMMAND_LINE
         value: ' --dump-hash-domain '
       - case sensitive: false
-        op: is
+        op: contains
         path: event/COMMAND_LINE
         value: --ntds-file
 respond:
