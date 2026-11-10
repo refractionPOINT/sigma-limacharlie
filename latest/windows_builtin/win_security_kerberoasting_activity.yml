@@ -55,6 +55,7 @@ respond:
     references:
     - https://www.trustedsec.com/blog/art_of_kerberoast/
     - https://adsecurity.org/?p=3513
+    - https://en.hackita.it/articoli/kerberoasting/
     tags:
     - attack.credential-access
     - attack.t1558.003
