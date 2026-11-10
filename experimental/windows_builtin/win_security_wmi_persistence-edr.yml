@@ -28,8 +28,8 @@ respond:
     - Unknown (data set is too small; further testing needed)
     level: medium
     references:
-    - https://twitter.com/mattifestation/status/899646620148539397
-    - https://www.eideon.com/2018-03-02-THL03-WMIBackdoors/
+    - https://web.archive.org/web/20170821162638/https://twitter.com/mattifestation/status/899646620148539397
+    - https://web.archive.org/web/20250427230247/https://www.eideon.com/2018-03-02-THL03-WMIBackdoors/
     tags:
     - attack.persistence
     - attack.privilege-escalation

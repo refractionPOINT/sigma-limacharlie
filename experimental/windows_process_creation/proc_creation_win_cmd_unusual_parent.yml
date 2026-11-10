@@ -118,7 +118,7 @@ respond:
     - Unknown
     level: medium
     references:
-    - https://www.elastic.co/guide/en/security/current/unusual-parent-process-for-cmd.exe.html
+    - https://github.com/elastic/detection-rules/blob/0aacc5e19292f764a002ea2093b2a076db35b589/rules/windows/execution_command_shell_started_by_unusual_process.toml
     tags:
     - attack.execution
     - attack.t1059

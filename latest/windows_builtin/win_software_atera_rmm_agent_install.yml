@@ -25,7 +25,7 @@ respond:
     - Legitimate Atera agent installation
     level: high
     references:
-    - https://www.advintel.io/post/secret-backdoor-behind-conti-ransomware-operation-introducing-atera-agent
+    - https://web.archive.org/web/20230208191147/https://www.advintel.io/post/secret-backdoor-behind-conti-ransomware-operation-introducing-atera-agent
     tags:
     - attack.command-and-control
     - attack.t1219.002

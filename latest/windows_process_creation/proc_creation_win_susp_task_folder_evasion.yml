@@ -53,7 +53,7 @@ respond:
     - Unknown
     level: high
     references:
-    - https://twitter.com/subTee/status/1216465628946563073
+    - https://web.archive.org/web/20200116124158/https://twitter.com/subTee/status/1216465628946563073
     - https://gist.github.com/am0nsec/8378da08f848424e4ab0cc5b317fdd26
     tags:
     - attack.privilege-escalation

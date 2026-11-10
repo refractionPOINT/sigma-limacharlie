@@ -51,7 +51,7 @@ respond:
     - Unlikely
     level: high
     references:
-    - https://twitter.com/Hexacorn/status/1224848930795552769
+    - https://web.archive.org/web/20220215183046/https://twitter.com/Hexacorn/status/1224848930795552769
     - http://www.hexacorn.com/blog/2020/02/05/stay-positive-lolbins-not/
     tags:
     - attack.stealth

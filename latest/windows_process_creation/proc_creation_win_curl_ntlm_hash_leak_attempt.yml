@@ -43,7 +43,7 @@ respond:
       such as in certain scripts or automation tasks.
     level: high
     references:
-    - https://github.com/curl/curl/blob/master/lib/vauth/ntlm_sspi.c#L128-L140
+    - https://github.com/curl/curl/blob/273534cdc71dcc3b844ef46da4d48dd6d9a627bf/lib/vauth/ntlm_sspi.c#L128-L140
     - https://learn.microsoft.com/en-us/windows/win32/secauthn/acquirecredentialshandle--ntlm
     - https://curl.se/docs/manpage.html#--ntlm
     tags:

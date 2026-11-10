@@ -45,7 +45,7 @@ respond:
     level: medium
     references:
     - https://redcanary.com/blog/threat-detection/child-processes/
-    - https://www.eideon.com/2018-03-02-THL03-WMIBackdoors/
+    - https://web.archive.org/web/20250427230247/https://www.eideon.com/2018-03-02-THL03-WMIBackdoors/
     tags:
     - attack.persistence
     - attack.privilege-escalation

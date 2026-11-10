@@ -19,7 +19,7 @@ respond:
     - Unlikely
     level: low
     references:
-    - https://research.splunk.com/endpoint/linux_doas_tool_execution/
+    - https://research.splunk.com/endpoint/d5a62490-6e09-11ec-884e-acde48001122/
     - https://www.makeuseof.com/how-to-install-and-use-doas/
     tags:
     - attack.privilege-escalation

@@ -87,7 +87,7 @@ respond:
     - Unknown
     level: high
     references:
-    - https://twitter.com/x86matthew/status/1505476263464607744?s=12
+    - https://web.archive.org/web/20220731153253/https://twitter.com/x86matthew/status/1505476263464607744
     - https://svch0st.medium.com/stats-from-hunting-cobalt-strike-beacons-c17e56255f9b
     tags:
     - attack.stealth

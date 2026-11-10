@@ -49,7 +49,7 @@ respond:
     - Administrative activity
     level: medium
     references:
-    - https://blog.talosintelligence.com/2022/08/recent-cyber-attack.html?m=1
+    - https://blog.talosintelligence.com/recent-cyber-attack/
     tags:
     - attack.privilege-escalation
     - attack.persistence

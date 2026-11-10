@@ -41,7 +41,7 @@ respond:
     - Unknown
     level: high
     references:
-    - https://twitter.com/200_okay_/status/1194765831911215104
+    - https://web.archive.org/web/20191114000442/https://twitter.com/200_okay_/status/1194765831911215104
     tags:
     - attack.stealth
     - attack.t1036.005

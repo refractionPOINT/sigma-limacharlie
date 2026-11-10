@@ -123,7 +123,7 @@ respond:
     - Unlikely
     level: high
     references:
-    - https://blog.malwarebytes.com/malwarebytes-news/2020/10/kraken-attack-abuses-wer-service/
+    - https://www.threatdown.com/blog/kraken-attack-abuses-wer-service/
     - https://www.cobaltstrike.com/help-opsec
     - https://twitter.com/CyberRaiju/status/1251492025678983169
     - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/regsvr32

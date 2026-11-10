@@ -138,7 +138,7 @@ respond:
     - https://github.com/mttaggart/quasar
     - https://positive.security/blog/ms-officecmd-rce
     - https://lolbas-project.github.io/lolbas/Binaries/Msedge/
-    - https://lolbas-project.github.io/lolbas/Binaries/Teams/
+    - https://lolbas-project.github.io/lolbas/OtherMSBinaries/Teams/
     - https://lolbas-project.github.io/lolbas/Binaries/msedgewebview2/
     - https://medium.com/@MalFuzzer/one-electron-to-rule-them-all-dc2e9b263daf
     tags:

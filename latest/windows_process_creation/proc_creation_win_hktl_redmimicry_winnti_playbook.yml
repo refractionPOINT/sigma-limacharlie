@@ -41,7 +41,7 @@ respond:
     - Unknown
     level: high
     references:
-    - https://redmimicry.com/posts/redmimicry-winnti/
+    - https://web.archive.org/web/20240222070028/https://redmimicry.com/posts/redmimicry-winnti/
     tags:
     - attack.execution
     - attack.stealth

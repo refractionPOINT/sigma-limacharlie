@@ -35,8 +35,8 @@ respond:
     references:
     - https://eqllib.readthedocs.io/en/latest/analytics/532b5ed4-7930-11e9-8f5c-d46d6d62a49e.html
     - https://lolbas-project.github.io/lolbas/Binaries/Wsreset/
-    - https://www.activecyber.us/activelabs/windows-uac-bypass
-    - https://twitter.com/ReaQta/status/1222548288731217921
+    - https://web.archive.org/web/20240812143656/https://www.activecyber.us/activelabs/windows-uac-bypass
+    - https://web.archive.org/web/20200530031302/https://twitter.com/ReaQta/status/1222548288731217921
     tags:
     - attack.privilege-escalation
     - attack.t1548.002

@@ -36,7 +36,7 @@ respond:
     level: critical
     references:
     - https://www.icebrg.io/blog/footprints-of-fin7-tracking-actor-patterns
-    - https://www.sekoia.io/en/hunting-and-detecting-cobalt-strike/
+    - https://web.archive.org/web/20211022162145/https://www.sekoia.io/en/hunting-and-detecting-cobalt-strike/
     tags:
     - attack.t1071.004
     - attack.command-and-control

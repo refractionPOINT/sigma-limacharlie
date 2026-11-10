@@ -104,7 +104,7 @@ respond:
     - HP software
     level: high
     references:
-    - https://www.trustedsec.com/july-2015/malicious-htas/
+    - https://web.archive.org/web/20150906062519/https://www.trustedsec.com/july-2015/malicious-htas/
     tags:
     - attack.stealth
     - attack.t1218.005

@@ -66,7 +66,7 @@ respond:
     level: medium
     references:
     - https://www.slideshare.net/heirhabarov/hunting-for-credentials-dumping-in-windows-environment
-    - https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/tutorial-for-ntds-goodness-vssadmin-wmis-ntdsdit-system/
+    - https://www.levelblue.com/blogs/spiderlabs-blog/tutorial-for-ntds-goodness-vssadmin-wmis-ntds.dit-system/
     tags:
     - attack.credential-access
     - attack.t1003

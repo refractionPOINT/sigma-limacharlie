@@ -40,7 +40,7 @@ respond:
     - Unknown
     level: medium
     references:
-    - https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/cleareventlog-method-in-class-win32-nteventlogfile
+    - https://learn.microsoft.com/previous-versions/windows/desktop/eventlogprov/cleareventlog-method-in-class-win32-nteventlogfile
     tags:
     - attack.defense-impairment
     - attack.t1685.005

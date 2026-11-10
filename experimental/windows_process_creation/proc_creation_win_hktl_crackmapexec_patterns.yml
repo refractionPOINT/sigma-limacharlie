@@ -91,7 +91,7 @@ respond:
     - Unknown
     level: high
     references:
-    - https://mpgn.gitbook.io/crackmapexec/smb-protocol/obtaining-credentials/dump-lsass
+    - https://web.archive.org/web/20220625230734/https://mpgn.gitbook.io/crackmapexec/smb-protocol/obtaining-credentials/dump-lsass
     tags:
     - attack.credential-access
     - attack.t1003.001

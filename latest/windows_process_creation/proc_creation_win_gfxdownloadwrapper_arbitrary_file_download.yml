@@ -38,7 +38,7 @@ respond:
     - Unknown
     level: medium
     references:
-    - https://lolbas-project.github.io/lolbas/HonorableMentions/GfxDownloadWrapper/
+    - https://github.com/LOLBAS-Project/LOLBAS/blob/2056cb7662509dc998fc6ce79636aec4e6c0397f/yml/HonorableMentions/GfxDownloadWrapper.yml
     tags:
     - attack.command-and-control
     - attack.t1105

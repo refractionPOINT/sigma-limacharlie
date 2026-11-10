@@ -40,7 +40,7 @@ respond:
     - Unknown
     level: high
     references:
-    - https://github.com/nasbench/Misc-Research/blob/b20da2336de0f342d31ef4794959d28c8d3ba5ba/ETW/Microsoft-Windows-Kernel-General.md
+    - https://web.archive.org/web/20240215020040/https://github.com/nasbench/Misc-Research/blob/b20da2336de0f342d31ef4794959d28c8d3ba5ba/ETW/Microsoft-Windows-Kernel-General.md
     tags:
     - attack.credential-access
     - attack.t1003.002

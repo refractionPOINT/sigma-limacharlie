@@ -25,7 +25,7 @@ respond:
     - Approved installs of Windows SDK with Debugging Tools for Windows (WinDbg).
     level: medium
     references:
-    - https://blog.thecybersecuritytutor.com/Exeuction-AWL-Bypass-Remote-exe-LOLBin/
+    - https://web.archive.org/web/20210922181157/https://blog.thecybersecuritytutor.com/Exeuction-AWL-Bypass-Remote-exe-LOLBin/
     - https://lolbas-project.github.io/lolbas/OtherMSBinaries/Remote/
     tags:
     - attack.execution

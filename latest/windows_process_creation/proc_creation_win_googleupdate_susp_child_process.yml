@@ -46,7 +46,7 @@ respond:
     - Unknown
     level: high
     references:
-    - https://www.ncsc.gov.uk/static-assets/documents/malware-analysis-reports/goofy-guineapig/NCSC-MAR-Goofy-Guineapig.pdf
+    - https://www.ncsc.gov.uk/files/NCSC-MAR-Goofy-Guineapig.pdf
     tags:
     - attack.stealth
   name: Potentially Suspicious GoogleUpdate Child Process
