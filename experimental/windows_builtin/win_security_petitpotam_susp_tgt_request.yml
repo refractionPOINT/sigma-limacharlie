@@ -32,9 +32,9 @@ respond:
     author: Mauricio Velazco, Michael Haag
     description: 'Detect suspicious Kerberos TGT requests.
 
-      Once an attacer obtains a computer certificate by abusing Active Directory Certificate
-      Services in combination with PetitPotam, the next step would be to leverage
-      the certificate for malicious purposes.
+      Once an attacker obtains a computer certificate by abusing Active Directory
+      Certificate Services in combination with PetitPotam, the next step would be
+      to leverage the certificate for malicious purposes.
 
       One way of doing this is to request a Kerberos Ticket Granting Ticket using
       a tool like Rubeus.
