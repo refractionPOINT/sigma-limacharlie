@@ -15,7 +15,7 @@ detect:
       not: true
       op: ends with
       path: event/FILE_PATH
-      value: vmnat.exe
+      value: \vmnat.exe
 respond:
 - action: report
   metadata:
