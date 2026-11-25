@@ -155,7 +155,7 @@ respond:
     - Legitimate use of the library for administrative activity
     level: high
     references:
-    - https://o365blog.com/aadinternals/
+    - https://aadinternals.com/aadinternals/
     - https://github.com/Gerenios/AADInternals
     tags:
     - attack.execution

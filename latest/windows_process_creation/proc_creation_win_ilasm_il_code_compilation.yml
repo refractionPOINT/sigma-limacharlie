@@ -38,7 +38,7 @@ respond:
     level: medium
     references:
     - https://lolbas-project.github.io/lolbas/Binaries/Ilasm/
-    - https://www.echotrail.io/insights/search/ilasm.exe
+    - https://web.archive.org/web/20231017050336/https://www.echotrail.io/insights/search/ilasm.exe
     tags:
     - attack.execution
     - attack.stealth

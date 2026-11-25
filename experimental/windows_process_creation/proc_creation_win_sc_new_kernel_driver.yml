@@ -79,7 +79,7 @@ respond:
     - Rare legitimate installation of kernel drivers via sc.exe
     level: medium
     references:
-    - https://www.aon.com/cyber-solutions/aon_cyber_labs/yours-truly-signed-av-driver-weaponizing-an-antivirus-driver/
+    - https://www.levelblue.com/blogs/spiderlabs-blog/yours-truly-signed-av-driver-weaponizing-an-antivirus-driver/
     tags:
     - attack.persistence
     - attack.privilege-escalation

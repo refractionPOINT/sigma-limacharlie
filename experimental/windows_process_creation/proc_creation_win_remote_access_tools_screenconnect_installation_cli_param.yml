@@ -37,7 +37,7 @@ respond:
     - Legitimate use by administrative staff
     level: medium
     references:
-    - https://www.anomali.com/blog/probable-iranian-cyber-actors-static-kitten-conducting-cyberespionage-campaign-targeting-uae-and-kuwait-government-agencies
+    - https://web.archive.org/web/20260610210028/https://www.anomali.com/blog/probable-iranian-cyber-actors-static-kitten-conducting-cyberespionage-campaign-targeting-uae-and-kuwait-government-agencies
     tags:
     - attack.persistence
     - attack.initial-access

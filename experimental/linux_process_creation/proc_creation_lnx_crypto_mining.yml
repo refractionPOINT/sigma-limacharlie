@@ -84,7 +84,7 @@ respond:
     - Legitimate use of crypto miners
     level: high
     references:
-    - https://www.poolwatch.io/coin/monero
+    - https://web.archive.org/web/20220816044708/https://www.poolwatch.io/coin/monero
     tags:
     - attack.impact
     - attack.t1496

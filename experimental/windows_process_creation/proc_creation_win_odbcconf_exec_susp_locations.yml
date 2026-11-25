@@ -119,7 +119,7 @@ respond:
     references:
     - https://learn.microsoft.com/en-us/sql/odbc/odbcconf-exe?view=sql-server-ver16
     - https://www.trendmicro.com/en_us/research/17/h/backdoor-carrying-emails-set-sights-on-russian-speaking-businesses.html
-    - https://securityintelligence.com/posts/raspberry-robin-worm-dridex-malware/
+    - https://web.archive.org/web/20230726152704/https://securityintelligence.com/posts/raspberry-robin-worm-dridex-malware/
     tags:
     - attack.stealth
     - attack.t1218.008

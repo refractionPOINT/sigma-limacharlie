@@ -19,7 +19,7 @@ respond:
     - Local accounts managed by privileged account management tools
     level: low
     references:
-    - https://patrick-bareiss.com/detecting-local-user-creation-in-ad-with-sigma/
+    - https://web.archive.org/web/20250616164358/https://www.patrick-bareiss.com/detecting-local-user-creation-in-ad-with-sigma/
     tags:
     - attack.persistence
     - attack.t1136.001

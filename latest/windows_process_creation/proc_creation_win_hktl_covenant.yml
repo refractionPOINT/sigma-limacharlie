@@ -60,7 +60,7 @@ respond:
     description: Detects suspicious command lines used in Covenant luanchers
     level: high
     references:
-    - https://posts.specterops.io/covenant-v0-5-eee0507b85ba
+    - https://specterops.io/blog/2020/06/04/covenant-v0-5/
     tags:
     - attack.execution
     - attack.stealth

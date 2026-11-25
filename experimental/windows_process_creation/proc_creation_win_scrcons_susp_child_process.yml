@@ -71,7 +71,7 @@ respond:
     level: high
     references:
     - https://redcanary.com/blog/child-processes/
-    - https://docs.paloaltonetworks.com/cortex/cortex-xdr/cortex-xdr-analytics-alert-reference/cortex-xdr-analytics-alert-reference/scrcons-exe-rare-child-process.html
+    - https://cortex-docs.paloaltonetworks.com/analytics-alerts/alerts-by-name/scrcons-exe-rare-child-process
     tags:
     - attack.execution
     - attack.t1047

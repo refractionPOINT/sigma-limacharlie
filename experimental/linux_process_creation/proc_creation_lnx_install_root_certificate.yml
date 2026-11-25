@@ -25,7 +25,7 @@ respond:
     - Legitimate administration activities
     level: low
     references:
-    - https://www.trendmicro.com/en_us/research/14/h/finding-holes-operation-emmental.html
+    - https://web.archive.org/web/20211206180016/https://blog.trendmicro.com/trendlabs-security-intelligence/finding-holes-operation-emmental/
     - https://www.kaspersky.com/blog/lenovo-pc-with-adware-superfish-preinstalled/
     - https://www.cisa.gov/news-events/alerts/2015/02/20/lenovo-superfish-adware-vulnerable-https-spoofing
     - https://capec.mitre.org/data/definitions/479.html
