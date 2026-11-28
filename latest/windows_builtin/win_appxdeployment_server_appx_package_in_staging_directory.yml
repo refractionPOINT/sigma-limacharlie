@@ -2,64 +2,77 @@ detect:
   log type: wel
   op: and
   rules:
-  - case sensitive: false
-    op: is
-    path: Event/System/EventID
-    value: '854'
-  - op: or
+  - op: and
     rules:
+    - case sensitive: false
+      op: is
+      path: Event/System/EventID
+      value: '854'
     - op: or
       rules:
-      - case sensitive: false
-        op: contains
-        path: Event/EventData/Path
-        value: :/Perflogs/
-      - case sensitive: false
-        op: contains
-        path: Event/EventData/Path
-        value: :/Users/Public/
-      - case sensitive: false
-        op: contains
-        path: Event/EventData/Path
-        value: :/Windows/Temp/
-      - case sensitive: false
-        op: contains
-        path: Event/EventData/Path
-        value: /AppData/Local/Temp/
-      - case sensitive: false
-        op: contains
-        path: Event/EventData/Path
-        value: /Desktop/
-      - case sensitive: false
-        op: contains
-        path: Event/EventData/Path
-        value: /Downloads/
-    - op: or
-      rules:
-      - case sensitive: false
-        op: contains
-        path: Event/EventData/Path
-        value: :\PerfLogs\
-      - case sensitive: false
-        op: contains
-        path: Event/EventData/Path
-        value: :\Users\Public\
-      - case sensitive: false
-        op: contains
-        path: Event/EventData/Path
-        value: :\Windows\Temp\
-      - case sensitive: false
-        op: contains
-        path: Event/EventData/Path
-        value: \AppData\Local\Temp\
-      - case sensitive: false
-        op: contains
-        path: Event/EventData/Path
-        value: \Desktop\
-      - case sensitive: false
-        op: contains
-        path: Event/EventData/Path
-        value: \Downloads\
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: Event/EventData/Path
+          value: :/Perflogs/
+        - case sensitive: false
+          op: contains
+          path: Event/EventData/Path
+          value: :/Users/Public/
+        - case sensitive: false
+          op: contains
+          path: Event/EventData/Path
+          value: :/Windows/Temp/
+        - case sensitive: false
+          op: contains
+          path: Event/EventData/Path
+          value: /AppData/Local/Temp/
+        - case sensitive: false
+          op: contains
+          path: Event/EventData/Path
+          value: /Desktop/
+        - case sensitive: false
+          op: contains
+          path: Event/EventData/Path
+          value: /Downloads/
+      - op: or
+        rules:
+        - case sensitive: false
+          op: contains
+          path: Event/EventData/Path
+          value: :\PerfLogs\
+        - case sensitive: false
+          op: contains
+          path: Event/EventData/Path
+          value: :\Users\Public\
+        - case sensitive: false
+          op: contains
+          path: Event/EventData/Path
+          value: :\Windows\Temp\
+        - case sensitive: false
+          op: contains
+          path: Event/EventData/Path
+          value: \AppData\Local\Temp\
+        - case sensitive: false
+          op: contains
+          path: Event/EventData/Path
+          value: \Desktop\
+        - case sensitive: false
+          op: contains
+          path: Event/EventData/Path
+          value: \Downloads\
+  - not: true
+    op: or
+    rules:
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/Path
+      value: /AppData/Local/Temp/WinGet/Microsoft.Winget.Source
+    - case sensitive: false
+      op: contains
+      path: Event/EventData/Path
+      value: \AppData\Local\Temp\WinGet\Microsoft.Winget.Source
   target: log
 respond:
 - action: report
@@ -72,7 +85,7 @@ respond:
       '
     falsepositives:
     - Unknown
-    level: high
+    level: medium
     references:
     - https://www.sentinelone.com/labs/inside-malicious-windows-apps-for-malware-deployment/
     - https://learn.microsoft.com/en-us/windows/win32/appxpkg/troubleshooting

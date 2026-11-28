@@ -5,64 +5,77 @@ detect:
   - op: is windows
   - op: and
     rules:
-    - case sensitive: false
-      op: is
-      path: event/EVENT/System/EventID
-      value: '854'
-    - op: or
+    - op: and
       rules:
+      - case sensitive: false
+        op: is
+        path: event/EVENT/System/EventID
+        value: '854'
       - op: or
         rules:
-        - case sensitive: false
-          op: contains
-          path: event/EVENT/EventData/Path
-          value: :/Perflogs/
-        - case sensitive: false
-          op: contains
-          path: event/EVENT/EventData/Path
-          value: :/Users/Public/
-        - case sensitive: false
-          op: contains
-          path: event/EVENT/EventData/Path
-          value: :/Windows/Temp/
-        - case sensitive: false
-          op: contains
-          path: event/EVENT/EventData/Path
-          value: /AppData/Local/Temp/
-        - case sensitive: false
-          op: contains
-          path: event/EVENT/EventData/Path
-          value: /Desktop/
-        - case sensitive: false
-          op: contains
-          path: event/EVENT/EventData/Path
-          value: /Downloads/
-      - op: or
-        rules:
-        - case sensitive: false
-          op: contains
-          path: event/EVENT/EventData/Path
-          value: :\PerfLogs\
-        - case sensitive: false
-          op: contains
-          path: event/EVENT/EventData/Path
-          value: :\Users\Public\
-        - case sensitive: false
-          op: contains
-          path: event/EVENT/EventData/Path
-          value: :\Windows\Temp\
-        - case sensitive: false
-          op: contains
-          path: event/EVENT/EventData/Path
-          value: \AppData\Local\Temp\
-        - case sensitive: false
-          op: contains
-          path: event/EVENT/EventData/Path
-          value: \Desktop\
-        - case sensitive: false
-          op: contains
-          path: event/EVENT/EventData/Path
-          value: \Downloads\
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/Path
+            value: :/Perflogs/
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/Path
+            value: :/Users/Public/
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/Path
+            value: :/Windows/Temp/
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/Path
+            value: /AppData/Local/Temp/
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/Path
+            value: /Desktop/
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/Path
+            value: /Downloads/
+        - op: or
+          rules:
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/Path
+            value: :\PerfLogs\
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/Path
+            value: :\Users\Public\
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/Path
+            value: :\Windows\Temp\
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/Path
+            value: \AppData\Local\Temp\
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/Path
+            value: \Desktop\
+          - case sensitive: false
+            op: contains
+            path: event/EVENT/EventData/Path
+            value: \Downloads\
+    - not: true
+      op: or
+      rules:
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Path
+        value: /AppData/Local/Temp/WinGet/Microsoft.Winget.Source
+      - case sensitive: false
+        op: contains
+        path: event/EVENT/EventData/Path
+        value: \AppData\Local\Temp\WinGet\Microsoft.Winget.Source
 respond:
 - action: report
   metadata:
@@ -74,7 +87,7 @@ respond:
       '
     falsepositives:
     - Unknown
-    level: high
+    level: medium
     references:
     - https://www.sentinelone.com/labs/inside-malicious-windows-apps-for-malware-deployment/
     - https://learn.microsoft.com/en-us/windows/win32/appxpkg/troubleshooting
