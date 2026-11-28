@@ -28,7 +28,7 @@ detect:
         - case sensitive: false
           op: contains
           path: event/EVENT/EventData/Path
-          value: /AppdData/Local/Temp/
+          value: /AppData/Local/Temp/
         - case sensitive: false
           op: contains
           path: event/EVENT/EventData/Path
@@ -54,7 +54,7 @@ detect:
         - case sensitive: false
           op: contains
           path: event/EVENT/EventData/Path
-          value: \AppdData\Local\Temp\
+          value: \AppData\Local\Temp\
         - case sensitive: false
           op: contains
           path: event/EVENT/EventData/Path

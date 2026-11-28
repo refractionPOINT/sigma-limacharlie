@@ -16,7 +16,7 @@ detect:
       - case sensitive: false
         op: ends with
         path: event/FILE_PATH
-        value: \zennmap.exe
+        value: \zenmap.exe
     - op: or
       rules:
       - case sensitive: false
@@ -26,12 +26,12 @@ detect:
       - case sensitive: false
         op: is
         path: event/ORIGINAL_FILE_NAME
-        value: zennmap.exe
+        value: zenmap.exe
 respond:
 - action: report
   metadata:
     author: frack113
-    description: Detects usage of namp/zenmap. Adversaries may attempt to get a listing
+    description: Detects usage of nmap/zenmap. Adversaries may attempt to get a listing
       of services running on remote hosts, including those that may be vulnerable
       to remote software exploitation
     falsepositives:
